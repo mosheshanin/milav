@@ -1,0 +1,22 @@
+# зависимости и сборка
+node_modules/
+dist/
+.wrangler/
+.vite/
+coverage/
+
+# секреты и локальные настройки (токены бота, ключи API)
+.env
+.env.*
+!.env.example
+.dev.vars
+
+# система и редакторы
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# логи
+*.log
+npm-debug.log*
