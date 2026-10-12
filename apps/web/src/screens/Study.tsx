@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { PartyPopper } from "lucide-react";
+import { Lock, PartyPopper } from "lucide-react";
 import { getLesson } from "@milav/content";
 import { STAGES, WORDS_PER_LESSON, type Stage, type WordProgress } from "@milav/shared";
 import { ApiError, api, type SpeechResponse } from "../api";
@@ -204,10 +204,18 @@ export function Study({
           )}
         </Card>
 
-        {allDone && view !== "end" && (
-          <Button variant="success" block onClick={onQuiz}>
-            Все слова пройдены. К викторине
-          </Button>
+        {allDone ? (
+          view !== "end" && (
+            <Button variant="success" block onClick={onQuiz} data-testid="open-quiz">
+              Все слова пройдены. К викторине
+            </Button>
+          )
+        ) : (
+          <div className="rounded-card border border-dashed border-line p-block text-center text-sm text-ink-soft" data-testid="quiz-locked">
+            <Lock className="mx-auto mb-1 size-icon" aria-hidden />
+            <b>Викторина</b> откроется, когда все {WORDS_PER_LESSON} слов урока будут пройдены по четырём этапам.
+            Сейчас: {doneCount} из {WORDS_PER_LESSON}.
+          </div>
         )}
       </main>
     </>

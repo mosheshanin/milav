@@ -92,6 +92,7 @@ function LessonRow({
             <Chip tone={done === WORDS_PER_LESSON ? "success" : "neutral"}>
               Слов: {done} из {WORDS_PER_LESSON}
             </Chip>
+            {!passed && done === WORDS_PER_LESSON && <Chip tone="accent">Викторина открыта</Chip>}
             {passed && (
               <Chip tone="success">
                 <CheckCircle2 className="size-4" aria-hidden />
