@@ -131,9 +131,21 @@ await page.click('[data-testid="listen-next"]');
 
 await page.waitForSelector('[data-testid="speak-start"]');
 await page.click('[data-testid="speak-start"]');
-await page.waitForTimeout(400);
-await page.click('[data-testid="speak-stop"]');
-await page.waitForSelector('[data-testid="speak-skip"]');
+await page.waitForSelector('[data-testid="equalizer"]');
+// Фальшивый микрофон Chromium пищит раз в секунду: снимаем высоты столбиков несколько раз за время записи.
+const seen = new Set();
+for (let i = 0; i < 12; i++) {
+  const heights = await page.$$eval('[data-testid="equalizer"] > div', (els) => els.map((e) => e.style.height)).catch(() => []);
+  heights.forEach((h) => seen.add(h));
+  if (seen.size > 2 && i === 3) await shot(page, "04a-recording-equalizer");
+  await page.waitForTimeout(100);
+}
+check(seen.size > 2, `эквалайзер реагирует на звук (разных высот: ${seen.size})`);
+// Руками не останавливаем: запись должна закончиться сама не позже чем через 2.5 с (+ запас на отправку).
+const startedAt = Date.now();
+await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 5000 });
+check(Date.now() - startedAt < 2600, `запись остановилась сама за ${Date.now() - startedAt} мс после показа эквалайзера`);
+check(!(await page.locator('[data-testid="recording"]').count()), "после остановки эквалайзер скрыт");
 await shot(page, "04-speak-unavailable");
 check(
   (await page.textContent("body")).includes("Проверка произношения сейчас недоступна"),
@@ -202,9 +214,7 @@ for (let q = 0; q < 25; q++) {
   } else if (await page.locator('[data-testid="speak-start"]').count()) {
     // «произнеси»: распознавания нет, пропускаем — вопрос засчитывается неверным
     await page.click('[data-testid="speak-start"]');
-    await page.waitForTimeout(300);
-    await page.click('[data-testid="speak-stop"]');
-    await page.waitForSelector('[data-testid="speak-skip"]');
+    await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
     await page.click('[data-testid="speak-skip"]');
     await page.waitForSelector('[data-testid="quiz-feedback"]');
     wrongShown++;
