@@ -1,34 +1,39 @@
 # Деплой на Cloudflare (бесплатный тариф)
 
-Приложение целиком (фронтенд и API) разворачивается одним Worker. Свой сервер и SSH не нужны.
+Приложение целиком (фронтенд и API) работает как один Worker `milav`. Свой сервер, SSH и Node.js на вашем компьютере не нужны:
+сборка и публикация идут в облаке Cloudflare при каждом пуше в `main`.
 
-## Один раз
+## Настройка автодеплоя (один раз)
 
-1. Создайте бесплатный аккаунт на https://dash.cloudflare.com.
-2. Создайте бота в Telegram через @BotFather командой `/newbot`, сохраните токен.
-3. Установите зависимости: `npm install`.
-4. Войдите в Cloudflare: `npx wrangler login` (откроется браузер).
-5. Сохраните токен бота как секрет: `cd apps/api && npx wrangler secret put BOT_TOKEN`.
+Worker `milav` → Settings → Build (подключение к GitHub-репозиторию `mosheshanin/milav`):
 
-## Каждый деплой
+| Поле | Значение |
+|---|---|
+| Production branch | `main` |
+| Root directory | `/` (корень репозитория) |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` (по умолчанию) |
 
-```
-npm run deploy
-```
+Конфигурация Worker лежит в корне: `wrangler.jsonc` (имя `milav`, точка входа `apps/api/src/index.ts`, статика `apps/web/dist`).
+Имя в `wrangler.jsonc` должно совпадать с именем Worker в панели Cloudflare.
 
-Команда собирает мини-приложение и публикует Worker. В конце wrangler покажет адрес вида
-`https://milav.<ваш-поддомен>.workers.dev`.
+## Секреты
+
+Worker `milav` → Settings → Variables & Secrets → добавьте секрет `BOT_TOKEN` (токен бота от @BotFather).
+В репозиторий токен не попадает.
 
 ## Подключение к Telegram
 
-В @BotFather: `/mybots` → ваш бот → Bot Settings → Menu Button → укажите адрес из предыдущего шага.
-После этого в чате с ботом появится кнопка, открывающая мини-приложение.
+В @BotFather: `/mybots` → ваш бот → Bot Settings → Menu Button → адрес Worker вида
+`https://milav.<ваш-поддомен>.workers.dev`. Кнопка в чате с ботом откроет мини-приложение.
 
-## Локальная разработка
+## Ручной деплой и локальная разработка (по желанию, нужен Node.js)
 
 ```
-npm run dev:api    # Worker на http://localhost:8787
+npm install
+npm run dev:api    # Worker на http://localhost:8787 (раздаёт собранный apps/web/dist)
 npm run dev:web    # фронтенд на http://localhost:5173, запросы /api уходят на Worker
+npm run deploy     # сборка и ручная публикация (после npx wrangler login)
 ```
 
-Для локальных секретов скопируйте `apps/api/.dev.vars.example` в `apps/api/.dev.vars`.
+Для локальных секретов скопируйте `apps/api/.dev.vars.example` в `.dev.vars` в корне репозитория.
