@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/*
+  ЕДИНСТВЕННОЕ место, где задаются дизайн-токены приложения:
+  цвета, радиусы, отступы и размеры иконок. Компоненты используют
+  только классы, построенные на этих токенах (bg-brand-orange, rounded-card и т.д.).
+*/
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Палитра бренда (из логотипа) */
+  --color-brand-orange: #ff6b35;
+  --color-brand-yellow: #ffc107;
+  --color-brand-green: #4caf50;
+  --color-brand-blue: #2196f3;
+  --color-brand-cyan: #00bcd4;
+
+  /* Основной акцент интерфейса (кнопки действий, активный этап) */
+  --color-accent: #3b82f6;
+  --color-accent-soft: #dbeafe;
+  --color-success: #16a34a;
+  --color-success-soft: #dcfce7;
+
+  /* Поверхности и текст */
+  --color-surface: #ffffff;
+  --color-page: #f8fafc;
+  --color-line: #e5e7eb;
+  --color-ink: #111827;
+  --color-ink-soft: #6b7280;
+
+  /* Радиусы: карточки и кнопки только этих двух размеров */
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+
+  /* Единая шкала отступов между блоками */
+  --spacing-block: 1rem;
+  --spacing-section: 1.5rem;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+}

@@ -1,0 +1,3 @@
+# Скопируйте в .dev.vars (он в .gitignore) и подставьте значения.
+# В продакшене секреты задаются командой: npx wrangler secret put BOT_TOKEN
+BOT_TOKEN=
