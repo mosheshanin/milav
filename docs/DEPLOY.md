@@ -19,8 +19,10 @@ Worker `milav` → Settings → Build (подключение к GitHub-репо
 
 ## Секреты
 
-Worker `milav` → Settings → Variables & Secrets → добавьте секрет `BOT_TOKEN` (токен бота от @BotFather).
+Worker `milav` → Settings → Variables & Secrets → секрет `BOT_TOKEN` (токен бота от @BotFather), уже добавлен.
 В репозиторий токен не попадает.
+
+Для озвучки: секрет `GOOGLE_TTS_API_KEY` в GitHub (Settings → Secrets and variables → Actions), см. [`AUDIO.md`](./AUDIO.md).
 
 ## Подключение к Telegram
 
@@ -34,6 +36,9 @@ npm install
 npm run dev:api    # Worker на http://localhost:8787 (раздаёт собранный apps/web/dist)
 npm run dev:web    # фронтенд на http://localhost:5173, запросы /api уходят на Worker
 npm run deploy     # сборка и ручная публикация (после npx wrangler login)
+
+# новая миграция базы (на боевой базе применяется вручную, автоматически пока нет):
+npx wrangler d1 migrations apply milav-db --remote
 ```
 
 Для локальных секретов скопируйте `apps/api/.dev.vars.example` в `.dev.vars` в корне репозитория.
