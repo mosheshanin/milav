@@ -21,3 +21,4 @@ Thumbs.db
 *.log
 npm-debug.log*
 e2e-shots/
+audio-review/
