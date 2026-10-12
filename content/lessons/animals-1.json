@@ -9,6 +9,7 @@
     {
       "id": "animals-1-cat",
       "he": "חתול",
+      "niqqud": "חָתוּל",
       "translit": "хатуль",
       "ru": "кот",
       "gender": "m",
@@ -22,6 +23,7 @@
     {
       "id": "animals-1-dog",
       "he": "כלב",
+      "niqqud": "כֶּלֶב",
       "translit": "келев",
       "ru": "собака",
       "gender": "m",
@@ -35,6 +37,7 @@
     {
       "id": "animals-1-horse",
       "he": "סוס",
+      "niqqud": "סוּס",
       "translit": "сус",
       "ru": "лошадь",
       "gender": "m",
@@ -48,6 +51,7 @@
     {
       "id": "animals-1-bird",
       "he": "ציפור",
+      "niqqud": "צִיפּוֹר",
       "translit": "ципор",
       "ru": "птица",
       "gender": "f",
@@ -61,6 +65,7 @@
     {
       "id": "animals-1-fish",
       "he": "דג",
+      "niqqud": "דָּג",
       "translit": "даг",
       "ru": "рыба",
       "gender": "m",
@@ -74,6 +79,7 @@
     {
       "id": "animals-1-cow",
       "he": "פרה",
+      "niqqud": "פָּרָה",
       "translit": "пара",
       "ru": "корова",
       "gender": "f",
@@ -87,6 +93,7 @@
     {
       "id": "animals-1-rabbit",
       "he": "ארנב",
+      "niqqud": "אַרְנָב",
       "translit": "арнав",
       "ru": "кролик",
       "gender": "m",
@@ -100,6 +107,7 @@
     {
       "id": "animals-1-mouse",
       "he": "עכבר",
+      "niqqud": "עַכְבָּר",
       "translit": "ахбар",
       "ru": "мышь",
       "gender": "m",
@@ -113,6 +121,7 @@
     {
       "id": "animals-1-elephant",
       "he": "פיל",
+      "niqqud": "פִּיל",
       "translit": "пиль",
       "ru": "слон",
       "gender": "m",
@@ -126,6 +135,7 @@
     {
       "id": "animals-1-lion",
       "he": "אריה",
+      "niqqud": "אַרְיֵה",
       "translit": "арье",
       "ru": "лев",
       "gender": "m",

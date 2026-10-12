@@ -57,6 +57,16 @@ describe("уроки", () => {
             if (isLast) expect(REGULAR_FORMS_OF_FINALS.includes(ch), `${word.he}: в конце нужна конечная форма`).toBe(false);
           });
 
+          expect(word.niqqud, "у каждого слова есть вариант с огласовками для озвучки").toBeDefined();
+          if (word.niqqud) {
+            expect(word.niqqud, "огласовки действительно есть").toMatch(/[\u05B0-\u05BC\u05C1\u05C2]/);
+            expect(normalizeHebrew(word.niqqud), "с огласовками то же слово").toBe(normalizeHebrew(word.he));
+          }
+          if (word.audio) {
+            const file = new URL(`../apps/web/public${word.audio}`, import.meta.url);
+            expect(existsSync(file), `нет файла озвучки ${word.audio}`).toBe(true);
+          }
+
           expect(word.image, "у каждого слова есть картинка").toBeDefined();
           if (word.image) {
             const file = new URL(`../apps/web/public${word.image}`, import.meta.url);
