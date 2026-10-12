@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { Mic, Square } from "lucide-react";
 import { SPEAK_ATTEMPTS_IN_QUIZ, type Word } from "@milav/shared";
 import { ApiError, api, type SpeechResponse } from "../api";
+import { micPermission, type MicState } from "../lib/mic";
 import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
+import { MicAsk, MicDenied } from "./MicNotice";
 import { Equalizer } from "./Equalizer";
 import { Button } from "./ui";
 
@@ -12,14 +14,6 @@ const STUDY_FAILS_BEFORE_SKIP = 2;
 type Phase = "idle" | "recording" | "checking";
 
 const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
-  unsupported: {
-    title: "Проблема с микрофоном: запись голоса не поддерживается на этом устройстве.",
-    hint: "Обновите Telegram или откройте приложение на другом устройстве.",
-  },
-  denied: {
-    title: "Проблема с микрофоном: нет доступа.",
-    hint: "Разрешите микрофон для Telegram в настройках телефона и нажмите «Попробовать снова».",
-  },
   speech_unavailable: {
     title: "Проверка произношения сейчас недоступна.",
     hint: "Попробуйте позже.",
@@ -58,8 +52,14 @@ export function SpeakRecorder({
   const [bars, setBars] = useState<number[]>(() => new Array<number>(EQUALIZER_BARS).fill(0));
   const active = useRef<ActiveRecording | null>(null);
   const alive = useRef(true);
+  const [mic, setMic] = useState<MicState | "checking">("checking");
+  const [starting, setStarting] = useState(false);
 
   // Если экран закрыли во время записи, останавливаем её, освобождаем микрофон и ничего не отправляем.
+  useEffect(() => {
+    void micPermission().then((state) => alive.current && setMic(state));
+  }, []);
+
   useEffect(() => {
     alive.current = true;
     return () => {
@@ -69,16 +69,22 @@ export function SpeakRecorder({
   }, []);
 
   async function begin() {
+    if (starting) return;
+    setStarting(true);
     setHeard(null);
     try {
       // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS; можно и вручную.
       const rec = await startRecording({ onLevels: setBars });
       active.current = rec;
+      setMic("granted");
       setRecording(rec);
       setPhase("recording");
       void finish(rec.finished);
     } catch (e) {
-      setBlocked(e instanceof RecorderError ? e.problem : "unsupported");
+      const problem = e instanceof RecorderError ? e.problem : "unsupported";
+      setMic(problem);
+    } finally {
+      setStarting(false);
     }
   }
 
@@ -106,6 +112,17 @@ export function SpeakRecorder({
     }
   }
 
+  const skipLabel = mode === "quiz" ? "Пропустить (засчитается как ошибка)" : "Отложить этап";
+
+  if (mic === "denied" || mic === "unsupported") {
+    return <MicDenied kind={mic} onRetry={() => void begin()} onSkip={onGiveUp} skipLabel={skipLabel} />;
+  }
+
+  // Доступ ещё не давали: сначала понятное приглашение, а системный запрос появится после нажатия.
+  if (mic === "prompt" && phase === "idle" && !blocked) {
+    return <MicAsk onAllow={() => void begin()} busy={starting} />;
+  }
+
   if (blocked) {
     const text = BLOCKED_TEXT[blocked] ?? { title: "Проверка произношения не сработала.", hint: "Попробуйте ещё раз." };
     return (
@@ -116,7 +133,7 @@ export function SpeakRecorder({
           Попробовать снова
         </Button>
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">
-          {mode === "quiz" ? "Пропустить (засчитается как ошибка)" : "Отложить этап"}
+          {skipLabel}
         </Button>
       </div>
     );
