@@ -1,5 +1,4 @@
 // Минимальные типы Telegram WebApp SDK (скрипт подключён в index.html).
-// Полный набор типов добавим, когда понадобятся другие методы.
 
 export interface TelegramUser {
   id: number;
@@ -33,4 +32,21 @@ export function initTelegram(): void {
   if (!tg) return;
   tg.ready();
   tg.expand();
+}
+
+const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
+
+/**
+ * Заголовок авторизации для API.
+ * В Telegram это подписанные данные запуска. На локальной машине (без Telegram) подставляется
+ * тестовый пользователь, номер можно задать в адресе: ?dev=1002. В остальных случаях null.
+ */
+export function authHeader(): string | null {
+  const initData = getTelegram()?.initData;
+  if (initData) return `tma ${initData}`;
+  if (import.meta.env.DEV || LOCAL_HOSTS.includes(location.hostname)) {
+    const id = new URLSearchParams(location.search).get("dev") ?? "1001";
+    return `dev ${/^\d{1,15}$/.test(id) ? id : "1001"}:Тестер`;
+  }
+  return null;
 }
