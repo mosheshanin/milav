@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mic, Square } from "lucide-react";
 import { SPEAK_ATTEMPTS_IN_QUIZ, type Word } from "@milav/shared";
 import { ApiError, api, type SpeechResponse } from "../api";
-import { RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
+import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
+import { Equalizer } from "./Equalizer";
 import { Button } from "./ui";
 
 /** После скольких неудач в обучении предлагаем отложить этап. */
@@ -54,14 +55,27 @@ export function SpeakRecorder({
   const [fails, setFails] = useState(0);
   const [heard, setHeard] = useState<string | null>(null);
   const [blocked, setBlocked] = useState<string | null>(null);
+  const [bars, setBars] = useState<number[]>(() => new Array<number>(EQUALIZER_BARS).fill(0));
+  const active = useRef<ActiveRecording | null>(null);
+  const alive = useRef(true);
+
+  // Если экран закрыли во время записи, останавливаем её, освобождаем микрофон и ничего не отправляем.
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+      void active.current?.stop();
+    };
+  }, []);
 
   async function begin() {
     setHeard(null);
     try {
-      const rec = await startRecording(4000);
+      // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS; можно и вручную.
+      const rec = await startRecording({ onLevels: setBars });
+      active.current = rec;
       setRecording(rec);
       setPhase("recording");
-      // Запись закончится по кнопке или по таймеру; в любом случае отправляем результат.
       void finish(rec.finished);
     } catch (e) {
       setBlocked(e instanceof RecorderError ? e.problem : "unsupported");
@@ -70,6 +84,8 @@ export function SpeakRecorder({
 
   async function finish(finished: Promise<Blob>) {
     const blob = await finished;
+    if (!alive.current) return;
+    active.current = null;
     setRecording(null);
     setPhase("checking");
     try {
@@ -110,11 +126,16 @@ export function SpeakRecorder({
 
   return (
     <div className="flex flex-col items-center gap-block text-center">
-      {phase === "recording" ? (
-        <Button variant="success" onClick={() => void recording?.stop()} className="min-w-56" data-testid="speak-stop">
-          <Square className="size-icon" aria-hidden />
-          Идёт запись… нажмите, чтобы закончить
-        </Button>
+      {phase === "recording" && recording ? (
+        <div className="flex w-full flex-col items-center gap-2" data-testid="recording">
+          <Equalizer bars={bars} />
+          <p className="font-semibold text-success">Идёт запись. Скажите слово.</p>
+          <TimeBar maxMs={recording.maxMs} />
+          <Button variant="ghost" onClick={() => void recording.stop()} data-testid="speak-stop">
+            <Square className="size-icon" aria-hidden />
+            Остановить
+          </Button>
+        </div>
       ) : (
         <Button onClick={() => void begin()} disabled={phase === "checking"} className="min-w-56" data-testid="speak-start">
           <Mic className="size-icon" aria-hidden />
@@ -135,6 +156,23 @@ export function SpeakRecorder({
           Отложить этап
         </Button>
       )}
+    </div>
+  );
+}
+
+/** Полоска оставшегося времени записи: плавно сжимается за maxMs. */
+function TimeBar({ maxMs }: { maxMs: number }) {
+  const [running, setRunning] = useState(false);
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setRunning(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
+  return (
+    <div className="h-1.5 w-48 overflow-hidden rounded-full bg-line" aria-hidden>
+      <div
+        className="h-full bg-success ease-linear"
+        style={{ width: running ? "0%" : "100%", transition: `width ${maxMs}ms linear` }}
+      />
     </div>
   );
 }
