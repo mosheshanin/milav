@@ -4,16 +4,21 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*",
+    "content"
   ],
   "scripts": {
     "dev:web": "npm run dev -w apps/web",
-    "dev:api": "wrangler dev",
+    "dev:api": "wrangler dev --env local",
     "build": "npm run build -w apps/web",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "validate:content": "vitest run content",
     "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
+    "vitest": "^3.2.4",
     "wrangler": "^4.0.0"
   }
 }

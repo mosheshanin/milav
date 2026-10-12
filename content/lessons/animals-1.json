@@ -1,0 +1,90 @@
+{
+  "id": "animals-1",
+  "section": "nouns",
+  "topic": "Животные",
+  "number": 1,
+  "free": true,
+  "title": "Знакомые животные",
+  "words": [
+    {
+      "id": "animals-1-cat",
+      "he": "חתול",
+      "translit": "хатуль",
+      "ru": "кот",
+      "gender": "m",
+      "example": { "he": "החתול שחור", "translit": "ха-хатуль шахор", "ru": "Кот чёрный" }
+    },
+    {
+      "id": "animals-1-dog",
+      "he": "כלב",
+      "translit": "келев",
+      "ru": "собака",
+      "gender": "m",
+      "example": { "he": "הכלב גדול", "translit": "ха-келев гадоль", "ru": "Пёс большой" }
+    },
+    {
+      "id": "animals-1-horse",
+      "he": "סוס",
+      "translit": "сус",
+      "ru": "лошадь",
+      "gender": "m",
+      "example": { "he": "הסוס מהיר", "translit": "ха-сус махир", "ru": "Конь быстрый" }
+    },
+    {
+      "id": "animals-1-bird",
+      "he": "ציפור",
+      "translit": "ципор",
+      "ru": "птица",
+      "gender": "f",
+      "example": { "he": "הציפור קטנה", "translit": "ха-ципор катана", "ru": "Птица маленькая" }
+    },
+    {
+      "id": "animals-1-fish",
+      "he": "דג",
+      "translit": "даг",
+      "ru": "рыба",
+      "gender": "m",
+      "example": { "he": "הדג קטן", "translit": "ха-даг катан", "ru": "Рыба маленькая" }
+    },
+    {
+      "id": "animals-1-cow",
+      "he": "פרה",
+      "translit": "пара",
+      "ru": "корова",
+      "gender": "f",
+      "example": { "he": "הפרה לבנה", "translit": "ха-пара левана", "ru": "Корова белая" }
+    },
+    {
+      "id": "animals-1-rabbit",
+      "he": "ארנב",
+      "translit": "арнав",
+      "ru": "кролик",
+      "gender": "m",
+      "example": { "he": "הארנב לבן", "translit": "ха-арнав лаван", "ru": "Кролик белый" }
+    },
+    {
+      "id": "animals-1-mouse",
+      "he": "עכבר",
+      "translit": "ахбар",
+      "ru": "мышь",
+      "gender": "m",
+      "example": { "he": "העכבר אפור", "translit": "ха-ахбар афор", "ru": "Мышь серая" }
+    },
+    {
+      "id": "animals-1-elephant",
+      "he": "פיל",
+      "translit": "пиль",
+      "ru": "слон",
+      "gender": "m",
+      "example": { "he": "הפיל גדול", "translit": "ха-пиль гадоль", "ru": "Слон большой" }
+    },
+    {
+      "id": "animals-1-lion",
+      "he": "אריה",
+      "translit": "арье",
+      "ru": "лев",
+      "gender": "m",
+      "example": { "he": "האריה חזק", "translit": "ха-арье хазак", "ru": "Лев сильный" }
+    }
+  ]
+}

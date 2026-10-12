@@ -1,0 +1,88 @@
+/** Четыре этапа изучения слова. */
+export const STAGES = ["listen", "speak", "write", "type"] as const;
+export type Stage = (typeof STAGES)[number];
+
+export const STAGE_TITLES: Record<Stage, string> = {
+  listen: "Слушай",
+  speak: "Говори",
+  write: "Пиши",
+  type: "Печатай",
+};
+
+export type Gender = "m" | "f";
+
+export interface Phrase {
+  he: string;
+  translit: string;
+  ru: string;
+}
+
+export interface Word {
+  /** Уникальный id слова, например "animals-1-tsipor". */
+  id: string;
+  /** Слово на иврите, без огласовок. */
+  he: string;
+  /** Транскрипция кириллицей. */
+  translit: string;
+  /** Перевод на русский. */
+  ru: string;
+  /** Род (для слов, у которых он есть). */
+  gender?: Gender;
+  /** Простая фраза со словом, по которой легко запомнить род. */
+  example?: Phrase;
+  /** Путь к файлу озвучки. Если не задан, используется синтезатор браузера. */
+  audio?: string;
+}
+
+export type Section = "nouns" | "verbs" | "adjectives";
+
+export interface Lesson {
+  id: string;
+  section: Section;
+  /** Тема, например «Животные». */
+  topic: string;
+  /** Номер урока внутри темы, начиная с 1. */
+  number: number;
+  /** Бесплатный ли урок (первые 3 в теме). */
+  free: boolean;
+  title: string;
+  words: Word[];
+}
+
+/** Типы вопросов викторины (по 5 вопросов каждого типа). */
+export const QUESTION_TYPES = ["hear-ru", "he-ru", "ru-he", "speak", "write"] as const;
+export type QuestionType = (typeof QUESTION_TYPES)[number];
+
+export const QUESTION_TITLES: Record<QuestionType, string> = {
+  "hear-ru": "Послушай слово и выбери перевод",
+  "he-ru": "Прочитай слово и выбери перевод",
+  "ru-he": "Выбери слово на иврите",
+  speak: "Произнеси слово на иврите",
+  write: "Напиши слово на иврите",
+};
+
+/** Ответ API на запрос профиля. */
+export interface MeResponse {
+  user: { id: number; firstName: string; username?: string };
+  points: number;
+  passedLessons: number;
+  status: StatusInfo;
+}
+
+export interface StatusInfo {
+  key: "pawn" | "knight" | "bishop" | "rook" | "queen" | "king";
+  name: string;
+  symbol: string;
+  /** Сколько сданных уроков до следующего статуса (null у Короля). */
+  nextAt: number | null;
+}
+
+/** Прогресс по этапам одного слова. */
+export interface WordProgress {
+  wordId: string;
+  listen: boolean;
+  speak: boolean;
+  write: boolean;
+  type: boolean;
+  completed: boolean;
+}
