@@ -10,6 +10,20 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/alef": "^5.3.0",
+    "@fontsource/amatic-sc": "^5.3.0",
+    "@fontsource/assistant": "^5.3.0",
+    "@fontsource/david-libre": "^5.3.0",
+    "@fontsource/gveret-levin": "^5.3.0",
+    "@fontsource/heebo": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/karantina": "^5.3.0",
+    "@fontsource/playpen-sans-hebrew": "^5.3.0",
+    "@fontsource/rubik": "^5.3.0",
+    "@fontsource/varela-round": "^5.3.0",
+    "@milav/content": "^0.1.0",
+    "@milav/shared": "^0.1.0",
+    "lucide-react": "^1.55.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
