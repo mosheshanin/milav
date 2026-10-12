@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { WORDS_PER_LESSON, normalizeHebrew } from "@milav/shared";
 import { lessons } from "./index";
@@ -56,6 +57,12 @@ describe("уроки", () => {
             if (isLast) expect(REGULAR_FORMS_OF_FINALS.includes(ch), `${word.he}: в конце нужна конечная форма`).toBe(false);
           });
 
+          expect(word.image, "у каждого слова есть картинка").toBeDefined();
+          if (word.image) {
+            const file = new URL(`../apps/web/public${word.image}`, import.meta.url);
+            expect(existsSync(file), `нет файла картинки ${word.image}`).toBe(true);
+          }
+
           if (lesson.section === "nouns") {
             expect(["m", "f"], "у существительного указан род").toContain(word.gender);
           }
@@ -65,6 +72,7 @@ describe("уроки", () => {
           if (word.example) {
             expect(normalizeHebrew(word.example.he), "во фразе есть само слово").toContain(normalizeHebrew(word.he));
             expect(word.example.translit).toMatch(CYRILLIC_TRANSLIT);
+            expect(word.example.translit, "фраза без артикля (ха-)").not.toMatch(/(^|[\s-])ха-/);
             expect(word.example.ru.length).toBeGreaterThan(0);
           }
         });

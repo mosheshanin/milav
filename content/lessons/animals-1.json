@@ -12,7 +12,12 @@
       "translit": "хатуль",
       "ru": "кот",
       "gender": "m",
-      "example": { "he": "החתול שחור", "translit": "ха-хатуль шахор", "ru": "Кот чёрный" }
+      "example": {
+        "he": "זה חתול שחור",
+        "translit": "зэ хатуль шахор",
+        "ru": "Это чёрный кот"
+      },
+      "image": "/words/animals-1-cat.svg"
     },
     {
       "id": "animals-1-dog",
@@ -20,7 +25,12 @@
       "translit": "келев",
       "ru": "собака",
       "gender": "m",
-      "example": { "he": "הכלב גדול", "translit": "ха-келев гадоль", "ru": "Пёс большой" }
+      "example": {
+        "he": "זה כלב גדול",
+        "translit": "зэ келев гадоль",
+        "ru": "Это большой пёс"
+      },
+      "image": "/words/animals-1-dog.svg"
     },
     {
       "id": "animals-1-horse",
@@ -28,7 +38,12 @@
       "translit": "сус",
       "ru": "лошадь",
       "gender": "m",
-      "example": { "he": "הסוס מהיר", "translit": "ха-сус махир", "ru": "Конь быстрый" }
+      "example": {
+        "he": "זה סוס מהיר",
+        "translit": "зэ сус махир",
+        "ru": "Это быстрый конь"
+      },
+      "image": "/words/animals-1-horse.svg"
     },
     {
       "id": "animals-1-bird",
@@ -36,7 +51,12 @@
       "translit": "ципор",
       "ru": "птица",
       "gender": "f",
-      "example": { "he": "הציפור קטנה", "translit": "ха-ципор катана", "ru": "Птица маленькая" }
+      "example": {
+        "he": "זאת ציפור קטנה",
+        "translit": "зот ципор катана",
+        "ru": "Это маленькая птица"
+      },
+      "image": "/words/animals-1-bird.svg"
     },
     {
       "id": "animals-1-fish",
@@ -44,7 +64,12 @@
       "translit": "даг",
       "ru": "рыба",
       "gender": "m",
-      "example": { "he": "הדג קטן", "translit": "ха-даг катан", "ru": "Рыба маленькая" }
+      "example": {
+        "he": "זה דג קטן",
+        "translit": "зэ даг катан",
+        "ru": "Это маленькая рыба"
+      },
+      "image": "/words/animals-1-fish.svg"
     },
     {
       "id": "animals-1-cow",
@@ -52,7 +77,12 @@
       "translit": "пара",
       "ru": "корова",
       "gender": "f",
-      "example": { "he": "הפרה לבנה", "translit": "ха-пара левана", "ru": "Корова белая" }
+      "example": {
+        "he": "זאת פרה לבנה",
+        "translit": "зот пара левана",
+        "ru": "Это белая корова"
+      },
+      "image": "/words/animals-1-cow.svg"
     },
     {
       "id": "animals-1-rabbit",
@@ -60,7 +90,12 @@
       "translit": "арнав",
       "ru": "кролик",
       "gender": "m",
-      "example": { "he": "הארנב לבן", "translit": "ха-арнав лаван", "ru": "Кролик белый" }
+      "example": {
+        "he": "זה ארנב לבן",
+        "translit": "зэ арнав лаван",
+        "ru": "Это белый кролик"
+      },
+      "image": "/words/animals-1-rabbit.svg"
     },
     {
       "id": "animals-1-mouse",
@@ -68,7 +103,12 @@
       "translit": "ахбар",
       "ru": "мышь",
       "gender": "m",
-      "example": { "he": "העכבר אפור", "translit": "ха-ахбар афор", "ru": "Мышь серая" }
+      "example": {
+        "he": "זה עכבר אפור",
+        "translit": "зэ ахбар афор",
+        "ru": "Это серая мышь"
+      },
+      "image": "/words/animals-1-mouse.svg"
     },
     {
       "id": "animals-1-elephant",
@@ -76,7 +116,12 @@
       "translit": "пиль",
       "ru": "слон",
       "gender": "m",
-      "example": { "he": "הפיל גדול", "translit": "ха-пиль гадоль", "ru": "Слон большой" }
+      "example": {
+        "he": "זה פיל גדול",
+        "translit": "зэ пиль гадоль",
+        "ru": "Это большой слон"
+      },
+      "image": "/words/animals-1-elephant.svg"
     },
     {
       "id": "animals-1-lion",
@@ -84,7 +129,12 @@
       "translit": "арье",
       "ru": "лев",
       "gender": "m",
-      "example": { "he": "האריה חזק", "translit": "ха-арье хазак", "ru": "Лев сильный" }
+      "example": {
+        "he": "זה אריה חזק",
+        "translit": "зэ арье хазак",
+        "ru": "Это сильный лев"
+      },
+      "image": "/words/animals-1-lion.svg"
     }
   ]
 }
