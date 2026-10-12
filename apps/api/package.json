@@ -7,6 +7,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@milav/content": "*",
+    "@milav/shared": "*",
     "hono": "^4.6.0"
   },
   "devDependencies": {

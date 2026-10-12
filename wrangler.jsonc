@@ -8,5 +8,38 @@
     "directory": "apps/web/dist",
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
+  },
+  // База данных: пользователи, прогресс, результаты викторин
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "milav-db",
+      "database_id": "afdd253d-ac34-4e24-8230-be98afdb4c6c",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Распознавание речи (Whisper)
+  "ai": { "binding": "AI" },
+
+  // Локальная разработка: npm run dev:api (без Workers AI и с тестовым входом)
+  "env": {
+    "local": {
+      "main": "apps/api/src/index.ts",
+      "compatibility_date": "2025-09-01",
+      "assets": {
+        "directory": "apps/web/dist",
+        "not_found_handling": "single-page-application",
+        "run_worker_first": ["/api/*"]
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "milav-db",
+          "database_id": "afdd253d-ac34-4e24-8230-be98afdb4c6c",
+          "migrations_dir": "migrations"
+        }
+      ],
+      "vars": { "ALLOW_DEV_AUTH": "true" }
+    }
   }
 }

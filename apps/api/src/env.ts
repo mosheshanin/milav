@@ -1,0 +1,17 @@
+import type { AuthUser } from "./auth";
+
+/** Привязки и переменные Worker (см. wrangler.jsonc). */
+export type Bindings = {
+  DB: D1Database;
+  /** Workers AI: распознавание речи. Недоступен при локальной разработке. */
+  AI?: unknown;
+  /** Токен бота. Задаётся секретом в Cloudflare, в репозитории его нет. */
+  BOT_TOKEN?: string;
+  /** "true" только для локальной разработки: разрешает вход без Telegram. */
+  ALLOW_DEV_AUTH?: string;
+};
+
+export type AppEnv = {
+  Bindings: Bindings;
+  Variables: { user: AuthUser };
+};

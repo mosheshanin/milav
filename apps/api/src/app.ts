@@ -1,0 +1,192 @@
+import { Hono } from "hono";
+import { findWord, getLesson } from "@milav/content";
+import {
+  PASS_SCORE,
+  POINTS_PER_WORD,
+  QUIZ_SIZE,
+  STAGES,
+  isSpeechMatch,
+  type Lesson,
+  type MeResponse,
+  type Stage,
+} from "@milav/shared";
+import { requireUser } from "./auth";
+import {
+  ensureUser,
+  getLessonProgress,
+  getQuizSummary,
+  getTotals,
+  markStage,
+  recordQuizAttempt,
+  touchUser,
+} from "./db";
+import type { AppEnv } from "./env";
+
+const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
+/** Запись слова длится несколько секунд; всё, что больше, это не слово. */
+const MAX_AUDIO_BYTES = 1_500_000;
+
+interface SpeechModel {
+  run(model: string, input: unknown): Promise<unknown>;
+}
+
+/** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные. */
+function canAccessLesson(lesson: Lesson): boolean {
+  return lesson.free;
+}
+
+function toBase64(bytes: Uint8Array): string {
+  let binary = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+  }
+  return btoa(binary);
+}
+
+async function readJson<T>(request: Request): Promise<T | null> {
+  try {
+    return (await request.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
+export const app = new Hono<AppEnv>();
+
+app.get("/api/health", (c) => c.json({ ok: true, service: "milav-api" }));
+
+// Профиль, очки и статус. Приложение вызывает это при запуске.
+app.get("/api/me", requireUser, async (c) => {
+  const user = c.get("user");
+  await touchUser(c.env.DB, user);
+  const totals = await getTotals(c.env.DB, user.id);
+  const body: MeResponse = {
+    user: { id: user.id, firstName: user.firstName, username: user.username },
+    ...totals,
+  };
+  return c.json(body);
+});
+
+// Прогресс по словам урока и итог викторины.
+app.get("/api/lessons/:lessonId/progress", requireUser, async (c) => {
+  const user = c.get("user");
+  const lesson = getLesson(c.req.param("lessonId"));
+  if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
+  if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
+
+  const words = await getLessonProgress(c.env.DB, user.id, lesson.id, lesson.words.map((w) => w.id));
+  const quiz = await getQuizSummary(c.env.DB, user.id, lesson.id);
+  return c.json({ words, quiz });
+});
+
+// Этапы слушай / пиши / печатай. Этап «говори» отмечает только проверка речи на сервере.
+app.post("/api/progress/stage", requireUser, async (c) => {
+  const user = c.get("user");
+  const body = await readJson<{ wordId?: string; stage?: string }>(c.req.raw);
+  if (!body?.wordId || !body.stage) return c.json({ error: "bad_request" }, 400);
+  if (body.stage === "speak") return c.json({ error: "speak_requires_speech_check" }, 400);
+  if (!STAGES.includes(body.stage as Stage)) return c.json({ error: "bad_stage" }, 400);
+
+  const found = findWord(body.wordId);
+  if (!found) return c.json({ error: "word_not_found" }, 404);
+  if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
+
+  await ensureUser(c.env.DB, user);
+  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, body.stage as Stage);
+  const totals = await getTotals(c.env.DB, user.id);
+  return c.json({
+    progress: result.progress,
+    pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
+    points: totals.points,
+  });
+});
+
+// Проверка произношения: тело запроса это запись голоса (audio/*).
+app.post("/api/speech/check", requireUser, async (c) => {
+  const user = c.get("user");
+  const wordId = c.req.query("wordId");
+  const mode = c.req.query("mode") === "study" ? "study" : "quiz";
+  const found = wordId ? findWord(wordId) : undefined;
+  if (!found) return c.json({ error: "word_not_found" }, 404);
+  if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
+  if (!c.env.AI) return c.json({ error: "speech_unavailable" }, 503);
+
+  const declared = Number(c.req.header("Content-Length") ?? 0);
+  if (declared > MAX_AUDIO_BYTES) return c.json({ error: "audio_too_large" }, 413);
+  const audio = new Uint8Array(await c.req.arrayBuffer());
+  if (audio.byteLength === 0) return c.json({ error: "empty_audio" }, 400);
+  if (audio.byteLength > MAX_AUDIO_BYTES) return c.json({ error: "audio_too_large" }, 413);
+
+  let heard = "";
+  try {
+    const out = (await (c.env.AI as SpeechModel).run(WHISPER_MODEL, {
+      audio: toBase64(audio),
+      language: "he",
+      task: "transcribe",
+    })) as { text?: string };
+    heard = (out.text ?? "").trim();
+  } catch {
+    return c.json({ error: "speech_failed" }, 502);
+  }
+
+  const match = isSpeechMatch(heard, found.word.he);
+  if (match && mode === "study") {
+    await ensureUser(c.env.DB, user);
+    const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, "speak");
+    const totals = await getTotals(c.env.DB, user.id);
+    return c.json({
+      heard,
+      match,
+      progress: result.progress,
+      pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
+      points: totals.points,
+    });
+  }
+  return c.json({ heard, match });
+});
+
+// Итог викторины. Принимается только по полностью пройденному уроку.
+app.post("/api/quiz/submit", requireUser, async (c) => {
+  const user = c.get("user");
+  const body = await readJson<{ lessonId?: string; correct?: number; total?: number }>(c.req.raw);
+  if (!body?.lessonId) return c.json({ error: "bad_request" }, 400);
+  const { correct, total } = body;
+  if (
+    !Number.isInteger(correct) ||
+    !Number.isInteger(total) ||
+    total !== QUIZ_SIZE ||
+    (correct as number) < 0 ||
+    (correct as number) > QUIZ_SIZE
+  ) {
+    return c.json({ error: "bad_result" }, 400);
+  }
+
+  const lesson = getLesson(body.lessonId);
+  if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
+  if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
+
+  await ensureUser(c.env.DB, user);
+  const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lesson.words.map((w) => w.id));
+  if (!progress.every((p) => p.completed)) return c.json({ error: "lesson_not_completed" }, 409);
+
+  const passed = (correct as number) >= PASS_SCORE;
+  const outcome = await recordQuizAttempt(c.env.DB, user.id, lesson.id, correct as number, total as number, passed);
+  const totals = await getTotals(c.env.DB, user.id);
+  return c.json({
+    passed,
+    correct,
+    total,
+    mistakes: QUIZ_SIZE - (correct as number),
+    firstTimePassed: outcome.firstTimePassed,
+    passedLessons: totals.passedLessons,
+    status: totals.status,
+  });
+});
+
+app.notFound((c) => c.json({ error: "not_found" }, 404));
+
+app.onError((err, c) => {
+  console.error(err);
+  return c.json({ error: "internal_error" }, 500);
+});
