@@ -245,15 +245,29 @@ await page.waitForSelector('[data-testid="word-he"]');
 check((await page.textContent('[data-testid="points"]')) === "10", "у готового урока 10 очков");
 await page.click("text=К викторине");
 await page.waitForSelector('[data-testid="quiz-progress"]');
-// Отвечаем неверно на первые вопросы с выбором и смотрим счётчик ошибок.
+// Шесть неверных ответов подряд: викторина обрывается и ничего не сохраняется.
 for (let q = 0; q < 6; q++) {
   await page.locator('[data-testid="option"][data-correct="false"]').first().click();
+  if (q === 5) {
+    const counter = await page.textContent('[data-testid="quiz-mistakes"]');
+    check(counter.includes("Ошибок: 6 из 5"), `счётчик ошибок: «${counter}»`);
+  }
   await page.click('[data-testid="quiz-next"]');
 }
-const counter = await page.textContent('[data-testid="quiz-mistakes"]');
-check(counter.includes("Ошибок: 6 из 5"), `счётчик ошибок: «${counter}»`);
-await shot(page, "18-quiz-over-limit");
+await page.waitForSelector('[data-testid="quiz-aborted"]');
+await shot(page, "18-quiz-aborted");
+check(true, "на 6-й ошибке викторина прервана");
+await page.click('[data-testid="quiz-restart"]');
+await page.waitForSelector('[data-testid="quiz-progress"]');
+check((await page.textContent('[data-testid="quiz-progress"]')).includes("Вопрос 1 "), "после «Начать заново» снова первый вопрос");
 await page.context().close();
+const attempts = execFileSync(
+  "npx",
+  ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${B}`],
+  { encoding: "utf8" },
+);
+check(JSON.parse(attempts)[0].results[0].n === 0, "прерванная викторина ничего не записала в базу");
+
 
 await browser.close();
 console.log(failures.length ? `\nПровалено проверок: ${failures.length}\n${failures.join("\n")}` : "\nВсе проверки пройдены");

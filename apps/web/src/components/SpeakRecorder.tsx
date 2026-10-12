@@ -10,12 +10,27 @@ const STUDY_FAILS_BEFORE_SKIP = 2;
 
 type Phase = "idle" | "recording" | "checking";
 
-const BLOCKED_TEXT: Record<string, string> = {
-  unsupported: "Запись голоса не поддерживается на этом устройстве.",
-  denied: "Нет доступа к микрофону. Разрешите его в настройках Telegram или телефона.",
-  speech_unavailable: "Проверка произношения сейчас недоступна.",
-  speech_failed: "Не удалось распознать запись. Попробуйте ещё раз позже.",
-  network: "Нет связи с сервером.",
+const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
+  unsupported: {
+    title: "Проблема с микрофоном: запись голоса не поддерживается на этом устройстве.",
+    hint: "Обновите Telegram или откройте приложение на другом устройстве.",
+  },
+  denied: {
+    title: "Проблема с микрофоном: нет доступа.",
+    hint: "Разрешите микрофон для Telegram в настройках телефона и нажмите «Попробовать снова».",
+  },
+  speech_unavailable: {
+    title: "Проверка произношения сейчас недоступна.",
+    hint: "Попробуйте позже.",
+  },
+  speech_failed: {
+    title: "Не удалось распознать запись.",
+    hint: "Проверьте микрофон и попробуйте ещё раз.",
+  },
+  network: {
+    title: "Нет связи с сервером.",
+    hint: "Проверьте интернет и попробуйте ещё раз.",
+  },
 };
 
 /**
@@ -76,11 +91,16 @@ export function SpeakRecorder({
   }
 
   if (blocked) {
+    const text = BLOCKED_TEXT[blocked] ?? { title: "Проверка произношения не сработала.", hint: "Попробуйте ещё раз." };
     return (
-      <div className="flex flex-col items-center gap-block text-center">
-        <p className="text-danger">{BLOCKED_TEXT[blocked] ?? "Проверка произношения не сработала."}</p>
+      <div className="flex flex-col items-center gap-block text-center" role="alert">
+        <p className="font-semibold text-danger">{text.title}</p>
+        <p className="text-sm text-ink-soft">{text.hint}</p>
+        <Button onClick={() => setBlocked(null)} data-testid="speak-retry">
+          Попробовать снова
+        </Button>
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">
-          {mode === "quiz" ? "Пропустить вопрос" : "Пропустить этап пока"}
+          {mode === "quiz" ? "Пропустить (засчитается как ошибка)" : "Отложить этап"}
         </Button>
       </div>
     );

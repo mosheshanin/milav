@@ -78,6 +78,40 @@ function QuizRound({
     }
   }
 
+  // Больше допустимого числа ошибок: викторина обрывается и ничего не сохраняется (решение владельца).
+  if (mistakes > MAX_MISTAKES && !outcome) {
+    return (
+      <>
+        <Header title="Викторина прервана" subtitle={title} onBack={onBack} />
+        <main className="mx-auto flex max-w-md flex-col gap-block p-block">
+          <Card className="flex flex-col items-center gap-block text-center">
+            <div className="text-5xl" aria-hidden>
+              💪
+            </div>
+            <h2 className="text-xl font-bold" data-testid="quiz-aborted">
+              Ошибок больше {MAX_MISTAKES}
+            </h2>
+            <p className="text-ink-soft">
+              Урок в этот раз не сдан. Результат не сохранён: всё так, как будто викторина не начиналась. Повторите слова
+              и попробуйте ещё раз.
+            </p>
+            <div className="grid w-full gap-2">
+              <Button block onClick={onRestart} data-testid="quiz-restart">
+                Начать заново
+              </Button>
+              <Button variant="secondary" block onClick={onBack}>
+                Повторить слова урока
+              </Button>
+              <Button variant="ghost" block onClick={onHome}>
+                К урокам
+              </Button>
+            </div>
+          </Card>
+        </main>
+      </>
+    );
+  }
+
   if (finished) {
     return (
       <>
@@ -87,7 +121,6 @@ function QuizRound({
             correct={correctCount}
             submit={submit}
             onSend={() => void send()}
-            onRestart={onRestart}
             onHome={onHome}
           />
         </main>
@@ -114,13 +147,6 @@ function QuizRound({
         <div className="h-2 overflow-hidden rounded-full bg-line" aria-hidden>
           <div className="h-full bg-accent transition-all" style={{ width: `${(index / QUIZ_SIZE) * 100}%` }} />
         </div>
-        {mistakes > MAX_MISTAKES && (
-          <p className="text-sm text-danger">
-            Ошибок больше допустимого: урок в этот раз не сдать (нужно {PASS_SCORE} верных). Можно дойти до конца и
-            попробовать снова.
-          </p>
-        )}
-
         <Card className="flex flex-col gap-block" key={index}>
           <h2 className="text-center text-ink-soft">{QUESTION_TITLES[question!.type]}</h2>
           <QuestionBody question={question!} word={word} outcome={outcome} onAnswer={answer} onWriteDone={answerAndNext} />
@@ -248,11 +274,11 @@ function QuestionBody({
   }
 }
 
+/** Итог дошедшей до конца викторины: ошибок не больше допустимого, значит урок сдан. */
 function Result({
   correct,
   submit,
   onSend,
-  onRestart,
   onHome,
 }: {
   correct: number;
@@ -262,23 +288,17 @@ function Result({
     | { state: "error"; code: string }
     | { state: "done"; result: QuizResponse };
   onSend: () => void;
-  onRestart: () => void;
   onHome: () => void;
 }) {
-  const passed = correct >= PASS_SCORE;
   return (
-    <Card className="flex flex-col items-center gap-block text-center" >
+    <Card className="flex flex-col items-center gap-block text-center">
       <div className="text-5xl" aria-hidden>
-        {passed ? "🎉" : "💪"}
+        🎉
       </div>
       <h2 className="text-2xl font-bold" data-testid="quiz-result">
         {correct} из {QUIZ_SIZE}
       </h2>
-      <p className="text-ink-soft">
-        {passed
-          ? `Нужно было ${PASS_SCORE}. Урок сдан!`
-          : `Для сдачи нужно ${PASS_SCORE}. Попробуйте ещё раз: слова вы уже знаете.`}
-      </p>
+      <p className="text-ink-soft">Нужно было {PASS_SCORE}. Урок сдан!</p>
 
       {submit.state === "idle" && (
         <Button block onClick={onSend} data-testid="quiz-send">
@@ -299,28 +319,16 @@ function Result({
         </>
       )}
       {submit.state === "done" && (
-        <>
-          {submit.result.passed && (
-            <p className="font-semibold text-success" data-testid="quiz-saved">
-              {submit.result.firstTimePassed
-                ? `Новый сданный урок! Всего сдано: ${submit.result.passedLessons}. Статус: ${submit.result.status.symbol} ${submit.result.status.name}`
-                : "Результат сохранён. Этот урок уже был сдан раньше, в статус он не добавляется."}
-            </p>
-          )}
-          {!submit.result.passed && <p className="text-ink-soft">Результат сохранён.</p>}
-        </>
+        <p className="font-semibold text-success" data-testid="quiz-saved">
+          {submit.result.firstTimePassed
+            ? `Новый сданный урок! Всего сдано: ${submit.result.passedLessons}. Статус: ${submit.result.status.symbol} ${submit.result.status.name}`
+            : "Результат сохранён. Этот урок уже был сдан раньше, в статус он не добавляется."}
+        </p>
       )}
 
-      <div className="grid w-full gap-2">
-        {!passed && (
-          <Button variant="secondary" block onClick={onRestart} data-testid="quiz-restart">
-            Пройти ещё раз
-          </Button>
-        )}
-        <Button variant="ghost" block onClick={onHome} data-testid="quiz-home">
-          К урокам
-        </Button>
-      </div>
+      <Button variant="ghost" block onClick={onHome} data-testid="quiz-home">
+        К урокам
+      </Button>
     </Card>
   );
 }
