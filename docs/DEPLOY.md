@@ -37,3 +37,21 @@ npm run deploy     # сборка и ручная публикация (посл
 ```
 
 Для локальных секретов скопируйте `apps/api/.dev.vars.example` в `.dev.vars` в корне репозитория.
+
+## Проверки
+
+```
+npm run typecheck   # типы во всех пакетах
+npm test            # юнит-тесты (общие правила, контент, API на настоящем SQLite, викторина, распознавание букв)
+```
+
+Сквозная проверка в браузере (Chromium на размере телефона, урок и викторина целиком):
+
+```
+npm run build
+npx wrangler d1 migrations apply milav-db --local --env local
+npm run dev:api                      # в одном окне
+node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты попадут в e2e-shots/
+```
+
+Локально открыть приложение вне Telegram можно по адресу `http://localhost:8787/?dev=1001` (номер задаёт тестового пользователя).
