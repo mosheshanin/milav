@@ -9,6 +9,8 @@ export class RecorderError extends Error {
 export interface ActiveRecording {
   /** Останавливает запись и возвращает звук. */
   stop(): Promise<Blob>;
+  /** Звук, когда запись закончилась: по `stop()` или по таймеру. */
+  finished: Promise<Blob>;
 }
 
 const MIME_TYPES = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"];
@@ -44,6 +46,7 @@ export async function startRecording(maxMs = 5000): Promise<ActiveRecording> {
   }, maxMs);
 
   return {
+    finished,
     stop: () => {
       clearTimeout(timer);
       if (recorder.state === "recording") recorder.stop();

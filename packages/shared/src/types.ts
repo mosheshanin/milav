@@ -36,6 +36,12 @@ export interface Word {
 
 export type Section = "nouns" | "verbs" | "adjectives";
 
+export const SECTION_TITLES: Record<Section, string> = {
+  nouns: "Существительные",
+  verbs: "Глаголы",
+  adjectives: "Прилагательные",
+};
+
 export interface Lesson {
   id: string;
   section: Section;

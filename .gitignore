@@ -20,3 +20,4 @@ Thumbs.db
 # логи
 *.log
 npm-debug.log*
+e2e-shots/

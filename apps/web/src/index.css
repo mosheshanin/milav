@@ -7,6 +7,9 @@
 */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Печатный иврит и рукописный иврит (шрифт «Гверет Левин», свободная лицензия OFL) */
+  --font-hebrew: "Heebo", "Inter", sans-serif;
+  --font-hand: "Gveret Levin", "Heebo", cursive;
 
   /* Палитра бренда (из логотипа) */
   --color-brand-orange: #ff6b35;
@@ -20,6 +23,8 @@
   --color-accent-soft: #dbeafe;
   --color-success: #16a34a;
   --color-success-soft: #dcfce7;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fee2e2;
 
   /* Поверхности и текст */
   --color-surface: #ffffff;
@@ -35,6 +40,10 @@
   /* Единая шкала отступов между блоками */
   --spacing-block: 1rem;
   --spacing-section: 1.5rem;
+
+  /* Размеры иконок (классы size-icon, size-icon-lg) */
+  --spacing-icon: 1.25rem;
+  --spacing-icon-lg: 1.75rem;
 }
 
 @layer base {

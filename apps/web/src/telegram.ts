@@ -46,7 +46,7 @@ export function authHeader(): string | null {
   if (initData) return `tma ${initData}`;
   if (import.meta.env.DEV || LOCAL_HOSTS.includes(location.hostname)) {
     const id = new URLSearchParams(location.search).get("dev") ?? "1001";
-    return `dev ${/^\d{1,15}$/.test(id) ? id : "1001"}:Тестер`;
+    return `dev ${/^\d{1,15}$/.test(id) ? id : "1001"}:Tester`;
   }
   return null;
 }
