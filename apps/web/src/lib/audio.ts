@@ -1,25 +1,31 @@
 import type { Word } from "@milav/shared";
 
 /**
- * Проигрывает слово. Если у слова есть файл озвучки, играет его, иначе использует голос
- * устройства (временное решение, пока нет записанных файлов, см. CLAUDE.md).
+ * Проигрывает слово. Если у слова есть файл озвучки (Google TTS, см. docs/AUDIO.md), играет его, иначе или при
+ * сбое использует голос устройства.
  * Возвращает false, если звук воспроизвести не удалось.
  */
 export async function playWord(word: Word): Promise<boolean> {
   if (word.audio) {
-    try {
-      const audio = new Audio(word.audio);
-      await audio.play();
-      await new Promise<void>((resolve) => {
-        audio.onended = () => resolve();
-        audio.onerror = () => resolve();
-      });
-      return true;
-    } catch {
-      return false;
-    }
+    const played = await playFile(word.audio);
+    if (played) return true;
+    // Файл не загрузился или не проигрался: не оставляем человека без звука.
   }
   return speakWithDevice(word.he);
+}
+
+async function playFile(src: string): Promise<boolean> {
+  try {
+    const audio = new Audio(src);
+    const ended = new Promise<boolean>((resolve) => {
+      audio.onended = () => resolve(true);
+      audio.onerror = () => resolve(false);
+    });
+    await audio.play();
+    return await ended;
+  } catch {
+    return false;
+  }
 }
 
 function speakWithDevice(text: string): Promise<boolean> {

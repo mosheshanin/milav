@@ -1,13 +1,8 @@
 import { SPEAK_MAX_MS, SPEAK_SILENCE_MS } from "@milav/shared";
+import { RecorderError, acquireMic, pauseMic } from "./mic";
 import { DEFAULT_SILENCE, SilenceDetector } from "./silence";
 
-export type RecorderProblem = "unsupported" | "denied";
-
-export class RecorderError extends Error {
-  constructor(readonly problem: RecorderProblem) {
-    super(problem);
-  }
-}
+export { RecorderError };
 
 export interface ActiveRecording {
   /** Останавливает запись и возвращает звук. */
@@ -42,15 +37,8 @@ export async function startRecording(options: RecordingOptions = {}): Promise<Ac
   const maxMs = options.maxMs ?? SPEAK_MAX_MS;
   const silenceMs = options.silenceMs ?? SPEAK_SILENCE_MS;
 
-  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
-    throw new RecorderError("unsupported");
-  }
-  let stream: MediaStream;
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  } catch {
-    throw new RecorderError("denied");
-  }
+  // Поток общий на всё время работы приложения (см. lib/mic.ts), чтобы системный запрос не повторялся.
+  const stream = await acquireMic();
 
   const mimeType = MIME_TYPES.find((t) => MediaRecorder.isTypeSupported(t));
   const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
@@ -76,7 +64,7 @@ export async function startRecording(options: RecordingOptions = {}): Promise<Ac
   const finished = new Promise<Blob>((resolve) => {
     recorder.onstop = () => {
       clearInterval(ticker);
-      stream.getTracks().forEach((t) => t.stop());
+      pauseMic();
       void audioContext?.close().catch(() => undefined);
       options.onLevels?.(new Array<number>(EQUALIZER_BARS).fill(0));
       resolve(new Blob(chunks, { type: recorder.mimeType }));

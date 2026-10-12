@@ -10,6 +10,8 @@ export interface TelegramUser {
 
 export interface TelegramWebApp {
   initData: string;
+  /** Платформа приложения Telegram: ios, android, tdesktop, macos, weba, webk и т. д. */
+  platform?: string;
   initDataUnsafe: { user?: TelegramUser };
   ready: () => void;
   expand: () => void;
