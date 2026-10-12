@@ -1,36 +1,50 @@
-import { useEffect, useState } from "react";
-import { getTelegram } from "./telegram";
+import { useState } from "react";
+import { AppProvider } from "./AppContext";
+import { Notice } from "./components/ui";
+import { Home } from "./screens/Home";
+import { Quiz } from "./screens/Quiz";
+import { Study } from "./screens/Study";
 
-type ApiState = "loading" | "ok" | "error";
+type Screen = { name: "home" } | { name: "study"; lessonId: string } | { name: "quiz"; lessonId: string };
 
 export function App() {
-  const [api, setApi] = useState<ApiState>("loading");
-  const user = getTelegram()?.initDataUnsafe.user;
-
-  useEffect(() => {
-    fetch("/api/health")
-      .then((r) => (r.ok ? setApi("ok") : setApi("error")))
-      .catch(() => setApi("error"));
-  }, []);
+  const [screen, setScreen] = useState<Screen>({ name: "home" });
 
   return (
-    <main className="mx-auto flex min-h-full max-w-md flex-col items-center justify-center gap-section p-block text-center">
-      <img src="/logo.png" alt="Milav" className="h-16" />
-      <h1 className="text-2xl font-bold">
-        {user ? `Привет, ${user.first_name}!` : "Привет!"}
-      </h1>
-      <p className="text-ink-soft">Учим иврит: слушай, говори, пиши, печатай.</p>
-      <p
-        className={
-          api === "ok"
-            ? "rounded-control bg-success-soft px-block py-2 text-sm text-success"
-            : "rounded-control bg-line px-block py-2 text-sm text-ink-soft"
+    <AppProvider
+      fallback={(load) => {
+        if (load.state === "loading") return <Notice title="Загрузка…" />;
+        if (load.state === "no-auth") {
+          return (
+            <Notice title="Откройте приложение в Telegram">
+              Milav работает как мини-приложение: найдите бота в Telegram и нажмите кнопку меню.
+            </Notice>
+          );
         }
-      >
-        {api === "loading" && "Проверяем связь с сервером…"}
-        {api === "ok" && "Сервер на связи"}
-        {api === "error" && "Сервер недоступен"}
-      </p>
-    </main>
+        if (load.code === "bot_token_missing") {
+          return <Notice title="Сервер ещё не настроен">Не задан токен бота. Загляните позже.</Notice>;
+        }
+        if (load.code === "unauthorized") {
+          return <Notice title="Не удалось войти">Закройте приложение и откройте его снова из Telegram.</Notice>;
+        }
+        return <Notice title="Нет связи с сервером">Проверьте интернет и откройте приложение снова.</Notice>;
+      }}
+    >
+      {screen.name === "home" && <Home onOpen={(lessonId) => setScreen({ name: "study", lessonId })} />}
+      {screen.name === "study" && (
+        <Study
+          lessonId={screen.lessonId}
+          onBack={() => setScreen({ name: "home" })}
+          onQuiz={() => setScreen({ name: "quiz", lessonId: screen.lessonId })}
+        />
+      )}
+      {screen.name === "quiz" && (
+        <Quiz
+          lessonId={screen.lessonId}
+          onBack={() => setScreen({ name: "study", lessonId: screen.lessonId })}
+          onHome={() => setScreen({ name: "home" })}
+        />
+      )}
+    </AppProvider>
   );
 }
