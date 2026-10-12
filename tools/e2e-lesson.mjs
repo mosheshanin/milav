@@ -279,6 +279,61 @@ const attempts = execFileSync(
 check(JSON.parse(attempts)[0].results[0].n === 0, "прерванная викторина ничего не записала в базу");
 
 
+// ---------- Сценарий В: приглашение микрофона, один системный запрос, отказ ----------
+const C = 2003;
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${C}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${C};`);
+sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (${C}, '${lesson.words[0].id}', '${lesson.id}', 1, 0, 0, 0, NULL);`);
+
+async function openSpeak(initScript) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+  const p = await context.newPage();
+  await p.addInitScript(() => {
+    window.speechSynthesis.speak = (u) => setTimeout(() => u.onend?.(new Event("end")), 20);
+  });
+  // Флаг Chromium для фальшивого микрофона сразу «разрешает» его; имитируем состояние «ещё не спрашивали».
+  await p.addInitScript(() => {
+    navigator.permissions.query = async () => ({ state: "prompt", onchange: null });
+  });
+  if (initScript) await p.addInitScript(initScript);
+  await p.goto(`${BASE}/?dev=${C}`);
+  await p.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+  await p.click(`[data-testid="lesson-${lesson.id}"]`);
+  return p;
+}
+
+page = await openSpeak(() => {
+  window.__gum = 0;
+  const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+  navigator.mediaDevices.getUserMedia = (c) => {
+    window.__gum++;
+    return original(c);
+  };
+});
+await page.waitForSelector('[data-testid="mic-ask"]');
+await shot(page, "19-mic-ask");
+check(true, "до первой записи показано приглашение разрешить микрофон");
+check((await page.evaluate(() => window.__gum)) === 0, "системный запрос не вызван, пока человек не нажал кнопку");
+await page.click('[data-testid="mic-allow"]');
+await page.waitForSelector('[data-testid="recording"]');
+await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
+await page.click('[data-testid="speak-retry"]');
+check((await page.locator('[data-testid="mic-ask"]').count()) === 0, "после разрешения приглашение больше не показывается");
+await page.click('[data-testid="speak-start"]');
+await page.waitForSelector('[data-testid="recording"]');
+await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
+check((await page.evaluate(() => window.__gum)) === 1, "за две записи системный запрос микрофона был один");
+await page.context().close();
+
+page = await openSpeak(() => {
+  navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException("denied", "NotAllowedError"));
+});
+await page.waitForSelector('[data-testid="mic-ask"]');
+await page.click('[data-testid="mic-allow"]');
+await page.waitForSelector('[data-testid="mic-denied"]');
+await shot(page, "20-mic-denied");
+check((await page.textContent('[data-testid="mic-denied"]')).includes("Микрофон выключен"), "при отказе показана инструкция, как включить микрофон");
+await page.context().close();
+
 await browser.close();
 console.log(failures.length ? `\nПровалено проверок: ${failures.length}\n${failures.join("\n")}` : "\nВсе проверки пройдены");
 process.exit(failures.length ? 1 : 0);
