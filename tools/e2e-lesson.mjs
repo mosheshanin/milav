@@ -1,0 +1,260 @@
+// Сквозная проверка в настоящем браузере: целый урок на размере телефона, затем викторина.
+// Нужен запущенный локальный Worker со свежей сборкой фронтенда:
+//   npm run build && npx wrangler d1 migrations apply milav-db --local --env local && npm run dev:api
+// Запуск: node tools/e2e-lesson.mjs [каталог для скриншотов]
+// Распознавание речи здесь недоступно (нет Workers AI), поэтому этап «говори» проверяется только как
+// «недоступно → отложить», а у слов он отмечается прямо в локальной базе.
+import { execFileSync } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
+import { chromium } from "playwright-core";
+
+const BASE = process.env.BASE ?? "http://localhost:8787";
+const SHOTS = process.argv[2] ?? "e2e-shots";
+mkdirSync(SHOTS, { recursive: true });
+
+const lesson = JSON.parse(readFileSync(new URL("../content/lessons/animals-1.json", import.meta.url), "utf8"));
+const templates = JSON.parse(
+  readFileSync(new URL("../apps/web/src/lib/handwriting/baseTemplates.json", import.meta.url), "utf8"),
+).filter((t) => t.source === "font:heebo");
+const heByRu = new Map(lesson.words.map((w) => [w.ru, w.he]));
+
+function findChromium() {
+  const root = process.env.PLAYWRIGHT_BROWSERS_PATH ?? "/opt/pw-browsers";
+  for (const dir of readdirSync(root)) {
+    const exe = `${root}/${dir}/chrome-linux/chrome`;
+    if (dir.startsWith("chromium-") && existsSync(exe)) return exe;
+  }
+  throw new Error("Chromium не найден");
+}
+
+function sql(command) {
+  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
+    stdio: "ignore",
+  });
+}
+
+const failures = [];
+function check(condition, text) {
+  console.log(`${condition ? "ok  " : "FAIL"} ${text}`);
+  if (!condition) failures.push(text);
+}
+
+const browser = await chromium.launch({
+  executablePath: findChromium(),
+  args: ["--no-sandbox", "--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"],
+});
+
+async function openPage(userId) {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 2,
+    permissions: ["microphone"],
+  });
+  const page = await context.newPage();
+  await page.addInitScript(() => {
+    // В безголовом Chromium нет голосов: имитируем окончание речи.
+    window.speechSynthesis.speak = (u) => setTimeout(() => u.onend?.(new Event("end")), 20);
+  });
+  page.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
+  await page.goto(`${BASE}/?dev=${userId}`);
+  return page;
+}
+
+const shot = (page, name) => page.screenshot({ path: `${SHOTS}/${name}.png` });
+
+/** Рисует букву по шаблону из шрифта: точки облака как короткие штрихи (распознаватель берёт точки равномерно). */
+async function drawLetter(page, letter) {
+  const t = templates.find((x) => x.letter === letter);
+  if (!t) throw new Error(`нет шаблона ${letter}`);
+  const box = await page.locator('[data-testid="draw-canvas"]').boundingBox();
+  const lineHeight = 0.45 * 220;
+  const h = t.heightRatio * lineHeight;
+  const scale = t.aspect <= 1 ? h : h * t.aspect;
+  const cx = box.x + box.width / 2;
+  const cy = box.y + 0.62 * 220 - h / 2;
+  for (let i = 0; i < t.points.length; i += 4) {
+    const x = cx + t.points[i] * scale;
+    const y = cy + t.points[i + 1] * scale;
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x + 1.5, y);
+    await page.mouse.up();
+  }
+}
+
+/** Пишет слово по буквам. Возвращает число неудачных проверок. */
+async function writeWord(page, he, { retriesAllowed = 3 } = {}) {
+  let misses = 0;
+  const slots = page.locator('[data-testid="write-slots"] [data-slot]');
+  for (let k = 0; k < [...he].length; k++) {
+    for (let attempt = 0; attempt < retriesAllowed; attempt++) {
+      await drawLetter(page, [...he][k]);
+      await page.locator('[data-testid="check"]').click();
+      await page.waitForTimeout(80);
+      if ((await slots.nth(k).getAttribute("data-slot")) !== "pending") break;
+      misses++;
+    }
+  }
+  return misses;
+}
+
+async function typeWord(page, he) {
+  for (const letter of [...he]) await page.locator('[data-testid="keyboard"] button').filter({ hasText: letter }).click();
+}
+
+// ---------- Сценарий А: полный урок и викторина на проходной балл ----------
+const A = 2001;
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${A}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${A}; DELETE FROM quiz_attempts WHERE user_id=${A}; DELETE FROM lesson_passed WHERE user_id=${A};`);
+const seed = lesson.words
+  .slice(1)
+  .map((w) => `(${A}, '${w.id}', '${lesson.id}', 0, 1, 0, 0, NULL)`)
+  .join(",");
+sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seed};`);
+
+let page = await openPage(A);
+await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await shot(page, "01-home");
+check((await page.textContent('[data-testid="points"]')) === "0", "на старте 0 очков");
+
+await page.click(`[data-testid="lesson-${lesson.id}"]`);
+await page.waitForSelector('[data-testid="word-he"]');
+await shot(page, "02-study-listen");
+
+// Слово 1: слушать → говорить (недоступно, отложить) → писать → печатать.
+const first = lesson.words[0];
+check((await page.textContent('[data-testid="word-he"]')) === first.he, "первое слово на карточке");
+check(await page.locator('[data-testid="listen-next"]').isDisabled(), "«Дальше» заблокировано, пока не послушал");
+await page.click('[data-testid="listen"]');
+await page.waitForFunction(() => !document.querySelector('[data-testid="listen-next"]').disabled);
+await shot(page, "03-listened");
+await page.click('[data-testid="listen-next"]');
+
+await page.waitForSelector('[data-testid="speak-start"]');
+await page.click('[data-testid="speak-start"]');
+await page.waitForTimeout(400);
+await page.click('[data-testid="speak-stop"]');
+await page.waitForSelector('[data-testid="speak-skip"]');
+await shot(page, "04-speak-unavailable");
+check(
+  (await page.textContent("body")).includes("Проверка произношения сейчас недоступна"),
+  "без Workers AI показано «проверка недоступна»",
+);
+await page.click('[data-testid="speak-skip"]');
+
+await page.waitForSelector('[data-testid="draw-canvas"]');
+await shot(page, "05-write-empty");
+let misses = await writeWord(page, first.he);
+console.log(`     распознавание в слове 1: лишних проверок ${misses}`);
+await shot(page, "06-write-done");
+await page.click('[data-testid="write-done"]');
+
+await page.waitForSelector('[data-testid="keyboard"]');
+await shot(page, "07-type");
+await typeWord(page, first.he);
+await shot(page, "08-type-correct");
+await page.click('[data-testid="type-done"]');
+await page.waitForSelector("text=Вернуться к «Говори»");
+check(true, "без «говори» слово не засчитано, предложено вернуться");
+await shot(page, "09-speak-pending");
+
+// Помечаем «говори» прямо в базе и перезагружаем: урок продолжится со слова 2.
+sql(`UPDATE word_progress SET stage_speak=1, completed_at=datetime('now') WHERE user_id=${A} AND word_id='${first.id}';`);
+await page.reload();
+await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+check((await page.textContent('[data-testid="points"]')) === "1", "после слова 1 одно очко");
+await page.click(`[data-testid="lesson-${lesson.id}"]`);
+await page.waitForSelector('[data-testid="word-he"]');
+check((await page.textContent('[data-testid="word-he"]')) === lesson.words[1].he, "урок продолжается со слова 2");
+
+for (let i = 1; i < lesson.words.length; i++) {
+  const w = lesson.words[i];
+  await page.waitForFunction((he) => document.querySelector('[data-testid="word-he"]')?.textContent === he, w.he);
+  await page.click('[data-testid="listen"]');
+  await page.waitForFunction(() => !document.querySelector('[data-testid="listen-next"]').disabled);
+  await page.click('[data-testid="listen-next"]');
+  // «говори» уже есть, сразу писать
+  await page.waitForSelector('[data-testid="draw-canvas"]');
+  misses += await writeWord(page, w.he);
+  await page.click('[data-testid="write-done"]');
+  await page.waitForSelector('[data-testid="keyboard"]');
+  await typeWord(page, w.he);
+    await page.click('[data-testid="type-done"]');
+  await page.waitForSelector('[data-testid="word-complete"]');
+  if (i === 1) await shot(page, "10-word-complete");
+  if (i < lesson.words.length - 1) await page.click('[data-testid="next-word"]');
+}
+console.log(`     всего лишних проверок письма в уроке: ${misses}`);
+check((await page.textContent('[data-testid="points"]')) === "10", "10 слов — 10 очков");
+await shot(page, "11-all-done");
+
+// Викторина.
+await page.click('[data-testid="to-quiz"]');
+await page.waitForSelector('[data-testid="quiz-progress"]');
+let wrongShown = 0;
+for (let q = 0; q < 25; q++) {
+  await page.waitForFunction((n) => document.querySelector('[data-testid="quiz-progress"]')?.textContent.includes(`Вопрос ${n} `), q + 1);
+  const options = page.locator('[data-testid="option"]');
+  if (await options.count()) {
+    const correct = page.locator('[data-testid="option"][data-correct="true"]');
+    await correct.click();
+    if (q === 0) await shot(page, "12-quiz-correct");
+    await page.click('[data-testid="quiz-next"]');
+  } else if (await page.locator('[data-testid="speak-start"]').count()) {
+    // «произнеси»: распознавания нет, пропускаем — вопрос засчитывается неверным
+    await page.click('[data-testid="speak-start"]');
+    await page.waitForTimeout(300);
+    await page.click('[data-testid="speak-stop"]');
+    await page.waitForSelector('[data-testid="speak-skip"]');
+    await page.click('[data-testid="speak-skip"]');
+    await page.waitForSelector('[data-testid="quiz-feedback"]');
+    wrongShown++;
+    if (wrongShown === 1) await shot(page, "13-quiz-wrong");
+    await page.click('[data-testid="quiz-next"]');
+  } else {
+    const ru = (await page.textContent('[data-testid="prompt"]')).trim();
+    await writeWord(page, heByRu.get(ru), { retriesAllowed: 2 });
+    if (q === 20) await shot(page, "14-quiz-write");
+    await page.click('[data-testid="write-done"]');
+  }
+}
+await page.waitForSelector('[data-testid="quiz-result"]');
+const resultText = await page.textContent('[data-testid="quiz-result"]');
+console.log(`     итог викторины: ${resultText}`);
+await shot(page, "15-result-before-save");
+check(/^20 из 25$|^2[0-5] из 25$/.test(resultText.trim()), "итог 20+ из 25 (произношение пропущено: 5 ошибок)");
+await page.click('[data-testid="quiz-send"]');
+await page.waitForSelector('[data-testid="quiz-saved"]');
+await shot(page, "16-result-saved");
+check((await page.textContent('[data-testid="quiz-saved"]')).includes("Новый сданный урок"), "урок сдан, засчитан в статус");
+await page.click('[data-testid="quiz-home"]');
+await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await page.waitForTimeout(500);
+await shot(page, "17-home-after");
+check((await page.textContent("body")).includes("Сдан"), "на главной урок помечен «Сдан»");
+await page.context().close();
+
+// ---------- Сценарий Б: урок пройден, викторина с ошибками не сдаётся ----------
+const B = 2002;
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${B}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${B}; DELETE FROM quiz_attempts WHERE user_id=${B}; DELETE FROM lesson_passed WHERE user_id=${B};`);
+const seedB = lesson.words.map((w) => `(${B}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now'))`).join(",");
+sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedB};`);
+page = await openPage(B);
+await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await page.click(`[data-testid="lesson-${lesson.id}"]`);
+await page.waitForSelector('[data-testid="word-he"]');
+check((await page.textContent('[data-testid="points"]')) === "10", "у готового урока 10 очков");
+await page.click("text=К викторине");
+await page.waitForSelector('[data-testid="quiz-progress"]');
+// Отвечаем неверно на первые вопросы с выбором и смотрим счётчик ошибок.
+for (let q = 0; q < 6; q++) {
+  await page.locator('[data-testid="option"][data-correct="false"]').first().click();
+  await page.click('[data-testid="quiz-next"]');
+}
+const counter = await page.textContent('[data-testid="quiz-mistakes"]');
+check(counter.includes("Ошибок: 6 из 5"), `счётчик ошибок: «${counter}»`);
+await shot(page, "18-quiz-over-limit");
+await page.context().close();
+
+await browser.close();
+console.log(failures.length ? `\nПровалено проверок: ${failures.length}\n${failures.join("\n")}` : "\nВсе проверки пройдены");
+process.exit(failures.length ? 1 : 0);
