@@ -17,7 +17,7 @@ permissions:
 jobs:
   checks:
     name: Типы, тесты, сборка
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
@@ -40,7 +40,7 @@ jobs:
 
   e2e:
     name: Сквозной тест (Chromium)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       # Куда ставится Chromium; tools/e2e-lesson.mjs ищет его по этой переменной.
