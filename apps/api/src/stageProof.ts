@@ -4,11 +4,11 @@ import {
   MAX_STROKES_PER_LETTER,
   featuresFromStrokes,
   isLetterAccepted,
-  loadBaseTemplates,
   wordLetters,
   type Stroke,
   type Word,
 } from "@milav/shared";
+import { templates } from "./templates";
 
 /** Координаты точек холста не выходят за разумные пределы (холст около 400 x 220 пикселей). */
 const MAX_COORDINATE = 5000;
@@ -73,7 +73,6 @@ export async function recognizeLetters(
     parsed.push(strokes);
   }
 
-  const templates = await loadBaseTemplates();
   const failedLetters: number[] = [];
   letters.forEach((letter, i) => {
     const drawn = parsed[i]!;

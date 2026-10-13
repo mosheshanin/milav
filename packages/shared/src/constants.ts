@@ -22,6 +22,9 @@ export const SPEAK_ATTEMPTS_IN_QUIZ = 2;
 /** Сколько ошибок допустимо в викторине, чтобы урок считался сданным. */
 export const MAX_MISTAKES = QUIZ_SIZE - PASS_SCORE;
 
+/** Сколько вариантов начертания записывает владелец на каждую из 27 форм (решение владельца, 13.10). */
+export const TEMPLATE_VARIANTS_PER_LETTER = 5;
+
 /** Сколько секунд викторина остаётся открытой для ответов с момента старта. */
 export const QUIZ_SESSION_TTL_SECONDS = 3 * 60 * 60;
 

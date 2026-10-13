@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loadBaseTemplates } from "./baseTemplates";
+import { loadBaseTemplates } from "./templates";
 import { HEBREW_LETTERS } from "../constants";
 import {
   RECOGNIZER,

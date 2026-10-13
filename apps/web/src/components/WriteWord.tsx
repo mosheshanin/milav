@@ -4,7 +4,7 @@ import {
   WRITE_ATTEMPTS_PER_LETTER,
   featuresFromStrokes,
   isLetterAccepted,
-  loadBaseTemplates,
+  loadTemplates,
   roundStrokes,
   wordLetters,
   type Stroke,
@@ -61,7 +61,7 @@ export function WriteWord({
   const [message, setMessage] = useState<{ tone: "ok" | "bad"; text: string } | null>(null);
 
   useEffect(() => {
-    loadBaseTemplates().then(setTemplates, () => setLoadFailed(true));
+    loadTemplates().then(setTemplates, () => setLoadFailed(true));
   }, []);
 
   const finished = index >= letters.length;
