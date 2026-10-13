@@ -45,7 +45,7 @@ jobs:
   e2e:
     name: Сквозной тест (Chromium)
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 25
     env:
       # Куда ставится Chromium; tools/e2e-lesson.mjs ищет его по этой переменной.
       PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.pw-browsers
@@ -91,6 +91,13 @@ jobs:
 
       - name: Сквозной тест
         run: node tools/e2e-lesson.mjs e2e-shots
+
+      # Те же сценарии на уроках другого вида: прилагательные с формами (colors-1) и слова без картинок (family-2).
+      - name: Сквозной тест, урок прилагательных (colors-1)
+        run: E2E_LESSON=colors-1 node tools/e2e-lesson.mjs e2e-shots/colors-1
+
+      - name: Сквозной тест, урок без картинок (family-2)
+        run: E2E_LESSON=family-2 node tools/e2e-lesson.mjs e2e-shots/family-2
 
       - name: Сквозной тест записи шаблонов букв
         run: node tools/e2e-record.mjs e2e-shots

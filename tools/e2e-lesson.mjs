@@ -2,6 +2,8 @@
 // Нужен запущенный локальный Worker со свежей сборкой фронтенда:
 //   npm run build && npx wrangler d1 migrations apply milav-db --local --env local && npm run dev:api
 // Запуск: node tools/e2e-lesson.mjs [каталог для скриншотов]
+// Урок для прохождения берётся из E2E_LESSON (по умолчанию animals-1): так проверяются уроки без картинок (family-2)
+// и уроки прилагательных с формами (colors-1).
 // Распознавание речи здесь недоступно (нет Workers AI), поэтому этап «говори» проверяется только как
 // «недоступно → отложить», а у слов он отмечается прямо в локальной базе.
 import { execFileSync } from "node:child_process";
@@ -12,7 +14,9 @@ const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
 mkdirSync(SHOTS, { recursive: true });
 
-const lesson = JSON.parse(readFileSync(new URL("../content/lessons/animals-1.json", import.meta.url), "utf8"));
+const LESSON_ID = process.env.E2E_LESSON ?? "animals-1";
+if (!/^[a-z0-9-]+$/.test(LESSON_ID)) throw new Error(`E2E_LESSON: недопустимый id урока «${LESSON_ID}»`);
+const lesson = JSON.parse(readFileSync(new URL(`../content/lessons/${LESSON_ID}.json`, import.meta.url), "utf8"));
 const templates = JSON.parse(
   readFileSync(new URL("../packages/shared/src/handwriting/baseTemplates.json", import.meta.url), "utf8"),
 ).filter((t) => t.source === "font:heebo");
@@ -147,6 +151,21 @@ await shot(page, "02-study-listen");
 // Слово 1: слушать → говорить (недоступно, отложить) → писать → печатать.
 const first = lesson.words[0];
 check((await page.textContent('[data-testid="word-he"]')) === first.he, "первое слово на карточке");
+if (first.image) {
+  check(await page.locator('[data-testid="word-image"]').count() === 1, "у слова с картинкой показана картинка");
+} else {
+  const letter = await page.textContent('[data-testid="word-image-fallback"]').catch(() => null);
+  check(letter === [...first.he][0], `у слова без картинки показана первая буква «${[...first.he][0]}»`);
+}
+if (first.forms) {
+  const formsText = (await page.textContent('[data-testid="word-forms"]').catch(() => "")) ?? "";
+  check(
+    ["f", "mp", "fp"].every((k) => formsText.includes(first.forms[k].he) && formsText.includes(`[${first.forms[k].translit}]`)),
+    "у прилагательного на карточке показаны все формы (ж. р., мн. ч. м. р., мн. ч. ж. р.)",
+  );
+} else {
+  check((await page.locator('[data-testid="word-forms"]').count()) === 0, "у существительного нет строки форм");
+}
 check(await page.locator('[data-testid="listen-next"]').isDisabled(), "«Дальше» заблокировано, пока не послушал");
 await page.click('[data-testid="listen"]');
 await page.waitForFunction(() => !document.querySelector('[data-testid="listen-next"]').disabled);
