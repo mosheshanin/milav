@@ -3,7 +3,7 @@ import type { Lesson, WordProgress } from "@milav/shared";
 import { findResume, orderLessons, type LessonState } from "./resume";
 
 function lesson(id: string, over: Partial<Lesson> = {}): Lesson {
-  return { id, section: "nouns", topic: "Животные", number: 1, free: true, title: id, words: [], ...over };
+  return { id, topicId: "animals", section: "nouns", topic: "Животные", number: 1, free: true, title: id, words: [], ...over };
 }
 
 function word(id: string, done: Partial<WordProgress> = {}): WordProgress {

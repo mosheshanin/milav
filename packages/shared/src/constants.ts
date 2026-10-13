@@ -3,6 +3,9 @@
 /** Слов в одном уроке. */
 export const WORDS_PER_LESSON = 10;
 
+/** Сколько первых уроков каждой темы бесплатны, остальные платные (решение владельца). */
+export const FREE_LESSONS_PER_TOPIC = 3;
+
 /** Очки за слово, пройденное по всем четырём этапам. */
 export const POINTS_PER_WORD = 1;
 

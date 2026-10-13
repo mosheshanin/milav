@@ -1,5 +1,6 @@
 {
   "id": "animals-1",
+  "topicId": "animals",
   "section": "nouns",
   "topic": "Животные",
   "number": 1,
@@ -19,7 +20,8 @@
         "ru": "Это чёрный кот"
       },
       "image": "/words/animals-1-cat.svg",
-      "audio": "/audio/animals-1-cat.mp3"
+      "audio": "/audio/animals-1-cat.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-dog",
@@ -34,7 +36,8 @@
         "ru": "Это большой пёс"
       },
       "image": "/words/animals-1-dog.svg",
-      "audio": "/audio/animals-1-dog.mp3"
+      "audio": "/audio/animals-1-dog.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-horse",
@@ -49,7 +52,8 @@
         "ru": "Это быстрый конь"
       },
       "image": "/words/animals-1-horse.svg",
-      "audio": "/audio/animals-1-horse.mp3"
+      "audio": "/audio/animals-1-horse.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-bird",
@@ -64,7 +68,8 @@
         "ru": "Это маленькая птица"
       },
       "image": "/words/animals-1-bird.svg",
-      "audio": "/audio/animals-1-bird.mp3"
+      "audio": "/audio/animals-1-bird.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-fish",
@@ -79,7 +84,8 @@
         "ru": "Это маленькая рыба"
       },
       "image": "/words/animals-1-fish.svg",
-      "audio": "/audio/animals-1-fish.mp3"
+      "audio": "/audio/animals-1-fish.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-cow",
@@ -94,7 +100,8 @@
         "ru": "Это белая корова"
       },
       "image": "/words/animals-1-cow.svg",
-      "audio": "/audio/animals-1-cow.mp3"
+      "audio": "/audio/animals-1-cow.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-rabbit",
@@ -109,7 +116,8 @@
         "ru": "Это белый кролик"
       },
       "image": "/words/animals-1-rabbit.svg",
-      "audio": "/audio/animals-1-rabbit.mp3"
+      "audio": "/audio/animals-1-rabbit.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-mouse",
@@ -124,7 +132,8 @@
         "ru": "Это серая мышь"
       },
       "image": "/words/animals-1-mouse.svg",
-      "audio": "/audio/animals-1-mouse.mp3"
+      "audio": "/audio/animals-1-mouse.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-elephant",
@@ -139,7 +148,8 @@
         "ru": "Это большой слон"
       },
       "image": "/words/animals-1-elephant.svg",
-      "audio": "/audio/animals-1-elephant.mp3"
+      "audio": "/audio/animals-1-elephant.mp3",
+      "reviewed": false
     },
     {
       "id": "animals-1-lion",
@@ -154,7 +164,8 @@
         "ru": "Это сильный лев"
       },
       "image": "/words/animals-1-lion.svg",
-      "audio": "/audio/animals-1-lion.mp3"
+      "audio": "/audio/animals-1-lion.mp3",
+      "reviewed": false
     }
   ]
 }
