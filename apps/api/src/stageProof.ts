@@ -6,7 +6,6 @@ import {
   isLetterAccepted,
   wordLetters,
   type Stroke,
-  type Word,
 } from "@milav/shared";
 import { templates } from "./templates";
 
@@ -39,8 +38,13 @@ export function parseStrokes(value: unknown): Stroke[] | null {
   return strokes;
 }
 
-/** Этап «печатай»: набранное слово должно совпасть с написанием слова (с конечными формами). */
-export function verifyTyped(word: Word, typed: unknown): ProofResult {
+/** Всё, что нужно для проверки ввода: написание слова или одна буква (Word и Letter подходят оба). */
+export interface Spelled {
+  he: string;
+}
+
+/** Этап «печатай»: набранное должно совпасть с написанием слова или буквы (с конечными формами). */
+export function verifyTyped(word: Spelled, typed: unknown): ProofResult {
   if (typeof typed !== "string" || typed.length === 0 || typed.length > 64) {
     return { ok: false, status: 400, error: "proof_required" };
   }
@@ -55,7 +59,7 @@ export function verifyTyped(word: Word, typed: unknown): ProofResult {
  * не принятой буквой, а не ошибкой формы.
  */
 export async function recognizeLetters(
-  word: Word,
+  word: Spelled,
   strokesPerLetter: unknown,
   allowSkipped: boolean,
 ): Promise<number[] | null> {
@@ -90,7 +94,7 @@ export async function recognizeLetters(
  * Этап «пиши»: на каждую букву слова нужны штрихи, сервер сам распознаёт их теми же шаблонами и правилами,
  * что и приложение. Если хоть одна буква не принята, этап не засчитывается.
  */
-export async function verifyWritten(word: Word, strokesPerLetter: unknown): Promise<ProofResult> {
+export async function verifyWritten(word: Spelled, strokesPerLetter: unknown): Promise<ProofResult> {
   const failedLetters = await recognizeLetters(word, strokesPerLetter, false);
   if (!failedLetters) return { ok: false, status: 400, error: "proof_required" };
   return failedLetters.length === 0 ? { ok: true } : { ok: false, status: 422, error: "write_rejected", failedLetters };

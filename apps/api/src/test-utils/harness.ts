@@ -1,7 +1,7 @@
 // Общая обвязка тестов API: подписанный вход, вызовы приложения, подмена Workers AI, прохождение слов урока.
 import { expect } from "vitest";
-import { lessons } from "@milav/content";
-import { CANVAS_LINE_HEIGHT, loadBaseTemplates, roundStrokes, wordLetters, type Stroke, type Word } from "@milav/shared";
+import { alphabetLessons, lessons } from "@milav/content";
+import { CANVAS_LINE_HEIGHT, loadBaseTemplates, roundStrokes, wordLetters, type Letter, type Stroke, type Word } from "@milav/shared";
 import { app } from "../app";
 import type { Bindings } from "../env";
 import { createTestDb } from "./d1";
@@ -10,6 +10,9 @@ import { signInitData } from "./telegram";
 export const TOKEN = "123456:TEST-bot-token";
 export const lesson = lessons[0]!;
 export const word = lesson.words[0]!;
+/** Первый урок алфавита и его первая буква. */
+export const alphabetLesson = alphabetLessons[0]!;
+export const letter = alphabetLesson.letters[0]!;
 
 /** Окружение теста и то, что «услышит» подменный распознаватель речи. Пересоздаётся перед каждым тестом (resetHarness). */
 export const ctx: { env: Bindings; heard: string } = { env: undefined as unknown as Bindings, heard: "" };
@@ -84,4 +87,24 @@ export async function completeWord(as: number, wordId: string) {
 /** Проходит весь урок как пользователь `as`. */
 export async function completeLesson(as: number) {
   for (const w of lesson.words) await completeWord(as, w.id);
+}
+
+/** Тело запроса с доказательством этапа буквы: нажатая буква или штрихи одной буквы. */
+export async function letterStageBody(l: Letter, stage: "listen" | "write" | "type") {
+  if (stage === "type") return { wordId: l.id, stage, typed: l.he };
+  if (stage === "write") return { wordId: l.id, stage, strokes: [await letterStrokes(l.he)] };
+  return { wordId: l.id, stage };
+}
+
+/** Проходит три этапа буквы (без «говори») как пользователь `as`. */
+export async function completeLetter(as: number, letterId: string) {
+  const target = alphabetLesson.letters.find((l) => l.id === letterId)!;
+  for (const stage of ["listen", "write", "type"] as const) {
+    expect((await post("/api/progress/stage", as, await letterStageBody(target, stage))).status).toBe(200);
+  }
+}
+
+/** Проходит все буквы первого урока алфавита как пользователь `as`. */
+export async function completeAlphabetLesson(as: number) {
+  for (const l of alphabetLesson.letters) await completeLetter(as, l.id);
 }

@@ -1,5 +1,6 @@
 import {
   POINTS_PER_WORD,
+  STAGES,
   statusForPassedLessons,
   type Stage,
   type StatusInfo,
@@ -97,15 +98,21 @@ export interface StageResult {
   justCompleted: boolean;
 }
 
-/** Отмечает этап слова пройденным. Когда пройдены все четыре, слово считается выученным. */
+/**
+ * Отмечает этап слова (или буквы) пройденным. Когда пройдены все обязательные этапы, элемент считается выученным
+ * и приносит очко: у слова это все четыре этапа, у буквы три (`required`, см. `stagesFor`).
+ */
 export async function markStage(
   db: D1Database,
   userId: number,
   lessonId: string,
   wordId: string,
   stage: Stage,
+  required: readonly Stage[] = STAGES,
 ): Promise<StageResult> {
   const column = STAGE_COLUMN[stage];
+  // Имена столбцов берутся только из STAGE_COLUMN, подставлять в запрос пользовательский текст нельзя.
+  const allDone = required.map((s) => `${STAGE_COLUMN[s]} = 1`).join(" AND ");
   const [, completion, select] = await db.batch([
     db
       .prepare(
@@ -117,7 +124,7 @@ export async function markStage(
       .prepare(
         `UPDATE word_progress SET completed_at = datetime('now')
          WHERE user_id = ? AND word_id = ? AND completed_at IS NULL
-           AND stage_listen = 1 AND stage_speak = 1 AND stage_write = 1 AND stage_type = 1`,
+           AND ${allDone}`,
       )
       .bind(userId, wordId),
     db.prepare("SELECT * FROM word_progress WHERE user_id = ? AND word_id = ?").bind(userId, wordId),

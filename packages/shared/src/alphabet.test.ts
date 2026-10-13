@@ -12,8 +12,10 @@ import {
   QUESTION_TYPES,
   STAGES,
   WORD_QUIZ_RULES,
+  baseLetter,
   isAlphabetLesson,
   isFinalForm,
+  isFormPair,
   isLetter,
   isWord,
   lessonItems,
@@ -156,5 +158,27 @@ describe("вид урока", () => {
     expect(isWord(alphabetLesson.letters[0]!)).toBe(false);
     expect(isWord(word)).toBe(true);
     expect(isLetter(word)).toBe(false);
+  });
+});
+
+describe("обычная и конечная форма", () => {
+  it("baseLetter приводит конечную форму к обычной", () => {
+    expect([..."ךםןףץ"].map(baseLetter).join("")).toBe("כמנפצ");
+    expect(baseLetter("א")).toBe("א");
+  });
+
+  it("isFormPair: пара только у обычной и конечной формы одной буквы", () => {
+    expect(isFormPair("כ", "ך")).toBe(true);
+    expect(isFormPair("ך", "כ")).toBe(true);
+    expect(isFormPair("כ", "כ")).toBe(false);
+    expect(isFormPair("כ", "ם")).toBe(false);
+    expect(isFormPair("מ", "ם")).toBe(true);
+  });
+
+  it("в каждом уроке пара форм стоит рядом", () => {
+    for (const group of ALPHABET_GROUPS) {
+      const pairs = group.flatMap((a, i) => group.slice(i + 1).filter((b) => isFormPair(a, b)).map((b) => a + b));
+      expect(pairs.length).toBe(group.filter(isFinalForm).length);
+    }
   });
 });

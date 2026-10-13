@@ -1,10 +1,10 @@
 // Сессия викторины в D1: вопросы выдаёт сервер, каждый ответ проверяется и записывается здесь.
 // Схема и объяснение метки состояния (rev): migrations/0003_quiz_sessions.sql.
+import { getAnyLesson } from "@milav/content";
 import {
-  MAX_MISTAKES,
-  PASS_SCORE,
   QUIZ_SESSION_TTL_SECONDS,
   SPEAK_ATTEMPTS_IN_QUIZ,
+  quizRulesFor,
   statusForPassedLessons,
   type QuizAnswerResponse,
   type QuizQuestion,
@@ -149,6 +149,8 @@ export async function commitAnswer(
   step: AnswerStep,
 ): Promise<CommitResult> {
   const question = session.questions[session.nextIndex]!;
+  // Правила зависят от вида урока: у слов 25 вопросов и 5 допустимых ошибок, у алфавита 20 и 4.
+  const rules = quizRulesFor(getAnyLesson(session.lessonId));
   const newRev = crypto.randomUUID();
   const total = session.questions.length;
 
@@ -164,13 +166,13 @@ export async function commitAnswer(
     mistakes += step.correct ? 0 : 1;
     nextIndex += 1;
     speakAttempts = 0;
-    if (mistakes > MAX_MISTAKES) status = "aborted";
+    if (mistakes > rules.maxMistakes) status = "aborted";
     else if (nextIndex >= total) status = "done";
   } else {
     speakAttempts += 1;
   }
 
-  const passed = status === "done" && correct >= PASS_SCORE;
+  const passed = status === "done" && correct >= rules.pass;
   if (status === "done") {
     const before = (await getTotals(db, session.userId)).passedLessons;
     const alreadyPassed = (await getQuizSummary(db, session.userId, session.lessonId)).passed;

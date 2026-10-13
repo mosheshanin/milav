@@ -1,12 +1,14 @@
 import { Hono } from "hono";
-import { findWord, getLesson } from "@milav/content";
+import { findStudyItem, findWord, getAnyLesson } from "@milav/content";
 import {
   MAX_STAGE_BODY_BYTES,
   POINTS_PER_WORD,
   STAGES,
   TEMPLATE_VARIANTS_PER_LETTER,
   isSpeechMatch,
-  type Lesson,
+  lessonItems,
+  stagesFor,
+  type AnyLesson,
   type MeResponse,
   type QuizStartResponse,
   type Stage,
@@ -17,7 +19,7 @@ import { requireUser } from "./auth";
 import { ensureUser, getLessonProgress, getQuizSummary, getTotals, markStage, touchUser } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
-import { generateQuiz, isChoiceType } from "./quizGen";
+import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
@@ -33,8 +35,8 @@ import {
   saveTemplate,
 } from "./templateRecorder";
 
-/** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные. */
-function canAccessLesson(lesson: Lesson): boolean {
+/** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные (алфавит бесплатный всегда). */
+function canAccessLesson(lesson: AnyLesson): boolean {
   return lesson.free;
 }
 
@@ -65,20 +67,21 @@ app.get("/api/me", requireUser, async (c) => {
   return c.json(body);
 });
 
-// Прогресс по словам урока и итог викторины.
+// Прогресс по словам (в алфавите по буквам) урока и итог викторины. Поле `words` общее для обоих видов уроков.
 app.get("/api/lessons/:lessonId/progress", requireUser, async (c) => {
   const user = c.get("user");
-  const lesson = getLesson(c.req.param("lessonId"));
+  const lesson = getAnyLesson(c.req.param("lessonId"));
   if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
   if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
 
-  const words = await getLessonProgress(c.env.DB, user.id, lesson.id, lesson.words.map((w) => w.id));
+  const words = await getLessonProgress(c.env.DB, user.id, lesson.id, lessonItems(lesson).map((item) => item.id));
   const quiz = await getQuizSummary(c.env.DB, user.id, lesson.id);
   return c.json({ words, quiz });
 });
 
-// Этапы слушай / пиши / печатай. «Говори» отмечает только проверка речи на сервере.
-// «Печатай» и «пиши» принимаются только с доказательством: набранное слово или штрихи букв (см. stageProof.ts).
+// Этапы слушай / пиши / печатай. «Говори» отмечает только проверка речи на сервере (у букв этапа «говори» нет).
+// «Печатай» и «пиши» принимаются только с доказательством: набранное слово или штрихи букв (см. stageProof.ts);
+// у буквы это набранная буква и штрихи одной буквы.
 app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   const user = c.get("user");
   const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
@@ -88,14 +91,17 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   if (body.stage === "speak") return c.json({ error: "speak_requires_speech_check" }, 400);
   if (!STAGES.includes(body.stage as Stage)) return c.json({ error: "bad_stage" }, 400);
 
-  const found = findWord(body.wordId);
+  // Слово или буква: у каждого своё множество этапов и свой урок.
+  const found = findStudyItem(body.wordId);
   if (!found) return c.json({ error: "word_not_found" }, 404);
   if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
 
   const stage = body.stage as Exclude<Stage, "speak">;
+  const required = stagesFor(found.lesson);
+  if (!required.includes(stage)) return c.json({ error: "bad_stage" }, 400);
   let proof: ProofResult = { ok: true };
-  if (stage === "type") proof = verifyTyped(found.word, body.typed);
-  else if (stage === "write") proof = await verifyWritten(found.word, body.strokes);
+  if (stage === "type") proof = verifyTyped(found.item, body.typed);
+  else if (stage === "write") proof = await verifyWritten(found.item, body.strokes);
   if (!proof.ok) {
     return c.json(
       { error: proof.error, ...(proof.failedLetters ? { failedLetters: proof.failedLetters } : {}) },
@@ -104,7 +110,7 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   }
 
   await ensureUser(c.env.DB, user);
-  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, stage);
+  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.item.id, stage, required);
   const totals = await getTotals(c.env.DB, user.id);
   return c.json({
     progress: result.progress,
@@ -152,27 +158,34 @@ app.post("/api/quiz/start", requireUser, rateLimit("quiz"), async (c) => {
   const body = await readJson<{ lessonId?: unknown }>(c.req.raw);
   if (typeof body?.lessonId !== "string") return c.json({ error: "bad_request" }, 400);
 
-  const lesson = getLesson(body.lessonId);
+  const lesson = getAnyLesson(body.lessonId);
   if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
   if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
 
   await ensureUser(c.env.DB, user);
-  const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lesson.words.map((w) => w.id));
+  const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lessonItems(lesson).map((item) => item.id));
   if (!progress.every((p) => p.completed)) return c.json({ error: "lesson_not_completed" }, 409);
 
-  const questions = generateQuiz(lesson.words);
+  const questions = generateLessonQuiz(lesson);
   const sessionId = await startSession(c.env.DB, user.id, lesson.id, questions, nowSeconds());
   const response: QuizStartResponse = { sessionId, lessonId: lesson.id, questions };
   return c.json(response);
 });
 
-// Ответ на вопрос с выбором или письмом (и отказ от вопроса «произнеси» или письма).
+// Ответ на вопрос с выбором, письмом или набором буквы (и отказ от вопроса «произнеси» или письма).
 // Запись голоса для «произнеси» отправляется отдельно: /api/quiz/speech.
 app.post("/api/quiz/answer", requireUser, async (c) => {
   const user = c.get("user");
   const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
   if (!raw) return c.json({ error: "body_too_large" }, 413);
-  const body = parseJson<{ sessionId?: unknown; index?: unknown; choice?: unknown; strokes?: unknown; giveUp?: unknown }>(raw);
+  const body = parseJson<{
+    sessionId?: unknown;
+    index?: unknown;
+    choice?: unknown;
+    strokes?: unknown;
+    typed?: unknown;
+    giveUp?: unknown;
+  }>(raw);
   if (typeof body !== "object" || body === null) return c.json({ error: "bad_request" }, 400);
 
   const check = checkSession(await loadSession(c.env.DB, user.id), body.sessionId, body.index, nowSeconds());
@@ -180,7 +193,7 @@ app.post("/api/quiz/answer", requireUser, async (c) => {
   if (check.kind === "repeat") return c.json(check.response);
   const { session, question } = check;
 
-  const found = findWord(question.wordId);
+  const found = findStudyItem(question.wordId);
   if (!found) return c.json({ error: "word_not_found" }, 404);
 
   let step: AnswerStep;
@@ -193,11 +206,20 @@ app.post("/api/quiz/answer", requireUser, async (c) => {
     step = { correct: false, final: true };
   } else if (question.type === "speak") {
     return c.json({ error: "speak_requires_recording" }, 400);
-  } else {
+  } else if (question.type === "name-type") {
+    // «Найди букву на клавиатуре»: нажатая буква должна быть именно этой формой (ך не равна כ).
+    if (typeof body.typed !== "string" || body.typed.length === 0 || body.typed.length > 8) {
+      return c.json({ error: "proof_required" }, 400);
+    }
+    step = { correct: verifyTyped(found.item, body.typed).ok, final: true };
+  } else if (isWriteType(question.type)) {
     // Письмо: штрихи каждой буквы; у не написанной буквы пустой список, вопрос тогда засчитывается неверным.
-    const failedLetters = await recognizeLetters(found.word, body.strokes, true);
+    // В алфавите буква одна, то есть один список штрихов.
+    const failedLetters = await recognizeLetters(found.item, body.strokes, true);
     if (!failedLetters) return c.json({ error: "proof_required" }, 400);
     step = { correct: failedLetters.length === 0, final: true, failedLetters };
+  } else {
+    return c.json({ error: "bad_request" }, 400);
   }
 
   const committed = await commitAnswer(c.env.DB, session, step);

@@ -43,3 +43,16 @@ export function isWord(item: StudyItem): item is Word {
 export function isFinalForm(letter: string): boolean {
   return letter.length === 1 && FINAL_LETTERS.includes(letter);
 }
+
+/** Обычная форма для каждой конечной. */
+const REGULAR_OF_FINAL: Record<string, string> = { ך: "כ", ם: "מ", ן: "נ", ף: "פ", ץ: "צ" };
+
+/** Буква без учёта конечной формы: «ך» даёт «כ», остальные остаются как есть. */
+export function baseLetter(letter: string): string {
+  return REGULAR_OF_FINAL[letter] ?? letter;
+}
+
+/** Одна и та же буква в обычной и конечной форме (כ и ך). Сама с собой не считается. */
+export function isFormPair(a: string, b: string): boolean {
+  return a !== b && baseLetter(a) === baseLetter(b);
+}
