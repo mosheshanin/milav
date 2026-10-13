@@ -1,11 +1,11 @@
 import type { Lesson, Word } from "@milav/shared";
-import animals1 from "./lessons/animals-1.json";
+import { lessonFiles } from "./registry";
 
 /**
- * Все уроки. Чтобы добавить урок: положить JSON в content/lessons, импортировать здесь
- * и запустить `npm test` (content/content.test.ts проверит формат).
+ * Все уроки. Список в content/registry.ts создаёт `npm run content:index` по файлам из content/lessons;
+ * формат и правила проверяют тесты (`npm run validate:content`). Как добавить урок: docs/CONTENT.md.
  */
-export const lessons = [animals1] as unknown as Lesson[];
+export const lessons = lessonFiles as unknown as Lesson[];
 
 export function getLesson(id: string): Lesson | undefined {
   return lessons.find((l) => l.id === id);

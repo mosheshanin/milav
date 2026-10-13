@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { WORDS_PER_LESSON, normalizeHebrew } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON, normalizeHebrew } from "@milav/shared";
 import { lessons } from "./index";
 import { skeletonProblems, stressProblems, stripStress } from "./rules";
 
@@ -37,7 +37,7 @@ describe("уроки", () => {
       });
 
       it("бесплатны только первые 3 урока темы", () => {
-        expect(lesson.free).toBe(lesson.number <= 3);
+        expect(lesson.free).toBe(lesson.number <= FREE_LESSONS_PER_TOPIC);
       });
 
       it("id слов начинаются с id урока", () => {

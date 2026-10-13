@@ -101,3 +101,111 @@ export function skeletonProblems(he: string, translit: string): string[] {
   }
   return problems;
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Правила уровня темы и всего набора уроков
+
+import type { Lesson } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC } from "@milav/shared";
+
+/** Правило проверки набора уроков: возвращает список нарушений (пустой, если всё в порядке). */
+export interface SetRule {
+  name: string;
+  check: (lessons: Lesson[]) => string[];
+}
+
+function byTopic(lessons: Lesson[]): Map<string, Lesson[]> {
+  const map = new Map<string, Lesson[]>();
+  for (const lesson of lessons) map.set(lesson.topicId, [...(map.get(lesson.topicId) ?? []), lesson]);
+  return map;
+}
+
+export const SET_RULES: SetRule[] = [
+  {
+    name: "id урока равен <topicId>-<номер>",
+    check: (lessons) =>
+      lessons.filter((l) => l.id !== `${l.topicId}-${l.number}`).map((l) => `${l.id}: ожидался id ${l.topicId}-${l.number}`),
+  },
+  {
+    name: "id уроков и слов уникальны во всём наборе",
+    check: (lessons) => {
+      const problems: string[] = [];
+      const seenLessons = new Set<string>();
+      const seenWords = new Set<string>();
+      for (const lesson of lessons) {
+        if (seenLessons.has(lesson.id)) problems.push(`повтор id урока ${lesson.id}`);
+        seenLessons.add(lesson.id);
+        for (const word of lesson.words) {
+          if (seenWords.has(word.id)) problems.push(`повтор id слова ${word.id}`);
+          seenWords.add(word.id);
+        }
+      }
+      return problems;
+    },
+  },
+  {
+    name: "внутри темы одинаковые название и раздел",
+    check: (lessons) => {
+      const problems: string[] = [];
+      for (const [topicId, items] of byTopic(lessons)) {
+        if (new Set(items.map((l) => l.topic)).size > 1) problems.push(`${topicId}: разные названия темы`);
+        if (new Set(items.map((l) => l.section)).size > 1) problems.push(`${topicId}: разные разделы`);
+      }
+      return problems;
+    },
+  },
+  {
+    name: "название темы не принадлежит двум разным темам раздела",
+    check: (lessons) => {
+      const problems: string[] = [];
+      const owners = new Map<string, string>();
+      for (const lesson of lessons) {
+        const key = `${lesson.section}/${lesson.topic}`;
+        const owner = owners.get(key);
+        if (owner !== undefined && owner !== lesson.topicId) problems.push(`название «${lesson.topic}» у тем ${owner} и ${lesson.topicId}`);
+        owners.set(key, lesson.topicId);
+      }
+      return problems;
+    },
+  },
+  {
+    name: "номера уроков темы идут подряд с 1",
+    check: (lessons) => {
+      const problems: string[] = [];
+      for (const [topicId, items] of byTopic(lessons)) {
+        const numbers = items.map((l) => l.number).sort((a, b) => a - b);
+        if (numbers.some((n, i) => n !== i + 1)) problems.push(`${topicId}: номера ${numbers.join(", ")}, ожидались подряд с 1`);
+      }
+      return problems;
+    },
+  },
+  {
+    name: `бесплатны ровно первые ${FREE_LESSONS_PER_TOPIC} уроков каждой темы`,
+    check: (lessons) =>
+      lessons
+        .filter((l) => l.free !== l.number <= FREE_LESSONS_PER_TOPIC)
+        .map((l) => `${l.id}: free=${l.free}, а должно быть ${l.number <= FREE_LESSONS_PER_TOPIC}`),
+  },
+  {
+    name: "иврит не повторяется внутри темы",
+    check: (lessons) => {
+      const problems: string[] = [];
+      for (const items of byTopic(lessons).values()) {
+        const seen = new Map<string, string>();
+        for (const lesson of items) {
+          for (const word of lesson.words) {
+            const first = seen.get(word.he);
+            if (first) problems.push(`${word.he}: есть в ${first} и в ${word.id}`);
+            else seen.set(word.he, word.id);
+          }
+        }
+      }
+      return problems;
+    },
+  },
+];
+
+/** Все нарушения правил набора, с названием правила. */
+export function setProblems(lessons: Lesson[]): string[] {
+  return SET_RULES.flatMap((rule) => rule.check(lessons).map((p) => `${rule.name}: ${p}`));
+}
