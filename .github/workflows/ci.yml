@@ -1,0 +1,99 @@
+# Проверки на каждый пуш и pull request: типы, тесты, сборка, сквозной тест в Chromium.
+# Деплой на Cloudflare от этого workflow не зависит: там свои проверки в команде сборки (docs/DEPLOY.md).
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# Новый пуш в ту же ветку отменяет ещё идущий прогон предыдущего.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Типы, тесты, сборка
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Типы
+        run: npm run typecheck
+
+      - name: Тесты
+        run: npm test
+
+      - name: Сборка
+        run: npm run build
+
+  e2e:
+    name: Сквозной тест (Chromium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Куда ставится Chromium; tools/e2e-lesson.mjs ищет его по этой переменной.
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.pw-browsers
+      WRANGLER_SEND_METRICS: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      - name: Сборка фронтенда
+        run: npm run build
+
+      - name: Кэш браузера
+        uses: actions/cache@v4
+        with:
+          path: .pw-browsers
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Установка Chromium
+        run: npx playwright-core install --with-deps chromium
+
+      - name: Локальная база (миграции)
+        run: npx wrangler d1 migrations apply milav-db --local --env local
+
+      - name: Запуск Worker
+        run: |
+          npx wrangler dev --env local > wrangler-dev.log 2>&1 &
+          for i in $(seq 1 90); do
+            if curl -sf http://localhost:8787/api/health > /dev/null; then
+              echo "Worker отвечает (попытка $i)"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Worker не запустился за 90 с"
+          cat wrangler-dev.log
+          exit 1
+
+      - name: Сквозной тест
+        run: node tools/e2e-lesson.mjs e2e-shots
+
+      - name: Скриншоты и лог Worker
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-shots
+          path: |
+            e2e-shots
+            wrangler-dev.log
+          if-no-files-found: ignore

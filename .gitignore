@@ -22,3 +22,5 @@ Thumbs.db
 npm-debug.log*
 e2e-shots/
 audio-review/
+wrangler-dev.log
+.pw-browsers/
