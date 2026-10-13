@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "animals-2",
+  "topicId": "animals",
+  "section": "nouns",
+  "topic": "Животные",
+  "number": 2,
+  "free": true,
+  "title": "Дикие животные",
+  "words": [
+    {
+      "id": "animals-2-wolf",
+      "he": "זאב",
+      "niqqud": "זְאֵב",
+      "translit": "зеэ́в",
+      "ru": "волк",
+      "gender": "m",
+      "example": {
+        "he": "זה זאב גדול",
+        "translit": "зэ зеэв гадоль",
+        "ru": "Это большой волк"
+      },
+      "image": "/words/animals-2-wolf.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-fox",
+      "he": "שועל",
+      "niqqud": "שׁוּעָל",
+      "translit": "шуа́ль",
+      "ru": "лис",
+      "gender": "m",
+      "example": {
+        "he": "זה שועל חכם",
+        "translit": "зэ шуаль хахам",
+        "ru": "Это умный лис"
+      },
+      "image": "/words/animals-2-fox.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-bear",
+      "he": "דוב",
+      "niqqud": "דּוֹב",
+      "translit": "дов",
+      "ru": "медведь",
+      "gender": "m",
+      "example": {
+        "he": "זה דוב חזק",
+        "translit": "зэ дов хазак",
+        "ru": "Это сильный медведь"
+      },
+      "image": "/words/animals-2-bear.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-monkey",
+      "he": "קוף",
+      "niqqud": "קוֹף",
+      "translit": "коф",
+      "ru": "обезьяна",
+      "gender": "m",
+      "example": {
+        "he": "זה קוף חכם",
+        "translit": "зэ коф хахам",
+        "ru": "Это умная обезьяна"
+      },
+      "image": "/words/animals-2-monkey.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-tiger",
+      "he": "טיגריס",
+      "niqqud": "טִיגְרִיס",
+      "translit": "ти́грис",
+      "ru": "тигр",
+      "gender": "m",
+      "example": {
+        "he": "זה טיגריס חזק",
+        "translit": "зэ тигрис хазак",
+        "ru": "Это сильный тигр"
+      },
+      "image": "/words/animals-2-tiger.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-camel",
+      "he": "גמל",
+      "niqqud": "גָּמָל",
+      "translit": "гама́ль",
+      "ru": "верблюд",
+      "gender": "m",
+      "example": {
+        "he": "זה גמל גדול",
+        "translit": "зэ гамаль гадоль",
+        "ru": "Это большой верблюд"
+      },
+      "image": "/words/animals-2-camel.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-snake",
+      "he": "נחש",
+      "niqqud": "נָחָשׁ",
+      "translit": "наха́ш",
+      "ru": "змея",
+      "gender": "m",
+      "example": {
+        "he": "זה נחש ארוך",
+        "translit": "зэ нахаш арох",
+        "ru": "Это длинная змея"
+      },
+      "image": "/words/animals-2-snake.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-turtle",
+      "he": "צב",
+      "niqqud": "צָב",
+      "translit": "цав",
+      "ru": "черепаха",
+      "gender": "m",
+      "example": {
+        "he": "זה צב ישן",
+        "translit": "зэ цав яшан",
+        "ru": "Это старая черепаха"
+      },
+      "image": "/words/animals-2-turtle.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-zebra",
+      "he": "זברה",
+      "niqqud": "זֶבְּרָה",
+      "translit": "зе́бра",
+      "ru": "зебра",
+      "gender": "f",
+      "example": {
+        "he": "זאת זברה יפה",
+        "translit": "зот зебра яфа",
+        "ru": "Это красивая зебра"
+      },
+      "image": "/words/animals-2-zebra.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-2-owl",
+      "he": "ינשוף",
+      "niqqud": "יַנְשׁוּף",
+      "translit": "яншу́ф",
+      "ru": "сова",
+      "gender": "m",
+      "example": {
+        "he": "זה ינשוף חכם",
+        "translit": "зэ яншуф хахам",
+        "ru": "Это умная сова"
+      },
+      "image": "/words/animals-2-owl.svg",
+      "reviewed": false
+    }
+  ]
+}

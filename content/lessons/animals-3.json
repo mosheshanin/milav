@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "animals-3",
+  "topicId": "animals",
+  "section": "nouns",
+  "topic": "Животные",
+  "number": 3,
+  "free": true,
+  "title": "Мелкие и морские",
+  "words": [
+    {
+      "id": "animals-3-bee",
+      "he": "דבורה",
+      "niqqud": "דְּבוֹרָה",
+      "translit": "двора́",
+      "ru": "пчела",
+      "gender": "f",
+      "example": {
+        "he": "זאת דבורה קטנה",
+        "translit": "зот двора ктана",
+        "ru": "Это маленькая пчела"
+      },
+      "image": "/words/animals-3-bee.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-butterfly",
+      "he": "פרפר",
+      "niqqud": "פַּרְפַּר",
+      "translit": "парпа́р",
+      "ru": "бабочка",
+      "gender": "m",
+      "example": {
+        "he": "זה פרפר יפה",
+        "translit": "зэ парпар яфэ",
+        "ru": "Это красивая бабочка"
+      },
+      "image": "/words/animals-3-butterfly.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-spider",
+      "he": "עכביש",
+      "niqqud": "עַכָּבִישׁ",
+      "translit": "акави́ш",
+      "ru": "паук",
+      "gender": "m",
+      "example": {
+        "he": "זה עכביש שחור",
+        "translit": "зэ акавиш шахор",
+        "ru": "Это чёрный паук"
+      },
+      "image": "/words/animals-3-spider.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-ant",
+      "he": "נמלה",
+      "niqqud": "נְמָלָה",
+      "translit": "немала́",
+      "ru": "муравей",
+      "gender": "f",
+      "example": {
+        "he": "זאת נמלה קטנה",
+        "translit": "зот немала ктана",
+        "ru": "Это маленький муравей"
+      },
+      "image": "/words/animals-3-ant.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-snail",
+      "he": "שבלול",
+      "niqqud": "שַׁבְּלוּל",
+      "translit": "шаблу́ль",
+      "ru": "улитка",
+      "gender": "m",
+      "example": {
+        "he": "זה שבלול קטן",
+        "translit": "зэ шаблуль катан",
+        "ru": "Это маленькая улитка"
+      },
+      "image": "/words/animals-3-snail.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-frog",
+      "he": "צפרדע",
+      "niqqud": "צְפַרְדֵּעַ",
+      "translit": "цфарде́а",
+      "ru": "лягушка",
+      "gender": "f",
+      "example": {
+        "he": "זאת צפרדע חמודה",
+        "translit": "зот цфардеа хмуда",
+        "ru": "Это милая лягушка"
+      },
+      "image": "/words/animals-3-frog.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-crab",
+      "he": "סרטן",
+      "niqqud": "סַרְטָן",
+      "translit": "сарта́н",
+      "ru": "краб",
+      "gender": "m",
+      "example": {
+        "he": "זה סרטן גדול",
+        "translit": "зэ сартан гадоль",
+        "ru": "Это большой краб"
+      },
+      "image": "/words/animals-3-crab.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-octopus",
+      "he": "תמנון",
+      "niqqud": "תְּמָנוֹן",
+      "translit": "тмано́н",
+      "ru": "осьминог",
+      "gender": "m",
+      "example": {
+        "he": "זה תמנון חכם",
+        "translit": "зэ тманон хахам",
+        "ru": "Это умный осьминог"
+      },
+      "image": "/words/animals-3-octopus.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-shark",
+      "he": "כריש",
+      "niqqud": "כָּרִישׁ",
+      "translit": "кари́ш",
+      "ru": "акула",
+      "gender": "m",
+      "example": {
+        "he": "זה כריש גדול",
+        "translit": "зэ кариш гадоль",
+        "ru": "Это большая акула"
+      },
+      "image": "/words/animals-3-shark.svg",
+      "reviewed": false
+    },
+    {
+      "id": "animals-3-dolphin",
+      "he": "דולפין",
+      "niqqud": "דּוֹלְפִין",
+      "translit": "дольфи́н",
+      "ru": "дельфин",
+      "gender": "m",
+      "example": {
+        "he": "זה דולפין חכם",
+        "translit": "зэ дольфин хахам",
+        "ru": "Это умный дельфин"
+      },
+      "image": "/words/animals-3-dolphin.svg",
+      "reviewed": false
+    }
+  ]
+}
