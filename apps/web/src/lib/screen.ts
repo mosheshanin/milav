@@ -3,9 +3,15 @@
 // Экран хранится в sessionStorage, а не в адресе: Telegram передаёт параметры запуска (initData) в хеше адреса,
 // и менять его опасно для входа. sessionStorage живёт, пока открыто окно приложения, и переживает перезагрузку.
 
-export type Screen = { name: "home" } | { name: "study"; lessonId: string } | { name: "quiz"; lessonId: string };
+export type Screen =
+  | { name: "home" }
+  | { name: "study"; lessonId: string }
+  | { name: "quiz"; lessonId: string }
+  /** Скрытый экран записи шаблонов букв (только владелец, см. docs/DEPLOY.md). */
+  | { name: "record" };
 
 export const HOME: Screen = { name: "home" };
+export const RECORD: Screen = { name: "record" };
 
 const KEY = "milav:screen";
 
@@ -33,6 +39,18 @@ export function saveScreen(storage: ScreenStorage | null, screen: Screen): void 
 }
 
 /**
+ * Было ли в этом окне уже сохранено место. Нужно, чтобы параметр запуска (например, `startapp=record`) действовал
+ * только при первом открытии: если человек потом ушёл на главную и перезагрузил приложение, его не возвращает назад.
+ */
+export function hasSavedScreen(storage: ScreenStorage | null): boolean {
+  try {
+    return !!storage?.getItem(KEY);
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Экран, на который вернуться после перезагрузки.
  * Викторина после перезагрузки начинается заново, поэтому её открывать нельзя: возвращаем на урок.
  * Неизвестный урок и любой мусор в хранилище ведут на главную.
@@ -47,6 +65,7 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   }
   if (typeof raw !== "object" || raw === null) return HOME;
   const { name, lessonId } = raw as { name?: unknown; lessonId?: unknown };
+  if (name === "record") return RECORD;
   if ((name === "study" || name === "quiz") && typeof lessonId === "string" && lessonExists(lessonId)) {
     return { name: "study", lessonId };
   }

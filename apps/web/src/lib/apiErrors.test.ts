@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ApiError } from "../api";
-import { isQuizSessionLost, quizErrorText, saveErrorText, waitText } from "./apiErrors";
+import { isQuizSessionLost, quizErrorText, recordErrorText, saveErrorText, waitText } from "./apiErrors";
 
 describe("время ожидания", () => {
   it("секунды, минуты и часы", () => {
@@ -49,5 +49,24 @@ describe("ошибки викторины", () => {
     expect(quizErrorText(new ApiError(409, "answer_conflict"))).toContain("Сервер не принял");
     expect(quizErrorText(new ApiError(0, "network"))).toContain("Проверьте интернет");
     expect(quizErrorText(new Error("что-то"))).toContain("Проверьте интернет");
+  });
+});
+
+describe("тексты ошибок записи шаблонов", () => {
+  it("лимит называет время, чужому пользователю нет доступа", () => {
+    expect(recordErrorText(new ApiError(429, "rate_limited", 30))).toContain("30 с");
+    expect(recordErrorText(new ApiError(403, "forbidden"))).toContain("Нет доступа");
+  });
+
+  it("слишком маленький рисунок просит нарисовать крупнее, другие отказы сервера просят нарисовать заново", () => {
+    expect(recordErrorText(new ApiError(422, "too_small"))).toContain("крупнее");
+    expect(recordErrorText(new ApiError(400, "bad_strokes"))).toContain("заново");
+    expect(recordErrorText(new ApiError(413, "body_too_large"))).toContain("заново");
+  });
+
+  it("сбой сервера и обрыв связи отличаются, рисунок при обрыве не теряется", () => {
+    expect(recordErrorText(new ApiError(500, "internal_error"))).toContain("Нажмите ещё раз");
+    expect(recordErrorText(new ApiError(0, "network"))).toContain("Рисунок не потерян");
+    expect(recordErrorText(new Error("что угодно"))).toContain("Рисунок не потерян");
   });
 });

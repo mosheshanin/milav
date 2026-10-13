@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import { getLesson } from "@milav/content";
 import { AppProvider } from "./AppContext";
 import { Notice } from "./components/ui";
-import { HOME, browserStorage, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { HOME, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Home } from "./screens/Home";
 import { Quiz } from "./screens/Quiz";
+import { RecordScreen } from "./screens/Record";
 import { Study } from "./screens/Study";
+import { launchTarget } from "./telegram";
+
+/** Первый экран: сохранённое место, а при первом открытии ещё и особая цель запуска (`startapp=record`). */
+function initialScreen(): Screen {
+  const storage = browserStorage();
+  if (!hasSavedScreen(storage) && launchTarget() === "record") return RECORD;
+  return restoreScreen(storage, (id) => !!getLesson(id));
+}
 
 export function App() {
   // Место запоминается, поэтому перезагрузка или свёрнутое приложение не уводят на главную.
-  const [screen, setScreen] = useState<Screen>(() => restoreScreen(browserStorage(), (id) => !!getLesson(id)));
+  const [screen, setScreen] = useState<Screen>(initialScreen);
 
   useEffect(() => {
     saveScreen(browserStorage(), screen);
@@ -55,6 +64,7 @@ export function App() {
           onHome={() => setScreen(HOME)}
         />
       )}
+      {screen.name === "record" && <RecordScreen onBack={() => setScreen(HOME)} />}
     </AppProvider>
   );
 }

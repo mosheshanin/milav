@@ -4,6 +4,9 @@ import type {
   QuizAnswerResponse,
   QuizStartResponse,
   StageProof,
+  TemplateSaveRequest,
+  TemplateSaveResponse,
+  TemplatesResponse,
   WordProgress,
 } from "@milav/shared";
 import { authHeader } from "./telegram";
@@ -42,6 +45,8 @@ const json = (body: unknown): RequestInit => ({
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(body),
 });
+
+const jsonPut = (body: unknown): RequestInit => ({ ...json(body), method: "PUT" });
 
 export interface StageResponse {
   progress: WordProgress;
@@ -86,4 +91,10 @@ export const api = {
       headers: { "Content-Type": audio.type || "audio/webm" },
       body: audio,
     }),
+  /** Запись шаблонов букв (скрытый экран владельца): все записанные варианты. 403, если Telegram id не из секрета. */
+  templates: () => request<TemplatesResponse>("/api/templates"),
+  /** Записать или перезаписать вариант буквы. */
+  templateSave: (body: TemplateSaveRequest) => request<TemplateSaveResponse>("/api/templates", jsonPut(body)),
+  templateDelete: (letter: string, slot: number) =>
+    request<{ ok: true }>(`/api/templates?letter=${encodeURIComponent(letter)}&slot=${slot}`, { method: "DELETE" }),
 };

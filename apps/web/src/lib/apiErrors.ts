@@ -38,3 +38,17 @@ export function quizErrorText(error: unknown): string {
   if (error instanceof ApiError && error.status !== 0) return "Сервер не принял ответ. Нажмите «Повторить».";
   return "Не удалось отправить ответ. Проверьте интернет и нажмите «Повторить».";
 }
+
+/** Текст для человека, когда не удалось записать или удалить вариант буквы (экран записи шаблонов). */
+export function recordErrorText(error: unknown): string {
+  if (error instanceof ApiError) {
+    if (error.code === "rate_limited") return saveErrorText(error);
+    if (error.status === 403) return "Нет доступа к записи шаблонов. Откройте приложение с вашего аккаунта.";
+    if (error.code === "too_small") return "Слишком маленький рисунок. Нарисуйте букву крупнее, между линиями.";
+    if (error.status === 400 || error.status === 413 || error.status === 422) {
+      return "Сервер не принял рисунок. Сотрите и нарисуйте заново.";
+    }
+    if (error.status !== 0) return "Сервер не смог сохранить. Нажмите ещё раз.";
+  }
+  return "Нет связи. Рисунок не потерян: проверьте интернет и нажмите ещё раз.";
+}

@@ -1,4 +1,5 @@
 // Минимальные типы Telegram WebApp SDK (скрипт подключён в index.html).
+import { launchTargetFrom, type LaunchTarget } from "./lib/launch";
 
 export interface TelegramUser {
   id: number;
@@ -20,7 +21,7 @@ export interface TelegramWebApp {
   initData: string;
   /** Платформа приложения Telegram: ios, android, tdesktop, macos, weba, webk и т. д. */
   platform?: string;
-  initDataUnsafe: { user?: TelegramUser };
+  initDataUnsafe: { user?: TelegramUser; start_param?: string };
   ready: () => void;
   expand: () => void;
   BackButton?: TelegramBackButton;
@@ -42,6 +43,26 @@ export function getTelegram(): TelegramWebApp | null {
   return window.Telegram?.WebApp ?? null;
 }
 
+const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
+
+/** Куда открыть приложение при первом запуске (сейчас особая цель одна: скрытый экран записи шаблонов букв). */
+export function launchTarget(): LaunchTarget {
+  return launchTargetFrom({
+    startParam: getTelegram()?.initDataUnsafe.start_param,
+    hash: location.hash,
+    search: location.search,
+    allowDev: import.meta.env.DEV || LOCAL_HOSTS.includes(location.hostname),
+  });
+}
+
+/** Telegram id текущего пользователя: нужен экрану записи, чтобы показать, какой id внести в секрет. */
+export function currentUserId(): number | null {
+  const fromTelegram = getTelegram()?.initDataUnsafe.user?.id;
+  if (fromTelegram) return fromTelegram;
+  const match = /^dev (\d{1,15}):/.exec(authHeader() ?? "");
+  return match ? Number(match[1]) : null;
+}
+
 /** Сообщает Telegram, что приложение загружено, и раскрывает его на весь экран. */
 export function initTelegram(): void {
   const tg = getTelegram();
@@ -49,8 +70,6 @@ export function initTelegram(): void {
   tg.ready();
   tg.expand();
 }
-
-const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
 
 /**
  * Заголовок авторизации для API.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HOME, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
+import { HOME, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
 
 function memoryStorage(initial: Record<string, string> = {}): ScreenStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -44,6 +44,20 @@ describe("сохранение экрана", () => {
     expect(restoreScreen(storage, exists)).toEqual(HOME);
   });
 
+  it("экран записи шаблонов восстанавливается после перезагрузки", () => {
+    const storage = memoryStorage();
+    saveScreen(storage, RECORD);
+    expect(restoreScreen(storage, exists)).toEqual(RECORD);
+  });
+
+  it("видно, было ли уже сохранено место (параметр запуска действует только в первый раз)", () => {
+    const storage = memoryStorage();
+    expect(hasSavedScreen(storage)).toBe(false);
+    expect(hasSavedScreen(null)).toBe(false);
+    saveScreen(storage, HOME);
+    expect(hasSavedScreen(storage)).toBe(true);
+  });
+
   it("если хранилище бросает ошибки, приложение не падает", () => {
     const broken: ScreenStorage = {
       getItem: () => {
@@ -55,5 +69,6 @@ describe("сохранение экрана", () => {
     };
     expect(() => saveScreen(broken, HOME)).not.toThrow();
     expect(restoreScreen(broken, exists)).toEqual(HOME);
+    expect(hasSavedScreen(broken)).toBe(false);
   });
 });

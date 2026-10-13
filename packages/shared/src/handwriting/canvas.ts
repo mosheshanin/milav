@@ -15,6 +15,25 @@ export const CANVAS_LINE_HEIGHT = (CANVAS_BASE_LINE - CANVAS_TOP_LINE) * CANVAS_
 export const STROKE_DECIMALS = 1;
 
 /**
+ * Убирает точки, которые ближе `minDistance` пикселей к предыдущей оставленной. Первая и последняя точка штриха
+ * остаются, одиночное касание не меняется. Нужно, чтобы медленный штрих (по точке на каждое движение пальца)
+ * не раздувал запрос: форма при этом не меняется, потому что распознавание всё равно берёт точки равномерно по длине.
+ */
+export function thinStrokes(strokes: Stroke[], minDistance = 1): Stroke[] {
+  return strokes.map((stroke) => {
+    if (stroke.length <= 2) return stroke.slice();
+    const kept = [stroke[0]!];
+    for (let i = 1; i < stroke.length - 1; i++) {
+      const last = kept[kept.length - 1]!;
+      const p = stroke[i]!;
+      if (Math.hypot(p.x - last.x, p.y - last.y) >= minDistance) kept.push(p);
+    }
+    kept.push(stroke[stroke.length - 1]!);
+    return kept;
+  });
+}
+
+/**
  * Округляет координаты штрихов. Клиент проверяет букву уже по округлённым штрихам и отправляет их же,
  * поэтому всё, что принял клиент, принимает и сервер (результат не зависит от округления).
  */
