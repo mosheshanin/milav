@@ -110,3 +110,70 @@ export type StageProof =
   | { stage: "listen" }
   | { stage: "type"; typed: string }
   | { stage: "write"; strokes: Stroke[][] };
+
+/**
+ * Вопрос викторины, как его выдаёт сервер (POST /api/quiz/start).
+ * `options` это id слов-вариантов для вопросов с выбором (у «произнеси» и «напиши» пусто);
+ * подписи вариантов приложение берёт из слов урока.
+ */
+export interface QuizQuestion {
+  type: QuestionType;
+  wordId: string;
+  options: string[];
+}
+
+export interface QuizStartResponse {
+  sessionId: string;
+  lessonId: string;
+  questions: QuizQuestion[];
+}
+
+/**
+ * Ответ на вопрос (POST /api/quiz/answer). Что в нём лежит, зависит от типа вопроса:
+ * - выбор: `choice`, id выбранного слова;
+ * - письмо: `strokes`, штрихи каждой буквы (у буквы, которую не удалось написать, пустой список);
+ * - «произнеси»: запись уходит отдельным запросом (POST /api/quiz/speech), здесь только `giveUp`;
+ * - `giveUp`: отказаться от вопроса («произнеси» и письмо), он засчитывается неверным.
+ */
+export interface QuizAnswerRequest {
+  sessionId: string;
+  index: number;
+  choice?: string;
+  strokes?: Stroke[][];
+  giveUp?: boolean;
+}
+
+/** Итог викторины, который считает сервер. */
+export interface QuizResult {
+  passed: boolean;
+  correct: number;
+  total: number;
+  mistakes: number;
+  firstTimePassed: boolean;
+  passedLessons: number;
+  status: StatusInfo;
+}
+
+/**
+ * Ответ сервера на ответ ученика (и на запись голоса).
+ * `final: false` бывает только у «произнеси»: ответ не принят, но попытка ещё есть (`attemptsLeft`).
+ */
+export interface QuizAnswerResponse {
+  index: number;
+  correct: boolean;
+  final: boolean;
+  /** Сколько верных и неверных ответов уже принято. */
+  correctCount: number;
+  mistakes: number;
+  attemptsLeft?: number;
+  /** «Произнеси»: что услышал распознаватель. */
+  heard?: string;
+  /** Письмо: номера букв (с нуля, в порядке написания), которые не приняты. */
+  failedLetters?: number[];
+  /** Ошибок больше допустимого: викторина прервана, ничего не сохранено. */
+  aborted?: boolean;
+  /** Есть, когда принят последний вопрос: итог уже записан. */
+  result?: QuizResult;
+  /** Ответ на повторный запрос того же вопроса (например, после обрыва связи): ничего не изменилось. */
+  repeat?: boolean;
+}

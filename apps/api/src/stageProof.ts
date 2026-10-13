@@ -49,26 +49,50 @@ export function verifyTyped(word: Word, typed: unknown): ProofResult {
 }
 
 /**
- * Этап «пиши»: на каждую букву слова нужны штрихи, сервер сам распознаёт их теми же шаблонами и правилами,
- * что и приложение. Если хоть одна буква не принята, этап не засчитывается.
+ * Распознаёт штрихи букв слова теми же шаблонами и правилами, что и приложение.
+ * Возвращает номера букв, которые не приняты, или null, если данные неверной формы (не тот список, не те штрихи).
+ * `allowSkipped`: пустой список у буквы означает «не удалось написать» (в викторине так бывает) и считается
+ * не принятой буквой, а не ошибкой формы.
  */
-export async function verifyWritten(word: Word, strokesPerLetter: unknown): Promise<ProofResult> {
+export async function recognizeLetters(
+  word: Word,
+  strokesPerLetter: unknown,
+  allowSkipped: boolean,
+): Promise<number[] | null> {
   const letters = wordLetters(word.he);
-  if (!Array.isArray(strokesPerLetter) || strokesPerLetter.length !== letters.length) {
-    return { ok: false, status: 400, error: "proof_required" };
-  }
-  const parsed: Stroke[][] = [];
+  if (!Array.isArray(strokesPerLetter) || strokesPerLetter.length !== letters.length) return null;
+
+  const parsed: (Stroke[] | "skipped")[] = [];
   for (const item of strokesPerLetter) {
+    if (allowSkipped && Array.isArray(item) && item.length === 0) {
+      parsed.push("skipped");
+      continue;
+    }
     const strokes = parseStrokes(item);
-    if (!strokes) return { ok: false, status: 400, error: "proof_required" };
+    if (!strokes) return null;
     parsed.push(strokes);
   }
 
   const templates = await loadBaseTemplates();
   const failedLetters: number[] = [];
   letters.forEach((letter, i) => {
-    const features = featuresFromStrokes(parsed[i]!, CANVAS_LINE_HEIGHT);
+    const drawn = parsed[i]!;
+    if (drawn === "skipped") {
+      failedLetters.push(i);
+      return;
+    }
+    const features = featuresFromStrokes(drawn, CANVAS_LINE_HEIGHT);
     if (!features || !checkLetter(features, templates, letter).ok) failedLetters.push(i);
   });
+  return failedLetters;
+}
+
+/**
+ * Этап «пиши»: на каждую букву слова нужны штрихи, сервер сам распознаёт их теми же шаблонами и правилами,
+ * что и приложение. Если хоть одна буква не принята, этап не засчитывается.
+ */
+export async function verifyWritten(word: Word, strokesPerLetter: unknown): Promise<ProofResult> {
+  const failedLetters = await recognizeLetters(word, strokesPerLetter, false);
+  if (!failedLetters) return { ok: false, status: 400, error: "proof_required" };
   return failedLetters.length === 0 ? { ok: true } : { ok: false, status: 422, error: "write_rejected", failedLetters };
 }

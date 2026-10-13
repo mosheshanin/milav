@@ -2,52 +2,31 @@ import { Hono } from "hono";
 import { findWord, getLesson } from "@milav/content";
 import {
   MAX_STAGE_BODY_BYTES,
-  PASS_SCORE,
   POINTS_PER_WORD,
-  QUIZ_SIZE,
   STAGES,
   isSpeechMatch,
   type Lesson,
   type MeResponse,
+  type QuizStartResponse,
   type Stage,
 } from "@milav/shared";
 import { requireUser } from "./auth";
-import {
-  ensureUser,
-  getLessonProgress,
-  getQuizSummary,
-  getTotals,
-  markStage,
-  recordQuizAttempt,
-  touchUser,
-} from "./db";
+import { ensureUser, getLessonProgress, getQuizSummary, getTotals, markStage, touchUser } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
+import { generateQuiz, isChoiceType } from "./quizGen";
+import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
-import { verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
-
-const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
-/** Запись слова длится несколько секунд; всё, что больше, это не слово. */
-const MAX_AUDIO_BYTES = 1_500_000;
-
-interface SpeechModel {
-  run(model: string, input: unknown): Promise<unknown>;
-}
+import { readAudio, transcribeHebrew } from "./speech";
+import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 
 /** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные. */
 function canAccessLesson(lesson: Lesson): boolean {
   return lesson.free;
 }
 
-function toBase64(bytes: Uint8Array): string {
-  let binary = "";
-  const chunk = 0x8000;
-  for (let i = 0; i < bytes.length; i += chunk) {
-    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
-  }
-  return btoa(binary);
-}
+const nowSeconds = () => Math.floor(Date.now() / 1000);
 
 /** Читает небольшой JSON из тела запроса. Слишком большое тело и не-JSON дают null. */
 async function readJson<T>(request: Request, maxBytes = 64 * 1024): Promise<T | null> {
@@ -122,63 +101,44 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   });
 });
 
-// Проверка произношения: тело запроса это запись голоса (audio/*).
+// Проверка произношения на этапе «говори»: тело запроса это запись голоса (audio/*).
+// Верное слово отмечает этап. Произношение в викторине проверяет /api/quiz/speech.
 app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   const user = c.get("user");
   const wordId = c.req.query("wordId");
-  const mode = c.req.query("mode") === "study" ? "study" : "quiz";
   const found = wordId ? findWord(wordId) : undefined;
   if (!found) return c.json({ error: "word_not_found" }, 404);
   if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
   if (!c.env.AI) return c.json({ error: "speech_unavailable" }, 503);
 
-  const audio = await readBodyLimited(c.req.raw, MAX_AUDIO_BYTES);
-  if (!audio) return c.json({ error: "audio_too_large" }, 413);
-  if (audio.byteLength === 0) return c.json({ error: "empty_audio" }, 400);
+  const recording = await readAudio(c.req.raw);
+  if (!recording.ok) return c.json({ error: recording.error }, recording.status);
 
-  let heard = "";
-  try {
-    const out = (await (c.env.AI as SpeechModel).run(WHISPER_MODEL, {
-      audio: toBase64(audio),
-      language: "he",
-      task: "transcribe",
-    })) as { text?: string };
-    heard = (out.text ?? "").trim();
-  } catch {
-    return c.json({ error: "speech_failed" }, 502);
-  }
+  const heard = await transcribeHebrew(c.env.AI, recording.audio);
+  if (heard === null) return c.json({ error: "speech_failed" }, 502);
 
   const match = isSpeechMatch(heard, found.word.he);
-  if (match && mode === "study") {
-    await ensureUser(c.env.DB, user);
-    const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, "speak");
-    const totals = await getTotals(c.env.DB, user.id);
-    return c.json({
-      heard,
-      match,
-      progress: result.progress,
-      pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
-      points: totals.points,
-    });
-  }
-  return c.json({ heard, match });
+  if (!match) return c.json({ heard, match });
+
+  await ensureUser(c.env.DB, user);
+  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, "speak");
+  const totals = await getTotals(c.env.DB, user.id);
+  return c.json({
+    heard,
+    match,
+    progress: result.progress,
+    pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
+    points: totals.points,
+  });
 });
 
-// Итог викторины. Принимается только по полностью пройденному уроку.
-app.post("/api/quiz/submit", requireUser, rateLimit("quiz"), async (c) => {
+// ---- Викторина. Вопросы выдаёт сервер, каждый ответ проверяется здесь, итог считается здесь (quizSession.ts). ----
+
+// Начало викторины: только по полностью пройденному уроку. Прежняя открытая викторина пользователя заменяется.
+app.post("/api/quiz/start", requireUser, rateLimit("quiz"), async (c) => {
   const user = c.get("user");
-  const body = await readJson<{ lessonId?: string; correct?: number; total?: number }>(c.req.raw);
-  if (!body?.lessonId) return c.json({ error: "bad_request" }, 400);
-  const { correct, total } = body;
-  if (
-    !Number.isInteger(correct) ||
-    !Number.isInteger(total) ||
-    total !== QUIZ_SIZE ||
-    (correct as number) < 0 ||
-    (correct as number) > QUIZ_SIZE
-  ) {
-    return c.json({ error: "bad_result" }, 400);
-  }
+  const body = await readJson<{ lessonId?: unknown }>(c.req.raw);
+  if (typeof body?.lessonId !== "string") return c.json({ error: "bad_request" }, 400);
 
   const lesson = getLesson(body.lessonId);
   if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
@@ -188,18 +148,79 @@ app.post("/api/quiz/submit", requireUser, rateLimit("quiz"), async (c) => {
   const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lesson.words.map((w) => w.id));
   if (!progress.every((p) => p.completed)) return c.json({ error: "lesson_not_completed" }, 409);
 
-  const passed = (correct as number) >= PASS_SCORE;
-  const outcome = await recordQuizAttempt(c.env.DB, user.id, lesson.id, correct as number, total as number, passed);
-  const totals = await getTotals(c.env.DB, user.id);
-  return c.json({
-    passed,
-    correct,
-    total,
-    mistakes: QUIZ_SIZE - (correct as number),
-    firstTimePassed: outcome.firstTimePassed,
-    passedLessons: totals.passedLessons,
-    status: totals.status,
-  });
+  const questions = generateQuiz(lesson.words);
+  const sessionId = await startSession(c.env.DB, user.id, lesson.id, questions, nowSeconds());
+  const response: QuizStartResponse = { sessionId, lessonId: lesson.id, questions };
+  return c.json(response);
+});
+
+// Ответ на вопрос с выбором или письмом (и отказ от вопроса «произнеси» или письма).
+// Запись голоса для «произнеси» отправляется отдельно: /api/quiz/speech.
+app.post("/api/quiz/answer", requireUser, async (c) => {
+  const user = c.get("user");
+  const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
+  if (!raw) return c.json({ error: "body_too_large" }, 413);
+  const body = parseJson<{ sessionId?: unknown; index?: unknown; choice?: unknown; strokes?: unknown; giveUp?: unknown }>(raw);
+  if (typeof body !== "object" || body === null) return c.json({ error: "bad_request" }, 400);
+
+  const check = checkSession(await loadSession(c.env.DB, user.id), body.sessionId, body.index, nowSeconds());
+  if (check.kind === "error") return c.json(check.body, check.status);
+  if (check.kind === "repeat") return c.json(check.response);
+  const { session, question } = check;
+
+  const found = findWord(question.wordId);
+  if (!found) return c.json({ error: "word_not_found" }, 404);
+
+  let step: AnswerStep;
+  if (isChoiceType(question.type)) {
+    if (typeof body.choice !== "string" || !question.options.includes(body.choice)) {
+      return c.json({ error: "bad_choice" }, 400);
+    }
+    step = { correct: body.choice === question.wordId, final: true };
+  } else if (body.giveUp === true) {
+    step = { correct: false, final: true };
+  } else if (question.type === "speak") {
+    return c.json({ error: "speak_requires_recording" }, 400);
+  } else {
+    // Письмо: штрихи каждой буквы; у не написанной буквы пустой список, вопрос тогда засчитывается неверным.
+    const failedLetters = await recognizeLetters(found.word, body.strokes, true);
+    if (!failedLetters) return c.json({ error: "proof_required" }, 400);
+    step = { correct: failedLetters.length === 0, final: true, failedLetters };
+  }
+
+  const committed = await commitAnswer(c.env.DB, session, step);
+  if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);
+  return c.json(committed.response);
+});
+
+// Вопрос «произнеси»: тело запроса это запись голоса. Попыток SPEAK_ATTEMPTS_IN_QUIZ, считает сервер.
+app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
+  const user = c.get("user");
+  const sessionId = c.req.query("sessionId");
+  const indexText = c.req.query("index") ?? "";
+  const index = /^\d{1,3}$/.test(indexText) ? Number(indexText) : null;
+
+  const check = checkSession(await loadSession(c.env.DB, user.id), sessionId, index, nowSeconds());
+  if (check.kind === "error") return c.json(check.body, check.status);
+  if (check.kind === "repeat") return c.json(check.response);
+  const { session, question } = check;
+  if (question.type !== "speak") return c.json({ error: "not_a_speech_question" }, 400);
+
+  const found = findWord(question.wordId);
+  if (!found) return c.json({ error: "word_not_found" }, 404);
+  if (!c.env.AI) return c.json({ error: "speech_unavailable" }, 503);
+
+  const recording = await readAudio(c.req.raw);
+  if (!recording.ok) return c.json({ error: recording.error }, recording.status);
+
+  // Если распознаватель не сработал, попытка не тратится: это не вина ученика.
+  const heard = await transcribeHebrew(c.env.AI, recording.audio);
+  if (heard === null) return c.json({ error: "speech_failed" }, 502);
+
+  const step = speechStep(session, isSpeechMatch(heard, found.word.he), heard);
+  const committed = await commitAnswer(c.env.DB, session, step);
+  if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);
+  return c.json(committed.response);
 });
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));

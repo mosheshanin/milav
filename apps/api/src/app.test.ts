@@ -1,82 +1,20 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { lessons } from "@milav/content";
-import { CANVAS_LINE_HEIGHT, loadBaseTemplates, roundStrokes, wordLetters, type Stroke, type Word } from "@milav/shared";
+import { wordLetters, type Stroke } from "@milav/shared";
 import { app } from "./app";
-import type { Bindings } from "./env";
-import { createTestDb } from "./test-utils/d1";
-import { signInitData } from "./test-utils/telegram";
+import {
+  api,
+  auth,
+  completeWord,
+  ctx,
+  lesson,
+  post,
+  resetHarness,
+  speak,
+  stageBody,
+  word,
+} from "./test-utils/harness";
 
-const TOKEN = "123456:TEST-bot-token";
-const lesson = lessons[0]!;
-const word = lesson.words[0]!;
-
-let env: Bindings;
-let heardText = "";
-const fakeAi = { run: async () => ({ text: heardText }) };
-
-beforeEach(() => {
-  heardText = word.he;
-  env = { DB: createTestDb(), BOT_TOKEN: TOKEN, AI: fakeAi };
-});
-
-function auth(id: number, name = "Тест"): Record<string, string> {
-  return { Authorization: `tma ${signInitData(TOKEN, { id, first_name: name })}` };
-}
-
-async function api(path: string, init: RequestInit & { as?: number } = {}, e: Bindings = env) {
-  const { as, ...rest } = init;
-  const headers = { ...(as ? auth(as) : {}), ...(rest.headers as Record<string, string> | undefined) };
-  return app.request(path, { ...rest, headers }, e);
-}
-
-const post = (path: string, as: number, body: unknown) =>
-  api(path, { method: "POST", as, body: JSON.stringify(body), headers: { "Content-Type": "application/json" } });
-
-/**
- * Штрихи буквы по шаблону из шрифта: каждая вторая точка облака как короткий штрих (24 штриха на букву, ровно предел сервера). Более редкая выборка не узнаётся для נ и ס.
- * Распознаватель принимает такой рисунок, потому что он повторяет шаблон.
- */
-async function letterStrokes(letter: string): Promise<Stroke[]> {
-  const t = (await loadBaseTemplates()).find((x) => x.letter === letter);
-  if (!t) throw new Error(`нет шаблона ${letter}`);
-  const h = t.heightRatio * CANVAS_LINE_HEIGHT;
-  const scale = t.aspect <= 1 ? h : h * t.aspect;
-  const cx = 200;
-  const cy = 0.62 * 220 - h / 2;
-  return roundStrokes(
-    t.points
-      .filter((_, i) => i % 2 === 0)
-      .map((p) => [
-        { x: cx + p.x * scale, y: cy + p.y * scale },
-        { x: cx + p.x * scale + 1.5, y: cy + p.y * scale },
-      ]),
-  );
-}
-
-/** Тело запроса с доказательством этапа: набранное слово или штрихи всех букв. */
-async function stageBody(w: Word, stage: "listen" | "write" | "type") {
-  if (stage === "type") return { wordId: w.id, stage, typed: wordLetters(w.he).join("") };
-  if (stage === "write") return { wordId: w.id, stage, strokes: await Promise.all(wordLetters(w.he).map(letterStrokes)) };
-  return { wordId: w.id, stage };
-}
-
-const speak = (as: number, wordId: string, mode = "study", bytes = 2000) =>
-  api(`/api/speech/check?wordId=${wordId}&mode=${mode}`, {
-    method: "POST",
-    as,
-    body: new Uint8Array(bytes),
-    headers: { "Content-Type": "audio/webm" },
-  });
-
-/** Проходит все четыре этапа слова как пользователь `as`. */
-async function completeWord(as: number, wordId: string) {
-  const target = lesson.words.find((w) => w.id === wordId)!;
-  for (const stage of ["listen", "write", "type"] as const) {
-    expect((await post("/api/progress/stage", as, await stageBody(target, stage))).status).toBe(200);
-  }
-  heardText = lesson.words.find((w) => w.id === wordId)!.he;
-  expect((await speak(as, wordId)).status).toBe(200);
-}
+beforeEach(resetHarness);
 
 describe("авторизация", () => {
   it("без заголовка 401", async () => {
@@ -89,7 +27,7 @@ describe("авторизация", () => {
   });
 
   it("если токен бота не настроен, отвечает 503 с понятной причиной", async () => {
-    const res = await api("/api/me", { as: 1 }, { DB: env.DB });
+    const res = await api("/api/me", { as: 1 }, { DB: ctx.env.DB });
     expect(res.status).toBe(503);
     expect(await res.json()).toEqual({ error: "bot_token_missing" });
   });
@@ -97,7 +35,7 @@ describe("авторизация", () => {
   it("тестовый вход (dev) выключен по умолчанию и работает только с ALLOW_DEV_AUTH", async () => {
     const headers = { Authorization: "dev 5:Dev" };
     expect((await api("/api/me", { headers })).status).toBe(401);
-    expect((await api("/api/me", { headers }, { ...env, ALLOW_DEV_AUTH: "true" })).status).toBe(200);
+    expect((await api("/api/me", { headers }, { ...ctx.env, ALLOW_DEV_AUTH: "true" })).status).toBe(200);
   });
 });
 
@@ -253,7 +191,7 @@ describe("доказательства этапов «пиши» и «печат
     await post("/api/progress/stage", 1, { wordId: word.id, stage: "listen" });
     await post("/api/progress/stage", 1, { wordId: word.id, stage: "write" });
     await post("/api/progress/stage", 1, { wordId: word.id, stage: "type" });
-    heardText = word.he;
+    ctx.heard = word.he;
     const spoken = (await (await speak(1, word.id)).json()) as any;
     expect(spoken.progress.completed).toBe(false);
     expect(((await (await api("/api/me", { as: 1 })).json()) as any).points).toBe(0);
@@ -262,7 +200,7 @@ describe("доказательства этапов «пиши» и «печат
 
 describe("проверка речи", () => {
   it("неверное слово не отмечает этап", async () => {
-    heardText = "כלב";
+    ctx.heard = "כלב";
     const res = await speak(1, word.id);
     const body = (await res.json()) as any;
     expect(body.match).toBe(false);
@@ -271,61 +209,16 @@ describe("проверка речи", () => {
     expect(progress.words[0].speak).toBe(false);
   });
 
-  it("в режиме викторины результат возвращается, но этап не отмечается", async () => {
-    const body = (await (await speak(1, word.id, "quiz")).json()) as any;
-    expect(body.match).toBe(true);
-    const progress = (await (await api(`/api/lessons/${lesson.id}/progress`, { as: 1 })).json()) as any;
-    expect(progress.words[0].speak).toBe(false);
-  });
-
   it("без Workers AI отвечает 503, пустую и слишком большую запись отклоняет", async () => {
-    expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...env, AI: undefined })).status).toBe(503);
-    expect((await speak(1, word.id, "study", 0)).status).toBe(400);
-    expect((await speak(1, word.id, "study", 1_600_000)).status).toBe(413);
+    expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...ctx.env, AI: undefined })).status).toBe(503);
+    expect((await speak(1, word.id, 0)).status).toBe(400);
+    expect((await speak(1, word.id, 1_600_000)).status).toBe(413);
   });
 
   it("ошибка распознавателя превращается в 502", async () => {
-    const broken = { ...env, AI: { run: async () => { throw new Error("boom"); } } };
+    const broken = { ...ctx.env, AI: { run: async () => { throw new Error("boom"); } } };
     const res = await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, broken);
     expect(res.status).toBe(502);
-  });
-});
-
-describe("викторина", () => {
-  const submit = (as: number, correct: number, total = 25) =>
-    post("/api/quiz/submit", as, { lessonId: lesson.id, correct, total });
-
-  it("пока урок не пройден полностью, результат не принимается", async () => {
-    await completeWord(1, word.id);
-    const res = await submit(1, 25);
-    expect(res.status).toBe(409);
-  });
-
-  it("20 из 25 сдают урок, 19 не сдают; повторная сдача не увеличивает счётчик", async () => {
-    for (const w of lesson.words) await completeWord(1, w.id);
-    const points = ((await (await api("/api/me", { as: 1 })).json()) as any).points;
-    expect(points).toBe(lesson.words.length);
-
-    let body = (await (await submit(1, 19)).json()) as any;
-    expect(body).toMatchObject({ passed: false, mistakes: 6, passedLessons: 0 });
-
-    body = (await (await submit(1, 20)).json()) as any;
-    expect(body).toMatchObject({ passed: true, mistakes: 5, firstTimePassed: true, passedLessons: 1 });
-    expect(body.status.name).toBe("Пешка");
-
-    body = (await (await submit(1, 25)).json()) as any;
-    expect(body).toMatchObject({ passed: true, mistakes: 0, firstTimePassed: false, passedLessons: 1 });
-
-    const summary = (await (await api(`/api/lessons/${lesson.id}/progress`, { as: 1 })).json()) as any;
-    expect(summary.quiz).toEqual({ passed: true, bestCorrect: 25 });
-  });
-
-  it("некорректные результаты отклоняются", async () => {
-    for (const w of lesson.words) await completeWord(1, w.id);
-    expect((await submit(1, 26)).status).toBe(400);
-    expect((await submit(1, -1)).status).toBe(400);
-    expect((await submit(1, 20, 24)).status).toBe(400);
-    expect((await post("/api/quiz/submit", 1, { lessonId: "nope", correct: 20, total: 25 })).status).toBe(404);
   });
 });
 
@@ -338,9 +231,9 @@ describe("лимиты запросов в API", () => {
 
   it("проверка речи: после 20 запросов в минуту отвечает 429 и не вызывает Whisper", async () => {
     const ai = countingAi();
-    const limited = { ...env, AI: ai };
+    const limited = { ...ctx.env, AI: ai };
     const call = () =>
-      api(`/api/speech/check?wordId=${word.id}&mode=study`, {
+      api(`/api/speech/check?wordId=${word.id}`, {
         method: "POST",
         as: 50,
         body: new Uint8Array(2000),
@@ -358,7 +251,7 @@ describe("лимиты запросов в API", () => {
     expect(ai.calls).toBe(20);
 
     // Другой пользователь не страдает.
-    const other = await api(`/api/speech/check?wordId=${word.id}&mode=study`, {
+    const other = await api(`/api/speech/check?wordId=${word.id}`, {
       method: "POST",
       as: 51,
       body: new Uint8Array(2000),
@@ -373,8 +266,8 @@ describe("лимиты запросов в API", () => {
     expect((await send()).status).toBe(429);
   });
 
-  it("сдача викторины: 10 в минуту, 11-я получает 429", async () => {
-    const send = () => post("/api/quiz/submit", 53, { lessonId: lesson.id, correct: 20, total: 25 });
+  it("начало викторины: 10 в минуту, 11-е получает 429", async () => {
+    const send = () => post("/api/quiz/start", 53, { lessonId: lesson.id });
     for (let i = 0; i < 10; i++) expect((await send()).status).toBe(409);
     expect((await send()).status).toBe(429);
   });
@@ -396,7 +289,7 @@ describe("лимиты запросов в API", () => {
     const res = await app.request(
       `/api/speech/check?wordId=${word.id}`,
       { method: "POST", headers: { ...auth(54), "Content-Type": "audio/webm" }, body: stream, duplex: "half" } as RequestInit,
-      env,
+      ctx.env,
     );
     expect(res.status).toBe(413);
     // Чтение остановилось почти сразу, а не дошло до конца потока.
