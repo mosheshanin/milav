@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "food-3",
+  "topicId": "food",
+  "section": "nouns",
+  "topic": "Еда",
+  "number": 3,
+  "free": true,
+  "title": "Овощи и блюда",
+  "words": [
+    {
+      "id": "food-3-onion",
+      "he": "בצל",
+      "niqqud": "בָּצָל",
+      "translit": "баца́ль",
+      "ru": "лук",
+      "gender": "m",
+      "example": {
+        "he": "זה בצל גדול",
+        "translit": "зэ бацаль гадоль",
+        "ru": "Это большой лук"
+      },
+      "image": "/words/food-3-onion.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-garlic",
+      "he": "שום",
+      "niqqud": "שׁוּם",
+      "translit": "шум",
+      "ru": "чеснок",
+      "gender": "m",
+      "example": {
+        "he": "זה שום קטן",
+        "translit": "зэ шум катан",
+        "ru": "Это маленький чеснок"
+      },
+      "image": "/words/food-3-garlic.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-pepper",
+      "he": "פלפל",
+      "niqqud": "פִּלְפֵּל",
+      "translit": "пилпе́ль",
+      "ru": "перец",
+      "gender": "m",
+      "example": {
+        "he": "זה פלפל חריף",
+        "translit": "зэ пилпель хариф",
+        "ru": "Это острый перец"
+      },
+      "image": "/words/food-3-pepper.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-corn",
+      "he": "תירס",
+      "niqqud": "תִּירָס",
+      "translit": "тира́с",
+      "ru": "кукуруза",
+      "gender": "m",
+      "example": {
+        "he": "זה תירס מתוק",
+        "translit": "зэ тирас маток",
+        "ru": "Это сладкая кукуруза"
+      },
+      "image": "/words/food-3-corn.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-broccoli",
+      "he": "ברוקולי",
+      "niqqud": "בְּרוֹקוֹלִי",
+      "translit": "броко́ли",
+      "ru": "брокколи",
+      "gender": "m",
+      "example": {
+        "he": "זה ברוקולי טעים",
+        "translit": "зэ броколи таим",
+        "ru": "Это вкусная брокколи"
+      },
+      "image": "/words/food-3-broccoli.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-eggplant",
+      "he": "חציל",
+      "niqqud": "חָצִיל",
+      "translit": "хаци́ль",
+      "ru": "баклажан",
+      "gender": "m",
+      "example": {
+        "he": "זה חציל גדול",
+        "translit": "зэ хациль гадоль",
+        "ru": "Это большой баклажан"
+      },
+      "image": "/words/food-3-eggplant.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-soup",
+      "he": "מרק",
+      "niqqud": "מָרָק",
+      "translit": "мара́к",
+      "ru": "суп",
+      "gender": "m",
+      "example": {
+        "he": "זה מרק חם",
+        "translit": "зэ марак хам",
+        "ru": "Это горячий суп"
+      },
+      "image": "/words/food-3-soup.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-sandwich",
+      "he": "כריך",
+      "niqqud": "כָּרִיךְ",
+      "translit": "кари́х",
+      "ru": "сэндвич",
+      "gender": "m",
+      "example": {
+        "he": "זה כריך טעים",
+        "translit": "зэ карих таим",
+        "ru": "Это вкусный сэндвич"
+      },
+      "image": "/words/food-3-sandwich.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-pizza",
+      "he": "פיצה",
+      "niqqud": "פִּיצָה",
+      "translit": "пи́ца",
+      "ru": "пицца",
+      "gender": "f",
+      "example": {
+        "he": "זאת פיצה חמה",
+        "translit": "зот пица хама",
+        "ru": "Это горячая пицца"
+      },
+      "image": "/words/food-3-pizza.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-3-cake",
+      "he": "עוגה",
+      "niqqud": "עוּגָה",
+      "translit": "уга́",
+      "ru": "торт",
+      "gender": "f",
+      "example": {
+        "he": "זאת עוגה מתוקה",
+        "translit": "зот уга мтука",
+        "ru": "Это сладкий торт"
+      },
+      "image": "/words/food-3-cake.svg",
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "food-2",
+  "topicId": "food",
+  "section": "nouns",
+  "topic": "Еда",
+  "number": 2,
+  "free": true,
+  "title": "Фрукты и ягоды",
+  "words": [
+    {
+      "id": "food-2-pear",
+      "he": "אגס",
+      "niqqud": "אַגָּס",
+      "translit": "ага́с",
+      "ru": "груша",
+      "gender": "m",
+      "example": {
+        "he": "זה אגס מתוק",
+        "translit": "зэ агас маток",
+        "ru": "Это сладкая груша"
+      },
+      "image": "/words/food-2-pear.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-strawberry",
+      "he": "תות",
+      "niqqud": "תּוּת",
+      "translit": "тут",
+      "ru": "клубника",
+      "gender": "m",
+      "example": {
+        "he": "זה תות מתוק",
+        "translit": "зэ тут маток",
+        "ru": "Это сладкая клубника"
+      },
+      "image": "/words/food-2-strawberry.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-watermelon",
+      "he": "אבטיח",
+      "niqqud": "אֲבַטִּיחַ",
+      "translit": "авати́ах",
+      "ru": "арбуз",
+      "gender": "m",
+      "example": {
+        "he": "זה אבטיח גדול",
+        "translit": "зэ аватиах гадоль",
+        "ru": "Это большой арбуз"
+      },
+      "image": "/words/food-2-watermelon.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-lemon",
+      "he": "לימון",
+      "niqqud": "לִימוֹן",
+      "translit": "лимо́н",
+      "ru": "лимон",
+      "gender": "m",
+      "example": {
+        "he": "זה לימון קטן",
+        "translit": "зэ лимон катан",
+        "ru": "Это маленький лимон"
+      },
+      "image": "/words/food-2-lemon.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-peach",
+      "he": "אפרסק",
+      "niqqud": "אֲפַרְסֵק",
+      "translit": "афарсе́к",
+      "ru": "персик",
+      "gender": "m",
+      "example": {
+        "he": "זה אפרסק טעים",
+        "translit": "зэ афарсек таим",
+        "ru": "Это вкусный персик"
+      },
+      "image": "/words/food-2-peach.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-cherry",
+      "he": "דובדבן",
+      "niqqud": "דּוּבְדְּבָן",
+      "translit": "дувдева́н",
+      "ru": "вишня",
+      "gender": "m",
+      "example": {
+        "he": "זה דובדבן קטן",
+        "translit": "зэ дувдеван катан",
+        "ru": "Это маленькая вишня"
+      },
+      "image": "/words/food-2-cherry.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-pineapple",
+      "he": "אננס",
+      "niqqud": "אֲנָנָס",
+      "translit": "анана́с",
+      "ru": "ананас",
+      "gender": "m",
+      "example": {
+        "he": "זה אננס מתוק",
+        "translit": "зэ ананас маток",
+        "ru": "Это сладкий ананас"
+      },
+      "image": "/words/food-2-pineapple.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-mango",
+      "he": "מנגו",
+      "niqqud": "מַנְגּוֹ",
+      "translit": "ма́нго",
+      "ru": "манго",
+      "gender": "m",
+      "example": {
+        "he": "זה מנגו טעים",
+        "translit": "зэ манго таим",
+        "ru": "Это вкусное манго"
+      },
+      "image": "/words/food-2-mango.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-coconut",
+      "he": "קוקוס",
+      "niqqud": "קוֹקוֹס",
+      "translit": "ко́кос",
+      "ru": "кокос",
+      "gender": "m",
+      "example": {
+        "he": "זה קוקוס גדול",
+        "translit": "зэ кокос гадоль",
+        "ru": "Это большой кокос"
+      },
+      "image": "/words/food-2-coconut.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-2-pomegranate",
+      "he": "רימון",
+      "niqqud": "רִימוֹן",
+      "translit": "римо́н",
+      "ru": "гранат",
+      "gender": "m",
+      "example": {
+        "he": "זה רימון מתוק",
+        "translit": "зэ римон маток",
+        "ru": "Это сладкий гранат"
+      },
+      "reviewed": false
+    }
+  ]
+}

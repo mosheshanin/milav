@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "food-1",
+  "topicId": "food",
+  "section": "nouns",
+  "topic": "Еда",
+  "number": 1,
+  "free": true,
+  "title": "Продукты",
+  "words": [
+    {
+      "id": "food-1-bread",
+      "he": "לחם",
+      "niqqud": "לֶחֶם",
+      "translit": "ле́хем",
+      "ru": "хлеб",
+      "gender": "m",
+      "example": {
+        "he": "זה לחם טעים",
+        "translit": "зэ лехем таим",
+        "ru": "Это вкусный хлеб"
+      },
+      "image": "/words/food-1-bread.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-milk",
+      "he": "חלב",
+      "niqqud": "חָלָב",
+      "translit": "хала́в",
+      "ru": "молоко",
+      "gender": "m",
+      "example": {
+        "he": "זה חלב קר",
+        "translit": "зэ халав кар",
+        "ru": "Это холодное молоко"
+      },
+      "image": "/words/food-1-milk.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-egg",
+      "he": "ביצה",
+      "niqqud": "בֵּיצָה",
+      "translit": "бейца́",
+      "ru": "яйцо",
+      "gender": "f",
+      "example": {
+        "he": "זאת ביצה גדולה",
+        "translit": "зот бейца гдола",
+        "ru": "Это большое яйцо"
+      },
+      "image": "/words/food-1-egg.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-cheese",
+      "he": "גבינה",
+      "niqqud": "גְּבִינָה",
+      "translit": "гвина́",
+      "ru": "сыр",
+      "gender": "f",
+      "example": {
+        "he": "זאת גבינה טעימה",
+        "translit": "зот гвина теима",
+        "ru": "Это вкусный сыр"
+      },
+      "image": "/words/food-1-cheese.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-apple",
+      "he": "תפוח",
+      "niqqud": "תַּפּוּחַ",
+      "translit": "тапу́ах",
+      "ru": "яблоко",
+      "gender": "m",
+      "example": {
+        "he": "זה תפוח טעים",
+        "translit": "зэ тапуах таим",
+        "ru": "Это вкусное яблоко"
+      },
+      "image": "/words/food-1-apple.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-banana",
+      "he": "בננה",
+      "niqqud": "בָּנָנָה",
+      "translit": "бана́на",
+      "ru": "банан",
+      "gender": "f",
+      "example": {
+        "he": "זאת בננה מתוקה",
+        "translit": "зот банана мтука",
+        "ru": "Это сладкий банан"
+      },
+      "image": "/words/food-1-banana.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-orange",
+      "he": "תפוז",
+      "niqqud": "תַּפּוּז",
+      "translit": "тапу́з",
+      "ru": "апельсин",
+      "gender": "m",
+      "example": {
+        "he": "זה תפוז מתוק",
+        "translit": "зэ тапуз маток",
+        "ru": "Это сладкий апельсин"
+      },
+      "image": "/words/food-1-orange.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-avocado",
+      "he": "אבוקדו",
+      "niqqud": "אָבוֹקָדוֹ",
+      "translit": "авока́до",
+      "ru": "авокадо",
+      "gender": "m",
+      "example": {
+        "he": "זה אבוקדו טעים",
+        "translit": "зэ авокадо таим",
+        "ru": "Это вкусное авокадо"
+      },
+      "image": "/words/food-1-avocado.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-cucumber",
+      "he": "מלפפון",
+      "niqqud": "מְלָפְפוֹן",
+      "translit": "мелафефо́н",
+      "ru": "огурец",
+      "gender": "m",
+      "example": {
+        "he": "זה מלפפון קטן",
+        "translit": "зэ мелафефон катан",
+        "ru": "Это маленький огурец"
+      },
+      "image": "/words/food-1-cucumber.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-carrot",
+      "he": "גזר",
+      "niqqud": "גֶּזֶר",
+      "translit": "ге́зер",
+      "ru": "морковь",
+      "gender": "m",
+      "example": {
+        "he": "זה גזר גדול",
+        "translit": "зэ гезер гадоль",
+        "ru": "Это большая морковь"
+      },
+      "image": "/words/food-1-carrot.svg",
+      "reviewed": false
+    }
+  ]
+}
