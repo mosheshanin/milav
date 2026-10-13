@@ -1,0 +1,159 @@
+{
+  "$schema": "../schema.json",
+  "id": "family-3",
+  "topicId": "family",
+  "section": "nouns",
+  "topic": "Семья",
+  "number": 3,
+  "free": true,
+  "title": "Мужчины и женщины",
+  "words": [
+    {
+      "id": "family-3-man",
+      "he": "איש",
+      "niqqud": "אִישׁ",
+      "translit": "иш",
+      "ru": "мужчина",
+      "gender": "m",
+      "example": {
+        "he": "זה איש טוב",
+        "translit": "зэ иш тов",
+        "ru": "Это хороший мужчина"
+      },
+      "image": "/words/family-3-man.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-woman",
+      "he": "אשה",
+      "niqqud": "אִשָּׁה",
+      "translit": "иша́",
+      "ru": "женщина",
+      "gender": "f",
+      "example": {
+        "he": "זאת אשה טובה",
+        "translit": "зот иша това",
+        "ru": "Это хорошая женщина"
+      },
+      "image": "/words/family-3-woman.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-person",
+      "he": "אדם",
+      "niqqud": "אָדָם",
+      "translit": "ада́м",
+      "ru": "человек",
+      "gender": "m",
+      "example": {
+        "he": "זה אדם חכם",
+        "translit": "зэ адам хахам",
+        "ru": "Это умный человек"
+      },
+      "image": "/words/family-3-person.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-lad",
+      "he": "בחור",
+      "niqqud": "בָּחוּר",
+      "translit": "баху́р",
+      "ru": "парень",
+      "gender": "m",
+      "example": {
+        "he": "זה בחור צעיר",
+        "translit": "зэ бахур цаир",
+        "ru": "Это молодой парень"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-3-lass",
+      "he": "בחורה",
+      "niqqud": "בַּחוּרָה",
+      "translit": "бахура́",
+      "ru": "девушка",
+      "gender": "f",
+      "example": {
+        "he": "זאת בחורה צעירה",
+        "translit": "зот бахура цеира",
+        "ru": "Это молодая девушка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-3-oldman",
+      "he": "זקן",
+      "niqqud": "זָקֵן",
+      "translit": "заке́н",
+      "ru": "старик",
+      "gender": "m",
+      "example": {
+        "he": "זה זקן חכם",
+        "translit": "зэ закен хахам",
+        "ru": "Это умный старик"
+      },
+      "image": "/words/family-3-oldman.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-oldwoman",
+      "he": "זקנה",
+      "niqqud": "זְקֵנָה",
+      "translit": "зкена́",
+      "ru": "старушка",
+      "gender": "f",
+      "example": {
+        "he": "זאת זקנה חכמה",
+        "translit": "зот зкена хахама",
+        "ru": "Это умная старушка"
+      },
+      "image": "/words/family-3-oldwoman.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-guest",
+      "he": "אורח",
+      "niqqud": "אוֹרֵחַ",
+      "translit": "оре́ах",
+      "ru": "гость",
+      "gender": "m",
+      "example": {
+        "he": "זה אורח חשוב",
+        "translit": "зэ ореах хашув",
+        "ru": "Это важный гость"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-3-groom",
+      "he": "חתן",
+      "niqqud": "חָתָן",
+      "translit": "хата́н",
+      "ru": "жених",
+      "gender": "m",
+      "example": {
+        "he": "זה חתן צעיר",
+        "translit": "зэ хатан цаир",
+        "ru": "Это молодой жених"
+      },
+      "image": "/words/family-3-groom.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-3-bride",
+      "he": "כלה",
+      "niqqud": "כַּלָּה",
+      "translit": "кала́",
+      "ru": "невеста",
+      "gender": "f",
+      "example": {
+        "he": "זאת כלה יפה",
+        "translit": "зот кала яфа",
+        "ru": "Это красивая невеста"
+      },
+      "image": "/words/family-3-bride.svg",
+      "reviewed": false
+    }
+  ]
+}

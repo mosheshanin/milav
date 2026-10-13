@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "id": "family-1",
+  "topicId": "family",
+  "section": "nouns",
+  "topic": "Семья",
+  "number": 1,
+  "free": true,
+  "title": "Близкие",
+  "words": [
+    {
+      "id": "family-1-mom",
+      "he": "אמא",
+      "niqqud": "אִמָּא",
+      "translit": "и́ма",
+      "ru": "мама",
+      "gender": "f",
+      "example": {
+        "he": "זאת אמא טובה",
+        "translit": "зот има това",
+        "ru": "Это хорошая мама"
+      },
+      "image": "/words/family-1-mom.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-dad",
+      "he": "אבא",
+      "niqqud": "אַבָּא",
+      "translit": "а́ба",
+      "ru": "папа",
+      "gender": "m",
+      "example": {
+        "he": "זה אבא חזק",
+        "translit": "зэ аба хазак",
+        "ru": "Это сильный папа"
+      },
+      "image": "/words/family-1-dad.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-grandpa",
+      "he": "סבא",
+      "niqqud": "סַבָּא",
+      "translit": "са́ба",
+      "ru": "дедушка",
+      "gender": "m",
+      "example": {
+        "he": "זה סבא חכם",
+        "translit": "зэ саба хахам",
+        "ru": "Это умный дедушка"
+      },
+      "image": "/words/family-1-grandpa.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-grandma",
+      "he": "סבתא",
+      "niqqud": "סַבְתָּא",
+      "translit": "са́вта",
+      "ru": "бабушка",
+      "gender": "f",
+      "example": {
+        "he": "זאת סבתא טובה",
+        "translit": "зот савта това",
+        "ru": "Это хорошая бабушка"
+      },
+      "image": "/words/family-1-grandma.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-boy",
+      "he": "ילד",
+      "niqqud": "יֶלֶד",
+      "translit": "е́лед",
+      "ru": "мальчик",
+      "gender": "m",
+      "example": {
+        "he": "זה ילד חמוד",
+        "translit": "зэ елед хамуд",
+        "ru": "Это милый мальчик"
+      },
+      "image": "/words/family-1-boy.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-girl",
+      "he": "ילדה",
+      "niqqud": "יַלְדָּה",
+      "translit": "ялда́",
+      "ru": "девочка",
+      "gender": "f",
+      "example": {
+        "he": "זאת ילדה חמודה",
+        "translit": "зот ялда хмуда",
+        "ru": "Это милая девочка"
+      },
+      "image": "/words/family-1-girl.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-baby",
+      "he": "תינוק",
+      "niqqud": "תִּינוֹק",
+      "translit": "тино́к",
+      "ru": "малыш",
+      "gender": "m",
+      "example": {
+        "he": "זה תינוק חמוד",
+        "translit": "зэ тинок хамуд",
+        "ru": "Это милый малыш"
+      },
+      "image": "/words/family-1-baby.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-brother",
+      "he": "אח",
+      "niqqud": "אָח",
+      "translit": "ах",
+      "ru": "брат",
+      "gender": "m",
+      "example": {
+        "he": "זה אח טוב",
+        "translit": "зэ ах тов",
+        "ru": "Это хороший брат"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-1-sister",
+      "he": "אחות",
+      "niqqud": "אָחוֹת",
+      "translit": "ахо́т",
+      "ru": "сестра",
+      "gender": "f",
+      "example": {
+        "he": "זאת אחות טובה",
+        "translit": "зот ахот това",
+        "ru": "Это хорошая сестра"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-1-family",
+      "he": "משפחה",
+      "niqqud": "מִשְׁפָּחָה",
+      "translit": "мишпаха́",
+      "ru": "семья",
+      "gender": "f",
+      "example": {
+        "he": "זאת משפחה גדולה",
+        "translit": "зот мишпаха гдола",
+        "ru": "Это большая семья"
+      },
+      "image": "/words/family-1-family.svg",
+      "reviewed": false
+    }
+  ]
+}

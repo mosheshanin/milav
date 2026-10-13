@@ -1,0 +1,156 @@
+{
+  "$schema": "../schema.json",
+  "id": "family-2",
+  "topicId": "family",
+  "section": "nouns",
+  "topic": "Семья",
+  "number": 2,
+  "free": true,
+  "title": "Родные и друзья",
+  "words": [
+    {
+      "id": "family-2-uncle",
+      "he": "דוד",
+      "niqqud": "דּוֹד",
+      "translit": "дод",
+      "ru": "дядя",
+      "gender": "m",
+      "example": {
+        "he": "זה דוד טוב",
+        "translit": "зэ дод тов",
+        "ru": "Это хороший дядя"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-aunt",
+      "he": "דודה",
+      "niqqud": "דּוֹדָה",
+      "translit": "дода́",
+      "ru": "тётя",
+      "gender": "f",
+      "example": {
+        "he": "זאת דודה טובה",
+        "translit": "зот дода това",
+        "ru": "Это хорошая тётя"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-son",
+      "he": "בן",
+      "niqqud": "בֵּן",
+      "translit": "бен",
+      "ru": "сын",
+      "gender": "m",
+      "example": {
+        "he": "זה בן חכם",
+        "translit": "зэ бен хахам",
+        "ru": "Это умный сын"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-daughter",
+      "he": "בת",
+      "niqqud": "בַּת",
+      "translit": "бат",
+      "ru": "дочь",
+      "gender": "f",
+      "example": {
+        "he": "זאת בת חכמה",
+        "translit": "зот бат хахама",
+        "ru": "Это умная дочь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-grandson",
+      "he": "נכד",
+      "niqqud": "נֶכֶד",
+      "translit": "не́хед",
+      "ru": "внук",
+      "gender": "m",
+      "example": {
+        "he": "זה נכד חמוד",
+        "translit": "зэ нехед хамуд",
+        "ru": "Это милый внук"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-granddaughter",
+      "he": "נכדה",
+      "niqqud": "נֶכְדָּה",
+      "translit": "нехда́",
+      "ru": "внучка",
+      "gender": "f",
+      "example": {
+        "he": "זאת נכדה חמודה",
+        "translit": "зот нехда хмуда",
+        "ru": "Это милая внучка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-2-friend",
+      "he": "חבר",
+      "niqqud": "חָבֵר",
+      "translit": "хаве́р",
+      "ru": "друг",
+      "gender": "m",
+      "example": {
+        "he": "זה חבר טוב",
+        "translit": "зэ хавер тов",
+        "ru": "Это хороший друг"
+      },
+      "image": "/words/family-2-friend.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-2-girlfriend",
+      "he": "חברה",
+      "niqqud": "חֲבֵרָה",
+      "translit": "хавера́",
+      "ru": "подруга",
+      "gender": "f",
+      "example": {
+        "he": "זאת חברה טובה",
+        "translit": "зот хавера това",
+        "ru": "Это хорошая подруга"
+      },
+      "image": "/words/family-2-girlfriend.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-2-neighbor",
+      "he": "שכן",
+      "niqqud": "שָׁכֵן",
+      "translit": "шахе́н",
+      "ru": "сосед",
+      "gender": "m",
+      "example": {
+        "he": "זה שכן חמוד",
+        "translit": "зэ шахен хамуд",
+        "ru": "Это милый сосед"
+      },
+      "image": "/words/family-2-neighbor.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-2-neighborf",
+      "he": "שכנה",
+      "niqqud": "שְׁכֵנָה",
+      "translit": "шхена́",
+      "ru": "соседка",
+      "gender": "f",
+      "example": {
+        "he": "זאת שכנה חמודה",
+        "translit": "зот шхена хмуда",
+        "ru": "Это милая соседка"
+      },
+      "image": "/words/family-2-neighborf.svg",
+      "reviewed": false
+    }
+  ]
+}
