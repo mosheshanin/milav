@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { WORDS_PER_LESSON, normalizeHebrew } from "@milav/shared";
 import { lessons } from "./index";
+import { skeletonProblems, stressProblems, stripStress } from "./rules";
 
 const ONLY_HEBREW_LETTERS = /^[א-ת]+$/;
 const CYRILLIC_TRANSLIT = /^[а-яё\- ]+$/i;
@@ -46,7 +47,8 @@ describe("уроки", () => {
       for (const word of lesson.words) {
         it(`слово ${word.id} заполнено корректно`, () => {
           expect(word.he, "иврит только буквами, без огласовок").toMatch(ONLY_HEBREW_LETTERS);
-          expect(word.translit, "транскрипция кириллицей").toMatch(CYRILLIC_TRANSLIT);
+          expect(stressProblems(word.translit), "ударение в транскрипции (docs/CONTENT.md)").toEqual([]);
+          expect(skeletonProblems(word.he, word.translit), "согласные иврита есть в транскрипции").toEqual([]);
           expect(word.ru.trim().length).toBeGreaterThan(0);
 
           // Конечные буквы только в конце слова, и в конце слова нет обычных форм ך ם ן ף ץ.
@@ -79,11 +81,28 @@ describe("уроки", () => {
           if (word.gender) {
             expect(word.example, "для слова с родом нужна фраза-пример").toBeDefined();
           }
+          // Формы слова, которые может использовать фраза: основная и (у прилагательных) остальные.
+          const forms = [{ he: word.he, translit: word.translit }, ...Object.values(word.forms ?? {})];
           if (word.example) {
-            expect(normalizeHebrew(word.example.he), "во фразе есть само слово").toContain(normalizeHebrew(word.he));
+            expect(
+              forms.some((f) => normalizeHebrew(word.example!.he).includes(normalizeHebrew(f.he))),
+              "во фразе есть само слово или его форма",
+            ).toBe(true);
+            expect(
+              forms.some((f) => word.example!.translit.includes(stripStress(f.translit))),
+              "транскрипция фразы содержит транскрипцию слова (одинаково записанную)",
+            ).toBe(true);
             expect(word.example.translit).toMatch(CYRILLIC_TRANSLIT);
             expect(word.example.translit, "фраза без артикля (ха-)").not.toMatch(/(^|[\s-])ха-/);
             expect(word.example.ru.length).toBeGreaterThan(0);
+          }
+
+          if (word.forms) {
+            for (const [name, form] of Object.entries(word.forms)) {
+              expect(normalizeHebrew(form.niqqud), `форма ${name}: с огласовками то же слово`).toBe(normalizeHebrew(form.he));
+              expect(stressProblems(form.translit), `форма ${name}: ударение`).toEqual([]);
+              expect(skeletonProblems(form.he, form.translit), `форма ${name}: согласные`).toEqual([]);
+            }
           }
         });
       }
