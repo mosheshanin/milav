@@ -1,0 +1,321 @@
+{
+  "$schema": "../schema.json",
+  "id": "colors-2",
+  "topicId": "colors",
+  "section": "adjectives",
+  "topic": "Цвета",
+  "number": 2,
+  "free": true,
+  "title": "Оттенки и свойства",
+  "words": [
+    {
+      "id": "colors-2-gray",
+      "he": "אפור",
+      "niqqud": "אָפוֹר",
+      "translit": "афо́р",
+      "ru": "серый",
+      "example": {
+        "he": "זה ענן אפור",
+        "translit": "зэ анан афор",
+        "ru": "Это серое облако"
+      },
+      "forms": {
+        "f": {
+          "he": "אפורה",
+          "niqqud": "אֲפוֹרָה",
+          "translit": "афора́"
+        },
+        "mp": {
+          "he": "אפורים",
+          "niqqud": "אֲפוֹרִים",
+          "translit": "афори́м"
+        },
+        "fp": {
+          "he": "אפורות",
+          "niqqud": "אֲפוֹרוֹת",
+          "translit": "афоро́т"
+        }
+      },
+      "image": "/words/colors-2-gray.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-gold",
+      "he": "זהוב",
+      "niqqud": "זָהוֹב",
+      "translit": "захо́в",
+      "ru": "золотистый",
+      "example": {
+        "he": "זאת טבעת זהובה",
+        "translit": "зот табаат зхува",
+        "ru": "Это золотистое кольцо"
+      },
+      "forms": {
+        "f": {
+          "he": "זהובה",
+          "niqqud": "זְהוּבָּה",
+          "translit": "зхува́"
+        },
+        "mp": {
+          "he": "זהובים",
+          "niqqud": "זְהוּבִּים",
+          "translit": "зхуви́м"
+        },
+        "fp": {
+          "he": "זהובות",
+          "niqqud": "זְהוּבּוֹת",
+          "translit": "зхуво́т"
+        }
+      },
+      "image": "/words/colors-2-gold.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-silver",
+      "he": "כסוף",
+      "niqqud": "כָּסוּף",
+      "translit": "касу́ф",
+      "ru": "серебристый",
+      "example": {
+        "he": "זאת מכונית כסופה",
+        "translit": "зот мехонит ксуфа",
+        "ru": "Это серебристая машина"
+      },
+      "forms": {
+        "f": {
+          "he": "כסופה",
+          "niqqud": "כְּסוּפָה",
+          "translit": "ксуфа́"
+        },
+        "mp": {
+          "he": "כסופים",
+          "niqqud": "כְּסוּפִים",
+          "translit": "ксуфи́м"
+        },
+        "fp": {
+          "he": "כסופות",
+          "niqqud": "כְּסוּפוֹת",
+          "translit": "ксуфо́т"
+        }
+      },
+      "image": "/words/colors-2-silver.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-light",
+      "he": "בהיר",
+      "niqqud": "בָּהִיר",
+      "translit": "бахи́р",
+      "ru": "светлый",
+      "example": {
+        "he": "זה צבע בהיר",
+        "translit": "зэ цева бахир",
+        "ru": "Это светлый цвет"
+      },
+      "forms": {
+        "f": {
+          "he": "בהירה",
+          "niqqud": "בְּהִירָה",
+          "translit": "бхира́"
+        },
+        "mp": {
+          "he": "בהירים",
+          "niqqud": "בְּהִירִים",
+          "translit": "бхири́м"
+        },
+        "fp": {
+          "he": "בהירות",
+          "niqqud": "בְּהִירוֹת",
+          "translit": "бхиро́т"
+        }
+      },
+      "image": "/words/colors-2-light.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-dark",
+      "he": "כהה",
+      "niqqud": "כֵּהֶה",
+      "translit": "ке́хе",
+      "ru": "тёмный",
+      "example": {
+        "he": "זה צבע כהה",
+        "translit": "зэ цева кехе",
+        "ru": "Это тёмный цвет"
+      },
+      "forms": {
+        "f": {
+          "he": "כהה",
+          "niqqud": "כֵּהָה",
+          "translit": "кеха́"
+        },
+        "mp": {
+          "he": "כהים",
+          "niqqud": "כֵּהִים",
+          "translit": "кехи́м"
+        },
+        "fp": {
+          "he": "כהות",
+          "niqqud": "כֵּהוֹת",
+          "translit": "кехо́т"
+        }
+      },
+      "image": "/words/colors-2-dark.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-transparent",
+      "he": "שקוף",
+      "niqqud": "שָׁקוּף",
+      "translit": "шаку́ф",
+      "ru": "прозрачный",
+      "example": {
+        "he": "זאת זכוכית שקופה",
+        "translit": "зот зхухит шкуфа",
+        "ru": "Это прозрачное стекло"
+      },
+      "forms": {
+        "f": {
+          "he": "שקופה",
+          "niqqud": "שְׁקוּפָה",
+          "translit": "шкуфа́"
+        },
+        "mp": {
+          "he": "שקופים",
+          "niqqud": "שְׁקוּפִים",
+          "translit": "шкуфи́м"
+        },
+        "fp": {
+          "he": "שקופות",
+          "niqqud": "שְׁקוּפוֹת",
+          "translit": "шкуфо́т"
+        }
+      },
+      "image": "/words/colors-2-transparent.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-shiny",
+      "he": "מבריק",
+      "niqqud": "מַבְרִיק",
+      "translit": "маври́к",
+      "ru": "блестящий",
+      "example": {
+        "he": "זאת כף מבריקה",
+        "translit": "зот каф маврика",
+        "ru": "Это блестящая ложка"
+      },
+      "forms": {
+        "f": {
+          "he": "מבריקה",
+          "niqqud": "מַבְרִיקָה",
+          "translit": "маврика́"
+        },
+        "mp": {
+          "he": "מבריקים",
+          "niqqud": "מַבְרִיקִים",
+          "translit": "маврики́м"
+        },
+        "fp": {
+          "he": "מבריקות",
+          "niqqud": "מַבְרִיקוֹת",
+          "translit": "маврико́т"
+        }
+      },
+      "image": "/words/colors-2-shiny.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-murky",
+      "he": "עכור",
+      "niqqud": "עָכוּר",
+      "translit": "аху́р",
+      "ru": "мутный",
+      "example": {
+        "he": "אלה מים עכורים",
+        "translit": "эле майим ахурим",
+        "ru": "Это мутная вода"
+      },
+      "forms": {
+        "f": {
+          "he": "עכורה",
+          "niqqud": "עֲכוּרָה",
+          "translit": "ахура́"
+        },
+        "mp": {
+          "he": "עכורים",
+          "niqqud": "עֲכוּרִים",
+          "translit": "ахури́м"
+        },
+        "fp": {
+          "he": "עכורות",
+          "niqqud": "עֲכוּרוֹת",
+          "translit": "ахуро́т"
+        }
+      },
+      "image": "/words/colors-2-murky.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-dim",
+      "he": "עמום",
+      "niqqud": "עָמוּם",
+      "translit": "аму́м",
+      "ru": "тусклый",
+      "example": {
+        "he": "זה אור עמום",
+        "translit": "зэ ор амум",
+        "ru": "Это тусклый свет"
+      },
+      "forms": {
+        "f": {
+          "he": "עמומה",
+          "niqqud": "עֲמוּמָה",
+          "translit": "амума́"
+        },
+        "mp": {
+          "he": "עמומים",
+          "niqqud": "עֲמוּמִים",
+          "translit": "амуми́м"
+        },
+        "fp": {
+          "he": "עמומות",
+          "niqqud": "עֲמוּמוֹת",
+          "translit": "амумо́т"
+        }
+      },
+      "image": "/words/colors-2-dim.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-2-yellowish",
+      "he": "צהבהב",
+      "niqqud": "צְהַבְהַב",
+      "translit": "цхавха́в",
+      "ru": "желтоватый",
+      "example": {
+        "he": "זה עלה צהבהב",
+        "translit": "зэ але цхавхав",
+        "ru": "Это желтоватый лист"
+      },
+      "forms": {
+        "f": {
+          "he": "צהבהבה",
+          "niqqud": "צְהַבְהַבָּה",
+          "translit": "цхавхава́"
+        },
+        "mp": {
+          "he": "צהבהבים",
+          "niqqud": "צְהַבְהַבִּים",
+          "translit": "цхавхави́м"
+        },
+        "fp": {
+          "he": "צהבהבות",
+          "niqqud": "צְהַבְהַבּוֹת",
+          "translit": "цхавхаво́т"
+        }
+      },
+      "reviewed": false
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+{
+  "$schema": "../schema.json",
+  "id": "colors-1",
+  "topicId": "colors",
+  "section": "adjectives",
+  "topic": "Цвета",
+  "number": 1,
+  "free": true,
+  "title": "Основные цвета",
+  "words": [
+    {
+      "id": "colors-1-red",
+      "he": "אדום",
+      "niqqud": "אָדוֹם",
+      "translit": "адо́м",
+      "ru": "красный",
+      "example": {
+        "he": "זאת שמלה אדומה",
+        "translit": "зот симла адума",
+        "ru": "Это красное платье"
+      },
+      "forms": {
+        "f": {
+          "he": "אדומה",
+          "niqqud": "אֲדוּמָּה",
+          "translit": "адума́"
+        },
+        "mp": {
+          "he": "אדומים",
+          "niqqud": "אֲדוּמִּים",
+          "translit": "адуми́м"
+        },
+        "fp": {
+          "he": "אדומות",
+          "niqqud": "אֲדוּמּוֹת",
+          "translit": "адумо́т"
+        }
+      },
+      "image": "/words/colors-1-red.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-blue",
+      "he": "כחול",
+      "niqqud": "כָּחוֹל",
+      "translit": "кахо́ль",
+      "ru": "синий",
+      "example": {
+        "he": "זה ים כחול",
+        "translit": "зэ ям кахоль",
+        "ru": "Это синее море"
+      },
+      "forms": {
+        "f": {
+          "he": "כחולה",
+          "niqqud": "כְּחוּלָּה",
+          "translit": "кхула́"
+        },
+        "mp": {
+          "he": "כחולים",
+          "niqqud": "כְּחוּלִּים",
+          "translit": "кхули́м"
+        },
+        "fp": {
+          "he": "כחולות",
+          "niqqud": "כְּחוּלּוֹת",
+          "translit": "кхуло́т"
+        }
+      },
+      "image": "/words/colors-1-blue.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-green",
+      "he": "ירוק",
+      "niqqud": "יָרוֹק",
+      "translit": "яро́к",
+      "ru": "зелёный",
+      "example": {
+        "he": "זה עץ ירוק",
+        "translit": "зэ эц ярок",
+        "ru": "Это зелёное дерево"
+      },
+      "forms": {
+        "f": {
+          "he": "ירוקה",
+          "niqqud": "יְרוּקָּה",
+          "translit": "ерука́"
+        },
+        "mp": {
+          "he": "ירוקים",
+          "niqqud": "יְרוּקִּים",
+          "translit": "еруки́м"
+        },
+        "fp": {
+          "he": "ירוקות",
+          "niqqud": "יְרוּקּוֹת",
+          "translit": "еруко́т"
+        }
+      },
+      "image": "/words/colors-1-green.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-yellow",
+      "he": "צהוב",
+      "niqqud": "צָהוֹב",
+      "translit": "цахо́в",
+      "ru": "жёлтый",
+      "example": {
+        "he": "זאת שמש צהובה",
+        "translit": "зот шемеш цхува",
+        "ru": "Это жёлтое солнце"
+      },
+      "forms": {
+        "f": {
+          "he": "צהובה",
+          "niqqud": "צְהוּבָּה",
+          "translit": "цхува́"
+        },
+        "mp": {
+          "he": "צהובים",
+          "niqqud": "צְהוּבִּים",
+          "translit": "цхуви́м"
+        },
+        "fp": {
+          "he": "צהובות",
+          "niqqud": "צְהוּבּוֹת",
+          "translit": "цхуво́т"
+        }
+      },
+      "image": "/words/colors-1-yellow.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-white",
+      "he": "לבן",
+      "niqqud": "לָבָן",
+      "translit": "лава́н",
+      "ru": "белый",
+      "example": {
+        "he": "זה שלג לבן",
+        "translit": "зэ шелег лаван",
+        "ru": "Это белый снег"
+      },
+      "forms": {
+        "f": {
+          "he": "לבנה",
+          "niqqud": "לְבָנָה",
+          "translit": "лвана́"
+        },
+        "mp": {
+          "he": "לבנים",
+          "niqqud": "לְבָנִים",
+          "translit": "лвани́м"
+        },
+        "fp": {
+          "he": "לבנות",
+          "niqqud": "לְבָנוֹת",
+          "translit": "лвано́т"
+        }
+      },
+      "image": "/words/colors-1-white.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-black",
+      "he": "שחור",
+      "niqqud": "שָׁחוֹר",
+      "translit": "шахо́р",
+      "ru": "чёрный",
+      "example": {
+        "he": "זאת מכונית שחורה",
+        "translit": "зот мехонит шхора",
+        "ru": "Это чёрная машина"
+      },
+      "forms": {
+        "f": {
+          "he": "שחורה",
+          "niqqud": "שְׁחוֹרָה",
+          "translit": "шхора́"
+        },
+        "mp": {
+          "he": "שחורים",
+          "niqqud": "שְׁחוֹרִים",
+          "translit": "шхори́м"
+        },
+        "fp": {
+          "he": "שחורות",
+          "niqqud": "שְׁחוֹרוֹת",
+          "translit": "шхоро́т"
+        }
+      },
+      "image": "/words/colors-1-black.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-orange",
+      "he": "כתום",
+      "niqqud": "כָּתוֹם",
+      "translit": "като́м",
+      "ru": "оранжевый",
+      "example": {
+        "he": "זה תפוז כתום",
+        "translit": "зэ тапуз катом",
+        "ru": "Это оранжевый апельсин"
+      },
+      "forms": {
+        "f": {
+          "he": "כתומה",
+          "niqqud": "כְּתוּמָּה",
+          "translit": "ктума́"
+        },
+        "mp": {
+          "he": "כתומים",
+          "niqqud": "כְּתוּמִּים",
+          "translit": "ктуми́м"
+        },
+        "fp": {
+          "he": "כתומות",
+          "niqqud": "כְּתוּמּוֹת",
+          "translit": "ктумо́т"
+        }
+      },
+      "image": "/words/colors-1-orange.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-purple",
+      "he": "סגול",
+      "niqqud": "סָגוֹל",
+      "translit": "саго́ль",
+      "ru": "фиолетовый",
+      "example": {
+        "he": "זאת חולצה סגולה",
+        "translit": "зот хульца сгула",
+        "ru": "Это фиолетовая рубашка"
+      },
+      "forms": {
+        "f": {
+          "he": "סגולה",
+          "niqqud": "סְגוּלָּה",
+          "translit": "сгула́"
+        },
+        "mp": {
+          "he": "סגולים",
+          "niqqud": "סְגוּלִּים",
+          "translit": "сгули́м"
+        },
+        "fp": {
+          "he": "סגולות",
+          "niqqud": "סְגוּלּוֹת",
+          "translit": "сгуло́т"
+        }
+      },
+      "image": "/words/colors-1-purple.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-pink",
+      "he": "ורוד",
+      "niqqud": "וָרוֹד",
+      "translit": "варо́д",
+      "ru": "розовый",
+      "example": {
+        "he": "זה פרח ורוד",
+        "translit": "зэ перах варод",
+        "ru": "Это розовый цветок"
+      },
+      "forms": {
+        "f": {
+          "he": "ורודה",
+          "niqqud": "וְרוּדָּה",
+          "translit": "вруда́"
+        },
+        "mp": {
+          "he": "ורודים",
+          "niqqud": "וְרוּדִּים",
+          "translit": "вруди́м"
+        },
+        "fp": {
+          "he": "ורודות",
+          "niqqud": "וְרוּדּוֹת",
+          "translit": "врудо́т"
+        }
+      },
+      "image": "/words/colors-1-pink.svg",
+      "reviewed": false
+    },
+    {
+      "id": "colors-1-brown",
+      "he": "חום",
+      "niqqud": "חוּם",
+      "translit": "хум",
+      "ru": "коричневый",
+      "example": {
+        "he": "זה שוקולד חום",
+        "translit": "зэ шоколад хум",
+        "ru": "Это коричневый шоколад"
+      },
+      "forms": {
+        "f": {
+          "he": "חומה",
+          "niqqud": "חוּמָּה",
+          "translit": "хума́"
+        },
+        "mp": {
+          "he": "חומים",
+          "niqqud": "חוּמִּים",
+          "translit": "хуми́м"
+        },
+        "fp": {
+          "he": "חומות",
+          "niqqud": "חוּמּוֹת",
+          "translit": "хумо́т"
+        }
+      },
+      "image": "/words/colors-1-brown.svg",
+      "reviewed": false
+    }
+  ]
+}
