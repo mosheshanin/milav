@@ -73,6 +73,18 @@ describe("wrangler.jsonc: тестовый вход", () => {
   });
 });
 
+describe("wrangler.jsonc: запись шаблонов букв", () => {
+  // Список тех, кто может записывать шаблоны, в продакшене секрет Cloudflare. В файле он допустим только в env.local:
+  // иначе настоящий id владельца попал бы в репозиторий, а значение из файла перекрыло бы секрет.
+  it("TEMPLATE_RECORDER_IDS есть только в env.local.vars", () => {
+    expect(findKeyPaths(config, "TEMPLATE_RECORDER_IDS")).toEqual(["env.local.vars.TEMPLATE_RECORDER_IDS"]);
+  });
+
+  it("в env.local записывающий это тестовый пользователь 1001 (сквозной тест входит под ним)", () => {
+    expect(config.env?.local?.vars?.TEMPLATE_RECORDER_IDS).toBe("1001");
+  });
+});
+
 describe("wrangler.jsonc: база для миграций при деплое", () => {
   // Команда деплоя из docs/DEPLOY.md: wrangler d1 migrations apply milav-db --remote
   it("боевая база называется milav-db и миграции лежат в migrations/", () => {

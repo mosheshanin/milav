@@ -39,7 +39,9 @@
           "migrations_dir": "migrations"
         }
       ],
-      "vars": { "ALLOW_DEV_AUTH": "true" }
+      // TEMPLATE_RECORDER_IDS: тестовый «записывающий» для локальной разработки и сквозного теста (id тестового входа).
+      // В продакшене это секрет Cloudflare с настоящим Telegram id владельца, в репозитории его нет.
+      "vars": { "ALLOW_DEV_AUTH": "true", "TEMPLATE_RECORDER_IDS": "1001" }
     }
   }
 }

@@ -58,5 +58,7 @@ export const RATE_LIMITS = {
   speech: { perMinute: 20, perDay: 300 },
   stage: { perMinute: 60, perDay: 1500 },
   quiz: { perMinute: 10, perDay: 100 },
+  // Инструмент записи шаблонов (только владелец): 135 рисунков с перезаписями, запас на неудачные попытки.
+  templates: { perMinute: 120, perDay: 3000 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;

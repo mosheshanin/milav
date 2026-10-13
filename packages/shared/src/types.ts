@@ -111,6 +111,44 @@ export type StageProof =
   | { stage: "type"; typed: string }
   | { stage: "write"; strokes: Stroke[][] };
 
+/** Один записанный вариант начертания буквы (инструмент записи шаблонов, доступен только владельцу). */
+export interface TemplateItem {
+  /** Одна из 27 форм (22 буквы и 5 конечных). */
+  letter: string;
+  /** Номер варианта, с нуля: от 0 до TEMPLATE_VARIANTS_PER_LETTER - 1. */
+  slot: number;
+  /** Штрихи как нарисованы на холсте. */
+  strokes: Stroke[];
+  /** Время записи по UTC, `YYYY-MM-DD HH:MM:SS`. */
+  recordedAt: string;
+}
+
+/** GET /api/templates: все записанные варианты. */
+export interface TemplatesResponse {
+  /** Сколько вариантов нужно на каждую форму. */
+  variants: number;
+  items: TemplateItem[];
+}
+
+/** PUT /api/templates: записать (или перезаписать) вариант. */
+export interface TemplateSaveRequest {
+  letter: string;
+  slot: number;
+  strokes: Stroke[];
+}
+
+/**
+ * Ответ на запись варианта. Вариант сохраняется всегда; `accepted` и `looksLike` предупреждают, если рисунок
+ * по существующим шаблонам (шрифты и уже выгруженные в репозиторий) больше похож на другую букву.
+ */
+export interface TemplateSaveResponse {
+  item: TemplateItem;
+  /** Распознаватель принял бы этот рисунок как ожидаемую букву. */
+  accepted: boolean;
+  /** На какую букву рисунок похож больше всего (при accepted это сама буква). */
+  looksLike: string;
+}
+
 /**
  * Вопрос викторины, как его выдаёт сервер (POST /api/quiz/start).
  * `options` это id слов-вариантов для вопросов с выбором (у «произнеси» и «напиши» пусто);

@@ -4,11 +4,14 @@ import {
   MAX_STAGE_BODY_BYTES,
   POINTS_PER_WORD,
   STAGES,
+  TEMPLATE_VARIANTS_PER_LETTER,
   isSpeechMatch,
   type Lesson,
   type MeResponse,
   type QuizStartResponse,
   type Stage,
+  type TemplateSaveResponse,
+  type TemplatesResponse,
 } from "@milav/shared";
 import { requireUser } from "./auth";
 import { ensureUser, getLessonProgress, getQuizSummary, getTotals, markStage, touchUser } from "./db";
@@ -20,6 +23,15 @@ import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
 import { readAudio, transcribeHebrew } from "./speech";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
+import {
+  checkRecorded,
+  deleteTemplate,
+  listTemplates,
+  parseTemplateStrokes,
+  parseTemplateTarget,
+  requireRecorder,
+  saveTemplate,
+} from "./templateRecorder";
 
 /** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные. */
 function canAccessLesson(lesson: Lesson): boolean {
@@ -221,6 +233,40 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
   const committed = await commitAnswer(c.env.DB, session, step);
   if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);
   return c.json(committed.response);
+});
+
+// ---- Запись шаблонов букв: скрытый инструмент владельца (templateRecorder.ts), доступ по Telegram id из секрета. ----
+
+// Все записанные варианты. Приложение вызывает это при открытии экрана записи, 403 значит «вам сюда нельзя».
+app.get("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+  const body: TemplatesResponse = { variants: TEMPLATE_VARIANTS_PER_LETTER, items: await listTemplates(c.env.DB) };
+  return c.json(body);
+});
+
+// Записать или перезаписать вариант. Рисунок сохраняется всегда, а ответ предупреждает, если он похож на другую букву.
+app.put("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+  const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
+  if (!raw) return c.json({ error: "body_too_large" }, 413);
+  const body = parseJson<{ letter?: unknown; slot?: unknown; strokes?: unknown }>(raw);
+  if (typeof body !== "object" || body === null) return c.json({ error: "bad_request" }, 400);
+
+  const target = parseTemplateTarget(body.letter, body.slot);
+  if (!target.ok) return c.json({ error: target.error }, 400);
+  const drawn = parseTemplateStrokes(body.strokes);
+  if (!drawn.ok) return c.json({ error: drawn.error }, drawn.error === "too_small" ? 422 : 400);
+
+  const item = await saveTemplate(c.env.DB, c.get("user").id, target.letter, target.slot, drawn.strokes);
+  const response: TemplateSaveResponse = { item, ...checkRecorded(target.letter, drawn.strokes) };
+  return c.json(response);
+});
+
+// Удалить вариант: ?letter=<буква>&slot=<номер>.
+app.delete("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+  const slot = c.req.query("slot");
+  const target = parseTemplateTarget(c.req.query("letter"), slot !== undefined && /^\d{1,2}$/.test(slot) ? Number(slot) : null);
+  if (!target.ok) return c.json({ error: target.error }, 400);
+  const removed = await deleteTemplate(c.env.DB, target.letter, target.slot);
+  return removed ? c.json({ ok: true }) : c.json({ error: "not_found" }, 404);
 });
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));
