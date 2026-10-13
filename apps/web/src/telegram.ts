@@ -21,7 +21,8 @@ export interface TelegramWebApp {
   initData: string;
   /** Платформа приложения Telegram: ios, android, tdesktop, macos, weba, webk и т. д. */
   platform?: string;
-  initDataUnsafe: { user?: TelegramUser; start_param?: string };
+  /** Разобранные данные запуска. В настоящем Telegram есть всегда; необязательное поле защищает от упрощённых имитаций. */
+  initDataUnsafe?: { user?: TelegramUser; start_param?: string };
   ready: () => void;
   expand: () => void;
   BackButton?: TelegramBackButton;
@@ -48,7 +49,7 @@ const LOCAL_HOSTS = ["localhost", "127.0.0.1"];
 /** Куда открыть приложение при первом запуске (сейчас особая цель одна: скрытый экран записи шаблонов букв). */
 export function launchTarget(): LaunchTarget {
   return launchTargetFrom({
-    startParam: getTelegram()?.initDataUnsafe.start_param,
+    startParam: getTelegram()?.initDataUnsafe?.start_param,
     hash: location.hash,
     search: location.search,
     allowDev: import.meta.env.DEV || LOCAL_HOSTS.includes(location.hostname),
@@ -57,7 +58,7 @@ export function launchTarget(): LaunchTarget {
 
 /** Telegram id текущего пользователя: нужен экрану записи, чтобы показать, какой id внести в секрет. */
 export function currentUserId(): number | null {
-  const fromTelegram = getTelegram()?.initDataUnsafe.user?.id;
+  const fromTelegram = getTelegram()?.initDataUnsafe?.user?.id;
   if (fromTelegram) return fromTelegram;
   const match = /^dev (\d{1,15}):/.exec(authHeader() ?? "");
   return match ? Number(match[1]) : null;
