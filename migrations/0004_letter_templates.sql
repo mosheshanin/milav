@@ -2,7 +2,7 @@
 -- TEMPLATE_RECORDER_IDS).
 --
 -- Это приёмник: рисунки сохраняются здесь прямо с телефона. В распознавание они попадают после выгрузки в
--- репозиторий (packages/shared/src/handwriting/ownTemplates.json, tools/build-own-templates.mjs), чтобы приложение
+-- репозиторий (packages/shared/src/handwriting/ownTemplates.json, tools/own-templates.ts), чтобы приложение
 -- и сервер получали один и тот же набор одной выкладкой, а не каждый по-своему из базы.
 --
 -- Одна строка = один вариант начертания: форма (letter, одна из 27) и номер варианта (slot, с нуля).
