@@ -2,8 +2,8 @@ import {
   CANVAS_LINE_HEIGHT,
   MAX_POINTS_PER_LETTER,
   MAX_STROKES_PER_LETTER,
-  checkLetter,
   featuresFromStrokes,
+  isLetterAccepted,
   loadBaseTemplates,
   wordLetters,
   type Stroke,
@@ -82,7 +82,7 @@ export async function recognizeLetters(
       return;
     }
     const features = featuresFromStrokes(drawn, CANVAS_LINE_HEIGHT);
-    if (!features || !checkLetter(features, templates, letter).ok) failedLetters.push(i);
+    if (!features || !isLetterAccepted(features, templates, letter)) failedLetters.push(i);
   });
   return failedLetters;
 }

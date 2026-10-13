@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Eraser } from "lucide-react";
 import {
   WRITE_ATTEMPTS_PER_LETTER,
-  checkLetter,
   featuresFromStrokes,
+  isLetterAccepted,
   loadBaseTemplates,
   roundStrokes,
   wordLetters,
@@ -83,8 +83,7 @@ export function WriteWord({
     const strokes = roundStrokes(canvas.current.strokes());
     const features = featuresFromStrokes(strokes, canvas.current.lineHeight());
     if (!features) return;
-    const result = checkLetter(features, templates, current);
-    if (result.ok) {
+    if (isLetterAccepted(features, templates, current)) {
       settle("ok", "Верно!", "ok", strokes);
       return;
     }
