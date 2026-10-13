@@ -118,6 +118,10 @@ npm run dev:api                      # в одном окне
 node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты попадут в e2e-shots/
 ```
 
+Урок для прохождения выбирается переменной `E2E_LESSON` (по умолчанию `animals-1`). В CI дополнительно идут `colors-1` (прилагательные: строка форм на карточке) и `family-2` (слова без картинок: запасной вариант), каждый около 2,5 минут; работа «Сквозной тест» ограничена 25 минутами. Локально: `E2E_LESSON=colors-1 node tools/e2e-lesson.mjs e2e-shots`.
+
+Проверки контента (`npm run validate:content`, входят в `npm test`, то есть и в сборку Cloudflare) описаны в `docs/CONTENT.md`: сломанный урок или забытая команда `npm run content:index` не выкладываются.
+
 Там же проверка экрана записи шаблонов букв (`node tools/e2e-record.mjs e2e-shots`, нужен тот же запущенный Worker): чужой не получает доступ, владелец записывает 5 вариантов формы, замена, удаление, предупреждение «похоже на другую букву», перезагрузка.
 
 Скрипт ищет Chromium в каталоге из `PLAYWRIGHT_BROWSERS_PATH` (по умолчанию `/opt/pw-browsers`). Установить браузер: `npx playwright-core install chromium`.
