@@ -1,4 +1,5 @@
 {
+  "$schema": "../schema.json",
   "id": "animals-1",
   "topicId": "animals",
   "section": "nouns",

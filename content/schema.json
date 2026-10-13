@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Урок Milav",
+  "description": "Формат файла content/lessons/<id урока>.json. Правила и стандарт транскрипции: docs/CONTENT.md. Проверка: npm run validate:content.",
+  "type": "object",
+  "required": ["id", "topicId", "section", "topic", "number", "free", "title", "words"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Ссылка на эту схему, чтобы редактор подсказывал поля: \"../schema.json\"."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-[1-9][0-9]*$",
+      "description": "<topicId>-<номер>, например animals-1. Совпадает с именем файла."
+    },
+    "topicId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+      "description": "Постоянный латинский ключ темы, например animals."
+    },
+    "section": {
+      "enum": ["nouns", "verbs", "adjectives"],
+      "description": "Раздел: nouns (существительные), verbs (глаголы), adjectives (прилагательные)."
+    },
+    "topic": { "$ref": "#/definitions/text", "description": "Название темы на экране, например «Животные»." },
+    "number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Номер урока внутри темы, начиная с 1, без пропусков."
+    },
+    "free": {
+      "type": "boolean",
+      "description": "Бесплатный ли урок: true у первых 3 уроков темы, у остальных false."
+    },
+    "title": { "$ref": "#/definitions/text", "description": "Название урока, например «Знакомые животные»." },
+    "words": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/definitions/word" },
+      "description": "Ровно 10 слов."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "required": ["number"], "properties": { "number": { "type": "integer", "maximum": 3 } } },
+      "then": { "properties": { "free": { "const": true } } },
+      "else": { "properties": { "free": { "const": false } } }
+    },
+    {
+      "if": { "required": ["section"], "properties": { "section": { "const": "nouns" } } },
+      "then": {
+        "properties": {
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["gender", "example"],
+              "not": { "type": "object", "required": ["forms"] }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "required": ["section"], "properties": { "section": { "const": "verbs" } } },
+      "then": {
+        "properties": {
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["example"],
+              "not": {
+                "type": "object",
+                "anyOf": [{ "required": ["forms"] }, { "required": ["gender"] }]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "required": ["section"], "properties": { "section": { "const": "adjectives" } } },
+      "then": {
+        "properties": {
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["example", "forms"],
+              "not": { "type": "object", "required": ["gender"] }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "text": {
+      "type": "string",
+      "pattern": "^\\S(.*\\S)?$"
+    },
+    "hebrew": {
+      "type": "string",
+      "pattern": "^[א-ת]+$",
+      "description": "Только буквы иврита, без огласовок. Конечные формы ך ם ן ף ץ только в конце слова (проверяют тесты)."
+    },
+    "niqqud": {
+      "type": "string",
+      "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+$",
+      "description": "Слово с огласовками: те же буквы, что в he, плюс знаки огласовок. Уходит в синтезатор речи, на экране не показывается."
+    },
+    "translit": {
+      "type": "string",
+      "pattern": "^[абвгдежзийклмнопрстуфхцчшьэюя\\u0301]+([ -][абвгдежзийклмнопрстуфхцчшьэюя\\u0301]+)*$",
+      "description": "Транскрипция кириллицей, строчные буквы. В слове из 2+ слогов ровно один знак ударения (U+0301) после ударной гласной. Стандарт: docs/CONTENT.md."
+    },
+    "phrase": {
+      "type": "object",
+      "required": ["he", "translit", "ru"],
+      "additionalProperties": false,
+      "properties": {
+        "he": { "type": "string", "pattern": "^[א-ת]+( [א-ת]+)*$" },
+        "translit": {
+          "type": "string",
+          "pattern": "^[абвгдежзийклмнопрстуфхцчшьэюя]+([ -][абвгдежзийклмнопрстуфхцчшьэюя]+)*$",
+          "description": "Транскрипция фразы без знаков ударения."
+        },
+        "ru": { "$ref": "#/definitions/text" }
+      }
+    },
+    "form": {
+      "type": "object",
+      "required": ["he", "niqqud", "translit"],
+      "additionalProperties": false,
+      "properties": {
+        "he": { "$ref": "#/definitions/hebrew" },
+        "niqqud": { "$ref": "#/definitions/niqqud" },
+        "translit": { "$ref": "#/definitions/translit" }
+      }
+    },
+    "forms": {
+      "type": "object",
+      "required": ["f", "mp", "fp"],
+      "additionalProperties": false,
+      "description": "Остальные формы прилагательного: f женский род ед.ч., mp мужской род мн.ч., fp женский род мн.ч. Основная форма (мужской род ед.ч.) в самом слове.",
+      "properties": {
+        "f": { "$ref": "#/definitions/form" },
+        "mp": { "$ref": "#/definitions/form" },
+        "fp": { "$ref": "#/definitions/form" }
+      }
+    },
+    "reviewed": {
+      "description": "false, пока слово не проверил носитель языка; после проверки { by, at }.",
+      "oneOf": [
+        { "const": false },
+        {
+          "type": "object",
+          "required": ["by", "at"],
+          "additionalProperties": false,
+          "properties": {
+            "by": { "$ref": "#/definitions/text" },
+            "at": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" }
+          }
+        }
+      ]
+    },
+    "word": {
+      "type": "object",
+      "required": ["id", "he", "niqqud", "translit", "ru", "reviewed"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-[1-9][0-9]*-[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+          "description": "<id урока>-<ключ слова>, например animals-1-cat. Прогресс пользователей привязан к id: после выпуска не менять."
+        },
+        "he": { "$ref": "#/definitions/hebrew" },
+        "niqqud": { "$ref": "#/definitions/niqqud" },
+        "translit": { "$ref": "#/definitions/translit" },
+        "ru": { "$ref": "#/definitions/text" },
+        "gender": { "enum": ["m", "f"], "description": "Род: m мужской, f женский (у существительных)." },
+        "example": { "$ref": "#/definitions/phrase" },
+        "forms": { "$ref": "#/definitions/forms" },
+        "image": {
+          "type": "string",
+          "pattern": "^/words/[a-z0-9-]+\\.(svg|png|webp)$",
+          "description": "Путь от корня сайта, файл в apps/web/public/words. Необязательно."
+        },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
+          "description": "Путь к озвучке, файл в apps/web/public/audio. Заполняется скриптом озвучки."
+        },
+        "reviewed": { "$ref": "#/definitions/reviewed" }
+      }
+    }
+  }
+}
