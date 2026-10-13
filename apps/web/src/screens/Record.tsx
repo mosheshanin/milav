@@ -98,7 +98,7 @@ export function RecordScreen({ onBack }: { onBack: () => void }) {
     <div className="mx-auto flex min-h-full max-w-md flex-col">
       <Header
         title="Запись букв"
-        subtitle={selected ? undefined : "Шаблоны для проверки письма"}
+        subtitle={selected ? undefined : "Для проверки письма"}
         onBack={selected ? () => setSelected(null) : onBack}
       />
       <main className="flex flex-col gap-section p-block">
