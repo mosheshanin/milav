@@ -103,6 +103,19 @@ jobs:
       - name: Сквозной тест алфавита (alphabet-1)
         run: node tools/e2e-alphabet.mjs e2e-shots/alphabet-1
 
+      # Остальные уроки алфавита: в 3, 4 и 5 конечные формы (ך ם ן ף ץ), в 2 буквы ו и י, которые легко спутать при письме.
+      - name: Сквозной тест алфавита (alphabet-2)
+        run: E2E_ALPHABET=alphabet-2 node tools/e2e-alphabet.mjs e2e-shots/alphabet-2
+
+      - name: Сквозной тест алфавита (alphabet-3, конечные ך ם)
+        run: E2E_ALPHABET=alphabet-3 node tools/e2e-alphabet.mjs e2e-shots/alphabet-3
+
+      - name: Сквозной тест алфавита (alphabet-4, конечные ן ף)
+        run: E2E_ALPHABET=alphabet-4 node tools/e2e-alphabet.mjs e2e-shots/alphabet-4
+
+      - name: Сквозной тест алфавита (alphabet-5, конечная ץ)
+        run: E2E_ALPHABET=alphabet-5 node tools/e2e-alphabet.mjs e2e-shots/alphabet-5
+
       - name: Сквозной тест записи шаблонов букв
         run: node tools/e2e-record.mjs e2e-shots
 

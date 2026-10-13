@@ -126,10 +126,15 @@ check(await page.locator('[data-testid="alphabet-section"]').isVisible(), "на 
   check(order[0] === "Алфавит", `«Алфавит» стоит первым на главной (разделы: ${order.join(", ")})`);
 }
 check((await page.textContent('[data-testid="points"]')) === "0", "на старте 0 очков");
-check((await page.textContent('[data-testid="continue"]')) === "Начать", "новичку предложено «Начать»");
-check((await page.textContent('[data-testid="continue-place"]')).includes(`Буква 1 из ${letters.length}`), "место старта: первая буква урока алфавита");
-
-await page.click('[data-testid="continue"]');
+if (lesson.number === 1) {
+  check((await page.textContent('[data-testid="continue"]')) === "Начать", "новичку предложено «Начать»");
+  check((await page.textContent('[data-testid="continue-place"]')).includes(`Буква 1 из ${letters.length}`), "место старта: первая буква урока алфавита");
+  await page.click('[data-testid="continue"]');
+} else {
+  // «Продолжить» у новичка ведёт в первый урок алфавита, остальные уроки открываются со списка на главной.
+  check((await page.textContent('[data-testid="continue-place"]')).includes("Буква 1 из 5"), "новичку «Продолжить» предлагает первый урок алфавита");
+  await page.click(`[data-testid="lesson-${lesson.id}"]`);
+}
 await page.waitForSelector('[data-testid="letter-he"]');
 await shot(page, "02-letter-card");
 check((await page.textContent('[data-testid="letter-he"]')) === letters[0].he, "на карточке первая буква");
