@@ -253,12 +253,23 @@ for (let q = 0; q < 25; q++) {
 await page.waitForSelector('[data-testid="quiz-result"]');
 const resultText = await page.textContent('[data-testid="quiz-result"]');
 console.log(`     итог викторины: ${resultText}`);
-await shot(page, "15-result-before-save");
+await shot(page, "15-result");
 check(/^20 из 25$|^2[0-5] из 25$/.test(resultText.trim()), "итог 20+ из 25 (произношение пропущено: 5 ошибок)");
-await page.click('[data-testid="quiz-send"]');
+// Итог записывает сервер сам, по последнему ответу: отдельной кнопки «сохранить» нет.
+check((await page.locator('[data-testid="quiz-send"]').count()) === 0, "кнопки «Сохранить результат» нет: итог уже записан сервером");
 await page.waitForSelector('[data-testid="quiz-saved"]');
 await shot(page, "16-result-saved");
 check((await page.textContent('[data-testid="quiz-saved"]')).includes("Новый сданный урок"), "урок сдан, засчитан в статус");
+{
+  const rows = JSON.parse(
+    execFileSync(
+      "npx",
+      ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT correct, total, passed FROM quiz_attempts WHERE user_id=${A}`],
+      { encoding: "utf8" },
+    ),
+  )[0].results;
+  check(rows.length === 1 && `${rows[0].correct} из ${rows[0].total}` === resultText.trim() && rows[0].passed === 1, `в базе одна попытка с тем же итогом, что на экране (${JSON.stringify(rows)})`);
+}
 await page.click('[data-testid="quiz-home"]');
 await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForTimeout(500);
@@ -282,6 +293,7 @@ await page.waitForSelector('[data-testid="quiz-progress"]');
 for (let q = 0; q < 6; q++) {
   await page.locator('[data-testid="option"][data-correct="false"]').first().click();
   if (q === 5) {
+    await page.waitForSelector('[data-testid="quiz-next"]');
     const counter = await page.textContent('[data-testid="quiz-mistakes"]');
     check(counter.includes("Ошибок: 6 из 5"), `счётчик ошибок: «${counter}»`);
   }
@@ -481,6 +493,49 @@ check((await page.locator('[data-testid="quiz-progress"]').count()) === 0, "пе
 await shot(page, "22-after-reload-in-quiz");
 await page.context().close();
 
+
+// ---------- Сценарий Д: подделать результат запросами без приложения нельзя ----------
+const E = 2005;
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${E}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${E}; DELETE FROM quiz_attempts WHERE user_id=${E}; DELETE FROM lesson_passed WHERE user_id=${E};`);
+sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedAll(E)};`);
+{
+  const context = await browser.newContext();
+  const headers = { Authorization: `dev ${E}:Tester`, "Content-Type": "application/json" };
+  const call = async (path, data) => {
+    const res = await context.request.post(`${BASE}${path}`, { headers, data });
+    return { status: res.status(), body: await res.json().catch(() => ({})) };
+  };
+
+  const submit = await call("/api/quiz/submit", { lessonId: lesson.id, correct: 25, total: 25 });
+  check(submit.status === 404, "старого маршрута «сдать с числом от клиента» больше нет");
+
+  const started = await call("/api/quiz/start", { lessonId: lesson.id });
+  check(started.status === 200 && started.body.questions.length === 25, "сервер выдаёт 25 вопросов");
+  const { sessionId, questions } = started.body;
+
+  check((await call("/api/quiz/answer", { sessionId: "0".repeat(32), index: 0, choice: questions[0].wordId })).status === 404, "чужой id сессии отклонён");
+  check((await call("/api/quiz/answer", { sessionId, index: 7, choice: questions[7].wordId })).status === 409, "перескочить через вопросы нельзя");
+
+  // Скрипт отвечает верно на все вопросы с выбором и отказывается от остальных: без голоса и штрихов результата не набрать.
+  let last;
+  for (let i = 0; i < questions.length; i++) {
+    const q = questions[i];
+    last = await call("/api/quiz/answer", q.options.length ? { sessionId, index: i, choice: q.wordId } : { sessionId, index: i, giveUp: true });
+    if (last.body.aborted) break;
+  }
+  check(last.body.aborted === true && !last.body.result, "скрипт без голоса и штрихов не набирает проходной балл: викторина прервана");
+  const me = await (await context.request.get(`${BASE}/api/me`, { headers })).json();
+  check(me.passedLessons === 0, "урок скриптом не сдан");
+  const forged = JSON.parse(
+    execFileSync(
+      "npx",
+      ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${E}`],
+      { encoding: "utf8" },
+    ),
+  )[0].results[0].n;
+  check(forged === 0, "в базе нет попыток от скрипта");
+  await context.close();
+}
 
 await browser.close();
 console.log(failures.length ? `\nПровалено проверок: ${failures.length}\n${failures.join("\n")}` : "\nВсе проверки пройдены");

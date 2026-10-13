@@ -184,7 +184,12 @@ export function Study({
           {view === "speak" && (
             <>
               <p className="text-center text-ink-soft">Нажмите «Записать» и скажите слово вслух.</p>
-              <SpeakRecorder word={word} mode="study" onPassed={onSpeakPassed} onGiveUp={onSpeakSkipped} />
+              <SpeakRecorder
+                mode="study"
+                check={(audio) => api.speech(word.id, audio)}
+                onPassed={onSpeakPassed}
+                onGiveUp={onSpeakSkipped}
+              />
             </>
           )}
           {view === "write" && (

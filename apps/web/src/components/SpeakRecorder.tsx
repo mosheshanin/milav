@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Mic, Square } from "lucide-react";
-import { SPEAK_ATTEMPTS_IN_QUIZ, type Word } from "@milav/shared";
-import { ApiError, api, type SpeechResponse } from "../api";
+import { ApiError } from "../api";
 import { micPermission, type MicState } from "../lib/mic";
 import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
 import { MicAsk, MicDenied } from "./MicNotice";
@@ -12,6 +11,16 @@ import { Button } from "./ui";
 const STUDY_FAILS_BEFORE_SKIP = 2;
 
 type Phase = "idle" | "recording" | "checking";
+
+/** Что сервер ответил на запись голоса. В викторине сервер сам считает попытки и говорит, были ли они последними. */
+export interface SpeakVerdict {
+  match: boolean;
+  heard: string;
+  /** Викторина: попыток больше нет, ответ засчитан неверным. */
+  final?: boolean;
+  /** Викторина: сколько попыток осталось. */
+  attemptsLeft?: number;
+}
 
 const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
   speech_unavailable: {
@@ -30,28 +39,37 @@ const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
     title: "Слишком много проверок подряд.",
     hint: "Подождите немного и попробуйте снова.",
   },
+  answer_conflict: {
+    title: "Ответ не удалось принять.",
+    hint: "Попробуйте ещё раз.",
+  },
 };
 
 /**
- * Запись голоса и проверка на сервере.
+ * Запись голоса и проверка на сервере (`check` отправляет запись и возвращает ответ сервера).
  * study: сервер сам отмечает этап, `onPassed` получает ответ; после нескольких неудач можно отложить (`onGiveUp`).
- * quiz: SPEAK_ATTEMPTS_IN_QUIZ попытки, затем `onGiveUp` (вопрос засчитывается неверным).
+ * quiz: попытки считает сервер; когда они кончились, вызывается `onFailed` с ответом сервера,
+ *       а `onGiveUp` вызывается, если ученик сам отказался от вопроса (нет микрофона, «Пропустить»).
  */
-export function SpeakRecorder({
-  word,
+export function SpeakRecorder<R extends SpeakVerdict>({
   mode,
+  check,
   onPassed,
+  onFailed,
   onGiveUp,
 }: {
-  word: Word;
   mode: "study" | "quiz";
-  onPassed: (response: SpeechResponse) => void;
+  check: (audio: Blob) => Promise<R>;
+  onPassed: (response: R) => void;
+  onFailed?: (response: R) => void;
   onGiveUp: () => void;
 }) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [recording, setRecording] = useState<ActiveRecording | null>(null);
   const [fails, setFails] = useState(0);
   const [heard, setHeard] = useState<string | null>(null);
+  /** Квиз: сколько попыток осталось по словам сервера (null, пока не было неудачных). */
+  const [attemptsLeft, setAttemptsLeft] = useState<number | null>(null);
   const [blocked, setBlocked] = useState<string | null>(null);
   const [bars, setBars] = useState<number[]>(() => new Array<number>(EQUALIZER_BARS).fill(0));
   const active = useRef<ActiveRecording | null>(null);
@@ -99,17 +117,17 @@ export function SpeakRecorder({
     setRecording(null);
     setPhase("checking");
     try {
-      const result = await api.speech(word.id, blob, mode);
+      const result = await check(blob);
       if (result.match) {
         setPhase("idle");
         onPassed(result);
         return;
       }
       setHeard(result.heard);
-      const next = fails + 1;
-      setFails(next);
+      setFails(fails + 1);
+      setAttemptsLeft(result.attemptsLeft ?? null);
       setPhase("idle");
-      if (mode === "quiz" && next >= SPEAK_ATTEMPTS_IN_QUIZ) onGiveUp();
+      if (mode === "quiz" && result.final) onFailed?.(result);
     } catch (e) {
       setPhase("idle");
       setBlocked(e instanceof ApiError ? e.code : "network");
@@ -143,8 +161,6 @@ export function SpeakRecorder({
     );
   }
 
-  const quizAttemptsLeft = SPEAK_ATTEMPTS_IN_QUIZ - fails;
-
   return (
     <div className="flex flex-col items-center gap-block text-center">
       {phase === "recording" && recording ? (
@@ -169,8 +185,8 @@ export function SpeakRecorder({
           Услышано: «{heard || "тишина"}». Не совпало со словом. Скажите отчётливо и не торопясь.
         </p>
       )}
-      {mode === "quiz" && fails > 0 && quizAttemptsLeft > 0 && (
-        <p className="text-sm text-ink-soft">Осталась попытка: {quizAttemptsLeft}</p>
+      {mode === "quiz" && attemptsLeft !== null && attemptsLeft > 0 && (
+        <p className="text-sm text-ink-soft">Осталась попытка: {attemptsLeft}</p>
       )}
       {mode === "study" && fails >= STUDY_FAILS_BEFORE_SKIP && (
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">

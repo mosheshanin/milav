@@ -23,3 +23,18 @@ export function saveErrorText(error: unknown): string {
   }
   return "Не удалось сохранить результат. Проверьте интернет и нажмите ещё раз.";
 }
+
+/** Коды, при которых открытая викторина больше не принимает ответы: надо начинать заново. */
+const LOST_SESSION_CODES = ["no_session", "session_expired", "quiz_finished", "bad_index"];
+
+/** Викторину потеряли: её заменили (открыли на другом устройстве), она просрочена или уже закончена. */
+export function isQuizSessionLost(error: unknown): boolean {
+  return error instanceof ApiError && LOST_SESSION_CODES.includes(error.code);
+}
+
+/** Текст для человека, когда ответ на вопрос викторины не удалось отправить. */
+export function quizErrorText(error: unknown): string {
+  if (error instanceof ApiError && error.code === "rate_limited") return saveErrorText(error);
+  if (error instanceof ApiError && error.status !== 0) return "Сервер не принял ответ. Нажмите «Повторить».";
+  return "Не удалось отправить ответ. Проверьте интернет и нажмите «Повторить».";
+}

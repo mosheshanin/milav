@@ -1,4 +1,11 @@
-import { QUIZ_SIZE, type MeResponse, type StageProof, type StatusInfo, type WordProgress } from "@milav/shared";
+import type {
+  MeResponse,
+  QuizAnswerRequest,
+  QuizAnswerResponse,
+  QuizStartResponse,
+  StageProof,
+  WordProgress,
+} from "@milav/shared";
 import { authHeader } from "./telegram";
 
 export class ApiError extends Error {
@@ -55,28 +62,28 @@ export interface LessonProgressResponse {
   quiz: { passed: boolean; bestCorrect: number | null };
 }
 
-export interface QuizResponse {
-  passed: boolean;
-  correct: number;
-  total: number;
-  mistakes: number;
-  firstTimePassed: boolean;
-  passedLessons: number;
-  status: StatusInfo;
-}
-
 export const api = {
   me: () => request<MeResponse>("/api/me"),
   lessonProgress: (lessonId: string) => request<LessonProgressResponse>(`/api/lessons/${lessonId}/progress`),
   /** Отметка этапа «слушай», «печатай» или «пиши»: для двух последних сервер проверяет доказательство (набранное слово, штрихи). */
   stage: (wordId: string, proof: StageProof) =>
     request<StageResponse>("/api/progress/stage", json({ wordId, ...proof })),
-  speech: (wordId: string, audio: Blob, mode: "study" | "quiz") =>
-    request<SpeechResponse>(`/api/speech/check?wordId=${encodeURIComponent(wordId)}&mode=${mode}`, {
+  /** Этап «говори»: запись голоса; верное слово сервер сам отмечает пройденным. */
+  speech: (wordId: string, audio: Blob) =>
+    request<SpeechResponse>(`/api/speech/check?wordId=${encodeURIComponent(wordId)}`, {
       method: "POST",
       headers: { "Content-Type": audio.type || "audio/webm" },
       body: audio,
     }),
-  submitQuiz: (lessonId: string, correct: number) =>
-    request<QuizResponse>("/api/quiz/submit", json({ lessonId, correct, total: QUIZ_SIZE })),
+  /** Начало викторины: вопросы и id сессии выдаёт сервер. */
+  quizStart: (lessonId: string) => request<QuizStartResponse>("/api/quiz/start", json({ lessonId })),
+  /** Ответ на вопрос с выбором или письмом, либо отказ от вопроса. */
+  quizAnswer: (body: QuizAnswerRequest) => request<QuizAnswerResponse>("/api/quiz/answer", json(body)),
+  /** Вопрос «произнеси»: запись голоса. */
+  quizSpeech: (sessionId: string, index: number, audio: Blob) =>
+    request<QuizAnswerResponse>(`/api/quiz/speech?sessionId=${encodeURIComponent(sessionId)}&index=${index}`, {
+      method: "POST",
+      headers: { "Content-Type": audio.type || "audio/webm" },
+      body: audio,
+    }),
 };
