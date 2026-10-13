@@ -111,7 +111,7 @@ docs/            SPEC, DEPLOY, AUDIO, ROADMAP
 - [x] Картинки слов (временные эмодзи Twemoji, CC BY 4.0, см. `CREDITS.md`), карточка: картинка слева, текст справа, фразы-примеры без артикля
 - [x] Запись голоса: эквалайзер, автостоп, приглашение микрофона, один запрос за сессию
 - [x] Озвучка Google TTS: скрипт и workflow готовы (`docs/AUDIO.md`)
-- [ ] Озвучка: секрет `GOOGLE_TTS_API_KEY` владелец добавил, секрет доходит до Google, API включён, но запуск «Озвучка слов → voices» (13.10) получил 403 «Requests to this API ... ListVoices are blocked»: у ключа ограничение API, в списке разрешённых нет Cloud Text-to-Speech API. Нужно в Google Cloud Console → APIs & Services → Credentials → ключ → API restrictions добавить Cloud Text-to-Speech API (или снять ограничение), подождать несколько минут и запустить `voices` снова
+- [x] Озвучка: ключ Google TTS работает (13.10): API включён, у ключа в ограничениях Cloud Text-to-Speech API, запуск «Озвучка слов → voices» прошёл успешно. Дальше задача 5: прослушивание (`review`) и `publish`
 - [x] Анализ проекта и 15 улучшений: `docs/ROADMAP.md`
 - [x] CI (`.github/workflows/ci.yml`): типы, тесты, сборка и сквозной тест в Chromium на каждый пуш и pull request; `npm run check`; защитный тест `ALLOW_DEV_AUTH` только в `env.local`; `docs/DEPLOY.md` (выкладка, миграции, откат)
 - [x] Cloudflare настроен владельцем (13.10): Build command `npm run check`, Deploy command с миграциями D1, токену сборки добавлено право D1 Edit (`docs/DEPLOY.md`). Проверено: ветка с заведомо падающим тестом даёт `failure` в Workers Builds, то есть сломанный код не выкладывается
@@ -128,7 +128,7 @@ docs/            SPEC, DEPLOY, AUDIO, ROADMAP
 2. Контент: `content/schema.json`, валидатор, формат урока; затем темы «Животные», «Еда», «Цвета», «Семья», «Дом и мебель» и др. (слова проверяет носитель языка).
 3. Тема «Алфавит» (этапы: слушай, пиши, печатай).
 4. Инструмент записи шаблонов букв (27 форм), хранение в D1, перекалибровка распознавания.
-5. Озвучка: инструмент и workflow готовы (`docs/AUDIO.md`), секрет `GOOGLE_TTS_API_KEY` добавлен, но у ключа в Google Cloud ограничение API, без Cloud Text-to-Speech API в списке разрешённых (см. «Статус»). Сначала поправить ограничение ключа, затем прослушивание (`review`) и `publish`.
+5. Озвучка: инструмент и workflow готовы (`docs/AUDIO.md`), секрет `GOOGLE_TTS_API_KEY` добавлен и проверен (запуск `voices` успешен). Дальше: прослушивание (`review`) и `publish`.
 6. Подписка Stars (500 на 3 месяца, 5000 навсегда) и выдача платных уроков только по API.
 7. Таблица лидеров.
 8. Собственный домен, если `workers.dev` недоступен части пользователей.
