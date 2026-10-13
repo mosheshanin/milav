@@ -18,7 +18,8 @@
         "translit": "зэ хатуль шахор",
         "ru": "Это чёрный кот"
       },
-      "image": "/words/animals-1-cat.svg"
+      "image": "/words/animals-1-cat.svg",
+      "audio": "/audio/animals-1-cat.mp3"
     },
     {
       "id": "animals-1-dog",
@@ -32,7 +33,8 @@
         "translit": "зэ келев гадоль",
         "ru": "Это большой пёс"
       },
-      "image": "/words/animals-1-dog.svg"
+      "image": "/words/animals-1-dog.svg",
+      "audio": "/audio/animals-1-dog.mp3"
     },
     {
       "id": "animals-1-horse",
@@ -46,7 +48,8 @@
         "translit": "зэ сус махир",
         "ru": "Это быстрый конь"
       },
-      "image": "/words/animals-1-horse.svg"
+      "image": "/words/animals-1-horse.svg",
+      "audio": "/audio/animals-1-horse.mp3"
     },
     {
       "id": "animals-1-bird",
@@ -60,7 +63,8 @@
         "translit": "зот ципор катана",
         "ru": "Это маленькая птица"
       },
-      "image": "/words/animals-1-bird.svg"
+      "image": "/words/animals-1-bird.svg",
+      "audio": "/audio/animals-1-bird.mp3"
     },
     {
       "id": "animals-1-fish",
@@ -74,7 +78,8 @@
         "translit": "зэ даг катан",
         "ru": "Это маленькая рыба"
       },
-      "image": "/words/animals-1-fish.svg"
+      "image": "/words/animals-1-fish.svg",
+      "audio": "/audio/animals-1-fish.mp3"
     },
     {
       "id": "animals-1-cow",
@@ -88,7 +93,8 @@
         "translit": "зот пара левана",
         "ru": "Это белая корова"
       },
-      "image": "/words/animals-1-cow.svg"
+      "image": "/words/animals-1-cow.svg",
+      "audio": "/audio/animals-1-cow.mp3"
     },
     {
       "id": "animals-1-rabbit",
@@ -102,7 +108,8 @@
         "translit": "зэ арнав лаван",
         "ru": "Это белый кролик"
       },
-      "image": "/words/animals-1-rabbit.svg"
+      "image": "/words/animals-1-rabbit.svg",
+      "audio": "/audio/animals-1-rabbit.mp3"
     },
     {
       "id": "animals-1-mouse",
@@ -116,7 +123,8 @@
         "translit": "зэ ахбар афор",
         "ru": "Это серая мышь"
       },
-      "image": "/words/animals-1-mouse.svg"
+      "image": "/words/animals-1-mouse.svg",
+      "audio": "/audio/animals-1-mouse.mp3"
     },
     {
       "id": "animals-1-elephant",
@@ -130,7 +138,8 @@
         "translit": "зэ пиль гадоль",
         "ru": "Это большой слон"
       },
-      "image": "/words/animals-1-elephant.svg"
+      "image": "/words/animals-1-elephant.svg",
+      "audio": "/audio/animals-1-elephant.mp3"
     },
     {
       "id": "animals-1-lion",
@@ -144,7 +153,8 @@
         "translit": "зэ арье хазак",
         "ru": "Это сильный лев"
       },
-      "image": "/words/animals-1-lion.svg"
+      "image": "/words/animals-1-lion.svg",
+      "audio": "/audio/animals-1-lion.mp3"
     }
   ]
 }
