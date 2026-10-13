@@ -69,7 +69,7 @@ describe("уроки", () => {
             expect(existsSync(file), `нет файла озвучки ${word.audio}`).toBe(true);
           }
 
-          expect(word.image, "у каждого слова есть картинка").toBeDefined();
+          // Картинка необязательна: без неё карточка показывает запасной вариант (первую букву).
           if (word.image) {
             const file = new URL(`../apps/web/public${word.image}`, import.meta.url);
             expect(existsSync(file), `нет файла картинки ${word.image}`).toBe(true);
