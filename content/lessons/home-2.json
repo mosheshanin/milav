@@ -1,0 +1,156 @@
+{
+  "$schema": "../schema.json",
+  "id": "home-2",
+  "topicId": "home",
+  "section": "nouns",
+  "topic": "Дом и мебель",
+  "number": 2,
+  "free": true,
+  "title": "Мебель",
+  "words": [
+    {
+      "id": "home-2-table",
+      "he": "שולחן",
+      "niqqud": "שׁוּלְחָן",
+      "translit": "шульха́н",
+      "ru": "стол",
+      "gender": "m",
+      "example": {
+        "he": "זה שולחן גדול",
+        "translit": "зэ шульхан гадоль",
+        "ru": "Это большой стол"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-chair",
+      "he": "כיסא",
+      "niqqud": "כִּיסֵּא",
+      "translit": "кисе́",
+      "ru": "стул",
+      "gender": "m",
+      "example": {
+        "he": "זה כיסא חדש",
+        "translit": "зэ кисе хадаш",
+        "ru": "Это новый стул"
+      },
+      "image": "/words/home-2-chair.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-2-bed",
+      "he": "מיטה",
+      "niqqud": "מִיטָּה",
+      "translit": "мита́",
+      "ru": "кровать",
+      "gender": "f",
+      "example": {
+        "he": "זאת מיטה גדולה",
+        "translit": "зот мита гдола",
+        "ru": "Это большая кровать"
+      },
+      "image": "/words/home-2-bed.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-2-sofa",
+      "he": "ספה",
+      "niqqud": "סַפָּה",
+      "translit": "сапа́",
+      "ru": "диван",
+      "gender": "f",
+      "example": {
+        "he": "זאת ספה חדשה",
+        "translit": "зот сапа хадаша",
+        "ru": "Это новый диван"
+      },
+      "image": "/words/home-2-sofa.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-2-wardrobe",
+      "he": "ארון",
+      "niqqud": "אָרוֹן",
+      "translit": "аро́н",
+      "ru": "шкаф",
+      "gender": "m",
+      "example": {
+        "he": "זה ארון גדול",
+        "translit": "зэ арон гадоль",
+        "ru": "Это большой шкаф"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-shelf",
+      "he": "מדף",
+      "niqqud": "מַדָּף",
+      "translit": "мада́ф",
+      "ru": "полка",
+      "gender": "m",
+      "example": {
+        "he": "זה מדף קטן",
+        "translit": "зэ мадаф катан",
+        "ru": "Это маленькая полка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-lamp",
+      "he": "מנורה",
+      "niqqud": "מְנוֹרָה",
+      "translit": "менора́",
+      "ru": "лампа",
+      "gender": "f",
+      "example": {
+        "he": "זאת מנורה יפה",
+        "translit": "зот менора яфа",
+        "ru": "Это красивая лампа"
+      },
+      "image": "/words/home-2-lamp.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-2-carpet",
+      "he": "שטיח",
+      "niqqud": "שָׁטִיחַ",
+      "translit": "шати́ах",
+      "ru": "ковёр",
+      "gender": "m",
+      "example": {
+        "he": "זה שטיח רך",
+        "translit": "зэ шатиах рах",
+        "ru": "Это мягкий ковёр"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-curtain",
+      "he": "וילון",
+      "niqqud": "וִילוֹן",
+      "translit": "вило́н",
+      "ru": "штора",
+      "gender": "m",
+      "example": {
+        "he": "זה וילון יפה",
+        "translit": "зэ вилон яфэ",
+        "ru": "Это красивая штора"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-pillow",
+      "he": "כרית",
+      "niqqud": "כָּרִית",
+      "translit": "кари́т",
+      "ru": "подушка",
+      "gender": "f",
+      "example": {
+        "he": "זאת כרית רכה",
+        "translit": "зот карит рака",
+        "ru": "Это мягкая подушка"
+      },
+      "reviewed": false
+    }
+  ]
+}

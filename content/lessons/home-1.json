@@ -1,0 +1,159 @@
+{
+  "$schema": "../schema.json",
+  "id": "home-1",
+  "topicId": "home",
+  "section": "nouns",
+  "topic": "Дом и мебель",
+  "number": 1,
+  "free": true,
+  "title": "Дом и комнаты",
+  "words": [
+    {
+      "id": "home-1-house",
+      "he": "בית",
+      "niqqud": "בַּיִת",
+      "translit": "ба́йит",
+      "ru": "дом",
+      "gender": "m",
+      "example": {
+        "he": "זה בית גדול",
+        "translit": "зэ байит гадоль",
+        "ru": "Это большой дом"
+      },
+      "image": "/words/home-1-house.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-room",
+      "he": "חדר",
+      "niqqud": "חֶדֶר",
+      "translit": "хе́дер",
+      "ru": "комната",
+      "gender": "m",
+      "example": {
+        "he": "זה חדר קטן",
+        "translit": "зэ хедер катан",
+        "ru": "Это маленькая комната"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-1-kitchen",
+      "he": "מטבח",
+      "niqqud": "מִטְבָּח",
+      "translit": "митба́х",
+      "ru": "кухня",
+      "gender": "m",
+      "example": {
+        "he": "זה מטבח חדש",
+        "translit": "зэ митбах хадаш",
+        "ru": "Это новая кухня"
+      },
+      "image": "/words/home-1-kitchen.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-bathroom",
+      "he": "אמבטיה",
+      "niqqud": "אַמְבַּטְיָה",
+      "translit": "амба́тья",
+      "ru": "ванная",
+      "gender": "f",
+      "example": {
+        "he": "זאת אמבטיה חדשה",
+        "translit": "зот амбатья хадаша",
+        "ru": "Это новая ванная"
+      },
+      "image": "/words/home-1-bathroom.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-door",
+      "he": "דלת",
+      "niqqud": "דֶּלֶת",
+      "translit": "де́лет",
+      "ru": "дверь",
+      "gender": "f",
+      "example": {
+        "he": "זאת דלת ישנה",
+        "translit": "зот делет яшана",
+        "ru": "Это старая дверь"
+      },
+      "image": "/words/home-1-door.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-window",
+      "he": "חלון",
+      "niqqud": "חַלּוֹן",
+      "translit": "хало́н",
+      "ru": "окно",
+      "gender": "m",
+      "example": {
+        "he": "זה חלון גדול",
+        "translit": "зэ халон гадоль",
+        "ru": "Это большое окно"
+      },
+      "image": "/words/home-1-window.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-wall",
+      "he": "קיר",
+      "niqqud": "קִיר",
+      "translit": "кир",
+      "ru": "стена",
+      "gender": "m",
+      "example": {
+        "he": "זה קיר לבן",
+        "translit": "зэ кир лаван",
+        "ru": "Это белая стена"
+      },
+      "image": "/words/home-1-wall.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-1-floor",
+      "he": "רצפה",
+      "niqqud": "רִצְפָּה",
+      "translit": "рицпа́",
+      "ru": "пол",
+      "gender": "f",
+      "example": {
+        "he": "זאת רצפה קרה",
+        "translit": "зот рицпа кара",
+        "ru": "Это холодный пол"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-1-roof",
+      "he": "גג",
+      "niqqud": "גַּג",
+      "translit": "гаг",
+      "ru": "крыша",
+      "gender": "m",
+      "example": {
+        "he": "זה גג ישן",
+        "translit": "зэ гаг яшан",
+        "ru": "Это старая крыша"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-1-garden",
+      "he": "גינה",
+      "niqqud": "גִּינָה",
+      "translit": "гина́",
+      "ru": "сад",
+      "gender": "f",
+      "example": {
+        "he": "זאת גינה יפה",
+        "translit": "зот гина яфа",
+        "ru": "Это красивый сад"
+      },
+      "image": "/words/home-1-garden.svg",
+      "reviewed": false
+    }
+  ]
+}

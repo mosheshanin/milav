@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "id": "home-3",
+  "topicId": "home",
+  "section": "nouns",
+  "topic": "Дом и мебель",
+  "number": 3,
+  "free": true,
+  "title": "Бытовые предметы",
+  "words": [
+    {
+      "id": "home-3-fridge",
+      "he": "מקרר",
+      "niqqud": "מְקָרֵר",
+      "translit": "мекаре́р",
+      "ru": "холодильник",
+      "gender": "m",
+      "example": {
+        "he": "זה מקרר חדש",
+        "translit": "зэ мекарер хадаш",
+        "ru": "Это новый холодильник"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-3-oven",
+      "he": "תנור",
+      "niqqud": "תַּנּוּר",
+      "translit": "тану́р",
+      "ru": "духовка",
+      "gender": "m",
+      "example": {
+        "he": "זה תנור חם",
+        "translit": "зэ танур хам",
+        "ru": "Это горячая духовка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-3-phone",
+      "he": "טלפון",
+      "niqqud": "טֶלֶפוֹן",
+      "translit": "телефо́н",
+      "ru": "телефон",
+      "gender": "m",
+      "example": {
+        "he": "זה טלפון חדש",
+        "translit": "зэ телефон хадаш",
+        "ru": "Это новый телефон"
+      },
+      "image": "/words/home-3-phone.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-computer",
+      "he": "מחשב",
+      "niqqud": "מַחְשֵׁב",
+      "translit": "махше́в",
+      "ru": "компьютер",
+      "gender": "m",
+      "example": {
+        "he": "זה מחשב מהיר",
+        "translit": "зэ махшев махир",
+        "ru": "Это быстрый компьютер"
+      },
+      "image": "/words/home-3-computer.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-clock",
+      "he": "שעון",
+      "niqqud": "שָׁעוֹן",
+      "translit": "шао́н",
+      "ru": "часы",
+      "gender": "m",
+      "example": {
+        "he": "זה שעון ישן",
+        "translit": "зэ шаон яшан",
+        "ru": "Это старые часы"
+      },
+      "image": "/words/home-3-clock.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-plate",
+      "he": "צלחת",
+      "niqqud": "צַלַּחַת",
+      "translit": "цала́хат",
+      "ru": "тарелка",
+      "gender": "f",
+      "example": {
+        "he": "זאת צלחת קטנה",
+        "translit": "зот цалахат ктана",
+        "ru": "Это маленькая тарелка"
+      },
+      "image": "/words/home-3-plate.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-mug",
+      "he": "ספל",
+      "niqqud": "סֵפֶל",
+      "translit": "се́фель",
+      "ru": "кружка",
+      "gender": "m",
+      "example": {
+        "he": "זה ספל חם",
+        "translit": "зэ сефель хам",
+        "ru": "Это горячая кружка"
+      },
+      "image": "/words/home-3-mug.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-spoon",
+      "he": "כף",
+      "niqqud": "כַּף",
+      "translit": "каф",
+      "ru": "ложка",
+      "gender": "f",
+      "example": {
+        "he": "זאת כף קטנה",
+        "translit": "зот каф ктана",
+        "ru": "Это маленькая ложка"
+      },
+      "image": "/words/home-3-spoon.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-fork",
+      "he": "מזלג",
+      "niqqud": "מַזְלֵג",
+      "translit": "мазле́г",
+      "ru": "вилка",
+      "gender": "m",
+      "example": {
+        "he": "זה מזלג חדש",
+        "translit": "зэ мазлег хадаш",
+        "ru": "Это новая вилка"
+      },
+      "image": "/words/home-3-fork.svg",
+      "reviewed": false
+    },
+    {
+      "id": "home-3-key",
+      "he": "מפתח",
+      "niqqud": "מַפְתֵּחַ",
+      "translit": "мафте́ах",
+      "ru": "ключ",
+      "gender": "m",
+      "example": {
+        "he": "זה מפתח קטן",
+        "translit": "зэ мафтеах катан",
+        "ru": "Это маленький ключ"
+      },
+      "image": "/words/home-3-key.svg",
+      "reviewed": false
+    }
+  ]
+}

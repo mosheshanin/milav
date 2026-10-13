@@ -9,6 +9,9 @@ import lesson_family_3 from "./lessons/family-3.json";
 import lesson_food_1 from "./lessons/food-1.json";
 import lesson_food_2 from "./lessons/food-2.json";
 import lesson_food_3 from "./lessons/food-3.json";
+import lesson_home_1 from "./lessons/home-1.json";
+import lesson_home_2 from "./lessons/home-2.json";
+import lesson_home_3 from "./lessons/home-3.json";
 
 export const lessonFiles: unknown[] = [
   lesson_animals_1,
@@ -20,4 +23,7 @@ export const lessonFiles: unknown[] = [
   lesson_food_1,
   lesson_food_2,
   lesson_food_3,
+  lesson_home_1,
+  lesson_home_2,
+  lesson_home_3,
 ];
