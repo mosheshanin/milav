@@ -1,0 +1,107 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-3",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 3,
+  "free": true,
+  "title": "Каф, ламед, мем",
+  "letters": [
+    {
+      "id": "alphabet-3-kaf",
+      "he": "כ",
+      "name": {
+        "he": "כף",
+        "niqqud": "כַּף",
+        "ru": "каф"
+      },
+      "sound": "к (с точкой внутри) или х (без точки)",
+      "example": {
+        "he": "כלב",
+        "niqqud": "כֶּלֶב",
+        "translit": "ке́лев",
+        "ru": "собака",
+        "image": "/words/animals-1-dog.svg",
+        "audio": "/audio/animals-1-dog.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-3-kaf-final",
+      "he": "ך",
+      "name": {
+        "he": "כף סופית",
+        "niqqud": "כַּף סוֹפִית",
+        "ru": "конечная каф"
+      },
+      "sound": "х (в конце слова, как каф без точки)",
+      "example": {
+        "he": "כריך",
+        "niqqud": "כָּרִיךְ",
+        "translit": "кари́х",
+        "ru": "сэндвич",
+        "image": "/words/food-3-sandwich.svg",
+        "audio": "/audio/food-3-sandwich.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-3-lamed",
+      "he": "ל",
+      "name": {
+        "he": "למד",
+        "niqqud": "לָמֶד",
+        "ru": "ламед"
+      },
+      "sound": "л",
+      "example": {
+        "he": "לימון",
+        "niqqud": "לִימוֹן",
+        "translit": "лимо́н",
+        "ru": "лимон",
+        "image": "/words/food-2-lemon.svg",
+        "audio": "/audio/food-2-lemon.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-3-mem",
+      "he": "מ",
+      "name": {
+        "he": "מם",
+        "niqqud": "מֵם",
+        "ru": "мем"
+      },
+      "sound": "м",
+      "example": {
+        "he": "מרק",
+        "niqqud": "מָרָק",
+        "translit": "мара́к",
+        "ru": "суп",
+        "image": "/words/food-3-soup.svg",
+        "audio": "/audio/food-3-soup.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-3-mem-final",
+      "he": "ם",
+      "name": {
+        "he": "מם סופית",
+        "niqqud": "מֵם סוֹפִית",
+        "ru": "конечная мем"
+      },
+      "sound": "м (в конце слова, звучит так же, как мем)",
+      "example": {
+        "he": "לחם",
+        "niqqud": "לֶחֶם",
+        "translit": "ле́хем",
+        "ru": "хлеб",
+        "image": "/words/food-1-bread.svg",
+        "audio": "/audio/food-1-bread.mp3"
+      },
+      "reviewed": false
+    }
+  ]
+}

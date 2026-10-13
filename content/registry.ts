@@ -1,6 +1,10 @@
 // Этот файл создаёт `npm run content:index` (tools/content-index.ts), руками не правится.
 // Тест content/registry.test.ts следит, чтобы список совпадал с файлами в content/lessons.
 import lesson_alphabet_1 from "./lessons/alphabet-1.json";
+import lesson_alphabet_2 from "./lessons/alphabet-2.json";
+import lesson_alphabet_3 from "./lessons/alphabet-3.json";
+import lesson_alphabet_4 from "./lessons/alphabet-4.json";
+import lesson_alphabet_5 from "./lessons/alphabet-5.json";
 import lesson_animals_1 from "./lessons/animals-1.json";
 import lesson_animals_2 from "./lessons/animals-2.json";
 import lesson_animals_3 from "./lessons/animals-3.json";
@@ -18,6 +22,10 @@ import lesson_home_3 from "./lessons/home-3.json";
 
 export const lessonFiles: unknown[] = [
   lesson_alphabet_1,
+  lesson_alphabet_2,
+  lesson_alphabet_3,
+  lesson_alphabet_4,
+  lesson_alphabet_5,
   lesson_animals_1,
   lesson_animals_2,
   lesson_animals_3,

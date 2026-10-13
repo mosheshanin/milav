@@ -1,0 +1,124 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-5",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 5,
+  "free": true,
+  "title": "Последние буквы",
+  "letters": [
+    {
+      "id": "alphabet-5-tsadi",
+      "he": "צ",
+      "name": {
+        "he": "צדי",
+        "niqqud": "צַדִּי",
+        "ru": "цади"
+      },
+      "sound": "ц",
+      "example": {
+        "he": "ציפור",
+        "niqqud": "צִיפּוֹר",
+        "translit": "ципо́р",
+        "ru": "птица",
+        "image": "/words/animals-1-bird.svg",
+        "audio": "/audio/animals-1-bird.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-5-tsadi-final",
+      "he": "ץ",
+      "name": {
+        "he": "צדי סופית",
+        "niqqud": "צַדִּי סוֹפִית",
+        "ru": "конечная цади"
+      },
+      "sound": "ц (в конце слова, звучит так же, как цади)",
+      "example": {
+        "he": "עץ",
+        "niqqud": "עֵץ",
+        "translit": "ец",
+        "ru": "дерево",
+        "image": "/words/alphabet-5-tsadi-final-example.svg"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-5-qof",
+      "he": "ק",
+      "name": {
+        "he": "קוף",
+        "niqqud": "קוֹף",
+        "ru": "куф"
+      },
+      "sound": "к (так же, как каф с точкой)",
+      "example": {
+        "he": "קוקוס",
+        "niqqud": "קוֹקוֹס",
+        "translit": "ко́кос",
+        "ru": "кокос",
+        "image": "/words/food-2-coconut.svg",
+        "audio": "/audio/food-2-coconut.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-5-resh",
+      "he": "ר",
+      "name": {
+        "he": "ריש",
+        "niqqud": "רֵישׁ",
+        "ru": "реш"
+      },
+      "sound": "р",
+      "example": {
+        "he": "רימון",
+        "niqqud": "רִימוֹן",
+        "translit": "римо́н",
+        "ru": "гранат",
+        "audio": "/audio/food-2-pomegranate.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-5-shin",
+      "he": "ש",
+      "name": {
+        "he": "שין",
+        "niqqud": "שִׁין",
+        "ru": "шин"
+      },
+      "sound": "ш (точка справа вверху) или с (точка слева вверху)",
+      "example": {
+        "he": "שעון",
+        "niqqud": "שָׁעוֹן",
+        "translit": "шао́н",
+        "ru": "часы",
+        "image": "/words/home-3-clock.svg",
+        "audio": "/audio/home-3-clock.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-5-tav",
+      "he": "ת",
+      "name": {
+        "he": "תו",
+        "niqqud": "תָּו",
+        "ru": "тав"
+      },
+      "sound": "т (так же, как тет)",
+      "example": {
+        "he": "תפוח",
+        "niqqud": "תַּפּוּחַ",
+        "translit": "тапу́ах",
+        "ru": "яблоко",
+        "image": "/words/food-1-apple.svg",
+        "audio": "/audio/food-1-apple.mp3"
+      },
+      "reviewed": false
+    }
+  ]
+}

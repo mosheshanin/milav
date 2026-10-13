@@ -1,0 +1,126 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-4",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 4,
+  "free": true,
+  "title": "Нун, самех, аин, пе",
+  "letters": [
+    {
+      "id": "alphabet-4-nun",
+      "he": "נ",
+      "name": {
+        "he": "נון",
+        "niqqud": "נוּן",
+        "ru": "нун"
+      },
+      "sound": "н",
+      "example": {
+        "he": "נחש",
+        "niqqud": "נָחָשׁ",
+        "translit": "наха́ш",
+        "ru": "змея",
+        "image": "/words/animals-2-snake.svg",
+        "audio": "/audio/animals-2-snake.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-4-nun-final",
+      "he": "ן",
+      "name": {
+        "he": "נון סופית",
+        "niqqud": "נוּן סוֹפִית",
+        "ru": "конечная нун"
+      },
+      "sound": "н (в конце слова, звучит так же, как нун)",
+      "example": {
+        "he": "חלון",
+        "niqqud": "חַלּוֹן",
+        "translit": "хало́н",
+        "ru": "окно",
+        "image": "/words/home-1-window.svg",
+        "audio": "/audio/home-1-window.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-4-samekh",
+      "he": "ס",
+      "name": {
+        "he": "סמך",
+        "niqqud": "סָמֶךְ",
+        "ru": "самех"
+      },
+      "sound": "с",
+      "example": {
+        "he": "סוס",
+        "niqqud": "סוּס",
+        "translit": "сус",
+        "ru": "лошадь",
+        "image": "/words/animals-1-horse.svg",
+        "audio": "/audio/animals-1-horse.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-4-ayin",
+      "he": "ע",
+      "name": {
+        "he": "עין",
+        "niqqud": "עַיִן",
+        "ru": "аин"
+      },
+      "sound": "не читается, звучит только гласная",
+      "example": {
+        "he": "עכבר",
+        "niqqud": "עַכְבָּר",
+        "translit": "ахба́р",
+        "ru": "мышь",
+        "image": "/words/animals-1-mouse.svg",
+        "audio": "/audio/animals-1-mouse.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-4-pe",
+      "he": "פ",
+      "name": {
+        "he": "פא",
+        "niqqud": "פֵּא",
+        "ru": "пе"
+      },
+      "sound": "п (с точкой внутри) или ф (без точки)",
+      "example": {
+        "he": "פיל",
+        "niqqud": "פִּיל",
+        "translit": "пиль",
+        "ru": "слон",
+        "image": "/words/animals-1-elephant.svg",
+        "audio": "/audio/animals-1-elephant.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-4-pe-final",
+      "he": "ף",
+      "name": {
+        "he": "פא סופית",
+        "niqqud": "פֵּא סוֹפִית",
+        "ru": "конечная пе"
+      },
+      "sound": "ф (в конце слова, как пе без точки)",
+      "example": {
+        "he": "קוף",
+        "niqqud": "קוֹף",
+        "translit": "коф",
+        "ru": "обезьяна",
+        "image": "/words/animals-2-monkey.svg",
+        "audio": "/audio/animals-2-monkey.mp3"
+      },
+      "reviewed": false
+    }
+  ]
+}

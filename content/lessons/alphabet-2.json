@@ -1,0 +1,107 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-2",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 2,
+  "free": true,
+  "title": "Продолжение алфавита",
+  "letters": [
+    {
+      "id": "alphabet-2-vav",
+      "he": "ו",
+      "name": {
+        "he": "וו",
+        "niqqud": "וָו",
+        "ru": "вав"
+      },
+      "sound": "в; также обозначает гласные у и о",
+      "example": {
+        "he": "ורוד",
+        "niqqud": "וָרוֹד",
+        "translit": "варо́д",
+        "ru": "розовый",
+        "image": "/words/colors-1-pink.svg",
+        "audio": "/audio/colors-1-pink.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-2-zayin",
+      "he": "ז",
+      "name": {
+        "he": "זין",
+        "niqqud": "זַיִן",
+        "ru": "зайин"
+      },
+      "sound": "з",
+      "example": {
+        "he": "זאב",
+        "niqqud": "זְאֵב",
+        "translit": "зеэ́в",
+        "ru": "волк",
+        "image": "/words/animals-2-wolf.svg",
+        "audio": "/audio/animals-2-wolf.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-2-het",
+      "he": "ח",
+      "name": {
+        "he": "חית",
+        "niqqud": "חֵית",
+        "ru": "хет"
+      },
+      "sound": "х (горловое)",
+      "example": {
+        "he": "חתול",
+        "niqqud": "חָתוּל",
+        "translit": "хату́ль",
+        "ru": "кот",
+        "image": "/words/animals-1-cat.svg",
+        "audio": "/audio/animals-1-cat.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-2-tet",
+      "he": "ט",
+      "name": {
+        "he": "טית",
+        "niqqud": "טֵית",
+        "ru": "тет"
+      },
+      "sound": "т (так же, как тав)",
+      "example": {
+        "he": "טיגריס",
+        "niqqud": "טִיגְרִיס",
+        "translit": "ти́грис",
+        "ru": "тигр",
+        "image": "/words/animals-2-tiger.svg",
+        "audio": "/audio/animals-2-tiger.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-2-yod",
+      "he": "י",
+      "name": {
+        "he": "יוד",
+        "niqqud": "יוֹד",
+        "ru": "йод"
+      },
+      "sound": "й; также обозначает гласную и",
+      "example": {
+        "he": "ינשוף",
+        "niqqud": "יַנְשׁוּף",
+        "translit": "яншу́ф",
+        "ru": "сова",
+        "image": "/words/animals-2-owl.svg",
+        "audio": "/audio/animals-2-owl.mp3"
+      },
+      "reviewed": false
+    }
+  ]
+}
