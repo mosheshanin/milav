@@ -17,6 +17,8 @@
     "check": "npm run typecheck && npm test && npm run build",
     "validate:content": "vitest run content",
     "content:index": "vite-node tools/content-index.ts",
+    "content:new": "vite-node tools/content-new.ts",
+    "content:report": "vite-node tools/content-report.ts",
     "templates": "vite-node tools/own-templates.ts",
     "deploy": "npm run build && wrangler deploy"
   },
