@@ -105,8 +105,17 @@ export function skeletonProblems(he: string, translit: string): string[] {
 // ---------------------------------------------------------------------------------------------------------------------
 // Правила уровня темы и всего набора уроков
 
-import type { Lesson } from "@milav/shared";
-import { FREE_LESSONS_PER_TOPIC } from "@milav/shared";
+import type { AlphabetLesson, Lesson } from "@milav/shared";
+import {
+  ALPHABET_GROUPS,
+  ALPHABET_TOPIC_ID,
+  FINAL_LETTERS,
+  FREE_LESSONS_PER_TOPIC,
+  LETTER_KEYS,
+  LETTER_NAMES,
+  isFinalForm,
+  normalizeHebrew,
+} from "@milav/shared";
 
 /** Правило проверки набора уроков: возвращает список нарушений (пустой, если всё в порядке). */
 export interface SetRule {
@@ -208,4 +217,159 @@ export const SET_RULES: SetRule[] = [
 /** Все нарушения правил набора, с названием правила. */
 export function setProblems(lessons: Lesson[]): string[] {
   return SET_RULES.flatMap((rule) => rule.check(lessons).map((p) => `${rule.name}: ${p}`));
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Правила урока алфавита и связи алфавита с остальными уроками (решения владельца, 13.10: docs/CONTENT.md)
+
+/** Правило проверки уроков алфавита: возвращает список нарушений (пустой, если всё в порядке). */
+export interface AlphabetRule {
+  name: string;
+  check: (lessons: AlphabetLesson[]) => string[];
+}
+
+const REGULAR_OF_FINAL: Record<string, string> = { ך: "כ", ם: "מ", ן: "נ", ף: "פ", ץ: "צ" };
+
+export const ALPHABET_RULES: AlphabetRule[] = [
+  {
+    name: `id урока alphabet-<номер>, тема «${ALPHABET_TOPIC_ID}», все уроки бесплатные`,
+    check: (lessons) =>
+      lessons.flatMap((l) => [
+        ...(l.id !== `alphabet-${l.number}` ? [`${l.id}: ожидался id alphabet-${l.number}`] : []),
+        ...(l.topicId !== ALPHABET_TOPIC_ID ? [`${l.id}: topicId ${l.topicId}, ожидался ${ALPHABET_TOPIC_ID}`] : []),
+        ...(!l.free ? [`${l.id}: алфавит полностью бесплатный, а free=false`] : []),
+      ]),
+  },
+  {
+    name: "одинаковое название темы во всех уроках алфавита",
+    check: (lessons) => (new Set(lessons.map((l) => l.topic)).size > 1 ? ["у уроков алфавита разные названия темы"] : []),
+  },
+  {
+    name: `номера уроков идут подряд с 1, не больше ${ALPHABET_GROUPS.length}`,
+    check: (lessons) => {
+      const numbers = lessons.map((l) => l.number).sort((a, b) => a - b);
+      const problems: string[] = [];
+      if (numbers.some((n, i) => n !== i + 1)) problems.push(`номера ${numbers.join(", ")}, ожидались подряд с 1`);
+      if (numbers.length > ALPHABET_GROUPS.length) problems.push(`уроков ${numbers.length}, а групп букв ${ALPHABET_GROUPS.length}`);
+      return problems;
+    },
+  },
+  {
+    name: "в уроке N ровно буквы группы N в алфавитном порядке (ALPHABET_GROUPS)",
+    check: (lessons) =>
+      lessons.flatMap((l) => {
+        const group = ALPHABET_GROUPS[l.number - 1];
+        if (!group) return [];
+        const actual = l.letters.map((x) => x.he).join("");
+        return actual === group.join("") ? [] : [`${l.id}: буквы «${actual}», ожидались «${group.join("")}»`];
+      }),
+  },
+  {
+    name: "id буквы это <id урока>-<ключ буквы>",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters
+          .filter((x) => x.id !== `${l.id}-${LETTER_KEYS[x.he]}`)
+          .map((x) => `${x.he}: id ${x.id}, ожидался ${l.id}-${LETTER_KEYS[x.he]}`),
+      ),
+  },
+  {
+    name: "русское название буквы совпадает с LETTER_NAMES (его же показывает запись шаблонов)",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters.filter((x) => x.name.ru !== LETTER_NAMES[x.he]).map((x) => `${x.id}: «${x.name.ru}», ожидалось «${LETTER_NAMES[x.he]}»`),
+      ),
+  },
+  {
+    name: "название буквы с огласовками это то же название, что без них",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters
+          .filter((x) => normalizeHebrew(x.name.niqqud) !== normalizeHebrew(x.name.he))
+          .map((x) => `${x.id}: «${x.name.niqqud}» не совпадает с «${x.name.he}»`),
+      ),
+  },
+  {
+    name: "слово-пример: обычная буква в его начале, конечная форма в его конце",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters.flatMap((x) => {
+          const letters = [...x.example.he];
+          const ok = isFinalForm(x.he) ? letters[letters.length - 1] === x.he : letters[0] === x.he;
+          return ok ? [] : [`${x.id}: слово ${x.example.he} ${isFinalForm(x.he) ? "должно заканчиваться на" : "должно начинаться с"} ${x.he}`];
+        }),
+      ),
+  },
+  {
+    name: "слово-пример: конечные буквы только в конце слова, а в конце слова нет обычных форм",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters.flatMap((x) => {
+          const letters = [...x.example.he];
+          return letters.flatMap((ch, i) => {
+            const isLast = i === letters.length - 1;
+            if (FINAL_LETTERS.includes(ch) && !isLast) return [`${x.id}: ${x.example.he}, конечная ${ch} не в конце`];
+            if (isLast && Object.values(REGULAR_OF_FINAL).includes(ch)) return [`${x.id}: ${x.example.he}, в конце нужна конечная форма`];
+            return [];
+          });
+        }),
+      ),
+  },
+  {
+    name: "слово-пример: огласовки того же слова, транскрипция с ударением и согласными",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.letters.flatMap((x) => [
+          ...(normalizeHebrew(x.example.niqqud) !== normalizeHebrew(x.example.he) ? [`${x.id}: огласовки ${x.example.niqqud} не совпадают с ${x.example.he}`] : []),
+          ...stressProblems(x.example.translit).map((p) => `${x.id}: ${p}`),
+          ...skeletonProblems(x.example.he, x.example.translit).map((p) => `${x.id}: ${p}`),
+        ]),
+      ),
+  },
+  {
+    name: "буквы и слова-примеры не повторяются внутри алфавита",
+    check: (lessons) => {
+      const problems: string[] = [];
+      const letters = new Set<string>();
+      const examples = new Map<string, string>();
+      for (const l of lessons) {
+        for (const x of l.letters) {
+          if (letters.has(x.he)) problems.push(`буква ${x.he} повторяется (${x.id})`);
+          letters.add(x.he);
+          const first = examples.get(x.example.he);
+          if (first) problems.push(`слово-пример ${x.example.he} у ${first} и у ${x.id}`);
+          else examples.set(x.example.he, x.id);
+        }
+      }
+      return problems;
+    },
+  },
+];
+
+/** Все нарушения правил алфавита, с названием правила. */
+export function alphabetProblems(lessons: AlphabetLesson[]): string[] {
+  return ALPHABET_RULES.flatMap((rule) => rule.check(lessons).map((p) => `${rule.name}: ${p}`));
+}
+
+/**
+ * Связи алфавита с остальным набором: прогресс хранится по id слова или буквы в одной таблице,
+ * поэтому id уроков, слов и букв не должны совпадать ни у каких двух элементов.
+ */
+export function crossProblems(words: Lesson[], alphabet: AlphabetLesson[]): string[] {
+  const seen = new Map<string, string>();
+  const problems: string[] = [];
+  const add = (id: string, what: string) => {
+    const first = seen.get(id);
+    if (first) problems.push(`id ${id}: ${first} и ${what}`);
+    else seen.set(id, what);
+  };
+  for (const l of words) {
+    add(l.id, `урок ${l.id}`);
+    for (const w of l.words) add(w.id, `слово ${l.id}`);
+  }
+  for (const l of alphabet) {
+    add(l.id, `урок ${l.id}`);
+    for (const x of l.letters) add(x.id, `буква ${l.id}`);
+  }
+  return problems;
 }

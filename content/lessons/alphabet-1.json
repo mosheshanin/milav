@@ -1,0 +1,105 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-1",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 1,
+  "free": true,
+  "title": "Первые буквы",
+  "letters": [
+    {
+      "id": "alphabet-1-alef",
+      "he": "א",
+      "name": {
+        "he": "אלף",
+        "niqqud": "אָלֶף",
+        "ru": "алеф"
+      },
+      "sound": "не читается: звучит только гласная",
+      "example": {
+        "he": "ארנב",
+        "niqqud": "אַרְנָב",
+        "translit": "арна́в",
+        "ru": "кролик",
+        "image": "/words/animals-1-rabbit.svg",
+        "audio": "/audio/animals-1-rabbit.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-1-bet",
+      "he": "ב",
+      "name": {
+        "he": "בית",
+        "niqqud": "בֵּית",
+        "ru": "бет"
+      },
+      "sound": "б (с точкой внутри) или в (без точки)",
+      "example": {
+        "he": "בננה",
+        "niqqud": "בָּנָנָה",
+        "translit": "бана́на",
+        "ru": "банан",
+        "image": "/words/food-1-banana.svg",
+        "audio": "/audio/food-1-banana.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-1-gimel",
+      "he": "ג",
+      "name": {
+        "he": "גימל",
+        "niqqud": "גִּימֶל",
+        "ru": "гимель"
+      },
+      "sound": "г",
+      "example": {
+        "he": "גמל",
+        "niqqud": "גָּמָל",
+        "translit": "гама́ль",
+        "ru": "верблюд",
+        "image": "/words/animals-2-camel.svg",
+        "audio": "/audio/animals-2-camel.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-1-dalet",
+      "he": "ד",
+      "name": {
+        "he": "דלת",
+        "niqqud": "דָּלֶת",
+        "ru": "далет"
+      },
+      "sound": "д",
+      "example": {
+        "he": "דג",
+        "niqqud": "דָּג",
+        "translit": "даг",
+        "ru": "рыба",
+        "image": "/words/animals-1-fish.svg",
+        "audio": "/audio/animals-1-fish.mp3"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-1-he",
+      "he": "ה",
+      "name": {
+        "he": "הא",
+        "niqqud": "הֵא",
+        "ru": "хей"
+      },
+      "sound": "х (в конце слова обычно не читается)",
+      "example": {
+        "he": "הר",
+        "niqqud": "הַר",
+        "translit": "хар",
+        "ru": "гора"
+      },
+      "reviewed": false
+    }
+  ]
+}

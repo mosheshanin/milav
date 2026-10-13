@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { lessons } from "./index";
+import { allLessons } from "./index";
 import { renderRegistry } from "./registryGen";
 
 const lessonsDir = new URL("./lessons/", import.meta.url);
@@ -13,11 +13,11 @@ describe("реестр уроков (content/registry.ts)", () => {
 
   it("в приложение попадает ровно столько уроков, сколько файлов", () => {
     const files = readdirSync(lessonsDir).filter((f) => f.endsWith(".json"));
-    expect(lessons.length).toBe(files.length);
+    expect(allLessons.length).toBe(files.length);
   });
 
   it("порядок: по ключу темы, затем по номеру урока", () => {
-    const keys = lessons.map((l) => `${l.topicId}:${String(l.number).padStart(4, "0")}`);
+    const keys = allLessons.map((l) => `${l.topicId}:${String(l.number).padStart(4, "0")}`);
     expect(keys).toEqual([...keys].sort());
   });
 });

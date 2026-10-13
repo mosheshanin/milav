@@ -1,4 +1,13 @@
-import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON } from "@milav/shared";
+import {
+  ALPHABET_GROUPS,
+  ALPHABET_SECTION,
+  ALPHABET_TITLE,
+  ALPHABET_TOPIC_ID,
+  FREE_LESSONS_PER_TOPIC,
+  LETTER_KEYS,
+  LETTER_NAMES,
+  WORDS_PER_LESSON,
+} from "@milav/shared";
 import type { Section } from "@milav/shared";
 
 /**
@@ -62,5 +71,46 @@ export function buildLessonTemplate(o: NewLessonOptions): Record<string, unknown
     free: o.number <= FREE_LESSONS_PER_TOPIC,
     title: o.title,
     words: o.keys.map((key) => wordTemplate(`${id}-${key}`, o.section)),
+  };
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Урок алфавита: буквы заданы группой ALPHABET_GROUPS, поэтому ключи слов не нужны
+
+export function alphabetTemplateProblems(number: number, title: string): string[] {
+  const problems: string[] = [];
+  if (!Number.isInteger(number) || number < 1 || number > ALPHABET_GROUPS.length) {
+    problems.push(`номер урока алфавита «${number}»: нужно целое число от 1 до ${ALPHABET_GROUPS.length}`);
+  }
+  if (!title.trim()) problems.push("не задано название урока (--title)");
+  return problems;
+}
+
+/**
+ * Шаблон урока алфавита для `npm run content:new -- --topic-id alphabet --number N --title "..."`.
+ * Буква, её id и русское название известны заранее и сразу проставлены; название на иврите, звук, слово-пример
+ * заполняет автор. Бесплатный всегда.
+ */
+export function buildAlphabetTemplate(number: number, title: string): Record<string, unknown> {
+  const problems = alphabetTemplateProblems(number, title);
+  if (problems.length) throw new Error(problems.join("\n"));
+  const id = `alphabet-${number}`;
+  return {
+    $schema: "../schema.json",
+    id,
+    topicId: ALPHABET_TOPIC_ID,
+    section: ALPHABET_SECTION,
+    topic: ALPHABET_TITLE,
+    number,
+    free: true,
+    title,
+    letters: ALPHABET_GROUPS[number - 1]!.map((he) => ({
+      id: `${id}-${LETTER_KEYS[he]}`,
+      he,
+      name: { he: "", niqqud: "", ru: LETTER_NAMES[he] },
+      sound: "",
+      example: { he: "", niqqud: "", translit: "", ru: "" },
+      reviewed: false,
+    })),
   };
 }

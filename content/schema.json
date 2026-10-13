@@ -3,7 +3,7 @@
   "title": "Урок Milav",
   "description": "Формат файла content/lessons/<id урока>.json. Правила и стандарт транскрипции: docs/CONTENT.md. Проверка: npm run validate:content.",
   "type": "object",
-  "required": ["id", "topicId", "section", "topic", "number", "free", "title", "words"],
+  "required": ["id", "topicId", "section", "topic", "number", "free", "title"],
   "additionalProperties": false,
   "properties": {
     "$schema": {
@@ -21,8 +21,8 @@
       "description": "Постоянный латинский ключ темы, например animals."
     },
     "section": {
-      "enum": ["nouns", "verbs", "adjectives"],
-      "description": "Раздел: nouns (существительные), verbs (глаголы), adjectives (прилагательные)."
+      "enum": ["nouns", "verbs", "adjectives", "alphabet"],
+      "description": "Раздел: nouns (существительные), verbs (глаголы), adjectives (прилагательные), alphabet (алфавит: в уроке letters вместо words)."
     },
     "topic": { "$ref": "#/definitions/text", "description": "Название темы на экране, например «Животные»." },
     "number": {
@@ -32,7 +32,7 @@
     },
     "free": {
       "type": "boolean",
-      "description": "Бесплатный ли урок: true у первых 3 уроков темы, у остальных false."
+      "description": "Бесплатный ли урок: true у первых 3 уроков темы, у остальных false. Уроки алфавита всегда бесплатные."
     },
     "title": { "$ref": "#/definitions/text", "description": "Название урока, например «Знакомые животные»." },
     "words": {
@@ -40,14 +40,40 @@
       "minItems": 10,
       "maxItems": 10,
       "items": { "$ref": "#/definitions/word" },
-      "description": "Ровно 10 слов."
+      "description": "Ровно 10 слов (у уроков обычных разделов; у урока алфавита вместо них letters)."
+    },
+    "letters": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 6,
+      "items": { "$ref": "#/definitions/letter" },
+      "description": "Только у урока алфавита: 5–6 форм. Какие именно буквы в каком уроке, задают ALPHABET_GROUPS в packages/shared (проверяют тесты)."
     }
   },
   "allOf": [
     {
       "if": { "required": ["number"], "properties": { "number": { "type": "integer", "maximum": 3 } } },
       "then": { "properties": { "free": { "const": true } } },
-      "else": { "properties": { "free": { "const": false } } }
+      "else": {
+        "if": { "required": ["section"], "properties": { "section": { "const": "alphabet" } } },
+        "then": { "properties": { "free": { "const": true } } },
+        "else": { "properties": { "free": { "const": false } } }
+      }
+    },
+    {
+      "if": { "required": ["section"], "properties": { "section": { "const": "alphabet" } } },
+      "then": {
+        "required": ["letters"],
+        "not": { "required": ["words"] },
+        "properties": {
+          "topicId": { "const": "alphabet" },
+          "id": { "type": "string", "pattern": "^alphabet-[1-9][0-9]*$" }
+        }
+      },
+      "else": {
+        "required": ["words"],
+        "not": { "required": ["letters"] }
+      }
     },
     {
       "if": { "required": ["section"], "properties": { "section": { "const": "nouns" } } },
@@ -167,6 +193,77 @@
           }
         }
       ]
+    },
+    "hebrewPhrase": {
+      "type": "string",
+      "pattern": "^[א-ת]+( [א-ת]+)*$",
+      "description": "Иврит только буквами, без огласовок; слова через пробел (название конечной формы: «כף סופית»)."
+    },
+    "niqqudPhrase": {
+      "type": "string",
+      "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+( [א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+)*$",
+      "description": "То же с огласовками. Уходит в синтезатор речи, на экране не показывается."
+    },
+    "letterName": {
+      "type": "object",
+      "required": ["he", "niqqud", "ru"],
+      "additionalProperties": false,
+      "description": "Название буквы: иврит, огласовки для озвучки и русское название (то же, что LETTER_NAMES в packages/shared).",
+      "properties": {
+        "he": { "$ref": "#/definitions/hebrewPhrase" },
+        "niqqud": { "$ref": "#/definitions/niqqudPhrase" },
+        "ru": { "type": "string", "pattern": "^[а-яь]+( [а-яь]+)*$" }
+      }
+    },
+    "letterExample": {
+      "type": "object",
+      "required": ["he", "niqqud", "translit", "ru"],
+      "additionalProperties": false,
+      "description": "Слово-пример: у обычной буквы начинается с неё, у конечной формы заканчивается ею.",
+      "properties": {
+        "he": { "$ref": "#/definitions/hebrew" },
+        "niqqud": { "$ref": "#/definitions/niqqud" },
+        "translit": { "$ref": "#/definitions/translit" },
+        "ru": { "$ref": "#/definitions/text" },
+        "image": {
+          "type": "string",
+          "pattern": "^/words/[a-z0-9-]+\\.(svg|png|webp)$",
+          "description": "Путь от корня сайта: свой файл /words/<id буквы>-example.svg или файл такого же слова из обычного урока. Необязательно."
+        },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
+          "description": "Озвучка слова-примера: свой файл /audio/<id буквы>-example.mp3 (заполняет скрипт озвучки) или файл такого же слова из обычного урока."
+        }
+      }
+    },
+    "letter": {
+      "type": "object",
+      "required": ["id", "he", "name", "sound", "example", "reviewed"],
+      "additionalProperties": false,
+      "description": "Одна из 27 форм алфавита (22 буквы и 5 конечных).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-[1-9][0-9]*-[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+          "description": "<id урока>-<ключ из LETTER_KEYS>, например alphabet-1-alef. Прогресс пользователей привязан к id: после выпуска не менять."
+        },
+        "he": { "type": "string", "pattern": "^[א-ת]$", "description": "Сама форма, одна буква иврита." },
+        "name": { "$ref": "#/definitions/letterName" },
+        "sound": {
+          "type": "string",
+          "pattern": "^\\S(.*\\S)?$",
+          "maxLength": 80,
+          "description": "Звук кириллицей, как показывается ученику: «б», «б (с точкой), в (без точки)», у молчащей буквы объяснение."
+        },
+        "example": { "$ref": "#/definitions/letterExample" },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
+          "description": "Озвучка названия буквы: /audio/<id буквы>.mp3. Заполняется скриптом озвучки."
+        },
+        "reviewed": { "$ref": "#/definitions/reviewed" }
+      }
     },
     "word": {
       "type": "object",
