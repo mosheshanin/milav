@@ -20,7 +20,8 @@
         "translit": "зэ дод тов",
         "ru": "Это хороший дядя"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-uncle.mp3"
     },
     {
       "id": "family-2-aunt",
@@ -34,7 +35,8 @@
         "translit": "зот дода това",
         "ru": "Это хорошая тётя"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-aunt.mp3"
     },
     {
       "id": "family-2-son",
@@ -48,7 +50,8 @@
         "translit": "зэ бен хахам",
         "ru": "Это умный сын"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-son.mp3"
     },
     {
       "id": "family-2-daughter",
@@ -62,7 +65,8 @@
         "translit": "зот бат хахама",
         "ru": "Это умная дочь"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-daughter.mp3"
     },
     {
       "id": "family-2-grandson",
@@ -76,7 +80,8 @@
         "translit": "зэ нехед хамуд",
         "ru": "Это милый внук"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-grandson.mp3"
     },
     {
       "id": "family-2-granddaughter",
@@ -90,7 +95,8 @@
         "translit": "зот нехда хмуда",
         "ru": "Это милая внучка"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-granddaughter.mp3"
     },
     {
       "id": "family-2-friend",
@@ -105,7 +111,8 @@
         "ru": "Это хороший друг"
       },
       "image": "/words/family-2-friend.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-friend.mp3"
     },
     {
       "id": "family-2-girlfriend",
@@ -120,7 +127,8 @@
         "ru": "Это хорошая подруга"
       },
       "image": "/words/family-2-girlfriend.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-girlfriend.mp3"
     },
     {
       "id": "family-2-neighbor",
@@ -135,7 +143,8 @@
         "ru": "Это милый сосед"
       },
       "image": "/words/family-2-neighbor.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-neighbor.mp3"
     },
     {
       "id": "family-2-neighborf",
@@ -150,7 +159,8 @@
         "ru": "Это милая соседка"
       },
       "image": "/words/family-2-neighborf.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-2-neighborf.mp3"
     }
   ]
 }

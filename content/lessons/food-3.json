@@ -21,7 +21,8 @@
         "ru": "Это большой лук"
       },
       "image": "/words/food-3-onion.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-onion.mp3"
     },
     {
       "id": "food-3-garlic",
@@ -36,7 +37,8 @@
         "ru": "Это маленький чеснок"
       },
       "image": "/words/food-3-garlic.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-garlic.mp3"
     },
     {
       "id": "food-3-pepper",
@@ -51,7 +53,8 @@
         "ru": "Это острый перец"
       },
       "image": "/words/food-3-pepper.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-pepper.mp3"
     },
     {
       "id": "food-3-corn",
@@ -66,7 +69,8 @@
         "ru": "Это сладкая кукуруза"
       },
       "image": "/words/food-3-corn.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-corn.mp3"
     },
     {
       "id": "food-3-broccoli",
@@ -81,7 +85,8 @@
         "ru": "Это вкусная брокколи"
       },
       "image": "/words/food-3-broccoli.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-broccoli.mp3"
     },
     {
       "id": "food-3-eggplant",
@@ -96,7 +101,8 @@
         "ru": "Это большой баклажан"
       },
       "image": "/words/food-3-eggplant.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-eggplant.mp3"
     },
     {
       "id": "food-3-soup",
@@ -111,7 +117,8 @@
         "ru": "Это горячий суп"
       },
       "image": "/words/food-3-soup.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-soup.mp3"
     },
     {
       "id": "food-3-sandwich",
@@ -126,7 +133,8 @@
         "ru": "Это вкусный сэндвич"
       },
       "image": "/words/food-3-sandwich.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-sandwich.mp3"
     },
     {
       "id": "food-3-pizza",
@@ -141,7 +149,8 @@
         "ru": "Это горячая пицца"
       },
       "image": "/words/food-3-pizza.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-pizza.mp3"
     },
     {
       "id": "food-3-cake",
@@ -156,7 +165,8 @@
         "ru": "Это сладкий торт"
       },
       "image": "/words/food-3-cake.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-cake.mp3"
     }
   ]
 }

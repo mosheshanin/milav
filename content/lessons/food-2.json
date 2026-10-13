@@ -21,7 +21,8 @@
         "ru": "Это сладкая груша"
       },
       "image": "/words/food-2-pear.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-pear.mp3"
     },
     {
       "id": "food-2-strawberry",
@@ -36,7 +37,8 @@
         "ru": "Это сладкая клубника"
       },
       "image": "/words/food-2-strawberry.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-strawberry.mp3"
     },
     {
       "id": "food-2-watermelon",
@@ -51,7 +53,8 @@
         "ru": "Это большой арбуз"
       },
       "image": "/words/food-2-watermelon.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-watermelon.mp3"
     },
     {
       "id": "food-2-lemon",
@@ -66,7 +69,8 @@
         "ru": "Это маленький лимон"
       },
       "image": "/words/food-2-lemon.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-lemon.mp3"
     },
     {
       "id": "food-2-peach",
@@ -81,7 +85,8 @@
         "ru": "Это вкусный персик"
       },
       "image": "/words/food-2-peach.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-peach.mp3"
     },
     {
       "id": "food-2-cherry",
@@ -96,7 +101,8 @@
         "ru": "Это маленькая вишня"
       },
       "image": "/words/food-2-cherry.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-cherry.mp3"
     },
     {
       "id": "food-2-pineapple",
@@ -111,7 +117,8 @@
         "ru": "Это сладкий ананас"
       },
       "image": "/words/food-2-pineapple.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-pineapple.mp3"
     },
     {
       "id": "food-2-mango",
@@ -126,7 +133,8 @@
         "ru": "Это вкусное манго"
       },
       "image": "/words/food-2-mango.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-mango.mp3"
     },
     {
       "id": "food-2-coconut",
@@ -141,7 +149,8 @@
         "ru": "Это большой кокос"
       },
       "image": "/words/food-2-coconut.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-coconut.mp3"
     },
     {
       "id": "food-2-pomegranate",
@@ -155,7 +164,8 @@
         "translit": "зэ римон маток",
         "ru": "Это сладкий гранат"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-pomegranate.mp3"
     }
   ]
 }

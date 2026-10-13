@@ -21,7 +21,8 @@
         "ru": "Это большой волк"
       },
       "image": "/words/animals-2-wolf.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-wolf.mp3"
     },
     {
       "id": "animals-2-fox",
@@ -36,7 +37,8 @@
         "ru": "Это умный лис"
       },
       "image": "/words/animals-2-fox.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-fox.mp3"
     },
     {
       "id": "animals-2-bear",
@@ -51,7 +53,8 @@
         "ru": "Это сильный медведь"
       },
       "image": "/words/animals-2-bear.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-bear.mp3"
     },
     {
       "id": "animals-2-monkey",
@@ -66,7 +69,8 @@
         "ru": "Это умная обезьяна"
       },
       "image": "/words/animals-2-monkey.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-monkey.mp3"
     },
     {
       "id": "animals-2-tiger",
@@ -81,7 +85,8 @@
         "ru": "Это сильный тигр"
       },
       "image": "/words/animals-2-tiger.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-tiger.mp3"
     },
     {
       "id": "animals-2-camel",
@@ -96,7 +101,8 @@
         "ru": "Это большой верблюд"
       },
       "image": "/words/animals-2-camel.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-camel.mp3"
     },
     {
       "id": "animals-2-snake",
@@ -111,7 +117,8 @@
         "ru": "Это длинная змея"
       },
       "image": "/words/animals-2-snake.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-snake.mp3"
     },
     {
       "id": "animals-2-turtle",
@@ -126,7 +133,8 @@
         "ru": "Это старая черепаха"
       },
       "image": "/words/animals-2-turtle.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-turtle.mp3"
     },
     {
       "id": "animals-2-zebra",
@@ -141,7 +149,8 @@
         "ru": "Это красивая зебра"
       },
       "image": "/words/animals-2-zebra.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-zebra.mp3"
     },
     {
       "id": "animals-2-owl",
@@ -156,7 +165,8 @@
         "ru": "Это умная сова"
       },
       "image": "/words/animals-2-owl.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-2-owl.mp3"
     }
   ]
 }

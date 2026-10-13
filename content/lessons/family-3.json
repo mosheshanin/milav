@@ -21,7 +21,8 @@
         "ru": "Это хороший мужчина"
       },
       "image": "/words/family-3-man.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-man.mp3"
     },
     {
       "id": "family-3-woman",
@@ -36,7 +37,8 @@
         "ru": "Это хорошая женщина"
       },
       "image": "/words/family-3-woman.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-woman.mp3"
     },
     {
       "id": "family-3-person",
@@ -51,7 +53,8 @@
         "ru": "Это умный человек"
       },
       "image": "/words/family-3-person.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-person.mp3"
     },
     {
       "id": "family-3-lad",
@@ -65,7 +68,8 @@
         "translit": "зэ бахур цаир",
         "ru": "Это молодой парень"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-lad.mp3"
     },
     {
       "id": "family-3-lass",
@@ -79,7 +83,8 @@
         "translit": "зот бахура цеира",
         "ru": "Это молодая девушка"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-lass.mp3"
     },
     {
       "id": "family-3-oldman",
@@ -94,7 +99,8 @@
         "ru": "Это умный старик"
       },
       "image": "/words/family-3-oldman.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-oldman.mp3"
     },
     {
       "id": "family-3-oldwoman",
@@ -109,7 +115,8 @@
         "ru": "Это умная старушка"
       },
       "image": "/words/family-3-oldwoman.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-oldwoman.mp3"
     },
     {
       "id": "family-3-guest",
@@ -123,7 +130,8 @@
         "translit": "зэ ореах хашув",
         "ru": "Это важный гость"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-guest.mp3"
     },
     {
       "id": "family-3-groom",
@@ -138,7 +146,8 @@
         "ru": "Это молодой жених"
       },
       "image": "/words/family-3-groom.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-groom.mp3"
     },
     {
       "id": "family-3-bride",
@@ -153,7 +162,8 @@
         "ru": "Это красивая невеста"
       },
       "image": "/words/family-3-bride.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-3-bride.mp3"
     }
   ]
 }

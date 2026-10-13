@@ -20,7 +20,8 @@
         "translit": "зэ шульхан гадоль",
         "ru": "Это большой стол"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-table.mp3"
     },
     {
       "id": "home-2-chair",
@@ -35,7 +36,8 @@
         "ru": "Это новый стул"
       },
       "image": "/words/home-2-chair.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-chair.mp3"
     },
     {
       "id": "home-2-bed",
@@ -50,7 +52,8 @@
         "ru": "Это большая кровать"
       },
       "image": "/words/home-2-bed.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-bed.mp3"
     },
     {
       "id": "home-2-sofa",
@@ -65,7 +68,8 @@
         "ru": "Это новый диван"
       },
       "image": "/words/home-2-sofa.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-sofa.mp3"
     },
     {
       "id": "home-2-wardrobe",
@@ -79,7 +83,8 @@
         "translit": "зэ арон гадоль",
         "ru": "Это большой шкаф"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-wardrobe.mp3"
     },
     {
       "id": "home-2-shelf",
@@ -93,7 +98,8 @@
         "translit": "зэ мадаф катан",
         "ru": "Это маленькая полка"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-shelf.mp3"
     },
     {
       "id": "home-2-lamp",
@@ -108,7 +114,8 @@
         "ru": "Это красивая лампа"
       },
       "image": "/words/home-2-lamp.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-lamp.mp3"
     },
     {
       "id": "home-2-carpet",
@@ -122,7 +129,8 @@
         "translit": "зэ шатиах рах",
         "ru": "Это мягкий ковёр"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-carpet.mp3"
     },
     {
       "id": "home-2-curtain",
@@ -136,7 +144,8 @@
         "translit": "зэ вилон яфэ",
         "ru": "Это красивая штора"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-curtain.mp3"
     },
     {
       "id": "home-2-pillow",
@@ -150,7 +159,8 @@
         "translit": "зот карит рака",
         "ru": "Это мягкая подушка"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-pillow.mp3"
     }
   ]
 }

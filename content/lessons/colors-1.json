@@ -37,7 +37,8 @@
         }
       },
       "image": "/words/colors-1-red.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-red.mp3"
     },
     {
       "id": "colors-1-blue",
@@ -68,7 +69,8 @@
         }
       },
       "image": "/words/colors-1-blue.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-blue.mp3"
     },
     {
       "id": "colors-1-green",
@@ -99,7 +101,8 @@
         }
       },
       "image": "/words/colors-1-green.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-green.mp3"
     },
     {
       "id": "colors-1-yellow",
@@ -130,7 +133,8 @@
         }
       },
       "image": "/words/colors-1-yellow.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-yellow.mp3"
     },
     {
       "id": "colors-1-white",
@@ -161,7 +165,8 @@
         }
       },
       "image": "/words/colors-1-white.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-white.mp3"
     },
     {
       "id": "colors-1-black",
@@ -192,7 +197,8 @@
         }
       },
       "image": "/words/colors-1-black.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-black.mp3"
     },
     {
       "id": "colors-1-orange",
@@ -223,7 +229,8 @@
         }
       },
       "image": "/words/colors-1-orange.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-orange.mp3"
     },
     {
       "id": "colors-1-purple",
@@ -254,7 +261,8 @@
         }
       },
       "image": "/words/colors-1-purple.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-purple.mp3"
     },
     {
       "id": "colors-1-pink",
@@ -285,7 +293,8 @@
         }
       },
       "image": "/words/colors-1-pink.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-pink.mp3"
     },
     {
       "id": "colors-1-brown",
@@ -316,7 +325,8 @@
         }
       },
       "image": "/words/colors-1-brown.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-1-brown.mp3"
     }
   ]
 }

@@ -21,7 +21,8 @@
         "ru": "Это хорошая мама"
       },
       "image": "/words/family-1-mom.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-mom.mp3"
     },
     {
       "id": "family-1-dad",
@@ -36,7 +37,8 @@
         "ru": "Это сильный папа"
       },
       "image": "/words/family-1-dad.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-dad.mp3"
     },
     {
       "id": "family-1-grandpa",
@@ -51,7 +53,8 @@
         "ru": "Это умный дедушка"
       },
       "image": "/words/family-1-grandpa.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-grandpa.mp3"
     },
     {
       "id": "family-1-grandma",
@@ -66,7 +69,8 @@
         "ru": "Это хорошая бабушка"
       },
       "image": "/words/family-1-grandma.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-grandma.mp3"
     },
     {
       "id": "family-1-boy",
@@ -81,7 +85,8 @@
         "ru": "Это милый мальчик"
       },
       "image": "/words/family-1-boy.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-boy.mp3"
     },
     {
       "id": "family-1-girl",
@@ -96,7 +101,8 @@
         "ru": "Это милая девочка"
       },
       "image": "/words/family-1-girl.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-girl.mp3"
     },
     {
       "id": "family-1-baby",
@@ -111,7 +117,8 @@
         "ru": "Это милый малыш"
       },
       "image": "/words/family-1-baby.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-baby.mp3"
     },
     {
       "id": "family-1-brother",
@@ -125,7 +132,8 @@
         "translit": "зэ ах тов",
         "ru": "Это хороший брат"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-brother.mp3"
     },
     {
       "id": "family-1-sister",
@@ -139,7 +147,8 @@
         "translit": "зот ахот това",
         "ru": "Это хорошая сестра"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-sister.mp3"
     },
     {
       "id": "family-1-family",
@@ -154,7 +163,8 @@
         "ru": "Это большая семья"
       },
       "image": "/words/family-1-family.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-family.mp3"
     }
   ]
 }

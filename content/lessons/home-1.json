@@ -21,7 +21,8 @@
         "ru": "Это большой дом"
       },
       "image": "/words/home-1-house.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-house.mp3"
     },
     {
       "id": "home-1-room",
@@ -35,7 +36,8 @@
         "translit": "зэ хедер катан",
         "ru": "Это маленькая комната"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-room.mp3"
     },
     {
       "id": "home-1-kitchen",
@@ -50,7 +52,8 @@
         "ru": "Это новая кухня"
       },
       "image": "/words/home-1-kitchen.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-kitchen.mp3"
     },
     {
       "id": "home-1-bathroom",
@@ -65,7 +68,8 @@
         "ru": "Это новая ванная"
       },
       "image": "/words/home-1-bathroom.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-bathroom.mp3"
     },
     {
       "id": "home-1-door",
@@ -80,7 +84,8 @@
         "ru": "Это старая дверь"
       },
       "image": "/words/home-1-door.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-door.mp3"
     },
     {
       "id": "home-1-window",
@@ -95,7 +100,8 @@
         "ru": "Это большое окно"
       },
       "image": "/words/home-1-window.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-window.mp3"
     },
     {
       "id": "home-1-wall",
@@ -110,7 +116,8 @@
         "ru": "Это белая стена"
       },
       "image": "/words/home-1-wall.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-wall.mp3"
     },
     {
       "id": "home-1-floor",
@@ -124,7 +131,8 @@
         "translit": "зот рицпа кара",
         "ru": "Это холодный пол"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-floor.mp3"
     },
     {
       "id": "home-1-roof",
@@ -138,7 +146,8 @@
         "translit": "зэ гаг яшан",
         "ru": "Это старая крыша"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-roof.mp3"
     },
     {
       "id": "home-1-garden",
@@ -153,7 +162,8 @@
         "ru": "Это красивый сад"
       },
       "image": "/words/home-1-garden.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-garden.mp3"
     }
   ]
 }

@@ -37,7 +37,8 @@
         }
       },
       "image": "/words/colors-2-gray.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-gray.mp3"
     },
     {
       "id": "colors-2-gold",
@@ -68,7 +69,8 @@
         }
       },
       "image": "/words/colors-2-gold.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-gold.mp3"
     },
     {
       "id": "colors-2-silver",
@@ -99,7 +101,8 @@
         }
       },
       "image": "/words/colors-2-silver.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-silver.mp3"
     },
     {
       "id": "colors-2-light",
@@ -130,7 +133,8 @@
         }
       },
       "image": "/words/colors-2-light.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-light.mp3"
     },
     {
       "id": "colors-2-dark",
@@ -161,7 +165,8 @@
         }
       },
       "image": "/words/colors-2-dark.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-dark.mp3"
     },
     {
       "id": "colors-2-transparent",
@@ -192,7 +197,8 @@
         }
       },
       "image": "/words/colors-2-transparent.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-transparent.mp3"
     },
     {
       "id": "colors-2-shiny",
@@ -223,7 +229,8 @@
         }
       },
       "image": "/words/colors-2-shiny.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-shiny.mp3"
     },
     {
       "id": "colors-2-murky",
@@ -254,7 +261,8 @@
         }
       },
       "image": "/words/colors-2-murky.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-murky.mp3"
     },
     {
       "id": "colors-2-dim",
@@ -285,7 +293,8 @@
         }
       },
       "image": "/words/colors-2-dim.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-dim.mp3"
     },
     {
       "id": "colors-2-yellowish",
@@ -315,7 +324,8 @@
           "translit": "цхавхаво́т"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/colors-2-yellowish.mp3"
     }
   ]
 }

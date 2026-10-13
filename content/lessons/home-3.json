@@ -20,7 +20,8 @@
         "translit": "зэ мекарер хадаш",
         "ru": "Это новый холодильник"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-fridge.mp3"
     },
     {
       "id": "home-3-oven",
@@ -34,7 +35,8 @@
         "translit": "зэ танур хам",
         "ru": "Это горячая духовка"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-oven.mp3"
     },
     {
       "id": "home-3-phone",
@@ -49,7 +51,8 @@
         "ru": "Это новый телефон"
       },
       "image": "/words/home-3-phone.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-phone.mp3"
     },
     {
       "id": "home-3-computer",
@@ -64,7 +67,8 @@
         "ru": "Это быстрый компьютер"
       },
       "image": "/words/home-3-computer.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-computer.mp3"
     },
     {
       "id": "home-3-clock",
@@ -79,7 +83,8 @@
         "ru": "Это старые часы"
       },
       "image": "/words/home-3-clock.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-clock.mp3"
     },
     {
       "id": "home-3-plate",
@@ -94,7 +99,8 @@
         "ru": "Это маленькая тарелка"
       },
       "image": "/words/home-3-plate.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-plate.mp3"
     },
     {
       "id": "home-3-mug",
@@ -109,7 +115,8 @@
         "ru": "Это горячая кружка"
       },
       "image": "/words/home-3-mug.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-mug.mp3"
     },
     {
       "id": "home-3-spoon",
@@ -124,7 +131,8 @@
         "ru": "Это маленькая ложка"
       },
       "image": "/words/home-3-spoon.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-spoon.mp3"
     },
     {
       "id": "home-3-fork",
@@ -139,7 +147,8 @@
         "ru": "Это новая вилка"
       },
       "image": "/words/home-3-fork.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-fork.mp3"
     },
     {
       "id": "home-3-key",
@@ -154,7 +163,8 @@
         "ru": "Это маленький ключ"
       },
       "image": "/words/home-3-key.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-key.mp3"
     }
   ]
 }

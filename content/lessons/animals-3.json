@@ -21,7 +21,8 @@
         "ru": "Это маленькая пчела"
       },
       "image": "/words/animals-3-bee.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-bee.mp3"
     },
     {
       "id": "animals-3-butterfly",
@@ -36,7 +37,8 @@
         "ru": "Это красивая бабочка"
       },
       "image": "/words/animals-3-butterfly.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-butterfly.mp3"
     },
     {
       "id": "animals-3-spider",
@@ -51,7 +53,8 @@
         "ru": "Это чёрный паук"
       },
       "image": "/words/animals-3-spider.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-spider.mp3"
     },
     {
       "id": "animals-3-ant",
@@ -66,7 +69,8 @@
         "ru": "Это маленький муравей"
       },
       "image": "/words/animals-3-ant.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-ant.mp3"
     },
     {
       "id": "animals-3-snail",
@@ -81,7 +85,8 @@
         "ru": "Это маленькая улитка"
       },
       "image": "/words/animals-3-snail.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-snail.mp3"
     },
     {
       "id": "animals-3-frog",
@@ -96,7 +101,8 @@
         "ru": "Это милая лягушка"
       },
       "image": "/words/animals-3-frog.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-frog.mp3"
     },
     {
       "id": "animals-3-crab",
@@ -111,7 +117,8 @@
         "ru": "Это большой краб"
       },
       "image": "/words/animals-3-crab.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-crab.mp3"
     },
     {
       "id": "animals-3-octopus",
@@ -126,7 +133,8 @@
         "ru": "Это умный осьминог"
       },
       "image": "/words/animals-3-octopus.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-octopus.mp3"
     },
     {
       "id": "animals-3-shark",
@@ -141,7 +149,8 @@
         "ru": "Это большая акула"
       },
       "image": "/words/animals-3-shark.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-shark.mp3"
     },
     {
       "id": "animals-3-dolphin",
@@ -156,7 +165,8 @@
         "ru": "Это умный дельфин"
       },
       "image": "/words/animals-3-dolphin.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-3-dolphin.mp3"
     }
   ]
 }

@@ -21,7 +21,8 @@
         "ru": "Это вкусный хлеб"
       },
       "image": "/words/food-1-bread.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-bread.mp3"
     },
     {
       "id": "food-1-milk",
@@ -36,7 +37,8 @@
         "ru": "Это холодное молоко"
       },
       "image": "/words/food-1-milk.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-milk.mp3"
     },
     {
       "id": "food-1-egg",
@@ -51,7 +53,8 @@
         "ru": "Это большое яйцо"
       },
       "image": "/words/food-1-egg.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-egg.mp3"
     },
     {
       "id": "food-1-cheese",
@@ -66,7 +69,8 @@
         "ru": "Это вкусный сыр"
       },
       "image": "/words/food-1-cheese.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-cheese.mp3"
     },
     {
       "id": "food-1-apple",
@@ -81,7 +85,8 @@
         "ru": "Это вкусное яблоко"
       },
       "image": "/words/food-1-apple.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-apple.mp3"
     },
     {
       "id": "food-1-banana",
@@ -96,7 +101,8 @@
         "ru": "Это сладкий банан"
       },
       "image": "/words/food-1-banana.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-banana.mp3"
     },
     {
       "id": "food-1-orange",
@@ -111,7 +117,8 @@
         "ru": "Это сладкий апельсин"
       },
       "image": "/words/food-1-orange.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-orange.mp3"
     },
     {
       "id": "food-1-avocado",
@@ -126,7 +133,8 @@
         "ru": "Это вкусное авокадо"
       },
       "image": "/words/food-1-avocado.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-avocado.mp3"
     },
     {
       "id": "food-1-cucumber",
@@ -141,7 +149,8 @@
         "ru": "Это маленький огурец"
       },
       "image": "/words/food-1-cucumber.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-cucumber.mp3"
     },
     {
       "id": "food-1-carrot",
@@ -156,7 +165,8 @@
         "ru": "Это большая морковь"
       },
       "image": "/words/food-1-carrot.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-carrot.mp3"
     }
   ]
 }
