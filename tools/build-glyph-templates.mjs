@@ -1,4 +1,4 @@
-// Генерирует базовые шаблоны букв из шрифтов: apps/web/src/lib/handwriting/baseTemplates.json.
+// Генерирует базовые шаблоны букв из шрифтов: packages/shared/src/handwriting/baseTemplates.json.
 // Запускать после изменения списка шрифтов (apps/web/src/lib/handwriting/glyphTemplates.ts).
 // Запуск: node tools/build-glyph-templates.mjs
 import { spawn } from "node:child_process";
@@ -6,7 +6,7 @@ import { existsSync, readdirSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright-core";
 
 const PORT = 5198;
-const OUT = new URL("../apps/web/src/lib/handwriting/baseTemplates.json", import.meta.url);
+const OUT = new URL("../packages/shared/src/handwriting/baseTemplates.json", import.meta.url);
 
 function findChromium() {
   const root = process.env.PLAYWRIGHT_BROWSERS_PATH ?? "/opt/pw-browsers";

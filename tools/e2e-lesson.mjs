@@ -14,7 +14,7 @@ mkdirSync(SHOTS, { recursive: true });
 
 const lesson = JSON.parse(readFileSync(new URL("../content/lessons/animals-1.json", import.meta.url), "utf8"));
 const templates = JSON.parse(
-  readFileSync(new URL("../apps/web/src/lib/handwriting/baseTemplates.json", import.meta.url), "utf8"),
+  readFileSync(new URL("../packages/shared/src/handwriting/baseTemplates.json", import.meta.url), "utf8"),
 ).filter((t) => t.source === "font:heebo");
 const heByRu = new Map(lesson.words.map((w) => [w.ru, w.he]));
 

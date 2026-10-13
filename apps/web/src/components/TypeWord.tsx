@@ -5,7 +5,7 @@ import { HebrewKeyboard } from "./HebrewKeyboard";
 import { Button } from "./ui";
 
 /** Набор слова на экранной клавиатуре. Слово видно на карточке выше. */
-export function TypeWord({ word, onDone }: { word: Word; onDone: () => void }) {
+export function TypeWord({ word, onDone }: { word: Word; onDone: (typed: string) => void }) {
   const target = lettersOf(word);
   const [typed, setTyped] = useState<string[]>([]);
 
@@ -27,7 +27,7 @@ export function TypeWord({ word, onDone }: { word: Word; onDone: () => void }) {
       </div>
 
       {correct ? (
-        <Button variant="success" onClick={onDone} data-testid="type-done">
+        <Button variant="success" onClick={() => onDone(typed.join(""))} data-testid="type-done">
           Верно! Дальше
         </Button>
       ) : (

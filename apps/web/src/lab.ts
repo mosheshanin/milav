@@ -1,10 +1,16 @@
 // Лаборатория: измеряет, насколько хорошо распознаются буквы, нарисованные «другим почерком».
 // «Пользователь» берёт буквы одного шрифта и искажает их, шаблоны строятся из другого шрифта.
 import "./lib/handwriting/fonts";
-import { HEBREW_LETTERS } from "@milav/shared";
+import {
+  HEBREW_LETTERS,
+  RECOGNIZER,
+  checkLetter,
+  featuresFromPoints,
+  rank,
+  type Point,
+  type Template,
+} from "@milav/shared";
 import { GLYPH_FONTS, REFERENCE_HEIGHT, rasterizeFont, templatesFromSkeletons } from "./lib/handwriting/glyphTemplates";
-import { RECOGNIZER, checkLetter, featuresFromPoints, rank } from "./lib/handwriting/recognizer";
-import type { Point, Template } from "./lib/handwriting/types";
 
 function mulberry32(seed: number) {
   return () => {

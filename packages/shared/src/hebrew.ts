@@ -61,3 +61,10 @@ export function isSpeechMatch(heard: string, expected: string): boolean {
     .filter(Boolean)
     .some((token) => tokenMatches(token, expected));
 }
+
+const HEBREW_LETTER = /[א-ת]/;
+
+/** Буквы слова в порядке написания (первая буква справа): без огласовок, пробелов и знаков, конечные формы сохраняются. */
+export function wordLetters(he: string): string[] {
+  return [...he.normalize("NFC")].filter((ch) => HEBREW_LETTER.test(ch));
+}

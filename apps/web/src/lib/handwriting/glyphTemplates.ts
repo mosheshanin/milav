@@ -1,7 +1,13 @@
-import { HEBREW_LETTERS } from "@milav/shared";
-import { CLOUD_SIZE, featuresFromPoints } from "./recognizer";
-import { bitmapPoints, samplePoints, thin } from "./skeleton";
-import type { Point, Template } from "./types";
+import {
+  CLOUD_SIZE,
+  HEBREW_LETTERS,
+  bitmapPoints,
+  featuresFromPoints,
+  samplePoints,
+  thin,
+  type Point,
+  type Template,
+} from "@milav/shared";
 
 /**
  * Базовые шаблоны: буквы из шрифтов (рукописный и печатный) утончаются до линии.

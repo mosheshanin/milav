@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Lock, PartyPopper } from "lucide-react";
 import { getLesson } from "@milav/content";
-import { STAGES, WORDS_PER_LESSON, type Stage, type WordProgress } from "@milav/shared";
+import { STAGES, WORDS_PER_LESSON, type Stage, type StageProof, type WordProgress } from "@milav/shared";
 import { ApiError, api, type SpeechResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
@@ -86,15 +86,15 @@ export function Study({
   );
 
   const saveStage = useCallback(
-    async (stage: Exclude<Stage, "speak">) => {
+    async (proof: StageProof) => {
       if (!word || busy) return;
       setBusy(true);
       setSaveError(false);
       try {
-        const res = await api.stage(word.id, stage);
+        const res = await api.stage(word.id, proof);
         replace(res.progress, res.points);
         if (res.pointsAwarded > 0) setJustEarned(true);
-        advance(stage, res.progress, skipped.has(word.id));
+        advance(proof.stage, res.progress, skipped.has(word.id));
       } catch {
         setSaveError(true);
       } finally {
@@ -174,7 +174,7 @@ export function Study({
 
         <Card className="flex flex-col gap-block" key={`${word.id}-${view}`}>
           {view === "listen" && (
-            <ListenStage done={current.listen} onNext={() => void saveStage("listen")} busy={busy} word={word} />
+            <ListenStage done={current.listen} onNext={() => void saveStage({ stage: "listen" })} busy={busy} word={word} />
           )}
           {view === "speak" && (
             <>
@@ -183,9 +183,14 @@ export function Study({
             </>
           )}
           {view === "write" && (
-            <WriteWord word={word} mode="study" doneLabel="Дальше" onDone={() => void saveStage("write")} />
+            <WriteWord
+              word={word}
+              mode="study"
+              doneLabel="Дальше"
+              onDone={(result) => void saveStage({ stage: "write", strokes: result.letterStrokes })}
+            />
           )}
-          {view === "type" && <TypeWord word={word} onDone={() => void saveStage("type")} />}
+          {view === "type" && <TypeWord word={word} onDone={(typed) => void saveStage({ stage: "type", typed })} />}
           {view === "end" && (
             <EndPanel
               completed={current.completed}

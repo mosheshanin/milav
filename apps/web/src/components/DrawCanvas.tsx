@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useImperativeHandle, useRef, type PointerEvent, type Ref } from "react";
-import type { Stroke } from "../lib/handwriting/types";
+import {
+  CANVAS_BASE_LINE as BASE_LINE,
+  CANVAS_HEIGHT as HEIGHT,
+  CANVAS_LINE_HEIGHT as LINE_HEIGHT,
+  CANVAS_TOP_LINE as TOP_LINE,
+  type Stroke,
+} from "@milav/shared";
 
-/** Высота холста в пикселях. */
-const HEIGHT = 220;
-/** Положение верхней линии и базовой линии (доли высоты). Расстояние между ними — высота обычной буквы. */
-const TOP_LINE = 0.17;
-const BASE_LINE = 0.62;
+// Геометрия холста (высота, направляющие) лежит в packages/shared: по ней же сервер проверяет штрихи.
 /** Высота «א» в шрифте относительно кегля (подобрано по глифам Gveret Levin). */
 const GLYPH_HEIGHT_PER_EM = 0.7;
 
@@ -25,8 +27,6 @@ interface Props {
   disabled?: boolean;
   ref?: Ref<DrawHandle>;
 }
-
-const LINE_HEIGHT = (BASE_LINE - TOP_LINE) * HEIGHT;
 
 /** Холст для рукописной буквы: рисование пальцем, направляющие линии и необязательная подсказка. */
 export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props) {

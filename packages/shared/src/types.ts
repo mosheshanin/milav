@@ -1,3 +1,5 @@
+import type { Stroke } from "./handwriting/types";
+
 /** Четыре этапа изучения слова. */
 export const STAGES = ["listen", "speak", "write", "type"] as const;
 export type Stage = (typeof STAGES)[number];
@@ -96,3 +98,15 @@ export interface WordProgress {
   type: boolean;
   completed: boolean;
 }
+
+/**
+ * Что клиент присылает вместе с отметкой этапа (POST /api/progress/stage).
+ * «Говори» здесь нет: его отмечает только проверка речи на сервере.
+ * - listen: достаточно самой отметки;
+ * - type: набранное слово, сервер сверяет с написанием слова;
+ * - write: штрихи по одному списку на каждую букву слова (в порядке написания), сервер сам распознаёт буквы.
+ */
+export type StageProof =
+  | { stage: "listen" }
+  | { stage: "type"; typed: string }
+  | { stage: "write"; strokes: Stroke[][] };

@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { findWord, getLesson } from "@milav/content";
 import {
+  MAX_STAGE_BODY_BYTES,
   PASS_SCORE,
   POINTS_PER_WORD,
   QUIZ_SIZE,
@@ -21,6 +22,7 @@ import {
   touchUser,
 } from "./db";
 import type { AppEnv } from "./env";
+import { verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 
 const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
 /** Запись слова длится несколько секунд; всё, что больше, это не слово. */
@@ -44,9 +46,14 @@ function toBase64(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-async function readJson<T>(request: Request): Promise<T | null> {
+/** Читает JSON из тела запроса. Слишком большое тело (по заголовку или по факту) считается ошибкой. */
+async function readJson<T>(request: Request, maxBytes = 64 * 1024): Promise<T | null> {
+  const declared = Number(request.headers.get("Content-Length") ?? 0);
+  if (declared > maxBytes) return null;
   try {
-    return (await request.json()) as T;
+    const text = await request.text();
+    if (text.length > maxBytes) return null;
+    return JSON.parse(text) as T;
   } catch {
     return null;
   }
@@ -80,10 +87,16 @@ app.get("/api/lessons/:lessonId/progress", requireUser, async (c) => {
   return c.json({ words, quiz });
 });
 
-// Этапы слушай / пиши / печатай. Этап «говори» отмечает только проверка речи на сервере.
+// Этапы слушай / пиши / печатай. «Говори» отмечает только проверка речи на сервере.
+// «Печатай» и «пиши» принимаются только с доказательством: набранное слово или штрихи букв (см. stageProof.ts).
 app.post("/api/progress/stage", requireUser, async (c) => {
   const user = c.get("user");
-  const body = await readJson<{ wordId?: string; stage?: string }>(c.req.raw);
+  const declared = Number(c.req.header("Content-Length") ?? 0);
+  if (declared > MAX_STAGE_BODY_BYTES) return c.json({ error: "body_too_large" }, 413);
+  const body = await readJson<{ wordId?: string; stage?: string; typed?: unknown; strokes?: unknown }>(
+    c.req.raw,
+    MAX_STAGE_BODY_BYTES,
+  );
   if (!body?.wordId || !body.stage) return c.json({ error: "bad_request" }, 400);
   if (body.stage === "speak") return c.json({ error: "speak_requires_speech_check" }, 400);
   if (!STAGES.includes(body.stage as Stage)) return c.json({ error: "bad_stage" }, 400);
@@ -92,8 +105,19 @@ app.post("/api/progress/stage", requireUser, async (c) => {
   if (!found) return c.json({ error: "word_not_found" }, 404);
   if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
 
+  const stage = body.stage as Exclude<Stage, "speak">;
+  let proof: ProofResult = { ok: true };
+  if (stage === "type") proof = verifyTyped(found.word, body.typed);
+  else if (stage === "write") proof = await verifyWritten(found.word, body.strokes);
+  if (!proof.ok) {
+    return c.json(
+      { error: proof.error, ...(proof.failedLetters ? { failedLetters: proof.failedLetters } : {}) },
+      proof.status,
+    );
+  }
+
   await ensureUser(c.env.DB, user);
-  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, body.stage as Stage);
+  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, stage);
   const totals = await getTotals(c.env.DB, user.id);
   return c.json({
     progress: result.progress,

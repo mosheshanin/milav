@@ -1,4 +1,4 @@
-import { QUIZ_SIZE, type MeResponse, type Stage, type StatusInfo, type WordProgress } from "@milav/shared";
+import { QUIZ_SIZE, type MeResponse, type StageProof, type StatusInfo, type WordProgress } from "@milav/shared";
 import { authHeader } from "./telegram";
 
 export class ApiError extends Error {
@@ -64,8 +64,9 @@ export interface QuizResponse {
 export const api = {
   me: () => request<MeResponse>("/api/me"),
   lessonProgress: (lessonId: string) => request<LessonProgressResponse>(`/api/lessons/${lessonId}/progress`),
-  stage: (wordId: string, stage: Exclude<Stage, "speak">) =>
-    request<StageResponse>("/api/progress/stage", json({ wordId, stage })),
+  /** Отметка этапа «слушай», «печатай» или «пиши»: для двух последних сервер проверяет доказательство (набранное слово, штрихи). */
+  stage: (wordId: string, proof: StageProof) =>
+    request<StageResponse>("/api/progress/stage", json({ wordId, ...proof })),
   speech: (wordId: string, audio: Blob, mode: "study" | "quiz") =>
     request<SpeechResponse>(`/api/speech/check?wordId=${encodeURIComponent(wordId)}&mode=${mode}`, {
       method: "POST",

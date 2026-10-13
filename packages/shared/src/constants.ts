@@ -33,3 +33,9 @@ export const SPEAK_MAX_MS = 2500;
 
 /** Запись останавливается сама, когда после речи наступила пауза такой длины, мс. */
 export const SPEAK_SILENCE_MS = 700;
+
+/** Ограничения на штрихи одной буквы, которые принимает сервер (защита от мусора и тяжёлых запросов). */
+export const MAX_STROKES_PER_LETTER = 24;
+export const MAX_POINTS_PER_LETTER = 3000;
+/** Предел размера тела запроса с отметкой этапа, байт. */
+export const MAX_STAGE_BODY_BYTES = 256 * 1024;

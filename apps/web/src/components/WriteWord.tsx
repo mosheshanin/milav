@@ -1,22 +1,34 @@
 import { useEffect, useRef, useState } from "react";
 import { Eraser } from "lucide-react";
-import { HEBREW_LETTERS, WRITE_ATTEMPTS_PER_LETTER, type Word } from "@milav/shared";
-import { loadBaseTemplates } from "../lib/handwriting/baseTemplates";
-import { checkLetter, featuresFromStrokes } from "../lib/handwriting/recognizer";
-import type { Template } from "../lib/handwriting/types";
+import {
+  WRITE_ATTEMPTS_PER_LETTER,
+  checkLetter,
+  featuresFromStrokes,
+  loadBaseTemplates,
+  roundStrokes,
+  wordLetters,
+  type Stroke,
+  type Template,
+  type Word,
+} from "@milav/shared";
 import { DrawCanvas, type DrawHandle } from "./DrawCanvas";
 import { Button } from "./ui";
 
 export interface WriteResult {
   /** Сколько букв так и не получилось написать за отведённые попытки. */
   failedLetters: number;
+  /**
+   * Принятые штрихи каждой буквы в порядке написания (у буквы с ошибкой пустой список).
+   * Их отправляют на сервер как доказательство этапа «пиши».
+   */
+  letterStrokes: Stroke[][];
 }
 
 type Slot = "pending" | "ok" | "fail";
 
 /** Буквы слова в порядке написания (первая буква справа). */
 export function lettersOf(word: Word): string[] {
-  return [...word.he].filter((ch) => (HEBREW_LETTERS as readonly string[]).includes(ch));
+  return wordLetters(word.he);
 }
 
 /**
@@ -38,6 +50,8 @@ export function WriteWord({
 }) {
   const letters = lettersOf(word);
   const canvas = useRef<DrawHandle>(null);
+  /** Принятые штрихи по буквам (по индексу буквы). Хранится в ref: на отрисовку не влияет. */
+  const accepted = useRef<Stroke[][]>([]);
   const [templates, setTemplates] = useState<Template[] | null>(null);
   const [loadFailed, setLoadFailed] = useState(false);
   const [slots, setSlots] = useState<Slot[]>(() => letters.map(() => "pending"));
@@ -53,7 +67,8 @@ export function WriteWord({
   const finished = index >= letters.length;
   const current = letters[index];
 
-  function settle(result: Slot, text: string, tone: "ok" | "bad") {
+  function settle(result: Slot, text: string, tone: "ok" | "bad", strokes: Stroke[] = []) {
+    accepted.current[index] = strokes;
     setSlots((prev) => prev.map((s, i) => (i === index ? result : s)));
     setIndex(index + 1);
     setAttempts(0);
@@ -64,11 +79,13 @@ export function WriteWord({
 
   function check() {
     if (!templates || !current || !canvas.current) return;
-    const features = featuresFromStrokes(canvas.current.strokes(), canvas.current.lineHeight());
+    // Проверяем округлённые штрихи и отправляем на сервер именно их: тогда принятое здесь примет и сервер.
+    const strokes = roundStrokes(canvas.current.strokes());
+    const features = featuresFromStrokes(strokes, canvas.current.lineHeight());
     if (!features) return;
     const result = checkLetter(features, templates, current);
     if (result.ok) {
-      settle("ok", "Верно!", "ok");
+      settle("ok", "Верно!", "ok", strokes);
       return;
     }
     const used = attempts + 1;
@@ -119,7 +136,10 @@ export function WriteWord({
           <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
             {failedLetters ? `Букв с ошибкой: ${failedLetters}` : "Слово написано!"}
           </p>
-          <Button onClick={() => onDone({ failedLetters })} data-testid="write-done">
+          <Button
+            onClick={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
+            data-testid="write-done"
+          >
             {doneLabel}
           </Button>
         </>
