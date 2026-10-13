@@ -8,6 +8,14 @@ export interface TelegramUser {
   language_code?: string;
 }
 
+/** Кнопка «назад» в шапке Telegram (она же системная кнопка и свайп назад на телефонах). Есть с версии 6.1. */
+export interface TelegramBackButton {
+  show: () => void;
+  hide: () => void;
+  onClick: (callback: () => void) => void;
+  offClick: (callback: () => void) => void;
+}
+
 export interface TelegramWebApp {
   initData: string;
   /** Платформа приложения Telegram: ios, android, tdesktop, macos, weba, webk и т. д. */
@@ -15,6 +23,12 @@ export interface TelegramWebApp {
   initDataUnsafe: { user?: TelegramUser };
   ready: () => void;
   expand: () => void;
+  BackButton?: TelegramBackButton;
+  /** Родной диалог подтверждения (с версии 6.2). */
+  showConfirm?: (message: string, callback: (confirmed: boolean) => void) => void;
+  /** Спрашивать подтверждение, когда человек закрывает приложение (с версии 6.2). */
+  enableClosingConfirmation?: () => void;
+  disableClosingConfirmation?: () => void;
 }
 
 declare global {
@@ -51,4 +65,33 @@ export function authHeader(): string | null {
     return `dev ${/^\d{1,15}$/.test(id) ? id : "1001"}:Tester`;
   }
   return null;
+}
+
+/**
+ * Спрашивает подтверждение. В Telegram это родной диалог, а если он не поддерживается (старая версия)
+ * или приложение открыто вне Telegram, обычный `confirm`.
+ */
+export function confirmAction(message: string): Promise<boolean> {
+  const tg = getTelegram();
+  if (tg?.showConfirm) {
+    return new Promise((resolve) => {
+      try {
+        tg.showConfirm?.(message, (confirmed) => resolve(confirmed));
+      } catch {
+        resolve(window.confirm(message));
+      }
+    });
+  }
+  return Promise.resolve(window.confirm(message));
+}
+
+/** Включает или выключает вопрос «закрыть приложение?» (например, пока идёт викторина). Старые версии молча пропускаются. */
+export function setClosingConfirmation(enabled: boolean): void {
+  try {
+    const tg = getTelegram();
+    if (enabled) tg?.enableClosingConfirmation?.();
+    else tg?.disableClosingConfirmation?.();
+  } catch {
+    // Метод не поддерживается этой версией Telegram.
+  }
 }

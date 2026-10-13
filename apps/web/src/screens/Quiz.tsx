@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { getLesson } from "@milav/content";
 import { MAX_MISTAKES, PASS_SCORE, QUESTION_TITLES, QUIZ_SIZE, type Word } from "@milav/shared";
@@ -10,6 +10,8 @@ import { SpeakRecorder } from "../components/SpeakRecorder";
 import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Chip, Notice } from "../components/ui";
 import { generateQuiz, type Question } from "../lib/quiz";
+import { useBackButton } from "../lib/useBackButton";
+import { confirmAction, setClosingConfirmation } from "../telegram";
 
 /** Викторина по уроку: 25 вопросов, ошибки видны сразу. */
 export function Quiz({ lessonId, onBack, onHome }: { lessonId: string; onBack: () => void; onHome: () => void }) {
@@ -50,6 +52,30 @@ function QuizRound({
   const finished = index >= questions.length;
   const correctCount = results.filter(Boolean).length;
 
+  // Больше допустимого числа ошибок: викторина обрывается и ничего не сохраняется (решение владельца).
+  const aborted = mistakes > MAX_MISTAKES && !outcome;
+  // Выход теряет ответы (идёт викторина) или готовый, но не отправленный результат: тогда спрашиваем.
+  const leaveWarning =
+    results.length > 0 && !finished && !aborted
+      ? "Прервать викторину? Ответы не сохранятся."
+      : finished && !aborted && submit.state !== "done" && submit.state !== "sending"
+        ? "Результат ещё не сохранён. Выйти без сохранения?"
+        : null;
+
+  const guardedBack = useCallback(async () => {
+    if (leaveWarning && !(await confirmAction(leaveWarning))) return;
+    onBack();
+  }, [leaveWarning, onBack]);
+
+  // Кнопка «назад» Telegram, свайп и стрелка в шапке ведут через одно и то же подтверждение.
+  useBackButton(() => void guardedBack());
+  // Закрытие приложения (свайп вниз) тоже спрашивает, пока есть что терять.
+  const hasUnsaved = leaveWarning !== null;
+  useEffect(() => {
+    setClosingConfirmation(hasUnsaved);
+    return () => setClosingConfirmation(false);
+  }, [hasUnsaved]);
+
   function answer(correct: boolean, chosen?: string) {
     if (outcome) return;
     setResults((prev) => [...prev, correct]);
@@ -78,8 +104,7 @@ function QuizRound({
     }
   }
 
-  // Больше допустимого числа ошибок: викторина обрывается и ничего не сохраняется (решение владельца).
-  if (mistakes > MAX_MISTAKES && !outcome) {
+  if (aborted) {
     return (
       <>
         <Header title="Викторина прервана" subtitle={title} onBack={onBack} />
@@ -115,7 +140,7 @@ function QuizRound({
   if (finished) {
     return (
       <>
-        <Header title="Итоги викторины" onBack={onBack} />
+        <Header title="Итоги викторины" onBack={() => void guardedBack()} />
         <main className="mx-auto flex max-w-md flex-col gap-block p-block">
           <Result
             correct={correctCount}
@@ -132,7 +157,7 @@ function QuizRound({
 
   return (
     <>
-      <Header title="Викторина" subtitle={title} onBack={onBack} />
+      <Header title="Викторина" subtitle={title} onBack={() => void guardedBack()} />
       <main className="mx-auto flex max-w-md flex-col gap-block p-block pb-section">
         <div className="flex items-center justify-between gap-2">
           <span className="font-semibold" data-testid="quiz-progress">

@@ -12,6 +12,7 @@ import { TypeWord } from "../components/TypeWord";
 import { WordCard } from "../components/WordCard";
 import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Notice } from "../components/ui";
+import { useBackButton } from "../lib/useBackButton";
 
 type View = Stage | "end";
 
@@ -31,6 +32,8 @@ export function Study({
 }) {
   const lesson = getLesson(lessonId);
   const { setPoints } = useApp();
+  // Кнопка «назад» Telegram (и системная, и свайп) возвращает к списку уроков.
+  useBackButton(onBack);
   const [progress, setProgress] = useState<WordProgress[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [index, setIndex] = useState(0);

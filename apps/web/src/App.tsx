@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getLesson } from "@milav/content";
 import { AppProvider } from "./AppContext";
 import { Notice } from "./components/ui";
+import { HOME, browserStorage, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Home } from "./screens/Home";
 import { Quiz } from "./screens/Quiz";
 import { Study } from "./screens/Study";
 
-type Screen = { name: "home" } | { name: "study"; lessonId: string } | { name: "quiz"; lessonId: string };
-
 export function App() {
-  const [screen, setScreen] = useState<Screen>({ name: "home" });
+  // Место запоминается, поэтому перезагрузка или свёрнутое приложение не уводят на главную.
+  const [screen, setScreen] = useState<Screen>(() => restoreScreen(browserStorage(), (id) => !!getLesson(id)));
+
+  useEffect(() => {
+    saveScreen(browserStorage(), screen);
+  }, [screen]);
 
   return (
     <AppProvider
@@ -30,11 +35,16 @@ export function App() {
         return <Notice title="Нет связи с сервером">Проверьте интернет и откройте приложение снова.</Notice>;
       }}
     >
-      {screen.name === "home" && <Home onOpen={(lessonId) => setScreen({ name: "study", lessonId })} />}
+      {screen.name === "home" && (
+        <Home
+          onOpen={(lessonId) => setScreen({ name: "study", lessonId })}
+          onOpenQuiz={(lessonId) => setScreen({ name: "quiz", lessonId })}
+        />
+      )}
       {screen.name === "study" && (
         <Study
           lessonId={screen.lessonId}
-          onBack={() => setScreen({ name: "home" })}
+          onBack={() => setScreen(HOME)}
           onQuiz={() => setScreen({ name: "quiz", lessonId: screen.lessonId })}
         />
       )}
@@ -42,7 +52,7 @@ export function App() {
         <Quiz
           lessonId={screen.lessonId}
           onBack={() => setScreen({ name: "study", lessonId: screen.lessonId })}
-          onHome={() => setScreen({ name: "home" })}
+          onHome={() => setScreen(HOME)}
         />
       )}
     </AppProvider>

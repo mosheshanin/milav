@@ -172,11 +172,10 @@ await shot(page, "09-speak-pending");
 // Помечаем «говори» прямо в базе и перезагружаем: урок продолжится со слова 2.
 sql(`UPDATE word_progress SET stage_speak=1, completed_at=datetime('now') WHERE user_id=${A} AND word_id='${first.id}';`);
 await page.reload();
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
-check((await page.textContent('[data-testid="points"]')) === "1", "после слова 1 одно очко");
-await page.click(`[data-testid="lesson-${lesson.id}"]`);
+// Экран запоминается: после перезагрузки остаёмся в уроке, а не возвращаемся на главную.
 await page.waitForSelector('[data-testid="word-he"]');
-check((await page.textContent('[data-testid="word-he"]')) === lesson.words[1].he, "урок продолжается со слова 2");
+check((await page.textContent('[data-testid="points"]')) === "1", "после слова 1 одно очко");
+check((await page.textContent('[data-testid="word-he"]')) === lesson.words[1].he, "после перезагрузки остаёмся в уроке, он продолжается со слова 2");
 
 for (let i = 1; i < lesson.words.length; i++) {
   const w = lesson.words[i];
@@ -333,6 +332,129 @@ await page.waitForSelector('[data-testid="mic-denied"]');
 await shot(page, "20-mic-denied");
 check((await page.textContent('[data-testid="mic-denied"]')).includes("Микрофон выключен"), "при отказе показана инструкция, как включить микрофон");
 await page.context().close();
+
+// ---------- Сценарий Г: навигация (кнопка «назад» Telegram, «Продолжить», перезагрузка, выход из викторины) ----------
+const D = 2004;
+const [w0, w1] = lesson.words;
+const seedAll = (userId) =>
+  lesson.words.map((w) => `(${userId}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now'))`).join(",");
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${D}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${D}; DELETE FROM quiz_attempts WHERE user_id=${D}; DELETE FROM lesson_passed WHERE user_id=${D};`);
+sql(
+  `INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ` +
+    `(${D}, '${w0.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now')), (${D}, '${w1.id}', '${lesson.id}', 1, 1, 0, 0, NULL);`,
+);
+
+/** Страница с имитацией Telegram WebApp: кнопка «назад», родной диалог подтверждения, закрытие с подтверждением. */
+async function openTelegramPage(userId) {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+  // Настоящий скрипт Telegram затёр бы имитацию.
+  await context.route("https://telegram.org/**", (route) => route.abort());
+  const p = await context.newPage();
+  await p.addInitScript(() => {
+    window.speechSynthesis.speak = (u) => setTimeout(() => u.onend?.(new Event("end")), 20);
+    const back = {
+      visible: false,
+      handlers: [],
+      show() {
+        this.visible = true;
+      },
+      hide() {
+        this.visible = false;
+      },
+      onClick(f) {
+        this.handlers.push(f);
+      },
+      offClick(f) {
+        this.handlers = this.handlers.filter((x) => x !== f);
+      },
+    };
+    window.__tg = { back, closing: false, confirmAnswer: true, confirmMessages: [] };
+    window.Telegram = {
+      WebApp: {
+        initData: "", // пустые данные запуска: вход идёт тестовым пользователем из адреса
+        ready() {},
+        expand() {},
+        BackButton: back,
+        showConfirm(message, callback) {
+          window.__tg.confirmMessages.push(message);
+          callback(window.__tg.confirmAnswer);
+        },
+        enableClosingConfirmation() {
+          window.__tg.closing = true;
+        },
+        disableClosingConfirmation() {
+          window.__tg.closing = false;
+        },
+      },
+    };
+  });
+  p.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
+  await p.goto(`${BASE}/?dev=${userId}`);
+  return p;
+}
+const pressBack = (p) => p.evaluate(() => window.__tg.back.handlers.forEach((h) => h()));
+const backVisible = (p) => p.evaluate(() => window.__tg.back.visible);
+
+page = await openTelegramPage(D);
+await page.waitForSelector('[data-testid="continue"]');
+await shot(page, "21-home-continue");
+check(!(await backVisible(page)), "на главной кнопка «назад» Telegram скрыта (там «назад» закрывает приложение)");
+const place = await page.textContent('[data-testid="continue-place"]');
+check(place.includes("Слово 2") && place.includes("«Пиши»"), `«Продолжить»: ${place.trim()}`);
+check((await page.textContent('[data-testid="continue"]')).trim() === "Продолжить", "кнопка называется «Продолжить»");
+
+await page.click('[data-testid="continue"]');
+await page.waitForSelector('[data-testid="draw-canvas"]');
+check((await page.textContent('[data-testid="word-he"]')) === w1.he, "«Продолжить» открыло слово 2 сразу на этапе «Пиши»");
+check(await backVisible(page), "в уроке кнопка «назад» Telegram показана");
+
+await page.reload();
+await page.waitForSelector('[data-testid="word-he"]');
+check((await page.textContent('[data-testid="word-he"]')) === w1.he, "после перезагрузки остаёмся в уроке на том же слове");
+await page.waitForFunction(() => window.__tg.back.visible);
+check(true, "после перезагрузки кнопка «назад» снова показана");
+
+await pressBack(page);
+await page.waitForSelector('[data-testid="continue"]');
+check(!(await backVisible(page)), "«назад» из урока ведёт на главную, кнопка скрывается");
+
+// Все слова пройдены: «Продолжить» ведёт к викторине.
+sql(`DELETE FROM word_progress WHERE user_id=${D};`);
+sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedAll(D)};`);
+await page.reload();
+await page.waitForSelector('[data-testid="continue"]');
+check((await page.textContent('[data-testid="continue"]')).trim() === "К викторине", "после всех слов «Продолжить» ведёт к викторине");
+await page.click('[data-testid="continue"]');
+await page.waitForSelector('[data-testid="quiz-progress"]');
+check(!(await page.evaluate(() => window.__tg.closing)), "пока нет ответов, закрытие приложения не требует подтверждения");
+
+await page.locator('[data-testid="option"]').first().click();
+await page.waitForSelector('[data-testid="quiz-next"]');
+check(await page.evaluate(() => window.__tg.closing), "после первого ответа закрытие приложения требует подтверждения");
+
+await page.evaluate(() => (window.__tg.confirmAnswer = false));
+await pressBack(page);
+await page.waitForTimeout(150);
+check(await page.locator('[data-testid="quiz-progress"]').isVisible(), "«назад» посреди викторины спрашивает; отказ оставляет в викторине");
+check(
+  (await page.evaluate(() => window.__tg.confirmMessages)).some((m) => m.includes("Прервать викторину")),
+  "вопрос подтверждения про прерывание викторины",
+);
+
+await page.evaluate(() => (window.__tg.confirmAnswer = true));
+await pressBack(page);
+await page.waitForSelector('[data-testid="to-quiz"]');
+check(!(await page.evaluate(() => window.__tg.closing)), "после выхода из викторины подтверждение закрытия выключено");
+
+// Перезагрузка посреди викторины возвращает в урок: викторина всё равно начнётся заново.
+await page.click('[data-testid="to-quiz"]');
+await page.waitForSelector('[data-testid="quiz-progress"]');
+await page.reload();
+await page.waitForSelector('[data-testid="to-quiz"]');
+check((await page.locator('[data-testid="quiz-progress"]').count()) === 0, "перезагрузка посреди викторины возвращает в урок");
+await shot(page, "22-after-reload-in-quiz");
+await page.context().close();
+
 
 await browser.close();
 console.log(failures.length ? `\nПровалено проверок: ${failures.length}\n${failures.join("\n")}` : "\nВсе проверки пройдены");
