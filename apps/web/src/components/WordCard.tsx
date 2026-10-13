@@ -7,8 +7,8 @@ const GENDER: Record<NonNullable<Word["gender"]>, string> = { m: "мужской
 /** Подписи форм прилагательного в порядке показа (основная форма, мужской род единственное число, это само слово). */
 const FORM_LABELS = [
   ["f", "ж. р."],
-  ["mp", "мн. ч., м. р."],
-  ["fp", "мн. ч., ж. р."],
+  ["mp", "мн., м. р."],
+  ["fp", "мн., ж. р."],
 ] as const;
 
 /**
@@ -79,7 +79,7 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
               const form = word.forms![key];
               return (
                 <div key={key} className="flex items-baseline justify-between gap-2">
-                  <dt className="text-xs text-ink-soft">{label}</dt>
+                  <dt className="whitespace-nowrap text-xs text-ink-soft">{label}</dt>
                   <dd className="flex items-baseline gap-2">
                     <span className="text-sm text-accent">[{form.translit}]</span>
                     <span dir="rtl" lang="he" className="font-hebrew text-lg">
