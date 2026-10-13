@@ -31,15 +31,26 @@ const lessonsDir = new URL("../content/lessons/", import.meta.url);
 const lessonFiles = readdirSync(lessonsDir).filter((f) => f.endsWith(".json"));
 const lessons = lessonFiles.map((file) => ({ file, data: JSON.parse(readFileSync(new URL(file, lessonsDir), "utf8")) }));
 
+/** В GitHub Actions причина видна в аннотациях запуска (без доступа к полному логу). Ключ в сообщения не попадает. */
+function annotate(message) {
+  if (process.env.GITHUB_ACTIONS) console.log(`::error title=Озвучка::${message.replace(/\r?\n/g, " ")}`);
+}
+
 async function call(path, init) {
   let response;
   try {
     response = await fetch(`${API}${path}${path.includes("?") ? "&" : "?"}key=${KEY}`, init);
   } catch {
-    throw new Error("Нет связи с texttospeech.googleapis.com (проверьте интернет или запускайте через GitHub Actions)");
+    const message = "Нет связи с texttospeech.googleapis.com (проверьте интернет или запускайте через GitHub Actions)";
+    annotate(message);
+    throw new Error(message);
   }
   const body = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(`Google TTS ${response.status}: ${body.error?.message ?? "ошибка"}`);
+  if (!response.ok) {
+    const message = `Google TTS ${response.status}: ${body.error?.message ?? "ошибка"}`;
+    annotate(message);
+    throw new Error(message);
+  }
   return body;
 }
 
@@ -74,7 +85,9 @@ function jobs() {
 }
 
 if (!dry && !KEY) {
-  console.error("Не задан GOOGLE_TTS_API_KEY. Ключ создаётся в Google Cloud Console (см. docs/AUDIO.md).");
+  const message = "Не задан GOOGLE_TTS_API_KEY. Ключ создаётся в Google Cloud Console (см. docs/AUDIO.md).";
+  annotate(`${message} В GitHub секрет должен быть в Settings → Secrets and variables → Actions, под именем GOOGLE_TTS_API_KEY.`);
+  console.error(message);
   process.exit(1);
 }
 
