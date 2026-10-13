@@ -39,3 +39,18 @@ export const MAX_STROKES_PER_LETTER = 24;
 export const MAX_POINTS_PER_LETTER = 3000;
 /** Предел размера тела запроса с отметкой этапа, байт. */
 export const MAX_STAGE_BODY_BYTES = 256 * 1024;
+
+/**
+ * Лимиты запросов на одного пользователя (считаются на сервере, таблица rate_limits).
+ * Окна фиксированные: минута и сутки по UTC. Цифры подобраны так, чтобы обычному ученику хватало с запасом,
+ * а один человек или скрипт не мог исчерпать бесплатную квоту Workers AI (Whisper) и записи в D1 для всех.
+ * - speech: проверка произношения, дорогой вызов Whisper (запись не короче 2,5 с, обычному человеку больше не нужно);
+ * - stage: отметка этапов слова (в уроке 10 слов, по 3 отметки на слово);
+ * - quiz: сдача результата викторины.
+ */
+export const RATE_LIMITS = {
+  speech: { perMinute: 20, perDay: 300 },
+  stage: { perMinute: 60, perDay: 1500 },
+  quiz: { perMinute: 10, perDay: 100 },
+} as const;
+export type RateAction = keyof typeof RATE_LIMITS;

@@ -5,6 +5,8 @@ export class ApiError extends Error {
   constructor(
     readonly status: number,
     readonly code: string,
+    /** Для кода rate_limited: через сколько секунд можно повторить. */
+    readonly retryAfter?: number,
   ) {
     super(code);
   }
@@ -21,8 +23,10 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   } catch {
     throw new ApiError(0, "network");
   }
-  const data = (await response.json().catch(() => ({}))) as { error?: string };
-  if (!response.ok) throw new ApiError(response.status, data.error ?? "error");
+  const data = (await response.json().catch(() => ({}))) as { error?: string; retryAfter?: number };
+  if (!response.ok) {
+    throw new ApiError(response.status, data.error ?? "error", typeof data.retryAfter === "number" ? data.retryAfter : undefined);
+  }
   return data as T;
 }
 

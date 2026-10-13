@@ -26,6 +26,10 @@ const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
     title: "Нет связи с сервером.",
     hint: "Проверьте интернет и попробуйте ещё раз.",
   },
+  rate_limited: {
+    title: "Слишком много проверок подряд.",
+    hint: "Подождите немного и попробуйте снова.",
+  },
 };
 
 /**

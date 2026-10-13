@@ -1,7 +1,7 @@
 // Минимальная замена D1 на настоящем SQLite (node:sqlite) для тестов: SQL выполняется как в D1,
 // схема берётся из боевой миграции.
 import { DatabaseSync } from "node:sqlite";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 
 type Params = (string | number | null)[];
 
@@ -53,7 +53,11 @@ class Statement {
 export function createTestDb(): D1Database {
   const sqlite = new DatabaseSync(":memory:");
   sqlite.exec("PRAGMA foreign_keys = ON");
-  sqlite.exec(readFileSync(new URL("../../../../migrations/0001_init.sql", import.meta.url), "utf8"));
+  // Все боевые миграции по порядку, как их применяет wrangler.
+  const migrationsDir = new URL("../../../../migrations/", import.meta.url);
+  for (const file of readdirSync(migrationsDir).filter((f) => f.endsWith(".sql")).sort()) {
+    sqlite.exec(readFileSync(new URL(file, migrationsDir), "utf8"));
+  }
 
   const d1 = {
     prepare: (sql: string) => new Statement(sqlite, sql),

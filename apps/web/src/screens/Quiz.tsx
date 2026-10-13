@@ -2,13 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { getLesson } from "@milav/content";
 import { MAX_MISTAKES, PASS_SCORE, QUESTION_TITLES, QUIZ_SIZE, type Word } from "@milav/shared";
-import { ApiError, api, type QuizResponse } from "../api";
+import { api, type QuizResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
 import { ListenButton } from "../components/ListenButton";
 import { SpeakRecorder } from "../components/SpeakRecorder";
 import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Chip, Notice } from "../components/ui";
+import { saveErrorText } from "../lib/apiErrors";
 import { generateQuiz, type Question } from "../lib/quiz";
 import { useBackButton } from "../lib/useBackButton";
 import { confirmAction, setClosingConfirmation } from "../telegram";
@@ -44,7 +45,7 @@ function QuizRound({
   const [results, setResults] = useState<boolean[]>([]);
   const [outcome, setOutcome] = useState<Outcome | null>(null);
   const [submit, setSubmit] = useState<
-    { state: "idle" } | { state: "sending" } | { state: "error"; code: string } | { state: "done"; result: QuizResponse }
+    { state: "idle" } | { state: "sending" } | { state: "error"; message: string } | { state: "done"; result: QuizResponse }
   >({ state: "idle" });
 
   const mistakes = results.filter((r) => !r).length;
@@ -100,7 +101,7 @@ function QuizRound({
       setSubmit({ state: "done", result });
       void refresh();
     } catch (e) {
-      setSubmit({ state: "error", code: e instanceof ApiError ? e.code : "network" });
+      setSubmit({ state: "error", message: saveErrorText(e) });
     }
   }
 
@@ -310,7 +311,7 @@ function Result({
   submit:
     | { state: "idle" }
     | { state: "sending" }
-    | { state: "error"; code: string }
+    | { state: "error"; message: string }
     | { state: "done"; result: QuizResponse };
   onSend: () => void;
   onHome: () => void;
@@ -334,9 +335,7 @@ function Result({
       {submit.state === "error" && (
         <>
           <p role="alert" className="text-danger">
-            {submit.code === "lesson_not_completed"
-              ? "Сначала пройдите все четыре этапа у всех слов урока."
-              : "Не удалось сохранить результат. Проверьте интернет."}
+            {submit.message}
           </p>
           <Button block onClick={onSend}>
             Повторить

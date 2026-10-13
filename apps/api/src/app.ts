@@ -21,7 +21,10 @@ import {
   recordQuizAttempt,
   touchUser,
 } from "./db";
+import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
+import { rateLimit } from "./rateLimit";
+import { apiSecurityHeaders } from "./security";
 import { verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 
 const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
@@ -46,20 +49,16 @@ function toBase64(bytes: Uint8Array): string {
   return btoa(binary);
 }
 
-/** Читает JSON из тела запроса. Слишком большое тело (по заголовку или по факту) считается ошибкой. */
+/** Читает небольшой JSON из тела запроса. Слишком большое тело и не-JSON дают null. */
 async function readJson<T>(request: Request, maxBytes = 64 * 1024): Promise<T | null> {
-  const declared = Number(request.headers.get("Content-Length") ?? 0);
-  if (declared > maxBytes) return null;
-  try {
-    const text = await request.text();
-    if (text.length > maxBytes) return null;
-    return JSON.parse(text) as T;
-  } catch {
-    return null;
-  }
+  const bytes = await readBodyLimited(request, maxBytes);
+  return bytes ? parseJson<T>(bytes) : null;
 }
 
 export const app = new Hono<AppEnv>();
+
+// Заголовки безопасности на всех ответах API (в том числе на ошибках и 404).
+app.use("/api/*", apiSecurityHeaders);
 
 app.get("/api/health", (c) => c.json({ ok: true, service: "milav-api" }));
 
@@ -89,14 +88,11 @@ app.get("/api/lessons/:lessonId/progress", requireUser, async (c) => {
 
 // Этапы слушай / пиши / печатай. «Говори» отмечает только проверка речи на сервере.
 // «Печатай» и «пиши» принимаются только с доказательством: набранное слово или штрихи букв (см. stageProof.ts).
-app.post("/api/progress/stage", requireUser, async (c) => {
+app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   const user = c.get("user");
-  const declared = Number(c.req.header("Content-Length") ?? 0);
-  if (declared > MAX_STAGE_BODY_BYTES) return c.json({ error: "body_too_large" }, 413);
-  const body = await readJson<{ wordId?: string; stage?: string; typed?: unknown; strokes?: unknown }>(
-    c.req.raw,
-    MAX_STAGE_BODY_BYTES,
-  );
+  const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
+  if (!raw) return c.json({ error: "body_too_large" }, 413);
+  const body = parseJson<{ wordId?: string; stage?: string; typed?: unknown; strokes?: unknown }>(raw);
   if (!body?.wordId || !body.stage) return c.json({ error: "bad_request" }, 400);
   if (body.stage === "speak") return c.json({ error: "speak_requires_speech_check" }, 400);
   if (!STAGES.includes(body.stage as Stage)) return c.json({ error: "bad_stage" }, 400);
@@ -127,7 +123,7 @@ app.post("/api/progress/stage", requireUser, async (c) => {
 });
 
 // Проверка произношения: тело запроса это запись голоса (audio/*).
-app.post("/api/speech/check", requireUser, async (c) => {
+app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   const user = c.get("user");
   const wordId = c.req.query("wordId");
   const mode = c.req.query("mode") === "study" ? "study" : "quiz";
@@ -136,11 +132,9 @@ app.post("/api/speech/check", requireUser, async (c) => {
   if (!canAccessLesson(found.lesson)) return c.json({ error: "subscription_required" }, 403);
   if (!c.env.AI) return c.json({ error: "speech_unavailable" }, 503);
 
-  const declared = Number(c.req.header("Content-Length") ?? 0);
-  if (declared > MAX_AUDIO_BYTES) return c.json({ error: "audio_too_large" }, 413);
-  const audio = new Uint8Array(await c.req.arrayBuffer());
+  const audio = await readBodyLimited(c.req.raw, MAX_AUDIO_BYTES);
+  if (!audio) return c.json({ error: "audio_too_large" }, 413);
   if (audio.byteLength === 0) return c.json({ error: "empty_audio" }, 400);
-  if (audio.byteLength > MAX_AUDIO_BYTES) return c.json({ error: "audio_too_large" }, 413);
 
   let heard = "";
   try {
@@ -171,7 +165,7 @@ app.post("/api/speech/check", requireUser, async (c) => {
 });
 
 // Итог викторины. Принимается только по полностью пройденному уроку.
-app.post("/api/quiz/submit", requireUser, async (c) => {
+app.post("/api/quiz/submit", requireUser, rateLimit("quiz"), async (c) => {
   const user = c.get("user");
   const body = await readJson<{ lessonId?: string; correct?: number; total?: number }>(c.req.raw);
   if (!body?.lessonId) return c.json({ error: "bad_request" }, 400);

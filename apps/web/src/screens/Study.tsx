@@ -12,6 +12,7 @@ import { TypeWord } from "../components/TypeWord";
 import { WordCard } from "../components/WordCard";
 import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Notice } from "../components/ui";
+import { saveErrorText } from "../lib/apiErrors";
 import { useBackButton } from "../lib/useBackButton";
 
 type View = Stage | "end";
@@ -40,7 +41,8 @@ export function Study({
   const [view, setView] = useState<View>("listen");
   const [skipped, setSkipped] = useState<ReadonlySet<string>>(new Set());
   const [busy, setBusy] = useState(false);
-  const [saveError, setSaveError] = useState(false);
+  /** Текст ошибки сохранения этапа (null, если всё в порядке). */
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [justEarned, setJustEarned] = useState(false);
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export function Study({
       if (!p || !lesson?.words[i]) return;
       setIndex(i);
       setJustEarned(false);
-      setSaveError(false);
+      setSaveError(null);
       setView(firstOpenStage(p, skipped.has(p.wordId)));
     },
     [progress, lesson, skipped],
@@ -92,14 +94,14 @@ export function Study({
     async (proof: StageProof) => {
       if (!word || busy) return;
       setBusy(true);
-      setSaveError(false);
+      setSaveError(null);
       try {
         const res = await api.stage(word.id, proof);
         replace(res.progress, res.points);
         if (res.pointsAwarded > 0) setJustEarned(true);
         advance(proof.stage, res.progress, skipped.has(word.id));
-      } catch {
-        setSaveError(true);
+      } catch (e) {
+        setSaveError(saveErrorText(e));
       } finally {
         setBusy(false);
       }
@@ -170,7 +172,7 @@ export function Study({
           current={view === "end" ? "type" : view}
           skipped={isSkipped}
           onSelect={(s) => {
-            setSaveError(false);
+            setSaveError(null);
             setView(s);
           }}
         />
@@ -207,7 +209,7 @@ export function Study({
           )}
           {saveError && (
             <p role="alert" className="text-center text-danger">
-              Не удалось сохранить результат. Проверьте интернет и нажмите ещё раз.
+              {saveError}
             </p>
           )}
         </Card>

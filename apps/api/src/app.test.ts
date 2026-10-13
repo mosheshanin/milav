@@ -328,3 +328,95 @@ describe("викторина", () => {
     expect((await post("/api/quiz/submit", 1, { lessonId: "nope", correct: 20, total: 25 })).status).toBe(404);
   });
 });
+
+describe("лимиты запросов в API", () => {
+  /** Подмена Workers AI, считающая вызовы: отклонённый по лимиту запрос не должен до неё доходить. */
+  function countingAi() {
+    const ai = { calls: 0, run: async () => ((ai.calls += 1), { text: word.he }) };
+    return ai;
+  }
+
+  it("проверка речи: после 20 запросов в минуту отвечает 429 и не вызывает Whisper", async () => {
+    const ai = countingAi();
+    const limited = { ...env, AI: ai };
+    const call = () =>
+      api(`/api/speech/check?wordId=${word.id}&mode=study`, {
+        method: "POST",
+        as: 50,
+        body: new Uint8Array(2000),
+        headers: { "Content-Type": "audio/webm" },
+      }, limited);
+
+    for (let i = 0; i < 20; i++) expect((await call()).status).toBe(200);
+    const res = await call();
+    expect(res.status).toBe(429);
+    const body = (await res.json()) as { error: string; retryAfter: number };
+    expect(body.error).toBe("rate_limited");
+    expect(body.retryAfter).toBeGreaterThan(0);
+    expect(body.retryAfter).toBeLessThanOrEqual(60);
+    expect(res.headers.get("Retry-After")).toBe(String(body.retryAfter));
+    expect(ai.calls).toBe(20);
+
+    // Другой пользователь не страдает.
+    const other = await api(`/api/speech/check?wordId=${word.id}&mode=study`, {
+      method: "POST",
+      as: 51,
+      body: new Uint8Array(2000),
+      headers: { "Content-Type": "audio/webm" },
+    }, limited);
+    expect(other.status).toBe(200);
+  });
+
+  it("отметка этапов: 60 в минуту, 61-я получает 429", async () => {
+    const send = () => post("/api/progress/stage", 52, { wordId: word.id, stage: "listen" });
+    for (let i = 0; i < 60; i++) expect((await send()).status).toBe(200);
+    expect((await send()).status).toBe(429);
+  });
+
+  it("сдача викторины: 10 в минуту, 11-я получает 429", async () => {
+    const send = () => post("/api/quiz/submit", 53, { lessonId: lesson.id, correct: 20, total: 25 });
+    for (let i = 0; i < 10; i++) expect((await send()).status).toBe(409);
+    expect((await send()).status).toBe(429);
+  });
+
+  it("запросы без входа лимитами не считаются: сначала проверка входа", async () => {
+    for (let i = 0; i < 70; i++) expect((await post("/api/progress/stage", 0, {})).status).toBe(401);
+  });
+
+  it("слишком большая запись, пришедшая потоком без Content-Length, отклоняется до чтения целиком", async () => {
+    let sent = 0;
+    const chunk = new Uint8Array(500_000);
+    const stream = new ReadableStream<Uint8Array>({
+      pull(controller) {
+        sent += chunk.byteLength;
+        controller.enqueue(chunk);
+        if (sent >= 10_000_000) controller.close();
+      },
+    });
+    const res = await app.request(
+      `/api/speech/check?wordId=${word.id}`,
+      { method: "POST", headers: { ...auth(54), "Content-Type": "audio/webm" }, body: stream, duplex: "half" } as RequestInit,
+      env,
+    );
+    expect(res.status).toBe(413);
+    // Чтение остановилось почти сразу, а не дошло до конца потока.
+    expect(sent).toBeLessThan(5_000_000);
+  });
+});
+
+describe("заголовки безопасности API", () => {
+  it("есть на успешных ответах, ошибках входа и 404", async () => {
+    const responses = [
+      await api("/api/health"),
+      await api("/api/me"),
+      await api("/api/me", { as: 60 }),
+      await api("/api/нет-такого"),
+    ];
+    expect(responses.map((r) => r.status)).toEqual([200, 401, 200, 404]);
+    for (const res of responses) {
+      expect(res.headers.get("X-Content-Type-Options")).toBe("nosniff");
+      expect(res.headers.get("Referrer-Policy")).toBe("no-referrer");
+      expect(res.headers.get("Cache-Control")).toBe("no-store");
+    }
+  });
+});

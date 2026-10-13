@@ -39,6 +39,13 @@ function check(condition, text) {
   if (!condition) failures.push(text);
 }
 
+/** Нарушения политики безопасности (CSP) в консоли браузера считаются провалом: приложение не должно упираться в свою же политику. */
+function watchCsp(page) {
+  page.on("console", (msg) => {
+    if (/content security policy/i.test(msg.text())) failures.push(`CSP: ${msg.text().slice(0, 200)}`);
+  });
+}
+
 const browser = await chromium.launch({
   executablePath: findChromium(),
   args: ["--no-sandbox", "--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"],
@@ -56,6 +63,7 @@ async function openPage(userId) {
     window.speechSynthesis.speak = (u) => setTimeout(() => u.onend?.(new Event("end")), 20);
   });
   page.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
+  watchCsp(page);
   await page.goto(`${BASE}/?dev=${userId}`);
   return page;
 }
@@ -114,6 +122,22 @@ sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage
 let page = await openPage(A);
 await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
 await shot(page, "01-home");
+
+// Заголовки безопасности: статика получает CSP из _headers, API свои заголовки из Worker.
+{
+  const home = await page.request.get(`${BASE}/`);
+  const csp = home.headers()["content-security-policy"] ?? "";
+  check(csp.includes("default-src 'none'") && csp.includes("frame-ancestors"), "у страницы приложения есть строгая CSP с frame-ancestors");
+  check(!csp.includes("unsafe-inline") && !csp.includes("unsafe-eval"), "в CSP нет unsafe-inline и unsafe-eval");
+  check(home.headers()["x-content-type-options"] === "nosniff", "у страницы приложения X-Content-Type-Options: nosniff");
+  const health = await page.request.get(`${BASE}/api/health`);
+  check(
+    health.headers()["x-content-type-options"] === "nosniff" &&
+      health.headers()["referrer-policy"] === "no-referrer" &&
+      health.headers()["cache-control"] === "no-store",
+    "у ответов API есть nosniff, no-referrer и no-store",
+  );
+}
 check((await page.textContent('[data-testid="points"]')) === "0", "на старте 0 очков");
 
 await page.click(`[data-testid="lesson-${lesson.id}"]`);
@@ -294,6 +318,7 @@ async function openSpeak(initScript) {
     navigator.permissions.query = async () => ({ state: "prompt", onchange: null });
   });
   if (initScript) await p.addInitScript(initScript);
+  watchCsp(p);
   await p.goto(`${BASE}/?dev=${C}`);
   await p.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
   await p.click(`[data-testid="lesson-${lesson.id}"]`);
@@ -389,6 +414,7 @@ async function openTelegramPage(userId) {
     };
   });
   p.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
+  watchCsp(p);
   await p.goto(`${BASE}/?dev=${userId}`);
   return p;
 }

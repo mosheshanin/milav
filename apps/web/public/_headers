@@ -1,0 +1,13 @@
+# Заголовки безопасности для статических файлов приложения (Cloudflare Workers Static Assets, правила применяются к каждому пути).
+# Заголовки ответов API ставит Worker: apps/api/src/security.ts. Проверяет этот файл apps/api/src/headers-file.test.ts.
+#
+# Политика содержимого (CSP) строгая: всё запрещено, кроме перечисленного.
+# - скрипты только свои и скрипт Telegram (telegram.org), без inline и eval;
+# - стили, шрифты, картинки, звук и запросы только со своего адреса (blob: нужен для записи голоса, data: для мелких встроенных картинок);
+# - frame-ancestors: приложение можно встраивать только в Telegram (веб-версии открывают мини-приложение во фрейме).
+# Если Telegram что-то ломает, смотрите консоль браузера: нарушения CSP видны там. Откат: revert коммита с этим файлом.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'self' https://telegram.org; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self'; manifest-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-ancestors https://web.telegram.org https://*.telegram.org
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: microphone=(self), camera=(), geolocation=(), payment=(), usb=()
