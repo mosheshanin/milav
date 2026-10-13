@@ -27,6 +27,11 @@ describe("проверки контента входят в check и CI", () => 
     expect(root(".github/workflows/ci.yml")).toContain("npm run validate:content");
   });
 
+  it("GitHub CI запускает сквозной тест алфавита, и скрипт на месте", () => {
+    expect(root(".github/workflows/ci.yml")).toContain("node tools/e2e-alphabet.mjs");
+    expect(root("tools/e2e-alphabet.mjs")).toContain("E2E_ALPHABET");
+  });
+
   it("команды инструментов контента на месте", () => {
     for (const name of ["content:index", "content:new", "content:report"]) expect(scripts[name], name).toBeTruthy();
   });

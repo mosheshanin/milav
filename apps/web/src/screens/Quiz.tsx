@@ -599,8 +599,8 @@ function LetterQuestionBody({
                   onClick={() => onChoose(optionId)}
                   dir={hebrew ? "rtl" : undefined}
                   lang={hebrew ? "he" : undefined}
-                  className={`min-h-14 rounded-control border-2 px-block text-lg font-semibold transition ${
-                    hebrew ? "font-hebrew text-5xl" : ""
+                  className={`min-h-14 rounded-control border-2 px-block font-semibold transition ${
+                    hebrew ? "font-hebrew text-5xl" : "text-lg"
                   } ${
                     state === "right"
                       ? "border-success bg-success-soft text-success"
