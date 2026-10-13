@@ -1,11 +1,17 @@
-import type { Word } from "@milav/shared";
+import type { Letter } from "@milav/shared";
+
+/** То, что можно проиграть: текст для голоса устройства и необязательный файл озвучки. */
+export interface Playable {
+  he: string;
+  audio?: string;
+}
 
 /**
  * Проигрывает слово. Если у слова есть файл озвучки (Google TTS, см. docs/AUDIO.md), играет его, иначе или при
  * сбое использует голос устройства.
  * Возвращает false, если звук воспроизвести не удалось.
  */
-export async function playWord(word: Word): Promise<boolean> {
+export async function playWord(word: Playable): Promise<boolean> {
   if (word.audio) {
     const played = await playFile(word.audio);
     if (played) return true;
@@ -13,6 +19,13 @@ export async function playWord(word: Word): Promise<boolean> {
   }
   return speakWithDevice(word.he);
 }
+
+/** Название буквы («אלף»). Голосу устройства отдаём название с огласовками, иначе он гадает. */
+export const playLetterName = (letter: Letter) => playWord({ he: letter.name.niqqud, audio: letter.audio });
+
+/** Слово-пример к букве. */
+export const playLetterExample = (letter: Letter) =>
+  playWord({ he: letter.example.niqqud, audio: letter.example.audio });
 
 async function playFile(src: string): Promise<boolean> {
   try {

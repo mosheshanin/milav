@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, ChevronRight, Lock } from "lucide-react";
-import { lessons } from "@milav/content";
-import { SECTION_TITLES, STAGE_TITLES, WORDS_PER_LESSON, type Lesson, type Section } from "@milav/shared";
+import { alphabetLessons, allLessons, lessons } from "@milav/content";
+import {
+  ALPHABET_GROUPS,
+  ALPHABET_TITLE,
+  SECTION_TITLES,
+  STAGE_TITLES,
+  isAlphabetLesson,
+  lessonItems,
+  type AnyLesson,
+  type Lesson,
+  type Section,
+} from "@milav/shared";
 import { api, type LessonProgressResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
@@ -10,18 +20,18 @@ import { findResume } from "../lib/resume";
 
 const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
 
-/** Уроки по разделам и темам. */
+/** Уроки: сначала алфавит (с него начинает новичок), потом разделы и темы. */
 export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => void; onOpenQuiz: (lessonId: string) => void }) {
   const { me } = useApp();
   const [progress, setProgress] = useState<Record<string, LessonProgressResponse>>({});
   /** Сколько запросов прогресса завершилось (успешно или нет). */
   const [settled, setSettled] = useState(0);
-  const freeCount = lessons.filter((l) => l.free).length;
+  const freeLessons = allLessons.filter((l) => l.free);
 
   // Прогресс запрашивается только по доступным урокам.
   useEffect(() => {
     let alive = true;
-    for (const lesson of lessons.filter((l) => l.free)) {
+    for (const lesson of allLessons.filter((l) => l.free)) {
       api.lessonProgress(lesson.id).then(
         (p) => alive && setProgress((prev) => ({ ...prev, [lesson.id]: p })),
         () => undefined,
@@ -33,8 +43,9 @@ export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => voi
   }, []);
 
   // Кнопка «Продолжить» появляется, когда прогресс по всем бесплатным урокам загружен: иначе она бы «прыгала».
-  const resume = settled >= freeCount ? findResume(lessons, progress) : null;
-  const resumeLesson = resume ? lessons.find((l) => l.id === resume.lessonId) : undefined;
+  const resume = settled >= freeLessons.length ? findResume(allLessons, progress) : null;
+  const resumeLesson = resume ? allLessons.find((l) => l.id === resume.lessonId) : undefined;
+  const resumeLetters = resumeLesson ? isAlphabetLesson(resumeLesson) : false;
 
   const toNext = me.status.nextAt === null ? null : me.status.nextAt - me.passedLessons;
 
@@ -49,14 +60,21 @@ export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => voi
           <Card className="flex flex-col gap-3" >
             <div>
               <div className="text-sm text-ink-soft">
-                {resume.kind === "quiz" ? "Все слова пройдены" : resume.started ? "Вы остановились здесь" : "Начните с первого урока"}
+                {resume.kind === "quiz"
+                  ? resumeLetters
+                    ? "Все буквы пройдены"
+                    : "Все слова пройдены"
+                  : resume.started
+                    ? "Вы остановились здесь"
+                    : "Начните с первого урока"}
               </div>
               <div className="font-semibold">
-                Урок {resumeLesson.number}. {resumeLesson.title}
+                {resumeLetters ? `Алфавит. Урок ${resumeLesson.number}.` : `Урок ${resumeLesson.number}.`} {resumeLesson.title}
               </div>
               {resume.kind === "word" && (
                 <div className="text-ink-soft" data-testid="continue-place">
-                  Слово {resume.wordIndex + 1} из {WORDS_PER_LESSON}, этап «{STAGE_TITLES[resume.stage]}»
+                  {resumeLetters ? "Буква" : "Слово"} {resume.wordIndex + 1} из {lessonItems(resumeLesson).length}, этап «
+                  {STAGE_TITLES[resume.stage]}»
                 </div>
               )}
             </div>
@@ -69,6 +87,20 @@ export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => voi
             </Button>
           </Card>
         )}
+        <section className="flex flex-col gap-block" data-testid="alphabet-section">
+          <h2 className="text-lg font-bold">{ALPHABET_TITLE}</h2>
+          <p className="text-sm text-ink-soft">
+            27 форм букв иврита, включая 5 конечных: послушайте, напишите и наберите каждую. Весь алфавит бесплатный.
+          </p>
+          <div className="flex flex-col gap-2">
+            {alphabetLessons.map((lesson) => (
+              <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
+            ))}
+          </div>
+          {alphabetLessons.length < ALPHABET_GROUPS.length && (
+            <p className="text-ink-soft">Остальные уроки алфавита скоро появятся.</p>
+          )}
+        </section>
         {SECTIONS.map((section) => {
           const inSection = lessons.filter((l) => l.section === section);
           return (
@@ -102,10 +134,12 @@ function LessonRow({
   progress,
   onOpen,
 }: {
-  lesson: Lesson;
+  lesson: AnyLesson;
   progress?: LessonProgressResponse;
   onOpen: (id: string) => void;
 }) {
+  const items = lessonItems(lesson);
+  const letters = isAlphabetLesson(lesson);
   const done = progress?.words.filter((w) => w.completed).length ?? 0;
   const passed = progress?.quiz.passed ?? false;
   return (
@@ -120,11 +154,16 @@ function LessonRow({
           <div className="font-semibold">
             Урок {lesson.number}. {lesson.title}
           </div>
+          {isAlphabetLesson(lesson) && (
+            <div dir="rtl" lang="he" className="font-hebrew text-xl text-ink-soft">
+              {lesson.letters.map((l) => l.he).join(" ")}
+            </div>
+          )}
           <div className="mt-1 flex flex-wrap items-center gap-2">
-            <Chip tone={done === WORDS_PER_LESSON ? "success" : "neutral"}>
-              Слов: {done} из {WORDS_PER_LESSON}
+            <Chip tone={done === items.length ? "success" : "neutral"}>
+              {letters ? "Букв" : "Слов"}: {done} из {items.length}
             </Chip>
-            {!passed && done === WORDS_PER_LESSON && <Chip tone="accent">Викторина открыта</Chip>}
+            {!passed && done === items.length && <Chip tone="accent">Викторина открыта</Chip>}
             {passed && (
               <Chip tone="success">
                 <CheckCircle2 className="size-4" aria-hidden />

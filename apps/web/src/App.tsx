@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getLesson } from "@milav/content";
+import { getAnyLesson } from "@milav/content";
 import { AppProvider } from "./AppContext";
 import { Notice } from "./components/ui";
 import { HOME, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
@@ -13,7 +13,7 @@ import { launchTarget } from "./telegram";
 function initialScreen(): Screen {
   const storage = browserStorage();
   if (!hasSavedScreen(storage) && launchTarget() === "record") return RECORD;
-  return restoreScreen(storage, (id) => !!getLesson(id));
+  return restoreScreen(storage, (id) => !!getAnyLesson(id));
 }
 
 export function App() {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Lesson, WordProgress } from "@milav/shared";
+import type { AlphabetLesson, Lesson, WordProgress } from "@milav/shared";
 import { findResume, orderLessons, type LessonState } from "./resume";
 
 function lesson(id: string, over: Partial<Lesson> = {}): Lesson {
@@ -75,5 +75,62 @@ describe("«Продолжить»", () => {
     expect(findResume(lessons, { a1: state(10, {}, true), a2: state(10, {}, true), a3: state(10, {}, true) })).toBeNull();
     expect(findResume([lesson("paid", { free: false })], { paid: state(0) })).toBeNull();
     expect(findResume(lessons, {})).toBeNull();
+  });
+});
+
+describe("алфавит", () => {
+  const alphabet = (number: number): AlphabetLesson => ({
+    id: `alphabet-${number}`,
+    topicId: "alphabet",
+    section: "alphabet",
+    topic: "Алфавит",
+    number,
+    free: true,
+    title: `Алфавит ${number}`,
+    letters: [],
+  });
+
+  /** Урок из 5 букв: первые `passedLetters` пройдены (без «говори»), у следующей отмечены этапы `current`. */
+  function letterState(passedLetters: number, current: Partial<WordProgress> = {}, quizPassed = false): LessonState {
+    const done = { listen: true, speak: false, write: true, type: true };
+    const letter = (i: number, over: Partial<WordProgress>) => ({
+      ...word(`l${i}`, over),
+      completed: !!(over.listen && over.write && over.type),
+    });
+    return {
+      words: Array.from({ length: 5 }, (_, i) => (i < passedLetters ? letter(i, done) : i === passedLetters ? letter(i, current) : letter(i, {}))),
+      quiz: { passed: quizPassed },
+    };
+  }
+
+  const lessons = [lesson("animals-1"), alphabet(2), alphabet(1)];
+
+  it("алфавит стоит первым на главной, по номерам", () => {
+    expect(orderLessons(lessons).map((l) => l.id)).toEqual(["alphabet-1", "alphabet-2", "animals-1"]);
+  });
+
+  it("новичку предлагает начать с первого урока алфавита", () => {
+    const progress = { "alphabet-1": letterState(0), "alphabet-2": letterState(0), "animals-1": state(0) };
+    expect(findResume(lessons, progress)).toEqual({ kind: "word", lessonId: "alphabet-1", wordIndex: 0, stage: "listen", started: false });
+  });
+
+  it("после «слушай» ведёт на «пиши», а не на несуществующий «говори»", () => {
+    const progress = { "alphabet-1": letterState(2, { listen: true }), "animals-1": state(0) };
+    expect(findResume(lessons, progress)).toEqual({ kind: "word", lessonId: "alphabet-1", wordIndex: 2, stage: "write", started: true });
+  });
+
+  it("когда все буквы пройдены, ведёт к викторине алфавита", () => {
+    const progress = { "alphabet-1": letterState(5), "animals-1": state(0) };
+    expect(findResume(lessons, progress)).toEqual({ kind: "quiz", lessonId: "alphabet-1" });
+  });
+
+  it("начатый урок слов важнее непочатого алфавита", () => {
+    const progress = { "alphabet-1": letterState(0), "animals-1": state(2, { listen: true }) };
+    expect(findResume(lessons, progress)).toMatchObject({ lessonId: "animals-1", wordIndex: 2, started: true });
+  });
+
+  it("сданный алфавит пропускается", () => {
+    const progress = { "alphabet-1": letterState(5, {}, true), "animals-1": state(0) };
+    expect(findResume(lessons, progress)).toMatchObject({ lessonId: "animals-1", started: false });
   });
 });

@@ -2,7 +2,7 @@ import { Check, Lock } from "lucide-react";
 import { STAGES, STAGE_TITLES, type Stage, type WordProgress } from "@milav/shared";
 
 /**
- * Четыре этапа слова. Этап доступен, когда пройдены предыдущие
+ * Этапы слова (четыре) или буквы (три, без «говори»). Этап доступен, когда пройдены предыдущие
  * (этап «говори», который пользователь пропустил, считается пройденным только для открытия следующих).
  */
 export function StageTabs({
@@ -10,18 +10,20 @@ export function StageTabs({
   current,
   skipped,
   onSelect,
+  stages = STAGES,
 }: {
   progress: WordProgress;
   current: Stage;
   skipped: boolean;
   onSelect: (stage: Stage) => void;
+  stages?: readonly Stage[];
 }) {
-  const firstOpen = STAGES.findIndex((s) => !progress[s] && !(s === "speak" && skipped));
-  const unlockedUpTo = firstOpen === -1 ? STAGES.length - 1 : firstOpen;
+  const firstOpen = stages.findIndex((s) => !progress[s] && !(s === "speak" && skipped));
+  const unlockedUpTo = firstOpen === -1 ? stages.length - 1 : firstOpen;
 
   return (
-    <div className="grid grid-cols-4 gap-2" role="tablist">
-      {STAGES.map((stage, i) => {
+    <div className={`grid gap-2 ${stages.length === 3 ? "grid-cols-3" : "grid-cols-4"}`} role="tablist">
+      {stages.map((stage, i) => {
         const locked = i > unlockedUpTo;
         const done = progress[stage];
         const active = stage === current;

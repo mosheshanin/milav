@@ -1,35 +1,41 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
-import { getLesson } from "@milav/content";
+import { getAnyLesson } from "@milav/content";
 import {
-  MAX_MISTAKES,
-  PASS_SCORE,
   QUESTION_TITLES,
-  QUIZ_SIZE,
-  type Lesson,
+  isAlphabetLesson,
+  isLetter,
+  lessonItems,
+  quizRulesFor,
+  type AnyLesson,
+  type Letter,
   type QuizAnswerResponse,
   type QuizQuestion,
   type QuizResult,
+  type QuizRules,
   type QuizStartResponse,
+  type StudyItem,
   type Word,
 } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { HebrewKeyboard } from "../components/HebrewKeyboard";
 import { ListenButton } from "../components/ListenButton";
 import { SpeakRecorder } from "../components/SpeakRecorder";
 import { WriteWord, type WriteResult } from "../components/WriteWord";
 import { Button, Card, Chip, Notice } from "../components/ui";
 import { isQuizSessionLost, quizErrorText, saveErrorText } from "../lib/apiErrors";
+import { playLetterName } from "../lib/audio";
 import { useBackButton } from "../lib/useBackButton";
 import { confirmAction, setClosingConfirmation } from "../telegram";
 
 /**
- * Викторина по уроку: 25 вопросов, ошибки видны сразу.
+ * Викторина по уроку: 25 вопросов у слов, 20 у алфавита (правила: `quizRulesFor`), ошибки видны сразу.
  * Вопросы выдаёт сервер, каждый ответ проверяется на сервере, итог считает и записывает сервер (apps/api/src/quizSession.ts).
  */
 export function Quiz({ lessonId, onBack, onHome }: { lessonId: string; onBack: () => void; onHome: () => void }) {
-  const lesson = getLesson(lessonId);
+  const lesson = getAnyLesson(lessonId);
   const [round, setRound] = useState(0);
   if (!lesson) return <Notice title="Урок не найден" />;
   return <QuizRound key={round} lesson={lesson} onBack={onBack} onHome={onHome} onRestart={() => setRound(round + 1)} />;
@@ -44,7 +50,7 @@ function QuizRound({
   onHome,
   onRestart,
 }: {
-  lesson: Lesson;
+  lesson: AnyLesson;
   onBack: () => void;
   onHome: () => void;
   onRestart: () => void;
@@ -96,7 +102,7 @@ function QuizRound({
                 Повторить
               </Button>
               <Button variant="ghost" block onClick={onBack}>
-                Назад к словам
+                {isAlphabetLesson(lesson) ? "Назад к буквам" : "Назад к словам"}
               </Button>
             </>
           )}
@@ -111,9 +117,14 @@ type Outcome = { correct: boolean; chosen?: string };
 
 type SendError = { message: string; retry: () => void };
 
-function optionLabel(question: QuizQuestion, word: Word): string {
-  return question.type === "ru-he" ? word.he : word.ru;
+/** Подпись варианта ответа: иврит, русский перевод слова, буква или русское название буквы. */
+function optionLabel(question: QuizQuestion, item: StudyItem): string {
+  if (isLetter(item)) return question.type === "hear-letter" ? item.he : item.name.ru;
+  return question.type === "ru-he" ? item.he : item.ru;
 }
+
+/** Вопросы, где ответ рисуют: ответ засчитывается сразу после письма, отдельной обратной связи нет. */
+const isWriteQuestion = (q: QuizQuestion) => q.type === "write" || q.type === "name-write";
 
 function QuizPlay({
   lesson,
@@ -122,7 +133,7 @@ function QuizPlay({
   onHome,
   onRestart,
 }: {
-  lesson: Lesson;
+  lesson: AnyLesson;
   session: QuizStartResponse;
   onBack: () => void;
   onHome: () => void;
@@ -130,7 +141,9 @@ function QuizPlay({
 }) {
   const { refresh } = useApp();
   const { sessionId, questions } = session;
-  const words = lesson.words;
+  const items = lessonItems(lesson);
+  const alphabet = isAlphabetLesson(lesson);
+  const rules = quizRulesFor(lesson);
   const [index, setIndex] = useState(0);
   /** Верно ли ответили на каждый уже принятый вопрос (так, как решил сервер). */
   const [results, setResults] = useState<boolean[]>([]);
@@ -205,6 +218,15 @@ function QuizPlay({
     );
   }
 
+  /** «Найди букву на клавиатуре»: нажатая буква уходит на сервер сразу. */
+  function typeLetter(typed: string) {
+    const i = index;
+    void send(
+      () => api.quizAnswer({ sessionId, index: i, typed }),
+      (res) => setOutcome({ correct: res.correct, chosen: typed }),
+    );
+  }
+
   function giveUpSpeak() {
     const i = index;
     void send(
@@ -261,7 +283,7 @@ function QuizPlay({
                 Начать заново
               </Button>
               <Button variant="ghost" block onClick={onBack}>
-                Назад к словам
+                {alphabet ? "Назад к буквам" : "Назад к словам"}
               </Button>
             </div>
           </Card>
@@ -280,18 +302,18 @@ function QuizPlay({
               💪
             </div>
             <h2 className="text-xl font-bold" data-testid="quiz-aborted">
-              Ошибок больше {MAX_MISTAKES}
+              Ошибок больше {rules.maxMistakes}
             </h2>
             <p className="text-ink-soft">
-              Урок в этот раз не сдан. Результат не сохранён: всё так, как будто викторина не начиналась. Повторите слова
-              и попробуйте ещё раз.
+              Урок в этот раз не сдан. Результат не сохранён: всё так, как будто викторина не начиналась. Повторите{" "}
+              {alphabet ? "буквы" : "слова"} и попробуйте ещё раз.
             </p>
             <div className="grid w-full gap-2">
               <Button block onClick={onRestart} data-testid="quiz-restart">
                 Начать заново
               </Button>
               <Button variant="secondary" block onClick={onBack}>
-                Повторить слова урока
+                {alphabet ? "Повторить буквы урока" : "Повторить слова урока"}
               </Button>
               <Button variant="ghost" block onClick={onHome}>
                 К урокам
@@ -308,13 +330,13 @@ function QuizPlay({
       <>
         <Header title="Итоги викторины" onBack={() => void guardedBack()} />
         <main className="mx-auto flex max-w-md flex-col gap-block p-block">
-          {result ? <Result result={result} onHome={onHome} /> : <Notice title="Подводим итог…" />}
+          {result ? <Result result={result} rules={rules} onHome={onHome} /> : <Notice title="Подводим итог…" />}
         </main>
       </>
     );
   }
 
-  const word = words.find((w) => w.id === question!.wordId)!;
+  const item = items.find((w) => w.id === question!.wordId)!;
 
   return (
     <>
@@ -322,26 +344,27 @@ function QuizPlay({
       <main className="mx-auto flex max-w-md flex-col gap-block p-block pb-section">
         <div className="flex items-center justify-between gap-2">
           <span className="font-semibold" data-testid="quiz-progress">
-            Вопрос {index + 1} из {QUIZ_SIZE}
+            Вопрос {index + 1} из {rules.size}
           </span>
-          <Chip tone={mistakes > MAX_MISTAKES ? "danger" : mistakes > 0 ? "accent" : "neutral"}>
+          <Chip tone={mistakes > rules.maxMistakes ? "danger" : mistakes > 0 ? "accent" : "neutral"}>
             <span data-testid="quiz-mistakes">
-              Ошибок: {mistakes} из {MAX_MISTAKES} допустимых
+              Ошибок: {mistakes} из {rules.maxMistakes} допустимых
             </span>
           </Chip>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-line" aria-hidden>
-          <div className="h-full bg-accent transition-all" style={{ width: `${(index / QUIZ_SIZE) * 100}%` }} />
+          <div className="h-full bg-accent transition-all" style={{ width: `${(index / rules.size) * 100}%` }} />
         </div>
         <Card className="flex flex-col gap-block" key={index}>
           <h2 className="text-center text-ink-soft">{QUESTION_TITLES[question!.type]}</h2>
           <QuestionBody
             question={question!}
-            word={word}
-            words={words}
+            item={item}
+            items={items}
             outcome={outcome}
             busy={pending}
             onChoose={choose}
+            onTypeLetter={typeLetter}
             checkSpeech={checkSpeech}
             onSpeechAnswered={speechAnswered}
             onSpeechGiveUp={giveUpSpeak}
@@ -360,10 +383,10 @@ function QuizPlay({
               </Button>
             </div>
           )}
-          {outcome && question!.type !== "write" && (
-            <Feedback outcome={outcome} word={word} showWord={question!.type === "speak"} />
+          {outcome && !isWriteQuestion(question!) && (
+            <Feedback outcome={outcome} item={item} showItem={question!.type === "speak"} />
           )}
-          {outcome && question!.type !== "write" && (
+          {outcome && !isWriteQuestion(question!) && (
             <Button onClick={next} data-testid="quiz-next">
               {index === questions.length - 1 ? "Завершить" : "Дальше"}
             </Button>
@@ -374,7 +397,7 @@ function QuizPlay({
   );
 }
 
-function Feedback({ outcome, word, showWord }: { outcome: Outcome; word: Word; showWord: boolean }) {
+function Feedback({ outcome, item, showItem }: { outcome: Outcome; item: StudyItem; showItem: boolean }) {
   return (
     <div
       role="status"
@@ -386,13 +409,13 @@ function Feedback({ outcome, word, showWord }: { outcome: Outcome; word: Word; s
       {outcome.correct ? <CheckCircle2 className="size-icon" aria-hidden /> : <XCircle className="size-icon" aria-hidden />}
       <span>
         {outcome.correct ? "Верно!" : "Неверно."}
-        {(!outcome.correct || showWord) && (
+        {(!outcome.correct || showItem) && (
           <>
             {" "}
             <span dir="rtl" lang="he" className="font-hebrew">
-              {word.he}
+              {item.he}
             </span>{" "}
-            [{word.translit}] — {word.ru}
+            {isLetter(item) ? `— ${item.name.ru}` : `[${item.translit}] — ${item.ru}`}
           </>
         )}
       </span>
@@ -402,27 +425,45 @@ function Feedback({ outcome, word, showWord }: { outcome: Outcome; word: Word; s
 
 function QuestionBody({
   question,
-  word,
-  words,
+  item,
+  items,
   outcome,
   busy,
   onChoose,
+  onTypeLetter,
   checkSpeech,
   onSpeechAnswered,
   onSpeechGiveUp,
   onWriteDone,
 }: {
   question: QuizQuestion;
-  word: Word;
-  words: Word[];
+  item: StudyItem;
+  items: StudyItem[];
   outcome: Outcome | null;
   busy: boolean;
   onChoose: (optionId: string) => void;
+  onTypeLetter: (letter: string) => void;
   checkSpeech: (audio: Blob) => Promise<QuizAnswerResponse & { match: boolean; heard: string }>;
   onSpeechAnswered: (res: QuizAnswerResponse) => void;
   onSpeechGiveUp: () => void;
   onWriteDone: (result: WriteResult) => void;
 }) {
+  if (isLetter(item)) {
+    return (
+      <LetterQuestionBody
+        question={question}
+        letter={item}
+        letters={items as Letter[]}
+        outcome={outcome}
+        busy={busy}
+        onChoose={onChoose}
+        onTypeLetter={onTypeLetter}
+        onWriteDone={onWriteDone}
+      />
+    );
+  }
+  const word = item as Word;
+  const words = items as Word[];
   switch (question.type) {
     case "hear-ru":
     case "he-ru":
@@ -498,20 +539,117 @@ function QuestionBody({
           <WriteWord word={word} mode="quiz" doneLabel="Дальше" onDone={onWriteDone} />
         </>
       );
+    default:
+      return null;
+  }
+}
+
+/**
+ * Вопросы викторины алфавита.
+ * - hear-letter: слушают название и выбирают букву среди четырёх;
+ * - letter-name: видят букву и выбирают русское название;
+ * - name-write: по названию рисуют букву (самой буквы на экране нет, подсказки нет);
+ * - name-type: по названию находят букву на клавиатуре.
+ */
+function LetterQuestionBody({
+  question,
+  letter,
+  letters,
+  outcome,
+  busy,
+  onChoose,
+  onTypeLetter,
+  onWriteDone,
+}: {
+  question: QuizQuestion;
+  letter: Letter;
+  letters: Letter[];
+  outcome: Outcome | null;
+  busy: boolean;
+  onChoose: (optionId: string) => void;
+  onTypeLetter: (letter: string) => void;
+  onWriteDone: (result: WriteResult) => void;
+}) {
+  switch (question.type) {
+    case "hear-letter":
+    case "letter-name":
+      return (
+        <>
+          {question.type === "hear-letter" && (
+            <ListenButton play={() => playLetterName(letter)} label="Послушать название" />
+          )}
+          {question.type === "letter-name" && (
+            <div dir="rtl" lang="he" className="text-center font-hebrew text-8xl font-bold leading-tight" data-testid="prompt">
+              {letter.he}
+            </div>
+          )}
+          <div className={question.type === "hear-letter" ? "grid grid-cols-2 gap-2" : "grid gap-2"}>
+            {question.options.map((optionId) => {
+              const option = letters.find((l) => l.id === optionId)!;
+              const isTarget = optionId === question.wordId;
+              const state = !outcome ? "idle" : isTarget ? "right" : outcome.chosen === optionId ? "wrong" : "idle";
+              const hebrew = question.type === "hear-letter";
+              return (
+                <button
+                  key={optionId}
+                  type="button"
+                  disabled={outcome !== null || busy}
+                  data-testid="option"
+                  data-correct={isTarget}
+                  onClick={() => onChoose(optionId)}
+                  dir={hebrew ? "rtl" : undefined}
+                  lang={hebrew ? "he" : undefined}
+                  className={`min-h-14 rounded-control border-2 px-block text-lg font-semibold transition ${
+                    hebrew ? "font-hebrew text-5xl" : ""
+                  } ${
+                    state === "right"
+                      ? "border-success bg-success-soft text-success"
+                      : state === "wrong"
+                        ? "border-danger bg-danger-soft text-danger"
+                        : "border-line bg-surface active:bg-accent-soft"
+                  }`}
+                >
+                  {optionLabel(question, option)}
+                </button>
+              );
+            })}
+          </div>
+        </>
+      );
+    case "name-write":
+      return (
+        <>
+          <div data-testid="prompt" className="text-center text-3xl font-semibold">
+            {letter.name.ru}
+          </div>
+          <WriteWord word={letter} mode="quiz" doneLabel="Дальше" onDone={onWriteDone} />
+        </>
+      );
+    case "name-type":
+      return (
+        <>
+          <div data-testid="prompt" className="text-center text-3xl font-semibold">
+            {letter.name.ru}
+          </div>
+          {!outcome && <HebrewKeyboard onKey={(key) => !busy && onTypeLetter(key)} />}
+        </>
+      );
+    default:
+      return null;
   }
 }
 
 /** Итог дошедшей до конца викторины: ошибок не больше допустимого, значит урок сдан и уже записан сервером. */
-function Result({ result, onHome }: { result: QuizResult; onHome: () => void }) {
+function Result({ result, rules, onHome }: { result: QuizResult; rules: QuizRules; onHome: () => void }) {
   return (
     <Card className="flex flex-col items-center gap-block text-center">
       <div className="text-5xl" aria-hidden>
         🎉
       </div>
       <h2 className="text-2xl font-bold" data-testid="quiz-result">
-        {result.correct} из {QUIZ_SIZE}
+        {result.correct} из {result.total}
       </h2>
-      <p className="text-ink-soft">Нужно было {PASS_SCORE}. Урок сдан!</p>
+      <p className="text-ink-soft">Нужно было {rules.pass}. Урок сдан!</p>
       <p className="font-semibold text-success" data-testid="quiz-saved">
         {result.firstTimePassed
           ? `Новый сданный урок! Всего сдано: ${result.passedLessons}. Статус: ${result.status.symbol} ${result.status.name}`

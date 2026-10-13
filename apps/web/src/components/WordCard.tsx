@@ -1,5 +1,5 @@
-import { useState } from "react";
 import type { Word } from "@milav/shared";
+import { WordImage } from "./WordImage";
 import { Card, Chip } from "./ui";
 
 const GENDER: Record<NonNullable<Word["gender"]>, string> = { m: "мужской род", f: "женский род" };
@@ -12,33 +12,6 @@ const FORM_LABELS = [
 ] as const;
 
 /**
- * Картинка слова. Если у слова нет картинки или файл не загрузился, плитка нужного размера показывает
- * запасной вариант: первую букву слова.
- */
-function WordImage({ word, className }: { word: Word; className: string }) {
-  const [broken, setBroken] = useState(false);
-  const showImage = word.image && !broken;
-  return (
-    <div className={`flex shrink-0 items-center justify-center rounded-control bg-page ${className}`}>
-      {showImage ? (
-        <img
-          src={word.image}
-          alt=""
-          className="size-4/5 object-contain"
-          loading="eager"
-          data-testid="word-image"
-          onError={() => setBroken(true)}
-        />
-      ) : (
-        <span dir="rtl" lang="he" aria-hidden className="font-hebrew text-5xl font-bold text-accent-soft" data-testid="word-image-fallback">
-          {[...word.he][0]}
-        </span>
-      )}
-    </div>
-  );
-}
-
-/**
  * Карточка слова: слева картинка, справа весь текст (выравнивание по правому краю):
  * печатный и рукописный иврит, транскрипция, перевод, род, остальные формы прилагательного и фраза для запоминания.
  */
@@ -47,7 +20,7 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
     // На этапах письма и набора остаётся главное, чтобы холст и клавиатура помещались на экране.
     return (
       <Card className="flex items-center gap-3 py-3">
-        <WordImage key={word.id} word={word} className="size-16" />
+        <WordImage key={word.id} image={word.image} fallback={word.he} className="size-16" />
         <div className="flex min-w-0 flex-1 items-center justify-between gap-3 text-right">
           <div className="min-w-0">
             <div className="text-xl font-semibold">{word.ru}</div>
@@ -62,7 +35,7 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
   }
   return (
     <Card className="flex items-start gap-3">
-      <WordImage key={word.id} word={word} className="size-28" />
+      <WordImage key={word.id} image={word.image} fallback={word.he} className="size-28" />
       <div className="flex min-w-0 flex-1 flex-col items-end gap-1 text-right">
         <div dir="rtl" lang="he" className="font-hebrew text-5xl font-bold leading-tight" data-testid="word-he">
           {word.he}

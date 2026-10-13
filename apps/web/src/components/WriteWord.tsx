@@ -9,7 +9,6 @@ import {
   wordLetters,
   type Stroke,
   type Template,
-  type Word,
 } from "@milav/shared";
 import { DrawCanvas, type DrawHandle } from "./DrawCanvas";
 import { Button } from "./ui";
@@ -26,8 +25,13 @@ export interface WriteResult {
 
 type Slot = "pending" | "ok" | "fail";
 
-/** Буквы слова в порядке написания (первая буква справа). */
-export function lettersOf(word: Word): string[] {
+/** Слово или буква: нужно только написание. */
+export interface Spelled {
+  he: string;
+}
+
+/** Буквы слова в порядке написания (первая буква справа). У буквы одна. */
+export function lettersOf(word: Spelled): string[] {
   return wordLetters(word.he);
 }
 
@@ -43,7 +47,7 @@ export function WriteWord({
   onDone,
   doneLabel,
 }: {
-  word: Word;
+  word: Spelled;
   mode: "study" | "quiz";
   onDone: (result: WriteResult) => void;
   doneLabel: string;
@@ -133,7 +137,7 @@ export function WriteWord({
       {finished ? (
         <>
           <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
-            {failedLetters ? `Букв с ошибкой: ${failedLetters}` : "Слово написано!"}
+            {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : "Слово написано!"}
           </p>
           <Button
             onClick={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
@@ -144,9 +148,11 @@ export function WriteWord({
         </>
       ) : (
         <>
-          <p className="text-center text-ink-soft">
-            Буква {index + 1} из {letters.length}
-          </p>
+          {letters.length > 1 && (
+            <p className="text-center text-ink-soft">
+              Буква {index + 1} из {letters.length}
+            </p>
+          )}
           <DrawCanvas
             key={index}
             ref={canvas}

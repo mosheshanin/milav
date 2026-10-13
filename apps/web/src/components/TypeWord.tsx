@@ -1,11 +1,10 @@
 import { useState } from "react";
-import type { Word } from "@milav/shared";
-import { lettersOf } from "./WriteWord";
+import { lettersOf, type Spelled } from "./WriteWord";
 import { HebrewKeyboard } from "./HebrewKeyboard";
 import { Button } from "./ui";
 
-/** Набор слова на экранной клавиатуре. Слово видно на карточке выше. */
-export function TypeWord({ word, onDone }: { word: Word; onDone: (typed: string) => void }) {
+/** Набор слова (или одной буквы) на экранной клавиатуре. Слово видно на карточке выше. */
+export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: string) => void }) {
   const target = lettersOf(word);
   const [typed, setTyped] = useState<string[]>([]);
 
@@ -23,7 +22,7 @@ export function TypeWord({ word, onDone }: { word: Word; onDone: (typed: string)
           correct ? "border-success text-success" : wrong ? "border-danger text-danger" : "border-line"
         }`}
       >
-        {typed.join("") || <span className="text-xl font-normal text-ink-soft">Наберите слово</span>}
+        {typed.join("") || <span className="text-xl font-normal text-ink-soft">{target.length === 1 ? "Нажмите букву" : "Наберите слово"}</span>}
       </div>
 
       {correct ? (
@@ -42,7 +41,7 @@ export function TypeWord({ word, onDone }: { word: Word; onDone: (typed: string)
           />
           {wrong && (
             <p role="alert" className="text-center font-semibold text-danger">
-              Не совпадает со словом. Сотрите лишнее и наберите ещё раз.
+              {target.length === 1 ? "Это другая буква. Сотрите и попробуйте ещё раз." : "Не совпадает со словом. Сотрите лишнее и наберите ещё раз."}
             </p>
           )}
         </>

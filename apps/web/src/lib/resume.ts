@@ -1,7 +1,7 @@
-import { STAGES, type Lesson, type Section, type Stage, type WordProgress } from "@milav/shared";
+import { ALPHABET_SECTION, stagesFor, type AnyLesson, type Stage, type WordProgress } from "@milav/shared";
 
-/** Порядок разделов на главной. */
-export const SECTION_ORDER: Section[] = ["nouns", "verbs", "adjectives"];
+/** Порядок разделов на главной: алфавит первым, это стартовая точка новичка. */
+export const SECTION_ORDER = [ALPHABET_SECTION, "nouns", "verbs", "adjectives"] as const;
 
 /** Прогресс по уроку, как его отдаёт сервер (нужна только часть полей). */
 export interface LessonState {
@@ -23,11 +23,11 @@ export type Resume =
     }
   | { kind: "quiz"; lessonId: string };
 
-/** Уроки в том порядке, в каком они показаны на главной: раздел, тема (по первому появлению), номер урока. */
-export function orderLessons(lessons: Lesson[]): Lesson[] {
-  const result: Lesson[] = [];
+/** Уроки в том порядке, в каком они показаны на главной: раздел (алфавит первый), тема (по первому появлению), номер урока. */
+export function orderLessons(lessons: AnyLesson[]): AnyLesson[] {
+  const result: AnyLesson[] = [];
   for (const section of SECTION_ORDER) {
-    const topics = new Map<string, Lesson[]>();
+    const topics = new Map<string, AnyLesson[]>();
     for (const lesson of lessons.filter((l) => l.section === section)) {
       topics.set(lesson.topic, [...(topics.get(lesson.topic) ?? []), lesson]);
     }
@@ -37,7 +37,7 @@ export function orderLessons(lessons: Lesson[]): Lesson[] {
 }
 
 function isStarted(state: LessonState): boolean {
-  return state.words.some((w) => STAGES.some((s) => w[s]));
+  return state.words.some((w) => w.listen || w.speak || w.write || w.type);
 }
 
 /**
@@ -46,7 +46,7 @@ function isStarted(state: LessonState): boolean {
  * и в нём первое непройденное слово и этап. Когда все слова пройдены, а викторина не сдана, ведём к ней.
  * Платные уроки пока не предлагаем: прогресс по ним не загружается.
  */
-export function findResume(lessons: Lesson[], progress: Record<string, LessonState | undefined>): Resume | null {
+export function findResume(lessons: AnyLesson[], progress: Record<string, LessonState | undefined>): Resume | null {
   const open = orderLessons(lessons).filter((l) => {
     const state = progress[l.id];
     return l.free && state && !state.quiz.passed;
@@ -63,7 +63,8 @@ export function findResume(lessons: Lesson[], progress: Record<string, LessonSta
     kind: "word",
     lessonId: lesson.id,
     wordIndex,
-    stage: STAGES.find((s) => !word[s]) ?? "listen",
+    // Этапы урока свои: у буквы нет «говори», иначе после «слушай» её отправило бы на несуществующий этап.
+    stage: stagesFor(lesson).find((s) => !word[s]) ?? "listen",
     started: isStarted(state),
   };
 }
