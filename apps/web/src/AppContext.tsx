@@ -17,6 +17,8 @@ interface AppValue {
   refresh: () => Promise<void>;
   /** То же, но только если профиль читали давно (при возврате на главную, чтобы не делать лишний запрос). */
   refreshIfStale: () => Promise<void>;
+  /** Помечает профиль устаревшим: главная перечитает его при следующем открытии (ритм и цель дня изменились). */
+  invalidate: () => void;
   /** Подставляет новую цель дня и счётчик непросмотренных после ответа сервера. */
   applyPlay: (play: PlayInfo) => void;
 }
@@ -67,6 +69,9 @@ export function AppProvider({
             refresh: fetchMe,
             refreshIfStale: async () => {
               if (Date.now() - fetchedAt.current > STALE_MS) await fetchMe();
+            },
+            invalidate: () => {
+              fetchedAt.current = 0;
             },
             applyPlay: (play) => setLoad({ state: "ready", me: { ...load.me, play } }),
           }

@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
 type Variant = "primary" | "secondary" | "success" | "ghost";
 
@@ -26,8 +26,16 @@ export function Button({ variant = "primary", block = false, className = "", ...
   );
 }
 
-export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`rounded-card border border-line bg-surface p-block ${className}`}>{children}</section>;
+export function Card({
+  children,
+  className = "",
+  ...rest
+}: { children: ReactNode; className?: string } & Omit<HTMLAttributes<HTMLElement>, "className" | "children">) {
+  return (
+    <section {...rest} className={`rounded-card border border-line bg-surface p-block ${className}`}>
+      {children}
+    </section>
+  );
 }
 
 export function Chip({

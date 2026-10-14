@@ -50,7 +50,7 @@ export function Study({
   const items = lesson ? lessonItems(lesson) : [];
   const stages = lesson ? stagesFor(lesson) : STAGES;
   const alphabet = lesson ? isAlphabetLesson(lesson) : false;
-  const { setPoints } = useApp();
+  const { setPoints, invalidate } = useApp();
   // Кнопка «назад» Telegram (и системная, и свайп) возвращает к списку уроков.
   useBackButton(onBack);
   const [progress, setProgress] = useState<WordProgress[] | null>(null);
@@ -85,9 +85,13 @@ export function Study({
   const replace = useCallback(
     (next: WordProgress, points?: number) => {
       setProgress((prev) => prev?.map((p) => (p.wordId === next.wordId ? next : p)) ?? prev);
-      if (points !== undefined) setPoints(points);
+      if (points !== undefined) {
+        setPoints(points);
+        // Ритм недели и цель дня могли измениться: главная перечитает профиль.
+        invalidate();
+      }
     },
-    [setPoints],
+    [setPoints, invalidate],
   );
 
   const selectWord = useCallback(

@@ -211,7 +211,7 @@ export function PlayToast({ event, onDone }: { event: PlayEvent; onDone: () => v
     <div
       role="status"
       data-testid="play-toast"
-      className="animate-sheet fixed inset-x-block bottom-block z-20 mx-auto flex max-w-md items-center gap-3 rounded-card border border-line bg-surface p-block shadow-lg"
+      className="animate-sheet pointer-events-none fixed inset-x-block bottom-block z-20 mx-auto flex max-w-md items-center gap-3 rounded-card border border-line bg-surface p-block shadow-lg"
     >
       {badges[0] ? <BadgeIconView badge={badges[0]} /> : <Target className="size-icon-lg text-success" aria-hidden />}
       <div className="min-w-0 flex-1 text-sm">
@@ -222,7 +222,7 @@ export function PlayToast({ event, onDone }: { event: PlayEvent; onDone: () => v
         ))}
         {event.goalMet && <div className="font-semibold text-success">Цель дня выполнена!</div>}
       </div>
-      <button type="button" onClick={onDone} aria-label="Закрыть" className="flex size-10 items-center justify-center text-ink-soft">
+      <button type="button" onClick={onDone} aria-label="Закрыть" className="pointer-events-auto flex size-10 items-center justify-center text-ink-soft">
         <X className="size-icon" aria-hidden />
       </button>
     </div>
@@ -281,9 +281,9 @@ export function CelebrationSheet({
             <span className="font-semibold">{status.name}</span>
           </div>
         )}
-        <h2 className="text-xl font-bold">{heading}</h2>
+        <h2 className="px-8 text-xl font-bold">{heading}</h2>
         {shown.map((b) => (
-          <div key={b.id} className="flex items-center gap-3 text-left" data-testid={`celebrate-${b.id}`}>
+          <div key={b.id} className="flex w-full items-center gap-3 text-left" data-testid={`celebrate-${b.id}`}>
             <span className={`animate-pop flex size-14 shrink-0 items-center justify-center rounded-full ${RARITY_CLASSES[b.rarity].soft}`}>
               <BadgeIconView badge={b} className="size-8" />
             </span>
