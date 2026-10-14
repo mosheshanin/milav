@@ -25,6 +25,10 @@ function fill(node: any, path: string[] = []): any {
       return "кот";
     case "gender":
       return "m";
+    case "binyan":
+      return "paal";
+    case "root":
+      return "כתב";
     default:
       throw new Error(`не знаю, чем заполнить ${path.join(".")}`);
   }
@@ -48,9 +52,25 @@ describe("шаблон нового урока", () => {
     expect(w.reviewed).toBe(false);
   });
 
-  it("глагол: фраза, без рода и forms", () => {
+  it("глагол: фраза и блок verb, без рода и forms", () => {
     const w = (buildLessonTemplate({ ...base, section: "verbs" }) as any).words[0];
-    expect(Object.keys(w)).toEqual(["id", "he", "niqqud", "translit", "ru", "example", "reviewed"]);
+    expect(Object.keys(w)).toEqual(["id", "he", "niqqud", "translit", "ru", "example", "verb", "reviewed"]);
+  });
+
+  it("глагол: пустые бинъян, корень и все 27 форм по временам", () => {
+    const v = (buildLessonTemplate({ ...base, section: "verbs" }) as any).words[0].verb;
+    expect(Object.keys(v)).toEqual(["binyan", "root", "present", "past", "future", "imperative"]);
+    expect([4, 9, 10, 4]).toEqual(["present", "past", "future", "imperative"].map((t) => Object.keys(v[t]).length));
+    expect(v.present.ms).toEqual({ he: "", niqqud: "", translit: "" });
+    expect(v.binyan).toBe("");
+    expect(v.root).toBe("");
+  });
+
+  it("в теме-бинъяне бинъян подставляется по topicId, в тематической теме остаётся пустым", () => {
+    const paal = (buildLessonTemplate({ ...base, section: "verbs", topicId: "paal", topic: "Пааль" }) as any).words[0];
+    expect(paal.verb.binyan).toBe("paal");
+    const themed = (buildLessonTemplate({ ...base, section: "verbs", topicId: "motion", topic: "Движение" }) as any).words[0];
+    expect(themed.verb.binyan).toBe("");
   });
 
   it("прилагательное: фраза и три формы", () => {

@@ -105,18 +105,23 @@ export function skeletonProblems(he: string, translit: string): string[] {
 // ---------------------------------------------------------------------------------------------------------------------
 // Правила уровня темы и всего набора уроков
 
-import type { AlphabetLesson, Lesson } from "@milav/shared";
+import type { AlphabetLesson, Lesson, VerbData } from "@milav/shared";
 import {
   ALPHABET_GROUPS,
   ALPHABET_TOPIC_ID,
+  BINYANIM,
+  BINYAN_KEYS,
   FINAL_LETTERS,
   FREE_LESSONS_PER_TOPIC,
   LETTER_KEYS,
   GERESH,
+  VERB_FORM_KEYS,
+  VERB_TENSES,
   isFinalForm,
   isGereshForm,
   letterRuName,
   normalizeHebrew,
+  verbForms,
 } from "@milav/shared";
 
 /** Правило проверки набора уроков: возвращает список нарушений (пустой, если всё в порядке). */
@@ -129,6 +134,67 @@ function byTopic(lessons: Lesson[]): Map<string, Lesson[]> {
   const map = new Map<string, Lesson[]>();
   for (const lesson of lessons) map.set(lesson.topicId, [...(map.get(lesson.topicId) ?? []), lesson]);
   return map;
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Глаголы (решения владельца, 14.10: CLAUDE.md, docs/CONTENT.md). Сейчас только сильные корни: слабые (гзары) теряют или
+// меняют буквы корня в формах, для них понадобится отдельное поле и своя проверка.
+
+/** Буквы стоят в тексте в том же порядке (между ними могут быть другие). Огласовки и конечные формы не мешают. */
+function hasLettersInOrder(text: string, letters: string): boolean {
+  const word = normalizeHebrew(text);
+  let pos = 0;
+  for (const ch of normalizeHebrew(letters)) {
+    const at = word.indexOf(ch, pos);
+    if (at < 0) return false;
+    pos = at + 1;
+  }
+  return true;
+}
+
+/**
+ * Нарушения у одного глагола. `he` это инфинитив (основная форма слова), `verb` блок с бинъяном, корнем и формами.
+ * Проверяет полноту таблицы, огласовки и транскрипцию каждой формы, корень в каждой форме и то,
+ * что бинъян соответствует написанию (приставки инфинитива и причастия).
+ */
+export function verbProblems(he: string, verb: VerbData): string[] {
+  const problems: string[] = [];
+  const info = BINYANIM[verb.binyan];
+  if (!info) return [`бинъян «${String(verb.binyan)}» неизвестен, допустимы ${BINYAN_KEYS.join(", ")}`];
+
+  if (!/^[אבגדהוזחטיכלמנסעפצקרשת]{3,4}$/.test(verb.root)) problems.push(`корень «${verb.root}»: нужны 3–4 буквы без конечных форм`);
+
+  if (!he.startsWith(info.infinitivePrefix)) problems.push(`инфинитив ${he}: в бинъяне ${info.ru} он начинается с ${info.infinitivePrefix}`);
+  if (!hasLettersInOrder(he, verb.root)) problems.push(`инфинитив ${he}: нет букв корня ${verb.root} по порядку`);
+
+  for (const tense of VERB_TENSES) {
+    const set = verb[tense] as Record<string, unknown> | undefined;
+    if (!set) {
+      // Повелительное наклонение необязательно: у части глаголов его нет.
+      if (tense !== "imperative") problems.push(`нет блока ${tense}`);
+      continue;
+    }
+    for (const key of VERB_FORM_KEYS[tense]) {
+      if (!set[key]) problems.push(`${tense}.${key}: нет формы`);
+    }
+    for (const key of Object.keys(set)) {
+      if (!VERB_FORM_KEYS[tense].includes(key)) problems.push(`${tense}.${key}: лишний ключ формы`);
+    }
+  }
+
+  for (const { tense, key, form } of verbForms(verb)) {
+    const where = `${tense}.${key}`;
+    if (normalizeHebrew(form.niqqud) !== normalizeHebrew(form.he)) problems.push(`${where}: огласовки ${form.niqqud} не совпадают с ${form.he}`);
+    if (!hasLettersInOrder(form.he, verb.root)) problems.push(`${where}: в ${form.he} нет букв корня ${verb.root} по порядку`);
+    problems.push(...stressProblems(form.translit).map((p) => `${where}: ${p}`));
+    problems.push(...skeletonProblems(form.he, form.translit).map((p) => `${where}: ${p}`));
+  }
+
+  const ms = verb.present?.ms;
+  if (ms && info.presentPrefix && !ms.he.startsWith(info.presentPrefix)) {
+    problems.push(`present.ms: ${ms.he} в бинъяне ${info.ru} начинается с ${info.presentPrefix}`);
+  }
+  return problems;
 }
 
 export const SET_RULES: SetRule[] = [
@@ -196,6 +262,27 @@ export const SET_RULES: SetRule[] = [
       lessons
         .filter((l) => l.free !== l.number <= FREE_LESSONS_PER_TOPIC)
         .map((l) => `${l.id}: free=${l.free}, а должно быть ${l.number <= FREE_LESSONS_PER_TOPIC}`),
+  },
+  {
+    name: "блок verb только у глаголов, а у каждого глагола он есть; бинъян, корень и формы без ошибок",
+    check: (lessons) =>
+      lessons.flatMap((l) =>
+        l.words.flatMap((w) => {
+          if (l.section !== "verbs") return w.verb ? [`${w.id}: блок verb есть у слова раздела ${l.section}`] : [];
+          if (!w.verb) return [`${w.id}: у глагола нет блока verb`];
+          return verbProblems(w.he, w.verb).map((p) => `${w.id}: ${p}`);
+        }),
+      ),
+  },
+  {
+    name: "в теме-бинъяне (topicId равен ключу бинъяна) все глаголы этого бинъяна",
+    check: (lessons) =>
+      lessons
+        .filter((l) => (BINYAN_KEYS as readonly string[]).includes(l.topicId))
+        .flatMap((l) => [
+          ...(l.section !== "verbs" ? [`${l.id}: тема ${l.topicId} это бинъян, раздел должен быть verbs`] : []),
+          ...l.words.filter((w) => w.verb && w.verb.binyan !== l.topicId).map((w) => `${w.id}: бинъян ${w.verb!.binyan} в теме ${l.topicId}`),
+        ]),
   },
   {
     name: "иврит не повторяется внутри темы",

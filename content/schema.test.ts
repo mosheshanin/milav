@@ -1,7 +1,8 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON } from "@milav/shared";
+import { BINYAN_KEYS, FREE_LESSONS_PER_TOPIC, VERB_FORM_KEYS, WORDS_PER_LESSON } from "@milav/shared";
 import { schema, schemaProblems } from "./validate";
+import { katavWord } from "./verbFixture";
 
 const lessonsDir = new URL("./lessons/", import.meta.url);
 const lessonFiles = readdirSync(lessonsDir).filter((f) => f.endsWith(".json"));
@@ -52,14 +53,15 @@ const adjective = (): any => ({
   reviewed: false,
 });
 
-const verb = (): any => ({
-  he: "לאכול",
-  niqqud: "לֶאֱכֹל",
-  translit: "леэхо́ль",
-  ru: "есть",
-  example: { he: "אני אוכל לחם", translit: "ани охэль лэхэм", ru: "Я ем хлеб" },
-  reviewed: { by: "Проверяющий", at: "2026-10-13" },
-});
+/** Глагол: инфинитив и блок verb с полной таблицей из 27 форм (образец «писать», `verbFixture.ts`). */
+const verb = (): any => ({ ...katavWord(), reviewed: { by: "Проверяющий", at: "2026-10-13" } });
+
+/** Глагол с одним изменением внутри блока verb. */
+const verbWith = (change: (v: any) => void): any => {
+  const w = verb();
+  change(w.verb);
+  return w;
+};
 
 describe("schema.json: настоящие уроки", () => {
   it("есть хотя бы один файл урока", () => {
@@ -88,6 +90,18 @@ describe("schema.json: согласованность с правилами пр
     const rule = (schema as any).allOf[0];
     expect(rule.if.properties.number.maximum).toBe(FREE_LESSONS_PER_TOPIC);
   });
+
+  it("ключи форм глагола и бинъяны в схеме равны константам shared", () => {
+    const defs = (schema as any).definitions;
+    const byTense = { present: "presentForms", past: "pastForms", future: "futureForms", imperative: "imperativeForms" } as const;
+    for (const [tense, name] of Object.entries(byTense)) {
+      const keys = [...VERB_FORM_KEYS[tense as keyof typeof byTense]];
+      expect(defs[name].required, `${tense}: required`).toEqual(keys);
+      expect(Object.keys(defs[name].properties), `${tense}: properties`).toEqual(keys);
+    }
+    expect(defs.verb.properties.binyan.enum).toEqual([...BINYAN_KEYS]);
+    expect(defs.verb.required).toEqual(["binyan", "root", "present", "past", "future"]);
+  });
 });
 
 describe("schema.json: образцы допустимых уроков", () => {
@@ -101,6 +115,15 @@ describe("schema.json: образцы допустимых уроков", () => 
 
   it("глаголы с проверкой носителем", () => {
     expect(schemaProblems(lessonOf("verbs", verb))).toEqual([]);
+  });
+
+  it("глагол без повелительного наклонения (у части глаголов его нет)", () => {
+    expect(schemaProblems(lessonOf("verbs", () => verbWith((v) => delete v.imperative)))).toEqual([]);
+  });
+
+  it("глагол с озвучкой форм: /audio/<id>-form-<время>-<ключ>.mp3", () => {
+    const word = () => verbWith((v) => (v.past["3ms"].audio = "/audio/sample-1-w0-form-past-3ms.mp3"));
+    expect(schemaProblems(lessonOf("verbs", word))).toEqual([]);
   });
 
   it("платный урок: номер 4 и free: false", () => {
@@ -145,6 +168,27 @@ describe("schema.json: ошибки формата ловятся", () => {
     ["в forms нет формы fp", lessonOf("adjectives", () => ({ ...adjective(), forms: { f: adjective().forms.f, mp: adjective().forms.mp } }))],
     ["глагол без фразы", lessonOf("verbs", () => ({ ...verb(), example: undefined }))],
     ["глагол с родом", lessonOf("verbs", () => ({ ...verb(), gender: "m" }))],
+    ["глагол без блока verb", lessonOf("verbs", () => ({ ...verb(), verb: undefined }))],
+    ["глагол с forms вместо verb", lessonOf("verbs", () => ({ ...verb(), forms: adjective().forms }))],
+    ["блок verb у существительного", lessonOf("nouns", (i) => ({ ...noun(i), verb: verb().verb }))],
+    ["блок verb у прилагательного", lessonOf("adjectives", () => ({ ...adjective(), verb: verb().verb }))],
+    ["неизвестный бинъян", lessonOf("verbs", () => verbWith((v) => (v.binyan = "kal")))],
+    ["нет бинъяна", lessonOf("verbs", () => verbWith((v) => delete v.binyan))],
+    ["нет корня", lessonOf("verbs", () => verbWith((v) => delete v.root))],
+    ["корень из двух букв", lessonOf("verbs", () => verbWith((v) => (v.root = "כת")))],
+    ["корень с конечной буквой", lessonOf("verbs", () => verbWith((v) => (v.root = "כתך")))],
+    ["корень с огласовками", lessonOf("verbs", () => verbWith((v) => (v.root = "כָּתַב")))],
+    ["нет блока настоящего времени", lessonOf("verbs", () => verbWith((v) => delete v.present))],
+    ["нет блока будущего времени", lessonOf("verbs", () => verbWith((v) => delete v.future))],
+    ["в настоящем нет формы fp", lessonOf("verbs", () => verbWith((v) => delete v.present.fp))],
+    ["в прошедшем нет формы 3p", lessonOf("verbs", () => verbWith((v) => delete v.past["3p"]))],
+    ["в будущем нет формы 3fp", lessonOf("verbs", () => verbWith((v) => delete v.future["3fp"]))],
+    ["в прошедшем лишняя форма 3mp", lessonOf("verbs", () => verbWith((v) => (v.past["3mp"] = v.past["3p"])))],
+    ["повелительное неполное (нет fp)", lessonOf("verbs", () => verbWith((v) => delete v.imperative.fp))],
+    ["форма глагола без транскрипции", lessonOf("verbs", () => verbWith((v) => delete v.past["1s"].translit))],
+    ["форма глагола без огласовок", lessonOf("verbs", () => verbWith((v) => (v.future["1s"].niqqud = "אכתוב")))],
+    ["форма глагола с огласовками в he", lessonOf("verbs", () => verbWith((v) => (v.present.ms.he = "כּוֹתֵב")))],
+    ["озвучка формы не mp3", lessonOf("verbs", () => verbWith((v) => (v.present.ms.audio = "/audio/x.wav")))],
     ["картинка вне /words", lessonOf("nouns", (i) => ({ ...noun(i), image: "/img/cat.svg" }))],
     ["озвучка не mp3", lessonOf("nouns", (i) => ({ ...noun(i), audio: "/audio/cat.wav" }))],
     ["лишнее поле слова", lessonOf("nouns", (i) => ({ ...noun(i), plural: "חתולים" }))],

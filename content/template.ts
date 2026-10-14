@@ -4,8 +4,13 @@ import {
   ALPHABET_TITLE,
   ALPHABET_TOPIC_ID,
   FREE_LESSONS_PER_TOPIC,
+  FUTURE_KEYS,
+  IMPERATIVE_KEYS,
+  isBinyan,
   LETTER_KEYS,
   letterRuName,
+  PAST_KEYS,
+  PRESENT_KEYS,
   WORDS_PER_LESSON,
 } from "@milav/shared";
 import type { Section } from "@milav/shared";
@@ -47,11 +52,29 @@ export function templateProblems(o: NewLessonOptions): string[] {
 const phrase = () => ({ he: "", translit: "", ru: "" });
 const form = () => ({ he: "", niqqud: "", translit: "" });
 
-function wordTemplate(id: string, section: Section): Record<string, unknown> {
+const formSet = (keys: readonly string[]) => Object.fromEntries(keys.map((key) => [key, form()]));
+
+/**
+ * Блок глагола: все 27 форм пустыми. Бинъян подставляется, если тема это бинъян (topicId равен ключу), иначе его вписывает автор.
+ * Если у глагола нет повелительного наклонения, блок imperative удаляют целиком.
+ */
+function verbTemplate(binyan: string): Record<string, unknown> {
+  return {
+    binyan,
+    root: "",
+    present: formSet(PRESENT_KEYS),
+    past: formSet(PAST_KEYS),
+    future: formSet(FUTURE_KEYS),
+    imperative: formSet(IMPERATIVE_KEYS),
+  };
+}
+
+function wordTemplate(id: string, section: Section, binyan: string): Record<string, unknown> {
   const word: Record<string, unknown> = { id, he: "", niqqud: "", translit: "", ru: "" };
   if (section === "nouns") word.gender = "";
   word.example = phrase();
   if (section === "adjectives") word.forms = { f: form(), mp: form(), fp: form() };
+  if (section === "verbs") word.verb = verbTemplate(binyan);
   word.reviewed = false;
   return word;
 }
@@ -70,7 +93,7 @@ export function buildLessonTemplate(o: NewLessonOptions): Record<string, unknown
     number: o.number,
     free: o.number <= FREE_LESSONS_PER_TOPIC,
     title: o.title,
-    words: o.keys.map((key) => wordTemplate(`${id}-${key}`, o.section)),
+    words: o.keys.map((key) => wordTemplate(`${id}-${key}`, o.section, isBinyan(o.topicId) ? o.topicId : "")),
   };
 }
 

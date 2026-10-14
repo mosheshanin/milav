@@ -84,7 +84,10 @@
             "items": {
               "type": "object",
               "required": ["gender", "example"],
-              "not": { "type": "object", "required": ["forms"] }
+              "not": {
+                "type": "object",
+                "anyOf": [{ "required": ["forms"] }, { "required": ["verb"] }]
+              }
             }
           }
         }
@@ -98,7 +101,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": ["example"],
+              "required": ["example", "verb"],
               "not": {
                 "type": "object",
                 "anyOf": [{ "required": ["forms"] }, { "required": ["gender"] }]
@@ -117,7 +120,10 @@
             "items": {
               "type": "object",
               "required": ["example", "forms"],
-              "not": { "type": "object", "required": ["gender"] }
+              "not": {
+                "type": "object",
+                "anyOf": [{ "required": ["gender"] }, { "required": ["verb"] }]
+              }
             }
           }
         }
@@ -187,6 +193,86 @@
         "f": { "$ref": "#/definitions/form" },
         "mp": { "$ref": "#/definitions/form" },
         "fp": { "$ref": "#/definitions/form" }
+      }
+    },
+    "presentForms": {
+      "type": "object",
+      "required": ["ms", "fs", "mp", "fp"],
+      "additionalProperties": false,
+      "description": "Настоящее время (причастие): ms м.р. ед.ч., fs ж.р. ед.ч., mp м.р. мн.ч., fp ж.р. мн.ч.",
+      "properties": {
+        "ms": { "$ref": "#/definitions/form" },
+        "fs": { "$ref": "#/definitions/form" },
+        "mp": { "$ref": "#/definitions/form" },
+        "fp": { "$ref": "#/definitions/form" }
+      }
+    },
+    "pastForms": {
+      "type": "object",
+      "required": ["1s", "2ms", "2fs", "3ms", "3fs", "1p", "2mp", "2fp", "3p"],
+      "additionalProperties": false,
+      "description": "Прошедшее время: цифра лицо, s/p число, m/f род; у 1-го лица и у 3-го лица мн.ч. (3p) род не различается.",
+      "properties": {
+        "1s": { "$ref": "#/definitions/form" },
+        "2ms": { "$ref": "#/definitions/form" },
+        "2fs": { "$ref": "#/definitions/form" },
+        "3ms": { "$ref": "#/definitions/form" },
+        "3fs": { "$ref": "#/definitions/form" },
+        "1p": { "$ref": "#/definitions/form" },
+        "2mp": { "$ref": "#/definitions/form" },
+        "2fp": { "$ref": "#/definitions/form" },
+        "3p": { "$ref": "#/definitions/form" }
+      }
+    },
+    "futureForms": {
+      "type": "object",
+      "required": ["1s", "2ms", "2fs", "3ms", "3fs", "1p", "2mp", "2fp", "3mp", "3fp"],
+      "additionalProperties": false,
+      "description": "Будущее время: полная таблица, у 3-го лица мн.ч. две формы (3mp и 3fp).",
+      "properties": {
+        "1s": { "$ref": "#/definitions/form" },
+        "2ms": { "$ref": "#/definitions/form" },
+        "2fs": { "$ref": "#/definitions/form" },
+        "3ms": { "$ref": "#/definitions/form" },
+        "3fs": { "$ref": "#/definitions/form" },
+        "1p": { "$ref": "#/definitions/form" },
+        "2mp": { "$ref": "#/definitions/form" },
+        "2fp": { "$ref": "#/definitions/form" },
+        "3mp": { "$ref": "#/definitions/form" },
+        "3fp": { "$ref": "#/definitions/form" }
+      }
+    },
+    "imperativeForms": {
+      "type": "object",
+      "required": ["ms", "fs", "mp", "fp"],
+      "additionalProperties": false,
+      "description": "Повелительное наклонение: ms, fs, mp, fp. Весь блок необязателен: у части глаголов его нет.",
+      "properties": {
+        "ms": { "$ref": "#/definitions/form" },
+        "fs": { "$ref": "#/definitions/form" },
+        "mp": { "$ref": "#/definitions/form" },
+        "fp": { "$ref": "#/definitions/form" }
+      }
+    },
+    "verb": {
+      "type": "object",
+      "required": ["binyan", "root", "present", "past", "future"],
+      "additionalProperties": false,
+      "description": "Данные глагола (только раздел «Глаголы»): бинъян, корень и формы по временам. Основная форма, инфинитив, лежит в he слова.",
+      "properties": {
+        "binyan": {
+          "enum": ["paal", "nifal", "piel", "hifil", "hitpael"],
+          "description": "Бинъян: paal, nifal, piel, hifil, hitpael (BINYAN_KEYS в packages/shared)."
+        },
+        "root": {
+          "type": "string",
+          "pattern": "^[אבגדהוזחטיכלמנסעפצקרשת]{3,4}$",
+          "description": "Корень: 3–4 буквы иврита без конечных форм, например כתב."
+        },
+        "present": { "$ref": "#/definitions/presentForms" },
+        "past": { "$ref": "#/definitions/pastForms" },
+        "future": { "$ref": "#/definitions/futureForms" },
+        "imperative": { "$ref": "#/definitions/imperativeForms" }
       }
     },
     "reviewed": {
@@ -302,6 +388,7 @@
         "gender": { "enum": ["m", "f"], "description": "Род: m мужской, f женский (у существительных)." },
         "example": { "$ref": "#/definitions/phrase" },
         "forms": { "$ref": "#/definitions/forms" },
+        "verb": { "$ref": "#/definitions/verb" },
         "image": {
           "type": "string",
           "pattern": "^/words/[a-z0-9-]+\\.(svg|png|webp)$",

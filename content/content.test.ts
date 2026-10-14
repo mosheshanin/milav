@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON, normalizeHebrew } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON, normalizeHebrew, verbForms } from "@milav/shared";
 import { lessons } from "./index";
 import { skeletonProblems, stressProblems, stripStress } from "./rules";
 
@@ -64,8 +64,15 @@ describe("уроки", () => {
             expect(word.niqqud, "огласовки действительно есть").toMatch(/[\u05B0-\u05BC\u05C1\u05C2]/);
             expect(normalizeHebrew(word.niqqud), "с огласовками то же слово").toBe(normalizeHebrew(word.he));
           }
-          // Озвучка основной формы, форм прилагательного и фразы-примера: если путь указан, файл существует.
-          for (const path of [word.audio, word.example?.audio, ...Object.values(word.forms ?? {}).map((f) => f.audio)]) {
+          // Формы глагола: все времена по порядку (у прилагательных формы лежат в forms).
+          const verbEntries = word.verb ? verbForms(word.verb) : [];
+          // Озвучка основной формы, форм прилагательного и глагола и фразы-примера: если путь указан, файл существует.
+          for (const path of [
+            word.audio,
+            word.example?.audio,
+            ...Object.values(word.forms ?? {}).map((f) => f.audio),
+            ...verbEntries.map((e) => e.form.audio),
+          ]) {
             if (path) expect(existsSync(new URL(`../apps/web/public${path}`, import.meta.url)), `нет файла озвучки ${path}`).toBe(true);
           }
 
@@ -81,8 +88,12 @@ describe("уроки", () => {
           if (word.gender) {
             expect(word.example, "для слова с родом нужна фраза-пример").toBeDefined();
           }
-          // Формы слова, которые может использовать фраза: основная и (у прилагательных) остальные.
-          const forms = [{ he: word.he, translit: word.translit }, ...Object.values(word.forms ?? {})];
+          // Формы слова, которые может использовать фраза: основная, остальные формы прилагательного и все формы глагола.
+          const forms = [
+            { he: word.he, translit: word.translit },
+            ...Object.values(word.forms ?? {}),
+            ...verbEntries.map((e) => e.form),
+          ];
           if (word.example) {
             expect(
               forms.some((f) => normalizeHebrew(word.example!.he).includes(normalizeHebrew(f.he))),
@@ -102,6 +113,19 @@ describe("уроки", () => {
               expect(normalizeHebrew(form.niqqud), `форма ${name}: с огласовками то же слово`).toBe(normalizeHebrew(form.he));
               expect(stressProblems(form.translit), `форма ${name}: ударение`).toEqual([]);
               expect(skeletonProblems(form.he, form.translit), `форма ${name}: согласные`).toEqual([]);
+            }
+          }
+
+          if (lesson.section === "verbs") {
+            expect(word.verb, "у глагола есть бинъян, корень и формы").toBeDefined();
+            expect(word.gender, "у глагола рода нет: он в формах").toBeUndefined();
+            // Решение владельца: фраза-пример с глаголом в настоящем времени (docs/CONTENT.md).
+            const phrase = normalizeHebrew(word.example?.he ?? "");
+            const present = verbEntries.filter((e) => e.tense === "present").map((e) => normalizeHebrew(e.form.he));
+            expect(present.some((he) => phrase.includes(he)), "во фразе есть глагол в настоящем времени").toBe(true);
+            // Озвучка формы названа по правилу <id слова>-form-<время>-<ключ>.mp3.
+            for (const { tense, key, form } of verbEntries) {
+              if (form.audio) expect(form.audio, `${tense}.${key}`).toBe(`/audio/${word.id}-form-${tense}-${key}.mp3`);
             }
           }
         });
