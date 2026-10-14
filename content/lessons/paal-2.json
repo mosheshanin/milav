@@ -17,7 +17,8 @@
       "example": {
         "he": "אני פוגש חבר",
         "translit": "ани погеш хавер",
-        "ru": "Я встречаю друга"
+        "ru": "Я встречаю друга",
+        "audio": "/audio/paal-2-meet-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -26,147 +27,175 @@
           "ms": {
             "he": "פוגש",
             "niqqud": "פּוֹגֵשׁ",
-            "translit": "поге́ш"
+            "translit": "поге́ш",
+            "audio": "/audio/paal-2-meet-form-present-ms.mp3"
           },
           "fs": {
             "he": "פוגשת",
             "niqqud": "פּוֹגֶשֶׁת",
-            "translit": "поге́шет"
+            "translit": "поге́шет",
+            "audio": "/audio/paal-2-meet-form-present-fs.mp3"
           },
           "mp": {
             "he": "פוגשים",
             "niqqud": "פּוֹגְשִׁים",
-            "translit": "погши́м"
+            "translit": "погши́м",
+            "audio": "/audio/paal-2-meet-form-present-mp.mp3"
           },
           "fp": {
             "he": "פוגשות",
             "niqqud": "פּוֹגְשׁוֹת",
-            "translit": "погшо́т"
+            "translit": "погшо́т",
+            "audio": "/audio/paal-2-meet-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "פגשתי",
             "niqqud": "פָּגַשְׁתִּי",
-            "translit": "пагашти́"
+            "translit": "пагашти́",
+            "audio": "/audio/paal-2-meet-form-past-1s.mp3"
           },
           "2ms": {
             "he": "פגשת",
             "niqqud": "פָּגַשְׁתָּ",
-            "translit": "пагашта́"
+            "translit": "пагашта́",
+            "audio": "/audio/paal-2-meet-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "פגשת",
             "niqqud": "פָּגַשְׁתְּ",
-            "translit": "пага́шт"
+            "translit": "пага́шт",
+            "audio": "/audio/paal-2-meet-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "פגש",
             "niqqud": "פָּגַשׁ",
-            "translit": "пага́ш"
+            "translit": "пага́ш",
+            "audio": "/audio/paal-2-meet-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "פגשה",
             "niqqud": "פָּגְשָׁה",
-            "translit": "пагша́"
+            "translit": "пагша́",
+            "audio": "/audio/paal-2-meet-form-past-3fs.mp3"
           },
           "1p": {
             "he": "פגשנו",
             "niqqud": "פָּגַשְׁנוּ",
-            "translit": "пагашну́"
+            "translit": "пагашну́",
+            "audio": "/audio/paal-2-meet-form-past-1p.mp3"
           },
           "2mp": {
             "he": "פגשתם",
             "niqqud": "פְּגַשְׁתֶּם",
-            "translit": "пгаште́м"
+            "translit": "пгаште́м",
+            "audio": "/audio/paal-2-meet-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "פגשתן",
             "niqqud": "פְּגַשְׁתֶּן",
-            "translit": "пгаште́н"
+            "translit": "пгаште́н",
+            "audio": "/audio/paal-2-meet-form-past-2fp.mp3"
           },
           "3p": {
             "he": "פגשו",
             "niqqud": "פָּגְשׁוּ",
-            "translit": "пагшу́"
+            "translit": "пагшу́",
+            "audio": "/audio/paal-2-meet-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אפגוש",
             "niqqud": "אֶפְגּוֹשׁ",
-            "translit": "эфго́ш"
+            "translit": "эфго́ш",
+            "audio": "/audio/paal-2-meet-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תפגוש",
             "niqqud": "תִּפְגּוֹשׁ",
-            "translit": "тифго́ш"
+            "translit": "тифго́ш",
+            "audio": "/audio/paal-2-meet-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תפגשי",
             "niqqud": "תִּפְגְּשִׁי",
-            "translit": "тифгши́"
+            "translit": "тифгши́",
+            "audio": "/audio/paal-2-meet-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יפגוש",
             "niqqud": "יִפְגּוֹשׁ",
-            "translit": "ифго́ш"
+            "translit": "ифго́ш",
+            "audio": "/audio/paal-2-meet-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תפגוש",
             "niqqud": "תִּפְגּוֹשׁ",
-            "translit": "тифго́ш"
+            "translit": "тифго́ш",
+            "audio": "/audio/paal-2-meet-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נפגוש",
             "niqqud": "נִפְגּוֹשׁ",
-            "translit": "нифго́ш"
+            "translit": "нифго́ш",
+            "audio": "/audio/paal-2-meet-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תפגשו",
             "niqqud": "תִּפְגְּשׁוּ",
-            "translit": "тифгшу́"
+            "translit": "тифгшу́",
+            "audio": "/audio/paal-2-meet-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תפגשנה",
             "niqqud": "תִּפְגֹּשְׁנָה",
-            "translit": "тифго́шна"
+            "translit": "тифго́шна",
+            "audio": "/audio/paal-2-meet-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יפגשו",
             "niqqud": "יִפְגְּשׁוּ",
-            "translit": "ифгшу́"
+            "translit": "ифгшу́",
+            "audio": "/audio/paal-2-meet-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יפגשנה",
             "niqqud": "יִפְגֹּשְׁנָה",
-            "translit": "ифго́шна"
+            "translit": "ифго́шна",
+            "audio": "/audio/paal-2-meet-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "פגוש",
             "niqqud": "פְּגוֹשׁ",
-            "translit": "пгош"
+            "translit": "пгош",
+            "audio": "/audio/paal-2-meet-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "פגשי",
             "niqqud": "פִּגְשִׁי",
-            "translit": "пигши́"
+            "translit": "пигши́",
+            "audio": "/audio/paal-2-meet-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "פגשו",
             "niqqud": "פִּגְשׁוּ",
-            "translit": "пигшу́"
+            "translit": "пигшу́",
+            "audio": "/audio/paal-2-meet-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "פגשנה",
             "niqqud": "פְּגֹשְׁנָה",
-            "translit": "пго́шна"
+            "translit": "пго́шна",
+            "audio": "/audio/paal-2-meet-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-meet.mp3"
     },
     {
       "id": "paal-2-catch",
@@ -177,7 +206,8 @@
       "example": {
         "he": "הוא תופס כדור",
         "translit": "ху тофес кадур",
-        "ru": "Он ловит мяч"
+        "ru": "Он ловит мяч",
+        "audio": "/audio/paal-2-catch-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -186,147 +216,175 @@
           "ms": {
             "he": "תופס",
             "niqqud": "תּוֹפֵס",
-            "translit": "тофе́с"
+            "translit": "тофе́с",
+            "audio": "/audio/paal-2-catch-form-present-ms.mp3"
           },
           "fs": {
             "he": "תופסת",
             "niqqud": "תּוֹפֶסֶת",
-            "translit": "тофе́сет"
+            "translit": "тофе́сет",
+            "audio": "/audio/paal-2-catch-form-present-fs.mp3"
           },
           "mp": {
             "he": "תופסים",
             "niqqud": "תּוֹפְסִים",
-            "translit": "тофси́м"
+            "translit": "тофси́м",
+            "audio": "/audio/paal-2-catch-form-present-mp.mp3"
           },
           "fp": {
             "he": "תופסות",
             "niqqud": "תּוֹפְסוֹת",
-            "translit": "тофсо́т"
+            "translit": "тофсо́т",
+            "audio": "/audio/paal-2-catch-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "תפסתי",
             "niqqud": "תָּפַסְתִּי",
-            "translit": "тафасти́"
+            "translit": "тафасти́",
+            "audio": "/audio/paal-2-catch-form-past-1s.mp3"
           },
           "2ms": {
             "he": "תפסת",
             "niqqud": "תָּפַסְתָּ",
-            "translit": "тафаста́"
+            "translit": "тафаста́",
+            "audio": "/audio/paal-2-catch-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "תפסת",
             "niqqud": "תָּפַסְתְּ",
-            "translit": "тафа́ст"
+            "translit": "тафа́ст",
+            "audio": "/audio/paal-2-catch-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "תפס",
             "niqqud": "תָּפַס",
-            "translit": "тафа́с"
+            "translit": "тафа́с",
+            "audio": "/audio/paal-2-catch-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "תפסה",
             "niqqud": "תָּפְסָה",
-            "translit": "тафса́"
+            "translit": "тафса́",
+            "audio": "/audio/paal-2-catch-form-past-3fs.mp3"
           },
           "1p": {
             "he": "תפסנו",
             "niqqud": "תָּפַסְנוּ",
-            "translit": "тафасну́"
+            "translit": "тафасну́",
+            "audio": "/audio/paal-2-catch-form-past-1p.mp3"
           },
           "2mp": {
             "he": "תפסתם",
             "niqqud": "תְּפַסְתֶּם",
-            "translit": "тфасте́м"
+            "translit": "тфасте́м",
+            "audio": "/audio/paal-2-catch-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "תפסתן",
             "niqqud": "תְּפַסְתֶּן",
-            "translit": "тфасте́н"
+            "translit": "тфасте́н",
+            "audio": "/audio/paal-2-catch-form-past-2fp.mp3"
           },
           "3p": {
             "he": "תפסו",
             "niqqud": "תָּפְסוּ",
-            "translit": "тафсу́"
+            "translit": "тафсу́",
+            "audio": "/audio/paal-2-catch-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתפוס",
             "niqqud": "אֶתְפּוֹס",
-            "translit": "этпо́с"
+            "translit": "этпо́с",
+            "audio": "/audio/paal-2-catch-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתפוס",
             "niqqud": "תִּתְפּוֹס",
-            "translit": "титпо́с"
+            "translit": "титпо́с",
+            "audio": "/audio/paal-2-catch-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתפסי",
             "niqqud": "תִּתְפְּסִי",
-            "translit": "титпси́"
+            "translit": "титпси́",
+            "audio": "/audio/paal-2-catch-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתפוס",
             "niqqud": "יִתְפּוֹס",
-            "translit": "итпо́с"
+            "translit": "итпо́с",
+            "audio": "/audio/paal-2-catch-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתפוס",
             "niqqud": "תִּתְפּוֹס",
-            "translit": "титпо́с"
+            "translit": "титпо́с",
+            "audio": "/audio/paal-2-catch-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתפוס",
             "niqqud": "נִתְפּוֹס",
-            "translit": "нитпо́с"
+            "translit": "нитпо́с",
+            "audio": "/audio/paal-2-catch-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתפסו",
             "niqqud": "תִּתְפְּסוּ",
-            "translit": "титпсу́"
+            "translit": "титпсу́",
+            "audio": "/audio/paal-2-catch-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתפסנה",
             "niqqud": "תִּתְפֹּסְנָה",
-            "translit": "титпо́сна"
+            "translit": "титпо́сна",
+            "audio": "/audio/paal-2-catch-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתפסו",
             "niqqud": "יִתְפְּסוּ",
-            "translit": "итпсу́"
+            "translit": "итпсу́",
+            "audio": "/audio/paal-2-catch-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתפסנה",
             "niqqud": "יִתְפֹּסְנָה",
-            "translit": "итпо́сна"
+            "translit": "итпо́сна",
+            "audio": "/audio/paal-2-catch-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "תפוס",
             "niqqud": "תְּפוֹס",
-            "translit": "тфос"
+            "translit": "тфос",
+            "audio": "/audio/paal-2-catch-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "תפסי",
             "niqqud": "תִּפְסִי",
-            "translit": "тифси́"
+            "translit": "тифси́",
+            "audio": "/audio/paal-2-catch-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "תפסו",
             "niqqud": "תִּפְסוּ",
-            "translit": "тифсу́"
+            "translit": "тифсу́",
+            "audio": "/audio/paal-2-catch-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "תפסנה",
             "niqqud": "תְּפֹסְנָה",
-            "translit": "тфо́сна"
+            "translit": "тфо́сна",
+            "audio": "/audio/paal-2-catch-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-catch.mp3"
     },
     {
       "id": "paal-2-jump",
@@ -337,7 +395,8 @@
       "example": {
         "he": "הוא קופץ גבוה",
         "translit": "ху кофец гавоа",
-        "ru": "Он высоко прыгает"
+        "ru": "Он высоко прыгает",
+        "audio": "/audio/paal-2-jump-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -346,147 +405,175 @@
           "ms": {
             "he": "קופץ",
             "niqqud": "קוֹפֵץ",
-            "translit": "кофе́ц"
+            "translit": "кофе́ц",
+            "audio": "/audio/paal-2-jump-form-present-ms.mp3"
           },
           "fs": {
             "he": "קופצת",
             "niqqud": "קוֹפֶצֶת",
-            "translit": "кофе́цет"
+            "translit": "кофе́цет",
+            "audio": "/audio/paal-2-jump-form-present-fs.mp3"
           },
           "mp": {
             "he": "קופצים",
             "niqqud": "קוֹפְצִים",
-            "translit": "кофци́м"
+            "translit": "кофци́м",
+            "audio": "/audio/paal-2-jump-form-present-mp.mp3"
           },
           "fp": {
             "he": "קופצות",
             "niqqud": "קוֹפְצוֹת",
-            "translit": "кофцо́т"
+            "translit": "кофцо́т",
+            "audio": "/audio/paal-2-jump-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "קפצתי",
             "niqqud": "קָפַצְתִּי",
-            "translit": "кафацти́"
+            "translit": "кафацти́",
+            "audio": "/audio/paal-2-jump-form-past-1s.mp3"
           },
           "2ms": {
             "he": "קפצת",
             "niqqud": "קָפַצְתָּ",
-            "translit": "кафацта́"
+            "translit": "кафацта́",
+            "audio": "/audio/paal-2-jump-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "קפצת",
             "niqqud": "קָפַצְתְּ",
-            "translit": "кафа́цт"
+            "translit": "кафа́цт",
+            "audio": "/audio/paal-2-jump-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "קפץ",
             "niqqud": "קָפַץ",
-            "translit": "кафа́ц"
+            "translit": "кафа́ц",
+            "audio": "/audio/paal-2-jump-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "קפצה",
             "niqqud": "קָפְצָה",
-            "translit": "кафца́"
+            "translit": "кафца́",
+            "audio": "/audio/paal-2-jump-form-past-3fs.mp3"
           },
           "1p": {
             "he": "קפצנו",
             "niqqud": "קָפַצְנוּ",
-            "translit": "кафацну́"
+            "translit": "кафацну́",
+            "audio": "/audio/paal-2-jump-form-past-1p.mp3"
           },
           "2mp": {
             "he": "קפצתם",
             "niqqud": "קְפַצְתֶּם",
-            "translit": "кфацте́м"
+            "translit": "кфацте́м",
+            "audio": "/audio/paal-2-jump-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "קפצתן",
             "niqqud": "קְפַצְתֶּן",
-            "translit": "кфацте́н"
+            "translit": "кфацте́н",
+            "audio": "/audio/paal-2-jump-form-past-2fp.mp3"
           },
           "3p": {
             "he": "קפצו",
             "niqqud": "קָפְצוּ",
-            "translit": "кафцу́"
+            "translit": "кафцу́",
+            "audio": "/audio/paal-2-jump-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אקפוץ",
             "niqqud": "אֶקְפּוֹץ",
-            "translit": "экпо́ц"
+            "translit": "экпо́ц",
+            "audio": "/audio/paal-2-jump-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תקפוץ",
             "niqqud": "תִּקְפּוֹץ",
-            "translit": "тикпо́ц"
+            "translit": "тикпо́ц",
+            "audio": "/audio/paal-2-jump-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תקפצי",
             "niqqud": "תִּקְפְּצִי",
-            "translit": "тикпци́"
+            "translit": "тикпци́",
+            "audio": "/audio/paal-2-jump-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יקפוץ",
             "niqqud": "יִקְפּוֹץ",
-            "translit": "икпо́ц"
+            "translit": "икпо́ц",
+            "audio": "/audio/paal-2-jump-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תקפוץ",
             "niqqud": "תִּקְפּוֹץ",
-            "translit": "тикпо́ц"
+            "translit": "тикпо́ц",
+            "audio": "/audio/paal-2-jump-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נקפוץ",
             "niqqud": "נִקְפּוֹץ",
-            "translit": "никпо́ц"
+            "translit": "никпо́ц",
+            "audio": "/audio/paal-2-jump-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תקפצו",
             "niqqud": "תִּקְפְּצוּ",
-            "translit": "тикпцу́"
+            "translit": "тикпцу́",
+            "audio": "/audio/paal-2-jump-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תקפצנה",
             "niqqud": "תִּקְפֹּצְנָה",
-            "translit": "тикпо́цна"
+            "translit": "тикпо́цна",
+            "audio": "/audio/paal-2-jump-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יקפצו",
             "niqqud": "יִקְפְּצוּ",
-            "translit": "икпцу́"
+            "translit": "икпцу́",
+            "audio": "/audio/paal-2-jump-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יקפצנה",
             "niqqud": "יִקְפֹּצְנָה",
-            "translit": "икпо́цна"
+            "translit": "икпо́цна",
+            "audio": "/audio/paal-2-jump-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "קפוץ",
             "niqqud": "קְפוֹץ",
-            "translit": "кфоц"
+            "translit": "кфоц",
+            "audio": "/audio/paal-2-jump-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "קפצי",
             "niqqud": "קִפְצִי",
-            "translit": "кифци́"
+            "translit": "кифци́",
+            "audio": "/audio/paal-2-jump-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "קפצו",
             "niqqud": "קִפְצוּ",
-            "translit": "кифцу́"
+            "translit": "кифцу́",
+            "audio": "/audio/paal-2-jump-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "קפצנה",
             "niqqud": "קְפֹצְנָה",
-            "translit": "кфо́цна"
+            "translit": "кфо́цна",
+            "audio": "/audio/paal-2-jump-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-jump.mp3"
     },
     {
       "id": "paal-2-slice",
@@ -497,7 +584,8 @@
       "example": {
         "he": "אני פורס לחם",
         "translit": "ани порес лехем",
-        "ru": "Я нарезаю хлеб"
+        "ru": "Я нарезаю хлеб",
+        "audio": "/audio/paal-2-slice-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -506,147 +594,175 @@
           "ms": {
             "he": "פורס",
             "niqqud": "פּוֹרֵס",
-            "translit": "поре́с"
+            "translit": "поре́с",
+            "audio": "/audio/paal-2-slice-form-present-ms.mp3"
           },
           "fs": {
             "he": "פורסת",
             "niqqud": "פּוֹרֶסֶת",
-            "translit": "поре́сет"
+            "translit": "поре́сет",
+            "audio": "/audio/paal-2-slice-form-present-fs.mp3"
           },
           "mp": {
             "he": "פורסים",
             "niqqud": "פּוֹרְסִים",
-            "translit": "порси́м"
+            "translit": "порси́м",
+            "audio": "/audio/paal-2-slice-form-present-mp.mp3"
           },
           "fp": {
             "he": "פורסות",
             "niqqud": "פּוֹרְסוֹת",
-            "translit": "порсо́т"
+            "translit": "порсо́т",
+            "audio": "/audio/paal-2-slice-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "פרסתי",
             "niqqud": "פָּרַסְתִּי",
-            "translit": "парасти́"
+            "translit": "парасти́",
+            "audio": "/audio/paal-2-slice-form-past-1s.mp3"
           },
           "2ms": {
             "he": "פרסת",
             "niqqud": "פָּרַסְתָּ",
-            "translit": "параста́"
+            "translit": "параста́",
+            "audio": "/audio/paal-2-slice-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "פרסת",
             "niqqud": "פָּרַסְתְּ",
-            "translit": "пара́ст"
+            "translit": "пара́ст",
+            "audio": "/audio/paal-2-slice-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "פרס",
             "niqqud": "פָּרַס",
-            "translit": "пара́с"
+            "translit": "пара́с",
+            "audio": "/audio/paal-2-slice-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "פרסה",
             "niqqud": "פָּרְסָה",
-            "translit": "парса́"
+            "translit": "парса́",
+            "audio": "/audio/paal-2-slice-form-past-3fs.mp3"
           },
           "1p": {
             "he": "פרסנו",
             "niqqud": "פָּרַסְנוּ",
-            "translit": "парасну́"
+            "translit": "парасну́",
+            "audio": "/audio/paal-2-slice-form-past-1p.mp3"
           },
           "2mp": {
             "he": "פרסתם",
             "niqqud": "פְּרַסְתֶּם",
-            "translit": "прасте́м"
+            "translit": "прасте́м",
+            "audio": "/audio/paal-2-slice-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "פרסתן",
             "niqqud": "פְּרַסְתֶּן",
-            "translit": "прасте́н"
+            "translit": "прасте́н",
+            "audio": "/audio/paal-2-slice-form-past-2fp.mp3"
           },
           "3p": {
             "he": "פרסו",
             "niqqud": "פָּרְסוּ",
-            "translit": "парсу́"
+            "translit": "парсу́",
+            "audio": "/audio/paal-2-slice-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אפרוס",
             "niqqud": "אֶפְרוֹס",
-            "translit": "эфро́с"
+            "translit": "эфро́с",
+            "audio": "/audio/paal-2-slice-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תפרוס",
             "niqqud": "תִּפְרוֹס",
-            "translit": "тифро́с"
+            "translit": "тифро́с",
+            "audio": "/audio/paal-2-slice-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תפרסי",
             "niqqud": "תִּפְרְסִי",
-            "translit": "тифрси́"
+            "translit": "тифрси́",
+            "audio": "/audio/paal-2-slice-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יפרוס",
             "niqqud": "יִפְרוֹס",
-            "translit": "ифро́с"
+            "translit": "ифро́с",
+            "audio": "/audio/paal-2-slice-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תפרוס",
             "niqqud": "תִּפְרוֹס",
-            "translit": "тифро́с"
+            "translit": "тифро́с",
+            "audio": "/audio/paal-2-slice-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נפרוס",
             "niqqud": "נִפְרוֹס",
-            "translit": "нифро́с"
+            "translit": "нифро́с",
+            "audio": "/audio/paal-2-slice-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תפרסו",
             "niqqud": "תִּפְרְסוּ",
-            "translit": "тифрсу́"
+            "translit": "тифрсу́",
+            "audio": "/audio/paal-2-slice-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תפרסנה",
             "niqqud": "תִּפְרֹסְנָה",
-            "translit": "тифро́сна"
+            "translit": "тифро́сна",
+            "audio": "/audio/paal-2-slice-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יפרסו",
             "niqqud": "יִפְרְסוּ",
-            "translit": "ифрсу́"
+            "translit": "ифрсу́",
+            "audio": "/audio/paal-2-slice-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יפרסנה",
             "niqqud": "יִפְרֹסְנָה",
-            "translit": "ифро́сна"
+            "translit": "ифро́сна",
+            "audio": "/audio/paal-2-slice-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "פרוס",
             "niqqud": "פְּרוֹס",
-            "translit": "прос"
+            "translit": "прос",
+            "audio": "/audio/paal-2-slice-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "פרסי",
             "niqqud": "פִּרְסִי",
-            "translit": "пирси́"
+            "translit": "пирси́",
+            "audio": "/audio/paal-2-slice-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "פרסו",
             "niqqud": "פִּרְסוּ",
-            "translit": "пирсу́"
+            "translit": "пирсу́",
+            "audio": "/audio/paal-2-slice-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "פרסנה",
             "niqqud": "פְּרֹסְנָה",
-            "translit": "про́сна"
+            "translit": "про́сна",
+            "audio": "/audio/paal-2-slice-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-slice.mp3"
     },
     {
       "id": "paal-2-steal",
@@ -657,7 +773,8 @@
       "example": {
         "he": "הוא גונב כסף",
         "translit": "ху гонев кесеф",
-        "ru": "Он ворует деньги"
+        "ru": "Он ворует деньги",
+        "audio": "/audio/paal-2-steal-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -666,147 +783,175 @@
           "ms": {
             "he": "גונב",
             "niqqud": "גּוֹנֵב",
-            "translit": "гоне́в"
+            "translit": "гоне́в",
+            "audio": "/audio/paal-2-steal-form-present-ms.mp3"
           },
           "fs": {
             "he": "גונבת",
             "niqqud": "גּוֹנֶבֶת",
-            "translit": "гоне́вет"
+            "translit": "гоне́вет",
+            "audio": "/audio/paal-2-steal-form-present-fs.mp3"
           },
           "mp": {
             "he": "גונבים",
             "niqqud": "גּוֹנְבִים",
-            "translit": "гонви́м"
+            "translit": "гонви́м",
+            "audio": "/audio/paal-2-steal-form-present-mp.mp3"
           },
           "fp": {
             "he": "גונבות",
             "niqqud": "גּוֹנְבוֹת",
-            "translit": "гонво́т"
+            "translit": "гонво́т",
+            "audio": "/audio/paal-2-steal-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "גנבתי",
             "niqqud": "גָּנַבְתִּי",
-            "translit": "ганавти́"
+            "translit": "ганавти́",
+            "audio": "/audio/paal-2-steal-form-past-1s.mp3"
           },
           "2ms": {
             "he": "גנבת",
             "niqqud": "גָּנַבְתָּ",
-            "translit": "ганавта́"
+            "translit": "ганавта́",
+            "audio": "/audio/paal-2-steal-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "גנבת",
             "niqqud": "גָּנַבְתְּ",
-            "translit": "гана́вт"
+            "translit": "гана́вт",
+            "audio": "/audio/paal-2-steal-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "גנב",
             "niqqud": "גָּנַב",
-            "translit": "гана́в"
+            "translit": "гана́в",
+            "audio": "/audio/paal-2-steal-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "גנבה",
             "niqqud": "גָּנְבָה",
-            "translit": "ганва́"
+            "translit": "ганва́",
+            "audio": "/audio/paal-2-steal-form-past-3fs.mp3"
           },
           "1p": {
             "he": "גנבנו",
             "niqqud": "גָּנַבְנוּ",
-            "translit": "ганавну́"
+            "translit": "ганавну́",
+            "audio": "/audio/paal-2-steal-form-past-1p.mp3"
           },
           "2mp": {
             "he": "גנבתם",
             "niqqud": "גְּנַבְתֶּם",
-            "translit": "гнавте́м"
+            "translit": "гнавте́м",
+            "audio": "/audio/paal-2-steal-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "גנבתן",
             "niqqud": "גְּנַבְתֶּן",
-            "translit": "гнавте́н"
+            "translit": "гнавте́н",
+            "audio": "/audio/paal-2-steal-form-past-2fp.mp3"
           },
           "3p": {
             "he": "גנבו",
             "niqqud": "גָּנְבוּ",
-            "translit": "ганву́"
+            "translit": "ганву́",
+            "audio": "/audio/paal-2-steal-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אגנוב",
             "niqqud": "אֶגְנוֹב",
-            "translit": "эгно́в"
+            "translit": "эгно́в",
+            "audio": "/audio/paal-2-steal-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תגנוב",
             "niqqud": "תִּגְנוֹב",
-            "translit": "тигно́в"
+            "translit": "тигно́в",
+            "audio": "/audio/paal-2-steal-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תגנבי",
             "niqqud": "תִּגְנְבִי",
-            "translit": "тигнви́"
+            "translit": "тигнви́",
+            "audio": "/audio/paal-2-steal-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יגנוב",
             "niqqud": "יִגְנוֹב",
-            "translit": "игно́в"
+            "translit": "игно́в",
+            "audio": "/audio/paal-2-steal-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תגנוב",
             "niqqud": "תִּגְנוֹב",
-            "translit": "тигно́в"
+            "translit": "тигно́в",
+            "audio": "/audio/paal-2-steal-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נגנוב",
             "niqqud": "נִגְנוֹב",
-            "translit": "нигно́в"
+            "translit": "нигно́в",
+            "audio": "/audio/paal-2-steal-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תגנבו",
             "niqqud": "תִּגְנְבוּ",
-            "translit": "тигнву́"
+            "translit": "тигнву́",
+            "audio": "/audio/paal-2-steal-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תגנבנה",
             "niqqud": "תִּגְנֹבְנָה",
-            "translit": "тигно́вна"
+            "translit": "тигно́вна",
+            "audio": "/audio/paal-2-steal-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יגנבו",
             "niqqud": "יִגְנְבוּ",
-            "translit": "игнву́"
+            "translit": "игнву́",
+            "audio": "/audio/paal-2-steal-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יגנבנה",
             "niqqud": "יִגְנֹבְנָה",
-            "translit": "игно́вна"
+            "translit": "игно́вна",
+            "audio": "/audio/paal-2-steal-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "גנוב",
             "niqqud": "גְּנוֹב",
-            "translit": "гнов"
+            "translit": "гнов",
+            "audio": "/audio/paal-2-steal-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "גנבי",
             "niqqud": "גִּנְבִי",
-            "translit": "гинви́"
+            "translit": "гинви́",
+            "audio": "/audio/paal-2-steal-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "גנבו",
             "niqqud": "גִּנְבוּ",
-            "translit": "гинву́"
+            "translit": "гинву́",
+            "audio": "/audio/paal-2-steal-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "גנבנה",
             "niqqud": "גְּנֹבְנָה",
-            "translit": "гно́вна"
+            "translit": "гно́вна",
+            "audio": "/audio/paal-2-steal-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-steal.mp3"
     },
     {
       "id": "paal-2-throw",
@@ -817,7 +962,8 @@
       "example": {
         "he": "אני זורק כדור",
         "translit": "ани зорек кадур",
-        "ru": "Я бросаю мяч"
+        "ru": "Я бросаю мяч",
+        "audio": "/audio/paal-2-throw-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -826,147 +972,175 @@
           "ms": {
             "he": "זורק",
             "niqqud": "זוֹרֵק",
-            "translit": "зоре́к"
+            "translit": "зоре́к",
+            "audio": "/audio/paal-2-throw-form-present-ms.mp3"
           },
           "fs": {
             "he": "זורקת",
             "niqqud": "זוֹרֶקֶת",
-            "translit": "зоре́кет"
+            "translit": "зоре́кет",
+            "audio": "/audio/paal-2-throw-form-present-fs.mp3"
           },
           "mp": {
             "he": "זורקים",
             "niqqud": "זוֹרְקִים",
-            "translit": "зорки́м"
+            "translit": "зорки́м",
+            "audio": "/audio/paal-2-throw-form-present-mp.mp3"
           },
           "fp": {
             "he": "זורקות",
             "niqqud": "זוֹרְקוֹת",
-            "translit": "зорко́т"
+            "translit": "зорко́т",
+            "audio": "/audio/paal-2-throw-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "זרקתי",
             "niqqud": "זָרַקְתִּי",
-            "translit": "заракти́"
+            "translit": "заракти́",
+            "audio": "/audio/paal-2-throw-form-past-1s.mp3"
           },
           "2ms": {
             "he": "זרקת",
             "niqqud": "זָרַקְתָּ",
-            "translit": "заракта́"
+            "translit": "заракта́",
+            "audio": "/audio/paal-2-throw-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "זרקת",
             "niqqud": "זָרַקְתְּ",
-            "translit": "зара́кт"
+            "translit": "зара́кт",
+            "audio": "/audio/paal-2-throw-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "זרק",
             "niqqud": "זָרַק",
-            "translit": "зара́к"
+            "translit": "зара́к",
+            "audio": "/audio/paal-2-throw-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "זרקה",
             "niqqud": "זָרְקָה",
-            "translit": "зарка́"
+            "translit": "зарка́",
+            "audio": "/audio/paal-2-throw-form-past-3fs.mp3"
           },
           "1p": {
             "he": "זרקנו",
             "niqqud": "זָרַקְנוּ",
-            "translit": "заракну́"
+            "translit": "заракну́",
+            "audio": "/audio/paal-2-throw-form-past-1p.mp3"
           },
           "2mp": {
             "he": "זרקתם",
             "niqqud": "זְרַקְתֶּם",
-            "translit": "зракте́м"
+            "translit": "зракте́м",
+            "audio": "/audio/paal-2-throw-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "זרקתן",
             "niqqud": "זְרַקְתֶּן",
-            "translit": "зракте́н"
+            "translit": "зракте́н",
+            "audio": "/audio/paal-2-throw-form-past-2fp.mp3"
           },
           "3p": {
             "he": "זרקו",
             "niqqud": "זָרְקוּ",
-            "translit": "зарку́"
+            "translit": "зарку́",
+            "audio": "/audio/paal-2-throw-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אזרוק",
             "niqqud": "אֶזְרוֹק",
-            "translit": "эзро́к"
+            "translit": "эзро́к",
+            "audio": "/audio/paal-2-throw-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תזרוק",
             "niqqud": "תִּזְרוֹק",
-            "translit": "тизро́к"
+            "translit": "тизро́к",
+            "audio": "/audio/paal-2-throw-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תזרקי",
             "niqqud": "תִּזְרְקִי",
-            "translit": "тизрки́"
+            "translit": "тизрки́",
+            "audio": "/audio/paal-2-throw-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יזרוק",
             "niqqud": "יִזְרוֹק",
-            "translit": "изро́к"
+            "translit": "изро́к",
+            "audio": "/audio/paal-2-throw-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תזרוק",
             "niqqud": "תִּזְרוֹק",
-            "translit": "тизро́к"
+            "translit": "тизро́к",
+            "audio": "/audio/paal-2-throw-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נזרוק",
             "niqqud": "נִזְרוֹק",
-            "translit": "низро́к"
+            "translit": "низро́к",
+            "audio": "/audio/paal-2-throw-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תזרקו",
             "niqqud": "תִּזְרְקוּ",
-            "translit": "тизрку́"
+            "translit": "тизрку́",
+            "audio": "/audio/paal-2-throw-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תזרקנה",
             "niqqud": "תִּזְרֹקְנָה",
-            "translit": "тизро́кна"
+            "translit": "тизро́кна",
+            "audio": "/audio/paal-2-throw-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יזרקו",
             "niqqud": "יִזְרְקוּ",
-            "translit": "изрку́"
+            "translit": "изрку́",
+            "audio": "/audio/paal-2-throw-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יזרקנה",
             "niqqud": "יִזְרֹקְנָה",
-            "translit": "изро́кна"
+            "translit": "изро́кна",
+            "audio": "/audio/paal-2-throw-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "זרוק",
             "niqqud": "זְרוֹק",
-            "translit": "зрок"
+            "translit": "зрок",
+            "audio": "/audio/paal-2-throw-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "זרקי",
             "niqqud": "זִרְקִי",
-            "translit": "зирки́"
+            "translit": "зирки́",
+            "audio": "/audio/paal-2-throw-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "זרקו",
             "niqqud": "זִרְקוּ",
-            "translit": "зирку́"
+            "translit": "зирку́",
+            "audio": "/audio/paal-2-throw-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "זרקנה",
             "niqqud": "זְרֹקְנָה",
-            "translit": "зро́кна"
+            "translit": "зро́кна",
+            "audio": "/audio/paal-2-throw-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-throw.mp3"
     },
     {
       "id": "paal-2-rinse",
@@ -977,7 +1151,8 @@
       "example": {
         "he": "היא שוטפת כוס",
         "translit": "хи шотефет кос",
-        "ru": "Она споласкивает стакан"
+        "ru": "Она споласкивает стакан",
+        "audio": "/audio/paal-2-rinse-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -986,147 +1161,175 @@
           "ms": {
             "he": "שוטף",
             "niqqud": "שׁוֹטֵף",
-            "translit": "шоте́ф"
+            "translit": "шоте́ф",
+            "audio": "/audio/paal-2-rinse-form-present-ms.mp3"
           },
           "fs": {
             "he": "שוטפת",
             "niqqud": "שׁוֹטֶפֶת",
-            "translit": "шоте́фет"
+            "translit": "шоте́фет",
+            "audio": "/audio/paal-2-rinse-form-present-fs.mp3"
           },
           "mp": {
             "he": "שוטפים",
             "niqqud": "שׁוֹטְפִים",
-            "translit": "шотфи́м"
+            "translit": "шотфи́м",
+            "audio": "/audio/paal-2-rinse-form-present-mp.mp3"
           },
           "fp": {
             "he": "שוטפות",
             "niqqud": "שׁוֹטְפוֹת",
-            "translit": "шотфо́т"
+            "translit": "шотфо́т",
+            "audio": "/audio/paal-2-rinse-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "שטפתי",
             "niqqud": "שָׁטַפְתִּי",
-            "translit": "шатафти́"
+            "translit": "шатафти́",
+            "audio": "/audio/paal-2-rinse-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שטפת",
             "niqqud": "שָׁטַפְתָּ",
-            "translit": "шатафта́"
+            "translit": "шатафта́",
+            "audio": "/audio/paal-2-rinse-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "שטפת",
             "niqqud": "שָׁטַפְתְּ",
-            "translit": "шата́фт"
+            "translit": "шата́фт",
+            "audio": "/audio/paal-2-rinse-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "שטף",
             "niqqud": "שָׁטַף",
-            "translit": "шата́ф"
+            "translit": "шата́ф",
+            "audio": "/audio/paal-2-rinse-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "שטפה",
             "niqqud": "שָׁטְפָה",
-            "translit": "шатфа́"
+            "translit": "шатфа́",
+            "audio": "/audio/paal-2-rinse-form-past-3fs.mp3"
           },
           "1p": {
             "he": "שטפנו",
             "niqqud": "שָׁטַפְנוּ",
-            "translit": "шатафну́"
+            "translit": "шатафну́",
+            "audio": "/audio/paal-2-rinse-form-past-1p.mp3"
           },
           "2mp": {
             "he": "שטפתם",
             "niqqud": "שְׁטַפְתֶּם",
-            "translit": "штафте́м"
+            "translit": "штафте́м",
+            "audio": "/audio/paal-2-rinse-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "שטפתן",
             "niqqud": "שְׁטַפְתֶּן",
-            "translit": "штафте́н"
+            "translit": "штафте́н",
+            "audio": "/audio/paal-2-rinse-form-past-2fp.mp3"
           },
           "3p": {
             "he": "שטפו",
             "niqqud": "שָׁטְפוּ",
-            "translit": "шатфу́"
+            "translit": "шатфу́",
+            "audio": "/audio/paal-2-rinse-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אשטוף",
             "niqqud": "אֶשְׁטוֹף",
-            "translit": "эшто́ф"
+            "translit": "эшто́ф",
+            "audio": "/audio/paal-2-rinse-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תשטוף",
             "niqqud": "תִּשְׁטוֹף",
-            "translit": "тишто́ф"
+            "translit": "тишто́ф",
+            "audio": "/audio/paal-2-rinse-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תשטפי",
             "niqqud": "תִּשְׁטְפִי",
-            "translit": "тиштфи́"
+            "translit": "тиштфи́",
+            "audio": "/audio/paal-2-rinse-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ישטוף",
             "niqqud": "יִשְׁטוֹף",
-            "translit": "ишто́ф"
+            "translit": "ишто́ф",
+            "audio": "/audio/paal-2-rinse-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תשטוף",
             "niqqud": "תִּשְׁטוֹף",
-            "translit": "тишто́ф"
+            "translit": "тишто́ф",
+            "audio": "/audio/paal-2-rinse-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נשטוף",
             "niqqud": "נִשְׁטוֹף",
-            "translit": "ништо́ф"
+            "translit": "ништо́ф",
+            "audio": "/audio/paal-2-rinse-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תשטפו",
             "niqqud": "תִּשְׁטְפוּ",
-            "translit": "тиштфу́"
+            "translit": "тиштфу́",
+            "audio": "/audio/paal-2-rinse-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תשטפנה",
             "niqqud": "תִּשְׁטֹפְנָה",
-            "translit": "тишто́фна"
+            "translit": "тишто́фна",
+            "audio": "/audio/paal-2-rinse-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ישטפו",
             "niqqud": "יִשְׁטְפוּ",
-            "translit": "иштфу́"
+            "translit": "иштфу́",
+            "audio": "/audio/paal-2-rinse-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ישטפנה",
             "niqqud": "יִשְׁטֹפְנָה",
-            "translit": "ишто́фна"
+            "translit": "ишто́фна",
+            "audio": "/audio/paal-2-rinse-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "שטוף",
             "niqqud": "שְׁטוֹף",
-            "translit": "штоф"
+            "translit": "штоф",
+            "audio": "/audio/paal-2-rinse-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "שטפי",
             "niqqud": "שִׁטְפִי",
-            "translit": "шитфи́"
+            "translit": "шитфи́",
+            "audio": "/audio/paal-2-rinse-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "שטפו",
             "niqqud": "שִׁטְפוּ",
-            "translit": "шитфу́"
+            "translit": "шитфу́",
+            "audio": "/audio/paal-2-rinse-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "שטפנה",
             "niqqud": "שְׁטֹפְנָה",
-            "translit": "што́фна"
+            "translit": "што́фна",
+            "audio": "/audio/paal-2-rinse-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-rinse.mp3"
     },
     {
       "id": "paal-2-sew",
@@ -1137,7 +1340,8 @@
       "example": {
         "he": "היא תופרת שמלה",
         "translit": "хи тоферет симла",
-        "ru": "Она шьёт платье"
+        "ru": "Она шьёт платье",
+        "audio": "/audio/paal-2-sew-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1146,147 +1350,175 @@
           "ms": {
             "he": "תופר",
             "niqqud": "תּוֹפֵר",
-            "translit": "тофе́р"
+            "translit": "тофе́р",
+            "audio": "/audio/paal-2-sew-form-present-ms.mp3"
           },
           "fs": {
             "he": "תופרת",
             "niqqud": "תּוֹפֶרֶת",
-            "translit": "тофе́рет"
+            "translit": "тофе́рет",
+            "audio": "/audio/paal-2-sew-form-present-fs.mp3"
           },
           "mp": {
             "he": "תופרים",
             "niqqud": "תּוֹפְרִים",
-            "translit": "тофри́м"
+            "translit": "тофри́м",
+            "audio": "/audio/paal-2-sew-form-present-mp.mp3"
           },
           "fp": {
             "he": "תופרות",
             "niqqud": "תּוֹפְרוֹת",
-            "translit": "тофро́т"
+            "translit": "тофро́т",
+            "audio": "/audio/paal-2-sew-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "תפרתי",
             "niqqud": "תָּפַרְתִּי",
-            "translit": "тафарти́"
+            "translit": "тафарти́",
+            "audio": "/audio/paal-2-sew-form-past-1s.mp3"
           },
           "2ms": {
             "he": "תפרת",
             "niqqud": "תָּפַרְתָּ",
-            "translit": "тафарта́"
+            "translit": "тафарта́",
+            "audio": "/audio/paal-2-sew-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "תפרת",
             "niqqud": "תָּפַרְתְּ",
-            "translit": "тафа́рт"
+            "translit": "тафа́рт",
+            "audio": "/audio/paal-2-sew-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "תפר",
             "niqqud": "תָּפַר",
-            "translit": "тафа́р"
+            "translit": "тафа́р",
+            "audio": "/audio/paal-2-sew-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "תפרה",
             "niqqud": "תָּפְרָה",
-            "translit": "тафра́"
+            "translit": "тафра́",
+            "audio": "/audio/paal-2-sew-form-past-3fs.mp3"
           },
           "1p": {
             "he": "תפרנו",
             "niqqud": "תָּפַרְנוּ",
-            "translit": "тафарну́"
+            "translit": "тафарну́",
+            "audio": "/audio/paal-2-sew-form-past-1p.mp3"
           },
           "2mp": {
             "he": "תפרתם",
             "niqqud": "תְּפַרְתֶּם",
-            "translit": "тфарте́м"
+            "translit": "тфарте́м",
+            "audio": "/audio/paal-2-sew-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "תפרתן",
             "niqqud": "תְּפַרְתֶּן",
-            "translit": "тфарте́н"
+            "translit": "тфарте́н",
+            "audio": "/audio/paal-2-sew-form-past-2fp.mp3"
           },
           "3p": {
             "he": "תפרו",
             "niqqud": "תָּפְרוּ",
-            "translit": "тафру́"
+            "translit": "тафру́",
+            "audio": "/audio/paal-2-sew-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתפור",
             "niqqud": "אֶתְפּוֹר",
-            "translit": "этпо́р"
+            "translit": "этпо́р",
+            "audio": "/audio/paal-2-sew-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתפור",
             "niqqud": "תִּתְפּוֹר",
-            "translit": "титпо́р"
+            "translit": "титпо́р",
+            "audio": "/audio/paal-2-sew-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתפרי",
             "niqqud": "תִּתְפְּרִי",
-            "translit": "титпри́"
+            "translit": "титпри́",
+            "audio": "/audio/paal-2-sew-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתפור",
             "niqqud": "יִתְפּוֹר",
-            "translit": "итпо́р"
+            "translit": "итпо́р",
+            "audio": "/audio/paal-2-sew-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתפור",
             "niqqud": "תִּתְפּוֹר",
-            "translit": "титпо́р"
+            "translit": "титпо́р",
+            "audio": "/audio/paal-2-sew-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתפור",
             "niqqud": "נִתְפּוֹר",
-            "translit": "нитпо́р"
+            "translit": "нитпо́р",
+            "audio": "/audio/paal-2-sew-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתפרו",
             "niqqud": "תִּתְפְּרוּ",
-            "translit": "титпру́"
+            "translit": "титпру́",
+            "audio": "/audio/paal-2-sew-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתפרנה",
             "niqqud": "תִּתְפֹּרְנָה",
-            "translit": "титпо́рна"
+            "translit": "титпо́рна",
+            "audio": "/audio/paal-2-sew-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתפרו",
             "niqqud": "יִתְפְּרוּ",
-            "translit": "итпру́"
+            "translit": "итпру́",
+            "audio": "/audio/paal-2-sew-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתפרנה",
             "niqqud": "יִתְפֹּרְנָה",
-            "translit": "итпо́рна"
+            "translit": "итпо́рна",
+            "audio": "/audio/paal-2-sew-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "תפור",
             "niqqud": "תְּפוֹר",
-            "translit": "тфор"
+            "translit": "тфор",
+            "audio": "/audio/paal-2-sew-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "תפרי",
             "niqqud": "תִּפְרִי",
-            "translit": "тифри́"
+            "translit": "тифри́",
+            "audio": "/audio/paal-2-sew-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "תפרו",
             "niqqud": "תִּפְרוּ",
-            "translit": "тифру́"
+            "translit": "тифру́",
+            "audio": "/audio/paal-2-sew-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "תפרנה",
             "niqqud": "תְּפֹרְנָה",
-            "translit": "тфо́рна"
+            "translit": "тфо́рна",
+            "audio": "/audio/paal-2-sew-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-sew.mp3"
     },
     {
       "id": "paal-2-ride",
@@ -1297,7 +1529,8 @@
       "example": {
         "he": "הוא רוכב על סוס",
         "translit": "ху рохев аль сус",
-        "ru": "Он едет верхом на лошади"
+        "ru": "Он едет верхом на лошади",
+        "audio": "/audio/paal-2-ride-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1306,147 +1539,175 @@
           "ms": {
             "he": "רוכב",
             "niqqud": "רוֹכֵב",
-            "translit": "рохе́в"
+            "translit": "рохе́в",
+            "audio": "/audio/paal-2-ride-form-present-ms.mp3"
           },
           "fs": {
             "he": "רוכבת",
             "niqqud": "רוֹכֶבֶת",
-            "translit": "рохе́вет"
+            "translit": "рохе́вет",
+            "audio": "/audio/paal-2-ride-form-present-fs.mp3"
           },
           "mp": {
             "he": "רוכבים",
             "niqqud": "רוֹכְבִים",
-            "translit": "рохви́м"
+            "translit": "рохви́м",
+            "audio": "/audio/paal-2-ride-form-present-mp.mp3"
           },
           "fp": {
             "he": "רוכבות",
             "niqqud": "רוֹכְבוֹת",
-            "translit": "рохво́т"
+            "translit": "рохво́т",
+            "audio": "/audio/paal-2-ride-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "רכבתי",
             "niqqud": "רָכַבְתִּי",
-            "translit": "рахавти́"
+            "translit": "рахавти́",
+            "audio": "/audio/paal-2-ride-form-past-1s.mp3"
           },
           "2ms": {
             "he": "רכבת",
             "niqqud": "רָכַבְתָּ",
-            "translit": "рахавта́"
+            "translit": "рахавта́",
+            "audio": "/audio/paal-2-ride-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "רכבת",
             "niqqud": "רָכַבְתְּ",
-            "translit": "раха́вт"
+            "translit": "раха́вт",
+            "audio": "/audio/paal-2-ride-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "רכב",
             "niqqud": "רָכַב",
-            "translit": "раха́в"
+            "translit": "раха́в",
+            "audio": "/audio/paal-2-ride-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "רכבה",
             "niqqud": "רָכְבָה",
-            "translit": "рахва́"
+            "translit": "рахва́",
+            "audio": "/audio/paal-2-ride-form-past-3fs.mp3"
           },
           "1p": {
             "he": "רכבנו",
             "niqqud": "רָכַבְנוּ",
-            "translit": "рахавну́"
+            "translit": "рахавну́",
+            "audio": "/audio/paal-2-ride-form-past-1p.mp3"
           },
           "2mp": {
             "he": "רכבתם",
             "niqqud": "רְכַבְתֶּם",
-            "translit": "рхавте́м"
+            "translit": "рхавте́м",
+            "audio": "/audio/paal-2-ride-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "רכבתן",
             "niqqud": "רְכַבְתֶּן",
-            "translit": "рхавте́н"
+            "translit": "рхавте́н",
+            "audio": "/audio/paal-2-ride-form-past-2fp.mp3"
           },
           "3p": {
             "he": "רכבו",
             "niqqud": "רָכְבוּ",
-            "translit": "рахву́"
+            "translit": "рахву́",
+            "audio": "/audio/paal-2-ride-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "ארכוב",
             "niqqud": "אֶרְכּוֹב",
-            "translit": "эрко́в"
+            "translit": "эрко́в",
+            "audio": "/audio/paal-2-ride-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תרכוב",
             "niqqud": "תִּרְכּוֹב",
-            "translit": "тирко́в"
+            "translit": "тирко́в",
+            "audio": "/audio/paal-2-ride-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תרכבי",
             "niqqud": "תִּרְכְּבִי",
-            "translit": "тиркви́"
+            "translit": "тиркви́",
+            "audio": "/audio/paal-2-ride-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ירכוב",
             "niqqud": "יִרְכּוֹב",
-            "translit": "ирко́в"
+            "translit": "ирко́в",
+            "audio": "/audio/paal-2-ride-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תרכוב",
             "niqqud": "תִּרְכּוֹב",
-            "translit": "тирко́в"
+            "translit": "тирко́в",
+            "audio": "/audio/paal-2-ride-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נרכוב",
             "niqqud": "נִרְכּוֹב",
-            "translit": "нирко́в"
+            "translit": "нирко́в",
+            "audio": "/audio/paal-2-ride-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תרכבו",
             "niqqud": "תִּרְכְּבוּ",
-            "translit": "тиркву́"
+            "translit": "тиркву́",
+            "audio": "/audio/paal-2-ride-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תרכבנה",
             "niqqud": "תִּרְכֹּבְנָה",
-            "translit": "тирко́вна"
+            "translit": "тирко́вна",
+            "audio": "/audio/paal-2-ride-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ירכבו",
             "niqqud": "יִרְכְּבוּ",
-            "translit": "иркву́"
+            "translit": "иркву́",
+            "audio": "/audio/paal-2-ride-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ירכבנה",
             "niqqud": "יִרְכֹּבְנָה",
-            "translit": "ирко́вна"
+            "translit": "ирко́вна",
+            "audio": "/audio/paal-2-ride-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "רכוב",
             "niqqud": "רְכוֹב",
-            "translit": "рхов"
+            "translit": "рхов",
+            "audio": "/audio/paal-2-ride-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "רכבי",
             "niqqud": "רִכְבִי",
-            "translit": "рихви́"
+            "translit": "рихви́",
+            "audio": "/audio/paal-2-ride-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "רכבו",
             "niqqud": "רִכְבוּ",
-            "translit": "рихву́"
+            "translit": "рихву́",
+            "audio": "/audio/paal-2-ride-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "רכבנה",
             "niqqud": "רְכֹבְנָה",
-            "translit": "рхо́вна"
+            "translit": "рхо́вна",
+            "audio": "/audio/paal-2-ride-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-ride.mp3"
     },
     {
       "id": "paal-2-cut",
@@ -1457,7 +1718,8 @@
       "example": {
         "he": "אני גוזר נייר",
         "translit": "ани гозер нейар",
-        "ru": "Я вырезаю бумагу"
+        "ru": "Я вырезаю бумагу",
+        "audio": "/audio/paal-2-cut-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1466,147 +1728,175 @@
           "ms": {
             "he": "גוזר",
             "niqqud": "גּוֹזֵר",
-            "translit": "гозе́р"
+            "translit": "гозе́р",
+            "audio": "/audio/paal-2-cut-form-present-ms.mp3"
           },
           "fs": {
             "he": "גוזרת",
             "niqqud": "גּוֹזֶרֶת",
-            "translit": "гозе́рет"
+            "translit": "гозе́рет",
+            "audio": "/audio/paal-2-cut-form-present-fs.mp3"
           },
           "mp": {
             "he": "גוזרים",
             "niqqud": "גּוֹזְרִים",
-            "translit": "гозри́м"
+            "translit": "гозри́м",
+            "audio": "/audio/paal-2-cut-form-present-mp.mp3"
           },
           "fp": {
             "he": "גוזרות",
             "niqqud": "גּוֹזְרוֹת",
-            "translit": "гозро́т"
+            "translit": "гозро́т",
+            "audio": "/audio/paal-2-cut-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "גזרתי",
             "niqqud": "גָּזַרְתִּי",
-            "translit": "газарти́"
+            "translit": "газарти́",
+            "audio": "/audio/paal-2-cut-form-past-1s.mp3"
           },
           "2ms": {
             "he": "גזרת",
             "niqqud": "גָּזַרְתָּ",
-            "translit": "газарта́"
+            "translit": "газарта́",
+            "audio": "/audio/paal-2-cut-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "גזרת",
             "niqqud": "גָּזַרְתְּ",
-            "translit": "газа́рт"
+            "translit": "газа́рт",
+            "audio": "/audio/paal-2-cut-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "גזר",
             "niqqud": "גָּזַר",
-            "translit": "газа́р"
+            "translit": "газа́р",
+            "audio": "/audio/paal-2-cut-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "גזרה",
             "niqqud": "גָּזְרָה",
-            "translit": "газра́"
+            "translit": "газра́",
+            "audio": "/audio/paal-2-cut-form-past-3fs.mp3"
           },
           "1p": {
             "he": "גזרנו",
             "niqqud": "גָּזַרְנוּ",
-            "translit": "газарну́"
+            "translit": "газарну́",
+            "audio": "/audio/paal-2-cut-form-past-1p.mp3"
           },
           "2mp": {
             "he": "גזרתם",
             "niqqud": "גְּזַרְתֶּם",
-            "translit": "гзарте́м"
+            "translit": "гзарте́м",
+            "audio": "/audio/paal-2-cut-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "גזרתן",
             "niqqud": "גְּזַרְתֶּן",
-            "translit": "гзарте́н"
+            "translit": "гзарте́н",
+            "audio": "/audio/paal-2-cut-form-past-2fp.mp3"
           },
           "3p": {
             "he": "גזרו",
             "niqqud": "גָּזְרוּ",
-            "translit": "газру́"
+            "translit": "газру́",
+            "audio": "/audio/paal-2-cut-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אגזור",
             "niqqud": "אֶגְזוֹר",
-            "translit": "эгзо́р"
+            "translit": "эгзо́р",
+            "audio": "/audio/paal-2-cut-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תגזור",
             "niqqud": "תִּגְזוֹר",
-            "translit": "тигзо́р"
+            "translit": "тигзо́р",
+            "audio": "/audio/paal-2-cut-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תגזרי",
             "niqqud": "תִּגְזְרִי",
-            "translit": "тигзри́"
+            "translit": "тигзри́",
+            "audio": "/audio/paal-2-cut-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יגזור",
             "niqqud": "יִגְזוֹר",
-            "translit": "игзо́р"
+            "translit": "игзо́р",
+            "audio": "/audio/paal-2-cut-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תגזור",
             "niqqud": "תִּגְזוֹר",
-            "translit": "тигзо́р"
+            "translit": "тигзо́р",
+            "audio": "/audio/paal-2-cut-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נגזור",
             "niqqud": "נִגְזוֹר",
-            "translit": "нигзо́р"
+            "translit": "нигзо́р",
+            "audio": "/audio/paal-2-cut-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תגזרו",
             "niqqud": "תִּגְזְרוּ",
-            "translit": "тигзру́"
+            "translit": "тигзру́",
+            "audio": "/audio/paal-2-cut-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תגזרנה",
             "niqqud": "תִּגְזֹרְנָה",
-            "translit": "тигзо́рна"
+            "translit": "тигзо́рна",
+            "audio": "/audio/paal-2-cut-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יגזרו",
             "niqqud": "יִגְזְרוּ",
-            "translit": "игзру́"
+            "translit": "игзру́",
+            "audio": "/audio/paal-2-cut-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יגזרנה",
             "niqqud": "יִגְזֹרְנָה",
-            "translit": "игзо́рна"
+            "translit": "игзо́рна",
+            "audio": "/audio/paal-2-cut-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "גזור",
             "niqqud": "גְּזוֹר",
-            "translit": "гзор"
+            "translit": "гзор",
+            "audio": "/audio/paal-2-cut-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "גזרי",
             "niqqud": "גִּזְרִי",
-            "translit": "гизри́"
+            "translit": "гизри́",
+            "audio": "/audio/paal-2-cut-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "גזרו",
             "niqqud": "גִּזְרוּ",
-            "translit": "гизру́"
+            "translit": "гизру́",
+            "audio": "/audio/paal-2-cut-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "גזרנה",
             "niqqud": "גְּזֹרְנָה",
-            "translit": "гзо́рна"
+            "translit": "гзо́рна",
+            "audio": "/audio/paal-2-cut-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-2-cut.mp3"
     }
   ]
 }
