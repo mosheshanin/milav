@@ -1,7 +1,8 @@
 // Отчёт по контенту. Запуск: npm run content:report [-- --list]
 //   без флагов: сводка по темам (и по алфавиту), сколько слов и букв не проверил носитель, у каких нет картинки или озвучки,
 //     нарушения формата;
-//   --list: полный список слов и букв с огласовками, транскрипцией и фразами для носителя языка (непроверенные).
+//   --list: полный список слов и букв с огласовками, транскрипцией и фразами для носителя языка (непроверенные);
+//   --no-image: слова и слова-примеры букв без картинки: id (по нему называется файл в ящике, docs/IMAGES.md), иврит, перевод.
 // Код возврата 1, если есть нарушения схемы или правил набора. Нерешённые «reviewed», картинки и озвучка нарушением не считаются.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parseArgs } from "node:util";
@@ -9,10 +10,18 @@ import type { Letter, Lesson, Word } from "@milav/shared";
 import { ALPHABET_GROUPS, SECTION_TITLES } from "@milav/shared";
 import { alphabetLessons, lessons } from "../content";
 import { alphabetProblems, crossProblems, setProblems } from "../content/rules";
+import { missingImages, type RawLesson } from "../content/inbox";
 import { schemaProblems } from "../content/validate";
 
-const { values } = parseArgs({ options: { list: { type: "boolean", default: false } } });
+const { values } = parseArgs({ options: { list: { type: "boolean", default: false }, "no-image": { type: "boolean", default: false } } });
 const publicDir = new URL("../apps/web/public", import.meta.url);
+
+if (values["no-image"]) {
+  const pending = missingImages([...alphabetLessons, ...lessons] as unknown as RawLesson[]);
+  console.log(`Без картинки: ${pending.length}. Файл для ящика называется по id: <id>.png (docs/IMAGES.md)\n`);
+  for (const t of pending) console.log(`${t.id}\t${t.he}\t${t.ru}${t.kind === "letter" ? "\t(слово-пример буквы)" : ""}`);
+  process.exit(0);
+}
 
 const allWords = lessons.flatMap((l) => l.words.map((w) => ({ lesson: l, word: w })));
 const unreviewed = allWords.filter(({ word }) => word.reviewed === false);

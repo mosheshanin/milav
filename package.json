@@ -20,7 +20,8 @@
     "content:new": "vite-node tools/content-new.ts",
     "content:report": "vite-node tools/content-report.ts",
     "templates": "vite-node tools/own-templates.ts",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "images:inbox": "vite-node tools/images-inbox.ts"
   },
   "devDependencies": {
     "ajv": "^8.20.0",

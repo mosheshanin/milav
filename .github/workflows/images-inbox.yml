@@ -1,0 +1,61 @@
+# Картинки слов из «почтового ящика»: файлы, добавленные в content/inbox/images, сжимаются, переносятся в
+# apps/web/public/words и прописываются в уроках. Подробности: docs/IMAGES.md.
+# Запускается сам при добавлении файла в ящик в ветку main, а также вручную (Actions → Картинки слов → Run workflow).
+name: Картинки слов
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/inbox/images/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: images-inbox
+  cancel-in-progress: false
+
+jobs:
+  images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Установка зависимостей
+        run: npm ci
+
+      # sharp нужен только здесь (сжатие png, jpg, webp), в зависимости приложения он не входит.
+      - name: Установка sharp
+        run: npm install --no-save sharp
+
+      - name: Обработка ящика
+        id: inbox
+        run: |
+          set +e
+          npm run images:inbox
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Проверка контента
+        run: npm run validate:content
+
+      - name: Сохранить в репозиторий
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A apps/web/public/words content/lessons content/inbox
+          git diff --cached --quiet && echo "Нечего сохранять" && exit 0
+          git commit -m "Картинки слов из ящика"
+          git pull --rebase origin main
+          git push
+
+      # Часть файлов отклонена (неверное имя, слишком большой файл): они остались в ящике, причины в аннотациях запуска.
+      - name: Итог
+        if: steps.inbox.outputs.status != '0'
+        run: |
+          echo "Часть файлов не принята, они остались в content/inbox/images. Причины выше и в аннотациях запуска."
+          exit 1
