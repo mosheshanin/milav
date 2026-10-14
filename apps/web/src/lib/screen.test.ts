@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HOME, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
+import { ACHIEVEMENTS, HOME, LEADERBOARD, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
 
 function memoryStorage(initial: Record<string, string> = {}): ScreenStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -25,6 +25,14 @@ describe("сохранение экрана", () => {
     const storage = memoryStorage();
     saveScreen(storage, { name: "quiz", lessonId: "animals-1" });
     expect(restoreScreen(storage, exists)).toEqual({ name: "study", lessonId: "animals-1" });
+  });
+
+  it("достижения и таблица восстанавливаются как есть", () => {
+    for (const screen of [ACHIEVEMENTS, LEADERBOARD]) {
+      const storage = memoryStorage();
+      saveScreen(storage, screen);
+      expect(restoreScreen(storage, exists)).toEqual(screen);
+    }
   });
 
   it("главная остаётся главной", () => {

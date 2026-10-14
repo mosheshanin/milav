@@ -1,5 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { MeResponse } from "@milav/shared";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import type { MeResponse, PlayInfo } from "@milav/shared";
 import { ApiError, api } from "./api";
 import { authHeader } from "./telegram";
 
@@ -15,7 +15,14 @@ interface AppValue {
   setPoints: (points: number) => void;
   /** Заново читает профиль (например, после сданной викторины). */
   refresh: () => Promise<void>;
+  /** То же, но только если профиль читали давно (при возврате на главную, чтобы не делать лишний запрос). */
+  refreshIfStale: () => Promise<void>;
+  /** Подставляет новую цель дня и счётчик непросмотренных после ответа сервера. */
+  applyPlay: (play: PlayInfo) => void;
 }
+
+/** Профиль считается свежим столько миллисекунд после чтения. */
+const STALE_MS = 5000;
 
 const Ctx = createContext<AppValue | null>(null);
 
@@ -35,9 +42,13 @@ export function AppProvider({
 }) {
   const [load, setLoad] = useState<Load>(() => (authHeader() ? { state: "loading" } : { state: "no-auth" }));
 
+  const fetchedAt = useRef(0);
+
   const fetchMe = useCallback(async () => {
     try {
-      setLoad({ state: "ready", me: await api.me() });
+      const me = await api.me();
+      fetchedAt.current = Date.now();
+      setLoad({ state: "ready", me });
     } catch (e) {
       setLoad({ state: "error", code: e instanceof ApiError ? e.code : "error" });
     }
@@ -54,6 +65,10 @@ export function AppProvider({
             me: load.me,
             setPoints: (points) => setLoad({ state: "ready", me: { ...load.me, points } }),
             refresh: fetchMe,
+            refreshIfStale: async () => {
+              if (Date.now() - fetchedAt.current > STALE_MS) await fetchMe();
+            },
+            applyPlay: (play) => setLoad({ state: "ready", me: { ...load.me, play } }),
           }
         : null,
     [load, fetchMe],

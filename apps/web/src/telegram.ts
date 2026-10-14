@@ -31,6 +31,13 @@ export interface TelegramWebApp {
   /** Спрашивать подтверждение, когда человек закрывает приложение (с версии 6.2). */
   enableClosingConfirmation?: () => void;
   disableClosingConfirmation?: () => void;
+  /** Отклик устройства (с версии 6.1). */
+  HapticFeedback?: {
+    notificationOccurred: (type: "error" | "success" | "warning") => void;
+    impactOccurred: (style: "light" | "medium" | "heavy" | "rigid" | "soft") => void;
+  };
+  /** Открывает ссылку t.me внутри Telegram (например, выбор чата для «Поделиться»). */
+  openTelegramLink?: (url: string) => void;
 }
 
 declare global {

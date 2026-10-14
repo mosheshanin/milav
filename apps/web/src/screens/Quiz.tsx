@@ -20,6 +20,7 @@ import {
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { CelebrationSheet } from "../components/play";
 import { HebrewKeyboard } from "../components/HebrewKeyboard";
 import { ListenButton } from "../components/ListenButton";
 import { SpeakRecorder } from "../components/SpeakRecorder";
@@ -641,7 +642,20 @@ function LetterQuestionBody({
 
 /** Итог дошедшей до конца викторины: ошибок не больше допустимого, значит урок сдан и уже записан сервером. */
 function Result({ result, rules, onHome }: { result: QuizResult; rules: QuizRules; onHome: () => void }) {
+  // Старый ответ сервера мог прийти без блока `play`: тогда праздничного листа просто нет.
+  const play = result.play;
+  const news = !!play && (play.newBadges.length > 0 || play.goalMet || !!result.statusChanged);
+  const [celebrating, setCelebrating] = useState(news);
   return (
+    <>
+    {celebrating && play && (
+      <CelebrationSheet
+        badgeIds={play.newBadges}
+        goalMet={play.goalMet}
+        status={result.statusChanged ? { name: result.status.name, symbol: result.status.symbol } : undefined}
+        onClose={() => setCelebrating(false)}
+      />
+    )}
     <Card className="flex flex-col items-center gap-block text-center">
       <div className="text-5xl" aria-hidden>
         🎉
@@ -659,5 +673,6 @@ function Result({ result, rules, onHome }: { result: QuizResult; rules: QuizRule
         К урокам
       </Button>
     </Card>
+    </>
   );
 }

@@ -26,6 +26,16 @@
   --color-danger: #dc2626;
   --color-danger-soft: #fee2e2;
 
+  /* Редкость бейджей: цвет значка и мягкий фон плитки (геймификация) */
+  --color-rarity-common: #64748b;
+  --color-rarity-common-soft: #f1f5f9;
+  --color-rarity-rare: #2563eb;
+  --color-rarity-rare-soft: #dbeafe;
+  --color-rarity-epic: #9333ea;
+  --color-rarity-epic-soft: #f3e8ff;
+  --color-rarity-legendary: #d97706;
+  --color-rarity-legendary-soft: #fef3c7;
+
   /* Поверхности и текст */
   --color-surface: #ffffff;
   --color-page: #f8fafc;
@@ -59,5 +69,46 @@
     background-color: var(--color-page);
     color: var(--color-ink);
     -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Появление листа поздравления и уведомления. Только прозрачность и сдвиг; при «уменьшить движение» анимаций нет. */
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes badge-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-sheet {
+  animation: sheet-in 0.25s ease-out both;
+}
+
+.animate-pop {
+  animation: badge-pop 0.45s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sheet,
+  .animate-pop {
+    animation: none;
   }
 }

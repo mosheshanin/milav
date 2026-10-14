@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { getAnyLesson } from "@milav/content";
 import { AppProvider } from "./AppContext";
 import { Notice } from "./components/ui";
-import { HOME, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { ACHIEVEMENTS, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
+import { Leaderboard } from "./screens/Leaderboard";
 import { Quiz } from "./screens/Quiz";
 import { RecordScreen } from "./screens/Record";
 import { Study } from "./screens/Study";
@@ -48,6 +50,8 @@ export function App() {
         <Home
           onOpen={(lessonId) => setScreen({ name: "study", lessonId })}
           onOpenQuiz={(lessonId) => setScreen({ name: "quiz", lessonId })}
+          onAchievements={() => setScreen(ACHIEVEMENTS)}
+          onLeaderboard={() => setScreen(LEADERBOARD)}
         />
       )}
       {screen.name === "study" && (
@@ -64,6 +68,8 @@ export function App() {
           onHome={() => setScreen(HOME)}
         />
       )}
+      {screen.name === "achievements" && <Achievements onBack={() => setScreen(HOME)} onLeaderboard={() => setScreen(LEADERBOARD)} />}
+      {screen.name === "leaderboard" && <Leaderboard onBack={() => setScreen(HOME)} />}
       {screen.name === "record" && <RecordScreen onBack={() => setScreen(HOME)} />}
     </AppProvider>
   );

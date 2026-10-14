@@ -7,11 +7,17 @@ export type Screen =
   | { name: "home" }
   | { name: "study"; lessonId: string }
   | { name: "quiz"; lessonId: string }
+  /** Достижения, ритм и настройки (геймификация). */
+  | { name: "achievements" }
+  /** Таблица лидеров. */
+  | { name: "leaderboard" }
   /** Скрытый экран записи шаблонов букв (только владелец, см. docs/DEPLOY.md). */
   | { name: "record" };
 
 export const HOME: Screen = { name: "home" };
 export const RECORD: Screen = { name: "record" };
+export const ACHIEVEMENTS: Screen = { name: "achievements" };
+export const LEADERBOARD: Screen = { name: "leaderboard" };
 
 const KEY = "milav:screen";
 
@@ -66,6 +72,8 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   if (typeof raw !== "object" || raw === null) return HOME;
   const { name, lessonId } = raw as { name?: unknown; lessonId?: unknown };
   if (name === "record") return RECORD;
+  if (name === "achievements") return ACHIEVEMENTS;
+  if (name === "leaderboard") return LEADERBOARD;
   if ((name === "study" || name === "quiz") && typeof lessonId === "string" && lessonExists(lessonId)) {
     return { name: "study", lessonId };
   }

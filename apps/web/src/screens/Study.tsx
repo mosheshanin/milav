@@ -8,6 +8,7 @@ import {
   lessonItems,
   stagesFor,
   type Letter,
+  type PlayEvent,
   type Stage,
   type StageProof,
   type Word,
@@ -16,6 +17,7 @@ import {
 import { ApiError, api, type SpeechResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { PlayToast, eventHasNews } from "../components/play";
 import { LetterCard } from "../components/LetterCard";
 import { ListenButton } from "../components/ListenButton";
 import { SpeakRecorder } from "../components/SpeakRecorder";
@@ -60,6 +62,8 @@ export function Study({
   /** Текст ошибки сохранения этапа (null, если всё в порядке). */
   const [saveError, setSaveError] = useState<string | null>(null);
   const [justEarned, setJustEarned] = useState(false);
+  /** Новости геймификации после слова: бейдж или цель дня. */
+  const [toast, setToast] = useState<PlayEvent | null>(null);
 
   useEffect(() => {
     if (!lesson) return;
@@ -115,6 +119,7 @@ export function Study({
         const res = await api.stage(word.id, proof);
         replace(res.progress, res.points);
         if (res.pointsAwarded > 0) setJustEarned(true);
+        if (eventHasNews(res.play)) setToast(res.play);
         advance(proof.stage, res.progress, skipped.has(word.id));
       } catch (e) {
         setSaveError(saveErrorText(e));
@@ -130,6 +135,7 @@ export function Study({
       if (!word || !res.progress) return;
       replace(res.progress, res.points);
       if (res.pointsAwarded) setJustEarned(true);
+      if (eventHasNews(res.play)) setToast(res.play);
       advance("speak", res.progress, skipped.has(word.id));
     },
     [word, replace, advance, skipped],
@@ -260,6 +266,7 @@ export function Study({
           </div>
         )}
       </main>
+      {toast && <PlayToast event={toast} onDone={() => setToast(null)} />}
     </>
   );
 }

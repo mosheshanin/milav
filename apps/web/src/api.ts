@@ -1,5 +1,11 @@
 import type {
+  AchievementsResponse,
+  CohortResponse,
+  LeaderboardResponse,
   MeResponse,
+  PlayEvent,
+  PlayInfo,
+  SettingsRequest,
   QuizAnswerRequest,
   QuizAnswerResponse,
   QuizStartResponse,
@@ -9,6 +15,7 @@ import type {
   TemplatesResponse,
   WordProgress,
 } from "@milav/shared";
+import { deviceTimeZone } from "./lib/timezone";
 import { authHeader } from "./telegram";
 
 export class ApiError extends Error {
@@ -52,6 +59,8 @@ export interface StageResponse {
   progress: WordProgress;
   pointsAwarded: number;
   points: number;
+  /** Бейджи и цель дня, если слово завершено этим запросом. */
+  play?: PlayEvent;
 }
 
 export interface SpeechResponse {
@@ -60,6 +69,7 @@ export interface SpeechResponse {
   progress?: WordProgress;
   pointsAwarded?: number;
   points?: number;
+  play?: PlayEvent;
 }
 
 export interface LessonProgressResponse {
@@ -68,7 +78,17 @@ export interface LessonProgressResponse {
 }
 
 export const api = {
-  me: () => request<MeResponse>("/api/me"),
+  /** Профиль; часовой пояс устройства нужен для границы дня (ритм, цель). */
+  me: () => {
+    const tz = deviceTimeZone();
+    return request<MeResponse>("/api/me", tz ? { headers: { "X-Timezone": tz } } : {});
+  },
+  achievements: () => request<AchievementsResponse>("/api/achievements"),
+  /** Человек увидел поздравление с этими бейджами. */
+  seen: (ids: string[]) => request<{ ok: true }>("/api/achievements/seen", json({ ids })),
+  settings: (body: SettingsRequest) => request<{ play: PlayInfo }>("/api/settings", jsonPut(body)),
+  leaderboard: (board: "week" | "all") => request<LeaderboardResponse>(`/api/leaderboard?board=${board}`),
+  cohort: () => request<CohortResponse>("/api/cohort"),
   lessonProgress: (lessonId: string) => request<LessonProgressResponse>(`/api/lessons/${lessonId}/progress`),
   /** Отметка этапа «слушай», «печатай» или «пиши»: для двух последних сервер проверяет доказательство (набранное слово, штрихи). */
   stage: (wordId: string, proof: StageProof) =>

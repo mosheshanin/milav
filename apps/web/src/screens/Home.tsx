@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, ChevronRight, Lock } from "lucide-react";
 import { alphabetLessons, allLessons, lessons } from "@milav/content";
 import {
@@ -15,14 +15,48 @@ import {
 import { api, type LessonProgressResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../components/play";
 import { Button, Card, Chip } from "../components/ui";
+import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { findResume } from "../lib/resume";
 
 const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
 
 /** Уроки: сначала алфавит (с него начинает новичок), потом разделы и темы. */
-export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => void; onOpenQuiz: (lessonId: string) => void }) {
-  const { me } = useApp();
+export function Home({
+  onOpen,
+  onOpenQuiz,
+  onAchievements,
+  onLeaderboard,
+}: {
+  onOpen: (lessonId: string) => void;
+  onOpenQuiz: (lessonId: string) => void;
+  onAchievements: () => void;
+  onLeaderboard: () => void;
+}) {
+  const { me, refreshIfStale } = useApp();
+  const [recapHidden, setRecapHidden] = useState(false);
+  /** Бейджи, о которых человек ещё не знает (найдены при пересчёте или потеряны уведомления). */
+  const [unseen, setUnseen] = useState<{ ids: string[]; retro: boolean } | null>(null);
+  const unseenChecked = useRef(false);
+
+  // Ритм и цель дня могли измениться в уроке: при возврате на главную профиль перечитывается, если он устарел.
+  useEffect(() => {
+    void refreshIfStale();
+  }, [refreshIfStale]);
+
+  // Непросмотренные бейджи показываем один раз за открытие приложения.
+  useEffect(() => {
+    if (unseenChecked.current || me.play.unseenBadges === 0) return;
+    unseenChecked.current = true;
+    api.achievements().then(
+      (res) => {
+        const fresh = res.earned.filter((e) => !e.seen);
+        if (fresh.length > 0) setUnseen({ ids: fresh.map((e) => e.id), retro: fresh.every((e) => e.retro) });
+      },
+      () => undefined,
+    );
+  }, [me.play.unseenBadges]);
   const [progress, setProgress] = useState<Record<string, LessonProgressResponse>>({});
   /** Сколько запросов прогресса завершилось (успешно или нет). */
   const [settled, setSettled] = useState(0);
@@ -47,15 +81,63 @@ export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => voi
   const resumeLesson = resume ? allLessons.find((l) => l.id === resume.lessonId) : undefined;
   const resumeLetters = resumeLesson ? isAlphabetLesson(resumeLesson) : false;
 
-  const toNext = me.status.nextAt === null ? null : me.status.nextAt - me.passedLessons;
-
   return (
     <>
-      <Header title="Milav" subtitle={`${me.status.name} · сдано уроков: ${me.passedLessons}`} />
+      <Header title="Milav" subtitle={`${me.status.name} · сдано уроков: ${me.passedLessons}`} onStatus={onAchievements} />
       <main className="mx-auto flex max-w-md flex-col gap-section p-block pb-section">
-        {toNext !== null && (
-          <p className="text-sm text-ink-soft">До следующего статуса сдать уроков: {toNext}</p>
+        {me.play.recap && !recapHidden && !recapDismissed(me.play.recap.weekIdx) && (
+          <Card className="flex items-start gap-3" data-testid="recap">
+            <div className="flex-1">
+              <div className="font-semibold">Итоги прошлой недели</div>
+              <div className="text-sm text-ink-soft">
+                Выучено {me.play.recap.words} {plural(me.play.recap.words, "слово", "слова", "слов")}, дней занятий:{" "}
+                {me.play.recap.days}.
+              </div>
+            </div>
+            <button
+              type="button"
+              className="min-h-10 px-2 text-sm font-semibold text-accent"
+              data-testid="recap-close"
+              onClick={() => {
+                dismissRecap(me.play.recap!.weekIdx);
+                setRecapHidden(true);
+              }}
+            >
+              Понятно
+            </button>
+          </Card>
         )}
+        <Card className="flex flex-col gap-block" data-testid="my-path">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold">Мой путь</h2>
+            <button
+              type="button"
+              onClick={onAchievements}
+              data-testid="open-achievements"
+              className="min-h-10 px-2 font-semibold text-accent"
+            >
+              Достижения{me.play.unseenBadges > 0 ? ` (+${me.play.unseenBadges})` : ""}
+            </button>
+          </div>
+          <StatusPathBar path={me.play.statusPath} />
+          <WeekDots week={me.play.week} />
+          {me.play.goal && (
+            <div className="flex items-center gap-3" data-testid="home-goal">
+              <GoalRing done={me.play.goal.done} target={me.play.goal.target} />
+              <div className="text-sm">
+                <div className="font-semibold">Цель дня</div>
+                <div className="text-ink-soft">
+                  {me.play.goal.met ? "Выполнена!" : `Слов сегодня: ${me.play.goal.done} из ${me.play.goal.target}`}
+                </div>
+              </div>
+            </div>
+          )}
+          {me.play.features.leaderboard && (
+            <Button variant="ghost" block onClick={onLeaderboard} data-testid="open-leaderboard">
+              Таблица лидеров
+            </Button>
+          )}
+        </Card>
         {resume && resumeLesson && (
           <Card className="flex flex-col gap-3" >
             <div>
@@ -119,6 +201,16 @@ export function Home({ onOpen, onOpenQuiz }: { onOpen: (lessonId: string) => voi
           );
         })}
       </main>
+      {unseen && (
+        <CelebrationSheet
+          badgeIds={unseen.ids}
+          title={unseen.retro ? `Мы нашли ${unseen.ids.length} ${plural(unseen.ids.length, "ваше достижение", "ваших достижения", "ваших достижений")}` : undefined}
+          onClose={() => {
+            setUnseen(null);
+            void refreshIfStale();
+          }}
+        />
+      )}
     </>
   );
 }
