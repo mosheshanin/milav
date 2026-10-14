@@ -1,4 +1,5 @@
 import type { StatusInfo } from "./types";
+import type { StatusPath } from "./gamification/types";
 
 /**
  * Статусы по числу сданных уроков (решение владельца, границы включительно):
@@ -21,5 +22,25 @@ export function statusForPassedLessons(passed: number): StatusInfo {
     name: step.name,
     symbol: step.symbol,
     nextAt: Number.isFinite(step.upTo) ? step.upTo + 1 : null,
+  };
+}
+
+/** Путь к следующему статусу: где человек внутри текущего и сколько уроков до следующего. */
+export function statusPath(passed: number): StatusPath {
+  const n = Math.max(0, Math.floor(passed));
+  const index = Math.max(0, LADDER.findIndex((s) => n <= s.upTo));
+  const current = LADDER[index]!;
+  const next = LADDER[index + 1];
+  const from = index === 0 ? 0 : LADDER[index - 1]!.upTo + 1;
+  const to = next ? current.upTo + 1 : null;
+  return {
+    key: current.key,
+    name: current.name,
+    symbol: current.symbol,
+    from,
+    to,
+    passed: n,
+    fraction: to === null ? 1 : Math.min(1, (n - from) / (to - from)),
+    next: next ? { key: next.key, name: next.name, symbol: next.symbol } : null,
   };
 }

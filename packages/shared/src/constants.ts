@@ -140,5 +140,9 @@ export const RATE_LIMITS = {
   quiz: { perMinute: 10, perDay: 100 },
   // Инструмент записи шаблонов (только владелец): 135 рисунков с перезаписями, запас на неудачные попытки.
   templates: { perMinute: 120, perDay: 3000 },
+  // Геймификация: настройки и отметка «просмотрено». Читающие маршруты (достижения, таблица, сравнение) не ограничиваются
+  // через D1: лимитер пишет строку на каждый запрос (docs/GAMIFICATION.md, раздел 10.2).
+  settings: { perMinute: 20, perDay: 200 },
+  seen: { perMinute: 30, perDay: 300 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;

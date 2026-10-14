@@ -1,3 +1,4 @@
+import type { PlayEvent, PlayInfo } from "./gamification/types";
 import type { Stroke } from "./handwriting/types";
 
 /** Четыре этапа изучения слова. */
@@ -184,6 +185,8 @@ export interface MeResponse {
   points: number;
   passedLessons: number;
   status: StatusInfo;
+  /** Ритм, цель дня, путь к следующему статусу и настройки (геймификация). */
+  play: PlayInfo;
 }
 
 export interface StatusInfo {
@@ -299,6 +302,10 @@ export interface QuizResult {
   firstTimePassed: boolean;
   passedLessons: number;
   status: StatusInfo;
+  /** Бейджи, цель дня и смена статуса, полученные этой викториной. */
+  play: PlayEvent;
+  /** Статус изменился именно этой сдачей урока. */
+  statusChanged?: { from: StatusInfo["key"]; to: StatusInfo["key"] };
 }
 
 /**

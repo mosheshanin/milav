@@ -5,3 +5,4 @@ export * from "./status";
 export * from "./hebrew";
 export * from "./letterNames";
 export * from "./handwriting";
+export * from "./gamification";
