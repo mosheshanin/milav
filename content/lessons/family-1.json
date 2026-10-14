@@ -18,7 +18,8 @@
       "example": {
         "he": "זאת אמא טובה",
         "translit": "зот има това",
-        "ru": "Это хорошая мама"
+        "ru": "Это хорошая мама",
+        "audio": "/audio/family-1-mom-phrase.mp3"
       },
       "image": "/words/family-1-mom.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה אבא חזק",
         "translit": "зэ аба хазак",
-        "ru": "Это сильный папа"
+        "ru": "Это сильный папа",
+        "audio": "/audio/family-1-dad-phrase.mp3"
       },
       "image": "/words/family-1-dad.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה סבא חכם",
         "translit": "зэ саба хахам",
-        "ru": "Это умный дедушка"
+        "ru": "Это умный дедушка",
+        "audio": "/audio/family-1-grandpa-phrase.mp3"
       },
       "image": "/words/family-1-grandpa.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זאת סבתא טובה",
         "translit": "зот савта това",
-        "ru": "Это хорошая бабушка"
+        "ru": "Это хорошая бабушка",
+        "audio": "/audio/family-1-grandma-phrase.mp3"
       },
       "image": "/words/family-1-grandma.svg",
       "reviewed": false,
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה ילד חמוד",
         "translit": "зэ елед хамуд",
-        "ru": "Это милый мальчик"
+        "ru": "Это милый мальчик",
+        "audio": "/audio/family-1-boy-phrase.mp3"
       },
       "image": "/words/family-1-boy.svg",
       "reviewed": false,
@@ -98,7 +103,8 @@
       "example": {
         "he": "זאת ילדה חמודה",
         "translit": "зот ялда хмуда",
-        "ru": "Это милая девочка"
+        "ru": "Это милая девочка",
+        "audio": "/audio/family-1-girl-phrase.mp3"
       },
       "image": "/words/family-1-girl.svg",
       "reviewed": false,
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה תינוק חמוד",
         "translit": "зэ тинок хамуд",
-        "ru": "Это милый малыш"
+        "ru": "Это милый малыш",
+        "audio": "/audio/family-1-baby-phrase.mp3"
       },
       "image": "/words/family-1-baby.svg",
       "reviewed": false,
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה אח טוב",
         "translit": "зэ ах тов",
-        "ru": "Это хороший брат"
+        "ru": "Это хороший брат",
+        "audio": "/audio/family-1-brother-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-1-brother.mp3"
@@ -145,7 +153,8 @@
       "example": {
         "he": "זאת אחות טובה",
         "translit": "зот ахот това",
-        "ru": "Это хорошая сестра"
+        "ru": "Это хорошая сестра",
+        "audio": "/audio/family-1-sister-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-1-sister.mp3"
@@ -160,7 +169,8 @@
       "example": {
         "he": "זאת משפחה גדולה",
         "translit": "зот мишпаха гдола",
-        "ru": "Это большая семья"
+        "ru": "Это большая семья",
+        "audio": "/audio/family-1-family-phrase.mp3"
       },
       "image": "/words/family-1-family.svg",
       "reviewed": false,

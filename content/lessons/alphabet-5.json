@@ -25,7 +25,8 @@
         "image": "/words/animals-1-bird.svg",
         "audio": "/audio/animals-1-bird.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-tsadi.mp3"
     },
     {
       "id": "alphabet-5-tsadi-final",
@@ -41,9 +42,11 @@
         "niqqud": "עֵץ",
         "translit": "ец",
         "ru": "дерево",
-        "image": "/words/alphabet-5-tsadi-final-example.svg"
+        "image": "/words/alphabet-5-tsadi-final-example.svg",
+        "audio": "/audio/alphabet-5-tsadi-final-example.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-tsadi-final.mp3"
     },
     {
       "id": "alphabet-5-qof",
@@ -62,7 +65,8 @@
         "image": "/words/food-2-coconut.svg",
         "audio": "/audio/food-2-coconut.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-qof.mp3"
     },
     {
       "id": "alphabet-5-resh",
@@ -80,7 +84,8 @@
         "ru": "гранат",
         "audio": "/audio/food-2-pomegranate.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-resh.mp3"
     },
     {
       "id": "alphabet-5-shin",
@@ -99,7 +104,8 @@
         "image": "/words/home-3-clock.svg",
         "audio": "/audio/home-3-clock.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-shin.mp3"
     },
     {
       "id": "alphabet-5-tav",
@@ -118,7 +124,8 @@
         "image": "/words/food-1-apple.svg",
         "audio": "/audio/food-1-apple.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-5-tav.mp3"
     }
   ]
 }

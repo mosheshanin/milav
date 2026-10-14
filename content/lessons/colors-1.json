@@ -17,23 +17,27 @@
       "example": {
         "he": "זאת שמלה אדומה",
         "translit": "зот симла адума",
-        "ru": "Это красное платье"
+        "ru": "Это красное платье",
+        "audio": "/audio/colors-1-red-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "אדומה",
           "niqqud": "אֲדוּמָּה",
-          "translit": "адума́"
+          "translit": "адума́",
+          "audio": "/audio/colors-1-red-form-f.mp3"
         },
         "mp": {
           "he": "אדומים",
           "niqqud": "אֲדוּמִּים",
-          "translit": "адуми́м"
+          "translit": "адуми́м",
+          "audio": "/audio/colors-1-red-form-mp.mp3"
         },
         "fp": {
           "he": "אדומות",
           "niqqud": "אֲדוּמּוֹת",
-          "translit": "адумо́т"
+          "translit": "адумо́т",
+          "audio": "/audio/colors-1-red-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-red.svg",
@@ -49,23 +53,27 @@
       "example": {
         "he": "זה ים כחול",
         "translit": "зэ ям кахоль",
-        "ru": "Это синее море"
+        "ru": "Это синее море",
+        "audio": "/audio/colors-1-blue-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "כחולה",
           "niqqud": "כְּחוּלָּה",
-          "translit": "кхула́"
+          "translit": "кхула́",
+          "audio": "/audio/colors-1-blue-form-f.mp3"
         },
         "mp": {
           "he": "כחולים",
           "niqqud": "כְּחוּלִּים",
-          "translit": "кхули́м"
+          "translit": "кхули́м",
+          "audio": "/audio/colors-1-blue-form-mp.mp3"
         },
         "fp": {
           "he": "כחולות",
           "niqqud": "כְּחוּלּוֹת",
-          "translit": "кхуло́т"
+          "translit": "кхуло́т",
+          "audio": "/audio/colors-1-blue-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-blue.svg",
@@ -81,23 +89,27 @@
       "example": {
         "he": "זה עץ ירוק",
         "translit": "зэ эц ярок",
-        "ru": "Это зелёное дерево"
+        "ru": "Это зелёное дерево",
+        "audio": "/audio/colors-1-green-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ירוקה",
           "niqqud": "יְרוּקָּה",
-          "translit": "ерука́"
+          "translit": "ерука́",
+          "audio": "/audio/colors-1-green-form-f.mp3"
         },
         "mp": {
           "he": "ירוקים",
           "niqqud": "יְרוּקִּים",
-          "translit": "еруки́м"
+          "translit": "еруки́м",
+          "audio": "/audio/colors-1-green-form-mp.mp3"
         },
         "fp": {
           "he": "ירוקות",
           "niqqud": "יְרוּקּוֹת",
-          "translit": "еруко́т"
+          "translit": "еруко́т",
+          "audio": "/audio/colors-1-green-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-green.svg",
@@ -113,23 +125,27 @@
       "example": {
         "he": "זאת שמש צהובה",
         "translit": "зот шемеш цхува",
-        "ru": "Это жёлтое солнце"
+        "ru": "Это жёлтое солнце",
+        "audio": "/audio/colors-1-yellow-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "צהובה",
           "niqqud": "צְהוּבָּה",
-          "translit": "цхува́"
+          "translit": "цхува́",
+          "audio": "/audio/colors-1-yellow-form-f.mp3"
         },
         "mp": {
           "he": "צהובים",
           "niqqud": "צְהוּבִּים",
-          "translit": "цхуви́м"
+          "translit": "цхуви́м",
+          "audio": "/audio/colors-1-yellow-form-mp.mp3"
         },
         "fp": {
           "he": "צהובות",
           "niqqud": "צְהוּבּוֹת",
-          "translit": "цхуво́т"
+          "translit": "цхуво́т",
+          "audio": "/audio/colors-1-yellow-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-yellow.svg",
@@ -145,23 +161,27 @@
       "example": {
         "he": "זה שלג לבן",
         "translit": "зэ шелег лаван",
-        "ru": "Это белый снег"
+        "ru": "Это белый снег",
+        "audio": "/audio/colors-1-white-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "לבנה",
           "niqqud": "לְבָנָה",
-          "translit": "лвана́"
+          "translit": "лвана́",
+          "audio": "/audio/colors-1-white-form-f.mp3"
         },
         "mp": {
           "he": "לבנים",
           "niqqud": "לְבָנִים",
-          "translit": "лвани́м"
+          "translit": "лвани́м",
+          "audio": "/audio/colors-1-white-form-mp.mp3"
         },
         "fp": {
           "he": "לבנות",
           "niqqud": "לְבָנוֹת",
-          "translit": "лвано́т"
+          "translit": "лвано́т",
+          "audio": "/audio/colors-1-white-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-white.svg",
@@ -177,23 +197,27 @@
       "example": {
         "he": "זאת מכונית שחורה",
         "translit": "зот мехонит шхора",
-        "ru": "Это чёрная машина"
+        "ru": "Это чёрная машина",
+        "audio": "/audio/colors-1-black-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "שחורה",
           "niqqud": "שְׁחוֹרָה",
-          "translit": "шхора́"
+          "translit": "шхора́",
+          "audio": "/audio/colors-1-black-form-f.mp3"
         },
         "mp": {
           "he": "שחורים",
           "niqqud": "שְׁחוֹרִים",
-          "translit": "шхори́м"
+          "translit": "шхори́м",
+          "audio": "/audio/colors-1-black-form-mp.mp3"
         },
         "fp": {
           "he": "שחורות",
           "niqqud": "שְׁחוֹרוֹת",
-          "translit": "шхоро́т"
+          "translit": "шхоро́т",
+          "audio": "/audio/colors-1-black-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-black.svg",
@@ -209,23 +233,27 @@
       "example": {
         "he": "זה תפוז כתום",
         "translit": "зэ тапуз катом",
-        "ru": "Это оранжевый апельсин"
+        "ru": "Это оранжевый апельсин",
+        "audio": "/audio/colors-1-orange-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "כתומה",
           "niqqud": "כְּתוּמָּה",
-          "translit": "ктума́"
+          "translit": "ктума́",
+          "audio": "/audio/colors-1-orange-form-f.mp3"
         },
         "mp": {
           "he": "כתומים",
           "niqqud": "כְּתוּמִּים",
-          "translit": "ктуми́м"
+          "translit": "ктуми́м",
+          "audio": "/audio/colors-1-orange-form-mp.mp3"
         },
         "fp": {
           "he": "כתומות",
           "niqqud": "כְּתוּמּוֹת",
-          "translit": "ктумо́т"
+          "translit": "ктумо́т",
+          "audio": "/audio/colors-1-orange-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-orange.svg",
@@ -241,23 +269,27 @@
       "example": {
         "he": "זאת חולצה סגולה",
         "translit": "зот хульца сгула",
-        "ru": "Это фиолетовая рубашка"
+        "ru": "Это фиолетовая рубашка",
+        "audio": "/audio/colors-1-purple-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "סגולה",
           "niqqud": "סְגוּלָּה",
-          "translit": "сгула́"
+          "translit": "сгула́",
+          "audio": "/audio/colors-1-purple-form-f.mp3"
         },
         "mp": {
           "he": "סגולים",
           "niqqud": "סְגוּלִּים",
-          "translit": "сгули́м"
+          "translit": "сгули́м",
+          "audio": "/audio/colors-1-purple-form-mp.mp3"
         },
         "fp": {
           "he": "סגולות",
           "niqqud": "סְגוּלּוֹת",
-          "translit": "сгуло́т"
+          "translit": "сгуло́т",
+          "audio": "/audio/colors-1-purple-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-purple.svg",
@@ -273,23 +305,27 @@
       "example": {
         "he": "זה פרח ורוד",
         "translit": "зэ перах варод",
-        "ru": "Это розовый цветок"
+        "ru": "Это розовый цветок",
+        "audio": "/audio/colors-1-pink-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ורודה",
           "niqqud": "וְרוּדָּה",
-          "translit": "вруда́"
+          "translit": "вруда́",
+          "audio": "/audio/colors-1-pink-form-f.mp3"
         },
         "mp": {
           "he": "ורודים",
           "niqqud": "וְרוּדִּים",
-          "translit": "вруди́м"
+          "translit": "вруди́м",
+          "audio": "/audio/colors-1-pink-form-mp.mp3"
         },
         "fp": {
           "he": "ורודות",
           "niqqud": "וְרוּדּוֹת",
-          "translit": "врудо́т"
+          "translit": "врудо́т",
+          "audio": "/audio/colors-1-pink-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-pink.svg",
@@ -305,23 +341,27 @@
       "example": {
         "he": "זה שוקולד חום",
         "translit": "зэ шоколад хум",
-        "ru": "Это коричневый шоколад"
+        "ru": "Это коричневый шоколад",
+        "audio": "/audio/colors-1-brown-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חומה",
           "niqqud": "חוּמָּה",
-          "translit": "хума́"
+          "translit": "хума́",
+          "audio": "/audio/colors-1-brown-form-f.mp3"
         },
         "mp": {
           "he": "חומים",
           "niqqud": "חוּמִּים",
-          "translit": "хуми́м"
+          "translit": "хуми́м",
+          "audio": "/audio/colors-1-brown-form-mp.mp3"
         },
         "fp": {
           "he": "חומות",
           "niqqud": "חוּמּוֹת",
-          "translit": "хумо́т"
+          "translit": "хумо́т",
+          "audio": "/audio/colors-1-brown-form-fp.mp3"
         }
       },
       "image": "/words/colors-1-brown.svg",

@@ -18,7 +18,8 @@
       "example": {
         "he": "זה מקרר חדש",
         "translit": "зэ мекарер хадаш",
-        "ru": "Это новый холодильник"
+        "ru": "Это новый холодильник",
+        "audio": "/audio/home-3-fridge-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-3-fridge.mp3"
@@ -33,7 +34,8 @@
       "example": {
         "he": "זה תנור חם",
         "translit": "зэ танур хам",
-        "ru": "Это горячая духовка"
+        "ru": "Это горячая духовка",
+        "audio": "/audio/home-3-oven-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-3-oven.mp3"
@@ -48,7 +50,8 @@
       "example": {
         "he": "זה טלפון חדש",
         "translit": "зэ телефон хадаш",
-        "ru": "Это новый телефон"
+        "ru": "Это новый телефон",
+        "audio": "/audio/home-3-phone-phrase.mp3"
       },
       "image": "/words/home-3-phone.svg",
       "reviewed": false,
@@ -64,7 +67,8 @@
       "example": {
         "he": "זה מחשב מהיר",
         "translit": "зэ махшев махир",
-        "ru": "Это быстрый компьютер"
+        "ru": "Это быстрый компьютер",
+        "audio": "/audio/home-3-computer-phrase.mp3"
       },
       "image": "/words/home-3-computer.svg",
       "reviewed": false,
@@ -80,7 +84,8 @@
       "example": {
         "he": "זה שעון ישן",
         "translit": "зэ шаон яшан",
-        "ru": "Это старые часы"
+        "ru": "Это старые часы",
+        "audio": "/audio/home-3-clock-phrase.mp3"
       },
       "image": "/words/home-3-clock.svg",
       "reviewed": false,
@@ -96,7 +101,8 @@
       "example": {
         "he": "זאת צלחת קטנה",
         "translit": "зот цалахат ктана",
-        "ru": "Это маленькая тарелка"
+        "ru": "Это маленькая тарелка",
+        "audio": "/audio/home-3-plate-phrase.mp3"
       },
       "image": "/words/home-3-plate.svg",
       "reviewed": false,
@@ -112,7 +118,8 @@
       "example": {
         "he": "זה ספל חם",
         "translit": "зэ сефель хам",
-        "ru": "Это горячая кружка"
+        "ru": "Это горячая кружка",
+        "audio": "/audio/home-3-mug-phrase.mp3"
       },
       "image": "/words/home-3-mug.svg",
       "reviewed": false,
@@ -128,7 +135,8 @@
       "example": {
         "he": "זאת כף קטנה",
         "translit": "зот каф ктана",
-        "ru": "Это маленькая ложка"
+        "ru": "Это маленькая ложка",
+        "audio": "/audio/home-3-spoon-phrase.mp3"
       },
       "image": "/words/home-3-spoon.svg",
       "reviewed": false,
@@ -144,7 +152,8 @@
       "example": {
         "he": "זה מזלג חדש",
         "translit": "зэ мазлег хадаш",
-        "ru": "Это новая вилка"
+        "ru": "Это новая вилка",
+        "audio": "/audio/home-3-fork-phrase.mp3"
       },
       "image": "/words/home-3-fork.svg",
       "reviewed": false,
@@ -160,7 +169,8 @@
       "example": {
         "he": "זה מפתח קטן",
         "translit": "зэ мафтеах катан",
-        "ru": "Это маленький ключ"
+        "ru": "Это маленький ключ",
+        "audio": "/audio/home-3-key-phrase.mp3"
       },
       "image": "/words/home-3-key.svg",
       "reviewed": false,

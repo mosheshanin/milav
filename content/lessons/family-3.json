@@ -18,7 +18,8 @@
       "example": {
         "he": "זה איש טוב",
         "translit": "зэ иш тов",
-        "ru": "Это хороший мужчина"
+        "ru": "Это хороший мужчина",
+        "audio": "/audio/family-3-man-phrase.mp3"
       },
       "image": "/words/family-3-man.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זאת אשה טובה",
         "translit": "зот иша това",
-        "ru": "Это хорошая женщина"
+        "ru": "Это хорошая женщина",
+        "audio": "/audio/family-3-woman-phrase.mp3"
       },
       "image": "/words/family-3-woman.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה אדם חכם",
         "translit": "зэ адам хахам",
-        "ru": "Это умный человек"
+        "ru": "Это умный человек",
+        "audio": "/audio/family-3-person-phrase.mp3"
       },
       "image": "/words/family-3-person.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זה בחור צעיר",
         "translit": "зэ бахур цаир",
-        "ru": "Это молодой парень"
+        "ru": "Это молодой парень",
+        "audio": "/audio/family-3-lad-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-3-lad.mp3"
@@ -81,7 +85,8 @@
       "example": {
         "he": "זאת בחורה צעירה",
         "translit": "зот бахура цеира",
-        "ru": "Это молодая девушка"
+        "ru": "Это молодая девушка",
+        "audio": "/audio/family-3-lass-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-3-lass.mp3"
@@ -96,7 +101,8 @@
       "example": {
         "he": "זה זקן חכם",
         "translit": "зэ закен хахам",
-        "ru": "Это умный старик"
+        "ru": "Это умный старик",
+        "audio": "/audio/family-3-oldman-phrase.mp3"
       },
       "image": "/words/family-3-oldman.svg",
       "reviewed": false,
@@ -112,7 +118,8 @@
       "example": {
         "he": "זאת זקנה חכמה",
         "translit": "зот зкена хахама",
-        "ru": "Это умная старушка"
+        "ru": "Это умная старушка",
+        "audio": "/audio/family-3-oldwoman-phrase.mp3"
       },
       "image": "/words/family-3-oldwoman.svg",
       "reviewed": false,
@@ -128,7 +135,8 @@
       "example": {
         "he": "זה אורח חשוב",
         "translit": "зэ ореах хашув",
-        "ru": "Это важный гость"
+        "ru": "Это важный гость",
+        "audio": "/audio/family-3-guest-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-3-guest.mp3"
@@ -143,7 +151,8 @@
       "example": {
         "he": "זה חתן צעיר",
         "translit": "зэ хатан цаир",
-        "ru": "Это молодой жених"
+        "ru": "Это молодой жених",
+        "audio": "/audio/family-3-groom-phrase.mp3"
       },
       "image": "/words/family-3-groom.svg",
       "reviewed": false,
@@ -159,7 +168,8 @@
       "example": {
         "he": "זאת כלה יפה",
         "translit": "зот кала яфа",
-        "ru": "Это красивая невеста"
+        "ru": "Это красивая невеста",
+        "audio": "/audio/family-3-bride-phrase.mp3"
       },
       "image": "/words/family-3-bride.svg",
       "reviewed": false,

@@ -18,7 +18,8 @@
       "example": {
         "he": "זה אגס מתוק",
         "translit": "зэ агас маток",
-        "ru": "Это сладкая груша"
+        "ru": "Это сладкая груша",
+        "audio": "/audio/food-2-pear-phrase.mp3"
       },
       "image": "/words/food-2-pear.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה תות מתוק",
         "translit": "зэ тут маток",
-        "ru": "Это сладкая клубника"
+        "ru": "Это сладкая клубника",
+        "audio": "/audio/food-2-strawberry-phrase.mp3"
       },
       "image": "/words/food-2-strawberry.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה אבטיח גדול",
         "translit": "зэ аватиах гадоль",
-        "ru": "Это большой арбуз"
+        "ru": "Это большой арбуз",
+        "audio": "/audio/food-2-watermelon-phrase.mp3"
       },
       "image": "/words/food-2-watermelon.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זה לימון קטן",
         "translit": "зэ лимон катан",
-        "ru": "Это маленький лимон"
+        "ru": "Это маленький лимон",
+        "audio": "/audio/food-2-lemon-phrase.mp3"
       },
       "image": "/words/food-2-lemon.svg",
       "reviewed": false,
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה אפרסק טעים",
         "translit": "зэ афарсек таим",
-        "ru": "Это вкусный персик"
+        "ru": "Это вкусный персик",
+        "audio": "/audio/food-2-peach-phrase.mp3"
       },
       "image": "/words/food-2-peach.svg",
       "reviewed": false,
@@ -98,7 +103,8 @@
       "example": {
         "he": "זה דובדבן קטן",
         "translit": "зэ дувдеван катан",
-        "ru": "Это маленькая вишня"
+        "ru": "Это маленькая вишня",
+        "audio": "/audio/food-2-cherry-phrase.mp3"
       },
       "image": "/words/food-2-cherry.svg",
       "reviewed": false,
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה אננס מתוק",
         "translit": "зэ ананас маток",
-        "ru": "Это сладкий ананас"
+        "ru": "Это сладкий ананас",
+        "audio": "/audio/food-2-pineapple-phrase.mp3"
       },
       "image": "/words/food-2-pineapple.svg",
       "reviewed": false,
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה מנגו טעים",
         "translit": "зэ манго таим",
-        "ru": "Это вкусное манго"
+        "ru": "Это вкусное манго",
+        "audio": "/audio/food-2-mango-phrase.mp3"
       },
       "image": "/words/food-2-mango.svg",
       "reviewed": false,
@@ -146,7 +154,8 @@
       "example": {
         "he": "זה קוקוס גדול",
         "translit": "зэ кокос гадоль",
-        "ru": "Это большой кокос"
+        "ru": "Это большой кокос",
+        "audio": "/audio/food-2-coconut-phrase.mp3"
       },
       "image": "/words/food-2-coconut.svg",
       "reviewed": false,
@@ -162,7 +171,8 @@
       "example": {
         "he": "זה רימון מתוק",
         "translit": "зэ римон маток",
-        "ru": "Это сладкий гранат"
+        "ru": "Это сладкий гранат",
+        "audio": "/audio/food-2-pomegranate-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/food-2-pomegranate.mp3"

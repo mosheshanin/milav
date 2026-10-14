@@ -18,7 +18,8 @@
       "example": {
         "he": "זה שולחן גדול",
         "translit": "зэ шульхан гадоль",
-        "ru": "Это большой стол"
+        "ru": "Это большой стол",
+        "audio": "/audio/home-2-table-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-table.mp3"
@@ -33,7 +34,8 @@
       "example": {
         "he": "זה כיסא חדש",
         "translit": "зэ кисе хадаш",
-        "ru": "Это новый стул"
+        "ru": "Это новый стул",
+        "audio": "/audio/home-2-chair-phrase.mp3"
       },
       "image": "/words/home-2-chair.svg",
       "reviewed": false,
@@ -49,7 +51,8 @@
       "example": {
         "he": "זאת מיטה גדולה",
         "translit": "зот мита гдола",
-        "ru": "Это большая кровать"
+        "ru": "Это большая кровать",
+        "audio": "/audio/home-2-bed-phrase.mp3"
       },
       "image": "/words/home-2-bed.svg",
       "reviewed": false,
@@ -65,7 +68,8 @@
       "example": {
         "he": "זאת ספה חדשה",
         "translit": "зот сапа хадаша",
-        "ru": "Это новый диван"
+        "ru": "Это новый диван",
+        "audio": "/audio/home-2-sofa-phrase.mp3"
       },
       "image": "/words/home-2-sofa.svg",
       "reviewed": false,
@@ -81,7 +85,8 @@
       "example": {
         "he": "זה ארון גדול",
         "translit": "зэ арон гадоль",
-        "ru": "Это большой шкаф"
+        "ru": "Это большой шкаф",
+        "audio": "/audio/home-2-wardrobe-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-wardrobe.mp3"
@@ -96,7 +101,8 @@
       "example": {
         "he": "זה מדף קטן",
         "translit": "зэ мадаф катан",
-        "ru": "Это маленькая полка"
+        "ru": "Это маленькая полка",
+        "audio": "/audio/home-2-shelf-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-shelf.mp3"
@@ -111,7 +117,8 @@
       "example": {
         "he": "זאת מנורה יפה",
         "translit": "зот менора яфа",
-        "ru": "Это красивая лампа"
+        "ru": "Это красивая лампа",
+        "audio": "/audio/home-2-lamp-phrase.mp3"
       },
       "image": "/words/home-2-lamp.svg",
       "reviewed": false,
@@ -127,7 +134,8 @@
       "example": {
         "he": "זה שטיח רך",
         "translit": "зэ шатиах рах",
-        "ru": "Это мягкий ковёр"
+        "ru": "Это мягкий ковёр",
+        "audio": "/audio/home-2-carpet-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-carpet.mp3"
@@ -142,7 +150,8 @@
       "example": {
         "he": "זה וילון יפה",
         "translit": "зэ вилон яфэ",
-        "ru": "Это красивая штора"
+        "ru": "Это красивая штора",
+        "audio": "/audio/home-2-curtain-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-curtain.mp3"
@@ -157,7 +166,8 @@
       "example": {
         "he": "זאת כרית רכה",
         "translit": "зот карит рака",
-        "ru": "Это мягкая подушка"
+        "ru": "Это мягкая подушка",
+        "audio": "/audio/home-2-pillow-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-2-pillow.mp3"

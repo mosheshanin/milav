@@ -25,7 +25,8 @@
         "image": "/words/animals-1-dog.svg",
         "audio": "/audio/animals-1-dog.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-3-kaf.mp3"
     },
     {
       "id": "alphabet-3-kaf-final",
@@ -44,7 +45,8 @@
         "image": "/words/food-3-sandwich.svg",
         "audio": "/audio/food-3-sandwich.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-3-kaf-final.mp3"
     },
     {
       "id": "alphabet-3-lamed",
@@ -63,7 +65,8 @@
         "image": "/words/food-2-lemon.svg",
         "audio": "/audio/food-2-lemon.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-3-lamed.mp3"
     },
     {
       "id": "alphabet-3-mem",
@@ -82,7 +85,8 @@
         "image": "/words/food-3-soup.svg",
         "audio": "/audio/food-3-soup.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-3-mem.mp3"
     },
     {
       "id": "alphabet-3-mem-final",
@@ -101,7 +105,8 @@
         "image": "/words/food-1-bread.svg",
         "audio": "/audio/food-1-bread.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-3-mem-final.mp3"
     }
   ]
 }

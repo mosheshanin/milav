@@ -25,7 +25,8 @@
         "image": "/words/animals-2-snake.svg",
         "audio": "/audio/animals-2-snake.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-nun.mp3"
     },
     {
       "id": "alphabet-4-nun-final",
@@ -44,7 +45,8 @@
         "image": "/words/home-1-window.svg",
         "audio": "/audio/home-1-window.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-nun-final.mp3"
     },
     {
       "id": "alphabet-4-samekh",
@@ -63,7 +65,8 @@
         "image": "/words/animals-1-horse.svg",
         "audio": "/audio/animals-1-horse.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-samekh.mp3"
     },
     {
       "id": "alphabet-4-ayin",
@@ -82,7 +85,8 @@
         "image": "/words/animals-1-mouse.svg",
         "audio": "/audio/animals-1-mouse.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-ayin.mp3"
     },
     {
       "id": "alphabet-4-pe",
@@ -101,7 +105,8 @@
         "image": "/words/animals-1-elephant.svg",
         "audio": "/audio/animals-1-elephant.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-pe.mp3"
     },
     {
       "id": "alphabet-4-pe-final",
@@ -120,7 +125,8 @@
         "image": "/words/animals-2-monkey.svg",
         "audio": "/audio/animals-2-monkey.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-4-pe-final.mp3"
     }
   ]
 }

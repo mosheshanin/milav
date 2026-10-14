@@ -18,7 +18,8 @@
       "example": {
         "he": "זה חתול שחור",
         "translit": "зэ хатуль шахор",
-        "ru": "Это чёрный кот"
+        "ru": "Это чёрный кот",
+        "audio": "/audio/animals-1-cat-phrase.mp3"
       },
       "image": "/words/animals-1-cat.svg",
       "audio": "/audio/animals-1-cat.mp3",
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה כלב גדול",
         "translit": "зэ келев гадоль",
-        "ru": "Это большой пёс"
+        "ru": "Это большой пёс",
+        "audio": "/audio/animals-1-dog-phrase.mp3"
       },
       "image": "/words/animals-1-dog.svg",
       "audio": "/audio/animals-1-dog.mp3",
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה סוס מהיר",
         "translit": "зэ сус махир",
-        "ru": "Это быстрый конь"
+        "ru": "Это быстрый конь",
+        "audio": "/audio/animals-1-horse-phrase.mp3"
       },
       "image": "/words/animals-1-horse.svg",
       "audio": "/audio/animals-1-horse.mp3",
@@ -66,7 +69,8 @@
       "example": {
         "he": "זאת ציפור קטנה",
         "translit": "зот ципор катана",
-        "ru": "Это маленькая птица"
+        "ru": "Это маленькая птица",
+        "audio": "/audio/animals-1-bird-phrase.mp3"
       },
       "image": "/words/animals-1-bird.svg",
       "audio": "/audio/animals-1-bird.mp3",
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה דג קטן",
         "translit": "зэ даг катан",
-        "ru": "Это маленькая рыба"
+        "ru": "Это маленькая рыба",
+        "audio": "/audio/animals-1-fish-phrase.mp3"
       },
       "image": "/words/animals-1-fish.svg",
       "audio": "/audio/animals-1-fish.mp3",
@@ -98,7 +103,8 @@
       "example": {
         "he": "זאת פרה לבנה",
         "translit": "зот пара левана",
-        "ru": "Это белая корова"
+        "ru": "Это белая корова",
+        "audio": "/audio/animals-1-cow-phrase.mp3"
       },
       "image": "/words/animals-1-cow.svg",
       "audio": "/audio/animals-1-cow.mp3",
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה ארנב לבן",
         "translit": "зэ арнав лаван",
-        "ru": "Это белый кролик"
+        "ru": "Это белый кролик",
+        "audio": "/audio/animals-1-rabbit-phrase.mp3"
       },
       "image": "/words/animals-1-rabbit.svg",
       "audio": "/audio/animals-1-rabbit.mp3",
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה עכבר אפור",
         "translit": "зэ ахбар афор",
-        "ru": "Это серая мышь"
+        "ru": "Это серая мышь",
+        "audio": "/audio/animals-1-mouse-phrase.mp3"
       },
       "image": "/words/animals-1-mouse.svg",
       "audio": "/audio/animals-1-mouse.mp3",
@@ -146,7 +154,8 @@
       "example": {
         "he": "זה פיל גדול",
         "translit": "зэ пиль гадоль",
-        "ru": "Это большой слон"
+        "ru": "Это большой слон",
+        "audio": "/audio/animals-1-elephant-phrase.mp3"
       },
       "image": "/words/animals-1-elephant.svg",
       "audio": "/audio/animals-1-elephant.mp3",
@@ -162,7 +171,8 @@
       "example": {
         "he": "זה אריה חזק",
         "translit": "зэ арье хазак",
-        "ru": "Это сильный лев"
+        "ru": "Это сильный лев",
+        "audio": "/audio/animals-1-lion-phrase.mp3"
       },
       "image": "/words/animals-1-lion.svg",
       "audio": "/audio/animals-1-lion.mp3",

@@ -18,7 +18,8 @@
       "example": {
         "he": "זה זאב גדול",
         "translit": "зэ зеэв гадоль",
-        "ru": "Это большой волк"
+        "ru": "Это большой волк",
+        "audio": "/audio/animals-2-wolf-phrase.mp3"
       },
       "image": "/words/animals-2-wolf.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה שועל חכם",
         "translit": "зэ шуаль хахам",
-        "ru": "Это умный лис"
+        "ru": "Это умный лис",
+        "audio": "/audio/animals-2-fox-phrase.mp3"
       },
       "image": "/words/animals-2-fox.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה דוב חזק",
         "translit": "зэ дов хазак",
-        "ru": "Это сильный медведь"
+        "ru": "Это сильный медведь",
+        "audio": "/audio/animals-2-bear-phrase.mp3"
       },
       "image": "/words/animals-2-bear.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זה קוף חכם",
         "translit": "зэ коф хахам",
-        "ru": "Это умная обезьяна"
+        "ru": "Это умная обезьяна",
+        "audio": "/audio/animals-2-monkey-phrase.mp3"
       },
       "image": "/words/animals-2-monkey.svg",
       "reviewed": false,
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה טיגריס חזק",
         "translit": "зэ тигрис хазак",
-        "ru": "Это сильный тигр"
+        "ru": "Это сильный тигр",
+        "audio": "/audio/animals-2-tiger-phrase.mp3"
       },
       "image": "/words/animals-2-tiger.svg",
       "reviewed": false,
@@ -98,7 +103,8 @@
       "example": {
         "he": "זה גמל גדול",
         "translit": "зэ гамаль гадоль",
-        "ru": "Это большой верблюд"
+        "ru": "Это большой верблюд",
+        "audio": "/audio/animals-2-camel-phrase.mp3"
       },
       "image": "/words/animals-2-camel.svg",
       "reviewed": false,
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה נחש ארוך",
         "translit": "зэ нахаш арох",
-        "ru": "Это длинная змея"
+        "ru": "Это длинная змея",
+        "audio": "/audio/animals-2-snake-phrase.mp3"
       },
       "image": "/words/animals-2-snake.svg",
       "reviewed": false,
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה צב ישן",
         "translit": "зэ цав яшан",
-        "ru": "Это старая черепаха"
+        "ru": "Это старая черепаха",
+        "audio": "/audio/animals-2-turtle-phrase.mp3"
       },
       "image": "/words/animals-2-turtle.svg",
       "reviewed": false,
@@ -146,7 +154,8 @@
       "example": {
         "he": "זאת זברה יפה",
         "translit": "зот зебра яфа",
-        "ru": "Это красивая зебра"
+        "ru": "Это красивая зебра",
+        "audio": "/audio/animals-2-zebra-phrase.mp3"
       },
       "image": "/words/animals-2-zebra.svg",
       "reviewed": false,
@@ -162,7 +171,8 @@
       "example": {
         "he": "זה ינשוף חכם",
         "translit": "зэ яншуф хахам",
-        "ru": "Это умная сова"
+        "ru": "Это умная сова",
+        "audio": "/audio/animals-2-owl-phrase.mp3"
       },
       "image": "/words/animals-2-owl.svg",
       "reviewed": false,

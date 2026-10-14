@@ -18,7 +18,8 @@
       "example": {
         "he": "זה לחם טעים",
         "translit": "зэ лехем таим",
-        "ru": "Это вкусный хлеб"
+        "ru": "Это вкусный хлеб",
+        "audio": "/audio/food-1-bread-phrase.mp3"
       },
       "image": "/words/food-1-bread.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה חלב קר",
         "translit": "зэ халав кар",
-        "ru": "Это холодное молоко"
+        "ru": "Это холодное молоко",
+        "audio": "/audio/food-1-milk-phrase.mp3"
       },
       "image": "/words/food-1-milk.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זאת ביצה גדולה",
         "translit": "зот бейца гдола",
-        "ru": "Это большое яйцо"
+        "ru": "Это большое яйцо",
+        "audio": "/audio/food-1-egg-phrase.mp3"
       },
       "image": "/words/food-1-egg.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זאת גבינה טעימה",
         "translit": "зот гвина теима",
-        "ru": "Это вкусный сыр"
+        "ru": "Это вкусный сыр",
+        "audio": "/audio/food-1-cheese-phrase.mp3"
       },
       "image": "/words/food-1-cheese.svg",
       "reviewed": false,
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה תפוח טעים",
         "translit": "зэ тапуах таим",
-        "ru": "Это вкусное яблоко"
+        "ru": "Это вкусное яблоко",
+        "audio": "/audio/food-1-apple-phrase.mp3"
       },
       "image": "/words/food-1-apple.svg",
       "reviewed": false,
@@ -98,7 +103,8 @@
       "example": {
         "he": "זאת בננה מתוקה",
         "translit": "зот банана мтука",
-        "ru": "Это сладкий банан"
+        "ru": "Это сладкий банан",
+        "audio": "/audio/food-1-banana-phrase.mp3"
       },
       "image": "/words/food-1-banana.svg",
       "reviewed": false,
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה תפוז מתוק",
         "translit": "зэ тапуз маток",
-        "ru": "Это сладкий апельсин"
+        "ru": "Это сладкий апельсин",
+        "audio": "/audio/food-1-orange-phrase.mp3"
       },
       "image": "/words/food-1-orange.svg",
       "reviewed": false,
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה אבוקדו טעים",
         "translit": "зэ авокадо таим",
-        "ru": "Это вкусное авокадо"
+        "ru": "Это вкусное авокадо",
+        "audio": "/audio/food-1-avocado-phrase.mp3"
       },
       "image": "/words/food-1-avocado.svg",
       "reviewed": false,
@@ -146,7 +154,8 @@
       "example": {
         "he": "זה מלפפון קטן",
         "translit": "зэ мелафефон катан",
-        "ru": "Это маленький огурец"
+        "ru": "Это маленький огурец",
+        "audio": "/audio/food-1-cucumber-phrase.mp3"
       },
       "image": "/words/food-1-cucumber.svg",
       "reviewed": false,
@@ -162,7 +171,8 @@
       "example": {
         "he": "זה גזר גדול",
         "translit": "зэ гезер гадоль",
-        "ru": "Это большая морковь"
+        "ru": "Это большая морковь",
+        "audio": "/audio/food-1-carrot-phrase.mp3"
       },
       "image": "/words/food-1-carrot.svg",
       "reviewed": false,

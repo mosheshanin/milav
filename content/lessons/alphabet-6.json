@@ -22,9 +22,11 @@
         "niqqud": "גִ׳ינְס",
         "translit": "джинс",
         "ru": "джинсы",
-        "image": "/words/alphabet-6-gimel-geresh-example.svg"
+        "image": "/words/alphabet-6-gimel-geresh-example.svg",
+        "audio": "/audio/alphabet-6-gimel-geresh-example.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-6-gimel-geresh.mp3"
     },
     {
       "id": "alphabet-6-zayin-geresh",
@@ -40,9 +42,11 @@
         "niqqud": "זָ׳קֶט",
         "translit": "жаке́т",
         "ru": "пиджак",
-        "image": "/words/alphabet-6-zayin-geresh-example.svg"
+        "image": "/words/alphabet-6-zayin-geresh-example.svg",
+        "audio": "/audio/alphabet-6-zayin-geresh-example.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-6-zayin-geresh.mp3"
     },
     {
       "id": "alphabet-6-tsadi-geresh",
@@ -58,9 +62,11 @@
         "niqqud": "צִ׳יפְּס",
         "translit": "чипс",
         "ru": "картошка фри",
-        "image": "/words/alphabet-6-tsadi-geresh-example.svg"
+        "image": "/words/alphabet-6-tsadi-geresh-example.svg",
+        "audio": "/audio/alphabet-6-tsadi-geresh-example.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-6-tsadi-geresh.mp3"
     }
   ]
 }

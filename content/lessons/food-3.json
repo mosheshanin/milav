@@ -18,7 +18,8 @@
       "example": {
         "he": "זה בצל גדול",
         "translit": "зэ бацаль гадоль",
-        "ru": "Это большой лук"
+        "ru": "Это большой лук",
+        "audio": "/audio/food-3-onion-phrase.mp3"
       },
       "image": "/words/food-3-onion.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה שום קטן",
         "translit": "зэ шум катан",
-        "ru": "Это маленький чеснок"
+        "ru": "Это маленький чеснок",
+        "audio": "/audio/food-3-garlic-phrase.mp3"
       },
       "image": "/words/food-3-garlic.svg",
       "reviewed": false,
@@ -50,7 +52,8 @@
       "example": {
         "he": "זה פלפל חריף",
         "translit": "зэ пилпель хариф",
-        "ru": "Это острый перец"
+        "ru": "Это острый перец",
+        "audio": "/audio/food-3-pepper-phrase.mp3"
       },
       "image": "/words/food-3-pepper.svg",
       "reviewed": false,
@@ -66,7 +69,8 @@
       "example": {
         "he": "זה תירס מתוק",
         "translit": "зэ тирас маток",
-        "ru": "Это сладкая кукуруза"
+        "ru": "Это сладкая кукуруза",
+        "audio": "/audio/food-3-corn-phrase.mp3"
       },
       "image": "/words/food-3-corn.svg",
       "reviewed": false,
@@ -82,7 +86,8 @@
       "example": {
         "he": "זה ברוקולי טעים",
         "translit": "зэ броколи таим",
-        "ru": "Это вкусная брокколи"
+        "ru": "Это вкусная брокколи",
+        "audio": "/audio/food-3-broccoli-phrase.mp3"
       },
       "image": "/words/food-3-broccoli.svg",
       "reviewed": false,
@@ -98,7 +103,8 @@
       "example": {
         "he": "זה חציל גדול",
         "translit": "зэ хациль гадоль",
-        "ru": "Это большой баклажан"
+        "ru": "Это большой баклажан",
+        "audio": "/audio/food-3-eggplant-phrase.mp3"
       },
       "image": "/words/food-3-eggplant.svg",
       "reviewed": false,
@@ -114,7 +120,8 @@
       "example": {
         "he": "זה מרק חם",
         "translit": "зэ марак хам",
-        "ru": "Это горячий суп"
+        "ru": "Это горячий суп",
+        "audio": "/audio/food-3-soup-phrase.mp3"
       },
       "image": "/words/food-3-soup.svg",
       "reviewed": false,
@@ -130,7 +137,8 @@
       "example": {
         "he": "זה כריך טעים",
         "translit": "зэ карих таим",
-        "ru": "Это вкусный сэндвич"
+        "ru": "Это вкусный сэндвич",
+        "audio": "/audio/food-3-sandwich-phrase.mp3"
       },
       "image": "/words/food-3-sandwich.svg",
       "reviewed": false,
@@ -146,7 +154,8 @@
       "example": {
         "he": "זאת פיצה חמה",
         "translit": "зот пица хама",
-        "ru": "Это горячая пицца"
+        "ru": "Это горячая пицца",
+        "audio": "/audio/food-3-pizza-phrase.mp3"
       },
       "image": "/words/food-3-pizza.svg",
       "reviewed": false,
@@ -162,7 +171,8 @@
       "example": {
         "he": "זאת עוגה מתוקה",
         "translit": "зот уга мтука",
-        "ru": "Это сладкий торт"
+        "ru": "Это сладкий торт",
+        "audio": "/audio/food-3-cake-phrase.mp3"
       },
       "image": "/words/food-3-cake.svg",
       "reviewed": false,

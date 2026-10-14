@@ -18,7 +18,8 @@
       "example": {
         "he": "זה בית גדול",
         "translit": "зэ байит гадоль",
-        "ru": "Это большой дом"
+        "ru": "Это большой дом",
+        "audio": "/audio/home-1-house-phrase.mp3"
       },
       "image": "/words/home-1-house.svg",
       "reviewed": false,
@@ -34,7 +35,8 @@
       "example": {
         "he": "זה חדר קטן",
         "translit": "зэ хедер катан",
-        "ru": "Это маленькая комната"
+        "ru": "Это маленькая комната",
+        "audio": "/audio/home-1-room-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-1-room.mp3"
@@ -49,7 +51,8 @@
       "example": {
         "he": "זה מטבח חדש",
         "translit": "зэ митбах хадаш",
-        "ru": "Это новая кухня"
+        "ru": "Это новая кухня",
+        "audio": "/audio/home-1-kitchen-phrase.mp3"
       },
       "image": "/words/home-1-kitchen.svg",
       "reviewed": false,
@@ -65,7 +68,8 @@
       "example": {
         "he": "זאת אמבטיה חדשה",
         "translit": "зот амбатья хадаша",
-        "ru": "Это новая ванная"
+        "ru": "Это новая ванная",
+        "audio": "/audio/home-1-bathroom-phrase.mp3"
       },
       "image": "/words/home-1-bathroom.svg",
       "reviewed": false,
@@ -81,7 +85,8 @@
       "example": {
         "he": "זאת דלת ישנה",
         "translit": "зот делет яшана",
-        "ru": "Это старая дверь"
+        "ru": "Это старая дверь",
+        "audio": "/audio/home-1-door-phrase.mp3"
       },
       "image": "/words/home-1-door.svg",
       "reviewed": false,
@@ -97,7 +102,8 @@
       "example": {
         "he": "זה חלון גדול",
         "translit": "зэ халон гадоль",
-        "ru": "Это большое окно"
+        "ru": "Это большое окно",
+        "audio": "/audio/home-1-window-phrase.mp3"
       },
       "image": "/words/home-1-window.svg",
       "reviewed": false,
@@ -113,7 +119,8 @@
       "example": {
         "he": "זה קיר לבן",
         "translit": "зэ кир лаван",
-        "ru": "Это белая стена"
+        "ru": "Это белая стена",
+        "audio": "/audio/home-1-wall-phrase.mp3"
       },
       "image": "/words/home-1-wall.svg",
       "reviewed": false,
@@ -129,7 +136,8 @@
       "example": {
         "he": "זאת רצפה קרה",
         "translit": "зот рицпа кара",
-        "ru": "Это холодный пол"
+        "ru": "Это холодный пол",
+        "audio": "/audio/home-1-floor-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-1-floor.mp3"
@@ -144,7 +152,8 @@
       "example": {
         "he": "זה גג ישן",
         "translit": "зэ гаг яшан",
-        "ru": "Это старая крыша"
+        "ru": "Это старая крыша",
+        "audio": "/audio/home-1-roof-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/home-1-roof.mp3"
@@ -159,7 +168,8 @@
       "example": {
         "he": "זאת גינה יפה",
         "translit": "зот гина яфа",
-        "ru": "Это красивый сад"
+        "ru": "Это красивый сад",
+        "audio": "/audio/home-1-garden-phrase.mp3"
       },
       "image": "/words/home-1-garden.svg",
       "reviewed": false,

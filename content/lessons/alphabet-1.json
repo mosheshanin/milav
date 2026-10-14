@@ -25,7 +25,8 @@
         "image": "/words/animals-1-rabbit.svg",
         "audio": "/audio/animals-1-rabbit.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-1-alef.mp3"
     },
     {
       "id": "alphabet-1-bet",
@@ -44,7 +45,8 @@
         "image": "/words/food-1-banana.svg",
         "audio": "/audio/food-1-banana.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-1-bet.mp3"
     },
     {
       "id": "alphabet-1-gimel",
@@ -63,7 +65,8 @@
         "image": "/words/animals-2-camel.svg",
         "audio": "/audio/animals-2-camel.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-1-gimel.mp3"
     },
     {
       "id": "alphabet-1-dalet",
@@ -82,7 +85,8 @@
         "image": "/words/animals-1-fish.svg",
         "audio": "/audio/animals-1-fish.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-1-dalet.mp3"
     },
     {
       "id": "alphabet-1-he",
@@ -97,9 +101,11 @@
         "he": "הר",
         "niqqud": "הַר",
         "translit": "хар",
-        "ru": "гора"
+        "ru": "гора",
+        "audio": "/audio/alphabet-1-he-example.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-1-he.mp3"
     }
   ]
 }

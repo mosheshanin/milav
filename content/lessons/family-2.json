@@ -18,7 +18,8 @@
       "example": {
         "he": "זה דוד טוב",
         "translit": "зэ дод тов",
-        "ru": "Это хороший дядя"
+        "ru": "Это хороший дядя",
+        "audio": "/audio/family-2-uncle-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-uncle.mp3"
@@ -33,7 +34,8 @@
       "example": {
         "he": "זאת דודה טובה",
         "translit": "зот дода това",
-        "ru": "Это хорошая тётя"
+        "ru": "Это хорошая тётя",
+        "audio": "/audio/family-2-aunt-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-aunt.mp3"
@@ -48,7 +50,8 @@
       "example": {
         "he": "זה בן חכם",
         "translit": "зэ бен хахам",
-        "ru": "Это умный сын"
+        "ru": "Это умный сын",
+        "audio": "/audio/family-2-son-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-son.mp3"
@@ -63,7 +66,8 @@
       "example": {
         "he": "זאת בת חכמה",
         "translit": "зот бат хахама",
-        "ru": "Это умная дочь"
+        "ru": "Это умная дочь",
+        "audio": "/audio/family-2-daughter-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-daughter.mp3"
@@ -78,7 +82,8 @@
       "example": {
         "he": "זה נכד חמוד",
         "translit": "зэ нехед хамуд",
-        "ru": "Это милый внук"
+        "ru": "Это милый внук",
+        "audio": "/audio/family-2-grandson-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-grandson.mp3"
@@ -93,7 +98,8 @@
       "example": {
         "he": "זאת נכדה חמודה",
         "translit": "зот нехда хмуда",
-        "ru": "Это милая внучка"
+        "ru": "Это милая внучка",
+        "audio": "/audio/family-2-granddaughter-phrase.mp3"
       },
       "reviewed": false,
       "audio": "/audio/family-2-granddaughter.mp3"
@@ -108,7 +114,8 @@
       "example": {
         "he": "זה חבר טוב",
         "translit": "зэ хавер тов",
-        "ru": "Это хороший друг"
+        "ru": "Это хороший друг",
+        "audio": "/audio/family-2-friend-phrase.mp3"
       },
       "image": "/words/family-2-friend.svg",
       "reviewed": false,
@@ -124,7 +131,8 @@
       "example": {
         "he": "זאת חברה טובה",
         "translit": "зот хавера това",
-        "ru": "Это хорошая подруга"
+        "ru": "Это хорошая подруга",
+        "audio": "/audio/family-2-girlfriend-phrase.mp3"
       },
       "image": "/words/family-2-girlfriend.svg",
       "reviewed": false,
@@ -140,7 +148,8 @@
       "example": {
         "he": "זה שכן חמוד",
         "translit": "зэ шахен хамуд",
-        "ru": "Это милый сосед"
+        "ru": "Это милый сосед",
+        "audio": "/audio/family-2-neighbor-phrase.mp3"
       },
       "image": "/words/family-2-neighbor.svg",
       "reviewed": false,
@@ -156,7 +165,8 @@
       "example": {
         "he": "זאת שכנה חמודה",
         "translit": "зот шхена хмуда",
-        "ru": "Это милая соседка"
+        "ru": "Это милая соседка",
+        "audio": "/audio/family-2-neighborf-phrase.mp3"
       },
       "image": "/words/family-2-neighborf.svg",
       "reviewed": false,

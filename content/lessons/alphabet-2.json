@@ -25,7 +25,8 @@
         "image": "/words/colors-1-pink.svg",
         "audio": "/audio/colors-1-pink.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-2-vav.mp3"
     },
     {
       "id": "alphabet-2-zayin",
@@ -44,7 +45,8 @@
         "image": "/words/animals-2-wolf.svg",
         "audio": "/audio/animals-2-wolf.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-2-zayin.mp3"
     },
     {
       "id": "alphabet-2-het",
@@ -63,7 +65,8 @@
         "image": "/words/animals-1-cat.svg",
         "audio": "/audio/animals-1-cat.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-2-het.mp3"
     },
     {
       "id": "alphabet-2-tet",
@@ -82,7 +85,8 @@
         "image": "/words/animals-2-tiger.svg",
         "audio": "/audio/animals-2-tiger.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-2-tet.mp3"
     },
     {
       "id": "alphabet-2-yod",
@@ -101,7 +105,8 @@
         "image": "/words/animals-2-owl.svg",
         "audio": "/audio/animals-2-owl.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/alphabet-2-yod.mp3"
     }
   ]
 }

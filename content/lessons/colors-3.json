@@ -17,27 +17,32 @@
       "example": {
         "he": "זאת חולצה כחלחלה",
         "translit": "зот хульца кхальхала",
-        "ru": "Это голубоватая рубашка"
+        "ru": "Это голубоватая рубашка",
+        "audio": "/audio/colors-3-bluish-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "כחלחלה",
           "niqqud": "כְּחַלְחַלָה",
-          "translit": "кхальхала́"
+          "translit": "кхальхала́",
+          "audio": "/audio/colors-3-bluish-form-f.mp3"
         },
         "mp": {
           "he": "כחלחלים",
           "niqqud": "כְּחַלְחַלִים",
-          "translit": "кхальхали́м"
+          "translit": "кхальхали́м",
+          "audio": "/audio/colors-3-bluish-form-mp.mp3"
         },
         "fp": {
           "he": "כחלחלות",
           "niqqud": "כְּחַלְחַלוֹת",
-          "translit": "кхальхало́т"
+          "translit": "кхальхало́т",
+          "audio": "/audio/colors-3-bluish-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-bluish.svg"
+      "image": "/words/colors-3-bluish.svg",
+      "audio": "/audio/colors-3-bluish.mp3"
     },
     {
       "id": "colors-3-greenish",
@@ -48,27 +53,32 @@
       "example": {
         "he": "אלה מים ירקרקים",
         "translit": "эле майим еракраким",
-        "ru": "Это зеленоватая вода"
+        "ru": "Это зеленоватая вода",
+        "audio": "/audio/colors-3-greenish-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ירקרקה",
           "niqqud": "יְרַקְרַקָה",
-          "translit": "еракрака́"
+          "translit": "еракрака́",
+          "audio": "/audio/colors-3-greenish-form-f.mp3"
         },
         "mp": {
           "he": "ירקרקים",
           "niqqud": "יְרַקְרַקִים",
-          "translit": "еракраки́м"
+          "translit": "еракраки́м",
+          "audio": "/audio/colors-3-greenish-form-mp.mp3"
         },
         "fp": {
           "he": "ירקרקות",
           "niqqud": "יְרַקְרַקוֹת",
-          "translit": "еракрако́т"
+          "translit": "еракрако́т",
+          "audio": "/audio/colors-3-greenish-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-greenish.svg"
+      "image": "/words/colors-3-greenish.svg",
+      "audio": "/audio/colors-3-greenish.mp3"
     },
     {
       "id": "colors-3-reddish",
@@ -79,27 +89,32 @@
       "example": {
         "he": "זאת שמש אדמדמה",
         "translit": "зот шемеш адамдама",
-        "ru": "Это красноватое солнце"
+        "ru": "Это красноватое солнце",
+        "audio": "/audio/colors-3-reddish-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "אדמדמה",
           "niqqud": "אֲדַמְדַּמָה",
-          "translit": "адамдама́"
+          "translit": "адамдама́",
+          "audio": "/audio/colors-3-reddish-form-f.mp3"
         },
         "mp": {
           "he": "אדמדמים",
           "niqqud": "אֲדַמְדַּמִים",
-          "translit": "адамдами́м"
+          "translit": "адамдами́м",
+          "audio": "/audio/colors-3-reddish-form-mp.mp3"
         },
         "fp": {
           "he": "אדמדמות",
           "niqqud": "אֲדַמְדַּמוֹת",
-          "translit": "адамдамо́т"
+          "translit": "адамдамо́т",
+          "audio": "/audio/colors-3-reddish-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-reddish.svg"
+      "image": "/words/colors-3-reddish.svg",
+      "audio": "/audio/colors-3-reddish.mp3"
     },
     {
       "id": "colors-3-pinkish",
@@ -110,27 +125,32 @@
       "example": {
         "he": "זה פרח ורדרד",
         "translit": "зэ перах врадрад",
-        "ru": "Это розоватый цветок"
+        "ru": "Это розоватый цветок",
+        "audio": "/audio/colors-3-pinkish-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ורדרדה",
           "niqqud": "וְרַדְרַדָה",
-          "translit": "врадрада́"
+          "translit": "врадрада́",
+          "audio": "/audio/colors-3-pinkish-form-f.mp3"
         },
         "mp": {
           "he": "ורדרדים",
           "niqqud": "וְרַדְרַדִים",
-          "translit": "врадради́м"
+          "translit": "врадради́м",
+          "audio": "/audio/colors-3-pinkish-form-mp.mp3"
         },
         "fp": {
           "he": "ורדרדות",
           "niqqud": "וְרַדְרַדוֹת",
-          "translit": "врадрадо́т"
+          "translit": "врадрадо́т",
+          "audio": "/audio/colors-3-pinkish-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-pinkish.svg"
+      "image": "/words/colors-3-pinkish.svg",
+      "audio": "/audio/colors-3-pinkish.mp3"
     },
     {
       "id": "colors-3-lightblue",
@@ -141,27 +161,32 @@
       "example": {
         "he": "אלה שמיים תכולים",
         "translit": "эле шамайим тхулим",
-        "ru": "Это голубое небо"
+        "ru": "Это голубое небо",
+        "audio": "/audio/colors-3-lightblue-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "תכולה",
           "niqqud": "תְּכוּלָה",
-          "translit": "тхула́"
+          "translit": "тхула́",
+          "audio": "/audio/colors-3-lightblue-form-f.mp3"
         },
         "mp": {
           "he": "תכולים",
           "niqqud": "תְּכוּלִים",
-          "translit": "тхули́м"
+          "translit": "тхули́м",
+          "audio": "/audio/colors-3-lightblue-form-mp.mp3"
         },
         "fp": {
           "he": "תכולות",
           "niqqud": "תְּכוּלוֹת",
-          "translit": "тхуло́т"
+          "translit": "тхуло́т",
+          "audio": "/audio/colors-3-lightblue-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-lightblue.svg"
+      "image": "/words/colors-3-lightblue.svg",
+      "audio": "/audio/colors-3-lightblue.mp3"
     },
     {
       "id": "colors-3-colorful",
@@ -172,27 +197,32 @@
       "example": {
         "he": "זאת ציפור צבעונית",
         "translit": "зот ципор цивонит",
-        "ru": "Это разноцветная птица"
+        "ru": "Это разноцветная птица",
+        "audio": "/audio/colors-3-colorful-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "צבעונית",
           "niqqud": "צִבְעוֹנִית",
-          "translit": "цивони́т"
+          "translit": "цивони́т",
+          "audio": "/audio/colors-3-colorful-form-f.mp3"
         },
         "mp": {
           "he": "צבעוניים",
           "niqqud": "צִבְעוֹנִיִּים",
-          "translit": "цивонии́м"
+          "translit": "цивонии́м",
+          "audio": "/audio/colors-3-colorful-form-mp.mp3"
         },
         "fp": {
           "he": "צבעוניות",
           "niqqud": "צִבְעוֹנִיּוֹת",
-          "translit": "цивонийо́т"
+          "translit": "цивонийо́т",
+          "audio": "/audio/colors-3-colorful-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-colorful.svg"
+      "image": "/words/colors-3-colorful.svg",
+      "audio": "/audio/colors-3-colorful.mp3"
     },
     {
       "id": "colors-3-striped",
@@ -203,27 +233,32 @@
       "example": {
         "he": "זאת זברה מפוספסת",
         "translit": "зот зебра мефуспесет",
-        "ru": "Это полосатая зебра"
+        "ru": "Это полосатая зебра",
+        "audio": "/audio/colors-3-striped-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מפוספסת",
           "niqqud": "מְפוּסְפֶּסֶת",
-          "translit": "мефуспе́сет"
+          "translit": "мефуспе́сет",
+          "audio": "/audio/colors-3-striped-form-f.mp3"
         },
         "mp": {
           "he": "מפוספסים",
           "niqqud": "מְפוּסְפָּסִים",
-          "translit": "мефуспаси́м"
+          "translit": "мефуспаси́м",
+          "audio": "/audio/colors-3-striped-form-mp.mp3"
         },
         "fp": {
           "he": "מפוספסות",
           "niqqud": "מְפוּסְפָּסוֹת",
-          "translit": "мефуспасо́т"
+          "translit": "мефуспасо́т",
+          "audio": "/audio/colors-3-striped-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-striped.svg"
+      "image": "/words/colors-3-striped.svg",
+      "audio": "/audio/colors-3-striped.mp3"
     },
     {
       "id": "colors-3-spotted",
@@ -234,27 +269,32 @@
       "example": {
         "he": "זאת פרה מנומרת",
         "translit": "зот пара менумерет",
-        "ru": "Это пятнистая корова"
+        "ru": "Это пятнистая корова",
+        "audio": "/audio/colors-3-spotted-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מנומרת",
           "niqqud": "מְנוּמֶּרֶת",
-          "translit": "менуме́рет"
+          "translit": "менуме́рет",
+          "audio": "/audio/colors-3-spotted-form-f.mp3"
         },
         "mp": {
           "he": "מנומרים",
           "niqqud": "מְנוּמָּרִים",
-          "translit": "менумари́м"
+          "translit": "менумари́м",
+          "audio": "/audio/colors-3-spotted-form-mp.mp3"
         },
         "fp": {
           "he": "מנומרות",
           "niqqud": "מְנוּמָּרוֹת",
-          "translit": "менумаро́т"
+          "translit": "менумаро́т",
+          "audio": "/audio/colors-3-spotted-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-spotted.svg"
+      "image": "/words/colors-3-spotted.svg",
+      "audio": "/audio/colors-3-spotted.mp3"
     },
     {
       "id": "colors-3-checkered",
@@ -265,27 +305,32 @@
       "example": {
         "he": "זה שולחן משובץ",
         "translit": "зэ шульхан мешубац",
-        "ru": "Это клетчатый стол"
+        "ru": "Это клетчатый стол",
+        "audio": "/audio/colors-3-checkered-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "משובצת",
           "niqqud": "מְשׁוּבֶּצֶת",
-          "translit": "мешубе́цет"
+          "translit": "мешубе́цет",
+          "audio": "/audio/colors-3-checkered-form-f.mp3"
         },
         "mp": {
           "he": "משובצים",
           "niqqud": "מְשׁוּבָּצִים",
-          "translit": "мешубаци́м"
+          "translit": "мешубаци́м",
+          "audio": "/audio/colors-3-checkered-form-mp.mp3"
         },
         "fp": {
           "he": "משובצות",
           "niqqud": "מְשׁוּבָּצוֹת",
-          "translit": "мешубацо́т"
+          "translit": "мешубацо́т",
+          "audio": "/audio/colors-3-checkered-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-checkered.svg"
+      "image": "/words/colors-3-checkered.svg",
+      "audio": "/audio/colors-3-checkered.mp3"
     },
     {
       "id": "colors-3-faded",
@@ -296,27 +341,32 @@
       "example": {
         "he": "זה בגד דהוי",
         "translit": "зэ бегед дахуй",
-        "ru": "Это выцветшая одежда"
+        "ru": "Это выцветшая одежда",
+        "audio": "/audio/colors-3-faded-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "דהויה",
           "niqqud": "דְּהוּיָה",
-          "translit": "дхуя́"
+          "translit": "дхуя́",
+          "audio": "/audio/colors-3-faded-form-f.mp3"
         },
         "mp": {
           "he": "דהויים",
           "niqqud": "דְּהוּיִים",
-          "translit": "дхуйи́м"
+          "translit": "дхуйи́м",
+          "audio": "/audio/colors-3-faded-form-mp.mp3"
         },
         "fp": {
           "he": "דהויות",
           "niqqud": "דְּהוּיוֹת",
-          "translit": "дхуйо́т"
+          "translit": "дхуйо́т",
+          "audio": "/audio/colors-3-faded-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/colors-3-faded.svg"
+      "image": "/words/colors-3-faded.svg",
+      "audio": "/audio/colors-3-faded.mp3"
     }
   ]
 }
