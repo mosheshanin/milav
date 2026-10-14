@@ -154,6 +154,42 @@ node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты по�
 
 Если после выкладки в Telegram что-то перестало работать (пропали стили, шрифты, картинки, не грузится скрипт), причина почти наверняка в CSP: откройте консоль браузера, там видно «Refused to ... because it violates the following Content Security Policy». Откат: revert коммита, который менял `_headers`.
 
+## Геймификация (бейджи, ритм, цель дня, таблица лидеров)
+
+Описание и решения: `docs/GAMIFICATION.md` (раздел 1.2). Код: `packages/shared/src/gamification/` (правила, одни и те же на сервере и в приложении), `apps/api/src/{stats,board,cohort,play}.ts`, миграция `0005_gamification.sql` (только добавляет таблицы, старый клиент продолжает работать). Сквозной тест: `tools/e2e-gamification.mjs` (шаг в CI).
+
+**Выключатель таблицы лидеров.** Переменная `LEADERBOARD_ENABLED` в `wrangler.jsonc`: в проде (верхний уровень) `"0"`, в `env.local` `"1"`. Пока `"0"`, вступить в таблицу нельзя (403 `feature_disabled`), кнопок «Таблица» в приложении нет, `/api/leaderboard` отвечает 404; бейджи, ритм, цель дня и сравнение с ровесниками работают. **Включать только после политики конфиденциальности и удаления данных (ROADMAP п. 4), отдельным коммитом** (меняется одна строка). Откат: вернуть `"0"` и выложить; данные участников остаются, таблица снова скрыта.
+
+**Лимиты новых маршрутов** (в `RATE_LIMITS`): `PUT /api/settings` 20 в минуту и 200 в сутки, `POST /api/achievements/seen` 30 и 300. Читающие маршруты (`GET /api/achievements`, `/api/leaderboard`, `/api/cohort`) через D1 не ограничиваются: лимитер пишет строку на каждый запрос. Встроенный Rate Limiting binding Cloudflare не используем: в документации для бесплатного тарифа подтверждения нет (проверено 14.10.2026).
+
+**Расход записей D1.** Каждое завершённое слово пишет две строки (счётчики и ритм), урок из 10 слов это около +20 к прежним 145 на ученика в день; снимки таблицы пишутся не чаще раза в 10 минут (неделя) и 30 минут (всё время) и только при просмотрах. Первые дни после выкладки смотреть «Rows written» на панели D1: ожидание около 170 строк на активного ученика в день (потолок около 590 активных учеников в сутки). Одноразовый пересчёт старых пользователей (первый вход после выкладки) даёт до 12 записей на человека и сотни чтений. Если записи не хватает, первым делом копить статистику вопросов викторины в сессии (раздел «Викторина на сервере»).
+
+Запросы для консоли D1 (Storage & Databases → D1 → milav-db → Console):
+
+```sql
+-- Сколько человек участвует в таблице.
+SELECT COUNT(*) AS participants FROM user_stats WHERE lb_optin = 1 AND lb_banned = 0;
+
+-- Подозрительно быстрый набор очков (потолка очков в таблице нет, решение владельца): слов за день занятий.
+SELECT user_id, words_done + letters_done AS total, active_days,
+       ROUND(1.0 * (words_done + letters_done) / MAX(active_days, 1), 1) AS per_day, lb_week_points
+FROM user_stats ORDER BY per_day DESC LIMIT 20;
+
+-- Аудит счётчиков: очки в user_stats должны совпадать с числом пройденных слов и букв в word_progress.
+SELECT s.user_id, s.words_done + s.letters_done AS counter, COUNT(w.word_id) AS actual
+FROM user_stats s LEFT JOIN word_progress w ON w.user_id = s.user_id AND w.completed_at IS NOT NULL
+GROUP BY s.user_id HAVING counter != actual LIMIT 50;
+
+-- Сколько раз выдан каждый бейдж.
+SELECT badge_id, COUNT(*) AS n FROM user_badges GROUP BY badge_id ORDER BY n DESC;
+```
+
+**Бан в таблице** (имя нарушает правила, накрутка): `UPDATE user_stats SET lb_banned = 1 WHERE user_id = <id>;` человек сразу исчезает из таблицы и из чтения, сам он этого не видит; вернуть: `lb_banned = 0`.
+
+**Починка счётчиков.** Если аудит показал расхождение: `DELETE FROM user_stats WHERE user_id = <id>;`. Строка пересоздастся при следующем входе пересчётом из `word_progress`, `lesson_passed` и `quiz_attempts`. Бейджи не теряются (`user_badges` не трогаем), но сбрасываются ритм недели, цель дня, часовой пояс и участие в таблице: человеку придётся вступить заново.
+
+**Что проверить на телефоне в настоящем Telegram** после выкладки: `docs/GAMIFICATION.md`, раздел 13, и вопрос 23 в `CLAUDE.md`.
+
 ## Викторина на сервере
 
 Вопросы викторины выдаёт Worker, каждый ответ проверяет он же, итог считает и пишет он (миграция `0003_quiz_sessions.sql`, код `apps/api/src/quizSession.ts`, маршруты в `apps/api/src/app.ts`):
