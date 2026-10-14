@@ -60,12 +60,18 @@ async function listVoices() {
   return (body.voices ?? []).map((v) => `${v.name}\t${v.ssmlGender}`);
 }
 
+/**
+ * В синтезатор гереш (U+05F3, ג׳ ז׳ צ׳) уходит обычным апострофом: в ивритских текстах для речи его пишут именно так,
+ * и голос произносит дж, ж, ч. Если на слух звук не тот, переозвучить слово точечно (--only <id> --force), см. docs/AUDIO.md.
+ */
+const forSpeech = (text) => text.replaceAll("\u05F3", "'");
+
 async function synthesize(text) {
   const body = await call("/text:synthesize", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      input: { text },
+      input: { text: forSpeech(text) },
       voice: { languageCode: "he-IL", name: voice },
       audioConfig: { audioEncoding: "MP3", speakingRate: rate },
     }),
