@@ -1,4 +1,4 @@
-// Озвучка слов, форм прилагательных, фраз-примеров, названий букв и слов-примеров к буквам официальным Google Cloud
+// Озвучка слов, форм прилагательных и глаголов, фраз-примеров, названий букв и слов-примеров к буквам официальным Google Cloud
 // Text-to-Speech (голоса he-IL). Файлы создаются один раз и лежат в репозитории.
 //
 // Нужен ключ API: переменная окружения GOOGLE_TTS_API_KEY (в GitHub: Settings → Secrets → Actions).
@@ -11,6 +11,7 @@
 //
 // Другие параметры: --only id1,id2   --kinds word,form,phrase,letter,example   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
 import { mkdirSync, existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { ALL_KINDS, buildJobs } from "./audio-jobs.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name) => args.includes(`--${name}`);
@@ -80,16 +81,10 @@ async function synthesize(text) {
 }
 
 /**
- * Что и в какой файл озвучивать. Виды озвучки (поле `kind`):
- *   word    основная форма слова: /audio/<id>.mp3, поле audio слова (текст с огласовками);
- *   form    форма прилагательного (f, mp, fp): /audio/<id>-form-<ключ>.mp3, поле audio формы (с огласовками);
- *   phrase  фраза-пример слова: /audio/<id>-phrase.mp3, поле example.audio (у фраз огласовок нет, уходит иврит как есть);
- *   letter  название буквы: /audio/<id буквы>.mp3, поле audio буквы (огласовки из name.niqqud);
- *   example слово-пример буквы, только если у него ещё нет файла: /audio/<id буквы>-example.mp3, поле example.audio.
- * `--only` принимает id слов и букв: озвучиваются все виды озвучки этих элементов.
+ * Что и в какой файл озвучивать, описано в tools/audio-jobs.mjs (виды озвучки word, form, phrase, letter, example;
+ * у глагола form это до 27 форм). `--only` принимает id слов и букв: озвучиваются все виды озвучки этих элементов.
  * `--kinds word,form,...` ограничивает виды (по умолчанию все).
  */
-const ALL_KINDS = ["word", "form", "phrase", "letter", "example"];
 const kinds = option("kinds", ALL_KINDS.join(",")).split(",").filter(Boolean);
 for (const k of kinds) {
   if (!ALL_KINDS.includes(k)) {
@@ -98,35 +93,7 @@ for (const k of kinds) {
   }
 }
 
-function jobs() {
-  const list = [];
-  const add = (job) => {
-    if (kinds.includes(job.kind)) list.push(job);
-  };
-  for (const { file, data } of lessons) {
-    for (const word of data.words ?? []) {
-      if (only?.length && !only.includes(word.id)) continue;
-      add({ file, kind: "word", id: word.id, name: word.id, plain: word.he, niqqud: word.niqqud ?? word.he, set: (path) => (word.audio = path), has: word.audio });
-      for (const [key, form] of Object.entries(word.forms ?? {})) {
-        const name = `${word.id}-form-${key}`;
-        add({ file, kind: "form", id: name, name, plain: form.he, niqqud: form.niqqud ?? form.he, set: (path) => (form.audio = path), has: form.audio });
-      }
-      if (word.example) {
-        const name = `${word.id}-phrase`;
-        add({ file, kind: "phrase", id: name, name, plain: word.example.he, niqqud: word.example.he, set: (path) => (word.example.audio = path), has: word.example.audio });
-      }
-    }
-    for (const letter of data.letters ?? []) {
-      if (only?.length && !only.includes(letter.id)) continue;
-      add({ file, kind: "letter", id: letter.id, name: letter.id, plain: letter.name.he, niqqud: letter.name.niqqud, set: (path) => (letter.audio = path), has: letter.audio });
-      if (!letter.example.audio) {
-        const name = `${letter.id}-example`;
-        add({ file, kind: "example", id: name, name, plain: letter.example.he, niqqud: letter.example.niqqud, set: (path) => (letter.example.audio = path), has: undefined });
-      }
-    }
-  }
-  return list;
-}
+const jobs = () => buildJobs(lessons, { kinds, only });
 
 if (!dry && !KEY) {
   const message = "Не задан GOOGLE_TTS_API_KEY. Ключ создаётся в Google Cloud Console (см. docs/AUDIO.md).";
