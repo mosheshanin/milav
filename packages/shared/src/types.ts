@@ -1,5 +1,6 @@
 import type { PlayEvent, PlayInfo } from "./gamification/types";
 import type { Stroke } from "./handwriting/types";
+import type { VerbData } from "./verbs";
 
 /** Четыре этапа изучения слова. */
 export const STAGES = ["listen", "speak", "write", "type"] as const;
@@ -67,6 +68,8 @@ export interface Word {
   example?: Phrase;
   /** Три остальные формы прилагательного (только раздел «Прилагательные»). */
   forms?: AdjectiveForms;
+  /** Бинъян, корень и формы глагола по временам (только раздел «Глаголы»). */
+  verb?: VerbData;
   /** Картинка слова: путь от корня сайта, файл лежит в apps/web/public/words. Необязательна: без неё карточка показывает запасной вариант. */
   image?: string;
   /** Путь к файлу озвучки. Если не задан, используется синтезатор браузера. */
