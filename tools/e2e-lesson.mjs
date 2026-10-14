@@ -55,6 +55,22 @@ const browser = await chromium.launch({
   args: ["--no-sandbox", "--use-fake-device-for-media-stream", "--use-fake-ui-for-media-stream"],
 });
 
+/** Лист «Мы нашли ваши достижения» на главной появляется у тех, чей прогресс записан в базу напрямую (сидирование): закрываем. */
+async function dismissFoundSheet(page) {
+  try {
+    await page.waitForSelector('[data-testid="my-path"]', { timeout: 15000 });
+    // Лист приходит после запроса достижений: ждём, пока главная дозагрузится.
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(150);
+    if (await page.locator('[data-testid="celebration"]').count()) {
+      await page.click('[data-testid="celebration-close"]');
+      await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
+    }
+  } catch {
+    // Главной нет (например, открыт другой экран): закрывать нечего.
+  }
+}
+
 async function openPage(userId) {
   const context = await browser.newContext({
     viewport: { width: 390, height: 844 },
@@ -69,6 +85,7 @@ async function openPage(userId) {
   page.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
   watchCsp(page);
   await page.goto(`${BASE}/?dev=${userId}`);
+  await dismissFoundSheet(page);
   return page;
 }
 
@@ -116,7 +133,7 @@ async function typeWord(page, he) {
 
 // ---------- Сценарий А: полный урок и викторина на проходной балл ----------
 const A = 2001;
-sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${A}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${A}; DELETE FROM quiz_attempts WHERE user_id=${A}; DELETE FROM lesson_passed WHERE user_id=${A};`);
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${A}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${A}; DELETE FROM user_stats WHERE user_id=${A}; DELETE FROM user_badges WHERE user_id=${A}; DELETE FROM quiz_attempts WHERE user_id=${A}; DELETE FROM lesson_passed WHERE user_id=${A};`);
 const seed = lesson.words
   .slice(1)
   .map((w) => `(${A}, '${w.id}', '${lesson.id}', 0, 1, 0, 0, NULL)`)
@@ -213,7 +230,8 @@ check(true, "без «говори» слово не засчитано, пре�
 await shot(page, "09-speak-pending");
 
 // Помечаем «говори» прямо в базе и перезагружаем: урок продолжится со слова 2.
-sql(`UPDATE word_progress SET stage_speak=1, completed_at=datetime('now') WHERE user_id=${A} AND word_id='${first.id}';`);
+sql(`UPDATE word_progress SET stage_speak=1, completed_at=datetime('now') WHERE user_id=${A} AND word_id='${first.id}'; DELETE FROM user_stats WHERE user_id=${A};`);
+// Запись в базу в обход приложения не двигает счётчики; строку счётчиков удаляем, и сервер пересчитает её сам.
 await page.reload();
 // Экран запоминается: после перезагрузки остаёмся в уроке, а не возвращаемся на главную.
 await page.waitForSelector('[data-testid="word-he"]');
@@ -289,6 +307,11 @@ check((await page.textContent('[data-testid="quiz-saved"]')).includes("Новы�
   )[0].results;
   check(rows.length === 1 && `${rows[0].correct} из ${rows[0].total}` === resultText.trim() && rows[0].passed === 1, `в базе одна попытка с тем же итогом, что на экране (${JSON.stringify(rows)})`);
 }
+// Новичку после первого сданного урока показывается лист поздравления (геймификация): закрываем его.
+check((await page.locator('[data-testid="celebration"]').count()) === 1, "после первого сданного урока показан лист поздравления");
+await shot(page, "11b-celebration");
+await page.click('[data-testid="celebration-close"]');
+await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
 await page.click('[data-testid="quiz-home"]');
 await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForTimeout(500);
@@ -298,7 +321,7 @@ await page.context().close();
 
 // ---------- Сценарий Б: урок пройден, викторина с ошибками не сдаётся ----------
 const B = 2002;
-sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${B}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${B}; DELETE FROM quiz_attempts WHERE user_id=${B}; DELETE FROM lesson_passed WHERE user_id=${B};`);
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${B}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${B}; DELETE FROM user_stats WHERE user_id=${B}; DELETE FROM user_badges WHERE user_id=${B}; DELETE FROM quiz_attempts WHERE user_id=${B}; DELETE FROM lesson_passed WHERE user_id=${B};`);
 const seedB = lesson.words.map((w) => `(${B}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now'))`).join(",");
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedB};`);
 page = await openPage(B);
@@ -335,7 +358,7 @@ check(JSON.parse(attempts)[0].results[0].n === 0, "прерванная викт
 
 // ---------- Сценарий В: приглашение микрофона, один системный запрос, отказ ----------
 const C = 2003;
-sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${C}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${C};`);
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${C}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${C}; DELETE FROM user_stats WHERE user_id=${C}; DELETE FROM user_badges WHERE user_id=${C};`);
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (${C}, '${lesson.words[0].id}', '${lesson.id}', 1, 0, 0, 0, NULL);`);
 
 async function openSpeak(initScript) {
@@ -394,7 +417,7 @@ const D = 2004;
 const [w0, w1] = lesson.words;
 const seedAll = (userId) =>
   lesson.words.map((w) => `(${userId}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now'))`).join(",");
-sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${D}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${D}; DELETE FROM quiz_attempts WHERE user_id=${D}; DELETE FROM lesson_passed WHERE user_id=${D};`);
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${D}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${D}; DELETE FROM user_stats WHERE user_id=${D}; DELETE FROM user_badges WHERE user_id=${D}; DELETE FROM quiz_attempts WHERE user_id=${D}; DELETE FROM lesson_passed WHERE user_id=${D};`);
 sql(
   `INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ` +
     `(${D}, '${w0.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now')), (${D}, '${w1.id}', '${lesson.id}', 1, 1, 0, 0, NULL);`,
@@ -447,6 +470,7 @@ async function openTelegramPage(userId) {
   p.on("pageerror", (e) => failures.push(`pageerror: ${e.message}`));
   watchCsp(p);
   await p.goto(`${BASE}/?dev=${userId}`);
+  await dismissFoundSheet(p);
   return p;
 }
 const pressBack = (p) => p.evaluate(() => window.__tg.back.handlers.forEach((h) => h()));
@@ -476,10 +500,11 @@ await page.waitForSelector('[data-testid="continue"]');
 check(!(await backVisible(page)), "«назад» из урока ведёт на главную, кнопка скрывается");
 
 // Все слова пройдены: «Продолжить» ведёт к викторине.
-sql(`DELETE FROM word_progress WHERE user_id=${D};`);
+sql(`DELETE FROM word_progress WHERE user_id=${D}; DELETE FROM user_stats WHERE user_id=${D}; DELETE FROM user_badges WHERE user_id=${D};`);
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedAll(D)};`);
 await page.reload();
 await page.waitForSelector('[data-testid="continue"]');
+await dismissFoundSheet(page);
 check((await page.textContent('[data-testid="continue"]')).trim() === "К викторине", "после всех слов «Продолжить» ведёт к викторине");
 await page.click('[data-testid="continue"]');
 await page.waitForSelector('[data-testid="quiz-progress"]');
@@ -515,7 +540,7 @@ await page.context().close();
 
 // ---------- Сценарий Д: подделать результат запросами без приложения нельзя ----------
 const E = 2005;
-sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${E}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${E}; DELETE FROM quiz_attempts WHERE user_id=${E}; DELETE FROM lesson_passed WHERE user_id=${E};`);
+sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${E}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${E}; DELETE FROM user_stats WHERE user_id=${E}; DELETE FROM user_badges WHERE user_id=${E}; DELETE FROM quiz_attempts WHERE user_id=${E}; DELETE FROM lesson_passed WHERE user_id=${E};`);
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedAll(E)};`);
 {
   const context = await browser.newContext();

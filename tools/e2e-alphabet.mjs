@@ -52,6 +52,22 @@ function check(condition, text) {
 
 const browser = await chromium.launch({ executablePath: findChromium(), args: ["--no-sandbox"] });
 
+/** Лист «Мы нашли ваши достижения» на главной появляется у тех, чей прогресс записан в базу напрямую (сидирование): закрываем. */
+async function dismissFoundSheet(page) {
+  try {
+    await page.waitForSelector('[data-testid="my-path"]', { timeout: 15000 });
+    // Лист приходит после запроса достижений: ждём, пока главная дозагрузится.
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(150);
+    if (await page.locator('[data-testid="celebration"]').count()) {
+      await page.click('[data-testid="celebration-close"]');
+      await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
+    }
+  } catch {
+    // Главной нет (например, открыт другой экран): закрывать нечего.
+  }
+}
+
 async function openPage(userId) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   const page = await context.newPage();
@@ -64,6 +80,7 @@ async function openPage(userId) {
     if (/content security policy/i.test(msg.text())) failures.push(`CSP: ${msg.text().slice(0, 200)}`);
   });
   await page.goto(`${BASE}/?dev=${userId}`);
+  await dismissFoundSheet(page);
   return page;
 }
 
@@ -107,7 +124,7 @@ const pressKey = (page, letter) => page.locator('[data-testid="keyboard"] button
 
 function resetUser(id) {
   sql(
-    `INSERT OR IGNORE INTO users (id, first_name) VALUES (${id}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${id}; DELETE FROM quiz_attempts WHERE user_id=${id}; DELETE FROM lesson_passed WHERE user_id=${id}; DELETE FROM quiz_sessions WHERE user_id=${id};`,
+    `INSERT OR IGNORE INTO users (id, first_name) VALUES (${id}, 'Тестер'); DELETE FROM word_progress WHERE user_id=${id}; DELETE FROM user_stats WHERE user_id=${id}; DELETE FROM user_badges WHERE user_id=${id}; DELETE FROM quiz_attempts WHERE user_id=${id}; DELETE FROM lesson_passed WHERE user_id=${id}; DELETE FROM quiz_sessions WHERE user_id=${id};`,
   );
 }
 const seedAll = (id) => letters.map((l) => `(${id}, '${l.id}', '${lesson.id}', 1, 0, 1, 1, datetime('now'))`).join(",");
@@ -122,7 +139,7 @@ await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
 await shot(page, "01-home");
 check(await page.locator('[data-testid="alphabet-section"]').isVisible(), "на главной есть раздел «Алфавит»");
 {
-  const order = await page.$$eval("main h2", (els) => els.map((e) => e.textContent));
+  const order = (await page.$$eval("main h2", (els) => els.map((e) => e.textContent))).filter((t) => t !== "Мой путь");
   check(order[0] === "Алфавит", `«Алфавит» стоит первым на главной (разделы: ${order.join(", ")})`);
 }
 check((await page.textContent('[data-testid="points"]')) === "0", "на старте 0 очков");
@@ -207,6 +224,11 @@ check((await page.textContent('[data-testid="quiz-saved"]')).includes("Новы�
   const rows = query(`SELECT correct, total, passed FROM quiz_attempts WHERE user_id=${A}`);
   check(rows.length === 1 && `${rows[0].correct} из ${rows[0].total}` === resultText && rows[0].passed === 1, `в базе одна попытка с тем же итогом (${JSON.stringify(rows)})`);
 }
+// Новичку после первого сданного урока показывается лист поздравления (геймификация): закрываем его.
+check((await page.locator('[data-testid="celebration"]').count()) === 1, "после первого сданного урока алфавита показан лист поздравления");
+await shot(page, "11b-celebration");
+await page.click('[data-testid="celebration-close"]');
+await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
 await page.click('[data-testid="quiz-home"]');
 await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForTimeout(500);

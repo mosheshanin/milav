@@ -119,6 +119,11 @@ jobs:
       - name: Сквозной тест записи шаблонов букв
         run: node tools/e2e-record.mjs e2e-shots
 
+      # Геймификация: блок «Мой путь», бейдж в уроке, «Достижения», цель дня, «Поделиться», таблица лидеров (вступить, выйти,
+      # приватность), лист «Мы нашли ваши достижения», экран 360 px. В локальной среде таблица включена (LEADERBOARD_ENABLED=1).
+      - name: Сквозной тест геймификации
+        run: node tools/e2e-gamification.mjs e2e-shots/gamification
+
       - name: Скриншоты и лог Worker
         if: always()
         uses: actions/upload-artifact@v4
