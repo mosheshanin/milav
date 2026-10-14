@@ -99,6 +99,9 @@ jobs:
       - name: Сквозной тест, урок без картинок (family-2)
         run: E2E_LESSON=family-2 node tools/e2e-lesson.mjs e2e-shots/family-2
 
+      - name: Сквозной тест, урок глаголов (paal-1)
+        run: E2E_LESSON=paal-1 node tools/e2e-lesson.mjs e2e-shots/paal-1
+
       # Алфавит: урок из букв (слушай, пиши, печатай), викторина из 20 вопросов, прерывание на 5-й ошибке, защита от подделки.
       - name: Сквозной тест алфавита (alphabet-1)
         run: node tools/e2e-alphabet.mjs e2e-shots/alphabet-1
