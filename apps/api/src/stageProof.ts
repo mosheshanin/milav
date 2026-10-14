@@ -4,6 +4,7 @@ import {
   MAX_STROKES_PER_LETTER,
   featuresFromStrokes,
   isLetterAccepted,
+  typedLetters,
   wordLetters,
   type Stroke,
 } from "@milav/shared";
@@ -48,7 +49,7 @@ export function verifyTyped(word: Spelled, typed: unknown): ProofResult {
   if (typeof typed !== "string" || typed.length === 0 || typed.length > 64) {
     return { ok: false, status: 400, error: "proof_required" };
   }
-  const expected = wordLetters(word.he).join("");
+  const expected = typedLetters(word.he).join("");
   return typed.normalize("NFC") === expected ? { ok: true } : { ok: false, status: 422, error: "type_mismatch" };
 }
 

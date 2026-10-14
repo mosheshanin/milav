@@ -1,10 +1,13 @@
 import {
   ALPHABET_QUESTION_TYPES,
   ALPHABET_QUIZ_RULES,
+  GERESH_QUESTION_TYPES,
+  GERESH_QUIZ_RULES,
   QUESTIONS_PER_TYPE,
   QUESTION_TYPES,
   isAlphabetLesson,
   isFormPair,
+  isGereshForm,
   type AnyLesson,
   type Letter,
   type QuestionType,
@@ -76,11 +79,17 @@ function letterOptions(target: Letter, letters: Letter[], rng: Rng): string[] {
  * Викторина алфавита: по 5 вопросов четырёх типов, всего 20. Порядок: послушать название и выбрать букву →
  * увидеть букву и выбрать название → написать букву по названию → найти букву на клавиатуре.
  * Внутри типа буквы не повторяются, поэтому в уроке нужно не меньше пяти букв.
+ *
+ * Урок со звуками дж, ж, ч (формы с гереш, их три): три типа без «напиши» по 3 вопроса, всего 9. В выборе
+ * три варианта: все формы урока.
  */
 export function generateAlphabetQuiz(letters: Letter[], rng: Rng = secureRandom): QuizQuestion[] {
+  const geresh = letters.length > 0 && letters.every((l) => isGereshForm(l.he));
+  const types = geresh ? GERESH_QUESTION_TYPES : ALPHABET_QUESTION_TYPES;
+  const perType = geresh ? GERESH_QUIZ_RULES.perType : ALPHABET_QUIZ_RULES.perType;
   const questions: QuizQuestion[] = [];
-  for (const type of ALPHABET_QUESTION_TYPES) {
-    const chosen = shuffle(letters, rng).slice(0, ALPHABET_QUIZ_RULES.perType);
+  for (const type of types) {
+    const chosen = shuffle(letters, rng).slice(0, perType);
     for (const letter of chosen) {
       const options = type === "hear-letter" || type === "letter-name" ? letterOptions(letter, letters, rng) : [];
       questions.push({ type, wordId: letter.id, options });

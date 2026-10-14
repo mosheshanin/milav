@@ -44,10 +44,10 @@
     },
     "letters": {
       "type": "array",
-      "minItems": 5,
+      "minItems": 3,
       "maxItems": 6,
       "items": { "$ref": "#/definitions/letter" },
-      "description": "Только у урока алфавита: 5–6 форм. Какие именно буквы в каком уроке, задают ALPHABET_GROUPS в packages/shared (проверяют тесты)."
+      "description": "Только у урока алфавита: 5–6 форм, а у урока звуков дж, ж, ч три формы с гереш. Какие именно буквы в каком уроке, задают ALPHABET_GROUPS в packages/shared (проверяют тесты)."
     }
   },
   "allOf": [
@@ -204,6 +204,16 @@
         }
       ]
     },
+    "hebrewGeresh": {
+      "type": "string",
+      "pattern": "^[א-ת׳]+$",
+      "description": "Как hebrew, но допускается гереш ׳ (U+05F3) после буквы: слова с звуками дж, ж, ч (ג׳ינס, ז׳קט, צ׳יפס)."
+    },
+    "niqqudGeresh": {
+      "type": "string",
+      "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2׳]+$",
+      "description": "Как niqqud, но допускается гереш ׳ (U+05F3) после буквы с огласовкой."
+    },
     "hebrewPhrase": {
       "type": "string",
       "pattern": "^[א-ת]+( [א-ת]+)*$",
@@ -231,8 +241,8 @@
       "additionalProperties": false,
       "description": "Слово-пример: у обычной буквы начинается с неё, у конечной формы заканчивается ею.",
       "properties": {
-        "he": { "$ref": "#/definitions/hebrew" },
-        "niqqud": { "$ref": "#/definitions/niqqud" },
+        "he": { "$ref": "#/definitions/hebrewGeresh" },
+        "niqqud": { "$ref": "#/definitions/niqqudGeresh" },
         "translit": { "$ref": "#/definitions/translit" },
         "ru": { "$ref": "#/definitions/text" },
         "image": {
@@ -258,7 +268,7 @@
           "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-[1-9][0-9]*-[a-z][a-z0-9]*(-[a-z0-9]+)*$",
           "description": "<id урока>-<ключ из LETTER_KEYS>, например alphabet-1-alef. Прогресс пользователей привязан к id: после выпуска не менять."
         },
-        "he": { "type": "string", "pattern": "^[א-ת]$", "description": "Сама форма, одна буква иврита." },
+        "he": { "type": "string", "pattern": "^[א-ת]׳?$", "description": "Сама форма: одна буква иврита, а в уроке звуков дж, ж, ч буква с гереш (ג׳, ז׳, צ׳)." },
         "name": { "$ref": "#/definitions/letterName" },
         "sound": {
           "type": "string",

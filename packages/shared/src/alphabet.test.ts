@@ -4,6 +4,10 @@ import {
   ALPHABET_QUESTION_TYPES,
   ALPHABET_QUIZ_RULES,
   FINAL_LETTERS,
+  GERESH,
+  GERESH_LETTER_STAGES,
+  GERESH_QUESTION_TYPES,
+  GERESH_QUIZ_RULES,
   HEBREW_LETTERS,
   LETTER_KEYS,
   LETTER_NAMES,
@@ -16,6 +20,8 @@ import {
   isAlphabetLesson,
   isFinalForm,
   isFormPair,
+  isGereshForm,
+  isGereshLesson,
   isLetter,
   isWord,
   lessonItems,
@@ -61,12 +67,12 @@ const wordLesson: Lesson = {
 };
 
 describe("группы алфавита", () => {
-  it("вместе дают все 27 форм по одному разу и в алфавитном порядке", () => {
-    expect(ALPHABET_GROUPS.flat()).toEqual([...HEBREW_LETTERS]);
+  it("первые 5 групп дают все 27 форм по одному разу и в алфавитном порядке", () => {
+    expect(ALPHABET_GROUPS.slice(0, 5).flat()).toEqual([...HEBREW_LETTERS]);
   });
 
-  it("5 уроков: 5+5+5+6+6", () => {
-    expect(ALPHABET_GROUPS.map((g) => g.length)).toEqual([5, 5, 5, 6, 6]);
+  it("6 уроков: 5+5+5+6+6 и 3 формы с гереш", () => {
+    expect(ALPHABET_GROUPS.map((g) => g.length)).toEqual([5, 5, 5, 6, 6, 3]);
   });
 
   it("конечная форма стоит сразу после обычной и в том же уроке", () => {
@@ -93,10 +99,10 @@ function regularOf(final: string): string {
 }
 
 describe("ключи и названия букв", () => {
-  it("ключи есть у всех 27 форм, уникальны и подходят для id", () => {
-    expect(Object.keys(LETTER_KEYS).sort()).toEqual([...HEBREW_LETTERS].sort());
+  it("ключи есть у всех 27 форм и трёх форм с гереш, уникальны и подходят для id", () => {
+    expect(Object.keys(LETTER_KEYS).sort()).toEqual([...HEBREW_LETTERS, ...ALPHABET_GROUPS[5]!].sort());
     const keys = Object.values(LETTER_KEYS);
-    expect(new Set(keys).size).toBe(27);
+    expect(new Set(keys).size).toBe(30);
     for (const key of keys) expect(key).toMatch(/^[a-z][a-z0-9]*(-[a-z0-9]+)*$/);
   });
 
@@ -127,7 +133,16 @@ describe("правила по виду урока", () => {
   });
 
   it("в каждом уроке алфавита букв не меньше, чем вопросов одного типа (внутри типа буквы не повторяются)", () => {
-    for (const group of ALPHABET_GROUPS) expect(group.length).toBeGreaterThanOrEqual(ALPHABET_QUIZ_RULES.perType);
+    for (const group of ALPHABET_GROUPS.slice(0, 5)) expect(group.length).toBeGreaterThanOrEqual(ALPHABET_QUIZ_RULES.perType);
+  });
+
+  it("звуки дж, ж, ч: 9 вопросов, по 3 из 3 типов, сдан при 7 (80%, округление вниз), допустимо 2 ошибки", () => {
+    expect(GERESH_QUIZ_RULES).toEqual({ size: 9, perType: 3, pass: 7, maxMistakes: 2 });
+    expect(GERESH_QUIZ_RULES.size).toBe(GERESH_QUESTION_TYPES.length * GERESH_QUIZ_RULES.perType);
+    expect(GERESH_QUIZ_RULES.pass).toBe(Math.floor(GERESH_QUIZ_RULES.size * 0.8));
+    expect(GERESH_QUIZ_RULES.maxMistakes).toBe(GERESH_QUIZ_RULES.size - GERESH_QUIZ_RULES.pass);
+    expect(GERESH_QUIZ_RULES.perType).toBe(ALPHABET_GROUPS[5]!.length);
+    expect(GERESH_QUESTION_TYPES).not.toContain("name-write");
   });
 
   it("у каждого типа вопроса есть заголовок", () => {
@@ -151,6 +166,24 @@ describe("вид урока", () => {
     expect(stagesFor(wordLesson)).toEqual(["listen", "speak", "write", "type"]);
     expect(LETTER_STAGES).not.toContain("speak");
     expect(LETTER_STAGES.every((s) => STAGES.includes(s))).toBe(true);
+  });
+
+  it("урок со звуками дж, ж, ч: этапы «слушай» и «печатай», свои правила викторины", () => {
+    const gereshLesson: AlphabetLesson = { ...alphabetLesson, id: "alphabet-6", number: 6, letters: ALPHABET_GROUPS[5]!.map(letter) };
+    expect(isGereshLesson(gereshLesson)).toBe(true);
+    expect(isGereshLesson(alphabetLesson)).toBe(false);
+    expect(isGereshLesson(wordLesson)).toBe(false);
+    expect(stagesFor(gereshLesson)).toEqual(["listen", "type"]);
+    expect(GERESH_LETTER_STAGES).not.toContain("write");
+    expect(quizRulesFor(gereshLesson)).toBe(GERESH_QUIZ_RULES);
+  });
+
+  it("форма с гереш: буква и знак ׳", () => {
+    expect(GERESH).toBe("\u05F3");
+    expect(isGereshForm("ג׳")).toBe(true);
+    expect(isGereshForm("ג")).toBe(false);
+    expect(isGereshForm("׳")).toBe(false);
+    expect(isGereshForm("גד")).toBe(false);
   });
 
   it("буква и слово отличаются", () => {

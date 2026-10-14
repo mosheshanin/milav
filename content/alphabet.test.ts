@@ -29,9 +29,19 @@ describe("уроки алфавита (настоящие данные)", () => 
     expect(crossProblems(lessons, alphabetLessons)).toEqual([]);
   });
 
-  it("когда уроки алфавита готовы все, в них все 27 форм по одному разу", () => {
+  it("когда уроки алфавита готовы все, в первых пяти все 27 форм по одному разу, а в шестом три формы с гереш", () => {
     if (alphabetLessons.length < ALPHABET_GROUPS.length) return;
-    expect(alphabetLessons.flatMap((l) => l.letters.map((x) => x.he))).toEqual([...HEBREW_LETTERS]);
+    expect(alphabetLessons.slice(0, 5).flatMap((l) => l.letters.map((x) => x.he))).toEqual([...HEBREW_LETTERS]);
+    expect(alphabetLessons[5]!.letters.map((x) => x.he)).toEqual(["ג׳", "ז׳", "צ׳"]);
+  });
+
+  it("урок со звуками дж, ж, ч: слова-примеры с гереш, названия «<буква> с апострофом»", () => {
+    const lesson = alphabetLessons.find((l) => l.number === 6);
+    if (!lesson) return;
+    for (const x of lesson.letters) {
+      expect(x.example.he.startsWith(x.he), x.id).toBe(true);
+      expect(x.name.ru, x.id).toMatch(/ с апострофом$/);
+    }
   });
 
   for (const lesson of alphabetLessons) {
@@ -105,8 +115,8 @@ describe("правила алфавита ловят нарушения", () => 
 
   it("пропуск в номерах и лишний урок", () => {
     expect(alphabetProblems([lesson3()]).join("\n")).toContain("ожидались подряд с 1");
-    const six = [1, 2, 3, 4, 5, 6].map((n) => ({ ...lesson3(), id: `alphabet-${n}`, number: n }));
-    expect(alphabetProblems(six).join("\n")).toContain("уроков 6, а групп букв 5");
+    const seven = [1, 2, 3, 4, 5, 6, 7].map((n) => ({ ...lesson3(), id: `alphabet-${n}`, number: n }));
+    expect(alphabetProblems(seven).join("\n")).toContain("уроков 7, а групп букв 6");
   });
 
   it("не те буквы в уроке", () => {
@@ -185,5 +195,32 @@ describe("связи алфавита с остальными уроками", (
 
   it("совпадение id урока алфавита с id обычного урока ловится", () => {
     expect(crossProblems(lessons, [{ ...lesson3(), id: lessons[0]!.id }]).join("\n")).toContain(lessons[0]!.id);
+  });
+});
+
+describe("правила алфавита: формы с гереш (дж, ж, ч)", () => {
+  const real = alphabetLessons.find((l) => l.number === 6)!;
+  const edit = (i: number, patch: Partial<Letter>): AlphabetLesson => ({ ...real, letters: real.letters.map((x, n) => (n === i ? { ...x, ...patch } : x)) });
+
+  it("настоящий урок без замечаний", () => {
+    expect(problemsOf(real)).toBe("");
+  });
+
+  it("слово-пример без гереш не подходит: это другое слово", () => {
+    const bad = edit(0, { example: { ...real.letters[0]!.example, he: "גינס", niqqud: "גִּינְס" } });
+    expect(problemsOf(bad)).toContain("должно начинаться с ג׳");
+  });
+
+  it("русское название формы с гереш: «<название> с апострофом»", () => {
+    expect(problemsOf(edit(1, { name: { ...real.letters[1]!.name, ru: "зайин" } }))).toContain("ожидалось «зайин с апострофом»");
+  });
+
+  it("формы с гереш и обычные буквы в одном уроке не смешиваются", () => {
+    const mixed = { ...real, letters: [...real.letters.slice(0, 2), { ...lesson3().letters[2]! }] };
+    expect(problemsOf(mixed)).toContain("форм с «׳»");
+  });
+
+  it("id формы по ключу", () => {
+    expect(problemsOf(edit(2, { id: "alphabet-6-tsadi" }))).toContain("ожидался alphabet-6-tsadi-geresh");
   });
 });

@@ -9,7 +9,7 @@ describe("сведения о контенте", () => {
     expect(info.totalLessons).toBe(allLessons.length);
     expect(info.totalWords).toBe(lessons.reduce((n, l) => n + l.words.length, 0));
     expect(info.alphabetLessons).toBe(alphabetLessons.length);
-    expect(info.alphabetLetters).toBe(27);
+    expect(info.alphabetLetters).toBe(30); // 27 форм и три формы с гереш (дж, ж, ч)
     expect(info.sections).toContain("alphabet");
   });
 

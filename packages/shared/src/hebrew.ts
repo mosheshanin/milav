@@ -63,8 +63,18 @@ export function isSpeechMatch(heard: string, expected: string): boolean {
 }
 
 const HEBREW_LETTER = /[א-ת]/;
+/** Знак гереш (U+05F3) после буквы: ג׳ дж, ז׳ ж, צ׳ ч. */
+const HEBREW_LETTER_OR_GERESH = /[א-ת\u05F3]/;
 
 /** Буквы слова в порядке написания (первая буква справа): без огласовок, пробелов и знаков, конечные формы сохраняются. */
 export function wordLetters(he: string): string[] {
   return [...he.normalize("NFC")].filter((ch) => HEBREW_LETTER.test(ch));
+}
+
+/**
+ * Что набирают на клавиатуре: буквы слова и знаки гереш (у ג׳ ז׳ צ׳ это два знака). Для рукописного ввода нужны только
+ * буквы (`wordLetters`): гереш отдельно не пишется.
+ */
+export function typedLetters(he: string): string[] {
+  return [...he.normalize("NFC")].filter((ch) => HEBREW_LETTER_OR_GERESH.test(ch));
 }

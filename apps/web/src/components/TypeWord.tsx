@@ -1,11 +1,16 @@
 import { useState } from "react";
-import { lettersOf, type Spelled } from "./WriteWord";
+import { GERESH, typedLetters } from "@milav/shared";
+import type { Spelled } from "./WriteWord";
 import { HebrewKeyboard } from "./HebrewKeyboard";
 import { Button } from "./ui";
 
-/** Набор слова (или одной буквы) на экранной клавиатуре. Слово видно на карточке выше. */
+/**
+ * Набор слова (или одной буквы) на экранной клавиатуре. Слово видно на карточке выше.
+ * Звуки дж, ж, ч набирают двумя знаками: буква и гереш (ג׳); для них на клавиатуре есть клавиша ׳.
+ */
 export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: string) => void }) {
-  const target = lettersOf(word);
+  const target = typedLetters(word.he);
+  const needsGeresh = target.includes(GERESH);
   const [typed, setTyped] = useState<string[]>([]);
 
   const complete = typed.length === target.length;
@@ -22,7 +27,7 @@ export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: stri
           correct ? "border-success text-success" : wrong ? "border-danger text-danger" : "border-line"
         }`}
       >
-        {typed.join("") || <span className="text-xl font-normal text-ink-soft">{target.length === 1 ? "Нажмите букву" : "Наберите слово"}</span>}
+        {typed.join("") || <span className="text-xl font-normal text-ink-soft">{needsGeresh ? "Нажмите букву, затем гереш" : target.length === 1 ? "Нажмите букву" : "Наберите слово"}</span>}
       </div>
 
       {correct ? (
@@ -32,6 +37,7 @@ export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: stri
       ) : (
         <>
           <HebrewKeyboard
+            geresh={needsGeresh}
             onKey={(letter) => {
               setTyped((prev) => (prev.length < target.length ? [...prev, letter] : prev));
             }}
@@ -41,7 +47,7 @@ export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: stri
           />
           {wrong && (
             <p role="alert" className="text-center font-semibold text-danger">
-              {target.length === 1 ? "Это другая буква. Сотрите и попробуйте ещё раз." : "Не совпадает со словом. Сотрите лишнее и наберите ещё раз."}
+              {needsGeresh ? "Не совпадает. Сотрите и наберите букву и гереш ещё раз." : target.length === 1 ? "Это другая буква. Сотрите и попробуйте ещё раз." : "Не совпадает со словом. Сотрите лишнее и наберите ещё раз."}
             </p>
           )}
         </>

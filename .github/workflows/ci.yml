@@ -116,6 +116,10 @@ jobs:
       - name: Сквозной тест алфавита (alphabet-5, конечная ץ)
         run: E2E_ALPHABET=alphabet-5 node tools/e2e-alphabet.mjs e2e-shots/alphabet-5
 
+      # Урок со звуками дж, ж, ч (формы с гереш): без этапа «пиши», клавиша гереш, викторина из 9 вопросов.
+      - name: Сквозной тест алфавита (alphabet-6, звуки дж, ж, ч)
+        run: node tools/e2e-geresh.mjs e2e-shots/alphabet-6
+
       - name: Сквозной тест записи шаблонов букв
         run: node tools/e2e-record.mjs e2e-shots
 

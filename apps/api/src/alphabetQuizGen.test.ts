@@ -1,6 +1,16 @@
 import { describe, expect, it } from "vitest";
 import { alphabetLessons, lessons } from "@milav/content";
-import { ALPHABET_QUESTION_TYPES, ALPHABET_QUIZ_RULES, LETTER_KEYS, QUESTION_TYPES, isFormPair, type Letter } from "@milav/shared";
+import {
+  ALPHABET_QUESTION_TYPES,
+  ALPHABET_QUIZ_RULES,
+  GERESH_QUESTION_TYPES,
+  GERESH_QUIZ_RULES,
+  LETTER_KEYS,
+  QUESTION_TYPES,
+  isFormPair,
+  isGereshForm,
+  type Letter,
+} from "@milav/shared";
 import { generateAlphabetQuiz, generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 
 function seeded(seed: number) {
@@ -56,7 +66,8 @@ describe("генерация викторины алфавита", () => {
   });
 
   it("при любом зерне хватает вариантов и нет пары «обычная и конечная» рядом с верным ответом", () => {
-    for (const group of alphabetLessons) {
+    // Урок со звуками дж, ж, ч (в нём три формы, три варианта) проверяется ниже отдельно.
+    for (const group of alphabetLessons.filter((l) => l.letters.length >= 5)) {
       for (let seed = 1; seed <= 60; seed++) {
         const q = generateAlphabetQuiz(group.letters, seeded(seed));
         const own = new Map(group.letters.map((l) => [l.id, l]));
@@ -108,5 +119,40 @@ describe("викторина урока с конечными формами", (
     }
     expect(finals.has("alphabet-3-kaf-final")).toBe(true);
     expect(finals.has("alphabet-3-mem-final")).toBe(true);
+  });
+});
+
+describe("викторина урока со звуками дж, ж, ч", () => {
+  const geresh = alphabetLessons.find((l) => l.letters.every((x) => isGereshForm(x.he)))!;
+
+  it("в данных есть такой урок и в нём три формы", () => {
+    expect(geresh).toBeDefined();
+    expect(geresh.letters.length).toBe(3);
+  });
+
+  it("9 вопросов: по 3 из 3 типов без «напиши», каждая форма по разу в каждом типе", () => {
+    for (let seed = 1; seed <= 40; seed++) {
+      const quiz = generateAlphabetQuiz(geresh.letters, seeded(seed));
+      expect(quiz.length).toBe(GERESH_QUIZ_RULES.size);
+      GERESH_QUESTION_TYPES.forEach((type, i) => {
+        const block = quiz.slice(i * GERESH_QUIZ_RULES.perType, (i + 1) * GERESH_QUIZ_RULES.perType);
+        expect(block.every((q) => q.type === type), type).toBe(true);
+        expect(new Set(block.map((q) => q.wordId)).size).toBe(3);
+      });
+      expect(quiz.some((q) => isWriteType(q.type))).toBe(false);
+    }
+  });
+
+  it("выбор из трёх форм урока, верная ровно одна", () => {
+    const ids = new Set(geresh.letters.map((l) => l.id));
+    for (const q of generateAlphabetQuiz(geresh.letters, seeded(5)).filter((x) => isChoiceType(x.type))) {
+      expect(q.options.length).toBe(3);
+      expect(new Set(q.options)).toEqual(ids);
+      expect(q.options.filter((id) => id === q.wordId).length).toBe(1);
+    }
+  });
+
+  it("генератор урока выбирает правила по уроку", () => {
+    expect(generateLessonQuiz(geresh, seeded(3)).length).toBe(GERESH_QUIZ_RULES.size);
   });
 });

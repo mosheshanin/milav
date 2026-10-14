@@ -172,7 +172,7 @@ export function Home({
         <section className="flex flex-col gap-block" data-testid="alphabet-section">
           <h2 className="text-lg font-bold">{ALPHABET_TITLE}</h2>
           <p className="text-sm text-ink-soft">
-            27 форм букв иврита, включая 5 конечных: послушайте, напишите и наберите каждую. Весь алфавит бесплатный.
+            27 форм букв иврита, включая 5 конечных: послушайте, напишите и наберите каждую. В последнем уроке звуки дж, ж и ч, которых в иврите нет: их пишут буквой со знаком гереш. Весь алфавит бесплатный.
           </p>
           <div className="flex flex-col gap-2">
             {alphabetLessons.map((lesson) => (

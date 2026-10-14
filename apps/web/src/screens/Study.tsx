@@ -265,7 +265,7 @@ export function Study({
         ) : (
           <div className="rounded-card border border-dashed border-line p-block text-center text-sm text-ink-soft" data-testid="quiz-locked">
             <Lock className="mx-auto mb-1 size-icon" aria-hidden />
-            <b>Викторина</b> откроется, когда {alphabet ? `все ${total} букв урока будут пройдены по трём этапам` : `все ${total} слов урока будут пройдены по четырём этапам`}.
+            <b>Викторина</b> откроется, когда {alphabet ? `все ${total} букв урока будут пройдены по ${stages.length === 2 ? "двум" : "трём"} этапам` : `все ${total} слов урока будут пройдены по четырём этапам`}.
             Сейчас: {doneCount} из {total}.
           </div>
         )}

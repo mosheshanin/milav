@@ -28,3 +28,13 @@ export const LETTER_NAMES: Record<string, string> = {
   ש: "шин",
   ת: "тав",
 };
+
+/** Русское название формы с гереш: «гимель с апострофом» (гереш по-русски называют апострофом). */
+export const GERESH_NAME_SUFFIX = " с апострофом";
+
+/** Русское название любой формы: 27 обычных из LETTER_NAMES и три формы с гереш (ג׳, ז׳, צ׳). */
+export function letterRuName(he: string): string | undefined {
+  if (LETTER_NAMES[he]) return LETTER_NAMES[he];
+  const base = [...he][0];
+  return he.length === 2 && he.endsWith("׳") && base && LETTER_NAMES[base] ? LETTER_NAMES[base] + GERESH_NAME_SUFFIX : undefined;
+}

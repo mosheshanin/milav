@@ -1,0 +1,66 @@
+{
+  "$schema": "../schema.json",
+  "id": "alphabet-6",
+  "topicId": "alphabet",
+  "section": "alphabet",
+  "topic": "Алфавит",
+  "number": 6,
+  "free": true,
+  "title": "Звуки дж, ж, ч",
+  "letters": [
+    {
+      "id": "alphabet-6-gimel-geresh",
+      "he": "ג׳",
+      "name": {
+        "he": "גימל עם גרש",
+        "niqqud": "גִּימֶל עִם גֵּרֵשׁ",
+        "ru": "гимель с апострофом"
+      },
+      "sound": "дж, как в «джинсы» (в иврите нет такого звука)",
+      "example": {
+        "he": "ג׳ינס",
+        "niqqud": "גִ׳ינְס",
+        "translit": "джинс",
+        "ru": "джинсы",
+        "image": "/words/alphabet-6-gimel-geresh-example.svg"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-6-zayin-geresh",
+      "he": "ז׳",
+      "name": {
+        "he": "זין עם גרש",
+        "niqqud": "זַיִן עִם גֵּרֵשׁ",
+        "ru": "зайин с апострофом"
+      },
+      "sound": "ж, как в «жакет» (в иврите нет такого звука)",
+      "example": {
+        "he": "ז׳קט",
+        "niqqud": "זָ׳קֶט",
+        "translit": "жаке́т",
+        "ru": "пиджак",
+        "image": "/words/alphabet-6-zayin-geresh-example.svg"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "alphabet-6-tsadi-geresh",
+      "he": "צ׳",
+      "name": {
+        "he": "צדי עם גרש",
+        "niqqud": "צַדִּי עִם גֵּרֵשׁ",
+        "ru": "цади с апострофом"
+      },
+      "sound": "ч, как в «чипсы» (в иврите нет такого звука)",
+      "example": {
+        "he": "צ׳יפס",
+        "niqqud": "צִ׳יפְּס",
+        "translit": "чипс",
+        "ru": "картошка фри",
+        "image": "/words/alphabet-6-tsadi-geresh-example.svg"
+      },
+      "reviewed": false
+    }
+  ]
+}

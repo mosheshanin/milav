@@ -5,7 +5,7 @@ import {
   ALPHABET_TOPIC_ID,
   FREE_LESSONS_PER_TOPIC,
   LETTER_KEYS,
-  LETTER_NAMES,
+  letterRuName,
   WORDS_PER_LESSON,
 } from "@milav/shared";
 import type { Section } from "@milav/shared";
@@ -107,7 +107,7 @@ export function buildAlphabetTemplate(number: number, title: string): Record<str
     letters: ALPHABET_GROUPS[number - 1]!.map((he) => ({
       id: `${id}-${LETTER_KEYS[he]}`,
       he,
-      name: { he: "", niqqud: "", ru: LETTER_NAMES[he] },
+      name: { he: "", niqqud: "", ru: letterRuName(he) },
       sound: "",
       example: { he: "", niqqud: "", translit: "", ru: "" },
       reviewed: false,

@@ -4,6 +4,7 @@ import { getAnyLesson } from "@milav/content";
 import {
   QUESTION_TITLES,
   isAlphabetLesson,
+  isGereshForm,
   isLetter,
   lessonItems,
   quizRulesFor,
@@ -584,7 +585,15 @@ function LetterQuestionBody({
               {letter.he}
             </div>
           )}
-          <div className={question.type === "hear-letter" ? "grid grid-cols-2 gap-2" : "grid gap-2"}>
+          <div
+            className={
+              question.type === "hear-letter"
+                ? question.options.length === 3
+                  ? "grid grid-cols-3 gap-2"
+                  : "grid grid-cols-2 gap-2"
+                : "grid gap-2"
+            }
+          >
             {question.options.map((optionId) => {
               const option = letters.find((l) => l.id === optionId)!;
               const isTarget = optionId === question.wordId;
@@ -632,12 +641,49 @@ function LetterQuestionBody({
           <div data-testid="prompt" className="text-center text-3xl font-semibold">
             {letter.name.ru}
           </div>
-          {!outcome && <HebrewKeyboard onKey={(key) => !busy && onTypeLetter(key)} />}
+          {!outcome &&
+            (isGereshForm(letter.he) ? (
+              <TypeGeresh busy={busy} onSubmit={onTypeLetter} />
+            ) : (
+              <HebrewKeyboard onKey={(key) => !busy && onTypeLetter(key)} />
+            ))}
         </>
       );
     default:
       return null;
   }
+}
+
+/**
+ * Ответ на «найди на клавиатуре» для звуков дж, ж, ч: два знака, буква и гереш. Ответ уходит сразу после второго знака,
+ * как у одной буквы после нажатия; до этого знаки можно стереть.
+ */
+function TypeGeresh({ busy, onSubmit }: { busy: boolean; onSubmit: (typed: string) => void }) {
+  const [typed, setTyped] = useState<string[]>([]);
+  return (
+    <>
+      <div
+        dir="rtl"
+        lang="he"
+        data-testid="typed"
+        className="flex min-h-16 items-center justify-center rounded-card border-2 border-line bg-surface px-block font-hebrew text-4xl font-bold"
+      >
+        {typed.join("") || <span className="text-xl font-normal text-ink-soft">Нажмите букву, затем гереш</span>}
+      </div>
+      <HebrewKeyboard
+        geresh
+        onKey={(key) => {
+          if (busy || typed.length >= 2) return;
+          const next = [...typed, key];
+          setTyped(next);
+          if (next.length === 2) onSubmit(next.join(""));
+        }}
+        onBackspace={() => {
+          if (!busy) setTyped((prev) => prev.slice(0, -1));
+        }}
+      />
+    </>
+  );
 }
 
 /** Итог дошедшей до конца викторины: ошибок не больше допустимого, значит урок сдан и уже записан сервером. */

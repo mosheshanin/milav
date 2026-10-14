@@ -112,8 +112,10 @@ import {
   FINAL_LETTERS,
   FREE_LESSONS_PER_TOPIC,
   LETTER_KEYS,
-  LETTER_NAMES,
+  GERESH,
   isFinalForm,
+  isGereshForm,
+  letterRuName,
   normalizeHebrew,
 } from "@milav/shared";
 
@@ -274,10 +276,10 @@ export const ALPHABET_RULES: AlphabetRule[] = [
       ),
   },
   {
-    name: "русское название буквы совпадает с LETTER_NAMES (его же показывает запись шаблонов)",
+    name: "русское название буквы совпадает с LETTER_NAMES (его же показывает запись шаблонов); у формы с гереш это «<название> с апострофом»",
     check: (lessons) =>
       lessons.flatMap((l) =>
-        l.letters.filter((x) => x.name.ru !== LETTER_NAMES[x.he]).map((x) => `${x.id}: «${x.name.ru}», ожидалось «${LETTER_NAMES[x.he]}»`),
+        l.letters.filter((x) => x.name.ru !== letterRuName(x.he)).map((x) => `${x.id}: «${x.name.ru}», ожидалось «${letterRuName(x.he)}»`),
       ),
   },
   {
@@ -295,10 +297,19 @@ export const ALPHABET_RULES: AlphabetRule[] = [
       lessons.flatMap((l) =>
         l.letters.flatMap((x) => {
           const letters = [...x.example.he];
-          const ok = isFinalForm(x.he) ? letters[letters.length - 1] === x.he : letters[0] === x.he;
+          // У формы с гереш слово начинается с буквы и знака (ג׳ינס), и знак обязателен: без него это другое слово.
+          const ok = isFinalForm(x.he) ? letters[letters.length - 1] === x.he : x.example.he.startsWith(x.he);
           return ok ? [] : [`${x.id}: слово ${x.example.he} ${isFinalForm(x.he) ? "должно заканчиваться на" : "должно начинаться с"} ${x.he}`];
         }),
       ),
+  },
+  {
+    name: "формы с гереш (ג׳ ז׳ צ׳) не смешиваются с обычными буквами в одном уроке",
+    check: (lessons) =>
+      lessons.flatMap((l) => {
+        const marked = l.letters.filter((x) => isGereshForm(x.he)).length;
+        return marked === 0 || marked === l.letters.length ? [] : [`${l.id}: ${marked} из ${l.letters.length} форм с «${GERESH}»`];
+      }),
   },
   {
     name: "слово-пример: конечные буквы только в конце слова, а в конце слова нет обычных форм",

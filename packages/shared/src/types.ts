@@ -131,7 +131,7 @@ export interface LetterExample {
 export interface Letter {
   /** Уникальный id: `<id урока>-<ключ из LETTER_KEYS>`, например "alphabet-1-alef". */
   id: string;
-  /** Сама форма, одна буква иврита («א», «ך»). Пишется и набирается на этапах «пиши» и «печатай». */
+  /** Сама форма: одна буква иврита («א», «ך») или, в уроке звуков дж, ж, ч, буква со знаком гереш («ג׳»). Пишется и набирается на этапах «пиши» и «печатай». */
   he: string;
   name: LetterName;
   /** Звук кириллицей, как показывается ученику («б», «б, в», у молчащей буквы объяснение). */
@@ -169,6 +169,8 @@ export const ALPHABET_TITLE = "Алфавит";
 export const QUESTION_TYPES = ["hear-ru", "he-ru", "ru-he", "speak", "write"] as const;
 /** Типы вопросов викторины алфавита (по 5 вопросов каждого типа). */
 export const ALPHABET_QUESTION_TYPES = ["hear-letter", "letter-name", "name-write", "name-type"] as const;
+/** Типы вопросов урока со звуками дж, ж, ч: без «напиши» (шаблонов рукописного ввода у них нет), по 3 вопроса каждого типа. */
+export const GERESH_QUESTION_TYPES = ["hear-letter", "letter-name", "name-type"] as const;
 export type QuestionType = (typeof QUESTION_TYPES)[number] | (typeof ALPHABET_QUESTION_TYPES)[number];
 
 export const QUESTION_TITLES: Record<QuestionType, string> = {
