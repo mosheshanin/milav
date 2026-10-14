@@ -18,6 +18,7 @@
     "validate:content": "vitest run content",
     "content:index": "vite-node tools/content-index.ts",
     "content:new": "vite-node tools/content-new.ts",
+    "content:verbs": "vite-node tools/gen-verb-lessons.ts",
     "content:report": "vite-node tools/content-report.ts",
     "templates": "vite-node tools/own-templates.ts",
     "deploy": "npm run build && wrangler deploy",
