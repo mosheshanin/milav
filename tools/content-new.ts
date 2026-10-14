@@ -91,4 +91,8 @@ writeFileSync(new URL("../content/registry.ts", import.meta.url), renderRegistry
 console.log(`Создано: content/lessons/${id}.json (бесплатный: ${options.number <= 3 ? "да" : "нет"}), реестр обновлён.`);
 console.log("Дальше: заполнить пустые поля (he, niqqud, translit, ru, пример), добавить image при наличии,");
 console.log("проверить `npm run validate:content`, озвучить через workflow «Озвучка слов» (docs/AUDIO.md).");
+if (options.section === "verbs") {
+  console.log("У глагола ещё: корень (verb.root), бинъян (verb.binyan, если тема не бинъян) и все формы по временам;");
+  console.log("если повелительного наклонения нет, удалить блок verb.imperative целиком (docs/CONTENT.md, «Глаголы»).");
+}
 console.log("Пока поля пустые, проверка контента красная: так задумано.");

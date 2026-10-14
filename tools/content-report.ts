@@ -7,7 +7,15 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 import type { Letter, Lesson, Word } from "@milav/shared";
-import { ALPHABET_GROUPS, SECTION_TITLES } from "@milav/shared";
+import {
+  ALPHABET_GROUPS,
+  BINYANIM,
+  SECTION_TITLES,
+  VERB_FORM_LABELS,
+  VERB_TENSES,
+  VERB_TENSE_TITLES,
+  verbForms,
+} from "@milav/shared";
 import { alphabetLessons, lessons } from "../content";
 import { alphabetProblems, crossProblems, setProblems } from "../content/rules";
 import { missingImages, type RawLesson } from "../content/inbox";
@@ -56,6 +64,16 @@ const describeWord = (w: Word): string => {
     parts.push(
       `формы: ж.р. ${w.forms.f.niqqud} [${w.forms.f.translit}], м.р. мн.ч. ${w.forms.mp.niqqud} [${w.forms.mp.translit}], ж.р. мн.ч. ${w.forms.fp.niqqud} [${w.forms.fp.translit}]`,
     );
+  }
+  if (w.verb) {
+    parts.push(`бинъян: ${BINYANIM[w.verb.binyan].ru}, корень: ${[...w.verb.root].join("-")}`);
+    // Формы по временам: носителю удобнее проверять строку целиком, чем 27 отдельных форм.
+    const all = verbForms(w.verb);
+    for (const tense of VERB_TENSES) {
+      const items = all.filter((e) => e.tense === tense);
+      if (!items.length) continue;
+      parts.push(`${VERB_TENSE_TITLES[tense]}: ${items.map((e) => `${VERB_FORM_LABELS[tense][e.key]} ${e.form.niqqud} [${e.form.translit}]`).join("; ")}`);
+    }
   }
   if (w.example) parts.push(`фраза: ${w.example.he} [${w.example.translit}] — ${w.example.ru}`);
   return parts.join("\n      ");
