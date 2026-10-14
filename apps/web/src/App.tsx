@@ -6,6 +6,7 @@ import { ACHIEVEMENTS, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen
 import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
 import { Leaderboard } from "./screens/Leaderboard";
+import { FormsPractice } from "./screens/FormsPractice";
 import { Quiz } from "./screens/Quiz";
 import { RecordScreen } from "./screens/Record";
 import { Study } from "./screens/Study";
@@ -59,7 +60,11 @@ export function App() {
           lessonId={screen.lessonId}
           onBack={() => setScreen(HOME)}
           onQuiz={() => setScreen({ name: "quiz", lessonId: screen.lessonId })}
+          onPractice={() => setScreen({ name: "practice", lessonId: screen.lessonId })}
         />
+      )}
+      {screen.name === "practice" && (
+        <FormsPractice lessonId={screen.lessonId} onBack={() => setScreen({ name: "study", lessonId: screen.lessonId })} />
       )}
       {screen.name === "quiz" && (
         <Quiz

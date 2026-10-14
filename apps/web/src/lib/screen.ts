@@ -7,6 +7,8 @@ export type Screen =
   | { name: "home" }
   | { name: "study"; lessonId: string }
   | { name: "quiz"; lessonId: string }
+  /** Практика форм глагола после урока (ничего не сохраняет). */
+  | { name: "practice"; lessonId: string }
   /** Достижения, ритм и настройки (геймификация). */
   | { name: "achievements" }
   /** Таблица лидеров. */
@@ -58,7 +60,7 @@ export function hasSavedScreen(storage: ScreenStorage | null): boolean {
 
 /**
  * Экран, на который вернуться после перезагрузки.
- * Викторина после перезагрузки начинается заново, поэтому её открывать нельзя: возвращаем на урок.
+ * Викторина и практика форм после перезагрузки начинаются заново, поэтому их открывать нельзя: возвращаем на урок.
  * Неизвестный урок и любой мусор в хранилище ведут на главную.
  */
 export function restoreScreen(storage: ScreenStorage | null, lessonExists: (lessonId: string) => boolean): Screen {
@@ -74,7 +76,7 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   if (name === "record") return RECORD;
   if (name === "achievements") return ACHIEVEMENTS;
   if (name === "leaderboard") return LEADERBOARD;
-  if ((name === "study" || name === "quiz") && typeof lessonId === "string" && lessonExists(lessonId)) {
+  if ((name === "study" || name === "quiz" || name === "practice") && typeof lessonId === "string" && lessonExists(lessonId)) {
     return { name: "study", lessonId };
   }
   return HOME;

@@ -28,6 +28,7 @@ import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Notice } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
 import { playLetterExample, playLetterName } from "../lib/audio";
+import { practiceWords } from "../lib/formsPractice";
 import { useBackButton } from "../lib/useBackButton";
 
 type View = Stage | "end";
@@ -41,10 +42,13 @@ export function Study({
   lessonId,
   onBack,
   onQuiz,
+  onPractice,
 }: {
   lessonId: string;
   onBack: () => void;
   onQuiz: () => void;
+  /** Открыть практику форм (только в уроках с глаголами). */
+  onPractice: () => void;
 }) {
   const lesson = getAnyLesson(lessonId);
   const items = lesson ? lessonItems(lesson) : [];
@@ -170,6 +174,8 @@ export function Study({
   const total = items.length;
   const allDone = doneCount === total;
   const noun = alphabet ? "букв" : "слов";
+  // Практика форм: только в уроках с глаголами и только когда все слова урока пройдены.
+  const hasVerbs = practiceWords(items).length > 0;
 
   return (
     <>
@@ -268,6 +274,12 @@ export function Study({
             <b>Викторина</b> откроется, когда {alphabet ? `все ${total} букв урока будут пройдены по ${stages.length === 2 ? "двум" : "трём"} этапам` : `все ${total} слов урока будут пройдены по четырём этапам`}.
             Сейчас: {doneCount} из {total}.
           </div>
+        )}
+
+        {allDone && hasVerbs && (
+          <Button variant="ghost" block onClick={onPractice} data-testid="open-practice">
+            Практика форм: тренировка без очков
+          </Button>
         )}
       </main>
       {toast && <PlayToast event={toast} onDone={() => setToast(null)} />}

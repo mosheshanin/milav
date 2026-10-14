@@ -27,6 +27,13 @@ describe("сохранение экрана", () => {
     expect(restoreScreen(storage, exists)).toEqual({ name: "study", lessonId: "animals-1" });
   });
 
+  it("практика форм после перезагрузки превращается в урок", () => {
+    const storage = memoryStorage();
+    saveScreen(storage, { name: "practice", lessonId: "animals-1" });
+    expect(restoreScreen(storage, exists)).toEqual({ name: "study", lessonId: "animals-1" });
+    expect(restoreScreen(memoryStorage({ "milav:screen": '{"name":"practice","lessonId":"nope"}' }), exists)).toEqual(HOME);
+  });
+
   it("достижения и таблица восстанавливаются как есть", () => {
     for (const screen of [ACHIEVEMENTS, LEADERBOARD]) {
       const storage = memoryStorage();
