@@ -1,11 +1,4 @@
-import {
-  POINTS_PER_WORD,
-  STAGES,
-  statusForPassedLessons,
-  type Stage,
-  type StatusInfo,
-  type WordProgress,
-} from "@milav/shared";
+import { STAGES, type Stage, type WordProgress } from "@milav/shared";
 import type { AuthUser } from "./auth";
 
 const STAGE_COLUMN: Record<Stage, string> = {
@@ -55,29 +48,6 @@ export async function touchUser(db: D1Database, user: AuthUser): Promise<void> {
     .run();
 }
 
-export interface Totals {
-  points: number;
-  passedLessons: number;
-  status: StatusInfo;
-}
-
-export async function getTotals(db: D1Database, userId: number): Promise<Totals> {
-  const words = await db
-    .prepare("SELECT COUNT(*) AS n FROM word_progress WHERE user_id = ? AND completed_at IS NOT NULL")
-    .bind(userId)
-    .first<{ n: number }>();
-  const lessons = await db
-    .prepare("SELECT COUNT(*) AS n FROM lesson_passed WHERE user_id = ?")
-    .bind(userId)
-    .first<{ n: number }>();
-  const passedLessons = lessons?.n ?? 0;
-  return {
-    points: (words?.n ?? 0) * POINTS_PER_WORD,
-    passedLessons,
-    status: statusForPassedLessons(passedLessons),
-  };
-}
-
 export async function getLessonProgress(
   db: D1Database,
   userId: number,
@@ -90,6 +60,16 @@ export async function getLessonProgress(
     .all<ProgressRow>();
   const byWord = new Map(results.map((r) => [r.word_id, r]));
   return wordIds.map((id) => toProgress(id, byWord.get(id)));
+}
+
+/** Что обновить в счётчиках в том же пакете, что и отметку этапа (см. markStage). */
+export interface StageCounters {
+  /** Буква алфавита (иначе слово). */
+  isLetter: boolean;
+  /** Номер недели таблицы лидеров (одна для всех, по Иерусалиму). */
+  boardWeek: number;
+  /** Секунды Unix: когда очки обновлены в последний раз (при равенстве очков выше набравший раньше). */
+  now: number;
 }
 
 export interface StageResult {
@@ -109,11 +89,28 @@ export async function markStage(
   wordId: string,
   stage: Stage,
   required: readonly Stage[] = STAGES,
+  counters?: StageCounters,
 ): Promise<StageResult> {
   const column = STAGE_COLUMN[stage];
   // Имена столбцов берутся только из STAGE_COLUMN, подставлять в запрос пользовательский текст нельзя.
   const allDone = required.map((s) => `${STAGE_COLUMN[s]} = 1`).join(" AND ");
-  const [, completion, select] = await db.batch([
+  // Счётчик очков растёт в том же пакете и только если слово завершено именно этим запросом (changes() относится к
+  // предыдущему оператору, то есть к отметке completed_at). Повторная отметка очков не даёт. Строки user_stats к этому
+  // моменту уже есть (ensureStats), иначе счётчик восстановит пересчёт.
+  const counter = counters
+    ? [
+        db
+          .prepare(
+            `UPDATE user_stats SET
+               words_done = words_done + ?1, letters_done = letters_done + ?2,
+               lb_week_points = CASE WHEN lb_week_idx = ?3 THEN lb_week_points + 1 ELSE 1 END,
+               lb_week_idx = ?3, lb_updated_at = ?4
+             WHERE user_id = ?5 AND changes() > 0`,
+          )
+          .bind(counters.isLetter ? 0 : 1, counters.isLetter ? 1 : 0, counters.boardWeek, counters.now, userId),
+      ]
+    : [];
+  const [, completion, ...rest] = await db.batch([
     db
       .prepare(
         `INSERT INTO word_progress (user_id, word_id, lesson_id, ${column}) VALUES (?, ?, ?, 1)
@@ -127,9 +124,10 @@ export async function markStage(
            AND ${allDone}`,
       )
       .bind(userId, wordId),
+    ...counter,
     db.prepare("SELECT * FROM word_progress WHERE user_id = ? AND word_id = ?").bind(userId, wordId),
   ]);
-  const row = (select?.results as ProgressRow[] | undefined)?.[0];
+  const row = (rest[rest.length - 1]?.results as ProgressRow[] | undefined)?.[0];
   return {
     progress: toProgress(wordId, row),
     justCompleted: (completion?.meta?.changes ?? 0) > 0,

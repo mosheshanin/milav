@@ -85,6 +85,19 @@ describe("wrangler.jsonc: запись шаблонов букв", () => {
   });
 });
 
+describe("wrangler.jsonc: таблица лидеров", () => {
+  // Таблица ждёт политику конфиденциальности (ROADMAP п. 4): включить её в продакшене значит поменять "0" на "1" здесь
+  // и в этом тесте одним коммитом. Локально она включена, чтобы её проверял сквозной тест.
+  it("в продакшене выключена, в env.local включена", () => {
+    expect(config.vars?.LEADERBOARD_ENABLED).toBe("0");
+    expect(config.env?.local?.vars?.LEADERBOARD_ENABLED).toBe("1");
+  });
+
+  it("переменная задана только на верхнем уровне и в env.local", () => {
+    expect(findKeyPaths(config, "LEADERBOARD_ENABLED").sort()).toEqual(["env.local.vars.LEADERBOARD_ENABLED", "vars.LEADERBOARD_ENABLED"]);
+  });
+});
+
 describe("wrangler.jsonc: база для миграций при деплое", () => {
   // Команда деплоя из docs/DEPLOY.md: wrangler d1 migrations apply milav-db --remote
   it("боевая база называется milav-db и миграции лежат в migrations/", () => {

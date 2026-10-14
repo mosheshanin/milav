@@ -1,10 +1,11 @@
 import { Hono } from "hono";
-import { findStudyItem, findWord, getAnyLesson } from "@milav/content";
+import { catalog, findStudyItem, findWord, getAnyLesson } from "@milav/content";
 import {
   MAX_STAGE_BODY_BYTES,
   POINTS_PER_WORD,
   STAGES,
   TEMPLATE_VARIANTS_PER_LETTER,
+  isAlphabetLesson,
   isSpeechMatch,
   lessonItems,
   stagesFor,
@@ -16,14 +17,17 @@ import {
   type TemplatesResponse,
 } from "@milav/shared";
 import { requireUser } from "./auth";
-import { ensureUser, getLessonProgress, getQuizSummary, getTotals, markStage, touchUser } from "./db";
+import { boardWeekNow } from "./board";
+import { ensureUser, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
+import { applyTimezone, buildPlayInfo, countUnseen, nowSeconds, playRoutes } from "./play";
 import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
 import { readAudio, transcribeHebrew } from "./speech";
+import { ensureStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 import {
   checkRecorded,
@@ -40,7 +44,26 @@ function canAccessLesson(lesson: AnyLesson): boolean {
   return lesson.free;
 }
 
-const nowSeconds = () => Math.floor(Date.now() / 1000);
+/**
+ * Отметка этапа вместе со счётчиками: очки и неделя таблицы растут в одном пакете с отметкой, а когда слово или буква
+ * пройдены, обновляются ритм, цель дня и бейджи (stats.ts). Пользователь уже должен быть в users.
+ */
+async function markStageWithPlay(
+  db: D1Database,
+  userId: number,
+  lesson: AnyLesson,
+  itemId: string,
+  stage: Stage,
+  required?: readonly Stage[],
+): Promise<{ result: StageResult; points: number; play?: PlayOutcome }> {
+  const now = nowSeconds();
+  const isLetter = isAlphabetLesson(lesson);
+  const stats = await ensureStats(db, userId, { now });
+  const result = await markStage(db, userId, lesson.id, itemId, stage, required, { isLetter, boardWeek: boardWeekNow(now), now });
+  const points = totalsOf(stats).points + (result.justCompleted ? POINTS_PER_WORD : 0);
+  const play = result.justCompleted ? await recordWordCompleted(db, stats, isLetter, now) : undefined;
+  return { result, points, play };
+}
 
 /** Читает небольшой JSON из тела запроса. Слишком большое тело и не-JSON дают null. */
 async function readJson<T>(request: Request, maxBytes = 64 * 1024): Promise<T | null> {
@@ -55,14 +78,20 @@ app.use("/api/*", apiSecurityHeaders);
 
 app.get("/api/health", (c) => c.json({ ok: true, service: "milav-api" }));
 
-// Профиль, очки и статус. Приложение вызывает это при запуске.
+// Профиль, очки, статус и блок «Мой путь». Приложение вызывает это при запуске и присылает свой часовой пояс.
 app.get("/api/me", requireUser, async (c) => {
   const user = c.get("user");
+  const now = nowSeconds();
   await touchUser(c.env.DB, user);
-  const totals = await getTotals(c.env.DB, user.id);
+  const timezone = c.req.header("X-Timezone");
+  let stats = await ensureStats(c.env.DB, user.id, { now, tz: timezone });
+  stats = await applyTimezone(c.env.DB, stats, timezone, now);
+  // Каталог бейджей вырос с прошлого входа: недостающие бейджи выдаются один раз задним числом.
+  if (stats.badgesVer !== catalog.version) await reconcileBadges(c.env.DB, stats, { now, retro: true });
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },
-    ...totals,
+    ...totalsOf(stats),
+    play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, c.env),
   };
   return c.json(body);
 });
@@ -110,12 +139,12 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   }
 
   await ensureUser(c.env.DB, user);
-  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.item.id, stage, required);
-  const totals = await getTotals(c.env.DB, user.id);
+  const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.item.id, stage, required);
   return c.json({
     progress: result.progress,
     pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
-    points: totals.points,
+    points,
+    ...(play ? { play } : {}),
   });
 });
 
@@ -139,14 +168,14 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   if (!match) return c.json({ heard, match });
 
   await ensureUser(c.env.DB, user);
-  const result = await markStage(c.env.DB, user.id, found.lesson.id, found.word.id, "speak");
-  const totals = await getTotals(c.env.DB, user.id);
+  const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.word.id, "speak");
   return c.json({
     heard,
     match,
     progress: result.progress,
     pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
-    points: totals.points,
+    points,
+    ...(play ? { play } : {}),
   });
 });
 
@@ -290,6 +319,9 @@ app.delete("/api/templates", requireUser, requireRecorder, rateLimit("templates"
   const removed = await deleteTemplate(c.env.DB, target.letter, target.slot);
   return removed ? c.json({ ok: true }) : c.json({ error: "not_found" }, 404);
 });
+
+// Геймификация: достижения, настройки, таблица лидеров, сравнение (play.ts).
+app.route("/", playRoutes);
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));
 

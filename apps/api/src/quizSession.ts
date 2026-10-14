@@ -1,16 +1,22 @@
 // Сессия викторины в D1: вопросы выдаёт сервер, каждый ответ проверяется и записывается здесь.
 // Схема и объяснение метки состояния (rev): migrations/0003_quiz_sessions.sql.
-import { getAnyLesson } from "@milav/content";
+import { catalog, getAnyLesson } from "@milav/content";
 import {
   QUIZ_SESSION_TTL_SECONDS,
+  SECTION_BITS,
   SPEAK_ATTEMPTS_IN_QUIZ,
+  applyActivity,
+  closedTopics,
+  crossedBadges,
+  localEpochDay,
   quizRulesFor,
   statusForPassedLessons,
+  viewPlay,
   type QuizAnswerResponse,
   type QuizQuestion,
   type QuizResult,
 } from "@milav/shared";
-import { getQuizSummary, getTotals } from "./db";
+import { INFO, ensureStats, loadPassedIds, metricsOf, playUpdateStatement, type Stats } from "./stats";
 
 export type SessionStatus = "active" | "done" | "aborted";
 
@@ -120,6 +126,99 @@ export function checkSession(session: QuizSession | null, sessionId: unknown, in
   return { kind: "ok", session, question: session.questions[i]! };
 }
 
+/** Всё, что заканчивающаяся викторина меняет в счётчиках пользователя (считается до записи). */
+interface Finish {
+  result: QuizResult;
+  before: Stats;
+  after: Stats;
+  perfectNew: boolean;
+  firstTimePassed: boolean;
+  now: number;
+}
+
+async function finishQuiz(
+  db: D1Database,
+  session: QuizSession,
+  done: { correct: number; total: number; passed: boolean },
+): Promise<Finish> {
+  const now = Math.floor(Date.now() / 1000);
+  const before = await ensureStats(db, session.userId, { now });
+  const passedIds = await loadPassedIds(db, session.userId);
+  const prior = await db
+    .prepare("SELECT COALESCE(MAX(correct = total), 0) AS perfect FROM quiz_attempts WHERE user_id = ? AND lesson_id = ?")
+    .bind(session.userId, session.lessonId)
+    .first<{ perfect: number }>();
+
+  const firstTimePassed = done.passed && !passedIds.has(session.lessonId);
+  // Безошибочной считается викторина без ошибок по каждому уроку один раз (повторы одного урока бейдж не накручивают).
+  const perfectNew = done.correct === done.total && !prior?.perfect;
+  const passedAfter = firstTimePassed ? new Set(passedIds).add(session.lessonId) : passedIds;
+  const section = getAnyLesson(session.lessonId)?.section ?? "";
+
+  const today = localEpochDay(before.tz, now * 1000);
+  const activity = applyActivity(before.play, { day: today, words: 0 }, before.dailyGoal);
+  const after: Stats = {
+    ...before,
+    passedLessons: before.passedLessons + (firstTimePassed ? 1 : 0),
+    alphabetLessons: before.alphabetLessons + (firstTimePassed && section === "alphabet" ? 1 : 0),
+    perfectQuizzes: before.perfectQuizzes + (perfectNew ? 1 : 0),
+    sectionsMask: before.sectionsMask | (firstTimePassed ? (SECTION_BITS[section] ?? 0) : 0),
+    topicsClosed: closedTopics(INFO, passedAfter).size,
+    play: activity.state,
+  };
+
+  const newBadges = crossedBadges(catalog, metricsOf(before), metricsOf(after), closedTopics(INFO, passedIds), closedTopics(INFO, passedAfter));
+  const statusBefore = statusForPassedLessons(before.passedLessons);
+  const statusAfter = statusForPassedLessons(after.passedLessons);
+  const result: QuizResult = {
+    passed: done.passed,
+    correct: done.correct,
+    total: done.total,
+    mistakes: done.total - done.correct,
+    firstTimePassed,
+    passedLessons: after.passedLessons,
+    status: statusAfter,
+    play: { newBadges, goal: viewPlay(activity.state, today, before.dailyGoal).goal, goalMet: false },
+    ...(statusBefore.key !== statusAfter.key ? { statusChanged: { from: statusBefore.key, to: statusAfter.key } } : {}),
+  };
+  return { result, before, after, perfectNew, firstTimePassed, now };
+}
+
+/** Записи счётчиков, ритма и бейджей; каждая выполняется, только если сессия с меткой `rev` всё ещё наша. */
+function finishStatements(db: D1Database, session: QuizSession, rev: string, f: Finish) {
+  const ours = "EXISTS (SELECT 1 FROM quiz_sessions WHERE user_id = ?1 AND rev = ?2)";
+  const statements = [];
+  if (f.firstTimePassed || f.perfectNew) {
+    statements.push(
+      db
+        .prepare(
+          `UPDATE user_stats SET passed_lessons = ?3, alphabet_lessons = ?4, sections_mask = ?5, topics_closed = ?6,
+             perfect_quizzes = perfect_quizzes + ?7
+           WHERE user_id = ?1 AND ${ours}`,
+        )
+        .bind(
+          session.userId,
+          rev,
+          f.after.passedLessons,
+          f.after.alphabetLessons,
+          f.after.sectionsMask,
+          f.after.topicsClosed,
+          f.perfectNew ? 1 : 0,
+        ),
+    );
+  }
+  // Ритм: завершённая викторина (сданная или нет) это день занятий. Запись не пройдёт, если состояние уже изменилось.
+  statements.push(playUpdateStatement(db, session.userId, f.before.play, f.after.play, { rev }));
+  for (const id of f.result.play.newBadges) {
+    statements.push(
+      db
+        .prepare(`INSERT OR IGNORE INTO user_badges (user_id, badge_id, earned_at, retro, seen) SELECT ?1, ?3, ?4, 0, 0 WHERE ${ours}`)
+        .bind(session.userId, rev, id, f.now),
+    );
+  }
+  return statements;
+}
+
 /** Итог одной проверки ответа. */
 export interface AnswerStep {
   correct: boolean;
@@ -173,20 +272,12 @@ export async function commitAnswer(
   }
 
   const passed = status === "done" && correct >= rules.pass;
+  // Когда викторина закончена, заранее считаем всё, что она меняет: счётчики, ритм, бейджи, статус. Записи войдут в тот же
+  // пакет, что и сам ответ, и выполнятся только если наша сессия победила в гонке (метка rev).
+  let finish: Finish | undefined;
   if (status === "done") {
-    const before = (await getTotals(db, session.userId)).passedLessons;
-    const alreadyPassed = (await getQuizSummary(db, session.userId, session.lessonId)).passed;
-    const firstTimePassed = passed && !alreadyPassed;
-    const passedLessons = before + (firstTimePassed ? 1 : 0);
-    result = {
-      passed,
-      correct,
-      total,
-      mistakes: total - correct,
-      firstTimePassed,
-      passedLessons,
-      status: statusForPassedLessons(passedLessons),
-    };
+    finish = await finishQuiz(db, session, { correct, total, passed });
+    result = finish.result;
   }
 
   const response: QuizAnswerResponse = {
@@ -243,6 +334,7 @@ export async function commitAnswer(
           .bind(session.userId, newRev, session.lessonId),
       );
     }
+    if (finish) statements.push(...finishStatements(db, session, newRev, finish));
   }
 
   const results = await db.batch(statements);

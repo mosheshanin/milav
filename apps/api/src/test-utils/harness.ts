@@ -1,7 +1,17 @@
 // Общая обвязка тестов API: подписанный вход, вызовы приложения, подмена Workers AI, прохождение слов урока.
 import { expect } from "vitest";
-import { alphabetLessons, lessons } from "@milav/content";
-import { CANVAS_LINE_HEIGHT, loadBaseTemplates, roundStrokes, wordLetters, type Letter, type Stroke, type Word } from "@milav/shared";
+import { alphabetLessons, findLetter, findWord, lessons } from "@milav/content";
+import {
+  CANVAS_LINE_HEIGHT,
+  loadBaseTemplates,
+  roundStrokes,
+  wordLetters,
+  type Letter,
+  type QuizAnswerResponse,
+  type QuizStartResponse,
+  type Stroke,
+  type Word,
+} from "@milav/shared";
 import { app } from "../app";
 import type { Bindings } from "../env";
 import { createTestDb } from "./d1";
@@ -108,3 +118,66 @@ export async function completeLetter(as: number, letterId: string) {
 export async function completeAlphabetLesson(as: number) {
   for (const l of alphabetLesson.letters) await completeLetter(as, l.id);
 }
+
+// ---- Викторина и геймификация ----
+
+
+/** Начинает викторину по уроку и возвращает вопросы. */
+export async function startQuiz(as: number, lessonId: string = lesson.id): Promise<QuizStartResponse> {
+  const res = await post("/api/quiz/start", as, { lessonId });
+  expect(res.status).toBe(200);
+  return (await res.json()) as QuizStartResponse;
+}
+
+/** Отвечает на вопрос `index` верно или неверно, как честный ученик (для обычного урока и для алфавита). */
+export async function answerQuestion(as: number, session: QuizStartResponse, index: number, right: boolean): Promise<QuizAnswerResponse> {
+  const q = session.questions[index]!;
+  const body = (extra: Record<string, unknown>) => post("/api/quiz/answer", as, { sessionId: session.sessionId, index, ...extra });
+  const w = findWord(q.wordId)?.word;
+  const l = findLetter(q.wordId)?.letter;
+  let res: Response;
+  if (q.type === "speak") {
+    if (right && w) {
+      ctx.heard = w.he;
+      res = await api(`/api/quiz/speech?sessionId=${session.sessionId}&index=${index}`, {
+        method: "POST",
+        as,
+        body: new Uint8Array(2000),
+        headers: { "Content-Type": "audio/webm" },
+      });
+    } else {
+      res = await body({ giveUp: true });
+    }
+  } else if (q.type === "write") {
+    res = await body({ strokes: right ? await wordStrokes(w!) : wordLetters(w!.he).map(() => []) });
+  } else if (q.type === "name-write") {
+    res = await body({ strokes: right ? [await letterStrokes(l!.he)] : [[]] });
+  } else if (q.type === "name-type") {
+    res = await body({ typed: right ? l!.he : "x" });
+  } else {
+    res = await body({ choice: right ? q.wordId : q.options.find((id) => id !== q.wordId)! });
+  }
+  expect(res.status).toBe(200);
+  return (await res.json()) as QuizAnswerResponse;
+}
+
+/** Проходит викторину; вопросы с номерами из `wrong` отвечает неверно. Возвращает последний ответ. */
+export async function playQuiz(as: number, session: QuizStartResponse, wrong: number[] = []): Promise<QuizAnswerResponse> {
+  let last!: QuizAnswerResponse;
+  for (let i = 0; i < session.questions.length; i++) {
+    last = await answerQuestion(as, session, i, !wrong.includes(i));
+    if (last.aborted) break;
+  }
+  return last;
+}
+
+/** Номера первых `n` вопросов (чтобы ответить на них неверно). */
+export const firstWrong = (n: number) => Array.from({ length: n }, (_, i) => i);
+
+/** Запрос профиля. */
+export const meOf = async (as: number, headers: Record<string, string> = {}) =>
+  (await (await api("/api/me", { as, headers })).json()) as any;
+
+/** Строка счётчиков пользователя прямо из базы (snake_case, как в таблице). */
+export const statsRow = async (userId: number) =>
+  (await ctx.env.DB.prepare("SELECT * FROM user_stats WHERE user_id = ?").bind(userId).first<Record<string, number | string>>()) as any;
