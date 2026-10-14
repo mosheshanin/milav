@@ -1,4 +1,5 @@
 import type { Word } from "@milav/shared";
+import { SpeakerButton } from "./SpeakerButton";
 import { WordImage } from "./WordImage";
 import { Card, Chip } from "./ui";
 
@@ -51,9 +52,10 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
             {FORM_LABELS.map(([key, label]) => {
               const form = word.forms![key];
               return (
-                <div key={key} className="flex items-baseline justify-between gap-2">
+                <div key={key} className="flex items-center justify-between gap-2">
                   <dt className="whitespace-nowrap text-xs text-ink-soft">{label}</dt>
-                  <dd className="flex items-baseline gap-2">
+                  <dd className="flex items-center gap-2">
+                    <SpeakerButton item={{ he: form.niqqud, audio: form.audio }} label={`Послушать: ${label}`} testId={`listen-form-${key}`} />
                     <span className="text-sm text-accent">[{form.translit}]</span>
                     <span dir="rtl" lang="he" className="font-hebrew text-lg">
                       {form.he}
@@ -65,12 +67,15 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
           </dl>
         )}
         {word.example && (
-          <div className="mt-1 w-full border-t border-line pt-2">
-            <div dir="rtl" lang="he" className="font-hebrew text-xl">
-              {word.example.he}
-            </div>
-            <div className="text-sm text-ink-soft">
-              {word.example.translit} — {word.example.ru}
+          <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2">
+            <SpeakerButton item={{ he: word.example.he, audio: word.example.audio }} label="Послушать фразу" testId="listen-phrase" />
+            <div className="min-w-0 flex-1">
+              <div dir="rtl" lang="he" className="font-hebrew text-xl">
+                {word.example.he}
+              </div>
+              <div className="text-sm text-ink-soft">
+                {word.example.translit} — {word.example.ru}
+              </div>
             </div>
           </div>
         )}

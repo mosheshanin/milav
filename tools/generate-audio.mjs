@@ -1,4 +1,5 @@
-// Озвучка слов официальным Google Cloud Text-to-Speech (голоса he-IL). Файлы создаются один раз и лежат в репозитории.
+// Озвучка слов, форм прилагательных, фраз-примеров, названий букв и слов-примеров к буквам официальным Google Cloud
+// Text-to-Speech (голоса he-IL). Файлы создаются один раз и лежат в репозитории.
 //
 // Нужен ключ API: переменная окружения GOOGLE_TTS_API_KEY (в GitHub: Settings → Secrets → Actions).
 //
@@ -8,7 +9,7 @@
 //   node tools/generate-audio.mjs --voice he-IL-Wavenet-A --text niqqud --update-content
 //        боевая озвучка: apps/web/public/audio/<id>.mp3 и поле "audio" в JSON урока
 //
-// Другие параметры: --only id1,id2   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
+// Другие параметры: --only id1,id2   --kinds word,form,phrase,letter,example   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
 import { mkdirSync, existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 
 const args = process.argv.slice(2);
@@ -72,13 +73,50 @@ async function synthesize(text) {
   return Buffer.from(body.audioContent, "base64");
 }
 
-/** Что и в какой файл озвучивать. */
+/**
+ * Что и в какой файл озвучивать. Виды озвучки (поле `kind`):
+ *   word    основная форма слова: /audio/<id>.mp3, поле audio слова (текст с огласовками);
+ *   form    форма прилагательного (f, mp, fp): /audio/<id>-form-<ключ>.mp3, поле audio формы (с огласовками);
+ *   phrase  фраза-пример слова: /audio/<id>-phrase.mp3, поле example.audio (у фраз огласовок нет, уходит иврит как есть);
+ *   letter  название буквы: /audio/<id буквы>.mp3, поле audio буквы (огласовки из name.niqqud);
+ *   example слово-пример буквы, только если у него ещё нет файла: /audio/<id буквы>-example.mp3, поле example.audio.
+ * `--only` принимает id слов и букв: озвучиваются все виды озвучки этих элементов.
+ * `--kinds word,form,...` ограничивает виды (по умолчанию все).
+ */
+const ALL_KINDS = ["word", "form", "phrase", "letter", "example"];
+const kinds = option("kinds", ALL_KINDS.join(",")).split(",").filter(Boolean);
+for (const k of kinds) {
+  if (!ALL_KINDS.includes(k)) {
+    console.error(`--kinds: неизвестный вид «${k}», допустимо: ${ALL_KINDS.join(", ")}`);
+    process.exit(1);
+  }
+}
+
 function jobs() {
   const list = [];
+  const add = (job) => {
+    if (kinds.includes(job.kind)) list.push(job);
+  };
   for (const { file, data } of lessons) {
-    for (const word of data.words) {
+    for (const word of data.words ?? []) {
       if (only?.length && !only.includes(word.id)) continue;
-      list.push({ file, data, word });
+      add({ file, kind: "word", id: word.id, name: word.id, plain: word.he, niqqud: word.niqqud ?? word.he, set: (path) => (word.audio = path), has: word.audio });
+      for (const [key, form] of Object.entries(word.forms ?? {})) {
+        const name = `${word.id}-form-${key}`;
+        add({ file, kind: "form", id: name, name, plain: form.he, niqqud: form.niqqud ?? form.he, set: (path) => (form.audio = path), has: form.audio });
+      }
+      if (word.example) {
+        const name = `${word.id}-phrase`;
+        add({ file, kind: "phrase", id: name, name, plain: word.example.he, niqqud: word.example.he, set: (path) => (word.example.audio = path), has: word.example.audio });
+      }
+    }
+    for (const letter of data.letters ?? []) {
+      if (only?.length && !only.includes(letter.id)) continue;
+      add({ file, kind: "letter", id: letter.id, name: letter.id, plain: letter.name.he, niqqud: letter.name.niqqud, set: (path) => (letter.audio = path), has: letter.audio });
+      if (!letter.example.audio) {
+        const name = `${letter.id}-example`;
+        add({ file, kind: "example", id: name, name, plain: letter.example.he, niqqud: letter.example.niqqud, set: (path) => (letter.example.audio = path), has: undefined });
+      }
     }
   }
   return list;
@@ -108,13 +146,13 @@ let made = 0;
 let skipped = 0;
 
 if (flag("review")) {
-  // Для прослушивания: оба варианта текста, чтобы выбрать лучший на слух.
+  // Для прослушивания: оба варианта текста, чтобы выбрать лучший на слух (только основные формы слов).
   for (const variant of ["plain", "niqqud"]) {
     const dir = `${reviewDir}/${voice}/${variant}`;
     mkdirSync(dir, { recursive: true });
-    for (const { word } of jobs()) {
-      const text = variant === "niqqud" ? (word.niqqud ?? word.he) : word.he;
-      const target = `${dir}/${word.id}.mp3`;
+    for (const job of jobs().filter((j) => j.kind === "word")) {
+      const text = variant === "niqqud" ? job.niqqud : job.plain;
+      const target = `${dir}/${job.name}.mp3`;
       console.log(`${dry ? "[dry] " : ""}${target}  «${text}»`);
       if (!dry) writeFileSync(target, await synthesize(text));
       made++;
@@ -128,9 +166,9 @@ if (flag("review")) {
   }
   mkdirSync(outDir, { recursive: true });
   const touched = new Set();
-  for (const { file, data, word } of jobs()) {
-    const target = `${outDir}/${word.id}.mp3`;
-    const text = variant === "niqqud" ? (word.niqqud ?? word.he) : word.he;
+  for (const job of jobs()) {
+    const target = `${outDir}/${job.name}.mp3`;
+    const text = variant === "niqqud" ? job.niqqud : job.plain;
     if (existsSync(target) && !flag("force")) {
       skipped++;
     } else {
@@ -138,9 +176,11 @@ if (flag("review")) {
       if (!dry) writeFileSync(target, await synthesize(text));
       made++;
     }
-    if (flag("update-content") && word.audio !== `/audio/${word.id}.mp3`) {
-      word.audio = `/audio/${word.id}.mp3`;
-      touched.add(file);
+    // Поле audio записывается, когда файл есть (создан сейчас или раньше).
+    const path = `/audio/${job.name}.mp3`;
+    if (flag("update-content") && (dry || existsSync(target)) && job.has !== path) {
+      job.set(path);
+      touched.add(job.file);
     }
   }
   if (!dry) {

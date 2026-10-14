@@ -64,9 +64,9 @@ describe("уроки", () => {
             expect(word.niqqud, "огласовки действительно есть").toMatch(/[\u05B0-\u05BC\u05C1\u05C2]/);
             expect(normalizeHebrew(word.niqqud), "с огласовками то же слово").toBe(normalizeHebrew(word.he));
           }
-          if (word.audio) {
-            const file = new URL(`../apps/web/public${word.audio}`, import.meta.url);
-            expect(existsSync(file), `нет файла озвучки ${word.audio}`).toBe(true);
+          // Озвучка основной формы, форм прилагательного и фразы-примера: если путь указан, файл существует.
+          for (const path of [word.audio, word.example?.audio, ...Object.values(word.forms ?? {}).map((f) => f.audio)]) {
+            if (path) expect(existsSync(new URL(`../apps/web/public${path}`, import.meta.url)), `нет файла озвучки ${path}`).toBe(true);
           }
 
           // Картинка необязательна: без неё карточка показывает запасной вариант (первую букву).

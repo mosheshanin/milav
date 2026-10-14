@@ -155,7 +155,12 @@
           "pattern": "^[абвгдежзийклмнопрстуфхцчшьэюя]+([ -][абвгдежзийклмнопрстуфхцчшьэюя]+)*$",
           "description": "Транскрипция фразы без знаков ударения."
         },
-        "ru": { "$ref": "#/definitions/text" }
+        "ru": { "$ref": "#/definitions/text" },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
+          "description": "Озвучка фразы: /audio/<id слова>-phrase.mp3. Заполняется скриптом озвучки."
+        }
       }
     },
     "form": {
@@ -165,7 +170,12 @@
       "properties": {
         "he": { "$ref": "#/definitions/hebrew" },
         "niqqud": { "$ref": "#/definitions/niqqud" },
-        "translit": { "$ref": "#/definitions/translit" }
+        "translit": { "$ref": "#/definitions/translit" },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
+          "description": "Озвучка формы: /audio/<id слова>-form-<f|mp|fp>.mp3. Заполняется скриптом озвучки."
+        }
       }
     },
     "forms": {

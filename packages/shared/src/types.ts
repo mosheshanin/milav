@@ -18,6 +18,8 @@ export interface Phrase {
   he: string;
   translit: string;
   ru: string;
+  /** Озвучка фразы: `/audio/<id слова>-phrase.mp3`. Заполняет скрипт озвучки. */
+  audio?: string;
 }
 
 /** Кто и когда проверил слово: носитель языка, дата `YYYY-MM-DD`. */
@@ -31,6 +33,8 @@ export interface WordForm {
   he: string;
   niqqud: string;
   translit: string;
+  /** Озвучка формы: `/audio/<id слова>-form-<f|mp|fp>.mp3`. Заполняет скрипт озвучки. */
+  audio?: string;
 }
 
 /** Остальные формы прилагательного. Основная форма (мужской род, единственное число) лежит в самом слове. */
