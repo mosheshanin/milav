@@ -1,5 +1,6 @@
 import type { Word } from "@milav/shared";
 import { SpeakerButton } from "./SpeakerButton";
+import { VerbForms } from "./VerbForms";
 import { WordImage } from "./WordImage";
 import { Card, Chip } from "./ui";
 
@@ -34,8 +35,21 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
       </Card>
     );
   }
-  return (
-    <Card className="flex items-start gap-3">
+  const phrase = word.example && (
+    <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2">
+      <SpeakerButton item={{ he: word.example.he, audio: word.example.audio }} label="Послушать фразу" testId="listen-phrase" />
+      <div className="min-w-0 flex-1">
+        <div dir="rtl" lang="he" className="font-hebrew text-xl">
+          {word.example.he}
+        </div>
+        <div className="text-sm text-ink-soft">
+          {word.example.translit} — {word.example.ru}
+        </div>
+      </div>
+    </div>
+  );
+  const head = (
+    <>
       <WordImage key={word.id} image={word.image} fallback={word.he} className="size-28" />
       <div className="flex min-w-0 flex-1 flex-col items-end gap-1 text-right">
         <div dir="rtl" lang="he" className="font-hebrew text-5xl font-bold leading-tight" data-testid="word-he">
@@ -66,20 +80,19 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
             })}
           </dl>
         )}
-        {word.example && (
-          <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2">
-            <SpeakerButton item={{ he: word.example.he, audio: word.example.audio }} label="Послушать фразу" testId="listen-phrase" />
-            <div className="min-w-0 flex-1">
-              <div dir="rtl" lang="he" className="font-hebrew text-xl">
-                {word.example.he}
-              </div>
-              <div className="text-sm text-ink-soft">
-                {word.example.translit} — {word.example.ru}
-              </div>
-            </div>
-          </div>
-        )}
+        {!word.verb && phrase}
       </div>
-    </Card>
+    </>
   );
+  if (word.verb) {
+    // У глагола до 10 форм в таблице: рядом с картинкой они не помещаются, поэтому таблица и фраза идут под ней на всю ширину карточки.
+    return (
+      <Card className="flex flex-col gap-2">
+        <div className="flex items-start gap-3">{head}</div>
+        <VerbForms key={word.id} verb={word.verb} />
+        {phrase}
+      </Card>
+    );
+  }
+  return <Card className="flex items-start gap-3">{head}</Card>;
 }
