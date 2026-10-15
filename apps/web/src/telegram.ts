@@ -40,6 +40,19 @@ export interface TelegramWebApp {
   };
   /** Открывает ссылку t.me внутри Telegram (например, выбор чата для «Поделиться»). */
   openTelegramLink?: (url: string) => void;
+  /** Схема оформления Telegram: светлая или тёмная (для темы «Как в Telegram»). */
+  colorScheme?: "light" | "dark";
+  /** Проверка версии Telegram WebApp API (с версии 6.0). */
+  isVersionAtLeast?: (version: string) => boolean;
+  /** Цвет шапки Telegram (произвольный цвет с версии 6.9). */
+  setHeaderColor?: (color: string) => void;
+  /** Цвет фона окна Telegram (с версии 6.1). */
+  setBackgroundColor?: (color: string) => void;
+  /** Цвет нижней панели (с версии 7.10). */
+  setBottomBarColor?: (color: string) => void;
+  /** События Telegram: смена темы (`themeChanged`), безопасной зоны (`safeAreaChanged`, `contentSafeAreaChanged`). */
+  onEvent?: (event: string, handler: () => void) => void;
+  offEvent?: (event: string, handler: () => void) => void;
 }
 
 declare global {

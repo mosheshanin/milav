@@ -42,6 +42,18 @@
   --color-line: #e5e7eb;
   --color-ink: #111827;
   --color-ink-soft: #6b7280;
+  /* Затемнение под нижними листами (в обеих темах тёмное, поэтому не берём --color-ink) */
+  --color-scrim: #111827;
+
+  /* Плитка картинки слова. Картинки (эмодзи, свои SVG) рисованы для светлого фона, поэтому в тёмной теме плитка
+     тоже светлая: иначе «чёрный», «тёмный» и «прозрачный» пропали бы. */
+  --color-picture: #f8fafc;
+  /* Запасная буква на плитке без картинки: бледная, чтобы не спорить с текстом карточки. */
+  --color-picture-ink: #dbeafe;
+
+  /* Холст для письма: направляющие линии и буква-подсказка (DrawCanvas читает их при отрисовке). */
+  --color-canvas-guide: #cbd5e1;
+  --color-canvas-ghost: #e2e8f0;
 
   /* Радиусы: карточки и кнопки только этих двух размеров */
   --radius-card: 1rem;
@@ -56,11 +68,81 @@
   --spacing-icon-lg: 1.75rem;
 }
 
+/*
+  Тёмная тема (lib/theme.ts ставит data-theme на <html>). Переопределяются только токены: компоненты не меняются.
+  Бренд и цвет «на акценте» (белый текст на кнопках) общие для обеих тем. Правило вне слоёв, поэтому сильнее @theme.
+*/
+:root[data-theme="dark"] {
+  --color-accent: #4f8ff7;
+  --color-accent-soft: #1b2f52;
+  --color-success: #22a356;
+  --color-success-soft: #12331f;
+  --color-danger: #ef4444;
+  --color-danger-soft: #401818;
+
+  --color-rarity-common: #94a3b8;
+  --color-rarity-common-soft: #263243;
+  --color-rarity-rare: #60a5fa;
+  --color-rarity-rare-soft: #1b2f52;
+  --color-rarity-epic: #c084fc;
+  --color-rarity-epic-soft: #2f1d47;
+  --color-rarity-legendary: #fbbf24;
+  --color-rarity-legendary-soft: #3d2c0b;
+
+  --color-surface: #1e293b;
+  --color-page: #0f172a;
+  --color-line: #334155;
+  --color-ink: #f1f5f9;
+  --color-ink-soft: #94a3b8;
+
+  --color-scrim: #000000;
+
+  --color-picture: #e2e8f0;
+  --color-picture-ink: #b4c2d6;
+  --color-canvas-guide: #475569;
+  --color-canvas-ghost: #334155;
+}
+
+/*
+  Безопасная зона: вырез экрана, скруглённые углы и полоска «домой» на iPhone.
+  env(safe-area-inset-*) работает благодаря viewport-fit=cover (index.html). Telegram 8.0+ сам задаёт
+  --tg-safe-area-inset-* (вырез устройства) и --tg-content-safe-area-inset-* (свои кнопки поверх приложения
+  в полноэкранном режиме); в обычном режиме сверху они равны нулю, потому что шапку рисует Telegram.
+*/
+:root {
+  --safe-top: calc(var(--tg-safe-area-inset-top, 0px) + var(--tg-content-safe-area-inset-top, 0px));
+  --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
+  --safe-left: max(env(safe-area-inset-left, 0px), var(--tg-safe-area-inset-left, 0px));
+  --safe-right: max(env(safe-area-inset-right, 0px), var(--tg-safe-area-inset-right, 0px));
+}
+
+/* Шапка экрана: под вырезом сверху (только в полноэкранном режиме Telegram). */
+@utility pt-header {
+  padding-top: calc(0.75rem + var(--safe-top));
+}
+
+/* Нижний лист: содержимое не уходит под полоску «домой». */
+@utility pb-sheet {
+  padding-bottom: calc(var(--spacing-section) + var(--safe-bottom));
+}
+
+/* Всплывающее уведомление над нижним краем. */
+@utility bottom-toast {
+  bottom: calc(var(--spacing-block) + var(--safe-bottom));
+}
+
 @layer base {
   html,
   body,
   #root {
     height: 100%;
+  }
+
+  /* Боковые вырезы (телефон боком) и полоска «домой» снизу; фон страницы заполняет эти поля. */
+  #root {
+    padding-left: var(--safe-left);
+    padding-right: var(--safe-right);
+    padding-bottom: var(--safe-bottom);
   }
 
   body {

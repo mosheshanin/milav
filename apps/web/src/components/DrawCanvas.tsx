@@ -6,6 +6,7 @@ import {
   CANVAS_TOP_LINE as TOP_LINE,
   type Stroke,
 } from "@milav/shared";
+import { cssToken, onThemeChange } from "../lib/theme";
 
 // Геометрия холста (высота, направляющие) лежит в packages/shared: по ней же сервер проверяет штрихи.
 /** Высота «א» в шрифте относительно кегля (подобрано по глифам Gveret Levin). */
@@ -45,11 +46,21 @@ interface Props {
   ref?: Ref<DrawHandle>;
 }
 
+/** Цвета холста из токенов темы (index.css). Читаются один раз и при смене темы, а не на каждое движение пальца. */
+function canvasColors() {
+  return {
+    guide: cssToken("--color-canvas-guide", "#cbd5e1"),
+    ghost: cssToken("--color-canvas-ghost", "#e2e8f0"),
+    ink: cssToken("--color-ink", "#111827"),
+  };
+}
+
 /** Холст для рукописной буквы: рисование пальцем, направляющие линии и необязательная подсказка. */
 export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const strokesRef = useRef<Stroke[]>([]);
   const drawingRef = useRef(false);
+  const colorsRef = useRef(canvasColors());
 
   const paint = useCallback(() => {
     const canvas = canvasRef.current;
@@ -60,7 +71,7 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
     ctx.clearRect(0, 0, width, HEIGHT);
 
     // Направляющие линии.
-    ctx.strokeStyle = "#cbd5e1";
+    ctx.strokeStyle = colorsRef.current.guide;
     ctx.lineWidth = 1;
     ctx.setLineDash([6, 6]);
     for (const k of [TOP_LINE, BASE_LINE]) {
@@ -72,14 +83,14 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
     ctx.setLineDash([]);
 
     if (ghost) {
-      ctx.fillStyle = "#e2e8f0";
+      ctx.fillStyle = colorsRef.current.ghost;
       ctx.font = `${GHOST_FONT_SIZE}px "Gveret Levin", Rubik, sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "alphabetic";
       ctx.fillText(ghost, width / 2, BASE_LINE * HEIGHT);
     }
 
-    ctx.strokeStyle = "#111827";
+    ctx.strokeStyle = colorsRef.current.ink;
     ctx.lineWidth = INK_WIDTH;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -110,6 +121,16 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
     if (ghost) void document.fonts.load(`48px "Gveret Levin"`, ghost).then(paint);
     return () => observer.disconnect();
   }, [paint, ghost]);
+
+  // Тема сменилась: холст перерисовывается новыми цветами, нарисованное сохраняется.
+  useEffect(
+    () =>
+      onThemeChange(() => {
+        colorsRef.current = canvasColors();
+        paint();
+      }),
+    [paint],
+  );
 
   const notify = useCallback(() => onInkChange?.(strokesRef.current.length > 0), [onInkChange]);
 

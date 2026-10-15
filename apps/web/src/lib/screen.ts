@@ -13,6 +13,8 @@ export type Screen =
   | { name: "achievements" }
   /** Таблица лидеров. */
   | { name: "leaderboard" }
+  /** Настройки; `from` это экран, куда ведёт «назад» (главная или достижения). */
+  | { name: "settings"; from: "home" | "achievements" }
   /** Скрытый экран записи шаблонов букв (только владелец, см. docs/DEPLOY.md). */
   | { name: "record" };
 
@@ -78,6 +80,10 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   if (name === "record") return RECORD;
   if (name === "achievements") return ACHIEVEMENTS;
   if (name === "leaderboard") return LEADERBOARD;
+  if (name === "settings") {
+    const from = (raw as { from?: unknown }).from;
+    return { name: "settings", from: from === "achievements" ? "achievements" : "home" };
+  }
   if ((name === "study" || name === "quiz" || name === "practice") && typeof lessonId === "string" && lessonExists(lessonId)) {
     return { name: "study", lessonId };
   }

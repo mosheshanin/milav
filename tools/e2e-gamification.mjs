@@ -164,14 +164,42 @@ check(
 check(!links[0].includes("3101") && !links[0].includes("Tester"), "в тексте для отправки нет ни id, ни имени");
 await page.getByRole("button", { name: "Закрыть" }).last().click();
 
-// Настройки: цель дня.
+// Настройки (отдельный экран, кнопка внизу «Достижений»): цель дня.
+await page.click('[data-testid="open-settings"]');
+await page.waitForSelector('[data-testid="settings"]');
+await shot(page, "05b-settings");
+const radioChecked = (id) => page.locator(`[data-testid="${id}"]`).getAttribute("aria-checked");
 await page.click('[data-testid="goal-10"]');
-await page.waitForFunction(() => document.querySelector('[data-testid="goal-text"]')?.textContent.includes("из 10"));
+await page.waitForFunction(() => document.querySelector('[data-testid="goal-10"]')?.getAttribute("aria-checked") === "true");
 check(true, "цель дня переключена на 10");
+// «Назад» с настроек возвращает на «Достижения», где цель уже новая.
+await pressBack(page);
+await page.waitForSelector('[data-testid="achievements"]');
+await page.waitForFunction(() => document.querySelector('[data-testid="goal-text"]')?.textContent.includes("из 10"));
+check(true, "«назад» из настроек ведёт на «Достижения», цель дня там уже 10");
+await page.click('[data-testid="open-settings"]');
 await page.click('[data-testid="goal-0"]');
-await page.waitForFunction(() => !document.querySelector('[data-testid="goal-card"]'));
-check(true, "цель дня выключена: карточка цели исчезла");
+await page.waitForFunction(() => document.querySelector('[data-testid="goal-0"]')?.getAttribute("aria-checked") === "true");
 await page.click('[data-testid="goal-5"]');
+await page.waitForFunction(() => document.querySelector('[data-testid="goal-5"]')?.getAttribute("aria-checked") === "true");
+check((await radioChecked("goal-10")) === "false", "в цели дня выбран ровно один вариант");
+
+// Тема: тёмная, светлая и «как в Telegram» (имитация Telegram сообщает светлую схему); выбор переживает перезагрузку.
+const themeOf = () => page.evaluate(() => document.documentElement.dataset.theme);
+const pageBg = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+check((await themeOf()) === "light", "по умолчанию светлая тема (как в Telegram)");
+const lightBg = await pageBg();
+await page.click('[data-testid="theme-dark"]');
+check((await themeOf()) === "dark", "тёмная тема включена");
+check((await pageBg()) !== lightBg, `фон страницы сменился (${lightBg} → ${await pageBg()})`);
+await shot(page, "05c-settings-dark");
+await page.reload();
+await page.waitForSelector('[data-testid="settings"]');
+check((await themeOf()) === "dark", "после перезагрузки остаёмся на «Настройках» в тёмной теме");
+await page.click('[data-testid="theme-system"]');
+check((await themeOf()) === "light", "«Как в Telegram» снова даёт светлую");
+await pressBack(page);
+await page.waitForSelector('[data-testid="achievements"]');
 await page.waitForSelector('[data-testid="goal-card"]');
 
 // Перезагрузка на экране достижений возвращает на него же.

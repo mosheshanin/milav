@@ -1,4 +1,4 @@
-import { ArrowLeft, Star } from "lucide-react";
+import { ArrowLeft, Settings, Star } from "lucide-react";
 import { useApp } from "../AppContext";
 import { Chip } from "./ui";
 
@@ -7,6 +7,7 @@ export function Header({
   subtitle,
   onBack,
   onStatus,
+  onSettings,
 }: {
   /** Без названия (главная) в шапке только крупный логотип, очки и фигура статуса. */
   title?: string;
@@ -14,10 +15,12 @@ export function Header({
   onBack?: () => void;
   /** Если задан, фигура статуса становится кнопкой (на главной ведёт к достижениям). */
   onStatus?: () => void;
+  /** Если задан, в шапке есть шестерёнка «Настройки» (на главной). */
+  onSettings?: () => void;
 }) {
   const { me } = useApp();
   return (
-    <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-line bg-surface px-block py-3">
+    <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-line bg-surface px-block pb-3 pt-header">
       {onBack ? (
         <button
           type="button"
@@ -60,6 +63,18 @@ export function Header({
         >
           {me.status.symbol}
         </span>
+      )}
+      {onSettings && (
+        <button
+          type="button"
+          onClick={onSettings}
+          aria-label="Настройки"
+          title="Настройки"
+          data-testid="open-settings"
+          className="flex size-10 shrink-0 items-center justify-center rounded-control text-ink-soft active:bg-page"
+        >
+          <Settings className="size-icon" aria-hidden />
+        </button>
       )}
     </header>
   );

@@ -8,7 +8,7 @@ export function WordImage({ image, fallback, className }: { image?: string; fall
   const [broken, setBroken] = useState(false);
   const showImage = image && !broken;
   return (
-    <div className={`flex shrink-0 items-center justify-center rounded-control bg-page ${className}`}>
+    <div className={`flex shrink-0 items-center justify-center rounded-control bg-picture ${className}`}>
       {showImage ? (
         <img
           src={image}
@@ -19,7 +19,7 @@ export function WordImage({ image, fallback, className }: { image?: string; fall
           onError={() => setBroken(true)}
         />
       ) : (
-        <span dir="rtl" lang="he" aria-hidden className="font-hebrew text-5xl font-bold text-accent-soft" data-testid="word-image-fallback">
+        <span dir="rtl" lang="he" aria-hidden className="font-hebrew text-5xl font-bold text-picture-ink" data-testid="word-image-fallback">
           {[...fallback][0]}
         </span>
       )}

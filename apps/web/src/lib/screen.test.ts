@@ -42,6 +42,18 @@ describe("сохранение экрана", () => {
     }
   });
 
+  it("настройки восстанавливаются вместе с экраном, куда ведёт «назад»; мусор в `from` ведёт на главную", () => {
+    for (const from of ["home", "achievements"] as const) {
+      const storage = memoryStorage();
+      saveScreen(storage, { name: "settings", from });
+      expect(restoreScreen(storage, exists)).toEqual({ name: "settings", from });
+    }
+    expect(restoreScreen(memoryStorage({ "milav:screen": '{"name":"settings","from":"quiz"}' }), exists)).toEqual({
+      name: "settings",
+      from: "home",
+    });
+  });
+
   it("главная остаётся главной", () => {
     const storage = memoryStorage();
     saveScreen(storage, HOME);

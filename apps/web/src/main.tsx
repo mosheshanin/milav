@@ -16,11 +16,14 @@ import "./index.css";
 import { App } from "./App";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { installErrorHandlers } from "./lib/telemetry";
+import { initTheme } from "./lib/theme";
 import { initTelegram } from "./telegram";
 
 // Ошибки скриптов и промисов уходят в журнал сервера (lib/telemetry.ts, docs/DEPLOY.md «Наблюдаемость»).
 installErrorHandlers();
 initTelegram();
+// Тема применяется до первого кадра, чтобы экран не мигал светлым (lib/theme.ts, выбор в «Настройках»).
+initTheme();
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Не найден контейнер #root");

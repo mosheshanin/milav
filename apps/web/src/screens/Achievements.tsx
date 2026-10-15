@@ -1,26 +1,30 @@
 import { useEffect, useMemo, useState } from "react";
 import { catalog } from "@milav/content";
 import {
-  DAILY_GOAL_OPTIONS,
   RARITY_TITLES,
   countByRarity,
   type AchievementsResponse,
   type BadgeDef,
   type CohortResponse,
-  type SettingsRequest,
 } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { BadgeDetails, BadgeTile, GoalRing, StatusPathBar, WeekCard } from "../components/play";
 import { Header } from "../components/Header";
 import { Button, Card, Chip } from "../components/ui";
-import { saveErrorText } from "../lib/apiErrors";
-import { hapticsEnabled, setHapticsEnabled } from "../lib/haptic";
-import { cohortText, groupBadges, plural, type BadgeView } from "../lib/play";
+import { cohortText, groupBadges, type BadgeView } from "../lib/play";
 import { useBackButton } from "../lib/useBackButton";
 
-/** Достижения: путь к следующему статусу, ритм недели, цель дня, бейджи и настройки. */
-export function Achievements({ onBack, onLeaderboard }: { onBack: () => void; onLeaderboard: () => void }) {
+/** Достижения: путь к следующему статусу, ритм недели, цель дня и бейджи. Настройки на отдельном экране. */
+export function Achievements({
+  onBack,
+  onLeaderboard,
+  onSettings,
+}: {
+  onBack: () => void;
+  onLeaderboard: () => void;
+  onSettings: () => void;
+}) {
   const { me, refresh } = useApp();
   const [data, setData] = useState<AchievementsResponse | null>(null);
   const [error, setError] = useState(false);
@@ -136,123 +140,11 @@ export function Achievements({ onBack, onLeaderboard }: { onBack: () => void; on
           </Button>
         )}
 
-        <Settings />
+        <Button variant="ghost" block onClick={onSettings} data-testid="open-settings">
+          Настройки
+        </Button>
       </main>
       {open && <BadgeDetails view={open} tz={play.tz} onClose={() => setOpen(null)} />}
     </>
-  );
-}
-
-function Settings() {
-  const { me, applyPlay } = useApp();
-  const { settings, features } = me.play;
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [vibration, setVibration] = useState(hapticsEnabled);
-
-  async function change(body: SettingsRequest) {
-    if (busy) return;
-    setBusy(true);
-    setMessage(null);
-    try {
-      const res = await api.settings(body);
-      applyPlay(res.play);
-    } catch (e) {
-      setMessage(saveErrorText(e));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <section className="flex flex-col gap-block" data-testid="settings">
-      <h2 className="text-lg font-bold">Настройки</h2>
-      <Card className="flex flex-col gap-block">
-        <div>
-          <div className="mb-2 font-semibold">Цель дня</div>
-          <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Цель дня">
-            {DAILY_GOAL_OPTIONS.map((n) => (
-              <button
-                key={n}
-                type="button"
-                role="radio"
-                aria-checked={settings.dailyGoal === n}
-                data-testid={`goal-${n}`}
-                disabled={busy}
-                onClick={() => void change({ dailyGoal: n })}
-                className={`min-h-10 rounded-full px-4 font-semibold ${
-                  settings.dailyGoal === n ? "bg-accent text-white" : "bg-line text-ink-soft"
-                }`}
-              >
-                {n === 0 ? "Выкл." : `${n} ${plural(n, "слово", "слова", "слов")}`}
-              </button>
-            ))}
-          </div>
-        </div>
-        {features.leaderboard && (
-          <Toggle
-            label="Показывать меня в таблице лидеров"
-            hint="Другие увидят ваше имя из Telegram (без фамилии и имени пользователя) и очки."
-            checked={settings.leaderboard}
-            disabled={busy}
-            testId="toggle-leaderboard"
-            onChange={(v) => void change({ leaderboard: v })}
-          />
-        )}
-        <Toggle
-          label="Учитывать меня в сравнении"
-          hint="Ваши очки попадают в общую картину «как у тех, кто пришёл в одно время». Имя не показывается."
-          checked={!settings.cohortExcluded}
-          disabled={busy}
-          testId="toggle-cohort"
-          onChange={(v) => void change({ cohortExcluded: !v })}
-        />
-        <Toggle
-          label="Вибрация"
-          hint="Лёгкий отклик на телефоне при получении бейджа. Настройка хранится только на этом устройстве."
-          checked={vibration}
-          testId="toggle-haptics"
-          onChange={(v) => {
-            setHapticsEnabled(v);
-            setVibration(v);
-          }}
-        />
-        {message && <p className="text-danger">{message}</p>}
-      </Card>
-    </section>
-  );
-}
-
-function Toggle({
-  label,
-  hint,
-  checked,
-  disabled,
-  testId,
-  onChange,
-}: {
-  label: string;
-  hint: string;
-  checked: boolean;
-  disabled?: boolean;
-  testId: string;
-  onChange: (value: boolean) => void;
-}) {
-  return (
-    <label className="flex items-start gap-3">
-      <input
-        type="checkbox"
-        role="switch"
-        className="mt-1 size-5 shrink-0 accent-accent"
-        checked={checked}
-        disabled={disabled}
-        data-testid={testId}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span>
-        <span className="block font-semibold">{label}</span>
-        <span className="block text-sm text-ink-soft">{hint}</span>
-      </span>
-    </label>
   );
 }

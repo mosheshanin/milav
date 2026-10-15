@@ -9,6 +9,7 @@ import { Leaderboard } from "./screens/Leaderboard";
 import { FormsPractice } from "./screens/FormsPractice";
 import { Quiz } from "./screens/Quiz";
 import { RecordScreen } from "./screens/Record";
+import { Settings } from "./screens/Settings";
 import { Study } from "./screens/Study";
 import { launchTarget } from "./telegram";
 
@@ -53,6 +54,7 @@ export function App() {
           onOpenQuiz={(lessonId) => setScreen({ name: "quiz", lessonId })}
           onAchievements={() => setScreen(ACHIEVEMENTS)}
           onLeaderboard={() => setScreen(LEADERBOARD)}
+          onSettings={() => setScreen({ name: "settings", from: "home" })}
         />
       )}
       {screen.name === "study" && (
@@ -73,7 +75,16 @@ export function App() {
           onHome={() => setScreen(HOME)}
         />
       )}
-      {screen.name === "achievements" && <Achievements onBack={() => setScreen(HOME)} onLeaderboard={() => setScreen(LEADERBOARD)} />}
+      {screen.name === "achievements" && (
+        <Achievements
+          onBack={() => setScreen(HOME)}
+          onLeaderboard={() => setScreen(LEADERBOARD)}
+          onSettings={() => setScreen({ name: "settings", from: "achievements" })}
+        />
+      )}
+      {screen.name === "settings" && (
+        <Settings onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)} />
+      )}
       {screen.name === "leaderboard" && <Leaderboard onBack={() => setScreen(HOME)} />}
       {screen.name === "record" && <RecordScreen onBack={() => setScreen(HOME)} />}
     </AppProvider>

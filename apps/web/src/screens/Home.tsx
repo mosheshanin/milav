@@ -35,11 +35,13 @@ export function Home({
   onOpenQuiz,
   onAchievements,
   onLeaderboard,
+  onSettings,
 }: {
   onOpen: (lessonId: string) => void;
   onOpenQuiz: (lessonId: string) => void;
   onAchievements: () => void;
   onLeaderboard: () => void;
+  onSettings: () => void;
 }) {
   const { me, refreshIfStale } = useApp();
   const [recapHidden, setRecapHidden] = useState(false);
@@ -73,33 +75,30 @@ export function Home({
     );
   }, [me.play.unseenBadges]);
   const [progress, setProgress] = useState<Progress>({});
-  /** Сколько запросов прогресса завершилось (успешно или нет). */
-  const [settled, setSettled] = useState(0);
-  const freeLessons = allLessons.filter((l) => l.free);
+  /** Запрос прогресса завершился (успешно или нет). */
+  const [settled, setSettled] = useState(false);
 
-  // Прогресс запрашивается только по доступным урокам.
+  // Прогресс всех доступных уроков приходит одним запросом (/api/home).
   useEffect(() => {
     let alive = true;
-    for (const lesson of allLessons.filter((l) => l.free)) {
-      api.lessonProgress(lesson.id).then(
-        (p) => alive && setProgress((prev) => ({ ...prev, [lesson.id]: p })),
-        () => undefined,
-      ).finally(() => alive && setSettled((n) => n + 1));
-    }
+    api.home().then(
+      (res) => alive && setProgress(res.lessons),
+      () => undefined,
+    ).finally(() => alive && setSettled(true));
     return () => {
       alive = false;
     };
   }, []);
 
-  // Кнопка «Продолжить» появляется, когда прогресс по всем бесплатным урокам загружен: иначе она бы «прыгала».
-  const resume = settled >= freeLessons.length ? findResume(allLessons, progress) : null;
+  // Кнопка «Продолжить» появляется, когда прогресс загружен: иначе она бы «прыгала».
+  const resume = settled ? findResume(allLessons, progress) : null;
   const resumeLesson = resume ? allLessons.find((l) => l.id === resume.lessonId) : undefined;
   const resumeLetters = resumeLesson ? isAlphabetLesson(resumeLesson) : false;
   const alphabetOpen = open.has(sectionKey("alphabet"));
 
   return (
     <>
-      <Header onStatus={onAchievements} />
+      <Header onStatus={onAchievements} onSettings={onSettings} />
       <main className="mx-auto flex max-w-md flex-col gap-section p-block pb-section">
         {me.play.recap && !recapHidden && !recapDismissed(me.play.recap.weekIdx) && (
           <Card className="flex items-start gap-3" data-testid="recap">

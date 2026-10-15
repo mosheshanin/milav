@@ -95,9 +95,9 @@ export function BadgeDetails({ view, tz, onClose }: { view: BadgeView; tz?: stri
 /** Затемнение и нижний лист. Закрывается кнопкой, крестиком и касанием фона. */
 export function Overlay({ children, onClose, label }: { children: React.ReactNode; onClose: () => void; label: string }) {
   return (
-    <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/40" role="dialog" aria-modal="true" aria-label={label}>
+    <div className="fixed inset-0 z-30 flex items-end justify-center bg-scrim/50" role="dialog" aria-modal="true" aria-label={label}>
       <button type="button" aria-label="Закрыть" className="absolute inset-0 cursor-default" onClick={onClose} tabIndex={-1} />
-      <div className="animate-sheet relative max-h-[90%] w-full max-w-md overflow-y-auto rounded-t-card bg-surface p-section">
+      <div className="animate-sheet relative max-h-[90%] w-full max-w-md overflow-y-auto rounded-t-card bg-surface p-section pb-sheet">
         <button
           type="button"
           onClick={onClose}
@@ -211,7 +211,7 @@ export function PlayToast({ event, onDone }: { event: PlayEvent; onDone: () => v
     <div
       role="status"
       data-testid="play-toast"
-      className="animate-sheet pointer-events-none fixed inset-x-block bottom-block z-20 mx-auto flex max-w-md items-center gap-3 rounded-card border border-line bg-surface p-block shadow-lg"
+      className="animate-sheet pointer-events-none fixed inset-x-block bottom-toast z-20 mx-auto flex max-w-md items-center gap-3 rounded-card border border-line bg-surface p-block shadow-lg"
     >
       {badges[0] ? <BadgeIconView badge={badges[0]} /> : <Target className="size-icon-lg text-success" aria-hidden />}
       <div className="min-w-0 flex-1 text-sm">
