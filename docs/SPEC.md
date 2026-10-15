@@ -11,7 +11,7 @@
 
 - Логотип: `design/logo.png` (буквы MILAV, разноцветные грани, чёрная обводка).
 - Палитра: оранжевый `#FF6B35`, жёлтый `#FFC107`, зелёный `#4CAF50`, синий `#2196F3`, бирюзовый `#00BCD4`.
-- Шрифты: русский текст Manrope (выбран владельцем 15.10 из Inter, Rubik, Nunito, Golos Text, Manrope, Montserrat), печатный иврит Heebo, рукописный иврит Gveret Levin. Все подключены файлами через `@fontsource`, поэтому одинаковы на всех платформах.
+- Шрифты: русский текст Manrope (выбран владельцем 15.10 из Inter, Rubik, Nunito, Golos Text, Manrope, Montserrat), печатный иврит Rubik (выбран владельцем 15.10 из 9 вариантов: Heebo, Rubik, Assistant, Noto Sans Hebrew, IBM Plex Sans Hebrew, Varela Round, Alef, Frank Ruhl Libre, Secular One), рукописный иврит Gveret Levin. Все подключены файлами через `@fontsource`, поэтому одинаковы на всех платформах.
 - Иллюстрации этапов (3D-иконки): `design/stages/` (listen, speak, write, type).
 
 ## Карточка слова
