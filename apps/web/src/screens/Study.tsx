@@ -313,8 +313,18 @@ function ListenStage({
     return (
       <>
         <p className="text-center text-ink-soft">Послушайте название буквы и повторите про себя. Потом послушайте слово-пример.</p>
-        <ListenButton play={() => playLetterName(item)} label="Название буквы" onPlayed={() => setPlayed(true)} />
-        <ListenButton play={() => playLetterExample(item)} label="Слово-пример" testId="listen-example" />
+        <ListenButton
+          play={(hooks) => playLetterName(item, hooks)}
+          preload={item.audio}
+          label="Название буквы"
+          onPlayed={() => setPlayed(true)}
+        />
+        <ListenButton
+          play={(hooks) => playLetterExample(item, hooks)}
+          preload={item.example.audio}
+          label="Слово-пример"
+          testId="listen-example"
+        />
         <Button onClick={onNext} disabled={!played || busy} data-testid="listen-next">
           Дальше
         </Button>

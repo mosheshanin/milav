@@ -106,9 +106,45 @@
   animation: badge-pop 0.45s ease-out both;
 }
 
+/*
+  Кнопки «послушать» (SpeakerButton, ListenButton).
+  Загрузка: по границе кружка бежит дуга (.animate-ring-spin вращает SVG-кольцо).
+  Звучит: от кружка расходится мягкая волна (.animate-sound-wave).
+*/
+@keyframes ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sound-wave {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.animate-ring-spin {
+  animation: ring-spin 0.9s linear infinite;
+}
+
+.animate-sound-wave {
+  animation: sound-wave 1.1s ease-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-sheet,
-  .animate-pop {
+  .animate-pop,
+  .animate-sound-wave {
     animation: none;
+  }
+
+  /* Загрузку всё равно показываем, но медленнее: иначе непонятно, что приложение работает. */
+  .animate-ring-spin {
+    animation-duration: 2.4s;
   }
 }

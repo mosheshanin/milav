@@ -578,7 +578,7 @@ function LetterQuestionBody({
       return (
         <>
           {question.type === "hear-letter" && (
-            <ListenButton play={() => playLetterName(letter)} label="Послушать название" />
+            <ListenButton play={(hooks) => playLetterName(letter, hooks)} preload={letter.audio} label="Послушать название" />
           )}
           {question.type === "letter-name" && (
             <div dir="rtl" lang="he" className="text-center font-hebrew text-8xl font-bold leading-tight" data-testid="prompt">
