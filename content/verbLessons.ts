@@ -1,13 +1,13 @@
-import { FREE_LESSONS_PER_TOPIC } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC, type Binyan } from "@milav/shared";
 import { stripStress } from "./rules";
-import { conjugatePaal } from "./verbGen";
+import { conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
 
 /**
- * Состав уроков глаголов пааль (сильные корни): корень, перевод и фраза-пример для каждого глагола.
- * Формы строит `conjugatePaal` (content/verbGen.ts); файлы уроков создаёт `npm run content:verbs` (tools/gen-verb-lessons.ts).
+ * Состав уроков глаголов с сильными корнями: корень, перевод и фраза-пример для каждого глагола, по темам-бинъянам.
+ * Формы строят генераторы (content/verbGen.ts); файлы уроков создаёт `npm run content:verbs` (tools/gen-verb-lessons.ts).
  */
 export interface VerbSpec {
-  /** Латинский ключ слова: id будет `paal-<урок>-<ключ>`. */
+  /** Латинский ключ слова: id будет `<бинъян>-<урок>-<ключ>`. */
   key: string;
   root: string;
   /** Перевод инфинитива. */
@@ -16,9 +16,14 @@ export interface VerbSpec {
   phrase: { he: string; translit: string; ru: string };
 }
 
+export interface VerbLessonSpec {
+  title: string;
+  verbs: VerbSpec[];
+}
+
 const p = (he: string, translit: string, ru: string) => ({ he, translit, ru });
 
-export const PAAL_LESSONS: { title: string; verbs: VerbSpec[] }[] = [
+export const PAAL_LESSONS: VerbLessonSpec[] = [
   {
     title: "Первые глаголы",
     verbs: [
@@ -66,22 +71,82 @@ export const PAAL_LESSONS: { title: string; verbs: VerbSpec[] }[] = [
   },
 ];
 
-/** Объект урока в порядке полей, как в остальных файлах. */
-export function buildPaalLesson(number: number): Record<string, unknown> {
-  const spec = PAAL_LESSONS[number - 1];
-  if (!spec) throw new Error(`урока paal-${number} нет в списке`);
-  const id = `paal-${number}`;
+/**
+ * Пиэль 1–3 (15.10): сильные корни, вторая буква не ר, третья не נ и не ת (`pielRootProblems`). Корень ספר есть и в пааль
+ * («считать»): в пиэль это «рассказывать», так на одной паре видна разница бинъянов. Фразы без артикля ה-, как везде.
+ */
+export const PIEL_LESSONS: VerbLessonSpec[] = [
+  {
+    title: "Общение и дом",
+    verbs: [
+      { key: "speak", root: "דבר", ru: "говорить, разговаривать", phrase: p("אני {ms} עברית", "ани {ms} иврит", "Я говорю на иврите") },
+      { key: "tell", root: "ספר", ru: "рассказывать", phrase: p("הוא {ms} סיפור", "ху {ms} сипур", "Он рассказывает историю") },
+      { key: "receive", root: "קבל", ru: "получать", phrase: p("אני {ms} מכתב", "ани {ms} михтав", "Я получаю письмо") },
+      { key: "visit", root: "בקר", ru: "навещать, посещать", phrase: p("היא {fs} את סבתא", "хи {fs} эт савта", "Она навещает бабушку") },
+      { key: "ask", root: "בקש", ru: "просить", phrase: p("אני {ms} עזרה", "ани {ms} эзра", "Я прошу помощи") },
+      { key: "pay", root: "שלמ", ru: "платить", phrase: p("אני {ms} במזומן", "ани {ms} бимзуман", "Я плачу наличными") },
+      { key: "teach", root: "למד", ru: "учить (кого-то), преподавать", phrase: p("היא {fs} ילדים", "хи {fs} еладим", "Она учит детей") },
+      { key: "cook", root: "בשל", ru: "варить, готовить", phrase: p("אמא {fs} מרק", "има {fs} марак", "Мама варит суп") },
+      { key: "arrange", root: "סדר", ru: "приводить в порядок, расставлять", phrase: p("הוא {ms} ספרים", "ху {ms} сфарим", "Он расставляет книги") },
+      { key: "launder", root: "כבס", ru: "стирать (бельё)", phrase: p("היא {fs} בגדים", "хи {fs} бгадим", "Она стирает одежду") },
+    ],
+  },
+  {
+    title: "Дела и работа",
+    verbs: [
+      { key: "photograph", root: "צלמ", ru: "фотографировать", phrase: p("הוא {ms} ים", "ху {ms} ям", "Он фотографирует море") },
+      { key: "fold", root: "קפל", ru: "складывать", phrase: p("אני {ms} חולצה", "ани {ms} хульца", "Я складываю рубашку") },
+      { key: "peel", root: "קלפ", ru: "чистить (снимать кожуру)", phrase: p("היא {fs} תפוח", "хи {fs} тапуах", "Она чистит яблоко") },
+      { key: "cancel", root: "בטל", ru: "отменять", phrase: p("הוא {ms} פגישה", "ху {ms} пгиша", "Он отменяет встречу") },
+      { key: "skip", root: "דלג", ru: "перепрыгивать, пропускать", phrase: p("אני {ms} על שאלה", "ани {ms} аль шеэла", "Я пропускаю вопрос") },
+      { key: "grow", root: "גדל", ru: "выращивать", phrase: p("הוא {ms} עגבניות", "ху {ms} агванийот", "Он выращивает помидоры") },
+      { key: "decorate", root: "קשט", ru: "украшать", phrase: p("היא {fs} עוגה", "хи {fs} уга", "Она украшает торт") },
+      { key: "fire", root: "פטר", ru: "увольнять", phrase: p("הוא {ms} עובד", "ху {ms} овед", "Он увольняет работника") },
+      { key: "lie", root: "שקר", ru: "лгать", phrase: p("הוא {ms} הרבה", "ху {ms} харбе", "Он много врёт") },
+      { key: "respect", root: "כבד", ru: "уважать", phrase: p("אני {ms} מורים", "ани {ms} морим", "Я уважаю учителей") },
+    ],
+  },
+  {
+    title: "Ещё десять глаголов",
+    verbs: [
+      { key: "scatter", root: "פזר", ru: "разбрасывать", phrase: p("הוא {ms} זרעים", "ху {ms} зраим", "Он разбрасывает семена") },
+      { key: "care", root: "טפל", ru: "ухаживать, заботиться", phrase: p("אמא {fs} בי", "има {fs} би", "Мама заботится обо мне") },
+      { key: "stroke", root: "לטפ", ru: "гладить, ласкать", phrase: p("אני {ms} חתול", "ани {ms} хатуль", "Я глажу кота") },
+      { key: "promote", root: "קדמ", ru: "продвигать", phrase: p("הוא {ms} פרויקט", "ху {ms} проект", "Он продвигает проект") },
+      { key: "summarize", root: "סכמ", ru: "подводить итог, резюмировать", phrase: p("היא {fs} מאמר", "хи {fs} маамар", "Она резюмирует статью") },
+      { key: "restore", root: "שקמ", ru: "восстанавливать", phrase: p("הוא {ms} בית ישן", "ху {ms} баит яшан", "Он восстанавливает старый дом") },
+      { key: "shorten", root: "קצר", ru: "укорачивать", phrase: p("אני {ms} מכנסיים", "ани {ms} михнасаим", "Я укорачиваю брюки") },
+      { key: "renovate", root: "שפצ", ru: "ремонтировать", phrase: p("הוא {ms} דירה", "ху {ms} дира", "Он ремонтирует квартиру") },
+      { key: "split", root: "פצל", ru: "разделять", phrase: p("הוא {ms} קבוצה", "ху {ms} квуца", "Он разделяет группу") },
+      { key: "crumple", root: "קמט", ru: "мять", phrase: p("הוא {ms} נייר", "ху {ms} нейар", "Он мнёт бумагу") },
+    ],
+  },
+];
+
+/** Темы глаголов, которые умеет строить `npm run content:verbs`: название темы, состав уроков и генератор форм. */
+export const VERB_TOPICS: Partial<Record<Binyan, { topic: string; lessons: VerbLessonSpec[]; conjugate: (root: string) => ConjugatedVerb }>> = {
+  paal: { topic: "Пааль", lessons: PAAL_LESSONS, conjugate: conjugatePaal },
+  piel: { topic: "Пиэль", lessons: PIEL_LESSONS, conjugate: conjugatePiel },
+};
+
+/** Объект урока темы-бинъяна в порядке полей, как в остальных файлах. */
+export function buildVerbLesson(binyan: Binyan, number: number): Record<string, unknown> {
+  const topic = VERB_TOPICS[binyan];
+  if (!topic) throw new Error(`для бинъяна ${binyan} генератора уроков нет`);
+  const spec = topic.lessons[number - 1];
+  const id = `${binyan}-${number}`;
+  if (!spec) throw new Error(`урока ${id} нет в списке`);
   return {
     $schema: "../schema.json",
     id,
-    topicId: "paal",
+    topicId: binyan,
     section: "verbs",
-    topic: "Пааль",
+    topic: topic.topic,
     number,
     free: number <= FREE_LESSONS_PER_TOPIC,
     title: spec.title,
     words: spec.verbs.map((v) => {
-      const { infinitive, verb } = conjugatePaal(v.root);
+      const { infinitive, verb } = topic.conjugate(v.root);
       const fill = (text: string, field: "he" | "translit") =>
         text.replace(/\{(ms|fs)\}/g, (_, key: "ms" | "fs") => (field === "he" ? verb.present[key].he : stripStress(verb.present[key].translit)));
       return {
@@ -98,3 +163,12 @@ export function buildPaalLesson(number: number): Record<string, unknown> {
   };
 }
 
+/** Урок пааль (прежнее имя, им пользуются тесты). */
+export function buildPaalLesson(number: number): Record<string, unknown> {
+  return buildVerbLesson("paal", number);
+}
+
+/** Урок пиэль. */
+export function buildPielLesson(number: number): Record<string, unknown> {
+  return buildVerbLesson("piel", number);
+}

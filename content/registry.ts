@@ -24,6 +24,9 @@ import lesson_home_3 from "./lessons/home-3.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
+import lesson_piel_1 from "./lessons/piel-1.json";
+import lesson_piel_2 from "./lessons/piel-2.json";
+import lesson_piel_3 from "./lessons/piel-3.json";
 
 export const lessonFiles: unknown[] = [
   lesson_alphabet_1,
@@ -50,4 +53,7 @@ export const lessonFiles: unknown[] = [
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
+  lesson_piel_1,
+  lesson_piel_2,
+  lesson_piel_3,
 ];

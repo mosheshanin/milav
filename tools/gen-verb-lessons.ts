@@ -1,34 +1,51 @@
-// Создаёт файлы уроков глаголов пааль (сильные корни) по списку из content/verbLessons.ts: формы строит content/verbGen.ts.
+// Создаёт файлы уроков глаголов с сильными корнями по спискам из content/verbLessons.ts: формы строит content/verbGen.ts.
 //
-//   npm run content:verbs                    создать недостающие уроки paal-1 … paal-3
-//   npm run content:verbs -- --lesson 2      только урок 2
-//   npm run content:verbs -- --dry-run       только проверить генерацию, ничего не записывать
+//   npm run content:verbs                              создать все недостающие уроки (paal-1 … paal-3, piel-1 … piel-3)
+//   npm run content:verbs -- --binyan piel             только тема «Пиэль»
+//   npm run content:verbs -- --binyan piel --lesson 2  только урок piel-2 (без --binyan --lesson относится к пааль)
+//   npm run content:verbs -- --dry-run                 только проверить генерацию, ничего не записывать
 //
 // Существующий файл урока НЕ перезаписывается: после проверки носителем формы правят в самих файлах, а генератор
 // для этого урока больше не запускают (docs/CONTENT.md, «Генератор форм»). Поэтому `--force` нет: чтобы пересоздать
 // урок, файл удаляют руками. После создания обновляется реестр уроков.
 import { existsSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
+import { isBinyan, type Binyan } from "@milav/shared";
 import { renderRegistry } from "../content/registryGen";
-import { PAAL_LESSONS, buildPaalLesson } from "../content/verbLessons";
+import { VERB_TOPICS, buildVerbLesson } from "../content/verbLessons";
 
-const { values } = parseArgs({ options: { lesson: { type: "string" }, "dry-run": { type: "boolean" } } });
-const numbers = values.lesson ? [Number(values.lesson)] : PAAL_LESSONS.map((_, i) => i + 1);
-for (const number of numbers) {
-  const file = new URL(`../content/lessons/paal-${number}.json`, import.meta.url);
-  const lesson = buildPaalLesson(number);
-  if (existsSync(file)) {
-    console.log(`paal-${number}: файл уже есть, не трогаю`);
-    continue;
-  }
-  if (values["dry-run"]) {
-    console.log(`paal-${number}: проверка прошла, 10 глаголов по 27 форм (без записи)`);
-    continue;
-  }
-  writeFileSync(file, JSON.stringify(lesson, null, 2) + "\n");
-  console.log(`paal-${number}: создан content/lessons/paal-${number}.json`);
+const { values } = parseArgs({ options: { binyan: { type: "string" }, lesson: { type: "string" }, "dry-run": { type: "boolean" } } });
+
+const known = Object.keys(VERB_TOPICS) as Binyan[];
+if (values.binyan !== undefined && !(isBinyan(values.binyan) && known.includes(values.binyan))) {
+  console.error(`--binyan: допустимы ${known.join(", ")}`);
+  process.exit(1);
 }
-if (!values["dry-run"]) {
+// --lesson без --binyan относится к пааль, как было до появления других тем.
+const binyans: Binyan[] = values.binyan ? [values.binyan as Binyan] : values.lesson ? ["paal"] : known;
+
+let created = 0;
+for (const binyan of binyans) {
+  const total = VERB_TOPICS[binyan]!.lessons.length;
+  const numbers = values.lesson ? [Number(values.lesson)] : Array.from({ length: total }, (_, i) => i + 1);
+  for (const number of numbers) {
+    const id = `${binyan}-${number}`;
+    const file = new URL(`../content/lessons/${id}.json`, import.meta.url);
+    const lesson = buildVerbLesson(binyan, number);
+    if (existsSync(file)) {
+      console.log(`${id}: файл уже есть, не трогаю`);
+      continue;
+    }
+    if (values["dry-run"]) {
+      console.log(`${id}: проверка прошла, ${(lesson.words as unknown[]).length} глаголов по 27 форм (без записи)`);
+      continue;
+    }
+    writeFileSync(file, JSON.stringify(lesson, null, 2) + "\n");
+    created++;
+    console.log(`${id}: создан content/lessons/${id}.json`);
+  }
+}
+if (!values["dry-run"] && created > 0) {
   writeFileSync(new URL("../content/registry.ts", import.meta.url), renderRegistry(new URL("../content/lessons/", import.meta.url)));
   console.log("Реестр уроков обновлён.");
 }
