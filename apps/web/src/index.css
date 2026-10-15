@@ -7,9 +7,9 @@
 */
 @theme {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  /* Русский текст: Manrope. Печатный иврит и рукописный иврит (шрифт «Гверет Левин», свободная лицензия OFL) */
-  --font-hebrew: "Heebo", "Manrope", sans-serif;
-  --font-hand: "Gveret Levin", "Heebo", cursive;
+  /* Русский текст: Manrope. Печатный иврит: Rubik. Рукописный иврит (шрифт «Гверет Левин», свободная лицензия OFL) */
+  --font-hebrew: "Rubik", "Manrope", sans-serif;
+  --font-hand: "Gveret Levin", "Rubik", cursive;
 
   /* Палитра бренда (из логотипа) */
   --color-brand-orange: #ff6b35;

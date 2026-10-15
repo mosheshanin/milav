@@ -73,7 +73,7 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
 
     if (ghost) {
       ctx.fillStyle = "#e2e8f0";
-      ctx.font = `${GHOST_FONT_SIZE}px "Gveret Levin", Heebo, sans-serif`;
+      ctx.font = `${GHOST_FONT_SIZE}px "Gveret Levin", Rubik, sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "alphabetic";
       ctx.fillText(ghost, width / 2, BASE_LINE * HEIGHT);

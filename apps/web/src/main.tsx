@@ -1,14 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-// Русский текст: Manrope (выбор владельца 15.10). Печатный иврит: Heebo, рукописный: Gveret Levin.
+// Русский текст: Manrope, печатный иврит: Rubik (выбор владельца 15.10), рукописный иврит: Gveret Levin.
+// У Rubik подключён только набор иврита: латиница и кириллица в таких местах берутся из Manrope.
 import "@fontsource/manrope/cyrillic-400.css";
 import "@fontsource/manrope/cyrillic-600.css";
 import "@fontsource/manrope/cyrillic-700.css";
 import "@fontsource/manrope/latin-400.css";
 import "@fontsource/manrope/latin-600.css";
 import "@fontsource/manrope/latin-700.css";
-import "@fontsource/heebo/hebrew-400.css";
-import "@fontsource/heebo/hebrew-700.css";
+import "@fontsource/rubik/hebrew-400.css";
+import "@fontsource/rubik/hebrew-600.css";
+import "@fontsource/rubik/hebrew-700.css";
 import "@fontsource/gveret-levin/hebrew-400.css";
 import "./index.css";
 import { App } from "./App";
