@@ -1,6 +1,5 @@
 // Запись шаблонов букв (скрытый инструмент владельца). Рисунки сохраняются в D1 (миграция 0004) как приёмник,
 // в распознавание они попадают после выгрузки в репозиторий (tools/build-own-templates.mjs).
-import { createMiddleware } from "hono/factory";
 import {
   CANVAS_LINE_HEIGHT,
   HEBREW_LETTERS,
@@ -13,27 +12,11 @@ import {
   type TemplateItem,
   type TemplateSaveResponse,
 } from "@milav/shared";
-import type { AppEnv } from "./env";
 import { parseStrokes } from "./stageProof";
 import { templates } from "./templates";
 
 /** Самый маленький допустимый рисунок: большая сторона не короче четверти высоты обычной буквы (иначе это случайное касание). */
 const MIN_SIZE = CANVAS_LINE_HEIGHT / 4;
-
-/** Разбирает секрет со списком id. Лишнее (пробелы, пустые части, не числа) отбрасывается. */
-export function recorderIds(raw: string | undefined): Set<number> {
-  const ids = new Set<number>();
-  for (const part of (raw ?? "").split(/[\s,;]+/)) {
-    if (/^\d{1,15}$/.test(part)) ids.add(Number(part));
-  }
-  return ids;
-}
-
-/** Пускает только тех, чей Telegram id указан в секрете TEMPLATE_RECORDER_IDS. Ставить после requireUser. */
-export const requireRecorder = createMiddleware<AppEnv>(async (c, next) => {
-  if (!recorderIds(c.env.TEMPLATE_RECORDER_IDS).has(c.get("user").id)) return c.json({ error: "forbidden" }, 403);
-  await next();
-});
 
 export type TemplateInputError = "bad_letter" | "bad_slot" | "bad_strokes" | "too_small";
 

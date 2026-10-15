@@ -156,5 +156,7 @@ export const RATE_LIMITS = {
   // через D1: лимитер пишет строку на каждый запрос (docs/GAMIFICATION.md, раздел 10.2).
   settings: { perMinute: 20, perDay: 200 },
   seen: { perMinute: 30, perDay: 300 },
+  // Панель администратора (только команда): чтение разделов и изменения настроек.
+  admin: { perMinute: 60, perDay: 2000 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;

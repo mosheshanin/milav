@@ -1,3 +1,4 @@
+import type { StaffInfo } from "@milav/shared";
 import type { AuthUser } from "./auth";
 
 /** Привязки и переменные Worker (см. wrangler.jsonc). */
@@ -15,13 +16,19 @@ export type Bindings = {
    */
   TEMPLATE_RECORDER_IDS?: string;
   /**
-   * "1" включает таблицу лидеров. Выкладывается выключенной (wrangler.jsonc) до политики конфиденциальности и удаления
-   * данных (docs/ROADMAP.md, п. 4); включается отдельным коммитом. Счётчики очков копятся и при выключенной таблице.
+   * Владельцы (всегда администраторы панели): Telegram id через запятую. Секрет в Cloudflare. Читается вместе с
+   * TEMPLATE_RECORDER_IDS (прежнее имя), см. admin.ts и docs/ADMIN.md.
+   */
+  ADMIN_IDS?: string;
+  /**
+   * Таблица лидеров по умолчанию: "1" включена для всех, иначе выключена. Действует, пока настройку «Таблица лидеров»
+   * не поменяли в панели администратора (app_config, admin.ts): значение из панели главнее.
    */
   LEADERBOARD_ENABLED?: string;
 };
 
 export type AppEnv = {
   Bindings: Bindings;
-  Variables: { user: AuthUser };
+  /** staff есть только после requireAdmin. */
+  Variables: { user: AuthUser; staff?: StaffInfo };
 };

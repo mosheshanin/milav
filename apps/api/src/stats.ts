@@ -315,6 +315,8 @@ function insertStatement(db: D1Database, s: Stats) {
 export interface EnsureOptions {
   /** Часовой пояс из заголовка приложения: используется только при создании строки. */
   tz?: string;
+  /** Цель дня нового ученика (настройка из панели); используется только при создании строки. */
+  dailyGoal?: number;
   now: number;
 }
 
@@ -328,6 +330,7 @@ export async function ensureStats(db: D1Database, userId: number, opts: EnsureOp
 
   const tz = isValidTimeZone(opts.tz) ? opts.tz : DEFAULT_TZ;
   const { stats, passed, timelines } = await recount(db, userId, tz, opts.now);
+  if (opts.dailyGoal !== undefined) stats.dailyGoal = opts.dailyGoal;
   await insertStatement(db, stats).run();
   // Параллельный запрос мог создать строку раньше: тогда INSERT OR IGNORE ничего не сделал, берём то, что в базе.
   const stored = (await loadStats(db, userId)) ?? stats;

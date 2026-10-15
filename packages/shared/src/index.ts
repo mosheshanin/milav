@@ -8,3 +8,4 @@ export * from "./letterNames";
 export * from "./handwriting";
 export * from "./gamification";
 export * from "./telemetry";
+export * from "./admin";

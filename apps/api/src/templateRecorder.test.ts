@@ -1,7 +1,8 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { HEBREW_LETTERS, RATE_LIMITS, TEMPLATE_VARIANTS_PER_LETTER, type Stroke, type TemplateItem } from "@milav/shared";
 import { api, ctx, letterStrokes, resetHarness } from "./test-utils/harness";
-import { recorderIds, saveTemplate } from "./templateRecorder";
+import { parseIds as recorderIds } from "./admin";
+import { saveTemplate } from "./templateRecorder";
 
 const OWNER = 7001;
 const STRANGER = 7002;

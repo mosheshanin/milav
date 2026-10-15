@@ -3,6 +3,7 @@
 import { Hono } from "hono";
 import {
   DAILY_GOAL_OPTIONS,
+  featureOn,
   MAX_SEEN_IDS,
   RHYTHM_DAYS_PER_WEEK,
   isValidTimeZone,
@@ -16,6 +17,7 @@ import {
 import { catalog } from "@milav/content";
 import { requireUser } from "./auth";
 import type { AuthUser } from "./auth";
+import { loadConfig, staffOf } from "./admin";
 import { buildLeaderboard, type Board } from "./board";
 import { parseJson, readBodyLimited } from "./body";
 import { buildCohort } from "./cohort";
@@ -26,7 +28,17 @@ import { ensureStats, loadStats, metricsOf, nextTimezone, reconcileBadges, type 
 
 export const nowSeconds = () => Math.floor(Date.now() / 1000);
 
-export const leaderboardEnabled = (env: Bindings): boolean => env.LEADERBOARD_ENABLED === "1";
+/** Включена ли таблица лидеров для этого человека: настройка из панели («выкл», «команда», «все») и его роль. */
+export async function leaderboardOn(env: Bindings, userId: number): Promise<boolean> {
+  const { leaderboard } = await loadConfig(env);
+  if (leaderboard !== "team") return leaderboard === "all";
+  return featureOn(leaderboard, await staffOf(env, userId));
+}
+
+/** Какие функции включены для человека (приложение прячет кнопки выключенных). */
+export async function featuresFor(env: Bindings, userId: number): Promise<PlayInfo["features"]> {
+  return { leaderboard: await leaderboardOn(env, userId) };
+}
 
 /** Сколько бейджей человек ещё не видел (поздравление не показано или ответ потерялся). */
 export async function countUnseen(db: D1Database, userId: number): Promise<number> {
@@ -38,7 +50,7 @@ export async function countUnseen(db: D1Database, userId: number): Promise<numbe
 }
 
 /** Блок «Мой путь» для приложения. */
-export function buildPlayInfo(stats: Stats, unseenBadges: number, now: number, env: Bindings): PlayInfo {
+export function buildPlayInfo(stats: Stats, unseenBadges: number, now: number, features: PlayInfo["features"]): PlayInfo {
   const view = viewPlay(stats.play, localEpochDay(stats.tz, now * 1000), stats.dailyGoal);
   return {
     tz: stats.tz,
@@ -57,16 +69,16 @@ export function buildPlayInfo(stats: Stats, unseenBadges: number, now: number, e
     unseenBadges,
     recap: view.recap,
     settings: { dailyGoal: stats.dailyGoal, leaderboard: stats.lbOptin && !stats.lbBanned, cohortExcluded: stats.cohortExcluded },
-    features: { leaderboard: leaderboardEnabled(env) },
+    features,
   };
 }
 
 /** Счётчики пользователя; строка создаётся, если её ещё нет (в том числе пользователь в users). */
-export async function statsFor(db: D1Database, user: AuthUser, now: number, tz?: string): Promise<Stats> {
-  const existing = await loadStats(db, user.id);
+export async function statsFor(env: Bindings, user: AuthUser, now: number, tz?: string): Promise<Stats> {
+  const existing = await loadStats(env.DB, user.id);
   if (existing) return existing;
-  await ensureUser(db, user);
-  return ensureStats(db, user.id, { now, tz });
+  await ensureUser(env.DB, user);
+  return ensureStats(env.DB, user.id, { now, tz, dailyGoal: (await loadConfig(env)).defaultDailyGoal });
 }
 
 /** Меняет часовой пояс, если приложение прислало другой и сегодня его ещё не меняли. */
@@ -88,7 +100,7 @@ export const playRoutes = new Hono<AppEnv>();
 playRoutes.get("/api/achievements", requireUser, async (c) => {
   const user = c.get("user");
   const now = nowSeconds();
-  const stats = await statsFor(c.env.DB, user, now);
+  const stats = await statsFor(c.env, user, now);
   await reconcileBadges(c.env.DB, stats, { now, retro: false });
   const { results } = await c.env.DB
     .prepare("SELECT badge_id, earned_at, retro, seen FROM user_badges WHERE user_id = ?")
@@ -137,10 +149,10 @@ playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) =>
   }
   if (req.tz !== undefined && !isValidTimeZone(req.tz)) return c.json({ error: "bad_tz" }, 400);
   // Вступить в таблицу можно только когда она включена; выйти можно всегда.
-  if (req.leaderboard === true && !leaderboardEnabled(c.env)) return c.json({ error: "feature_disabled" }, 403);
+  if (req.leaderboard === true && !(await leaderboardOn(c.env, user.id))) return c.json({ error: "feature_disabled" }, 403);
 
   const now = nowSeconds();
-  let stats = await statsFor(c.env.DB, user, now);
+  let stats = await statsFor(c.env, user, now);
   if (req.tz !== undefined) stats = await applyTimezone(c.env.DB, stats, req.tz, now);
 
   // Имена столбцов фиксированы здесь, значения идут параметрами.
@@ -163,22 +175,22 @@ playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) =>
   }
 
   const fresh = (await loadStats(c.env.DB, user.id)) ?? stats;
-  return c.json({ play: buildPlayInfo(fresh, await countUnseen(c.env.DB, user.id), now, c.env) });
+  return c.json({ play: buildPlayInfo(fresh, await countUnseen(c.env.DB, user.id), now, await featuresFor(c.env, user.id)) });
 });
 
-// Таблица лидеров: «неделя» или «всё время». Выключена, пока не выпущена политика конфиденциальности.
+// Таблица лидеров: «неделя» или «всё время». Выключатель в панели администратора (настройка «Таблица лидеров»).
 playRoutes.get("/api/leaderboard", requireUser, async (c) => {
-  if (!leaderboardEnabled(c.env)) return c.json({ error: "feature_disabled" }, 404);
+  if (!(await leaderboardOn(c.env, c.get("user").id))) return c.json({ error: "feature_disabled" }, 404);
   const board = c.req.query("board") ?? "week";
   if (board !== "week" && board !== "all") return c.json({ error: "bad_request" }, 400);
   const now = nowSeconds();
-  const viewer = await statsFor(c.env.DB, c.get("user"), now);
+  const viewer = await statsFor(c.env, c.get("user"), now);
   return c.json(await buildLeaderboard(c.env.DB, board as Board, viewer, now));
 });
 
 // Сравнение с теми, кто начал учиться в то же время: только числа, без имён.
 playRoutes.get("/api/cohort", requireUser, async (c) => {
   const now = nowSeconds();
-  const viewer = await statsFor(c.env.DB, c.get("user"), now);
+  const viewer = await statsFor(c.env, c.get("user"), now);
   return c.json(await buildCohort(c.env.DB, viewer, now));
 });

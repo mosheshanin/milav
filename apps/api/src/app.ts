@@ -25,7 +25,7 @@ import { boardWeekNow } from "./board";
 import { ensureUser, getHomeProgress, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
-import { applyTimezone, buildPlayInfo, countUnseen, nowSeconds, playRoutes } from "./play";
+import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, playRoutes } from "./play";
 import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
@@ -40,10 +40,10 @@ import {
   listTemplates,
   parseTemplateStrokes,
   parseTemplateTarget,
-  recorderIds,
-  requireRecorder,
   saveTemplate,
 } from "./templateRecorder";
+import { adminRoutes, loadConfig, ownerIds, requireAdmin, staffOf } from "./admin";
+import { recordActivity } from "./adminStats";
 import {
   BOT_MAX_UPDATE_BYTES,
   BOT_WEBHOOK_PATH,
@@ -73,7 +73,7 @@ function canAccessLesson(lesson: AnyLesson): boolean {
  * пройдены, обновляются ритм, цель дня и бейджи (stats.ts). Пользователь уже должен быть в users.
  */
 async function markStageWithPlay(
-  db: D1Database,
+  env: AppEnv["Bindings"],
   userId: number,
   lesson: AnyLesson,
   itemId: string,
@@ -82,7 +82,8 @@ async function markStageWithPlay(
 ): Promise<{ result: StageResult; points: number; play?: PlayOutcome }> {
   const now = nowSeconds();
   const isLetter = isAlphabetLesson(lesson);
-  const stats = await ensureStats(db, userId, { now });
+  const db = env.DB;
+  const stats = await ensureStats(db, userId, { now, dailyGoal: (await loadConfig(env)).defaultDailyGoal });
   const result = await markStage(db, userId, lesson.id, itemId, stage, required, { isLetter, boardWeek: boardWeekNow(now), now });
   const points = totalsOf(stats).points + (result.justCompleted ? POINTS_PER_WORD : 0);
   const play = result.justCompleted ? await recordWordCompleted(db, stats, isLetter, now) : undefined;
@@ -159,23 +160,27 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
 app.get("/api/me", requireUser, async (c) => {
   const user = c.get("user");
   const now = nowSeconds();
-  await touchUser(c.env.DB, user);
+  // Профиль и отметка «открывал сегодня» (для «Обзора» панели) пишутся параллельно.
+  await Promise.all([touchUser(c.env.DB, user), recordActivity(c.env.DB, user.id, now * 1000)]);
   const timezone = c.req.header("X-Timezone");
-  let stats = await ensureStats(c.env.DB, user.id, { now, tz: timezone });
+  const config = await loadConfig(c.env);
+  let stats = await ensureStats(c.env.DB, user.id, { now, tz: timezone, dailyGoal: config.defaultDailyGoal });
   stats = await applyTimezone(c.env.DB, stats, timezone, now);
   // Каталог бейджей вырос с прошлого входа: недостающие бейджи выдаются один раз задним числом.
   if (stats.badgesVer !== catalog.version) await reconcileBadges(c.env.DB, stats, { now, retro: true });
   // Приложение запрашивает профиль при каждом запуске: по этому событию считаем запуски и активных учеников.
   logEvent("app_open", { uid: user.id, tz: timezone, points: totalsOf(stats).points });
   // Владелец открыл приложение: в фоне проверяем вебхук бота и при необходимости регистрируем его (bot.ts).
-  if (recorderIds(c.env.TEMPLATE_RECORDER_IDS).has(user.id)) {
+  if (ownerIds(c.env).has(user.id)) {
     const setup = ensureBotSetupOnce(c.env, new URL(c.req.url).origin);
     if (setup) inBackground(c, setup);
   }
+  const staff = await staffOf(c.env, user.id);
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },
     ...totalsOf(stats),
-    play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, c.env),
+    play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, await featuresFor(c.env, user.id)),
+    ...(staff ? { staff } : {}),
   };
   return c.json(body);
 });
@@ -241,7 +246,7 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   }
 
   await ensureUser(c.env.DB, user);
-  const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.item.id, stage, required);
+  const { result, points, play } = await markStageWithPlay(c.env, user.id, found.lesson, found.item.id, stage, required);
   if (result.justCompleted) logEvent("word_done", { uid: user.id, lesson: found.lesson.id, item: found.item.id, points });
   return c.json({
     progress: result.progress,
@@ -276,7 +281,7 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   if (!match) return c.json({ heard, match });
 
   await ensureUser(c.env.DB, user);
-  const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.word.id, "speak");
+  const { result, points, play } = await markStageWithPlay(c.env, user.id, found.lesson, found.word.id, "speak");
   if (result.justCompleted) logEvent("word_done", { uid: user.id, lesson: found.lesson.id, item: found.word.id, points });
   return c.json({
     heard,
@@ -403,16 +408,16 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
   return c.json(committed.response);
 });
 
-// ---- Запись шаблонов букв: скрытый инструмент владельца (templateRecorder.ts), доступ по Telegram id из секрета. ----
+// ---- Запись шаблонов букв (templateRecorder.ts): раздел панели администратора, доступ только администраторам. ----
 
 // Все записанные варианты. Приложение вызывает это при открытии экрана записи, 403 значит «вам сюда нельзя».
-app.get("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+app.get("/api/templates", requireUser, requireAdmin, rateLimit("templates"), async (c) => {
   const body: TemplatesResponse = { variants: TEMPLATE_VARIANTS_PER_LETTER, items: await listTemplates(c.env.DB) };
   return c.json(body);
 });
 
 // Записать или перезаписать вариант. Рисунок сохраняется всегда, а ответ предупреждает, если он похож на другую букву.
-app.put("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+app.put("/api/templates", requireUser, requireAdmin, rateLimit("templates"), async (c) => {
   const raw = await readBodyLimited(c.req.raw, MAX_STAGE_BODY_BYTES);
   if (!raw) return c.json({ error: "body_too_large" }, 413);
   const body = parseJson<{ letter?: unknown; slot?: unknown; strokes?: unknown }>(raw);
@@ -429,7 +434,7 @@ app.put("/api/templates", requireUser, requireRecorder, rateLimit("templates"), 
 });
 
 // Удалить вариант: ?letter=<буква>&slot=<номер>.
-app.delete("/api/templates", requireUser, requireRecorder, rateLimit("templates"), async (c) => {
+app.delete("/api/templates", requireUser, requireAdmin, rateLimit("templates"), async (c) => {
   const slot = c.req.query("slot");
   const target = parseTemplateTarget(c.req.query("letter"), slot !== undefined && /^\d{1,2}$/.test(slot) ? Number(slot) : null);
   if (!target.ok) return c.json({ error: target.error }, 400);
@@ -439,6 +444,9 @@ app.delete("/api/templates", requireUser, requireRecorder, rateLimit("templates"
 
 // Геймификация: достижения, настройки, таблица лидеров, сравнение (play.ts).
 app.route("/", playRoutes);
+
+// Панель администратора: обзор, настройки приложения, команда, журнал (admin.ts, docs/ADMIN.md).
+app.route("/", adminRoutes);
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));
 
