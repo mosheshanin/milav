@@ -268,6 +268,7 @@ npm run content:new -- --topic-id paal --number 1 --section verbs --topic "Па�
 2. Заполнить пустые поля слов. Пока они пусты, `npm run validate:content` краснеет: так задумано.
 3. Если есть картинка, положить файл в `apps/web/public/words/<id слова>.svg` и указать `image`.
 4. `npm run validate:content` и `npm run content:report`: без нарушений.
+4а. Эмодзи урока для главной (и темы, если она новая): `LESSON_EMOJI` и `TOPIC_EMOJI` в `apps/web/src/lib/homeEmoji.ts`. Эмодзи уроков внутри темы не повторяются. Если забыть, краснеет `npm test` (`homeEmoji.test.ts`); приложение при этом не ломается, урок показывает эмодзи темы.
 5. Закоммитить и запушить в `main`.
 6. Озвучка: GitHub → Actions → «Озвучка слов» → action `publish`, голос `he-IL-Wavenet-A`, текст `niqqud`, без `force` (`docs/AUDIO.md`). Workflow сам запишет файлы и поле `audio`.
 7. Передать список `npm run content:report -- --list` носителю языка, после проверки проставить `reviewed`.
