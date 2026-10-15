@@ -1,6 +1,8 @@
 import { Hono } from "hono";
 import { catalog, findStudyItem, findWord, getAnyLesson } from "@milav/content";
 import {
+  CLIENT_LOG_LIMITS,
+  CLIENT_LOG_PATH,
   MAX_STAGE_BODY_BYTES,
   POINTS_PER_WORD,
   STAGES,
@@ -11,12 +13,13 @@ import {
   stagesFor,
   type AnyLesson,
   type MeResponse,
+  type QuizAnswerResponse,
   type QuizStartResponse,
   type Stage,
   type TemplateSaveResponse,
   type TemplatesResponse,
 } from "@milav/shared";
-import { requireUser } from "./auth";
+import { requireUser, userFromHeader } from "./auth";
 import { boardWeekNow } from "./board";
 import { ensureUser, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
 import { parseJson, readBodyLimited } from "./body";
@@ -29,6 +32,7 @@ import { apiSecurityHeaders } from "./security";
 import { readAudio, transcribeHebrew } from "./speech";
 import { ensureStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
+import { createThrottle, describeError, logClientReport, logError, logEvent, logWarn, parseClientReport } from "./telemetry";
 import {
   checkRecorded,
   deleteTemplate,
@@ -71,12 +75,50 @@ async function readJson<T>(request: Request, maxBytes = 64 * 1024): Promise<T | 
   return bytes ? parseJson<T>(bytes) : null;
 }
 
+/** Итог викторины для журнала: сдана, не сдана, прервана или ещё идёт. */
+function quizOutcome(response: QuizAnswerResponse): "passed" | "failed" | "aborted" | null {
+  if (response.aborted) return "aborted";
+  if (response.result) return response.result.passed ? "passed" : "failed";
+  return null;
+}
+
+/** Пишет в журнал конец викторины, если этот ответ её закончил (повторный ответ после обрыва связи не пишется). */
+function logQuizEnd(userId: number, lessonId: string, response: QuizAnswerResponse): void {
+  const outcome = quizOutcome(response);
+  if (!outcome || response.repeat) return;
+  logEvent("quiz_end", { uid: userId, lesson: lessonId, outcome, correct: response.correctCount, mistakes: response.mistakes });
+}
+
+// Отчёты приложения: не больше CLIENT_LOG_LIMITS.perMinutePerIp в минуту с одного адреса (в памяти экземпляра, без D1).
+const clientLogThrottle = createThrottle(CLIENT_LOG_LIMITS.perMinutePerIp);
+
 export const app = new Hono<AppEnv>();
 
 // Заголовки безопасности на всех ответах API (в том числе на ошибках и 404).
 app.use("/api/*", apiSecurityHeaders);
 
-app.get("/api/health", (c) => c.json({ ok: true, service: "milav-api" }));
+// Проверка, что сервис жив и база отвечает. 503, если база недоступна (например, исчерпан дневной лимит D1).
+app.get("/api/health", async (c) => {
+  try {
+    await c.env.DB.prepare("SELECT 1").first();
+    return c.json({ ok: true, service: "milav-api", db: "ok" });
+  } catch (err) {
+    logError("health_db_error", describeError(err));
+    return c.json({ ok: false, service: "milav-api", db: "error" }, 503);
+  }
+});
+
+// Отчёт приложения об ошибке или событии (lib/telemetry.ts в приложении). Вход необязателен: ошибка могла случиться
+// до входа. Если подпись верна, в запись попадает id пользователя. Ответ всегда пустой: приложению нечего с ним делать.
+app.post(CLIENT_LOG_PATH, async (c) => {
+  const ip = c.req.header("CF-Connecting-IP") ?? "local";
+  if (!clientLogThrottle(ip)) return c.body(null, 429);
+  const report = parseClientReport(await readJson<unknown>(c.req.raw, CLIENT_LOG_LIMITS.bodyBytes));
+  if (!report) return c.body(null, 400);
+  const user = await userFromHeader(c.req.header("Authorization") ?? "", c.env);
+  logClientReport(report, user?.id);
+  return c.body(null, 204);
+});
 
 // Профиль, очки, статус и блок «Мой путь». Приложение вызывает это при запуске и присылает свой часовой пояс.
 app.get("/api/me", requireUser, async (c) => {
@@ -88,6 +130,8 @@ app.get("/api/me", requireUser, async (c) => {
   stats = await applyTimezone(c.env.DB, stats, timezone, now);
   // Каталог бейджей вырос с прошлого входа: недостающие бейджи выдаются один раз задним числом.
   if (stats.badgesVer !== catalog.version) await reconcileBadges(c.env.DB, stats, { now, retro: true });
+  // Приложение запрашивает профиль при каждом запуске: по этому событию считаем запуски и активных учеников.
+  logEvent("app_open", { uid: user.id, tz: timezone, points: totalsOf(stats).points });
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },
     ...totalsOf(stats),
@@ -132,6 +176,14 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
   if (stage === "type") proof = verifyTyped(found.item, body.typed);
   else if (stage === "write") proof = await verifyWritten(found.item, body.strokes);
   if (!proof.ok) {
+    logWarn("stage_rejected", {
+      uid: user.id,
+      lesson: found.lesson.id,
+      item: found.item.id,
+      stage,
+      error: proof.error,
+      failed: proof.failedLetters?.join(","),
+    });
     return c.json(
       { error: proof.error, ...(proof.failedLetters ? { failedLetters: proof.failedLetters } : {}) },
       proof.status,
@@ -140,6 +192,7 @@ app.post("/api/progress/stage", requireUser, rateLimit("stage"), async (c) => {
 
   await ensureUser(c.env.DB, user);
   const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.item.id, stage, required);
+  if (result.justCompleted) logEvent("word_done", { uid: user.id, lesson: found.lesson.id, item: found.item.id, points });
   return c.json({
     progress: result.progress,
     pointsAwarded: result.justCompleted ? POINTS_PER_WORD : 0,
@@ -162,13 +215,19 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   if (!recording.ok) return c.json({ error: recording.error }, recording.status);
 
   const heard = await transcribeHebrew(c.env.AI, recording.audio);
-  if (heard === null) return c.json({ error: "speech_failed" }, 502);
+  if (heard === null) {
+    logWarn("speech_failed", { uid: user.id, word: found.word.id, where: "study", bytes: recording.audio.byteLength });
+    return c.json({ error: "speech_failed" }, 502);
+  }
 
   const match = isSpeechMatch(heard, found.word.he);
+  // Что услышал распознаватель: по несовпадениям видно, какие слова Whisper слышит плохо (и не слишком ли строг допуск).
+  logEvent("speech", { uid: user.id, word: found.word.id, where: "study", match, heard });
   if (!match) return c.json({ heard, match });
 
   await ensureUser(c.env.DB, user);
   const { result, points, play } = await markStageWithPlay(c.env.DB, user.id, found.lesson, found.word.id, "speak");
+  if (result.justCompleted) logEvent("word_done", { uid: user.id, lesson: found.lesson.id, item: found.word.id, points });
   return c.json({
     heard,
     match,
@@ -197,6 +256,7 @@ app.post("/api/quiz/start", requireUser, rateLimit("quiz"), async (c) => {
 
   const questions = generateLessonQuiz(lesson);
   const sessionId = await startSession(c.env.DB, user.id, lesson.id, questions, nowSeconds());
+  logEvent("quiz_start", { uid: user.id, lesson: lesson.id, questions: questions.length });
   const response: QuizStartResponse = { sessionId, lessonId: lesson.id, questions };
   return c.json(response);
 });
@@ -253,6 +313,7 @@ app.post("/api/quiz/answer", requireUser, async (c) => {
 
   const committed = await commitAnswer(c.env.DB, session, step);
   if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);
+  logQuizEnd(user.id, session.lessonId, committed.response);
   return c.json(committed.response);
 });
 
@@ -278,11 +339,17 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
 
   // Если распознаватель не сработал, попытка не тратится: это не вина ученика.
   const heard = await transcribeHebrew(c.env.AI, recording.audio);
-  if (heard === null) return c.json({ error: "speech_failed" }, 502);
+  if (heard === null) {
+    logWarn("speech_failed", { uid: user.id, word: found.word.id, where: "quiz", bytes: recording.audio.byteLength });
+    return c.json({ error: "speech_failed" }, 502);
+  }
 
-  const step = speechStep(session, isSpeechMatch(heard, found.word.he), heard);
+  const match = isSpeechMatch(heard, found.word.he);
+  logEvent("speech", { uid: user.id, word: found.word.id, where: "quiz", match, heard });
+  const step = speechStep(session, match, heard);
   const committed = await commitAnswer(c.env.DB, session, step);
   if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);
+  logQuizEnd(user.id, session.lessonId, committed.response);
   return c.json(committed.response);
 });
 
@@ -325,7 +392,8 @@ app.route("/", playRoutes);
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));
 
+// Необработанная ошибка: в журнал с адресом и стеком, ученику только «internal_error».
 app.onError((err, c) => {
-  console.error(err);
+  logError("server_error", { method: c.req.method, path: c.req.path, ...describeError(err) });
   return c.json({ error: "internal_error" }, 500);
 });

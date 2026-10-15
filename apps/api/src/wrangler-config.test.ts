@@ -117,3 +117,11 @@ describe("stripJsonc", () => {
     expect(JSON.parse(stripJsonc(text))).toEqual({ url: "https://example.com/a//b", list: [1, 2] });
   });
 });
+
+describe("wrangler.jsonc: журналы", () => {
+  // Без observability ошибки сервера и отчёты приложения никуда не сохраняются (ROADMAP п. 9, docs/DEPLOY.md).
+  it("Workers Logs включены в продакшене", () => {
+    expect(config.observability?.enabled).toBe(true);
+    expect(config.observability?.head_sampling_rate).toBeGreaterThan(0);
+  });
+});

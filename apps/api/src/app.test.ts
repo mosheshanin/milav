@@ -1,16 +1,19 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { wordLetters, type Stroke } from "@milav/shared";
 import { app } from "./app";
 import {
   api,
   auth,
+  completeLesson,
   completeWord,
   ctx,
   lesson,
+  playQuiz,
   post,
   resetHarness,
   speak,
   stageBody,
+  startQuiz,
   word,
 } from "./test-utils/harness";
 
@@ -311,5 +314,101 @@ describe("заголовки безопасности API", () => {
       expect(res.headers.get("Referrer-Policy")).toBe("no-referrer");
       expect(res.headers.get("Cache-Control")).toBe("no-store");
     }
+  });
+});
+
+describe("наблюдаемость", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  /** Записи журнала, которые прошли через console.<level>, разобранные из JSON. */
+  function captured(level: "log" | "warn" | "error") {
+    const spy = vi.spyOn(console, level).mockImplementation(() => {});
+    return () => spy.mock.calls.map((call) => JSON.parse(call[0] as string) as Record<string, unknown>);
+  }
+
+  const clientLog = (body: unknown, headers: Record<string, string> = {}, ip = "198.51.100.1") =>
+    api("/api/client-log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "CF-Connecting-IP": ip, ...headers },
+      body: typeof body === "string" ? body : JSON.stringify(body),
+    });
+
+  it("/api/health проверяет базу", async () => {
+    const res = await api("/api/health");
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ ok: true, service: "milav-api", db: "ok" });
+  });
+
+  it("/api/health отвечает 503, если база не отвечает", async () => {
+    const errors = captured("error");
+    const brokenDb = { prepare: () => ({ first: () => Promise.reject(new Error("D1_ERROR: daily limit exceeded")) }) };
+    const res = await api("/api/health", {}, { ...ctx.env, DB: brokenDb as unknown as D1Database });
+    expect(res.status).toBe(503);
+    expect(await res.json()).toMatchObject({ ok: false, db: "error" });
+    expect(errors()[0]).toMatchObject({ evt: "health_db_error", message: "D1_ERROR: daily limit exceeded" });
+  });
+
+  it("принимает отчёт об ошибке без входа и с входом (тогда в записи id ученика)", async () => {
+    const errors = captured("error");
+    const report = { kind: "error", source: "error", message: "TypeError: x is undefined", platform: "ios" };
+    expect((await clientLog(report)).status).toBe(204);
+    expect((await clientLog(report, auth(77), "198.51.100.2")).status).toBe(204);
+    const [anon, signed] = errors();
+    expect(anon).toMatchObject({ evt: "client_error", message: "TypeError: x is undefined", platform: "ios" });
+    expect(anon!.uid).toBeUndefined();
+    expect(signed).toMatchObject({ evt: "client_error", uid: 77 });
+  });
+
+  it("принимает событие микрофона и отклоняет неизвестное, не-JSON и слишком большое тело", async () => {
+    const logs = captured("log");
+    expect((await clientLog({ kind: "event", name: "mic_problem", detail: "denied" }, {}, "198.51.100.3")).status).toBe(204);
+    expect(logs()[0]).toMatchObject({ evt: "client_mic_problem", detail: "denied" });
+    expect((await clientLog({ kind: "event", name: "free_points" }, {}, "198.51.100.3")).status).toBe(400);
+    expect((await clientLog("не json", {}, "198.51.100.3")).status).toBe(400);
+    const huge = { kind: "error", source: "error", message: "x", stack: "y".repeat(10_000) };
+    expect((await clientLog(huge, {}, "198.51.100.3")).status).toBe(400);
+  });
+
+  it("ограничивает число отчётов с одного адреса", async () => {
+    captured("log");
+    const report = { kind: "event", name: "app_crash" };
+    const statuses: number[] = [];
+    for (let i = 0; i < 32; i++) statuses.push((await clientLog(report, {}, "203.0.113.9")).status);
+    expect(statuses.filter((s) => s === 204)).toHaveLength(30);
+    expect(statuses.slice(-2)).toEqual([429, 429]);
+  });
+
+  it("пишет запуск приложения, пройденное слово, начало и конец викторины", async () => {
+    const logs = captured("log");
+    await api("/api/me", { as: 81 });
+    await completeLesson(81);
+    const session = await startQuiz(81);
+    await playQuiz(81, session);
+    const events = logs();
+    expect(events.find((e) => e.evt === "app_open")).toMatchObject({ uid: 81 });
+    expect(events.filter((e) => e.evt === "word_done")).toHaveLength(lesson.words.length);
+    expect(events.find((e) => e.evt === "quiz_start")).toMatchObject({ uid: 81, lesson: lesson.id, questions: 25 });
+    expect(events.find((e) => e.evt === "quiz_end")).toMatchObject({ uid: 81, lesson: lesson.id, outcome: "passed", correct: 25 });
+    // Что услышал распознаватель на этапе «говори»: по этим записям видно, какие слова Whisper слышит плохо.
+    expect(events.some((e) => e.evt === "speech" && e.where === "study" && e.match === true)).toBe(true);
+  });
+
+  it("пишет отклонённый этап и превышение лимита как предупреждения", async () => {
+    const warns = captured("warn");
+    captured("log");
+    await post("/api/progress/stage", 82, { wordId: word.id, stage: "type", typed: "неверно" });
+    expect(warns()[0]).toMatchObject({ evt: "stage_rejected", uid: 82, item: word.id, stage: "type" });
+  });
+
+  it("необработанная ошибка сервера попадает в журнал с адресом", async () => {
+    const errors = captured("error");
+    const brokenDb = {
+      prepare: () => {
+        throw new Error("база сломалась");
+      },
+    };
+    const res = await api("/api/me", { as: 83 }, { ...ctx.env, DB: brokenDb as unknown as D1Database });
+    expect(res.status).toBe(500);
+    expect(errors()[0]).toMatchObject({ evt: "server_error", method: "GET", path: "/api/me", message: "база сломалась" });
   });
 });

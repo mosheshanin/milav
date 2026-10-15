@@ -103,19 +103,25 @@ export function parseDevUser(value: string): AuthUser | null {
  */
 export const requireUser = createMiddleware<AppEnv>(async (c, next) => {
   const header = c.req.header("Authorization") ?? "";
-  const space = header.indexOf(" ");
-  const scheme = space === -1 ? header : header.slice(0, space);
-  const value = space === -1 ? "" : header.slice(space + 1);
-
-  let user: AuthUser | null = null;
-  if (scheme === "tma") {
-    if (!c.env.BOT_TOKEN) return c.json({ error: "bot_token_missing" }, 503);
-    user = await validateInitData(value, c.env.BOT_TOKEN);
-  } else if (scheme === "dev" && c.env.ALLOW_DEV_AUTH === "true") {
-    user = parseDevUser(value);
-  }
-
+  if ((header === "tma" || header.startsWith("tma ")) && !c.env.BOT_TOKEN) return c.json({ error: "bot_token_missing" }, 503);
+  const user = await userFromHeader(header, c.env);
   if (!user) return c.json({ error: "unauthorized" }, 401);
   c.set("user", user);
   await next();
 });
+
+/**
+ * Пользователь из заголовка Authorization или null (нет заголовка, неверная подпись, тестовый вход выключен).
+ * Для маршрутов, где вход необязателен (отчёты приложения об ошибках).
+ */
+export async function userFromHeader(
+  header: string,
+  env: { BOT_TOKEN?: string; ALLOW_DEV_AUTH?: string },
+): Promise<AuthUser | null> {
+  const space = header.indexOf(" ");
+  const scheme = space === -1 ? header : header.slice(0, space);
+  const value = space === -1 ? "" : header.slice(space + 1);
+  if (scheme === "tma") return env.BOT_TOKEN ? validateInitData(value, env.BOT_TOKEN) : null;
+  if (scheme === "dev" && env.ALLOW_DEV_AUTH === "true") return parseDevUser(value);
+  return null;
+}

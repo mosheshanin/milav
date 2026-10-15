@@ -14,8 +14,12 @@ import "@fontsource/rubik/hebrew-700.css";
 import "@fontsource/gveret-levin/hebrew-400.css";
 import "./index.css";
 import { App } from "./App";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { installErrorHandlers } from "./lib/telemetry";
 import { initTelegram } from "./telegram";
 
+// Ошибки скриптов и промисов уходят в журнал сервера (lib/telemetry.ts, docs/DEPLOY.md «Наблюдаемость»).
+installErrorHandlers();
 initTelegram();
 
 const root = document.getElementById("root");
@@ -23,6 +27,8 @@ if (!root) throw new Error("Не найден контейнер #root");
 
 createRoot(root).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>,
 );

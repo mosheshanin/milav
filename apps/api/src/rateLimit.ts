@@ -1,6 +1,7 @@
 import { createMiddleware } from "hono/factory";
 import { RATE_LIMITS, type RateAction } from "@milav/shared";
 import type { AppEnv } from "./env";
+import { logWarn } from "./telemetry";
 
 const MINUTE = 60;
 const DAY = 86_400;
@@ -48,6 +49,8 @@ export const rateLimit = (action: RateAction) =>
   createMiddleware<AppEnv>(async (c, next) => {
     const result = await consumeRateLimit(c.env.DB, c.get("user").id, action);
     if (!result.ok) {
+      // Частые отказы у одного ученика: либо лимит слишком строгий, либо кто-то шлёт запросы скриптом.
+      logWarn("rate_limited", { uid: c.get("user").id, action, retryAfter: result.retryAfter });
       c.header("Retry-After", String(result.retryAfter));
       return c.json({ error: "rate_limited", retryAfter: result.retryAfter }, 429);
     }

@@ -21,6 +21,8 @@ export interface TelegramWebApp {
   initData: string;
   /** Платформа приложения Telegram: ios, android, tdesktop, macos, weba, webk и т. д. */
   platform?: string;
+  /** Версия Telegram WebApp API, например «8.0» (для отчётов об ошибках). */
+  version?: string;
   /** Разобранные данные запуска. В настоящем Telegram есть всегда; необязательное поле защищает от упрощённых имитаций. */
   initDataUnsafe?: { user?: TelegramUser; start_param?: string };
   ready: () => void;

@@ -3,6 +3,15 @@
   "name": "milav",
   "main": "apps/api/src/index.ts",
   "compatibility_date": "2025-09-01",
+  // Журналы (Workers Logs, ROADMAP п. 9): ошибки сервера и приложения, события воронки (apps/api/src/telemetry.ts).
+  // Бесплатно 200 000 записей в сутки, хранятся 3 дня; с 01.12.2026 бесплатно 0,5 ГБ в сутки (docs/DEPLOY.md).
+  // invocation_logs: запись о каждом запросе к /api/* (адрес, код ответа, время процессора). Если упрёмся в лимит,
+  // первым делом уменьшить head_sampling_rate (доля запросов, которые попадают в журнал).
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "logs": { "invocation_logs": true }
+  },
   // Worker раздаёт собранное мини-приложение и отвечает на /api/*
   "assets": {
     "directory": "apps/web/dist",

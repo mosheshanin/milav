@@ -21,7 +21,9 @@ export const RECORD: Screen = { name: "record" };
 export const ACHIEVEMENTS: Screen = { name: "achievements" };
 export const LEADERBOARD: Screen = { name: "leaderboard" };
 
-const KEY = "milav:screen";
+/** Ключ в sessionStorage. Его же читает отчёт об ошибке (lib/telemetry.ts), чтобы знать экран. */
+export const SCREEN_KEY = "milav:screen";
+const KEY = SCREEN_KEY;
 
 /** Минимум от Storage, чтобы код проверялся без браузера. */
 export interface ScreenStorage {

@@ -1,4 +1,5 @@
 import { readBodyLimited } from "./body";
+import { describeError, logError } from "./telemetry";
 
 const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
 /** Запись слова длится несколько секунд; всё, что больше, это не слово. */
@@ -36,7 +37,9 @@ export async function transcribeHebrew(ai: unknown, audio: Uint8Array): Promise<
       task: "transcribe",
     })) as { text?: string };
     return (out.text ?? "").trim();
-  } catch {
+  } catch (err) {
+    // Причина сбоя Workers AI (лимит нейронов, таймаут, формат записи) видна только здесь: пишем её в журнал.
+    logError("whisper_error", describeError(err));
     return null;
   }
 }

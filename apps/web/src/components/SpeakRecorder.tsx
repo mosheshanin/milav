@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Mic, Square } from "lucide-react";
 import { ApiError } from "../api";
 import { micPermission, type MicState } from "../lib/mic";
+import { reportEvent } from "../lib/telemetry";
 import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
 import { MicAsk, MicDenied } from "./MicNotice";
 import { Equalizer } from "./Equalizer";
@@ -104,6 +105,8 @@ export function SpeakRecorder<R extends SpeakVerdict>({
       void finish(rec.finished);
     } catch (e) {
       const problem = e instanceof RecorderError ? e.problem : "unsupported";
+      // Сколько учеников не может включить микрофон и на каких платформах: без этого этап «говори» не пройти.
+      reportEvent("mic_problem", problem);
       setMic(problem);
     } finally {
       setStarting(false);
