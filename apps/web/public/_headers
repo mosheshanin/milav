@@ -11,3 +11,8 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Permissions-Policy: microphone=(self), camera=(), geolocation=(), payment=(), usb=()
+
+# Озвучка: файл меняется только при переозвучке (`--force`, docs/AUDIO.md), поэтому телефон хранит его сутки
+# и не спрашивает сервер при каждом нажатии «послушать». После переозвучки старый звук может играть у ученика до суток.
+/audio/*
+  Cache-Control: public, max-age=86400
