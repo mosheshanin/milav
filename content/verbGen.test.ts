@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { VERB_FORMS_TOTAL, normalizeHebrew, verbForms } from "@milav/shared";
-import { KATAV, KATAV_INFINITIVE } from "./verbFixture";
+import { DIBER, DIBER_INFINITIVE, KATAV, KATAV_INFINITIVE } from "./verbFixture";
 import { stressProblems, skeletonProblems, stripStress, syllables, verbProblems } from "./rules";
-import { SIN_ROOTS, conjugatePaal, paalRootProblems } from "./verbGen";
-import { PAAL_LESSONS, buildPaalLesson } from "./verbLessons";
+import { SIN_ROOTS, conjugatePaal, conjugatePiel, paalRootProblems, pielRootProblems } from "./verbGen";
+import { PAAL_LESSONS, PIEL_LESSONS, buildPaalLesson, buildPielLesson } from "./verbLessons";
 
 const ROOTS = PAAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
 
@@ -172,5 +172,153 @@ describe("уроки пааль: составлены генератором", (
       expect(lesson).toMatchObject({ id: `paal-${n}`, free: true, topicId: "paal", section: "verbs", topic: "Пааль" });
     }
     expect(() => buildPaalLesson(4)).toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Пиэль
+
+const PIEL_ROOTS = PIEL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
+
+describe("генератор форм пиэль: образец «говорить»", () => {
+  it("для корня דבר получает те же 27 форм и инфинитив, что набраны в образце вручную", () => {
+    const { infinitive, verb } = conjugatePiel("דבר");
+    expect(infinitive).toEqual(DIBER_INFINITIVE);
+    expect(verb).toEqual(DIBER);
+  });
+
+  it("всегда 27 форм, бинъян пиэль, корень сохранён, приставки бинъяна на месте", () => {
+    for (const root of PIEL_ROOTS) {
+      const { infinitive, verb } = conjugatePiel(root);
+      expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+      expect(verb.binyan).toBe("piel");
+      expect(verb.root).toBe(root);
+      expect(infinitive.he.startsWith("ל")).toBe(true);
+      expect(verb.present.ms.he.startsWith("מ")).toBe(true);
+    }
+  });
+});
+
+describe("генератор форм пиэль: правила огласовок", () => {
+  const same = (actual: string, expected: string) => expect(actual.normalize("NFD")).toBe(expected.normalize("NFD"));
+  const form = (root: string, tense: "present" | "past" | "future" | "imperative", key: string) => {
+    const set = conjugatePiel(root).verb[tense] as Record<string, { he: string; niqqud: string; translit: string }>;
+    return set[key]!;
+  };
+
+  it("удвоение второй буквы корня во всех формах: дагеш, а ב כ פ твёрдые (б, к, п)", () => {
+    for (const root of PIEL_ROOTS) {
+      for (const { form: f } of verbForms(conjugatePiel(root).verb)) {
+        const c2 = [...root][1]!;
+        expect(f.niqqud.normalize("NFD"), `${root} ${f.niqqud}`).toMatch(new RegExp(`${c2}[\u05B0-\u05BB\u05C1]*\u05BC`));
+      }
+    }
+    expect(form("קבל", "present", "ms").translit).toBe("мекабе́л");
+    expect(form("כבס", "past", "3ms").translit).toBe("кибе́с");
+    expect(form("ספר", "present", "ms").translit).toBe("месапе́р");
+    expect(form("סכמ", "imperative", "ms").translit).toBe("саке́м");
+  });
+
+  it("первая буква корня: дагеш в начале слова (прошедшее, повелительное), без дагеша после приставки с подвижной шва", () => {
+    same(form("בקר", "past", "3ms").niqqud, "בִּיקֵּר");
+    expect(form("בקר", "past", "3ms").translit).toBe("бике́р");
+    same(conjugatePiel("בקר").infinitive.niqqud, "לְבַקֵּר");
+    expect(conjugatePiel("בקר").infinitive.translit).toBe("леваке́р");
+    expect(form("כבס", "present", "ms").translit).toBe("мехабе́с");
+    expect(form("פטר", "future", "3ms").translit).toBe("ефате́р");
+    same(form("פטר", "imperative", "ms").niqqud, "פַּטֵּר");
+    expect(form("פטר", "imperative", "ms").translit).toBe("пате́р");
+  });
+
+  it("приставки будущего: אֲ «а», остальные с подвижной шва «е»; окончание ת после немой шва с дагешем", () => {
+    same(form("שלמ", "future", "1s").niqqud, "אֲשַׁלֵּם");
+    expect(form("שלמ", "future", "1s").translit).toBe("ашале́м");
+    same(form("שלמ", "future", "2ms").niqqud, "תְּשַׁלֵּם");
+    expect(form("שלמ", "future", "1p").translit).toBe("нешале́м");
+    same(form("שלמ", "past", "1s").niqqud, "שִׁילַּמְתִּי");
+    same(form("קפל", "past", "2fs").niqqud, "קִיפַּלְתְּ");
+  });
+
+  it("конечные формы и полное письмо прошедшего с י", () => {
+    expect(form("שלמ", "past", "3ms").he).toBe("שילם");
+    expect(form("שלמ", "past", "2mp").he).toBe("שילמתם");
+    expect(form("שפצ", "present", "ms").he).toBe("משפץ");
+    expect(form("לטפ", "imperative", "ms").he).toBe("לטף");
+    expect(form("לטפ", "imperative", "fs").he).toBe("לטפי");
+    expect(conjugatePiel("קלפ").infinitive.he).toBe("לקלף");
+    for (const root of PIEL_ROOTS) {
+      for (const f of Object.values(conjugatePiel(root).verb.past)) expect(f.he[1], f.he).toBe("י");
+    }
+  });
+
+  it("ударение как в пааль: -ти, -та, -ну без ударения, -тем, -тен, 3-е лицо ударные; ж.р. настоящего и формы на -на на предпоследнем", () => {
+    expect(form("קבל", "past", "1s").translit).toBe("киба́лти");
+    expect(form("קבל", "past", "2ms").translit).toBe("киба́лта");
+    expect(form("קבל", "past", "1p").translit).toBe("киба́лну");
+    expect(form("קבל", "past", "2mp").translit).toBe("кибалте́м");
+    expect(form("קבל", "past", "3fs").translit).toBe("кибла́");
+    expect(form("קבל", "present", "fs").translit).toBe("мекабе́лет");
+    expect(form("קבל", "future", "2fp").translit).toBe("текабе́лна");
+    expect(form("קבל", "imperative", "fp").translit).toBe("кабе́лна");
+  });
+});
+
+describe("генератор форм пиэль: отказ на неподходящих корнях", () => {
+  const bad: [string, string][] = [
+    ["ברכ", "ר во второй букве"],
+    ["סמנ", "נ в конце"],
+    ["שכת", "ת в конце"],
+    ["חפש", "гортанная ח"],
+    ["נקה", "слабая ה, נ в начале"],
+    ["ציר", "י в корне"],
+    ["בשר", "пишется с син"],
+    ["שמש", "одинаковые буквы"],
+    ["טלפנ", "четыре буквы"],
+  ];
+  for (const [root, why] of bad) {
+    it(`корень ${root} (${why}) отклоняется`, () => {
+      expect(pielRootProblems(root).length).toBeGreaterThan(0);
+      expect(() => conjugatePiel(root)).toThrow();
+    });
+  }
+});
+
+describe("уроки пиэль: составлены генератором", () => {
+  it("3 урока по 10 глаголов, все корни разные, ключи уникальны, корни не с син", () => {
+    expect(PIEL_LESSONS).toHaveLength(3);
+    for (const lesson of PIEL_LESSONS) expect(lesson.verbs).toHaveLength(10);
+    expect(new Set(PIEL_ROOTS).size).toBe(30);
+    const keys = PIEL_LESSONS.flatMap((l) => l.verbs.map((v) => v.key));
+    expect(new Set(keys).size).toBe(30);
+    for (const root of PIEL_ROOTS) expect(SIN_ROOTS).not.toContain(root);
+  });
+
+  it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
+    for (const root of PIEL_ROOTS) expect(pielRootProblems(root), root).toEqual([]);
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildPielLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
+      for (const word of lesson.words) {
+        expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
+        for (const { form } of verbForms(word.verb)) {
+          expect(stressProblems(form.translit), form.translit).toEqual([]);
+          expect(skeletonProblems(form.he, form.translit), form.translit).toEqual([]);
+          expect(normalizeHebrew(form.niqqud)).toBe(normalizeHebrew(form.he));
+        }
+      }
+    }
+  });
+
+  it("урок 1–3 бесплатный, id piel-<номер>, тема «Пиэль» раздел verbs; фраза с настоящим временем", () => {
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildPielLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
+      expect(lesson).toMatchObject({ id: `piel-${n}`, free: true, topicId: "piel", section: "verbs", topic: "Пиэль" });
+      for (const w of lesson.words) {
+        expect(w.id.startsWith(`piel-${n}-`)).toBe(true);
+        expect(w.example.he).not.toContain("{");
+      }
+    }
+    const speak = (buildPielLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[0]!;
+    expect(speak.example).toMatchObject({ he: "אני מדבר עברית", translit: "ани медабер иврит" });
+    expect(() => buildPielLesson(4)).toThrow();
   });
 });
