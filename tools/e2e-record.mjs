@@ -5,6 +5,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { revealLesson } from "./e2e-home.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -93,7 +94,7 @@ sql("DELETE FROM letter_templates;");
 // ---------- Обычный запуск владельца не открывает запись ----------
 {
   const page = await openPage("dev=1001");
-  await page.waitForSelector('[data-testid="lesson-animals-1"]');
+  await revealLesson(page, "animals-1");
   check((await page.locator('[data-testid="record-summary"]').count()) === 0, "без параметра запуска открывается главная, а не запись");
   await page.context().close();
 }
@@ -151,7 +152,7 @@ await shot(page, "r5-reload");
 
 // «Назад» из сетки ведёт на главную.
 await page.getByRole("button", { name: "Назад" }).click();
-await page.waitForSelector('[data-testid="lesson-animals-1"]');
+await revealLesson(page, "animals-1");
 check(true, "стрелка назад в сетке ведёт на главную");
 
 // Рисунки лежат в базе (приёмник), номера и форма верны.

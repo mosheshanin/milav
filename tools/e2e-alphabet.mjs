@@ -7,6 +7,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { revealLesson } from "./e2e-home.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -135,11 +136,11 @@ const seedSql = (id) =>
 const A = 2101;
 resetUser(A);
 let page = await openPage(A);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await shot(page, "01-home");
 check(await page.locator('[data-testid="alphabet-section"]').isVisible(), "на главной есть раздел «Алфавит»");
 {
-  const order = (await page.$$eval("main h2", (els) => els.map((e) => e.textContent))).filter((t) => t !== "Мой путь");
+  const order = await page.$$eval('[data-testid="home-lessons"] h2 [data-title]', (els) => els.map((e) => e.textContent));
   check(order[0] === "Алфавит", `«Алфавит» стоит первым на главной (разделы: ${order.join(", ")})`);
 }
 check((await page.textContent('[data-testid="points"]')) === "0", "на старте 0 очков");
@@ -230,7 +231,7 @@ await shot(page, "11b-celebration");
 await page.click('[data-testid="celebration-close"]');
 await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
 await page.click('[data-testid="quiz-home"]');
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await page.waitForTimeout(500);
 await shot(page, "12-home-after");
 check((await page.textContent(`[data-testid="lesson-${lesson.id}"]`)).includes("Сдан"), "на главной урок алфавита помечен «Сдан»");
@@ -242,7 +243,7 @@ const B = 2102;
 resetUser(B);
 sql(seedSql(B));
 page = await openPage(B);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await page.click(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForSelector('[data-testid="letter-he"]');
 await page.click('[data-testid="to-quiz"], [data-testid="open-quiz"]');

@@ -9,6 +9,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { revealLesson } from "./e2e-home.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -141,7 +142,7 @@ const seed = lesson.words
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seed};`);
 
 let page = await openPage(A);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await shot(page, "01-home");
 
 // Заголовки безопасности: статика получает CSP из _headers, API свои заголовки из Worker.
@@ -313,7 +314,7 @@ await shot(page, "11b-celebration");
 await page.click('[data-testid="celebration-close"]');
 await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
 await page.click('[data-testid="quiz-home"]');
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await page.waitForTimeout(500);
 await shot(page, "17-home-after");
 check((await page.textContent("body")).includes("Сдан"), "на главной урок помечен «Сдан»");
@@ -325,7 +326,7 @@ sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${B}, 'Тестер');
 const seedB = lesson.words.map((w) => `(${B}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, datetime('now'))`).join(",");
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedB};`);
 page = await openPage(B);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await page.click(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForSelector('[data-testid="word-he"]');
 check((await page.textContent('[data-testid="points"]')) === "10", "у готового урока 10 очков");
@@ -374,7 +375,7 @@ async function openSpeak(initScript) {
   if (initScript) await p.addInitScript(initScript);
   watchCsp(p);
   await p.goto(`${BASE}/?dev=${C}`);
-  await p.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+  await revealLesson(p, lesson.id);
   await p.click(`[data-testid="lesson-${lesson.id}"]`);
   return p;
 }

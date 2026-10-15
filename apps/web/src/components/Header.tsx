@@ -8,7 +8,8 @@ export function Header({
   onBack,
   onStatus,
 }: {
-  title: string;
+  /** Без названия (главная) в шапке только крупный логотип, очки и фигура статуса. */
+  title?: string;
   subtitle?: string;
   onBack?: () => void;
   /** Если задан, фигура статуса становится кнопкой (на главной ведёт к достижениям). */
@@ -27,10 +28,10 @@ export function Header({
           <ArrowLeft className="size-icon" />
         </button>
       ) : (
-        <img src="/logo.png" alt="Milav" className="h-8" />
+        <img src="/logo.png" alt="Milav" className={title ? "h-8" : "h-14"} data-testid="header-logo" />
       )}
       <div className="min-w-0 flex-1">
-        <h1 className="truncate font-bold leading-tight">{title}</h1>
+        {title && <h1 className="truncate font-bold leading-tight">{title}</h1>}
         {subtitle && <p className="truncate text-sm text-ink-soft">{subtitle}</p>}
       </div>
       <Chip tone="accent">

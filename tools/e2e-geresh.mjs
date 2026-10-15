@@ -6,6 +6,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { revealLesson } from "./e2e-home.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -96,7 +97,7 @@ const seedSql = (id) =>
 const A = 2201;
 resetUser(A);
 let page = await openPage(A);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 check((await page.textContent(`[data-testid="lesson-${lesson.id}"]`)).includes("Звуки дж, ж, ч"), "на главной есть урок «Звуки дж, ж, ч»");
 check((await page.textContent(`[data-testid="lesson-${lesson.id}"]`)).includes(`ג${GERESH}`), "в строке урока видны формы с гереш");
 await shot(page, "01-home");
@@ -172,7 +173,7 @@ const B = 2202;
 resetUser(B);
 sql(seedSql(B));
 page = await openPage(B);
-await page.waitForSelector(`[data-testid="lesson-${lesson.id}"]`);
+await revealLesson(page, lesson.id);
 await page.click(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForSelector('[data-testid="letter-he"]');
 await page.click('[data-testid="to-quiz"], [data-testid="open-quiz"]');

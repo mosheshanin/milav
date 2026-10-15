@@ -6,6 +6,7 @@
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { revealLesson } from "./e2e-home.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -112,6 +113,7 @@ check((await text(page, "home-goal")).includes("0 из 5"), "цель дня в�
 check((await page.locator('[data-testid="unseen-dot"]').count()) === 0, "у новичка нет красной точки у статуса");
 check((await page.locator('[data-testid="open-leaderboard"]').count()) === 1, "кнопка «Таблица лидеров» есть (в локальной среде включена)");
 
+await revealLesson(page, alphabet.id);
 await page.click(`[data-testid="lesson-${alphabet.id}"]`);
 await page.waitForSelector('[data-testid="keyboard"]');
 await page.locator('[data-testid="keyboard"] button').filter({ hasText: alef.he }).click();

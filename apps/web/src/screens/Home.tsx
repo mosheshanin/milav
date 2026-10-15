@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, ChevronRight, Lock } from "lucide-react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { CheckCircle2, ChevronDown, ChevronRight, Lock } from "lucide-react";
 import { alphabetLessons, allLessons, lessons } from "@milav/content";
 import {
   ALPHABET_GROUPS,
@@ -17,12 +17,19 @@ import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
 import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../components/play";
 import { Button, Card, Chip } from "../components/ui";
+import { lessonEmoji, topicEmoji } from "../lib/homeEmoji";
+import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { findResume } from "../lib/resume";
 
 const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
 
-/** Уроки: сначала алфавит (с него начинает новичок), потом разделы и темы. */
+type Progress = Record<string, LessonProgressResponse>;
+
+/** Карточка раздела без внутреннего отступа: отступы задают заголовок и список внутри. */
+const FOLD_CARD = "rounded-card border border-line bg-surface";
+
+/** Уроки: сначала алфавит (с него начинает новичок), потом разделы и темы. Разделы и темы сворачиваются. */
 export function Home({
   onOpen,
   onOpenQuiz,
@@ -39,6 +46,14 @@ export function Home({
   /** Бейджи, о которых человек ещё не знает (найдены при пересчёте или потеряны уведомления). */
   const [unseen, setUnseen] = useState<{ ids: string[]; retro: boolean } | null>(null);
   const unseenChecked = useRef(false);
+  /** Развёрнутые разделы и темы (по умолчанию всё свёрнуто, состояние запоминается на устройстве). */
+  const [open, setOpen] = useState<Set<string>>(loadOpen);
+  const toggle = (key: string) =>
+    setOpen((prev) => {
+      const next = toggled(prev, key);
+      saveOpen(next);
+      return next;
+    });
 
   // Ритм и цель дня могли измениться в уроке: при возврате на главную профиль перечитывается, если он устарел.
   useEffect(() => {
@@ -57,7 +72,7 @@ export function Home({
       () => undefined,
     );
   }, [me.play.unseenBadges]);
-  const [progress, setProgress] = useState<Record<string, LessonProgressResponse>>({});
+  const [progress, setProgress] = useState<Progress>({});
   /** Сколько запросов прогресса завершилось (успешно или нет). */
   const [settled, setSettled] = useState(0);
   const freeLessons = allLessons.filter((l) => l.free);
@@ -80,10 +95,11 @@ export function Home({
   const resume = settled >= freeLessons.length ? findResume(allLessons, progress) : null;
   const resumeLesson = resume ? allLessons.find((l) => l.id === resume.lessonId) : undefined;
   const resumeLetters = resumeLesson ? isAlphabetLesson(resumeLesson) : false;
+  const alphabetOpen = open.has(sectionKey("alphabet"));
 
   return (
     <>
-      <Header title="Milav" subtitle={`${me.status.name} · сдано уроков: ${me.passedLessons}`} onStatus={onAchievements} />
+      <Header onStatus={onAchievements} />
       <main className="mx-auto flex max-w-md flex-col gap-section p-block pb-section">
         {me.play.recap && !recapHidden && !recapDismissed(me.play.recap.weekIdx) && (
           <Card className="flex items-start gap-3" data-testid="recap">
@@ -151,6 +167,7 @@ export function Home({
                     : "Начните с первого урока"}
               </div>
               <div className="font-semibold">
+                {lessonEmoji(resumeLesson)}{" "}
                 {resumeLetters ? `Алфавит. Урок ${resumeLesson.number}.` : `Урок ${resumeLesson.number}.`} {resumeLesson.title}
               </div>
               {resume.kind === "word" && (
@@ -169,37 +186,89 @@ export function Home({
             </Button>
           </Card>
         )}
-        <section className="flex flex-col gap-block" data-testid="alphabet-section">
-          <h2 className="text-lg font-bold">{ALPHABET_TITLE}</h2>
-          <p className="text-sm text-ink-soft">
-            27 форм букв иврита, включая 5 конечных: послушайте, напишите и наберите каждую. В последнем уроке звуки дж, ж и ч, которых в иврите нет: их пишут буквой со знаком гереш. Весь алфавит бесплатный.
-          </p>
-          <div className="flex flex-col gap-2">
-            {alphabetLessons.map((lesson) => (
-              <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
-            ))}
-          </div>
-          {alphabetLessons.length < ALPHABET_GROUPS.length && (
-            <p className="text-ink-soft">Остальные уроки алфавита скоро появятся.</p>
-          )}
-        </section>
-        {SECTIONS.map((section) => {
-          const inSection = lessons.filter((l) => l.section === section);
-          return (
-            <section key={section} className="flex flex-col gap-block">
-              <h2 className="text-lg font-bold">{SECTION_TITLES[section]}</h2>
-              {inSection.length === 0 && <p className="text-ink-soft">Скоро здесь появятся уроки.</p>}
-              {topicsOf(inSection).map(([topic, items]) => (
-                <div key={topic} className="flex flex-col gap-2">
-                  <h3 className="font-semibold text-ink-soft">{topic}</h3>
-                  {items.map((lesson) => (
-                    <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
-                  ))}
-                </div>
-              ))}
-            </section>
-          );
-        })}
+        <div className="flex flex-col gap-3" data-testid="home-lessons">
+          <section className={FOLD_CARD} data-testid="alphabet-section">
+            <h2>
+              <FoldButton
+                open={alphabetOpen}
+                onToggle={() => toggle(sectionKey("alphabet"))}
+                lessons={alphabetLessons}
+                progress={progress}
+                testId="fold-section-alphabet"
+                className="px-block py-3"
+              >
+                <Emoji>{topicEmoji("alphabet")}</Emoji>
+                <span className="text-lg font-bold" data-title>
+                  {ALPHABET_TITLE}
+                </span>
+              </FoldButton>
+            </h2>
+            {alphabetOpen && (
+              <div className="flex flex-col gap-2 px-3 pb-3">
+                {alphabetLessons.map((lesson) => (
+                  <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
+                ))}
+                {alphabetLessons.length < ALPHABET_GROUPS.length && (
+                  <p className="text-ink-soft">Остальные уроки алфавита скоро появятся.</p>
+                )}
+              </div>
+            )}
+          </section>
+          {SECTIONS.map((section) => {
+            const inSection = lessons.filter((l) => l.section === section);
+            const sectionOpen = open.has(sectionKey(section));
+            return (
+              <section key={section} className={FOLD_CARD} data-testid={`section-${section}`}>
+                <h2>
+                  <FoldButton
+                    open={sectionOpen}
+                    onToggle={() => toggle(sectionKey(section))}
+                    lessons={inSection}
+                    progress={progress}
+                    testId={`fold-section-${section}`}
+                    className="px-block py-3"
+                  >
+                    <span className="text-lg font-bold" data-title>
+                      {SECTION_TITLES[section]}
+                    </span>
+                  </FoldButton>
+                </h2>
+                {sectionOpen && (
+                  <div className="flex flex-col gap-2 px-3 pb-3">
+                    {inSection.length === 0 && <p className="text-ink-soft">Скоро здесь появятся уроки.</p>}
+                    {topicsOf(inSection).map(({ topicId, topic, items }) => {
+                      const topicOpen = open.has(topicKey(topicId));
+                      return (
+                        <div key={topicId} className="rounded-control border border-line" data-testid={`topic-${topicId}`}>
+                          <h3>
+                            <FoldButton
+                              open={topicOpen}
+                              onToggle={() => toggle(topicKey(topicId))}
+                              lessons={items}
+                              progress={progress}
+                              testId={`fold-topic-${topicId}`}
+                              className="px-3 py-2"
+                            >
+                              <Emoji>{topicEmoji(topicId)}</Emoji>
+                              <span className="font-semibold">{topic}</span>
+                            </FoldButton>
+                          </h3>
+                          {topicOpen && (
+                            <div className="flex flex-col gap-2 px-2 pb-2">
+                              {items.map((lesson) => (
+                                <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+            );
+          })}
+        </div>
       </main>
       {unseen && (
         <CelebrationSheet
@@ -215,10 +284,66 @@ export function Home({
   );
 }
 
-function topicsOf(items: Lesson[]): [string, Lesson[]][] {
-  const map = new Map<string, Lesson[]>();
-  for (const lesson of items) map.set(lesson.topic, [...(map.get(lesson.topic) ?? []), lesson]);
-  return [...map.entries()].map(([topic, list]) => [topic, list.sort((a, b) => a.number - b.number)]);
+function topicsOf(items: Lesson[]): { topicId: string; topic: string; items: Lesson[] }[] {
+  const map = new Map<string, { topicId: string; topic: string; items: Lesson[] }>();
+  for (const lesson of items) {
+    const entry = map.get(lesson.topicId) ?? { topicId: lesson.topicId, topic: lesson.topic, items: [] };
+    entry.items.push(lesson);
+    map.set(lesson.topicId, entry);
+  }
+  return [...map.values()].map((t) => ({ ...t, items: [...t.items].sort((a, b) => a.number - b.number) }));
+}
+
+function Emoji({ children }: { children: ReactNode }) {
+  return (
+    <span className="text-xl leading-none" aria-hidden>
+      {children}
+    </span>
+  );
+}
+
+/**
+ * Заголовок раздела или темы, который сворачивает и разворачивает список.
+ * Справа сводка: сколько уроков и сколько из них сдано, чтобы прогресс был виден и в свёрнутом виде.
+ * `data-lessons` нужен сквозным тестам: по нему они находят, что развернуть, чтобы добраться до урока.
+ */
+function FoldButton({
+  open,
+  onToggle,
+  lessons: items,
+  progress,
+  testId,
+  className = "",
+  children,
+}: {
+  open: boolean;
+  onToggle: () => void;
+  lessons: AnyLesson[];
+  progress: Progress;
+  testId: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  const passed = items.filter((l) => progress[l.id]?.quiz.passed).length;
+  const summary =
+    passed > 0 ? `сдано ${passed} из ${items.length}` : `${items.length} ${plural(items.length, "урок", "урока", "уроков")}`;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={open}
+      data-testid={testId}
+      data-lessons={items.map((l) => l.id).join(" ")}
+      className={`flex min-h-12 w-full items-center gap-3 rounded-card text-left active:bg-page ${className}`}
+    >
+      {children}
+      <span className="ml-auto shrink-0 text-sm text-ink-soft">{summary}</span>
+      <ChevronDown
+        className={`size-icon shrink-0 text-ink-soft transition-transform ${open ? "rotate-180" : ""}`}
+        aria-hidden
+      />
+    </button>
+  );
 }
 
 function LessonRow({
@@ -235,43 +360,47 @@ function LessonRow({
   const done = progress?.words.filter((w) => w.completed).length ?? 0;
   const passed = progress?.quiz.passed ?? false;
   return (
-    <Card className="p-0">
-      <button
-        type="button"
-        onClick={() => onOpen(lesson.id)}
-        data-testid={`lesson-${lesson.id}`}
-        className="flex w-full items-center gap-3 rounded-card p-block text-left active:bg-page"
+    <button
+      type="button"
+      onClick={() => onOpen(lesson.id)}
+      data-testid={`lesson-${lesson.id}`}
+      className="flex w-full items-center gap-2.5 rounded-control bg-page p-2.5 text-left active:bg-line"
+    >
+      <span
+        className="flex size-10 shrink-0 items-center justify-center rounded-control bg-surface text-xl leading-none"
+        aria-hidden
       >
-        <div className="min-w-0 flex-1">
-          <div className="font-semibold">
-            Урок {lesson.number}. {lesson.title}
-          </div>
-          {isAlphabetLesson(lesson) && (
-            <div dir="rtl" lang="he" className="font-hebrew text-xl text-ink-soft">
-              {lesson.letters.map((l) => l.he).join(" ")}
-            </div>
-          )}
-          <div className="mt-1 flex flex-wrap items-center gap-2">
-            <Chip tone={done === items.length ? "success" : "neutral"}>
-              {letters ? "Букв" : "Слов"}: {done} из {items.length}
-            </Chip>
-            {!passed && done === items.length && <Chip tone="accent">Викторина открыта</Chip>}
-            {passed && (
-              <Chip tone="success">
-                <CheckCircle2 className="size-4" aria-hidden />
-                Сдан
-              </Chip>
-            )}
-            {!lesson.free && (
-              <Chip tone="accent">
-                <Lock className="size-4" aria-hidden />
-                Подписка
-              </Chip>
-            )}
-          </div>
+        {lessonEmoji(lesson)}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="font-semibold">
+          Урок {lesson.number}. {lesson.title}
         </div>
-        <ChevronRight className="size-icon text-ink-soft" aria-hidden />
-      </button>
-    </Card>
+        {isAlphabetLesson(lesson) && (
+          <div dir="rtl" lang="he" className="font-hebrew text-xl text-ink-soft">
+            {lesson.letters.map((l) => l.he).join(" ")}
+          </div>
+        )}
+        <div className="mt-1 flex flex-wrap items-center gap-2">
+          <Chip tone={done === items.length ? "success" : "neutral"}>
+            {letters ? "Букв" : "Слов"}: {done} из {items.length}
+          </Chip>
+          {!passed && done === items.length && <Chip tone="accent">Викторина открыта</Chip>}
+          {passed && (
+            <Chip tone="success">
+              <CheckCircle2 className="size-4" aria-hidden />
+              Сдан
+            </Chip>
+          )}
+          {!lesson.free && (
+            <Chip tone="accent">
+              <Lock className="size-4" aria-hidden />
+              Подписка
+            </Chip>
+          )}
+        </div>
+      </div>
+      <ChevronRight className="size-icon shrink-0 text-ink-soft" aria-hidden />
+    </button>
   );
 }
