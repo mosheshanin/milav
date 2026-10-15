@@ -53,13 +53,13 @@
           "1s": {
             "he": "כתבתי",
             "niqqud": "כָּתַבְתִּי",
-            "translit": "катавти́",
+            "translit": "ката́вти",
             "audio": "/audio/paal-1-write-form-past-1s.mp3"
           },
           "2ms": {
             "he": "כתבת",
             "niqqud": "כָּתַבְתָּ",
-            "translit": "катавта́",
+            "translit": "ката́вта",
             "audio": "/audio/paal-1-write-form-past-2ms.mp3"
           },
           "2fs": {
@@ -83,7 +83,7 @@
           "1p": {
             "he": "כתבנו",
             "niqqud": "כָּתַבְנוּ",
-            "translit": "катавну́",
+            "translit": "ката́вну",
             "audio": "/audio/paal-1-write-form-past-1p.mp3"
           },
           "2mp": {
@@ -242,13 +242,13 @@
           "1s": {
             "he": "סגרתי",
             "niqqud": "סָגַרְתִּי",
-            "translit": "сагарти́",
+            "translit": "сага́рти",
             "audio": "/audio/paal-1-close-form-past-1s.mp3"
           },
           "2ms": {
             "he": "סגרת",
             "niqqud": "סָגַרְתָּ",
-            "translit": "сагарта́",
+            "translit": "сага́рта",
             "audio": "/audio/paal-1-close-form-past-2ms.mp3"
           },
           "2fs": {
@@ -272,7 +272,7 @@
           "1p": {
             "he": "סגרנו",
             "niqqud": "סָגַרְנוּ",
-            "translit": "сагарну́",
+            "translit": "сага́рну",
             "audio": "/audio/paal-1-close-form-past-1p.mp3"
           },
           "2mp": {
@@ -431,13 +431,13 @@
           "1s": {
             "he": "שברתי",
             "niqqud": "שָׁבַרְתִּי",
-            "translit": "шаварти́",
+            "translit": "шава́рти",
             "audio": "/audio/paal-1-break-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שברת",
             "niqqud": "שָׁבַרְתָּ",
-            "translit": "шаварта́",
+            "translit": "шава́рта",
             "audio": "/audio/paal-1-break-form-past-2ms.mp3"
           },
           "2fs": {
@@ -461,7 +461,7 @@
           "1p": {
             "he": "שברנו",
             "niqqud": "שָׁבַרְנוּ",
-            "translit": "шаварну́",
+            "translit": "шава́рну",
             "audio": "/audio/paal-1-break-form-past-1p.mp3"
           },
           "2mp": {
@@ -620,13 +620,13 @@
           "1s": {
             "he": "שמרתי",
             "niqqud": "שָׁמַרְתִּי",
-            "translit": "шамарти́",
+            "translit": "шама́рти",
             "audio": "/audio/paal-1-keep-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שמרת",
             "niqqud": "שָׁמַרְתָּ",
-            "translit": "шамарта́",
+            "translit": "шама́рта",
             "audio": "/audio/paal-1-keep-form-past-2ms.mp3"
           },
           "2fs": {
@@ -650,7 +650,7 @@
           "1p": {
             "he": "שמרנו",
             "niqqud": "שָׁמַרְנוּ",
-            "translit": "шамарну́",
+            "translit": "шама́рну",
             "audio": "/audio/paal-1-keep-form-past-1p.mp3"
           },
           "2mp": {
@@ -809,13 +809,13 @@
           "1s": {
             "he": "זכרתי",
             "niqqud": "זָכַרְתִּי",
-            "translit": "захарти́",
+            "translit": "заха́рти",
             "audio": "/audio/paal-1-remember-form-past-1s.mp3"
           },
           "2ms": {
             "he": "זכרת",
             "niqqud": "זָכַרְתָּ",
-            "translit": "захарта́",
+            "translit": "заха́рта",
             "audio": "/audio/paal-1-remember-form-past-2ms.mp3"
           },
           "2fs": {
@@ -839,7 +839,7 @@
           "1p": {
             "he": "זכרנו",
             "niqqud": "זָכַרְנוּ",
-            "translit": "захарну́",
+            "translit": "заха́рну",
             "audio": "/audio/paal-1-remember-form-past-1p.mp3"
           },
           "2mp": {
@@ -998,13 +998,13 @@
           "1s": {
             "he": "גמרתי",
             "niqqud": "גָּמַרְתִּי",
-            "translit": "гамарти́",
+            "translit": "гама́рти",
             "audio": "/audio/paal-1-finish-form-past-1s.mp3"
           },
           "2ms": {
             "he": "גמרת",
             "niqqud": "גָּמַרְתָּ",
-            "translit": "гамарта́",
+            "translit": "гама́рта",
             "audio": "/audio/paal-1-finish-form-past-2ms.mp3"
           },
           "2fs": {
@@ -1028,7 +1028,7 @@
           "1p": {
             "he": "גמרנו",
             "niqqud": "גָּמַרְנוּ",
-            "translit": "гамарну́",
+            "translit": "гама́рну",
             "audio": "/audio/paal-1-finish-form-past-1p.mp3"
           },
           "2mp": {
@@ -1187,13 +1187,13 @@
           "1s": {
             "he": "רקדתי",
             "niqqud": "רָקַדְתִּי",
-            "translit": "ракадти́",
+            "translit": "рака́дти",
             "audio": "/audio/paal-1-dance-form-past-1s.mp3"
           },
           "2ms": {
             "he": "רקדת",
             "niqqud": "רָקַדְתָּ",
-            "translit": "ракадта́",
+            "translit": "рака́дта",
             "audio": "/audio/paal-1-dance-form-past-2ms.mp3"
           },
           "2fs": {
@@ -1217,7 +1217,7 @@
           "1p": {
             "he": "רקדנו",
             "niqqud": "רָקַדְנוּ",
-            "translit": "ракадну́",
+            "translit": "рака́дну",
             "audio": "/audio/paal-1-dance-form-past-1p.mp3"
           },
           "2mp": {
@@ -1376,13 +1376,13 @@
           "1s": {
             "he": "ספרתי",
             "niqqud": "סָפַרְתִּי",
-            "translit": "сафарти́",
+            "translit": "сафа́рти",
             "audio": "/audio/paal-1-count-form-past-1s.mp3"
           },
           "2ms": {
             "he": "ספרת",
             "niqqud": "סָפַרְתָּ",
-            "translit": "сафарта́",
+            "translit": "сафа́рта",
             "audio": "/audio/paal-1-count-form-past-2ms.mp3"
           },
           "2fs": {
@@ -1406,7 +1406,7 @@
           "1p": {
             "he": "ספרנו",
             "niqqud": "סָפַרְנוּ",
-            "translit": "сафарну́",
+            "translit": "сафа́рну",
             "audio": "/audio/paal-1-count-form-past-1p.mp3"
           },
           "2mp": {
@@ -1565,13 +1565,13 @@
           "1s": {
             "he": "בדקתי",
             "niqqud": "בָּדַקְתִּי",
-            "translit": "бадакти́",
+            "translit": "бада́кти",
             "audio": "/audio/paal-1-check-form-past-1s.mp3"
           },
           "2ms": {
             "he": "בדקת",
             "niqqud": "בָּדַקְתָּ",
-            "translit": "бадакта́",
+            "translit": "бада́кта",
             "audio": "/audio/paal-1-check-form-past-2ms.mp3"
           },
           "2fs": {
@@ -1595,7 +1595,7 @@
           "1p": {
             "he": "בדקנו",
             "niqqud": "בָּדַקְנוּ",
-            "translit": "бадакну́",
+            "translit": "бада́кну",
             "audio": "/audio/paal-1-check-form-past-1p.mp3"
           },
           "2mp": {
@@ -1754,13 +1754,13 @@
           "1s": {
             "he": "שפכתי",
             "niqqud": "שָׁפַכְתִּי",
-            "translit": "шафахти́",
+            "translit": "шафа́хти",
             "audio": "/audio/paal-1-pour-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שפכת",
             "niqqud": "שָׁפַכְתָּ",
-            "translit": "шафахта́",
+            "translit": "шафа́хта",
             "audio": "/audio/paal-1-pour-form-past-2ms.mp3"
           },
           "2fs": {
@@ -1784,7 +1784,7 @@
           "1p": {
             "he": "שפכנו",
             "niqqud": "שָׁפַכְנוּ",
-            "translit": "шафахну́",
+            "translit": "шафа́хну",
             "audio": "/audio/paal-1-pour-form-past-1p.mp3"
           },
           "2mp": {

@@ -76,11 +76,16 @@ describe("генератор форм пааль: правила огласов�
     expect(conjugatePaal("רכב").infinitive.translit).toBe("лирко́в");
     expect(form("קפצ", "present", "ms").translit).toBe("кофе́ц");
     expect(form("קפצ", "future", "1s").translit).toBe("экпо́ц");
-    expect(form("שפכ", "past", "1s").translit).toBe("шафахти́");
+    expect(form("שפכ", "past", "1s").translit).toBe("шафа́хти");
   });
 
-  it("ударение: суффиксы прошедшего ударные, а 3fp, 2fp, женское множественное будущего и женское настоящее на предпоследнем слоге", () => {
-    expect(form("גנב", "past", "1s").translit).toBe("ганавти́");
+  it("ударение: в прошедшем -ти, -та, -ну без ударения, -тем, -тен и 3-е лицо ударные; 3fp, 2fp, женское множественное будущего и женское настоящее на предпоследнем слоге", () => {
+    expect(form("גנב", "past", "1s").translit).toBe("гана́вти");
+    expect(form("גנב", "past", "2ms").translit).toBe("гана́вта");
+    expect(form("גנב", "past", "2fs").translit).toBe("гана́вт");
+    expect(form("גנב", "past", "1p").translit).toBe("гана́вну");
+    expect(form("גנב", "past", "2mp").translit).toBe("гнавте́м");
+    expect(form("גנב", "past", "3p").translit).toBe("ганву́");
     expect(form("גנב", "past", "3ms").translit).toBe("гана́в");
     expect(form("גנב", "past", "3fs").translit).toBe("ганва́");
     expect(form("גנב", "present", "fs").translit).toBe("гоне́вет");
