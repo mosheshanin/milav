@@ -210,6 +210,9 @@ describe("пересчёт для существующих пользовате�
   });
 
   it("счётчики после пересчёта совпадают с теми, что накопились при живых событиях", async () => {
+    // Дату прохождения слова пишет SQLite (`datetime('now')`, настоящие часы), а живые счётчики считаются по времени теста.
+    // Чтобы день совпал в любой день запуска, время теста здесь равно настоящему.
+    vi.setSystemTime(vi.getRealSystemTime());
     await completeLesson(1);
     await playQuiz(1, await startQuiz(1));
     for (const l of alphabetLesson.letters) await completeLetter(1, l.id);
