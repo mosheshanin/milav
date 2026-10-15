@@ -40,9 +40,28 @@ import {
   listTemplates,
   parseTemplateStrokes,
   parseTemplateTarget,
+  recorderIds,
   requireRecorder,
   saveTemplate,
 } from "./templateRecorder";
+import {
+  BOT_MAX_UPDATE_BYTES,
+  BOT_WEBHOOK_PATH,
+  commandOf,
+  ensureBotSetupOnce,
+  isTelegramWebhook,
+  replyTo,
+  type TelegramUpdate,
+} from "./bot";
+
+/** Фоновая задача: дожидается её Workers (waitUntil). В тестах контекста выполнения нет, тогда просто не ждём. */
+function inBackground(c: { executionCtx: { waitUntil(promise: Promise<unknown>): void } }, task: Promise<unknown>): void {
+  try {
+    c.executionCtx.waitUntil(task);
+  } catch {
+    void task;
+  }
+}
 
 /** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные (алфавит бесплатный всегда). */
 function canAccessLesson(lesson: AnyLesson): boolean {
@@ -121,6 +140,21 @@ app.post(CLIENT_LOG_PATH, async (c) => {
   return c.body(null, 204);
 });
 
+// Бот: обновления от Telegram. Ответ уходит в теле ответа на вебхук (Telegram выполнит sendMessage сам).
+// Неподписанный запрос получает 401; непонятное обновление 200 без ответа, чтобы Telegram не повторял его.
+app.post(BOT_WEBHOOK_PATH, async (c) => {
+  if (!(await isTelegramWebhook(c.req.header("X-Telegram-Bot-Api-Secret-Token"), c.env.BOT_TOKEN))) {
+    return c.json({ error: "unauthorized" }, 401);
+  }
+  const raw = await readBodyLimited(c.req.raw, BOT_MAX_UPDATE_BYTES);
+  const update = raw ? parseJson<TelegramUpdate>(raw) : null;
+  if (!update || typeof update !== "object") return c.body(null, 200);
+  const reply = replyTo(update, `${new URL(c.req.url).origin}/`);
+  if (!reply) return c.body(null, 200);
+  logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
+  return c.json(reply);
+});
+
 // Профиль, очки, статус и блок «Мой путь». Приложение вызывает это при запуске и присылает свой часовой пояс.
 app.get("/api/me", requireUser, async (c) => {
   const user = c.get("user");
@@ -133,6 +167,11 @@ app.get("/api/me", requireUser, async (c) => {
   if (stats.badgesVer !== catalog.version) await reconcileBadges(c.env.DB, stats, { now, retro: true });
   // Приложение запрашивает профиль при каждом запуске: по этому событию считаем запуски и активных учеников.
   logEvent("app_open", { uid: user.id, tz: timezone, points: totalsOf(stats).points });
+  // Владелец открыл приложение: в фоне проверяем вебхук бота и при необходимости регистрируем его (bot.ts).
+  if (recorderIds(c.env.TEMPLATE_RECORDER_IDS).has(user.id)) {
+    const setup = ensureBotSetupOnce(c.env, new URL(c.req.url).origin);
+    if (setup) inBackground(c, setup);
+  }
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },
     ...totalsOf(stats),
