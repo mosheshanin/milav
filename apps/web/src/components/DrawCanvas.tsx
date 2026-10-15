@@ -11,12 +11,22 @@ import {
 /** Высота «א» в шрифте относительно кегля (подобрано по глифам Gveret Levin). */
 const GLYPH_HEIGHT_PER_EM = 0.7;
 
+/** Кегль подсказки-призрака: обычная буква шрифта занимает строку между направляющими (около 141 px). */
+const GHOST_FONT_SIZE = LINE_HEIGHT / GLYPH_HEIGHT_PER_EM;
+
 /**
- * Толщина линии, которой рисуется буква (px), на экране записи шаблонов и на этапе «пиши». Выбрана владельцем 15.10
- * (было 6). Только для вида: распознавание сравнивает точки штрихов, толщина на него не влияет.
- * От неё же считается толщина превью записанных вариантов (`StrokePreview`).
+ * Толщина штриха в шрифте подсказки Gveret Levin как доля кегля. Измерено 15.10 по всем 27 формам (ширина штриха по оси
+ * буквы, медиана 15,8 px при кегле 141,4 px, половина штрихов от 15 до 16,5 px).
  */
-export const INK_WIDTH = 12;
+const FONT_STROKE_PER_EM = 0.112;
+
+/**
+ * Толщина линии, которой рисуется буква (px), на экране записи шаблонов и на этапе «пиши»: такая же, как у штриха
+ * в шрифте подсказки (решение владельца 15.10; при нынешней геометрии 16 px, раньше было 6, потом 12). Считается
+ * от кегля подсказки, поэтому при изменении холста остаётся равной шрифту. Только для вида: распознавание сравнивает
+ * точки штрихов, толщина на него не влияет. Ею же рисуются превью записанных вариантов (`StrokePreview`).
+ */
+export const INK_WIDTH = Math.round(GHOST_FONT_SIZE * FONT_STROKE_PER_EM);
 
 export interface DrawHandle {
   clear: () => void;
@@ -63,7 +73,7 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
 
     if (ghost) {
       ctx.fillStyle = "#e2e8f0";
-      ctx.font = `${LINE_HEIGHT / GLYPH_HEIGHT_PER_EM}px "Gveret Levin", Heebo, sans-serif`;
+      ctx.font = `${GHOST_FONT_SIZE}px "Gveret Levin", Heebo, sans-serif`;
       ctx.textAlign = "center";
       ctx.textBaseline = "alphabetic";
       ctx.fillText(ghost, width / 2, BASE_LINE * HEIGHT);

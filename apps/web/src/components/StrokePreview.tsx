@@ -2,10 +2,11 @@ import type { Stroke } from "@milav/shared";
 import { INK_WIDTH } from "./DrawCanvas";
 
 /**
- * Толщина линии превью как доля стороны картинки. При толщине холста 6 px было side / 14, то есть доля INK_WIDTH / 84:
- * превью утолщается вместе с холстом (при 12 px это side / 7).
+ * Превью рисуется той же толщиной, что и холст (`INK_WIDTH`, в координатах холста), поэтому выглядит как уменьшенный
+ * рисунок. Маленькие формы (י, ו) превью растягивает на всю ячейку: чтобы они не превращались в кляксу, линия
+ * не толще пятой части стороны картинки.
  */
-const PREVIEW_INK_PER_SIDE = INK_WIDTH / 84;
+const MAX_INK_PER_SIDE = 1 / 5;
 
 /** Маленькая картинка записанных штрихов: по ней видно, что вариант записан, и какой он. */
 export function StrokePreview({ strokes, className = "" }: { strokes: Stroke[]; className?: string }) {
@@ -29,7 +30,7 @@ export function StrokePreview({ strokes, className = "" }: { strokes: Stroke[]; 
           points={stroke.length === 1 ? `${stroke[0]!.x},${stroke[0]!.y} ${stroke[0]!.x + 0.01},${stroke[0]!.y}` : stroke.map((p) => `${p.x},${p.y}`).join(" ")}
           fill="none"
           stroke="currentColor"
-          strokeWidth={side * PREVIEW_INK_PER_SIDE}
+          strokeWidth={Math.min(INK_WIDTH, side * MAX_INK_PER_SIDE)}
           strokeLinecap="round"
           strokeLinejoin="round"
         />
