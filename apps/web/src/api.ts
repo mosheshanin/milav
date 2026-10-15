@@ -1,7 +1,9 @@
 import type {
   AchievementsResponse,
   CohortResponse,
+  HomeResponse,
   LeaderboardResponse,
+  LessonProgressResponse,
   MeResponse,
   PlayEvent,
   PlayInfo,
@@ -72,10 +74,7 @@ export interface SpeechResponse {
   play?: PlayEvent;
 }
 
-export interface LessonProgressResponse {
-  words: WordProgress[];
-  quiz: { passed: boolean; bestCorrect: number | null };
-}
+export type { HomeResponse, LessonProgressResponse };
 
 export const api = {
   /** Профиль; часовой пояс устройства нужен для границы дня (ритм, цель). */
@@ -89,6 +88,8 @@ export const api = {
   settings: (body: SettingsRequest) => request<{ play: PlayInfo }>("/api/settings", jsonPut(body)),
   leaderboard: (board: "week" | "all") => request<LeaderboardResponse>(`/api/leaderboard?board=${board}`),
   cohort: () => request<CohortResponse>("/api/cohort"),
+  /** Главная: прогресс всех доступных уроков одним запросом. */
+  home: () => request<HomeResponse>("/api/home"),
   lessonProgress: (lessonId: string) => request<LessonProgressResponse>(`/api/lessons/${lessonId}/progress`),
   /** Отметка этапа «слушай», «печатай» или «пиши»: для двух последних сервер проверяет доказательство (набранное слово, штрихи). */
   stage: (wordId: string, proof: StageProof) =>

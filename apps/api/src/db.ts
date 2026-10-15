@@ -1,4 +1,4 @@
-import { STAGES, type Stage, type WordProgress } from "@milav/shared";
+import { STAGES, type LessonProgressResponse, type Stage, type WordProgress } from "@milav/shared";
 import type { AuthUser } from "./auth";
 
 const STAGE_COLUMN: Record<Stage, string> = {
@@ -60,6 +60,43 @@ export async function getLessonProgress(
     .all<ProgressRow>();
   const byWord = new Map(results.map((r) => [r.word_id, r]));
   return wordIds.map((id) => toProgress(id, byWord.get(id)));
+}
+
+/**
+ * Прогресс сразу нескольких уроков для главной: три запроса одним пакетом вместо двух-трёх на каждый урок.
+ * Строки читаются только этого пользователя (индексы по user_id), уроки без строк получают пустой прогресс.
+ */
+export async function getHomeProgress(
+  db: D1Database,
+  userId: number,
+  lessons: readonly { id: string; itemIds: readonly string[] }[],
+): Promise<Record<string, LessonProgressResponse>> {
+  const [progress, best, passed] = await db.batch<unknown>([
+    db.prepare("SELECT * FROM word_progress WHERE user_id = ?").bind(userId),
+    db
+      .prepare("SELECT lesson_id, MAX(correct) AS best FROM quiz_attempts WHERE user_id = ? GROUP BY lesson_id")
+      .bind(userId),
+    db.prepare("SELECT lesson_id FROM lesson_passed WHERE user_id = ?").bind(userId),
+  ]);
+  const rows = new Map<string, Map<string, ProgressRow>>();
+  for (const row of (progress?.results ?? []) as (ProgressRow & { lesson_id: string })[]) {
+    const inLesson = rows.get(row.lesson_id) ?? new Map<string, ProgressRow>();
+    inLesson.set(row.word_id, row);
+    rows.set(row.lesson_id, inLesson);
+  }
+  const bestBy = new Map(
+    ((best?.results ?? []) as { lesson_id: string; best: number | null }[]).map((r) => [r.lesson_id, r.best]),
+  );
+  const passedSet = new Set(((passed?.results ?? []) as { lesson_id: string }[]).map((r) => r.lesson_id));
+  const out: Record<string, LessonProgressResponse> = {};
+  for (const lesson of lessons) {
+    const inLesson = rows.get(lesson.id);
+    out[lesson.id] = {
+      words: lesson.itemIds.map((id) => toProgress(id, inLesson?.get(id))),
+      quiz: { passed: passedSet.has(lesson.id), bestCorrect: bestBy.get(lesson.id) ?? null },
+    };
+  }
+  return out;
 }
 
 /** Что обновить в счётчиках в том же пакете, что и отметку этапа (см. markStage). */

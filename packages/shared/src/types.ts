@@ -216,6 +216,17 @@ export interface WordProgress {
   completed: boolean;
 }
 
+/** Прогресс урока: слова (или буквы) по этапам и итог викторины. */
+export interface LessonProgressResponse {
+  words: WordProgress[];
+  quiz: { passed: boolean; bestCorrect: number | null };
+}
+
+/** Ответ GET /api/home: прогресс всех доступных уроков одним запросом (ключ это id урока). */
+export interface HomeResponse {
+  lessons: Record<string, LessonProgressResponse>;
+}
+
 /**
  * Что клиент присылает вместе с отметкой этапа (POST /api/progress/stage).
  * «Говори» здесь нет: его отмечает только проверка речи на сервере.

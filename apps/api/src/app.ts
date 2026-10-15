@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { catalog, findStudyItem, findWord, getAnyLesson } from "@milav/content";
+import { allLessons, catalog, findStudyItem, findWord, getAnyLesson } from "@milav/content";
 import {
   CLIENT_LOG_LIMITS,
   CLIENT_LOG_PATH,
@@ -12,6 +12,7 @@ import {
   lessonItems,
   stagesFor,
   type AnyLesson,
+  type HomeResponse,
   type MeResponse,
   type QuizAnswerResponse,
   type QuizStartResponse,
@@ -21,7 +22,7 @@ import {
 } from "@milav/shared";
 import { requireUser, userFromHeader } from "./auth";
 import { boardWeekNow } from "./board";
-import { ensureUser, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
+import { ensureUser, getHomeProgress, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
 import { applyTimezone, buildPlayInfo, countUnseen, nowSeconds, playRoutes } from "./play";
@@ -137,6 +138,16 @@ app.get("/api/me", requireUser, async (c) => {
     ...totalsOf(stats),
     play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, c.env),
   };
+  return c.json(body);
+});
+
+// Главная: прогресс всех доступных уроков одним запросом (раньше приложение спрашивало каждый урок отдельно).
+app.get("/api/home", requireUser, async (c) => {
+  const user = c.get("user");
+  const available = allLessons
+    .filter(canAccessLesson)
+    .map((lesson) => ({ id: lesson.id, itemIds: lessonItems(lesson).map((item) => item.id) }));
+  const body: HomeResponse = { lessons: await getHomeProgress(c.env.DB, user.id, available) };
   return c.json(body);
 });
 
