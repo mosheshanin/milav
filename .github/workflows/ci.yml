@@ -45,7 +45,8 @@ jobs:
   e2e:
     name: Сквозной тест (Chromium)
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    # Около 18 минут сценариев плюс проверка вёрстки всех уроков (e2e-overflow, 2–4 минуты).
+    timeout-minutes: 35
     env:
       # Куда ставится Chromium; tools/e2e-lesson.mjs ищет его по этой переменной.
       PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.pw-browsers
@@ -133,6 +134,11 @@ jobs:
       # приватность), лист «Мы нашли ваши достижения», экран 360 px. В локальной среде таблица включена (LEADERBOARD_ENABLED=1).
       - name: Сквозной тест геймификации
         run: node tools/e2e-gamification.mjs e2e-shots/gamification
+
+      # Вёрстка на экране 360 px: все уроки, все слова и буквы на каждом этапе, вкладки времён глаголов, главная.
+      # Падает при горизонтальной прокрутке и называет элемент за краем (так ловятся длинные слова и формы).
+      - name: Сквозной тест вёрстки (нет горизонтальной прокрутки на 360 px)
+        run: node tools/e2e-overflow.mjs e2e-shots/overflow
 
       - name: Скриншоты и лог Worker
         if: always()
