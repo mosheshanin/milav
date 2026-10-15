@@ -14,8 +14,10 @@ const FORM_LABELS = [
 ] as const;
 
 /**
- * Карточка слова: слева картинка, справа весь текст (выравнивание по правому краю):
- * печатный и рукописный иврит, транскрипция, перевод, род, остальные формы прилагательного и фраза для запоминания.
+ * Карточка слова: слева картинка, справа печатный и рукописный иврит, транскрипция, перевод и род (выравнивание по правому краю).
+ * У существительных фраза для запоминания стоит там же, справа.
+ * У прилагательных (формы) и глаголов (таблица форм) формы и фраза идут под картинкой на всю ширину карточки:
+ * рядом с картинкой длинные формы (מפוספסים, כחלחלות) не помещались и давали горизонтальную прокрутку на экране 360 px.
  */
 export function WordCard({ word, compact = false }: { word: Word; compact?: boolean }) {
   if (compact) {
@@ -36,9 +38,9 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
     );
   }
   const phrase = word.example && (
-    <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2">
+    <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2" data-testid="word-phrase">
       <SpeakerButton item={{ he: word.example.he, audio: word.example.audio }} label="Послушать фразу" testId="listen-phrase" />
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1 text-right">
         <div dir="rtl" lang="he" className="font-hebrew text-xl">
           {word.example.he}
         </div>
@@ -48,6 +50,27 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
       </div>
     </div>
   );
+  const forms = word.forms && (
+    <dl className="w-full divide-y divide-line border-t border-line" data-testid="word-forms">
+      {FORM_LABELS.map(([key, label]) => {
+        const form = word.forms![key];
+        return (
+          <div key={key} className="flex items-center gap-3 py-2">
+            <SpeakerButton item={{ he: form.niqqud, audio: form.audio }} label={`Послушать: ${label}`} testId={`listen-form-${key}`} />
+            <dt className="flex-1 text-sm text-ink-soft">{label}</dt>
+            <dd className="flex min-w-0 flex-col items-end text-right">
+              <span dir="rtl" lang="he" className="font-hebrew text-xl">
+                {form.he}
+              </span>
+              <span className="text-sm text-accent">[{form.translit}]</span>
+            </dd>
+          </div>
+        );
+      })}
+    </dl>
+  );
+  /** Формы и фраза под картинкой на всю ширину: у глаголов и прилагательных. */
+  const wide = Boolean(word.verb || word.forms);
   const head = (
     <>
       <WordImage key={word.id} image={word.image} fallback={word.he} className="size-28" />
@@ -61,35 +84,16 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
         <div className="text-lg text-accent">[{word.translit}]</div>
         <div className="text-2xl font-semibold">{word.ru}</div>
         {word.gender && <Chip tone={word.gender === "f" ? "danger" : "accent"}>{GENDER[word.gender]}</Chip>}
-        {word.forms && (
-          <dl className="mt-1 w-full border-t border-line pt-2" data-testid="word-forms">
-            {FORM_LABELS.map(([key, label]) => {
-              const form = word.forms![key];
-              return (
-                <div key={key} className="flex items-center justify-between gap-2">
-                  <dt className="whitespace-nowrap text-xs text-ink-soft">{label}</dt>
-                  <dd className="flex items-center gap-2">
-                    <SpeakerButton item={{ he: form.niqqud, audio: form.audio }} label={`Послушать: ${label}`} testId={`listen-form-${key}`} />
-                    <span className="text-sm text-accent">[{form.translit}]</span>
-                    <span dir="rtl" lang="he" className="font-hebrew text-lg">
-                      {form.he}
-                    </span>
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
-        )}
-        {!word.verb && phrase}
+        {!wide && phrase}
       </div>
     </>
   );
-  if (word.verb) {
-    // У глагола до 10 форм в таблице: рядом с картинкой они не помещаются, поэтому таблица и фраза идут под ней на всю ширину карточки.
+  if (wide) {
     return (
       <Card className="flex flex-col gap-2">
         <div className="flex items-start gap-3">{head}</div>
-        <VerbForms key={word.id} verb={word.verb} />
+        {word.verb && <VerbForms key={word.id} verb={word.verb} />}
+        {forms}
         {phrase}
       </Card>
     );
