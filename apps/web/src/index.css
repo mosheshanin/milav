@@ -6,9 +6,9 @@
   только классы, построенные на этих токенах (bg-brand-orange, rounded-card и т.д.).
 */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  /* Печатный иврит и рукописный иврит (шрифт «Гверет Левин», свободная лицензия OFL) */
-  --font-hebrew: "Heebo", "Inter", sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  /* Русский текст: Manrope. Печатный иврит и рукописный иврит (шрифт «Гверет Левин», свободная лицензия OFL) */
+  --font-hebrew: "Heebo", "Manrope", sans-serif;
   --font-hand: "Gveret Levin", "Heebo", cursive;
 
   /* Палитра бренда (из логотипа) */
