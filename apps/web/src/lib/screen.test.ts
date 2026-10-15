@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ACHIEVEMENTS, HOME, LEADERBOARD, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
 
 function memoryStorage(initial: Record<string, string> = {}): ScreenStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -75,6 +75,15 @@ describe("сохранение экрана", () => {
     const storage = memoryStorage();
     saveScreen(storage, RECORD);
     expect(restoreScreen(storage, exists)).toEqual(RECORD);
+  });
+
+  it("панель и запись шаблонов из панели восстанавливаются, «назад» по-прежнему ведёт в панель", () => {
+    for (const screen of [ADMIN, { name: "record", from: "admin" } as const]) {
+      const storage = memoryStorage();
+      saveScreen(storage, screen);
+      expect(restoreScreen(storage, exists)).toEqual(screen);
+    }
+    expect(restoreScreen(memoryStorage({ "milav:screen": '{"name":"record","from":"x"}' }), exists)).toEqual(RECORD);
   });
 
   it("видно, было ли уже сохранено место (параметр запуска действует только в первый раз)", () => {

@@ -1,17 +1,39 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 import { getAnyLesson } from "@milav/content";
-import { AppProvider } from "./AppContext";
-import { Notice } from "./components/ui";
-import { ACHIEVEMENTS, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { AppProvider, useApp } from "./AppContext";
+import { Button, Notice } from "./components/ui";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
 import { Leaderboard } from "./screens/Leaderboard";
 import { FormsPractice } from "./screens/FormsPractice";
 import { Quiz } from "./screens/Quiz";
-import { RecordScreen } from "./screens/Record";
 import { Settings } from "./screens/Settings";
 import { Study } from "./screens/Study";
 import { launchTarget } from "./telegram";
+
+// Панель и запись шаблонов подгружаются отдельными файлами: ученики их код не скачивают (docs/ADMIN.md).
+const Admin = lazy(() => import("./screens/admin/Admin"));
+const RecordScreen = lazy(() => import("./screens/Record").then((m) => ({ default: m.RecordScreen })));
+
+/** Экран только для администраторов. Остальным (например, после снятия роли) «Нет доступа»; сервер всё равно проверяет сам. */
+function AdminOnly({ children, onBack }: { children: ReactNode; onBack: () => void }) {
+  const { me } = useApp();
+  if (me.staff?.role !== "admin") {
+    return (
+      <Notice title="Нет доступа">
+        <p>Этот раздел открыт только администраторам приложения.</p>
+        <p className="mt-2 text-sm">
+          Ваш Telegram id: <b data-testid="my-id">{me.user.id}</b>. Его можно назвать владельцу, чтобы он добавил вас в команду.
+        </p>
+        <Button className="mt-block" onClick={onBack}>
+          На главную
+        </Button>
+      </Notice>
+    );
+  }
+  return <Suspense fallback={<Notice title="Загрузка…" />}>{children}</Suspense>;
+}
 
 /** Первый экран: сохранённое место, а при первом открытии ещё и особая цель запуска (`startapp=record`). */
 function initialScreen(): Screen {
@@ -83,10 +105,19 @@ export function App() {
         />
       )}
       {screen.name === "settings" && (
-        <Settings onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)} />
+        <Settings onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)} onAdmin={() => setScreen(ADMIN)} />
       )}
       {screen.name === "leaderboard" && <Leaderboard onBack={() => setScreen(HOME)} />}
-      {screen.name === "record" && <RecordScreen onBack={() => setScreen(HOME)} />}
+      {screen.name === "admin" && (
+        <AdminOnly onBack={() => setScreen(HOME)}>
+          <Admin onBack={() => setScreen({ name: "settings", from: "home" })} onRecord={() => setScreen({ name: "record", from: "admin" })} />
+        </AdminOnly>
+      )}
+      {screen.name === "record" && (
+        <AdminOnly onBack={() => setScreen(HOME)}>
+          <RecordScreen onBack={() => setScreen(screen.from === "admin" ? ADMIN : HOME)} />
+        </AdminOnly>
+      )}
     </AppProvider>
   );
 }

@@ -1,9 +1,11 @@
-import { useState, type ReactNode } from "react";
-import { DAILY_GOAL_OPTIONS, type SettingsRequest } from "@milav/shared";
+import { useState } from "react";
+import { Check, Copy, Shield } from "lucide-react";
+import { DAILY_GOAL_OPTIONS, STAFF_ROLE_TITLES, type SettingsRequest } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
-import { Card } from "../components/ui";
+import { Choice, Section, Toggle } from "../components/Controls";
+import { Button } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
 import { hapticsEnabled, setHapticsEnabled } from "../lib/haptic";
 import { plural } from "../lib/play";
@@ -12,10 +14,11 @@ import { useBackButton } from "../lib/useBackButton";
 
 /**
  * Настройки пользователя. Разделы: оформление (тема; позже цветовые схемы), занятия (цель дня), звук и отклик
- * (вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение).
+ * (вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение), внизу Telegram id и вход в панель
+ * администратора (пункт панели виден только администраторам, docs/ADMIN.md).
  * Тема и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
  */
-export function Settings({ onBack }: { onBack: () => void }) {
+export function Settings({ onBack, onAdmin }: { onBack: () => void; onAdmin: () => void }) {
   const { me, applyPlay } = useApp();
   const { settings, features } = me.play;
   const [busy, setBusy] = useState(false);
@@ -105,6 +108,22 @@ export function Settings({ onBack }: { onBack: () => void }) {
           />
         </Section>
 
+        <Section title="Аккаунт">
+          <TelegramId id={me.user.id} />
+          {me.staff && (
+            <p className="text-sm text-ink-soft" data-testid="staff-role">
+              Вы в команде приложения: {STAFF_ROLE_TITLES[me.staff.role].toLowerCase()}
+              {me.staff.owner ? " (владелец)" : ""}.
+            </p>
+          )}
+          {me.staff?.role === "admin" && (
+            <Button variant="secondary" block onClick={onAdmin} data-testid="open-admin">
+              <Shield className="size-icon" aria-hidden />
+              Панель администратора
+            </Button>
+          )}
+        </Section>
+
         {message && (
           <p className="text-danger" role="alert">
             {message}
@@ -115,89 +134,31 @@ export function Settings({ onBack }: { onBack: () => void }) {
   );
 }
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <section className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">{title}</h2>
-      <Card className="flex flex-col gap-block">{children}</Card>
-    </section>
-  );
-}
-
-/** Выбор одного варианта из нескольких: кнопки-«таблетки» (как у цели дня). */
-function Choice<T extends string | number>({
-  label,
-  hint,
-  options,
-  value,
-  disabled,
-  testId,
-  onChange,
-}: {
-  label: string;
-  hint?: string;
-  options: { value: T; title: string }[];
-  value: T;
-  disabled?: boolean;
-  testId: string;
-  onChange: (value: T) => void;
-}) {
+/** Telegram id: его называют владельцу, чтобы он добавил человека в команду (проверяющим или администратором). */
+function TelegramId({ id }: { id: number }) {
+  const [copied, setCopied] = useState(false);
   return (
     <div>
-      <div className="font-semibold">{label}</div>
-      {hint && <p className="mb-2 text-sm text-ink-soft">{hint}</p>}
-      <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={label}>
-        {options.map((o) => (
-          <button
-            key={String(o.value)}
-            type="button"
-            role="radio"
-            aria-checked={value === o.value}
-            data-testid={`${testId}-${o.value}`}
-            disabled={disabled}
-            onClick={() => onChange(o.value)}
-            className={`min-h-10 rounded-full px-4 font-semibold ${
-              value === o.value ? "bg-accent text-white" : "bg-line text-ink-soft"
-            }`}
-          >
-            {o.title}
-          </button>
-        ))}
+      <div className="font-semibold">Ваш Telegram id</div>
+      <p className="mb-2 text-sm text-ink-soft">Нужен, если вас добавляют в команду приложения.</p>
+      <div className="flex items-center gap-2">
+        <code className="select-all rounded-control bg-page px-3 py-2 font-semibold" data-testid="my-telegram-id">
+          {id}
+        </code>
+        <Button
+          variant="ghost"
+          className="min-h-10"
+          onClick={() => {
+            navigator.clipboard?.writeText(String(id)).then(
+              () => setCopied(true),
+              () => setCopied(false),
+            );
+          }}
+        >
+          {copied ? <Check className="size-icon" aria-hidden /> : <Copy className="size-icon" aria-hidden />}
+          {copied ? "Скопировано" : "Скопировать"}
+        </Button>
       </div>
     </div>
-  );
-}
-
-function Toggle({
-  label,
-  hint,
-  checked,
-  disabled,
-  testId,
-  onChange,
-}: {
-  label: string;
-  hint: string;
-  checked: boolean;
-  disabled?: boolean;
-  testId: string;
-  onChange: (value: boolean) => void;
-}) {
-  return (
-    <label className="flex items-start gap-3">
-      <input
-        type="checkbox"
-        role="switch"
-        className="mt-1 size-5 shrink-0 accent-accent"
-        checked={checked}
-        disabled={disabled}
-        data-testid={testId}
-        onChange={(e) => onChange(e.target.checked)}
-      />
-      <span>
-        <span className="block font-semibold">{label}</span>
-        <span className="block text-sm text-ink-soft">{hint}</span>
-      </span>
-    </label>
   );
 }

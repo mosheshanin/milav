@@ -1,6 +1,6 @@
 // Сквозная проверка экрана записи шаблонов букв (только владелец) в настоящем браузере на размере телефона.
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
-// В env.local записывающий это тестовый пользователь 1001 (TEMPLATE_RECORDER_IDS в wrangler.jsonc).
+// В env.local владелец (а значит, администратор) это тестовый пользователь 1001 (TEMPLATE_RECORDER_IDS в wrangler.jsonc).
 // Запуск: node tools/e2e-record.mjs [каталог для скриншотов]
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
@@ -82,7 +82,7 @@ sql("DELETE FROM letter_templates;");
   const page = await openPage("dev=1002&record");
   await page.waitForSelector('[data-testid="my-id"]');
   check((await page.locator('[data-testid="my-id"]').textContent()) === "1002", "не владельцу показывается «Нет доступа» и его id");
-  check((await page.locator("body").textContent()).includes("TEMPLATE_RECORDER_IDS"), "на экране подсказка про секрет TEMPLATE_RECORDER_IDS");
+  check((await page.locator("body").textContent()).includes("только администраторам"), "на экране объяснение: запись только для администраторов");
   await shot(page, "r1-forbidden");
   const res = await page.request.get(`${BASE}/api/templates`, { headers: { authorization: "dev 1002:Tester" } });
   check(res.status() === 403, "API шаблонов отвечает чужому 403");

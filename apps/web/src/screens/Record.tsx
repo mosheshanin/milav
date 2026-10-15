@@ -16,8 +16,8 @@ type Load =
   | { state: "ready"; variants: number };
 
 /**
- * Скрытый экран записи шаблонов рукописных букв (27 форм). Открывается по параметру запуска `startapp=record`,
- * доступ проверяет сервер по секрету TEMPLATE_RECORDER_IDS (docs/DEPLOY.md).
+ * Экран записи шаблонов рукописных букв (27 форм): раздел «Шаблоны букв» панели администратора, а также параметр
+ * запуска `startapp=record`. Доступ проверяет сервер: только администраторы (docs/ADMIN.md).
  */
 export function RecordScreen({ onBack }: { onBack: () => void }) {
   const [load, setLoad] = useState<Load>({ state: "loading" });
@@ -67,10 +67,10 @@ export function RecordScreen({ onBack }: { onBack: () => void }) {
     const id = currentUserId();
     return (
       <Notice title="Нет доступа">
-        <p>Запись шаблонов открыта только владельцу.</p>
+        <p>Запись шаблонов открыта только администраторам.</p>
         {id !== null && (
           <p className="mt-2 text-sm">
-            Ваш Telegram id: <b data-testid="my-id">{id}</b>. Он должен быть в секрете TEMPLATE_RECORDER_IDS на сервере.
+            Ваш Telegram id: <b data-testid="my-id">{id}</b>. Владелец может добавить вас в «Команду» панели администратора.
           </p>
         )}
         <Button className="mt-block" onClick={onBack}>

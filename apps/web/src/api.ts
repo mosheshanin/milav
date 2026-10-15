@@ -1,4 +1,10 @@
 import type {
+  AdminConfigResponse,
+  AdminLogResponse,
+  AdminOverviewResponse,
+  AdminTeamResponse,
+  ConfigKey,
+  StaffRole,
   AchievementsResponse,
   CohortResponse,
   HomeResponse,
@@ -118,4 +124,15 @@ export const api = {
   templateSave: (body: TemplateSaveRequest) => request<TemplateSaveResponse>("/api/templates", jsonPut(body)),
   templateDelete: (letter: string, slot: number) =>
     request<{ ok: true }>(`/api/templates?letter=${encodeURIComponent(letter)}&slot=${slot}`, { method: "DELETE" }),
+
+  // ---- Панель администратора (только администраторы; остальным сервер отвечает 403) ----
+  admin: {
+    overview: () => request<AdminOverviewResponse>("/api/admin/overview"),
+    config: () => request<AdminConfigResponse>("/api/admin/config"),
+    setConfig: (key: ConfigKey, value: unknown) => request<{ ok: true; changed: boolean }>("/api/admin/config", jsonPut({ key, value })),
+    team: () => request<AdminTeamResponse>("/api/admin/team"),
+    setRole: (userId: number, role: StaffRole) => request<{ ok: true; changed: boolean }>("/api/admin/team", jsonPut({ userId, role })),
+    removeFromTeam: (userId: number) => request<{ ok: true }>(`/api/admin/team?userId=${userId}`, { method: "DELETE" }),
+    log: (before?: number) => request<AdminLogResponse>(`/api/admin/log${before ? `?before=${before}` : ""}`),
+  },
 };

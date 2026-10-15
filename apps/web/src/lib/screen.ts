@@ -15,11 +15,17 @@ export type Screen =
   | { name: "leaderboard" }
   /** Настройки; `from` это экран, куда ведёт «назад» (главная или достижения). */
   | { name: "settings"; from: "home" | "achievements" }
-  /** Скрытый экран записи шаблонов букв (только владелец, см. docs/DEPLOY.md). */
-  | { name: "record" };
+  /** Панель администратора (только команда, docs/ADMIN.md). */
+  | { name: "admin" }
+  /**
+   * Запись шаблонов букв (только администраторы). Открывается из панели (`from: "admin"`, «назад» ведёт в панель)
+   * или по параметру запуска `startapp=record` («назад» ведёт на главную).
+   */
+  | { name: "record"; from?: "admin" };
 
 export const HOME: Screen = { name: "home" };
 export const RECORD: Screen = { name: "record" };
+export const ADMIN: Screen = { name: "admin" };
 export const ACHIEVEMENTS: Screen = { name: "achievements" };
 export const LEADERBOARD: Screen = { name: "leaderboard" };
 
@@ -77,7 +83,8 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   }
   if (typeof raw !== "object" || raw === null) return HOME;
   const { name, lessonId } = raw as { name?: unknown; lessonId?: unknown };
-  if (name === "record") return RECORD;
+  if (name === "record") return (raw as { from?: unknown }).from === "admin" ? { name: "record", from: "admin" } : RECORD;
+  if (name === "admin") return ADMIN;
   if (name === "achievements") return ACHIEVEMENTS;
   if (name === "leaderboard") return LEADERBOARD;
   if (name === "settings") {
