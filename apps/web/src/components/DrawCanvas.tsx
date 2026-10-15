@@ -11,6 +11,13 @@ import {
 /** Высота «א» в шрифте относительно кегля (подобрано по глифам Gveret Levin). */
 const GLYPH_HEIGHT_PER_EM = 0.7;
 
+/**
+ * Толщина линии, которой рисуется буква (px), на экране записи шаблонов и на этапе «пиши». Выбрана владельцем 15.10
+ * (было 6). Только для вида: распознавание сравнивает точки штрихов, толщина на него не влияет.
+ * От неё же считается толщина превью записанных вариантов (`StrokePreview`).
+ */
+export const INK_WIDTH = 12;
+
 export interface DrawHandle {
   clear: () => void;
   strokes: () => Stroke[];
@@ -63,7 +70,7 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
     }
 
     ctx.strokeStyle = "#111827";
-    ctx.lineWidth = 6;
+    ctx.lineWidth = INK_WIDTH;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     for (const stroke of strokesRef.current) {
