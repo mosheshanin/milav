@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { HEBREW_LETTERS, RATE_LIMITS, TEMPLATE_VARIANTS_PER_LETTER, type Stroke, type TemplateItem } from "@milav/shared";
 import { api, ctx, letterStrokes, resetHarness } from "./test-utils/harness";
 import { parseIds as recorderIds } from "./admin";
@@ -188,9 +188,16 @@ describe("удаление варианта", () => {
 
 describe("лимит запросов к инструменту записи", () => {
   it("сверх лимита в минуту 429", async () => {
-    for (let i = 0; i < RATE_LIMITS.templates.perMinute; i++) expect((await list()).status).toBe(200);
-    const res = await list();
-    expect(res.status).toBe(429);
-    expect(((await res.json()) as { error: string }).error).toBe("rate_limited");
+    // Часы стоят в начале минуты: иначе 120 запросов могут попасть на смену минуты, и счётчик обнулится.
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date("2026-10-14T09:00:05Z"));
+    try {
+      for (let i = 0; i < RATE_LIMITS.templates.perMinute; i++) expect((await list()).status).toBe(200);
+      const res = await list();
+      expect(res.status).toBe(429);
+      expect(((await res.json()) as { error: string }).error).toBe("rate_limited");
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
