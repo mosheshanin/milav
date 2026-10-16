@@ -41,6 +41,14 @@ export function logEntryText(entry: AdminLogEntry): string {
       return `Текст напоминания №${target} ${entry.newValue ? "включён" : "выключен"}`;
     case "reminder.remove":
       return `Удалён текст напоминания №${target}: «${short(entry.oldValue)}»`;
+    case "review.set": {
+      const next = entry.newValue as { verdict?: string; fixes?: Record<string, string>; comment?: string } | null;
+      const fixes = Object.keys(next?.fixes ?? {}).length;
+      const what = next?.verdict === "ok" ? "верно" : `замечания${fixes ? ` (исправлений: ${fixes})` : ""}${next?.comment ? `, «${short(next.comment)}»` : ""}`;
+      return `Проверка ${target}: ${what}`;
+    }
+    case "review.remove":
+      return `Отозвана проверка ${target}`;
     default:
       return `${entry.action} ${target}`.trim();
   }
@@ -94,6 +102,20 @@ export function adminErrorText(error: unknown): string {
         return "Нет доступа: панель открыта только администраторам.";
       case "rate_limited":
         return "Слишком много действий подряд. Подождите минуту.";
+      case "stale":
+        return "Слово успели изменить, пока вы его смотрели. Откройте его заново.";
+      case "same_value":
+        return "Исправление совпадает с тем, что уже в уроке. Уберите его или измените.";
+      case "too_long":
+        return "Слишком длинно: исправление до 200 знаков, комментарий до 1000.";
+      case "empty_fix":
+        return "Напишите исправление или комментарий.";
+      case "fixes_with_ok":
+        return "Есть исправления: отправьте их как замечания.";
+      case "bad_value":
+        return "Значение не подходит: пустое или с переводом строки.";
+      case "bad_field":
+        return "Такое поле исправить нельзя. Обновите карточку.";
     }
     if (error.status !== 0) return "Сервер не принял изменение. Попробуйте ещё раз.";
   }

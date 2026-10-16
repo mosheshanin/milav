@@ -94,7 +94,7 @@ check((await text(page, "staff-role")).includes("владелец"), "владе
 await page.click('[data-testid="open-admin"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
 check((await scriptUrls(page)).some((u) => /\/Admin-/.test(u)), "код панели подгружается отдельным файлом при входе в панель");
-check((await page.locator('[data-testid^="admin-open-"]').count()) === 6, "в меню панели 6 разделов (обзор, настройки, напоминания, команда, журнал, шаблоны)");
+check((await page.locator('[data-testid^="admin-open-"]').count()) === 7, "в меню панели 7 разделов (обзор, настройки, напоминания, контент, команда, журнал, шаблоны)");
 check(await noOverflow(page), "меню панели без горизонтальной прокрутки");
 await shot(page, "a2-menu");
 

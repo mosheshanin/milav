@@ -2,7 +2,7 @@ import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 import { AppProvider, useApp } from "./AppContext";
 import { Button, Notice } from "./components/ui";
 import { getLessonMeta } from "./lib/lessons";
-import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, REVIEW, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
 import { Leaderboard } from "./screens/Leaderboard";
@@ -14,6 +14,7 @@ import { launchTarget } from "./telegram";
 
 // Панель и запись шаблонов подгружаются отдельными файлами: ученики их код не скачивают (docs/ADMIN.md).
 const Admin = lazy(() => import("./screens/admin/Admin"));
+const Review = lazy(() => import("./screens/admin/Review"));
 const RecordScreen = lazy(() => import("./screens/Record").then((m) => ({ default: m.RecordScreen })));
 
 /** Экран только для администраторов. Остальным (например, после снятия роли) «Нет доступа»; сервер всё равно проверяет сам. */
@@ -26,6 +27,22 @@ function AdminOnly({ children, onBack }: { children: ReactNode; onBack: () => vo
         <p className="mt-2 text-sm">
           Ваш Telegram id: <b data-testid="my-id">{me.user.id}</b>. Его можно назвать владельцу, чтобы он добавил вас в команду.
         </p>
+        <Button className="mt-block" onClick={onBack}>
+          На главную
+        </Button>
+      </Notice>
+    );
+  }
+  return <Suspense fallback={<Notice title="Загрузка…" />}>{children}</Suspense>;
+}
+
+/** Экран для всей команды (администраторов и проверяющих): проверка слов. */
+function StaffOnly({ children, onBack }: { children: ReactNode; onBack: () => void }) {
+  const { me } = useApp();
+  if (!me.staff) {
+    return (
+      <Notice title="Нет доступа">
+        <p>Проверка слов открыта только команде приложения.</p>
         <Button className="mt-block" onClick={onBack}>
           На главную
         </Button>
@@ -105,13 +122,22 @@ export function App() {
         />
       )}
       {screen.name === "settings" && (
-        <Settings onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)} onAdmin={() => setScreen(ADMIN)} />
+        <Settings
+          onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)}
+          onAdmin={() => setScreen(ADMIN)}
+          onReview={() => setScreen(REVIEW)}
+        />
       )}
       {screen.name === "leaderboard" && <Leaderboard onBack={() => setScreen(HOME)} />}
       {screen.name === "admin" && (
         <AdminOnly onBack={() => setScreen(HOME)}>
           <Admin onBack={() => setScreen({ name: "settings", from: "home" })} onRecord={() => setScreen({ name: "record", from: "admin" })} />
         </AdminOnly>
+      )}
+      {screen.name === "review" && (
+        <StaffOnly onBack={() => setScreen(HOME)}>
+          <Review onBack={() => setScreen({ name: "settings", from: "home" })} />
+        </StaffOnly>
       )}
       {screen.name === "record" && (
         <AdminOnly onBack={() => setScreen(HOME)}>

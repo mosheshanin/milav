@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, Shield } from "lucide-react";
+import { BookCheck, Check, Copy, Shield } from "lucide-react";
 import { DAILY_GOAL_OPTIONS, STAFF_ROLE_TITLES, type SettingsRequest } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
@@ -19,7 +19,7 @@ import { useBackButton } from "../lib/useBackButton";
  * администратора (пункт панели виден только администраторам, docs/ADMIN.md).
  * Тема и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
  */
-export function Settings({ onBack, onAdmin }: { onBack: () => void; onAdmin: () => void }) {
+export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; onAdmin: () => void; onReview: () => void }) {
   const { me, applyPlay } = useApp();
   const { settings, features } = me.play;
   const [busy, setBusy] = useState(false);
@@ -123,6 +123,12 @@ export function Settings({ onBack, onAdmin }: { onBack: () => void; onAdmin: () 
             <Button variant="secondary" block onClick={onAdmin} data-testid="open-admin">
               <Shield className="size-icon" aria-hidden />
               Панель администратора
+            </Button>
+          )}
+          {me.staff?.role === "reviewer" && (
+            <Button variant="secondary" block onClick={onReview} data-testid="open-review">
+              <BookCheck className="size-icon" aria-hidden />
+              Проверка слов
             </Button>
           )}
         </Section>

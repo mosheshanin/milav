@@ -17,6 +17,8 @@ export type Screen =
   | { name: "settings"; from: "home" | "achievements" }
   /** Панель администратора (только команда, docs/ADMIN.md). */
   | { name: "admin" }
+  /** Проверка слов для проверяющего (раздел «Контент» без остальной панели, docs/ADMIN.md, этап 3). */
+  | { name: "review" }
   /**
    * Запись шаблонов букв (только администраторы). Открывается из панели (`from: "admin"`, «назад» ведёт в панель)
    * или по параметру запуска `startapp=record` («назад» ведёт на главную).
@@ -26,6 +28,7 @@ export type Screen =
 export const HOME: Screen = { name: "home" };
 export const RECORD: Screen = { name: "record" };
 export const ADMIN: Screen = { name: "admin" };
+export const REVIEW: Screen = { name: "review" };
 export const ACHIEVEMENTS: Screen = { name: "achievements" };
 export const LEADERBOARD: Screen = { name: "leaderboard" };
 
@@ -85,6 +88,7 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   const { name, lessonId } = raw as { name?: unknown; lessonId?: unknown };
   if (name === "record") return (raw as { from?: unknown }).from === "admin" ? { name: "record", from: "admin" } : RECORD;
   if (name === "admin") return ADMIN;
+  if (name === "review") return REVIEW;
   if (name === "achievements") return ACHIEVEMENTS;
   if (name === "leaderboard") return LEADERBOARD;
   if (name === "settings") {

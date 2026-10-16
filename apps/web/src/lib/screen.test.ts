@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, REVIEW, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
 
 function memoryStorage(initial: Record<string, string> = {}): ScreenStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -77,8 +77,8 @@ describe("сохранение экрана", () => {
     expect(restoreScreen(storage, exists)).toEqual(RECORD);
   });
 
-  it("панель и запись шаблонов из панели восстанавливаются, «назад» по-прежнему ведёт в панель", () => {
-    for (const screen of [ADMIN, { name: "record", from: "admin" } as const]) {
+  it("панель, проверка слов и запись шаблонов из панели восстанавливаются, «назад» по-прежнему ведёт в панель", () => {
+    for (const screen of [ADMIN, REVIEW, { name: "record", from: "admin" } as const]) {
       const storage = memoryStorage();
       saveScreen(storage, screen);
       expect(restoreScreen(storage, exists)).toEqual(screen);

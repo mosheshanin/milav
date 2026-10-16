@@ -5,6 +5,10 @@ import type {
   ReminderKind,
   ReminderSettingsRequest,
   ReminderTextItem,
+  ReviewExportResponse,
+  ReviewItemResponse,
+  ReviewListResponse,
+  ReviewSaveRequest,
   AdminLogResponse,
   AdminOverviewResponse,
   AdminTeamResponse,
@@ -150,5 +154,14 @@ export const api = {
       request<{ item: ReminderTextItem; changed: boolean }>(`/api/admin/reminders/${id}`, jsonPut(body)),
     deleteReminder: (id: number) => request<{ ok: true }>(`/api/admin/reminders/${id}`, { method: "DELETE" }),
     sendReminderToMe: (id: number) => request<{ ok: true; text: string; sent: boolean }>(`/api/admin/reminders/${id}/send`, json({})),
+  },
+
+  // ---- Проверка слов носителем (администраторы и проверяющие; выгрузка только администраторам) ----
+  review: {
+    items: () => request<ReviewListResponse>("/api/review/items"),
+    item: (id: string) => request<ReviewItemResponse>(`/api/review/items/${encodeURIComponent(id)}`),
+    save: (id: string, body: ReviewSaveRequest) => request<{ ok: true; changed: boolean }>(`/api/review/items/${encodeURIComponent(id)}`, jsonPut(body)),
+    remove: (id: string) => request<{ ok: true }>(`/api/review/items/${encodeURIComponent(id)}`, { method: "DELETE" }),
+    export: () => request<ReviewExportResponse>("/api/review/export"),
   },
 };
