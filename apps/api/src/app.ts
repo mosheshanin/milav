@@ -13,6 +13,7 @@ import {
   stagesFor,
   type AnyLesson,
   type HomeResponse,
+  type LessonContentResponse,
   type MeResponse,
   type QuizAnswerResponse,
   type QuizStartResponse,
@@ -226,6 +227,17 @@ app.get("/api/home", requireUser, async (c) => {
     .filter(canAccessLesson)
     .map((lesson) => ({ id: lesson.id, itemIds: lessonItems(lesson).map((item) => item.id) }));
   const body: HomeResponse = { lessons: await getHomeProgress(c.env.DB, user.id, available) };
+  return c.json(body);
+});
+
+// Слова (в алфавите буквы) урока. В приложении их нет, там только манифест без слов (content/manifest.ts):
+// урок приходит отсюда и только тем, у кого есть к нему доступ, поэтому платные слова не видны в файлах приложения.
+// Обращения к базе нет: проверка доступа пока по самому уроку (бесплатный или нет).
+app.get("/api/lessons/:lessonId", requireUser, (c) => {
+  const lesson = getAnyLesson(c.req.param("lessonId"));
+  if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
+  if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
+  const body: LessonContentResponse = { lesson };
   return c.json(body);
 });
 
