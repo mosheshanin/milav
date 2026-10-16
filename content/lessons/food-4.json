@@ -1,0 +1,159 @@
+{
+  "$schema": "../schema.json",
+  "id": "food-4",
+  "topicId": "food",
+  "section": "nouns",
+  "topic": "Еда",
+  "number": 4,
+  "free": false,
+  "title": "На кухне и за столом",
+  "words": [
+    {
+      "id": "food-4-meal",
+      "he": "ארוחה",
+      "niqqud": "אֲרוּחָה",
+      "translit": "аруха́",
+      "ru": "трапеза (завтрак, обед, ужин)",
+      "gender": "f",
+      "example": {
+        "he": "זאת ארוחה טעימה",
+        "translit": "зот аруха теима",
+        "ru": "Это вкусная трапеза"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "food-4-butter",
+      "he": "חמאה",
+      "niqqud": "חֶמְאָה",
+      "translit": "хема́",
+      "ru": "сливочное масло",
+      "gender": "f",
+      "example": {
+        "he": "זאת חמאה טרייה",
+        "translit": "зот хема трия",
+        "ru": "Это свежее сливочное масло"
+      },
+      "image": "/words/food-4-butter.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-yogurt",
+      "he": "יוגורט",
+      "niqqud": "יוֹגוּרְט",
+      "translit": "йо́гурт",
+      "ru": "йогурт",
+      "gender": "m",
+      "example": {
+        "he": "זה יוגורט טעים",
+        "translit": "зэ йогурт таим",
+        "ru": "Это вкусный йогурт"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "food-4-flour",
+      "he": "קמח",
+      "niqqud": "קֶמַח",
+      "translit": "ке́мах",
+      "ru": "мука",
+      "gender": "m",
+      "example": {
+        "he": "זה קמח לבן",
+        "translit": "зэ кемах лаван",
+        "ru": "Это белая мука"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "food-4-honey",
+      "he": "דבש",
+      "niqqud": "דְּבַשׁ",
+      "translit": "дваш",
+      "ru": "мёд",
+      "gender": "m",
+      "example": {
+        "he": "זה דבש מתוק",
+        "translit": "зэ дваш матук",
+        "ru": "Это сладкий мёд"
+      },
+      "image": "/words/food-4-honey.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-pasta",
+      "he": "פסטה",
+      "niqqud": "פַּסְטָה",
+      "translit": "па́ста",
+      "ru": "макароны, паста",
+      "gender": "f",
+      "example": {
+        "he": "זאת פסטה חמה",
+        "translit": "зот паста хама",
+        "ru": "Это горячая паста"
+      },
+      "image": "/words/food-4-pasta.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-chocolate",
+      "he": "שוקולד",
+      "niqqud": "שׁוֹקוֹלָד",
+      "translit": "шокола́д",
+      "ru": "шоколад",
+      "gender": "m",
+      "example": {
+        "he": "זה שוקולד מתוק",
+        "translit": "зэ шоколад матук",
+        "ru": "Это сладкий шоколад"
+      },
+      "image": "/words/food-4-chocolate.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-cookie",
+      "he": "עוגייה",
+      "niqqud": "עוּגִייָּה",
+      "translit": "угия́",
+      "ru": "печенье",
+      "gender": "f",
+      "example": {
+        "he": "זאת עוגייה טעימה",
+        "translit": "зот угия теима",
+        "ru": "Это вкусное печенье"
+      },
+      "image": "/words/food-4-cookie.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-icecream",
+      "he": "גלידה",
+      "niqqud": "גְּלִידָה",
+      "translit": "глида́",
+      "ru": "мороженое",
+      "gender": "f",
+      "example": {
+        "he": "זאת גלידה קרה",
+        "translit": "зот глида кара",
+        "ru": "Это холодное мороженое"
+      },
+      "image": "/words/food-4-icecream.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-4-grapes",
+      "he": "ענבים",
+      "niqqud": "עֲנָבִים",
+      "translit": "анави́м",
+      "ru": "виноград",
+      "gender": "m",
+      "example": {
+        "he": "אלה ענבים ירוקים",
+        "translit": "эле анавим йеруким",
+        "ru": "Это зелёный виноград"
+      },
+      "image": "/words/food-4-grapes.svg",
+      "reviewed": false
+    }
+  ]
+}

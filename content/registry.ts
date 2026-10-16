@@ -9,16 +9,20 @@ import lesson_alphabet_6 from "./lessons/alphabet-6.json";
 import lesson_animals_1 from "./lessons/animals-1.json";
 import lesson_body_1 from "./lessons/body-1.json";
 import lesson_body_2 from "./lessons/body-2.json";
+import lesson_body_3 from "./lessons/body-3.json";
 import lesson_colors_1 from "./lessons/colors-1.json";
 import lesson_family_1 from "./lessons/family-1.json";
 import lesson_family_2 from "./lessons/family-2.json";
 import lesson_family_3 from "./lessons/family-3.json";
+import lesson_family_4 from "./lessons/family-4.json";
 import lesson_food_1 from "./lessons/food-1.json";
 import lesson_food_2 from "./lessons/food-2.json";
 import lesson_food_3 from "./lessons/food-3.json";
+import lesson_food_4 from "./lessons/food-4.json";
 import lesson_home_1 from "./lessons/home-1.json";
 import lesson_home_2 from "./lessons/home-2.json";
 import lesson_home_3 from "./lessons/home-3.json";
+import lesson_home_4 from "./lessons/home-4.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
@@ -27,6 +31,7 @@ import lesson_piel_2 from "./lessons/piel-2.json";
 import lesson_piel_3 from "./lessons/piel-3.json";
 import lesson_qualities_1 from "./lessons/qualities-1.json";
 import lesson_qualities_2 from "./lessons/qualities-2.json";
+import lesson_qualities_3 from "./lessons/qualities-3.json";
 
 export const lessonFiles: unknown[] = [
   lesson_alphabet_1,
@@ -38,16 +43,20 @@ export const lessonFiles: unknown[] = [
   lesson_animals_1,
   lesson_body_1,
   lesson_body_2,
+  lesson_body_3,
   lesson_colors_1,
   lesson_family_1,
   lesson_family_2,
   lesson_family_3,
+  lesson_family_4,
   lesson_food_1,
   lesson_food_2,
   lesson_food_3,
+  lesson_food_4,
   lesson_home_1,
   lesson_home_2,
   lesson_home_3,
+  lesson_home_4,
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
@@ -56,4 +65,5 @@ export const lessonFiles: unknown[] = [
   lesson_piel_3,
   lesson_qualities_1,
   lesson_qualities_2,
+  lesson_qualities_3,
 ];

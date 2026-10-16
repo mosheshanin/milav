@@ -1,0 +1,318 @@
+{
+  "$schema": "../schema.json",
+  "id": "qualities-3",
+  "topicId": "qualities",
+  "section": "adjectives",
+  "topic": "Главные качества",
+  "number": 3,
+  "free": true,
+  "title": "Сильный и слабый",
+  "words": [
+    {
+      "id": "qualities-3-tall",
+      "he": "גבוה",
+      "niqqud": "גָּבוֹהַּ",
+      "translit": "гаво́ах",
+      "ru": "высокий",
+      "example": {
+        "he": "זה בניין גבוה",
+        "translit": "зэ биньян гавоах",
+        "ru": "Это высокое здание"
+      },
+      "forms": {
+        "f": {
+          "he": "גבוהה",
+          "niqqud": "גְּבוֹהָה",
+          "translit": "гвоха́"
+        },
+        "mp": {
+          "he": "גבוהים",
+          "niqqud": "גְּבוֹהִים",
+          "translit": "гвохи́м"
+        },
+        "fp": {
+          "he": "גבוהות",
+          "niqqud": "גְּבוֹהוֹת",
+          "translit": "гвохо́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-low",
+      "he": "נמוך",
+      "niqqud": "נָמוּךְ",
+      "translit": "наму́х",
+      "ru": "низкий",
+      "example": {
+        "he": "זה שולחן נמוך",
+        "translit": "зэ шульхан намух",
+        "ru": "Это низкий стол"
+      },
+      "forms": {
+        "f": {
+          "he": "נמוכה",
+          "niqqud": "נְמוּכָה",
+          "translit": "нмуха́"
+        },
+        "mp": {
+          "he": "נמוכים",
+          "niqqud": "נְמוּכִים",
+          "translit": "нмухи́м"
+        },
+        "fp": {
+          "he": "נמוכות",
+          "niqqud": "נְמוּכוֹת",
+          "translit": "нмухо́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-heavy",
+      "he": "כבד",
+      "niqqud": "כָּבֵד",
+      "translit": "каве́д",
+      "ru": "тяжёлый",
+      "example": {
+        "he": "זה תיק כבד",
+        "translit": "зэ тик кавед",
+        "ru": "Это тяжёлая сумка"
+      },
+      "forms": {
+        "f": {
+          "he": "כבדה",
+          "niqqud": "כְּבֵדָה",
+          "translit": "кведа́"
+        },
+        "mp": {
+          "he": "כבדים",
+          "niqqud": "כְּבֵדִים",
+          "translit": "кведи́м"
+        },
+        "fp": {
+          "he": "כבדות",
+          "niqqud": "כְּבֵדוֹת",
+          "translit": "кведо́т"
+        }
+      },
+      "image": "/words/qualities-3-heavy.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-strong",
+      "he": "חזק",
+      "niqqud": "חָזָק",
+      "translit": "хаза́к",
+      "ru": "сильный",
+      "example": {
+        "he": "זה איש חזק",
+        "translit": "зэ иш хазак",
+        "ru": "Это сильный мужчина"
+      },
+      "forms": {
+        "f": {
+          "he": "חזקה",
+          "niqqud": "חֲזָקָה",
+          "translit": "хазака́"
+        },
+        "mp": {
+          "he": "חזקים",
+          "niqqud": "חֲזָקִים",
+          "translit": "хазаки́м"
+        },
+        "fp": {
+          "he": "חזקות",
+          "niqqud": "חֲזָקוֹת",
+          "translit": "хазако́т"
+        }
+      },
+      "image": "/words/qualities-3-strong.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-weak",
+      "he": "חלש",
+      "niqqud": "חַלָּשׁ",
+      "translit": "хала́ш",
+      "ru": "слабый",
+      "example": {
+        "he": "זה קפה חלש",
+        "translit": "зэ кафе халаш",
+        "ru": "Это слабый кофе"
+      },
+      "forms": {
+        "f": {
+          "he": "חלשה",
+          "niqqud": "חַלָּשָׁה",
+          "translit": "халаша́"
+        },
+        "mp": {
+          "he": "חלשים",
+          "niqqud": "חַלָּשִׁים",
+          "translit": "халаши́м"
+        },
+        "fp": {
+          "he": "חלשות",
+          "niqqud": "חַלָּשׁוֹת",
+          "translit": "халашо́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-fast",
+      "he": "מהיר",
+      "niqqud": "מָהִיר",
+      "translit": "махи́р",
+      "ru": "быстрый",
+      "example": {
+        "he": "זאת מכונית מהירה",
+        "translit": "зот мехонит мхира",
+        "ru": "Это быстрая машина"
+      },
+      "forms": {
+        "f": {
+          "he": "מהירה",
+          "niqqud": "מְהִירָה",
+          "translit": "мхира́"
+        },
+        "mp": {
+          "he": "מהירים",
+          "niqqud": "מְהִירִים",
+          "translit": "мхири́м"
+        },
+        "fp": {
+          "he": "מהירות",
+          "niqqud": "מְהִירוֹת",
+          "translit": "мхиро́т"
+        }
+      },
+      "image": "/words/qualities-3-fast.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-slow",
+      "he": "איטי",
+      "niqqud": "אִיטִי",
+      "translit": "ити́",
+      "ru": "медленный",
+      "example": {
+        "he": "זה אוטובוס איטי",
+        "translit": "зэ отобус ити",
+        "ru": "Это медленный автобус"
+      },
+      "forms": {
+        "f": {
+          "he": "איטית",
+          "niqqud": "אִיטִית",
+          "translit": "ити́т"
+        },
+        "mp": {
+          "he": "איטיים",
+          "niqqud": "אִיטִיִּים",
+          "translit": "итии́м"
+        },
+        "fp": {
+          "he": "איטיות",
+          "niqqud": "אִיטִיּוֹת",
+          "translit": "итийо́т"
+        }
+      },
+      "image": "/words/qualities-3-slow.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-clean",
+      "he": "נקי",
+      "niqqud": "נָקִי",
+      "translit": "наки́",
+      "ru": "чистый",
+      "example": {
+        "he": "זה חדר נקי",
+        "translit": "зэ хедер наки",
+        "ru": "Это чистая комната"
+      },
+      "forms": {
+        "f": {
+          "he": "נקייה",
+          "niqqud": "נְקִייָּה",
+          "translit": "нкия́"
+        },
+        "mp": {
+          "he": "נקיים",
+          "niqqud": "נְקִיִּים",
+          "translit": "нкии́м"
+        },
+        "fp": {
+          "he": "נקיות",
+          "niqqud": "נְקִיּוֹת",
+          "translit": "нкийо́т"
+        }
+      },
+      "image": "/words/qualities-3-clean.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-dirty",
+      "he": "מלוכלך",
+      "niqqud": "מְלוּכְלָךְ",
+      "translit": "млухла́х",
+      "ru": "грязный",
+      "example": {
+        "he": "זאת חולצה מלוכלכת",
+        "translit": "зот хульца млухлехет",
+        "ru": "Это грязная рубашка"
+      },
+      "forms": {
+        "f": {
+          "he": "מלוכלכת",
+          "niqqud": "מְלוּכְלֶכֶת",
+          "translit": "млухле́хет"
+        },
+        "mp": {
+          "he": "מלוכלכים",
+          "niqqud": "מְלוּכְלָכִים",
+          "translit": "млухлахи́м"
+        },
+        "fp": {
+          "he": "מלוכלכות",
+          "niqqud": "מְלוּכְלָכוֹת",
+          "translit": "млухлахо́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-3-quiet",
+      "he": "שקט",
+      "niqqud": "שָׁקֵט",
+      "translit": "шаке́т",
+      "ru": "тихий",
+      "example": {
+        "he": "זה רחוב שקט",
+        "translit": "зэ рехов шакет",
+        "ru": "Это тихая улица"
+      },
+      "forms": {
+        "f": {
+          "he": "שקטה",
+          "niqqud": "שְׁקֵטָה",
+          "translit": "шкета́"
+        },
+        "mp": {
+          "he": "שקטים",
+          "niqqud": "שְׁקֵטִים",
+          "translit": "шкети́м"
+        },
+        "fp": {
+          "he": "שקטות",
+          "niqqud": "שְׁקֵטוֹת",
+          "translit": "шкето́т"
+        }
+      },
+      "image": "/words/qualities-3-quiet.svg",
+      "reviewed": false
+    }
+  ]
+}

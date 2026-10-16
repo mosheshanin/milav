@@ -189,6 +189,23 @@
       "v": "c178bdefc5"
     },
     {
+      "id": "body-3",
+      "topicId": "body",
+      "section": "nouns",
+      "topic": "Тело",
+      "number": 3,
+      "free": true,
+      "title": "Здоровье и болезни",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e55d7a5c2f"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -257,6 +274,23 @@
       "v": "a4813986d2"
     },
     {
+      "id": "family-4",
+      "topicId": "family",
+      "section": "nouns",
+      "topic": "Семья",
+      "number": 4,
+      "free": false,
+      "title": "Пара и жизнь",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "f97839c988"
+    },
+    {
       "id": "food-1",
       "topicId": "food",
       "section": "nouns",
@@ -308,6 +342,23 @@
       "v": "318f892ca6"
     },
     {
+      "id": "food-4",
+      "topicId": "food",
+      "section": "nouns",
+      "topic": "Еда",
+      "number": 4,
+      "free": false,
+      "title": "На кухне и за столом",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "4db379d0c6"
+    },
+    {
       "id": "home-1",
       "topicId": "home",
       "section": "nouns",
@@ -357,6 +408,23 @@
         "type"
       ],
       "v": "f05151fa86"
+    },
+    {
+      "id": "home-4",
+      "topicId": "home",
+      "section": "nouns",
+      "topic": "Дом и мебель",
+      "number": 4,
+      "free": false,
+      "title": "Здание и аренда",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e18914031b"
     },
     {
       "id": "paal-1",
@@ -493,11 +561,28 @@
         "type"
       ],
       "v": "7b39cd9a42"
+    },
+    {
+      "id": "qualities-3",
+      "topicId": "qualities",
+      "section": "adjectives",
+      "topic": "Главные качества",
+      "number": 3,
+      "free": true,
+      "title": "Сильный и слабый",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e735c28445"
     }
   ],
   "info": {
-    "totalWords": 210,
-    "totalLessons": 27,
+    "totalWords": 260,
+    "totalLessons": 32,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -519,7 +604,8 @@
         "title": "Тело",
         "lessonIds": [
           "body-1",
-          "body-2"
+          "body-2",
+          "body-3"
         ]
       },
       {
@@ -535,7 +621,8 @@
         "lessonIds": [
           "family-1",
           "family-2",
-          "family-3"
+          "family-3",
+          "family-4"
         ]
       },
       {
@@ -544,7 +631,8 @@
         "lessonIds": [
           "food-1",
           "food-2",
-          "food-3"
+          "food-3",
+          "food-4"
         ]
       },
       {
@@ -553,7 +641,8 @@
         "lessonIds": [
           "home-1",
           "home-2",
-          "home-3"
+          "home-3",
+          "home-4"
         ]
       },
       {
@@ -579,7 +668,8 @@
         "title": "Главные качества",
         "lessonIds": [
           "qualities-1",
-          "qualities-2"
+          "qualities-2",
+          "qualities-3"
         ]
       }
     ]

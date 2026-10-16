@@ -1,0 +1,157 @@
+{
+  "$schema": "../schema.json",
+  "id": "family-4",
+  "topicId": "family",
+  "section": "nouns",
+  "topic": "Семья",
+  "number": 4,
+  "free": false,
+  "title": "Пара и жизнь",
+  "words": [
+    {
+      "id": "family-4-couple",
+      "he": "זוג",
+      "niqqud": "זוּג",
+      "translit": "зуг",
+      "ru": "пара",
+      "gender": "m",
+      "example": {
+        "he": "זה זוג צעיר",
+        "translit": "зэ зуг цаир",
+        "ru": "Это молодая пара"
+      },
+      "image": "/words/family-4-couple.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-4-wedding",
+      "he": "חתונה",
+      "niqqud": "חֲתוּנָּה",
+      "translit": "хатуна́",
+      "ru": "свадьба",
+      "gender": "f",
+      "example": {
+        "he": "זאת חתונה גדולה",
+        "translit": "зот хатуна гдола",
+        "ru": "Это большая свадьба"
+      },
+      "image": "/words/family-4-wedding.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-4-love",
+      "he": "אהבה",
+      "niqqud": "אַהֲבָה",
+      "translit": "ахава́",
+      "ru": "любовь",
+      "gender": "f",
+      "example": {
+        "he": "זאת אהבה גדולה",
+        "translit": "зот ахава гдола",
+        "ru": "Это большая любовь"
+      },
+      "image": "/words/family-4-love.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-4-divorce",
+      "he": "גירושים",
+      "niqqud": "גֵּירוּשִׁים",
+      "translit": "геруши́м",
+      "ru": "развод",
+      "gender": "m",
+      "example": {
+        "he": "אלה גירושים קשים",
+        "translit": "эле герушим кашим",
+        "ru": "Это тяжёлый развод"
+      },
+      "image": "/words/family-4-divorce.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-4-age",
+      "he": "גיל",
+      "niqqud": "גִּיל",
+      "translit": "гиль",
+      "ru": "возраст",
+      "gender": "m",
+      "example": {
+        "he": "זה גיל טוב",
+        "translit": "зэ гиль тов",
+        "ru": "Это хороший возраст"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-4-name",
+      "he": "שם",
+      "niqqud": "שֵׁם",
+      "translit": "шем",
+      "ru": "имя",
+      "gender": "m",
+      "example": {
+        "he": "זה שם יפה",
+        "translit": "зэ шем яфе",
+        "ru": "Это красивое имя"
+      },
+      "image": "/words/family-4-name.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-4-teenboy",
+      "he": "נער",
+      "niqqud": "נַעַר",
+      "translit": "на́ар",
+      "ru": "подросток, юноша",
+      "gender": "m",
+      "example": {
+        "he": "זה נער חכם",
+        "translit": "зэ наар хахам",
+        "ru": "Это умный подросток"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-4-teengirl",
+      "he": "נערה",
+      "niqqud": "נַעֲרָה",
+      "translit": "наара́",
+      "ru": "девушка-подросток",
+      "gender": "f",
+      "example": {
+        "he": "זאת נערה חכמה",
+        "translit": "зот наара хахама",
+        "ru": "Это умная девушка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-4-motherinlaw",
+      "he": "חמות",
+      "niqqud": "חָמוֹת",
+      "translit": "хамо́т",
+      "ru": "свекровь, тёща",
+      "gender": "f",
+      "example": {
+        "he": "זאת חמות טובה",
+        "translit": "зот хамот това",
+        "ru": "Это хорошая свекровь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "family-4-brotherinlaw",
+      "he": "גיס",
+      "niqqud": "גִּיס",
+      "translit": "гис",
+      "ru": "шурин, деверь",
+      "gender": "m",
+      "example": {
+        "he": "זה גיס טוב",
+        "translit": "зэ гис тов",
+        "ru": "Это хороший шурин"
+      },
+      "reviewed": false
+    }
+  ]
+}

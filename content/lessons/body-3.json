@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "id": "body-3",
+  "topicId": "body",
+  "section": "nouns",
+  "topic": "Тело",
+  "number": 3,
+  "free": true,
+  "title": "Здоровье и болезни",
+  "words": [
+    {
+      "id": "body-3-health",
+      "he": "בריאות",
+      "niqqud": "בְּרִיאוּת",
+      "translit": "бриу́т",
+      "ru": "здоровье",
+      "gender": "f",
+      "example": {
+        "he": "זאת בריאות טובה",
+        "translit": "зот бриут това",
+        "ru": "Это хорошее здоровье"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-3-illness",
+      "he": "מחלה",
+      "niqqud": "מַחֲלָה",
+      "translit": "махала́",
+      "ru": "болезнь",
+      "gender": "f",
+      "example": {
+        "he": "זאת מחלה קשה",
+        "translit": "зот махала каша",
+        "ru": "Это тяжёлая болезнь"
+      },
+      "image": "/words/body-3-illness.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-pain",
+      "he": "כאב",
+      "niqqud": "כְּאֵב",
+      "translit": "кеэ́в",
+      "ru": "боль",
+      "gender": "m",
+      "example": {
+        "he": "זה כאב חזק",
+        "translit": "зэ кеэв хазак",
+        "ru": "Это сильная боль"
+      },
+      "image": "/words/body-3-pain.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-cough",
+      "he": "שיעול",
+      "niqqud": "שִׁיעוּל",
+      "translit": "шиу́ль",
+      "ru": "кашель",
+      "gender": "m",
+      "example": {
+        "he": "זה שיעול חזק",
+        "translit": "зэ шиуль хазак",
+        "ru": "Это сильный кашель"
+      },
+      "image": "/words/body-3-cough.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-runnynose",
+      "he": "נזלת",
+      "niqqud": "נַזֶּלֶת",
+      "translit": "назе́лет",
+      "ru": "насморк",
+      "gender": "f",
+      "example": {
+        "he": "זאת נזלת קלה",
+        "translit": "зот назелет кала",
+        "ru": "Это лёгкий насморк"
+      },
+      "image": "/words/body-3-runnynose.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-flu",
+      "he": "שפעת",
+      "niqqud": "שַׁפַּעַת",
+      "translit": "шапа́ат",
+      "ru": "грипп",
+      "gender": "f",
+      "example": {
+        "he": "זאת שפעת קשה",
+        "translit": "зот шапаат каша",
+        "ru": "Это тяжёлый грипп"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-3-wound",
+      "he": "פצע",
+      "niqqud": "פֶּצַע",
+      "translit": "пе́ца",
+      "ru": "рана",
+      "gender": "m",
+      "example": {
+        "he": "זה פצע קטן",
+        "translit": "зэ пеца катан",
+        "ru": "Это маленькая рана"
+      },
+      "image": "/words/body-3-wound.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-checkup",
+      "he": "בדיקה",
+      "niqqud": "בְּדִיקָה",
+      "translit": "бдика́",
+      "ru": "анализ, обследование",
+      "gender": "f",
+      "example": {
+        "he": "זאת בדיקה חשובה",
+        "translit": "зот бдика хашува",
+        "ru": "Это важный анализ"
+      },
+      "image": "/words/body-3-checkup.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-medicine",
+      "he": "תרופה",
+      "niqqud": "תְּרוּפָה",
+      "translit": "труфа́",
+      "ru": "лекарство",
+      "gender": "f",
+      "example": {
+        "he": "זאת תרופה חזקה",
+        "translit": "зот труфа хазака",
+        "ru": "Это сильное лекарство"
+      },
+      "image": "/words/body-3-medicine.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-3-doctor",
+      "he": "רופא",
+      "niqqud": "רוֹפֵא",
+      "translit": "рофе́",
+      "ru": "врач",
+      "gender": "m",
+      "example": {
+        "he": "זה רופא טוב",
+        "translit": "зэ рофе тов",
+        "ru": "Это хороший врач"
+      },
+      "image": "/words/body-3-doctor.svg",
+      "reviewed": false
+    }
+  ]
+}

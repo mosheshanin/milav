@@ -16,10 +16,14 @@ const USER = 2401;
 
 const lessonsDir = new URL("../content/lessons/", import.meta.url);
 const only = process.env.E2E_LESSON;
+// Пока платные уроки открыты всем до Stars (PAID_LESSONS_OPEN в packages/shared/src/constants.ts), проверяем и их.
+const paidOpen = /PAID_LESSONS_OPEN = true/.test(
+  readFileSync(new URL("../packages/shared/src/constants.ts", import.meta.url), "utf8"),
+);
 const lessons = readdirSync(lessonsDir)
   .filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(new URL(f, lessonsDir), "utf8")))
-  .filter((l) => l.free && (!only || l.id === only))
+  .filter((l) => (l.free || paidOpen) && (!only || l.id === only))
   .sort((a, b) => (a.section === "alphabet" ? -1 : 0) - (b.section === "alphabet" ? -1 : 0) || a.id.localeCompare(b.id));
 if (lessons.length === 0) throw new Error(`Нет уроков для проверки${only ? ` (E2E_LESSON=${only})` : ""}`);
 const itemsOf = (l) => l.words ?? l.letters;

@@ -1,0 +1,153 @@
+{
+  "$schema": "../schema.json",
+  "id": "home-4",
+  "topicId": "home",
+  "section": "nouns",
+  "topic": "Дом и мебель",
+  "number": 4,
+  "free": false,
+  "title": "Здание и аренда",
+  "words": [
+    {
+      "id": "home-4-building",
+      "he": "בניין",
+      "niqqud": "בִּנְייָן",
+      "translit": "бинья́н",
+      "ru": "здание",
+      "gender": "m",
+      "example": {
+        "he": "זה בניין חדש",
+        "translit": "зэ биньян хадаш",
+        "ru": "Это новое здание"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-elevator",
+      "he": "מעלית",
+      "niqqud": "מַעֲלִית",
+      "translit": "маали́т",
+      "ru": "лифт",
+      "gender": "f",
+      "example": {
+        "he": "זאת מעלית חדשה",
+        "translit": "зот маалит хадаша",
+        "ru": "Это новый лифт"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-stairs",
+      "he": "מדרגות",
+      "niqqud": "מַדְרֵגוֹת",
+      "translit": "мадрего́т",
+      "ru": "лестница",
+      "gender": "f",
+      "example": {
+        "he": "אלה מדרגות ישנות",
+        "translit": "эле мадрегот яшанот",
+        "ru": "Это старая лестница"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-wall",
+      "he": "קיר",
+      "niqqud": "קִיר",
+      "translit": "кир",
+      "ru": "стена",
+      "gender": "m",
+      "example": {
+        "he": "זה קיר לבן",
+        "translit": "зэ кир лаван",
+        "ru": "Это белая стена"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-floor",
+      "he": "רצפה",
+      "niqqud": "רִצְפָּה",
+      "translit": "рицпа́",
+      "ru": "пол",
+      "gender": "f",
+      "example": {
+        "he": "זאת רצפה נקייה",
+        "translit": "зот рицпа нкия",
+        "ru": "Это чистый пол"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-ceiling",
+      "he": "תקרה",
+      "niqqud": "תִּקְרָה",
+      "translit": "тикра́",
+      "ru": "потолок",
+      "gender": "f",
+      "example": {
+        "he": "זאת תקרה לבנה",
+        "translit": "зот тикра лвана",
+        "ru": "Это белый потолок"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-roof",
+      "he": "גג",
+      "niqqud": "גַּג",
+      "translit": "гаг",
+      "ru": "крыша",
+      "gender": "m",
+      "example": {
+        "he": "זה גג אדום",
+        "translit": "зэ гаг адом",
+        "ru": "Это красная крыша"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-yard",
+      "he": "חצר",
+      "niqqud": "חָצֵר",
+      "translit": "хаце́р",
+      "ru": "двор",
+      "gender": "f",
+      "example": {
+        "he": "זאת חצר גדולה",
+        "translit": "зот хацер гдола",
+        "ru": "Это большой двор"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-rent",
+      "he": "שכירות",
+      "niqqud": "שְׂכִירוּת",
+      "translit": "схиру́т",
+      "ru": "аренда, съём",
+      "gender": "f",
+      "example": {
+        "he": "זאת שכירות יקרה",
+        "translit": "зот схирут йекара",
+        "ru": "Это дорогая аренда"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-4-contract",
+      "he": "חוזה",
+      "niqqud": "חוֹזֶה",
+      "translit": "хозе́",
+      "ru": "договор",
+      "gender": "m",
+      "example": {
+        "he": "זה חוזה חדש",
+        "translit": "зэ хозе хадаш",
+        "ru": "Это новый договор"
+      },
+      "image": "/words/home-4-contract.svg",
+      "reviewed": false
+    }
+  ]
+}
