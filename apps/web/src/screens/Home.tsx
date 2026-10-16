@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { CheckCircle2, ChevronDown, ChevronRight, Lock } from "lucide-react";
+import { CheckCircle2, ChevronDown, ChevronRight, Lock, RefreshCw } from "lucide-react";
 import {
   ALPHABET_GROUPS,
   ALPHABET_TITLE,
@@ -8,6 +8,7 @@ import {
   STAGE_TITLES,
   lessonOpenWithoutPurchase,
   type LessonMeta,
+  type RepeatSummary,
   type Section,
 } from "@milav/shared";
 import { api, type LessonProgressResponse } from "../api";
@@ -20,6 +21,7 @@ import { lessonEmoji, topicEmoji } from "../lib/homeEmoji";
 import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
 import { alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
+import { repeatCardText } from "../lib/repeat";
 import { findResume } from "../lib/resume";
 
 const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
@@ -36,12 +38,16 @@ export function Home({
   onAchievements,
   onLeaderboard,
   onSettings,
+  onRepeat,
+  onWords,
 }: {
   onOpen: (lessonId: string) => void;
   onOpenQuiz: (lessonId: string) => void;
   onAchievements: () => void;
   onLeaderboard: () => void;
   onSettings: () => void;
+  onRepeat: () => void;
+  onWords: () => void;
 }) {
   const { me, refreshIfStale } = useApp();
   const [recapHidden, setRecapHidden] = useState(false);
@@ -75,6 +81,8 @@ export function Home({
     );
   }, [me.play.unseenBadges]);
   const [progress, setProgress] = useState<Progress>({});
+  /** Повторение: сколько слов пора повторить (нет, если функция выключена). */
+  const [repeat, setRepeat] = useState<RepeatSummary | undefined>(undefined);
   /** Запрос прогресса завершился (успешно или нет). */
   const [settled, setSettled] = useState(false);
 
@@ -82,7 +90,11 @@ export function Home({
   useEffect(() => {
     let alive = true;
     api.home().then(
-      (res) => alive && setProgress(res.lessons),
+      (res) => {
+        if (!alive) return;
+        setProgress(res.lessons);
+        setRepeat(res.repeat);
+      },
       () => undefined,
     ).finally(() => alive && setSettled(true));
     return () => {
@@ -159,6 +171,7 @@ export function Home({
             </Button>
           )}
         </Card>
+        {me.play.features.repeat && repeat && repeat.total > 0 && <RepeatCard summary={repeat} onRepeat={onRepeat} onWords={onWords} />}
         {resume && resumeLesson && (
           <Card className="flex flex-col gap-3" >
             <div>
@@ -286,6 +299,39 @@ export function Home({
         />
       )}
     </>
+  );
+}
+
+/**
+ * Карточка «Повторение»: сколько слов пора повторить, кнопки «Повторить» и «Мои слова». Появляется, когда есть хотя бы
+ * одно выученное слово. Когда повторять нечего, карточка тише (без главной кнопки) и говорит, когда следующие слова.
+ */
+function RepeatCard({ summary, onRepeat, onWords }: { summary: RepeatSummary; onRepeat: () => void; onWords: () => void }) {
+  const { line, canRepeat } = repeatCardText(summary);
+  return (
+    <Card className="flex flex-col gap-3" data-testid="home-repeat" data-due={summary.due}>
+      <div className="flex items-center gap-3">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-control bg-accent-soft text-accent" aria-hidden>
+          <RefreshCw className="size-icon" />
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="font-semibold">Повторение</div>
+          <div className="text-sm text-ink-soft" data-testid="home-repeat-line">
+            {line}
+          </div>
+        </div>
+      </div>
+      <div className={canRepeat ? "grid grid-cols-2 gap-2" : ""}>
+        {canRepeat && (
+          <Button onClick={onRepeat} data-testid="home-repeat-start">
+            Повторить
+          </Button>
+        )}
+        <Button variant="ghost" block={!canRepeat} onClick={onWords} data-testid="home-repeat-words">
+          Мои слова
+        </Button>
+      </div>
+    </Card>
   );
 }
 

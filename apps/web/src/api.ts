@@ -21,7 +21,11 @@ import type {
   LessonContentResponse,
   LessonProgressResponse,
   MeResponse,
+  MyWordsResponse,
   PlayEvent,
+  RepeatAnswerRequest,
+  RepeatAnswerResponse,
+  RepeatSessionResponse,
   PlayInfo,
   SettingsRequest,
   QuizAnswerRequest,
@@ -132,6 +136,12 @@ export const api = {
       headers: { "Content-Type": audio.type || "audio/webm" },
       body: audio,
     }),
+  /** Повторение: новый подход (слова, которые пора повторить, и упражнения к ним). */
+  repeatSession: () => request<RepeatSessionResponse>("/api/repeat/session"),
+  /** Ответ на повторение одного слова: сервер проверяет его и двигает слово по коробкам. */
+  repeatAnswer: (body: RepeatAnswerRequest) => request<RepeatAnswerResponse>("/api/repeat/answer", json(body)),
+  /** «Мои слова»: все выученные слова с коробками. */
+  myWords: () => request<MyWordsResponse>("/api/repeat/words"),
   /** Запись шаблонов букв (скрытый экран владельца): все записанные варианты. 403, если Telegram id не из секрета. */
   templates: () => request<TemplatesResponse>("/api/templates"),
   /** Записать или перезаписать вариант буквы. */

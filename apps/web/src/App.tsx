@@ -2,11 +2,13 @@ import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 import { AppProvider, useApp } from "./AppContext";
 import { Button, Notice } from "./components/ui";
 import { getLessonMeta } from "./lib/lessons";
-import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, REVIEW, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, REPEAT, REVIEW, WORDS, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
 import { Leaderboard } from "./screens/Leaderboard";
 import { FormsPractice } from "./screens/FormsPractice";
+import { MyWords } from "./screens/MyWords";
+import { Repeat } from "./screens/Repeat";
 import { Quiz } from "./screens/Quiz";
 import { Settings } from "./screens/Settings";
 import { Study } from "./screens/Study";
@@ -94,8 +96,12 @@ export function App() {
           onAchievements={() => setScreen(ACHIEVEMENTS)}
           onLeaderboard={() => setScreen(LEADERBOARD)}
           onSettings={() => setScreen({ name: "settings", from: "home" })}
+          onRepeat={() => setScreen(REPEAT)}
+          onWords={() => setScreen(WORDS)}
         />
       )}
+      {screen.name === "repeat" && <Repeat onBack={() => setScreen(HOME)} onWords={() => setScreen(WORDS)} />}
+      {screen.name === "words" && <MyWords onBack={() => setScreen(HOME)} onRepeat={() => setScreen(REPEAT)} />}
       {screen.name === "study" && (
         <Study
           lessonId={screen.lessonId}

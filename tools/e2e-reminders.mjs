@@ -197,7 +197,7 @@ check(true, "напоминания включены для всех");
 await admin.click('header button[aria-label="Назад"]');
 await admin.click('[data-testid="admin-open-reminders"]');
 await admin.waitForSelector('[data-testid="reminder-kind-daily"]');
-check((await admin.locator('[data-testid="reminder-kind-daily"] [data-testid^="reminder-"][data-testid$="-edit"]').count()) === 8, "8 ежедневных текстов из миграции");
+check((await admin.locator('[data-testid="reminder-kind-daily"] [data-testid^="reminder-"][data-testid$="-edit"]').count()) === 11, "11 ежедневных текстов из миграций (8 этапа 1 и 3 о повторении)");
 check((await admin.locator('[data-testid="reminders-summary"]').textContent()).includes("1"), "видно, сколько учеников включили напоминания");
 check(await noOverflow(admin), "раздел «Напоминания» без горизонтальной прокрутки");
 await shot(admin, "r4-admin-texts");
