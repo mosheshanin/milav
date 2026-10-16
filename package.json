@@ -20,6 +20,7 @@
     "content:new": "vite-node tools/content-new.ts",
     "content:verbs": "vite-node tools/gen-verb-lessons.ts",
     "content:report": "vite-node tools/content-report.ts",
+    "content:reviews": "vite-node tools/content-reviews.ts",
     "templates": "vite-node tools/own-templates.ts",
     "deploy": "npm run build && wrangler deploy",
     "images:inbox": "vite-node tools/images-inbox.ts"

@@ -22,6 +22,9 @@ on:
         description: "Для publish: перезаписать уже готовые файлы"
         type: boolean
         default: false
+      only:
+        description: "Для publish: только эти слова и буквы (id через запятую), например после правок носителя"
+        default: ""
 
 permissions:
   contents: write
@@ -59,7 +62,16 @@ jobs:
 
       - name: Боевая озвучка
         if: inputs.action == 'publish'
-        run: node tools/generate-audio.mjs --voice "${{ inputs.voice }}" --text "${{ inputs.text }}" --update-content ${{ inputs.force && '--force' || '' }}
+        # Список id приходит через переменную окружения и проверяется: в команду попадают только id уроков.
+        env:
+          ONLY: ${{ inputs.only }}
+        run: |
+          ONLY_ARGS=()
+          if [ -n "$ONLY" ]; then
+            if ! [[ "$ONLY" =~ ^[a-z0-9,-]+$ ]]; then echo "only: только id через запятую"; exit 1; fi
+            ONLY_ARGS=(--only "$ONLY")
+          fi
+          node tools/generate-audio.mjs --voice "${{ inputs.voice }}" --text "${{ inputs.text }}" --update-content ${{ inputs.force && '--force' || '' }} "${ONLY_ARGS[@]}"
 
       # Поле audio в уроке меняет его версию: манифест приложения пересобирается, иначе тест манифеста остановит выкладку.
       - name: Манифест уроков
