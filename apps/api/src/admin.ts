@@ -131,6 +131,8 @@ export function configDefaults(env: Bindings): AppConfig {
     // Напоминания сначала проверяет команда на своих телефонах, потом владелец включает «Все» в панели.
     // Локально (env.local) по умолчанию выключены, чтобы предложение не мешало сквозным тестам уроков.
     reminders: isFeatureMode(env.REMINDERS_DEFAULT) ? env.REMINDERS_DEFAULT : "team",
+    // Повторение слов (задача 10): сразу для всех, при сбое его можно выключить в панели без выкладки.
+    repeat: "all",
     defaultDailyGoal: DEFAULT_DAILY_GOAL,
   };
 }

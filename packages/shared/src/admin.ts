@@ -43,6 +43,11 @@ export const APP_CONFIG = {
     title: "Напоминания от бота",
     hint: "Предложение включить напоминания, раздел в «Настройках» и отправка. «Команда»: только администраторам и проверяющим (для проверки). При выключении сообщения перестают уходить, выбор учеников сохраняется.",
   },
+  repeat: {
+    kind: "feature",
+    title: "Повторение слов",
+    hint: "Карточка «Повторить» на главной, подход повторения и «Мои слова». При выключении коробки слов сохраняются.",
+  },
   defaultDailyGoal: {
     kind: "choice",
     title: "Цель дня для новых учеников",
@@ -57,6 +62,7 @@ export const CONFIG_KEYS = Object.keys(APP_CONFIG) as ConfigKey[];
 export interface AppConfig {
   leaderboard: FeatureMode;
   reminders: FeatureMode;
+  repeat: FeatureMode;
   defaultDailyGoal: number;
 }
 

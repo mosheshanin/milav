@@ -3,7 +3,7 @@ import { localEpochDay, type AdminRemindersResponse } from "@milav/shared";
 import { webhookSecret } from "./bot";
 import type { Bindings } from "./env";
 import { OFFER_AGAIN_SECONDS, SEND_BATCH, runDueReminders, setTelegramFetchForTests } from "./reminders";
-import { TOKEN, api, completeWord, ctx, lesson, resetHarness } from "./test-utils/harness";
+import { TOKEN, api, completeLesson, completeWord, ctx, lesson, resetHarness } from "./test-utils/harness";
 
 const OWNER = 8001;
 const STUDENT = 8002;
@@ -206,6 +206,22 @@ describe("отправка по расписанию", () => {
     expect(outbox[0]!.text).toMatch(/^Осталось 5 сл\. до цели дня/);
   });
 
+  it("есть 5 слов к повторению: текст о повторении через раз; при выключенном повторении обычный", async () => {
+    await subscribed(STUDENT);
+    await completeLesson(STUDENT);
+    // Слова выучены 10.10, сегодня ученик ещё не занимался.
+    await ctx.env.DB.prepare("UPDATE word_progress SET completed_at = '2026-10-10 08:00:00' WHERE user_id = ?").bind(STUDENT).run();
+    await ctx.env.DB.prepare("UPDATE user_stats SET last_day = last_day - 3 WHERE user_id = ?").bind(STUDENT).run();
+    await run("2026-10-14T17:00:00Z", () => 0);
+    expect(outbox[0]!.text).toContain("10 слов");
+    await run("2026-10-15T17:00:00Z", () => 0);
+    expect(outbox[1]!.text).not.toContain("слов ждут");
+    expect(outbox[1]!.text).not.toMatch(/К повторению|в очереди/);
+    await putJson("/api/admin/config", OWNER, { key: "repeat", value: "off" });
+    await run("2026-10-18T17:00:00Z", () => 0);
+    expect(outbox[2]!.text).not.toMatch(/10 слов|11 слов/);
+  });
+
   it("открыл приложение в течение суток после напоминания: засчитывается тексту один раз", async () => {
     await subscribed(STUDENT);
     await run("2026-10-14T17:00:00Z");
@@ -281,7 +297,9 @@ describe("раздел панели «Напоминания»", () => {
     await setMode("all");
     await subscribed(STUDENT);
     const data = await list();
-    expect(data.texts.filter((t) => t.kind === "daily")).toHaveLength(8);
+    // 8 текстов этапа 1 и 3 о повторении слов (миграция 0009).
+    expect(data.texts.filter((t) => t.kind === "daily")).toHaveLength(11);
+    expect(data.texts.filter((t) => t.text.includes("{к_повторению}"))).toHaveLength(3);
     expect(data.texts.filter((t) => t.kind === "enabled")).toHaveLength(1);
     expect(data.subscribers).toBe(1);
   });

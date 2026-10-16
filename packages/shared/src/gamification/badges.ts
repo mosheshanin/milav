@@ -11,7 +11,7 @@ export const RARITY_TITLES: Record<Rarity, string> = {
   legendary: "Легендарный",
 };
 
-export type BadgeCategory = "start" | "milestones" | "alphabet" | "topics" | "quality" | "regularity" | "variety" | "return";
+export type BadgeCategory = "start" | "milestones" | "alphabet" | "topics" | "quality" | "regularity" | "memory" | "variety" | "return";
 
 /** Порядок и названия разделов на экране «Достижения». */
 export const BADGE_CATEGORIES: { key: BadgeCategory; title: string }[] = [
@@ -21,6 +21,7 @@ export const BADGE_CATEGORIES: { key: BadgeCategory; title: string }[] = [
   { key: "topics", title: "Темы" },
   { key: "quality", title: "Качество" },
   { key: "regularity", title: "Регулярность" },
+  { key: "memory", title: "Память" },
   { key: "variety", title: "Разнообразие" },
   { key: "return", title: "Возвращение" },
 ];
@@ -30,6 +31,7 @@ export const BADGE_ICONS = [
   "Footprints", "Sprout", "Flag", "BookOpen", "Layers", "Target", "Compass", "Castle", "Crown", "Medal", "Trophy",
   "Languages", "Award", "Shield", "Gem", "Sparkles", "CalendarDays",
   "CalendarCheck", "Calendar", "Waves", "Goal", "Shuffle", "Network", "LayoutGrid", "Handshake",
+  "RefreshCw", "History", "Brain", "Anchor",
 ] as const;
 export type BadgeIcon = (typeof BADGE_ICONS)[number];
 
@@ -46,6 +48,8 @@ export const METRICS = [
   "rhythmWeeks",
   "goalDays",
   "returns",
+  "repeats",
+  "mastered",
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Metrics = Record<Metric, number>;
@@ -62,6 +66,8 @@ export const ZERO_METRICS: Metrics = {
   rhythmWeeks: 0,
   goalDays: 0,
   returns: 0,
+  repeats: 0,
+  mastered: 0,
 };
 
 export interface BadgeDef {
@@ -155,6 +161,12 @@ export function buildCatalog(info: ContentInfo): Catalog {
     spec("rhythm-52", "regularity", "legendary", "Waves", "Год ритма", "Наберите 52 недели ритма", "rhythmWeeks", 52),
     spec("goal-7", "regularity", "common", "Goal", "Цель достигнута", "Выполните цель дня 7 раз", "goalDays", 7),
     spec("goal-30", "regularity", "rare", "Goal", "Цель на 30", "Выполните цель дня 30 раз", "goalDays", 30),
+    // Память (повторение слов, задача 10): вспомнено при повторении и доведено до последней коробки (пауза 60 дней)
+    spec("repeat-10", "memory", "common", "RefreshCw", "Освежили память", "Вспомните 10 слов при повторении", "repeats", 10, words(10)),
+    spec("repeat-100", "memory", "rare", "History", "Ничего не забыто", "Вспомните 100 слов при повторении", "repeats", 100, words(10)),
+    spec("repeat-500", "memory", "epic", "History", "Слоновья память", "Вспомните 500 слов при повторении", "repeats", 500, words(50)),
+    spec("mastered-10", "memory", "rare", "Brain", "Прочно выучено", "Доведите 10 слов до самой долгой паузы повторения (60 дней)", "mastered", 10, words(10)),
+    spec("mastered-50", "memory", "epic", "Anchor", "Якорь в памяти", "Доведите 50 слов до самой долгой паузы повторения", "mastered", 50, words(50)),
     // Разнообразие
     spec("variety-2", "variety", "common", "Shuffle", "Два фронта", "Сдайте уроки в 2 разных разделах", "sections", 2, sectionsAtLeast(2)),
     spec("variety-3", "variety", "rare", "Network", "Три направления", "Сдайте уроки в 3 разных разделах", "sections", 3, sectionsAtLeast(3)),

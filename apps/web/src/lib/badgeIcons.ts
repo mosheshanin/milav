@@ -1,7 +1,9 @@
 // Сопоставление имён значков бейджей (BADGE_ICONS в shared) компонентам lucide-react.
 // Тест badgeIcons.test.ts следит, чтобы ни одно имя из каталога не осталось без значка.
 import {
+  Anchor,
   Award,
+  Brain,
   BookOpen,
   Calendar,
   CalendarCheck,
@@ -14,11 +16,13 @@ import {
   Gem,
   Goal,
   Handshake,
+  History,
   Languages,
   Layers,
   LayoutGrid,
   Medal,
   Network,
+  RefreshCw,
   Shield,
   Shuffle,
   Sparkles,
@@ -56,4 +60,8 @@ export const BADGE_ICON_COMPONENTS: Record<BadgeIcon, LucideIcon> = {
   Network,
   LayoutGrid,
   Handshake,
+  RefreshCw,
+  History,
+  Brain,
+  Anchor,
 };

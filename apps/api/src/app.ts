@@ -3,6 +3,7 @@ import { allLessons, catalog, findStudyItem, findWord, getAnyLesson } from "@mil
 import {
   CLIENT_LOG_LIMITS,
   CLIENT_LOG_PATH,
+  DEFAULT_TZ,
   MAX_STAGE_BODY_BYTES,
   PAID_LESSONS_OPEN,
   POINTS_PER_WORD,
@@ -28,13 +29,14 @@ import { boardWeekNow } from "./board";
 import { ensureUser, getHomeProgress, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
-import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, playRoutes } from "./play";
+import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, playRoutes, repeatOn } from "./play";
+import { repeatRoutes, repeatSummaryFor } from "./repeat";
 import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
 import { readAudio, transcribeHebrew } from "./speech";
-import { ensureStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
+import { ensureStats, loadStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 import { createThrottle, describeError, logClientReport, logError, logEvent, logWarn, parseClientReport } from "./telemetry";
 import {
@@ -233,6 +235,11 @@ app.get("/api/home", requireUser, async (c) => {
     .filter(canAccessLesson)
     .map((lesson) => ({ id: lesson.id, itemIds: lessonItems(lesson).map((item) => item.id) }));
   const body: HomeResponse = { lessons: await getHomeProgress(c.env.DB, user.id, available) };
+  // Повторение: сколько слов пора повторить (граница дня по поясу ученика, который приложение прислало в /api/me).
+  if (await repeatOn(c.env, user.id)) {
+    const tz = (await loadStats(c.env.DB, user.id))?.tz ?? DEFAULT_TZ;
+    body.repeat = await repeatSummaryFor(c.env.DB, user.id, tz, nowSeconds());
+  }
   return c.json(body);
 });
 
@@ -496,6 +503,9 @@ app.delete("/api/templates", requireUser, requireAdmin, rateLimit("templates"), 
 
 // Геймификация: достижения, настройки, таблица лидеров, сравнение (play.ts).
 app.route("/", playRoutes);
+
+// Повторение слов: подход, ответы, «Мои слова» (repeat.ts).
+app.route("/", repeatRoutes);
 
 // Напоминания от бота: настройки ученика (reminders.ts). Таймер отправки: scheduler.ts.
 app.route("/", reminderRoutes);

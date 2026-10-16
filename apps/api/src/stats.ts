@@ -7,6 +7,7 @@ import {
   EMPTY_PLAY,
   LEADERBOARD_TZ,
   POINTS_PER_WORD,
+  REPEAT_LAST_BOX,
   SECTION_BITS,
   applyActivity,
   closedTopics,
@@ -37,6 +38,9 @@ export interface Stats {
   perfectQuizzes: number;
   topicsClosed: number;
   sectionsMask: number;
+  /** Повторение слов: сколько раз вспомнил и сколько слов дошло до последней коробки. */
+  repeatsDone: number;
+  wordsMastered: number;
   tz: string;
   tzChangedDay: number;
   /** Дни, недели ритма, цель дня и возвращения (минимальный конечный автомат из пакета shared). */
@@ -62,6 +66,8 @@ interface StatsRow {
   perfect_quizzes: number;
   topics_closed: number;
   sections_mask: number;
+  repeats_done: number;
+  words_mastered: number;
   returns: number;
   tz: string;
   tz_changed_day: number;
@@ -100,6 +106,8 @@ function fromRow(r: StatsRow): Stats {
     perfectQuizzes: r.perfect_quizzes,
     topicsClosed: r.topics_closed,
     sectionsMask: r.sections_mask,
+    repeatsDone: r.repeats_done ?? 0,
+    wordsMastered: r.words_mastered ?? 0,
     tz: r.tz,
     tzChangedDay: r.tz_changed_day,
     play: {
@@ -145,6 +153,8 @@ export function metricsOf(s: Stats): Metrics {
     rhythmWeeks: s.play.rhythmWeeks,
     goalDays: s.play.goalDays,
     returns: s.play.returns,
+    repeats: s.repeatsDone,
+    mastered: s.wordsMastered,
   };
 }
 
@@ -202,12 +212,14 @@ interface Recount {
  * так подхватывается прежний прогресс. Цель дня задним числом не засчитывается (цель появилась только сейчас).
  */
 async function recount(db: D1Database, userId: number, tz: string, now: number): Promise<Recount> {
-  const [progress, passedRows, attemptRows, userRows] = await db.batch([
+  const [progress, passedRows, attemptRows, userRows, repeatRows] = await db.batch([
     db.prepare("SELECT lesson_id, completed_at FROM word_progress WHERE user_id = ? AND completed_at IS NOT NULL").bind(userId),
     db.prepare("SELECT lesson_id, first_passed_at FROM lesson_passed WHERE user_id = ?").bind(userId),
     db.prepare("SELECT lesson_id, correct, total, created_at FROM quiz_attempts WHERE user_id = ?").bind(userId),
     db.prepare("SELECT created_at FROM users WHERE id = ?").bind(userId),
+    db.prepare(`SELECT COALESCE(SUM(reps), 0) AS reps, COALESCE(SUM(best_box >= ${REPEAT_LAST_BOX}), 0) AS mastered FROM repeat_state WHERE user_id = ?`).bind(userId),
   ]);
+  const repeat = (repeatRows?.results?.[0] as { reps?: number; mastered?: number } | undefined) ?? {};
 
   const timelines: Timelines = { words: [], letters: [], lessons: [], alphabetLessons: [], activeDays: [] };
   const dayWords = new Map<number, number>();
@@ -274,6 +286,8 @@ async function recount(db: D1Database, userId: number, tz: string, now: number):
     perfectQuizzes,
     topicsClosed: closedTopics(INFO, passed).size,
     sectionsMask,
+    repeatsDone: repeat.reps ?? 0,
+    wordsMastered: repeat.mastered ?? 0,
     tz,
     tzChangedDay: 0,
     play,
@@ -296,8 +310,9 @@ INSERT OR IGNORE INTO user_stats (
   user_id, words_done, letters_done, passed_lessons, alphabet_lessons, perfect_quizzes,
   topics_closed, sections_mask, returns, tz, tz_changed_day, active_days, last_day, week_idx, week_days, week_words,
   rhythm_weeks, rhythm_hist, prev_week_idx, prev_week_days, prev_week_words, daily_goal, goal_day, goal_words, goal_days,
-  lb_optin, lb_banned, lb_week_idx, lb_week_points, lb_updated_at, cohort_week, cohort_excluded, badges_ver, created_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  lb_optin, lb_banned, lb_week_idx, lb_week_points, lb_updated_at, cohort_week, cohort_excluded, badges_ver, created_at,
+  repeats_done, words_mastered
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 function insertStatement(db: D1Database, s: Stats) {
   const p = s.play;
@@ -309,6 +324,7 @@ function insertStatement(db: D1Database, s: Stats) {
       p.rhythmWeeks, p.rhythmHist, p.prevWeekIdx, p.prevWeekDays, p.prevWeekWords, s.dailyGoal, p.goalDay, p.goalWords, p.goalDays,
       s.lbOptin ? 1 : 0, s.lbBanned ? 1 : 0, s.lbWeekIdx, s.lbWeekPoints, s.lbUpdatedAt, s.cohortWeek, s.cohortExcluded ? 1 : 0,
       s.badgesVer, s.createdAt,
+      s.repeatsDone, s.wordsMastered,
     );
 }
 
@@ -434,11 +450,10 @@ export interface PlayOutcome {
 }
 
 /**
- * Слово или буква пройдены (markStage вернул justCompleted): ритм, цель дня и бейджи.
- * Счётчики слов и очки таблицы уже увеличены в том же пакете, что и сама отметка (см. markStage в db.ts).
- * `initial` — счётчики, прочитанные до отметки.
+ * Учитывает `words` слов в ритме и цели дня (запись со сравнением, до 3 попыток при параллельных занятиях).
+ * Если запись так и не прошла, `applied` false: ритм догонит следующее занятие.
  */
-export async function recordWordCompleted(db: D1Database, initial: Stats, isLetter: boolean, now: number): Promise<PlayOutcome> {
+async function applyWordsToPlay(db: D1Database, initial: Stats, words: number, now: number) {
   let current = initial;
   let after: PlayState = initial.play;
   let today = localEpochDay(initial.tz, now * 1000);
@@ -447,7 +462,7 @@ export async function recordWordCompleted(db: D1Database, initial: Stats, isLett
 
   for (let attempt = 0; attempt < 3 && !applied; attempt++) {
     today = localEpochDay(current.tz, now * 1000);
-    const act = applyActivity(current.play, { day: today, words: 1 }, current.dailyGoal);
+    const act = applyActivity(current.play, { day: today, words }, current.dailyGoal);
     const res = await playUpdateStatement(db, current.userId, current.play, act.state).run();
     if ((res.meta?.changes ?? 0) > 0) {
       after = act.state;
@@ -458,11 +473,42 @@ export async function recordWordCompleted(db: D1Database, initial: Stats, isLett
       current = (await loadStats(db, current.userId)) ?? current;
     }
   }
+  return { current, after: applied ? after : current.play, today, goalMet, applied };
+}
 
-  // Если запись ритма так и не прошла, бейджи считаются по одним словам: ритм догонит следующее занятие.
+/**
+ * Слово или буква пройдены (markStage вернул justCompleted): ритм, цель дня и бейджи.
+ * Счётчики слов и очки таблицы уже увеличены в том же пакете, что и сама отметка (см. markStage в db.ts).
+ * `initial` — счётчики, прочитанные до отметки.
+ */
+export async function recordWordCompleted(db: D1Database, initial: Stats, isLetter: boolean, now: number): Promise<PlayOutcome> {
+  const { current, after, today, goalMet, applied } = await applyWordsToPlay(db, initial, 1, now);
   const before: Stats = { ...initial, play: current.play };
   const newBadges = await awardBadges(db, initial.userId, badgesForWord(before, applied ? after : before.play, isLetter), now);
-  return { newBadges, goal: viewPlay(applied ? after : current.play, today, current.dailyGoal).goal, goalMet };
+  return { newBadges, goal: viewPlay(after, today, current.dailyGoal).goal, goalMet };
+}
+
+/**
+ * Ответ на повторение слова (repeat.ts): слово засчитывается в цель дня и ритм (очков не даёт, решение владельца
+ * 16.10), бейджи «Память». Счётчики repeats_done и words_mastered уже увеличены в одном пакете с ответом.
+ */
+export async function recordRepeatAnswer(
+  db: D1Database,
+  initial: Stats,
+  delta: { repeats: number; mastered: number },
+  now: number,
+): Promise<PlayOutcome> {
+  const { current, after, today, goalMet, applied } = await applyWordsToPlay(db, initial, 1, now);
+  const before: Stats = { ...initial, play: current.play };
+  const afterStats: Stats = {
+    ...before,
+    repeatsDone: before.repeatsDone + delta.repeats,
+    wordsMastered: before.wordsMastered + delta.mastered,
+    play: applied ? after : before.play,
+  };
+  const crossed = crossedBadges(catalog, metricsOf(before), metricsOf(afterStats), new Set(), new Set());
+  const newBadges = await awardBadges(db, initial.userId, crossed, now);
+  return { newBadges, goal: viewPlay(after, today, current.dailyGoal).goal, goalMet };
 }
 
 /**

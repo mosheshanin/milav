@@ -171,5 +171,7 @@ export const RATE_LIMITS = {
   admin: { perMinute: 60, perDay: 2000 },
   // Проверка слов (администраторы и проверяющие): около 240 слов и букв, каждое открывают и отмечают, с запасом.
   review: { perMinute: 60, perDay: 3000 },
+  // Повторение слов: ответы (каждое слово не чаще раза в день) и начало подхода.
+  repeat: { perMinute: 60, perDay: 1500 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;

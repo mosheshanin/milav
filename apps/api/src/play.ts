@@ -35,9 +35,17 @@ export async function leaderboardOn(env: Bindings, userId: number): Promise<bool
   return featureOn(leaderboard, await staffOf(env, userId));
 }
 
+/** Включено ли повторение слов для этого человека (настройка «Повторение слов» в панели и его роль). */
+export async function repeatOn(env: Bindings, userId: number): Promise<boolean> {
+  const { repeat } = await loadConfig(env);
+  if (repeat !== "team") return repeat === "all";
+  return featureOn(repeat, await staffOf(env, userId));
+}
+
 /** Какие функции включены для человека (приложение прячет кнопки выключенных). */
 export async function featuresFor(env: Bindings, userId: number): Promise<PlayInfo["features"]> {
-  return { leaderboard: await leaderboardOn(env, userId) };
+  const [leaderboard, repeat] = await Promise.all([leaderboardOn(env, userId), repeatOn(env, userId)]);
+  return { leaderboard, repeat };
 }
 
 /** Сколько бейджей человек ещё не видел (поздравление не показано или ответ потерялся). */

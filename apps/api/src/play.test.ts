@@ -43,7 +43,7 @@ describe("новичок", () => {
       recap: null,
       goal: { target: 5, done: 0, met: false },
       settings: { dailyGoal: 5, leaderboard: false, cohortExcluded: false },
-      features: { leaderboard: false },
+      features: { leaderboard: false, repeat: true },
       week: { target: 3, wordsThisWeek: 0, rhythmWeeks: 0, rhythmLast8: 0, daysThisWeek: 0 },
       statusPath: { key: "pawn", from: 0, to: 6, passed: 0 },
     });

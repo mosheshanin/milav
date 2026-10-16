@@ -1,5 +1,6 @@
 import type { StaffInfo } from "./admin";
 import type { ReminderInfo } from "./reminders";
+import type { RepeatSummary } from "./repeat";
 import type { PlayEvent, PlayInfo } from "./gamification/types";
 import type { Stroke } from "./handwriting/types";
 import type { VerbData } from "./verbs";
@@ -258,6 +259,8 @@ export interface LessonProgressResponse {
 /** Ответ GET /api/home: прогресс всех доступных уроков одним запросом (ключ это id урока). */
 export interface HomeResponse {
   lessons: Record<string, LessonProgressResponse>;
+  /** Повторение слов: сколько пора повторить. Поля нет, если функция выключена для этого человека. */
+  repeat?: RepeatSummary;
 }
 
 /**

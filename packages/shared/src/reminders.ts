@@ -87,13 +87,14 @@ export const REMINDER_PLACEHOLDERS = {
   слов_за_неделю: "сколько слов выучено на этой неделе",
   статус: "следующая фигура, например «Конь»",
   до_статуса: "сколько уроков до следующей фигуры (текст выбирается, только если она есть)",
+  к_повторению: "сколько слов пора повторить, например «7 слов» (текст выбирается, только если их 5 и больше; такие тексты бот берёт через раз)",
 } as const;
 
 export type ReminderPlaceholder = keyof typeof REMINDER_PLACEHOLDERS;
 
 /** Какие подстановки можно использовать в каком виде. */
 export const KIND_PLACEHOLDERS: Record<ReminderKind, readonly ReminderPlaceholder[]> = {
-  daily: ["имя", "время", "осталось_слов", "дней_на_неделе", "слов_за_неделю", "статус", "до_статуса"],
+  daily: ["имя", "время", "осталось_слов", "дней_на_неделе", "слов_за_неделю", "статус", "до_статуса", "к_повторению"],
   enabled: ["имя", "время"],
 };
 
@@ -157,6 +158,37 @@ export function pickReminder<T extends { id: number; text: string }>(
   const pool = fresh.length > 0 ? fresh : usable;
   if (pool.length === 0) return null;
   return pool[Math.min(pool.length - 1, Math.floor(random * pool.length))]!;
+}
+
+/** Подстановка, по которой узнаются тексты о повторении слов. */
+export const REPEAT_PLACEHOLDER = "{к_повторению}";
+
+/** «1 слово», «3 слова», «7 слов». */
+export function wordsText(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  const word = mod10 === 1 && mod100 !== 11 ? "слово" : mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14) ? "слова" : "слов";
+  return `${n} ${word}`;
+}
+
+/**
+ * Выбор ежедневного текста с учётом повторения: если подстановка «к повторению» заполнена (слов набралось
+ * REPEAT_REMINDER_MIN и больше), а прошлый текст был не о повторении, берётся текст о повторении. Так напоминания
+ * о повторении и обычные чередуются (docs/REMINDERS.md, «Повторение»). Если текстов о повторении нет, выбор обычный.
+ */
+export function pickDailyReminder<T extends { id: number; text: string }>(
+  texts: readonly T[],
+  vars: ReminderVars,
+  lastId: number | null,
+  random: number,
+): { id: number; text: string } | null {
+  const isRepeat = (t: { text: string }) => t.text.includes(REPEAT_PLACEHOLDER);
+  const last = texts.find((t) => t.id === lastId);
+  if (vars.к_повторению !== undefined && !(last && isRepeat(last))) {
+    const chosen = pickReminder(texts.filter(isRepeat), vars, lastId, random);
+    if (chosen) return chosen;
+  }
+  return pickReminder(texts, vars, lastId, random);
 }
 
 // ---- Ответы API ----

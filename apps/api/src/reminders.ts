@@ -22,7 +22,10 @@ import {
   localEpochDay,
   minuteText,
   nextReminderAt,
+  pickDailyReminder,
   pickReminder,
+  REPEAT_REMINDER_MIN,
+  wordsText,
   popcount,
   renderReminder,
   statusPath,
@@ -40,6 +43,7 @@ import { requireUser } from "./auth";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv, Bindings } from "./env";
 import { statsFor } from "./play";
+import { countDueForReminders } from "./repeat";
 import { rateLimit } from "./rateLimit";
 import type { Stats } from "./stats";
 import { describeError, logError, logEvent, logWarn } from "./telemetry";
@@ -336,8 +340,13 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
   summary.due = due.length;
   if (due.length === 0) return summary;
 
-  const { reminders: mode } = await loadConfig(env);
+  const { reminders: mode, repeat: repeatMode } = await loadConfig(env);
   const texts = await enabledTexts(env.DB, "daily");
+  // Слова к повторению у всех, кому пора, одним запросом (каждому по его местному дню).
+  const repeatDue =
+    repeatMode === "off"
+      ? new Map<number, number>()
+      : await countDueForReminders(env.DB, due.map((r) => ({ userId: r.user_id, day: localEpochDay(r.tz ?? DEFAULT_TZ, nowMs) })));
   const updates: D1PreparedStatement[] = [];
   let stop = false;
 
@@ -367,7 +376,12 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
     }
 
     const vars = varsFor(row.first_name ?? "", row.minute, row, local.day);
-    const chosen = pickReminder(texts, vars, row.last_text_id, random());
+    // Слова к повторению (задача 10): только если повторение включено для этого человека.
+    const dueWords = repeatDue.get(row.user_id) ?? 0;
+    if (dueWords >= REPEAT_REMINDER_MIN && (repeatMode === "all" || (repeatMode === "team" && !!(await staffOf(env, row.user_id))))) {
+      vars.к_повторению = wordsText(dueWords);
+    }
+    const chosen = pickDailyReminder(texts, vars, row.last_text_id, random());
     if (!chosen) {
       // Все тексты выключены или ни один не заполняется: молчим, это видно в журнале.
       logWarn("reminder_no_text", { uid: row.user_id });
@@ -610,7 +624,7 @@ adminRoutes.delete("/api/admin/reminders/:id", async (c) => {
 });
 
 /** Примеры для подстановок, которых у администратора сейчас нет (чтобы «Прислать мне» работало всегда). */
-const SAMPLE_VARS: ReminderVars = { имя: "Друг", время: "20:00", осталось_слов: "3", дней_на_неделе: "2", слов_за_неделю: "12", статус: "Конь", до_статуса: "4" };
+const SAMPLE_VARS: ReminderVars = { имя: "Друг", время: "20:00", осталось_слов: "3", дней_на_неделе: "2", слов_за_неделю: "12", статус: "Конь", до_статуса: "4", к_повторению: "7 слов" };
 
 // «Прислать мне»: текст приходит администратору в чат с ботом, подстановки из его данных (или примеры).
 adminRoutes.post("/api/admin/reminders/:id/send", async (c) => {
