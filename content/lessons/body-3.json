@@ -18,9 +18,11 @@
       "example": {
         "he": "זאת בריאות טובה",
         "translit": "зот бриут това",
-        "ru": "Это хорошее здоровье"
+        "ru": "Это хорошее здоровье",
+        "audio": "/audio/body-3-health-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-health.mp3"
     },
     {
       "id": "body-3-illness",
@@ -32,10 +34,12 @@
       "example": {
         "he": "זאת מחלה קשה",
         "translit": "зот махала каша",
-        "ru": "Это тяжёлая болезнь"
+        "ru": "Это тяжёлая болезнь",
+        "audio": "/audio/body-3-illness-phrase.mp3"
       },
       "image": "/words/body-3-illness.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-illness.mp3"
     },
     {
       "id": "body-3-pain",
@@ -47,10 +51,12 @@
       "example": {
         "he": "זה כאב חזק",
         "translit": "зэ кеэв хазак",
-        "ru": "Это сильная боль"
+        "ru": "Это сильная боль",
+        "audio": "/audio/body-3-pain-phrase.mp3"
       },
       "image": "/words/body-3-pain.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-pain.mp3"
     },
     {
       "id": "body-3-cough",
@@ -62,10 +68,12 @@
       "example": {
         "he": "זה שיעול חזק",
         "translit": "зэ шиуль хазак",
-        "ru": "Это сильный кашель"
+        "ru": "Это сильный кашель",
+        "audio": "/audio/body-3-cough-phrase.mp3"
       },
       "image": "/words/body-3-cough.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-cough.mp3"
     },
     {
       "id": "body-3-runnynose",
@@ -77,10 +85,12 @@
       "example": {
         "he": "זאת נזלת קלה",
         "translit": "зот назелет кала",
-        "ru": "Это лёгкий насморк"
+        "ru": "Это лёгкий насморк",
+        "audio": "/audio/body-3-runnynose-phrase.mp3"
       },
       "image": "/words/body-3-runnynose.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-runnynose.mp3"
     },
     {
       "id": "body-3-flu",
@@ -92,9 +102,11 @@
       "example": {
         "he": "זאת שפעת קשה",
         "translit": "зот шапаат каша",
-        "ru": "Это тяжёлый грипп"
+        "ru": "Это тяжёлый грипп",
+        "audio": "/audio/body-3-flu-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-flu.mp3"
     },
     {
       "id": "body-3-wound",
@@ -106,10 +118,12 @@
       "example": {
         "he": "זה פצע קטן",
         "translit": "зэ пеца катан",
-        "ru": "Это маленькая рана"
+        "ru": "Это маленькая рана",
+        "audio": "/audio/body-3-wound-phrase.mp3"
       },
       "image": "/words/body-3-wound.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-wound.mp3"
     },
     {
       "id": "body-3-checkup",
@@ -121,10 +135,12 @@
       "example": {
         "he": "זאת בדיקה חשובה",
         "translit": "зот бдика хашува",
-        "ru": "Это важный анализ"
+        "ru": "Это важный анализ",
+        "audio": "/audio/body-3-checkup-phrase.mp3"
       },
       "image": "/words/body-3-checkup.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-checkup.mp3"
     },
     {
       "id": "body-3-medicine",
@@ -136,10 +152,12 @@
       "example": {
         "he": "זאת תרופה חזקה",
         "translit": "зот труфа хазака",
-        "ru": "Это сильное лекарство"
+        "ru": "Это сильное лекарство",
+        "audio": "/audio/body-3-medicine-phrase.mp3"
       },
       "image": "/words/body-3-medicine.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-medicine.mp3"
     },
     {
       "id": "body-3-doctor",
@@ -151,10 +169,12 @@
       "example": {
         "he": "זה רופא טוב",
         "translit": "зэ рофе тов",
-        "ru": "Это хороший врач"
+        "ru": "Это хороший врач",
+        "audio": "/audio/body-3-doctor-phrase.mp3"
       },
       "image": "/words/body-3-doctor.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-3-doctor.mp3"
     }
   ]
 }

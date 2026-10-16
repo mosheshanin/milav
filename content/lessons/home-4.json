@@ -18,9 +18,11 @@
       "example": {
         "he": "זה בניין חדש",
         "translit": "зэ биньян хадаш",
-        "ru": "Это новое здание"
+        "ru": "Это новое здание",
+        "audio": "/audio/home-4-building-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-building.mp3"
     },
     {
       "id": "home-4-elevator",
@@ -32,9 +34,11 @@
       "example": {
         "he": "זאת מעלית חדשה",
         "translit": "зот маалит хадаша",
-        "ru": "Это новый лифт"
+        "ru": "Это новый лифт",
+        "audio": "/audio/home-4-elevator-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-elevator.mp3"
     },
     {
       "id": "home-4-stairs",
@@ -46,9 +50,11 @@
       "example": {
         "he": "אלה מדרגות ישנות",
         "translit": "эле мадрегот яшанот",
-        "ru": "Это старая лестница"
+        "ru": "Это старая лестница",
+        "audio": "/audio/home-4-stairs-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-stairs.mp3"
     },
     {
       "id": "home-4-wall",
@@ -60,9 +66,11 @@
       "example": {
         "he": "זה קיר לבן",
         "translit": "зэ кир лаван",
-        "ru": "Это белая стена"
+        "ru": "Это белая стена",
+        "audio": "/audio/home-4-wall-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-wall.mp3"
     },
     {
       "id": "home-4-floor",
@@ -74,9 +82,11 @@
       "example": {
         "he": "זאת רצפה נקייה",
         "translit": "зот рицпа нкия",
-        "ru": "Это чистый пол"
+        "ru": "Это чистый пол",
+        "audio": "/audio/home-4-floor-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-floor.mp3"
     },
     {
       "id": "home-4-ceiling",
@@ -88,9 +98,11 @@
       "example": {
         "he": "זאת תקרה לבנה",
         "translit": "зот тикра лвана",
-        "ru": "Это белый потолок"
+        "ru": "Это белый потолок",
+        "audio": "/audio/home-4-ceiling-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-ceiling.mp3"
     },
     {
       "id": "home-4-roof",
@@ -102,9 +114,11 @@
       "example": {
         "he": "זה גג אדום",
         "translit": "зэ гаг адом",
-        "ru": "Это красная крыша"
+        "ru": "Это красная крыша",
+        "audio": "/audio/home-4-roof-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-roof.mp3"
     },
     {
       "id": "home-4-yard",
@@ -116,9 +130,11 @@
       "example": {
         "he": "זאת חצר גדולה",
         "translit": "зот хацер гдола",
-        "ru": "Это большой двор"
+        "ru": "Это большой двор",
+        "audio": "/audio/home-4-yard-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-yard.mp3"
     },
     {
       "id": "home-4-rent",
@@ -130,9 +146,11 @@
       "example": {
         "he": "זאת שכירות יקרה",
         "translit": "зот схирут йекара",
-        "ru": "Это дорогая аренда"
+        "ru": "Это дорогая аренда",
+        "audio": "/audio/home-4-rent-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-rent.mp3"
     },
     {
       "id": "home-4-contract",
@@ -144,10 +162,12 @@
       "example": {
         "he": "זה חוזה חדש",
         "translit": "зэ хозе хадаш",
-        "ru": "Это новый договор"
+        "ru": "Это новый договор",
+        "audio": "/audio/home-4-contract-phrase.mp3"
       },
       "image": "/words/home-4-contract.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-4-contract.mp3"
     }
   ]
 }

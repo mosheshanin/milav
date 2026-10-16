@@ -18,9 +18,11 @@
       "example": {
         "he": "זאת ארוחה טעימה",
         "translit": "зот аруха теима",
-        "ru": "Это вкусная трапеза"
+        "ru": "Это вкусная трапеза",
+        "audio": "/audio/food-4-meal-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-meal.mp3"
     },
     {
       "id": "food-4-butter",
@@ -32,10 +34,12 @@
       "example": {
         "he": "זאת חמאה טרייה",
         "translit": "зот хема трия",
-        "ru": "Это свежее сливочное масло"
+        "ru": "Это свежее сливочное масло",
+        "audio": "/audio/food-4-butter-phrase.mp3"
       },
       "image": "/words/food-4-butter.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-butter.mp3"
     },
     {
       "id": "food-4-yogurt",
@@ -47,9 +51,11 @@
       "example": {
         "he": "זה יוגורט טעים",
         "translit": "зэ йогурт таим",
-        "ru": "Это вкусный йогурт"
+        "ru": "Это вкусный йогурт",
+        "audio": "/audio/food-4-yogurt-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-yogurt.mp3"
     },
     {
       "id": "food-4-flour",
@@ -61,9 +67,11 @@
       "example": {
         "he": "זה קמח לבן",
         "translit": "зэ кемах лаван",
-        "ru": "Это белая мука"
+        "ru": "Это белая мука",
+        "audio": "/audio/food-4-flour-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-flour.mp3"
     },
     {
       "id": "food-4-honey",
@@ -75,10 +83,12 @@
       "example": {
         "he": "זה דבש מתוק",
         "translit": "зэ дваш матук",
-        "ru": "Это сладкий мёд"
+        "ru": "Это сладкий мёд",
+        "audio": "/audio/food-4-honey-phrase.mp3"
       },
       "image": "/words/food-4-honey.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-honey.mp3"
     },
     {
       "id": "food-4-pasta",
@@ -90,10 +100,12 @@
       "example": {
         "he": "זאת פסטה חמה",
         "translit": "зот паста хама",
-        "ru": "Это горячая паста"
+        "ru": "Это горячая паста",
+        "audio": "/audio/food-4-pasta-phrase.mp3"
       },
       "image": "/words/food-4-pasta.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-pasta.mp3"
     },
     {
       "id": "food-4-chocolate",
@@ -105,10 +117,12 @@
       "example": {
         "he": "זה שוקולד מתוק",
         "translit": "зэ шоколад матук",
-        "ru": "Это сладкий шоколад"
+        "ru": "Это сладкий шоколад",
+        "audio": "/audio/food-4-chocolate-phrase.mp3"
       },
       "image": "/words/food-4-chocolate.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-chocolate.mp3"
     },
     {
       "id": "food-4-cookie",
@@ -120,10 +134,12 @@
       "example": {
         "he": "זאת עוגייה טעימה",
         "translit": "зот угия теима",
-        "ru": "Это вкусное печенье"
+        "ru": "Это вкусное печенье",
+        "audio": "/audio/food-4-cookie-phrase.mp3"
       },
       "image": "/words/food-4-cookie.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-cookie.mp3"
     },
     {
       "id": "food-4-icecream",
@@ -135,10 +151,12 @@
       "example": {
         "he": "זאת גלידה קרה",
         "translit": "зот глида кара",
-        "ru": "Это холодное мороженое"
+        "ru": "Это холодное мороженое",
+        "audio": "/audio/food-4-icecream-phrase.mp3"
       },
       "image": "/words/food-4-icecream.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-icecream.mp3"
     },
     {
       "id": "food-4-grapes",
@@ -150,10 +168,12 @@
       "example": {
         "he": "אלה ענבים ירוקים",
         "translit": "эле анавим йеруким",
-        "ru": "Это зелёный виноград"
+        "ru": "Это зелёный виноград",
+        "audio": "/audio/food-4-grapes-phrase.mp3"
       },
       "image": "/words/food-4-grapes.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-4-grapes.mp3"
     }
   ]
 }

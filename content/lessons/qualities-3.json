@@ -17,26 +17,31 @@
       "example": {
         "he": "זה בניין גבוה",
         "translit": "зэ биньян гавоах",
-        "ru": "Это высокое здание"
+        "ru": "Это высокое здание",
+        "audio": "/audio/qualities-3-tall-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "גבוהה",
           "niqqud": "גְּבוֹהָה",
-          "translit": "гвоха́"
+          "translit": "гвоха́",
+          "audio": "/audio/qualities-3-tall-form-f.mp3"
         },
         "mp": {
           "he": "גבוהים",
           "niqqud": "גְּבוֹהִים",
-          "translit": "гвохи́м"
+          "translit": "гвохи́м",
+          "audio": "/audio/qualities-3-tall-form-mp.mp3"
         },
         "fp": {
           "he": "גבוהות",
           "niqqud": "גְּבוֹהוֹת",
-          "translit": "гвохо́т"
+          "translit": "гвохо́т",
+          "audio": "/audio/qualities-3-tall-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-tall.mp3"
     },
     {
       "id": "qualities-3-low",
@@ -47,26 +52,31 @@
       "example": {
         "he": "זה שולחן נמוך",
         "translit": "зэ шульхан намух",
-        "ru": "Это низкий стол"
+        "ru": "Это низкий стол",
+        "audio": "/audio/qualities-3-low-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "נמוכה",
           "niqqud": "נְמוּכָה",
-          "translit": "нмуха́"
+          "translit": "нмуха́",
+          "audio": "/audio/qualities-3-low-form-f.mp3"
         },
         "mp": {
           "he": "נמוכים",
           "niqqud": "נְמוּכִים",
-          "translit": "нмухи́м"
+          "translit": "нмухи́м",
+          "audio": "/audio/qualities-3-low-form-mp.mp3"
         },
         "fp": {
           "he": "נמוכות",
           "niqqud": "נְמוּכוֹת",
-          "translit": "нмухо́т"
+          "translit": "нмухо́т",
+          "audio": "/audio/qualities-3-low-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-low.mp3"
     },
     {
       "id": "qualities-3-heavy",
@@ -77,27 +87,32 @@
       "example": {
         "he": "זה תיק כבד",
         "translit": "зэ тик кавед",
-        "ru": "Это тяжёлая сумка"
+        "ru": "Это тяжёлая сумка",
+        "audio": "/audio/qualities-3-heavy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "כבדה",
           "niqqud": "כְּבֵדָה",
-          "translit": "кведа́"
+          "translit": "кведа́",
+          "audio": "/audio/qualities-3-heavy-form-f.mp3"
         },
         "mp": {
           "he": "כבדים",
           "niqqud": "כְּבֵדִים",
-          "translit": "кведи́м"
+          "translit": "кведи́м",
+          "audio": "/audio/qualities-3-heavy-form-mp.mp3"
         },
         "fp": {
           "he": "כבדות",
           "niqqud": "כְּבֵדוֹת",
-          "translit": "кведо́т"
+          "translit": "кведо́т",
+          "audio": "/audio/qualities-3-heavy-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-heavy.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-heavy.mp3"
     },
     {
       "id": "qualities-3-strong",
@@ -108,27 +123,32 @@
       "example": {
         "he": "זה איש חזק",
         "translit": "зэ иш хазак",
-        "ru": "Это сильный мужчина"
+        "ru": "Это сильный мужчина",
+        "audio": "/audio/qualities-3-strong-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חזקה",
           "niqqud": "חֲזָקָה",
-          "translit": "хазака́"
+          "translit": "хазака́",
+          "audio": "/audio/qualities-3-strong-form-f.mp3"
         },
         "mp": {
           "he": "חזקים",
           "niqqud": "חֲזָקִים",
-          "translit": "хазаки́м"
+          "translit": "хазаки́м",
+          "audio": "/audio/qualities-3-strong-form-mp.mp3"
         },
         "fp": {
           "he": "חזקות",
           "niqqud": "חֲזָקוֹת",
-          "translit": "хазако́т"
+          "translit": "хазако́т",
+          "audio": "/audio/qualities-3-strong-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-strong.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-strong.mp3"
     },
     {
       "id": "qualities-3-weak",
@@ -139,26 +159,31 @@
       "example": {
         "he": "זה קפה חלש",
         "translit": "зэ кафе халаш",
-        "ru": "Это слабый кофе"
+        "ru": "Это слабый кофе",
+        "audio": "/audio/qualities-3-weak-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חלשה",
           "niqqud": "חַלָּשָׁה",
-          "translit": "халаша́"
+          "translit": "халаша́",
+          "audio": "/audio/qualities-3-weak-form-f.mp3"
         },
         "mp": {
           "he": "חלשים",
           "niqqud": "חַלָּשִׁים",
-          "translit": "халаши́м"
+          "translit": "халаши́м",
+          "audio": "/audio/qualities-3-weak-form-mp.mp3"
         },
         "fp": {
           "he": "חלשות",
           "niqqud": "חַלָּשׁוֹת",
-          "translit": "халашо́т"
+          "translit": "халашо́т",
+          "audio": "/audio/qualities-3-weak-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-weak.mp3"
     },
     {
       "id": "qualities-3-fast",
@@ -169,27 +194,32 @@
       "example": {
         "he": "זאת מכונית מהירה",
         "translit": "зот мехонит мхира",
-        "ru": "Это быстрая машина"
+        "ru": "Это быстрая машина",
+        "audio": "/audio/qualities-3-fast-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מהירה",
           "niqqud": "מְהִירָה",
-          "translit": "мхира́"
+          "translit": "мхира́",
+          "audio": "/audio/qualities-3-fast-form-f.mp3"
         },
         "mp": {
           "he": "מהירים",
           "niqqud": "מְהִירִים",
-          "translit": "мхири́м"
+          "translit": "мхири́м",
+          "audio": "/audio/qualities-3-fast-form-mp.mp3"
         },
         "fp": {
           "he": "מהירות",
           "niqqud": "מְהִירוֹת",
-          "translit": "мхиро́т"
+          "translit": "мхиро́т",
+          "audio": "/audio/qualities-3-fast-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-fast.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-fast.mp3"
     },
     {
       "id": "qualities-3-slow",
@@ -200,27 +230,32 @@
       "example": {
         "he": "זה אוטובוס איטי",
         "translit": "зэ отобус ити",
-        "ru": "Это медленный автобус"
+        "ru": "Это медленный автобус",
+        "audio": "/audio/qualities-3-slow-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "איטית",
           "niqqud": "אִיטִית",
-          "translit": "ити́т"
+          "translit": "ити́т",
+          "audio": "/audio/qualities-3-slow-form-f.mp3"
         },
         "mp": {
           "he": "איטיים",
           "niqqud": "אִיטִיִּים",
-          "translit": "итии́м"
+          "translit": "итии́м",
+          "audio": "/audio/qualities-3-slow-form-mp.mp3"
         },
         "fp": {
           "he": "איטיות",
           "niqqud": "אִיטִיּוֹת",
-          "translit": "итийо́т"
+          "translit": "итийо́т",
+          "audio": "/audio/qualities-3-slow-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-slow.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-slow.mp3"
     },
     {
       "id": "qualities-3-clean",
@@ -231,27 +266,32 @@
       "example": {
         "he": "זה חדר נקי",
         "translit": "зэ хедер наки",
-        "ru": "Это чистая комната"
+        "ru": "Это чистая комната",
+        "audio": "/audio/qualities-3-clean-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "נקייה",
           "niqqud": "נְקִייָּה",
-          "translit": "нкия́"
+          "translit": "нкия́",
+          "audio": "/audio/qualities-3-clean-form-f.mp3"
         },
         "mp": {
           "he": "נקיים",
           "niqqud": "נְקִיִּים",
-          "translit": "нкии́м"
+          "translit": "нкии́м",
+          "audio": "/audio/qualities-3-clean-form-mp.mp3"
         },
         "fp": {
           "he": "נקיות",
           "niqqud": "נְקִיּוֹת",
-          "translit": "нкийо́т"
+          "translit": "нкийо́т",
+          "audio": "/audio/qualities-3-clean-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-clean.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-clean.mp3"
     },
     {
       "id": "qualities-3-dirty",
@@ -262,26 +302,31 @@
       "example": {
         "he": "זאת חולצה מלוכלכת",
         "translit": "зот хульца млухлехет",
-        "ru": "Это грязная рубашка"
+        "ru": "Это грязная рубашка",
+        "audio": "/audio/qualities-3-dirty-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מלוכלכת",
           "niqqud": "מְלוּכְלֶכֶת",
-          "translit": "млухле́хет"
+          "translit": "млухле́хет",
+          "audio": "/audio/qualities-3-dirty-form-f.mp3"
         },
         "mp": {
           "he": "מלוכלכים",
           "niqqud": "מְלוּכְלָכִים",
-          "translit": "млухлахи́м"
+          "translit": "млухлахи́м",
+          "audio": "/audio/qualities-3-dirty-form-mp.mp3"
         },
         "fp": {
           "he": "מלוכלכות",
           "niqqud": "מְלוּכְלָכוֹת",
-          "translit": "млухлахо́т"
+          "translit": "млухлахо́т",
+          "audio": "/audio/qualities-3-dirty-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-dirty.mp3"
     },
     {
       "id": "qualities-3-quiet",
@@ -292,27 +337,32 @@
       "example": {
         "he": "זה רחוב שקט",
         "translit": "зэ рехов шакет",
-        "ru": "Это тихая улица"
+        "ru": "Это тихая улица",
+        "audio": "/audio/qualities-3-quiet-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "שקטה",
           "niqqud": "שְׁקֵטָה",
-          "translit": "шкета́"
+          "translit": "шкета́",
+          "audio": "/audio/qualities-3-quiet-form-f.mp3"
         },
         "mp": {
           "he": "שקטים",
           "niqqud": "שְׁקֵטִים",
-          "translit": "шкети́м"
+          "translit": "шкети́м",
+          "audio": "/audio/qualities-3-quiet-form-mp.mp3"
         },
         "fp": {
           "he": "שקטות",
           "niqqud": "שְׁקֵטוֹת",
-          "translit": "шкето́т"
+          "translit": "шкето́т",
+          "audio": "/audio/qualities-3-quiet-form-fp.mp3"
         }
       },
       "image": "/words/qualities-3-quiet.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-3-quiet.mp3"
     }
   ]
 }

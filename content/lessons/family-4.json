@@ -18,10 +18,12 @@
       "example": {
         "he": "זה זוג צעיר",
         "translit": "зэ зуг цаир",
-        "ru": "Это молодая пара"
+        "ru": "Это молодая пара",
+        "audio": "/audio/family-4-couple-phrase.mp3"
       },
       "image": "/words/family-4-couple.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-couple.mp3"
     },
     {
       "id": "family-4-wedding",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זאת חתונה גדולה",
         "translit": "зот хатуна гдола",
-        "ru": "Это большая свадьба"
+        "ru": "Это большая свадьба",
+        "audio": "/audio/family-4-wedding-phrase.mp3"
       },
       "image": "/words/family-4-wedding.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-wedding.mp3"
     },
     {
       "id": "family-4-love",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זאת אהבה גדולה",
         "translit": "зот ахава гдола",
-        "ru": "Это большая любовь"
+        "ru": "Это большая любовь",
+        "audio": "/audio/family-4-love-phrase.mp3"
       },
       "image": "/words/family-4-love.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-love.mp3"
     },
     {
       "id": "family-4-divorce",
@@ -63,10 +69,12 @@
       "example": {
         "he": "אלה גירושים קשים",
         "translit": "эле герушим кашим",
-        "ru": "Это тяжёлый развод"
+        "ru": "Это тяжёлый развод",
+        "audio": "/audio/family-4-divorce-phrase.mp3"
       },
       "image": "/words/family-4-divorce.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-divorce.mp3"
     },
     {
       "id": "family-4-age",
@@ -78,9 +86,11 @@
       "example": {
         "he": "זה גיל טוב",
         "translit": "зэ гиль тов",
-        "ru": "Это хороший возраст"
+        "ru": "Это хороший возраст",
+        "audio": "/audio/family-4-age-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-age.mp3"
     },
     {
       "id": "family-4-name",
@@ -92,10 +102,12 @@
       "example": {
         "he": "זה שם יפה",
         "translit": "зэ шем яфе",
-        "ru": "Это красивое имя"
+        "ru": "Это красивое имя",
+        "audio": "/audio/family-4-name-phrase.mp3"
       },
       "image": "/words/family-4-name.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-name.mp3"
     },
     {
       "id": "family-4-teenboy",
@@ -107,9 +119,11 @@
       "example": {
         "he": "זה נער חכם",
         "translit": "зэ наар хахам",
-        "ru": "Это умный подросток"
+        "ru": "Это умный подросток",
+        "audio": "/audio/family-4-teenboy-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-teenboy.mp3"
     },
     {
       "id": "family-4-teengirl",
@@ -121,9 +135,11 @@
       "example": {
         "he": "זאת נערה חכמה",
         "translit": "зот наара хахама",
-        "ru": "Это умная девушка"
+        "ru": "Это умная девушка",
+        "audio": "/audio/family-4-teengirl-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-teengirl.mp3"
     },
     {
       "id": "family-4-motherinlaw",
@@ -135,9 +151,11 @@
       "example": {
         "he": "זאת חמות טובה",
         "translit": "зот хамот това",
-        "ru": "Это хорошая свекровь"
+        "ru": "Это хорошая свекровь",
+        "audio": "/audio/family-4-motherinlaw-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-motherinlaw.mp3"
     },
     {
       "id": "family-4-brotherinlaw",
@@ -149,9 +167,11 @@
       "example": {
         "he": "זה גיס טוב",
         "translit": "зэ гис тов",
-        "ru": "Это хороший шурин"
+        "ru": "Это хороший шурин",
+        "audio": "/audio/family-4-brotherinlaw-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-4-brotherinlaw.mp3"
     }
   ]
 }
