@@ -45,6 +45,7 @@ import {
 } from "./templateRecorder";
 import { adminRoutes, loadConfig, ownerIds, requireAdmin, staffOf } from "./admin";
 import { recordActivity } from "./adminStats";
+import { reviewRoutes } from "./review";
 import {
   ensureScheduler,
   handleReminderCallback,
@@ -496,6 +497,9 @@ app.route("/", reminderRoutes);
 
 // Панель администратора: обзор, настройки приложения, команда, журнал (admin.ts, docs/ADMIN.md).
 app.route("/", adminRoutes);
+
+// Проверка слов носителем: администраторы и проверяющие (review.ts, docs/ADMIN.md, этап 3).
+app.route("/", reviewRoutes);
 
 app.notFound((c) => c.json({ error: "not_found" }, 404));
 

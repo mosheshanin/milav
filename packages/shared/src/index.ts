@@ -10,3 +10,4 @@ export * from "./gamification";
 export * from "./telemetry";
 export * from "./admin";
 export * from "./reminders";
+export * from "./review";

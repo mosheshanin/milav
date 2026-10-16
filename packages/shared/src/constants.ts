@@ -158,5 +158,7 @@ export const RATE_LIMITS = {
   seen: { perMinute: 30, perDay: 300 },
   // Панель администратора (только команда): чтение разделов и изменения настроек.
   admin: { perMinute: 60, perDay: 2000 },
+  // Проверка слов (администраторы и проверяющие): около 240 слов и букв, каждое открывают и отмечают, с запасом.
+  review: { perMinute: 60, perDay: 3000 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;

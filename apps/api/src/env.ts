@@ -34,6 +34,6 @@ export type Bindings = {
 
 export type AppEnv = {
   Bindings: Bindings;
-  /** staff есть только после requireAdmin. */
+  /** staff есть только после requireAdmin или requireStaff. */
   Variables: { user: AuthUser; staff?: StaffInfo };
 };

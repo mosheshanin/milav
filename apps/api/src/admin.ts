@@ -156,8 +156,19 @@ export const requireAdmin = createMiddleware<AppEnv>(async (c, next) => {
   await next();
 });
 
+/**
+ * Пускает всю команду: администраторов и проверяющих (раздел «Контент», маршруты /api/review/*). Ставить после
+ * requireUser. Роль кладёт в c.var.staff.
+ */
+export const requireStaff = createMiddleware<AppEnv>(async (c, next) => {
+  const staff = await staffOf(c.env, c.get("user").id);
+  if (!staff) return c.json({ error: "forbidden" }, 403);
+  c.set("staff", staff);
+  await next();
+});
+
 /** Запись в журнал панели. Значения хранятся JSON. */
-function logStatement(db: D1Database, actor: number, action: string, target: string, oldValue: unknown, newValue: unknown, at: number) {
+export function logStatement(db: D1Database, actor: number, action: string, target: string, oldValue: unknown, newValue: unknown, at: number) {
   return db
     .prepare("INSERT INTO admin_log (at, actor, action, target, old_value, new_value) VALUES (?, ?, ?, ?, ?, ?)")
     .bind(
