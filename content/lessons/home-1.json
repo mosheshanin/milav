@@ -26,6 +26,21 @@
       "audio": "/audio/home-1-house.mp3"
     },
     {
+      "id": "home-1-apartment",
+      "he": "דירה",
+      "niqqud": "דִּירָה",
+      "translit": "дира́",
+      "ru": "квартира",
+      "gender": "f",
+      "example": {
+        "he": "זאת דירה חדשה",
+        "translit": "зот дира хадаша",
+        "ru": "Это новая квартира"
+      },
+      "image": "/words/home-1-apartment.svg",
+      "reviewed": false
+    },
+    {
       "id": "home-1-room",
       "he": "חדר",
       "niqqud": "חֶדֶר",
@@ -76,6 +91,21 @@
       "audio": "/audio/home-1-bathroom.mp3"
     },
     {
+      "id": "home-1-toilet",
+      "he": "שירותים",
+      "niqqud": "שֵׁירוּתִים",
+      "translit": "шерути́м",
+      "ru": "туалет",
+      "gender": "m",
+      "example": {
+        "he": "אלה שירותים נקיים",
+        "translit": "эле шерутим нкиим",
+        "ru": "Это чистый туалет"
+      },
+      "image": "/words/home-1-toilet.svg",
+      "reviewed": false
+    },
+    {
       "id": "home-1-door",
       "he": "דלת",
       "niqqud": "דֶּלֶת",
@@ -110,70 +140,33 @@
       "audio": "/audio/home-1-window.mp3"
     },
     {
-      "id": "home-1-wall",
-      "he": "קיר",
-      "niqqud": "קִיר",
-      "translit": "кир",
-      "ru": "стена",
-      "gender": "m",
-      "example": {
-        "he": "זה קיר לבן",
-        "translit": "зэ кир лаван",
-        "ru": "Это белая стена",
-        "audio": "/audio/home-1-wall-phrase.mp3"
-      },
-      "image": "/words/home-1-wall.svg",
-      "reviewed": false,
-      "audio": "/audio/home-1-wall.mp3"
-    },
-    {
-      "id": "home-1-floor",
-      "he": "רצפה",
-      "niqqud": "רִצְפָּה",
-      "translit": "рицпа́",
-      "ru": "пол",
+      "id": "home-1-storey",
+      "he": "קומה",
+      "niqqud": "קוֹמָה",
+      "translit": "кома́",
+      "ru": "этаж",
       "gender": "f",
       "example": {
-        "he": "זאת רצפה קרה",
-        "translit": "зот рицпа кара",
-        "ru": "Это холодный пол",
-        "audio": "/audio/home-1-floor-phrase.mp3"
+        "he": "זאת קומה שנייה",
+        "translit": "зот кома шния",
+        "ru": "Это второй этаж"
       },
-      "reviewed": false,
-      "audio": "/audio/home-1-floor.mp3"
+      "image": "/words/home-1-storey.svg",
+      "reviewed": false
     },
     {
-      "id": "home-1-roof",
-      "he": "גג",
-      "niqqud": "גַּג",
-      "translit": "гаг",
-      "ru": "крыша",
-      "gender": "m",
-      "example": {
-        "he": "זה גג ישן",
-        "translit": "зэ гаг яшан",
-        "ru": "Это старая крыша",
-        "audio": "/audio/home-1-roof-phrase.mp3"
-      },
-      "reviewed": false,
-      "audio": "/audio/home-1-roof.mp3"
-    },
-    {
-      "id": "home-1-garden",
-      "he": "גינה",
-      "niqqud": "גִּינָה",
-      "translit": "гина́",
-      "ru": "сад",
+      "id": "home-1-balcony",
+      "he": "מרפסת",
+      "niqqud": "מִרְפֶּסֶת",
+      "translit": "мирпе́сет",
+      "ru": "балкон",
       "gender": "f",
       "example": {
-        "he": "זאת גינה יפה",
-        "translit": "зот гина яфа",
-        "ru": "Это красивый сад",
-        "audio": "/audio/home-1-garden-phrase.mp3"
+        "he": "זאת מרפסת גדולה",
+        "translit": "зот мирпесет гдола",
+        "ru": "Это большой балкон"
       },
-      "image": "/words/home-1-garden.svg",
-      "reviewed": false,
-      "audio": "/audio/home-1-garden.mp3"
+      "reviewed": false
     }
   ]
 }

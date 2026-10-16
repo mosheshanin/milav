@@ -1,0 +1,158 @@
+{
+  "$schema": "../schema.json",
+  "id": "body-2",
+  "topicId": "body",
+  "section": "nouns",
+  "topic": "Тело",
+  "number": 2,
+  "free": true,
+  "title": "Руки, ноги и сердце",
+  "words": [
+    {
+      "id": "body-2-body",
+      "he": "גוף",
+      "niqqud": "גּוּף",
+      "translit": "гуф",
+      "ru": "тело",
+      "gender": "m",
+      "example": {
+        "he": "זה גוף חזק",
+        "translit": "зэ гуф хазак",
+        "ru": "Это сильное тело"
+      },
+      "image": "/words/body-2-body.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-2-hand",
+      "he": "יד",
+      "niqqud": "יָד",
+      "translit": "яд",
+      "ru": "рука, кисть",
+      "gender": "f",
+      "example": {
+        "he": "זאת יד קטנה",
+        "translit": "зот яд ктана",
+        "ru": "Это маленькая рука"
+      },
+      "image": "/words/body-2-hand.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-2-leg",
+      "he": "רגל",
+      "niqqud": "רֶגֶל",
+      "translit": "ре́гель",
+      "ru": "нога",
+      "gender": "f",
+      "example": {
+        "he": "זאת רגל ארוכה",
+        "translit": "зот регель арука",
+        "ru": "Это длинная нога"
+      },
+      "image": "/words/body-2-leg.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-2-finger",
+      "he": "אצבע",
+      "niqqud": "אֶצְבַּע",
+      "translit": "э́цба",
+      "ru": "палец",
+      "gender": "f",
+      "example": {
+        "he": "זאת אצבע ארוכה",
+        "translit": "зот эцба арука",
+        "ru": "Это длинный палец"
+      },
+      "image": "/words/body-2-finger.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-2-back",
+      "he": "גב",
+      "niqqud": "גַּב",
+      "translit": "гав",
+      "ru": "спина",
+      "gender": "m",
+      "example": {
+        "he": "זה גב חזק",
+        "translit": "зэ гав хазак",
+        "ru": "Это сильная спина"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-2-belly",
+      "he": "בטן",
+      "niqqud": "בֶּטֶן",
+      "translit": "бе́тен",
+      "ru": "живот",
+      "gender": "f",
+      "example": {
+        "he": "זאת בטן גדולה",
+        "translit": "зот бетен гдола",
+        "ru": "Это большой живот"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-2-heart",
+      "he": "לב",
+      "niqqud": "לֵב",
+      "translit": "лев",
+      "ru": "сердце",
+      "gender": "m",
+      "example": {
+        "he": "זה לב טוב",
+        "translit": "зэ лев тов",
+        "ru": "Это доброе сердце"
+      },
+      "image": "/words/body-2-heart.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-2-shoulder",
+      "he": "כתף",
+      "niqqud": "כָּתֵף",
+      "translit": "кате́ф",
+      "ru": "плечо",
+      "gender": "f",
+      "example": {
+        "he": "זאת כתף רחבה",
+        "translit": "зот катеф рхава",
+        "ru": "Это широкое плечо"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-2-knee",
+      "he": "ברך",
+      "niqqud": "בֶּרֶךְ",
+      "translit": "бе́рех",
+      "ru": "колено",
+      "gender": "f",
+      "example": {
+        "he": "זאת ברך כואבת",
+        "translit": "зот берех коэвет",
+        "ru": "Это колено болит"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-2-blood",
+      "he": "דם",
+      "niqqud": "דָּם",
+      "translit": "дам",
+      "ru": "кровь",
+      "gender": "m",
+      "example": {
+        "he": "זה דם אדום",
+        "translit": "зэ дам адом",
+        "ru": "Это красная кровь"
+      },
+      "image": "/words/body-2-blood.svg",
+      "reviewed": false
+    }
+  ]
+}

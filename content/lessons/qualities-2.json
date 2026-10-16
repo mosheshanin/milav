@@ -1,0 +1,318 @@
+{
+  "$schema": "../schema.json",
+  "id": "qualities-2",
+  "topicId": "qualities",
+  "section": "adjectives",
+  "topic": "Главные качества",
+  "number": 2,
+  "free": true,
+  "title": "Дорогой и дешёвый",
+  "words": [
+    {
+      "id": "qualities-2-expensive",
+      "he": "יקר",
+      "niqqud": "יָקָר",
+      "translit": "яка́р",
+      "ru": "дорогой",
+      "example": {
+        "he": "זה שעון יקר",
+        "translit": "зэ шаон якар",
+        "ru": "Это дорогие часы"
+      },
+      "forms": {
+        "f": {
+          "he": "יקרה",
+          "niqqud": "יְקָרָה",
+          "translit": "йекара́"
+        },
+        "mp": {
+          "he": "יקרים",
+          "niqqud": "יְקָרִים",
+          "translit": "йекари́м"
+        },
+        "fp": {
+          "he": "יקרות",
+          "niqqud": "יְקָרוֹת",
+          "translit": "йекаро́т"
+        }
+      },
+      "image": "/words/qualities-2-expensive.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-cheap",
+      "he": "זול",
+      "niqqud": "זוֹל",
+      "translit": "золь",
+      "ru": "дешёвый",
+      "example": {
+        "he": "זאת חולצה זולה",
+        "translit": "зот хульца зола",
+        "ru": "Это дешёвая рубашка"
+      },
+      "forms": {
+        "f": {
+          "he": "זולה",
+          "niqqud": "זוֹלָה",
+          "translit": "зола́"
+        },
+        "mp": {
+          "he": "זולים",
+          "niqqud": "זוֹלִים",
+          "translit": "золи́м"
+        },
+        "fp": {
+          "he": "זולות",
+          "niqqud": "זוֹלוֹת",
+          "translit": "золо́т"
+        }
+      },
+      "image": "/words/qualities-2-cheap.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-easy",
+      "he": "קל",
+      "niqqud": "קַל",
+      "translit": "каль",
+      "ru": "лёгкий, простой",
+      "example": {
+        "he": "זה מבחן קל",
+        "translit": "зэ мивхан каль",
+        "ru": "Это лёгкий экзамен"
+      },
+      "forms": {
+        "f": {
+          "he": "קלה",
+          "niqqud": "קַלָּה",
+          "translit": "кала́"
+        },
+        "mp": {
+          "he": "קלים",
+          "niqqud": "קַלִּים",
+          "translit": "кали́м"
+        },
+        "fp": {
+          "he": "קלות",
+          "niqqud": "קַלּוֹת",
+          "translit": "кало́т"
+        }
+      },
+      "image": "/words/qualities-2-easy.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-hard",
+      "he": "קשה",
+      "niqqud": "קָשֶׁה",
+      "translit": "каше́",
+      "ru": "трудный, твёрдый",
+      "example": {
+        "he": "זאת שאלה קשה",
+        "translit": "зот шеэла каша",
+        "ru": "Это трудный вопрос"
+      },
+      "forms": {
+        "f": {
+          "he": "קשה",
+          "niqqud": "קָשָׁה",
+          "translit": "каша́"
+        },
+        "mp": {
+          "he": "קשים",
+          "niqqud": "קָשִׁים",
+          "translit": "каши́м"
+        },
+        "fp": {
+          "he": "קשות",
+          "niqqud": "קָשׁוֹת",
+          "translit": "кашо́т"
+        }
+      },
+      "image": "/words/qualities-2-hard.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-beautiful",
+      "he": "יפה",
+      "niqqud": "יָפֶה",
+      "translit": "яфе́",
+      "ru": "красивый",
+      "example": {
+        "he": "זאת עיר יפה",
+        "translit": "зот ир яфа",
+        "ru": "Это красивый город"
+      },
+      "forms": {
+        "f": {
+          "he": "יפה",
+          "niqqud": "יָפָה",
+          "translit": "яфа́"
+        },
+        "mp": {
+          "he": "יפים",
+          "niqqud": "יָפִים",
+          "translit": "яфи́м"
+        },
+        "fp": {
+          "he": "יפות",
+          "niqqud": "יָפוֹת",
+          "translit": "яфо́т"
+        }
+      },
+      "image": "/words/qualities-2-beautiful.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-full",
+      "he": "מלא",
+      "niqqud": "מָלֵא",
+      "translit": "мале́",
+      "ru": "полный",
+      "example": {
+        "he": "זאת כוס מלאה",
+        "translit": "зот кос млеа",
+        "ru": "Это полный стакан"
+      },
+      "forms": {
+        "f": {
+          "he": "מלאה",
+          "niqqud": "מְלֵאָה",
+          "translit": "млеа́"
+        },
+        "mp": {
+          "he": "מלאים",
+          "niqqud": "מְלֵאִים",
+          "translit": "млеи́м"
+        },
+        "fp": {
+          "he": "מלאות",
+          "niqqud": "מְלֵאוֹת",
+          "translit": "млео́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-empty",
+      "he": "ריק",
+      "niqqud": "רֵיק",
+      "translit": "рейк",
+      "ru": "пустой",
+      "example": {
+        "he": "זה בקבוק ריק",
+        "translit": "зэ бакбук рейк",
+        "ru": "Это пустая бутылка"
+      },
+      "forms": {
+        "f": {
+          "he": "ריקה",
+          "niqqud": "רֵיקָה",
+          "translit": "рейка́"
+        },
+        "mp": {
+          "he": "ריקים",
+          "niqqud": "רֵיקִים",
+          "translit": "рейки́м"
+        },
+        "fp": {
+          "he": "ריקות",
+          "niqqud": "רֵיקוֹת",
+          "translit": "рейко́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-near",
+      "he": "קרוב",
+      "niqqud": "קָרוֹב",
+      "translit": "каро́в",
+      "ru": "близкий",
+      "example": {
+        "he": "זה חבר קרוב",
+        "translit": "зэ хавер каров",
+        "ru": "Это близкий друг"
+      },
+      "forms": {
+        "f": {
+          "he": "קרובה",
+          "niqqud": "קְרוֹבָה",
+          "translit": "крова́"
+        },
+        "mp": {
+          "he": "קרובים",
+          "niqqud": "קְרוֹבִים",
+          "translit": "крови́м"
+        },
+        "fp": {
+          "he": "קרובות",
+          "niqqud": "קְרוֹבוֹת",
+          "translit": "крово́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-far",
+      "he": "רחוק",
+      "niqqud": "רָחוֹק",
+      "translit": "рахо́к",
+      "ru": "далёкий",
+      "example": {
+        "he": "זאת עיר רחוקה",
+        "translit": "зот ир рхока",
+        "ru": "Это далёкий город"
+      },
+      "forms": {
+        "f": {
+          "he": "רחוקה",
+          "niqqud": "רְחוֹקָה",
+          "translit": "рхока́"
+        },
+        "mp": {
+          "he": "רחוקים",
+          "niqqud": "רְחוֹקִים",
+          "translit": "рхоки́м"
+        },
+        "fp": {
+          "he": "רחוקות",
+          "niqqud": "רְחוֹקוֹת",
+          "translit": "рхоко́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-2-important",
+      "he": "חשוב",
+      "niqqud": "חָשׁוּב",
+      "translit": "хашу́в",
+      "ru": "важный",
+      "example": {
+        "he": "זאת שאלה חשובה",
+        "translit": "зот шеэла хашува",
+        "ru": "Это важный вопрос"
+      },
+      "forms": {
+        "f": {
+          "he": "חשובה",
+          "niqqud": "חֲשׁוּבָה",
+          "translit": "хашува́"
+        },
+        "mp": {
+          "he": "חשובים",
+          "niqqud": "חֲשׁוּבִים",
+          "translit": "хашуви́м"
+        },
+        "fp": {
+          "he": "חשובות",
+          "niqqud": "חֲשׁוּבוֹת",
+          "translit": "хашуво́т"
+        }
+      },
+      "image": "/words/qualities-2-important.svg",
+      "reviewed": false
+    }
+  ]
+}

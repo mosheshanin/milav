@@ -6,7 +6,7 @@
   "topic": "Семья",
   "number": 3,
   "free": true,
-  "title": "Мужчины и женщины",
+  "title": "Люди вокруг",
   "words": [
     {
       "id": "family-3-man",
@@ -30,7 +30,7 @@
       "he": "אשה",
       "niqqud": "אִשָּׁה",
       "translit": "иша́",
-      "ru": "женщина",
+      "ru": "женщина, жена",
       "gender": "f",
       "example": {
         "he": "זאת אשה טובה",
@@ -92,40 +92,6 @@
       "audio": "/audio/family-3-lass.mp3"
     },
     {
-      "id": "family-3-oldman",
-      "he": "זקן",
-      "niqqud": "זָקֵן",
-      "translit": "заке́н",
-      "ru": "старик",
-      "gender": "m",
-      "example": {
-        "he": "זה זקן חכם",
-        "translit": "зэ закен хахам",
-        "ru": "Это умный старик",
-        "audio": "/audio/family-3-oldman-phrase.mp3"
-      },
-      "image": "/words/family-3-oldman.svg",
-      "reviewed": false,
-      "audio": "/audio/family-3-oldman.mp3"
-    },
-    {
-      "id": "family-3-oldwoman",
-      "he": "זקנה",
-      "niqqud": "זְקֵנָה",
-      "translit": "зкена́",
-      "ru": "старушка",
-      "gender": "f",
-      "example": {
-        "he": "זאת זקנה חכמה",
-        "translit": "зот зкена хахама",
-        "ru": "Это умная старушка",
-        "audio": "/audio/family-3-oldwoman-phrase.mp3"
-      },
-      "image": "/words/family-3-oldwoman.svg",
-      "reviewed": false,
-      "audio": "/audio/family-3-oldwoman.mp3"
-    },
-    {
       "id": "family-3-guest",
       "he": "אורח",
       "niqqud": "אוֹרֵחַ",
@@ -142,38 +108,72 @@
       "audio": "/audio/family-3-guest.mp3"
     },
     {
-      "id": "family-3-groom",
-      "he": "חתן",
-      "niqqud": "חָתָן",
-      "translit": "хата́н",
-      "ru": "жених",
+      "id": "family-3-friend",
+      "he": "חבר",
+      "niqqud": "חָבֵר",
+      "translit": "хаве́р",
+      "ru": "друг",
       "gender": "m",
       "example": {
-        "he": "זה חתן צעיר",
-        "translit": "зэ хатан цаир",
-        "ru": "Это молодой жених",
-        "audio": "/audio/family-3-groom-phrase.mp3"
+        "he": "זה חבר טוב",
+        "translit": "зэ хавер тов",
+        "ru": "Это хороший друг",
+        "audio": "/audio/family-3-friend-phrase.mp3"
       },
-      "image": "/words/family-3-groom.svg",
+      "image": "/words/family-3-friend.svg",
       "reviewed": false,
-      "audio": "/audio/family-3-groom.mp3"
+      "audio": "/audio/family-3-friend.mp3"
     },
     {
-      "id": "family-3-bride",
-      "he": "כלה",
-      "niqqud": "כַּלָּה",
-      "translit": "кала́",
-      "ru": "невеста",
+      "id": "family-3-girlfriend",
+      "he": "חברה",
+      "niqqud": "חֲבֵרָה",
+      "translit": "хавера́",
+      "ru": "подруга",
       "gender": "f",
       "example": {
-        "he": "זאת כלה יפה",
-        "translit": "зот кала яфа",
-        "ru": "Это красивая невеста",
-        "audio": "/audio/family-3-bride-phrase.mp3"
+        "he": "זאת חברה טובה",
+        "translit": "зот хавера това",
+        "ru": "Это хорошая подруга",
+        "audio": "/audio/family-3-girlfriend-phrase.mp3"
       },
-      "image": "/words/family-3-bride.svg",
+      "image": "/words/family-3-girlfriend.svg",
       "reviewed": false,
-      "audio": "/audio/family-3-bride.mp3"
+      "audio": "/audio/family-3-girlfriend.mp3"
+    },
+    {
+      "id": "family-3-neighbor",
+      "he": "שכן",
+      "niqqud": "שָׁכֵן",
+      "translit": "шахе́н",
+      "ru": "сосед",
+      "gender": "m",
+      "example": {
+        "he": "זה שכן חמוד",
+        "translit": "зэ шахен хамуд",
+        "ru": "Это милый сосед",
+        "audio": "/audio/family-3-neighbor-phrase.mp3"
+      },
+      "image": "/words/family-3-neighbor.svg",
+      "reviewed": false,
+      "audio": "/audio/family-3-neighbor.mp3"
+    },
+    {
+      "id": "family-3-neighborf",
+      "he": "שכנה",
+      "niqqud": "שְׁכֵנָה",
+      "translit": "шхена́",
+      "ru": "соседка",
+      "gender": "f",
+      "example": {
+        "he": "זאת שכנה חמודה",
+        "translit": "зот шхена хмуда",
+        "ru": "Это милая соседка",
+        "audio": "/audio/family-3-neighborf-phrase.mp3"
+      },
+      "image": "/words/family-3-neighborf.svg",
+      "reviewed": false,
+      "audio": "/audio/family-3-neighborf.mp3"
     }
   ]
 }

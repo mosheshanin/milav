@@ -1,0 +1,321 @@
+{
+  "$schema": "../schema.json",
+  "id": "qualities-1",
+  "topicId": "qualities",
+  "section": "adjectives",
+  "topic": "Главные качества",
+  "number": 1,
+  "free": true,
+  "title": "Большой и маленький",
+  "words": [
+    {
+      "id": "qualities-1-big",
+      "he": "גדול",
+      "niqqud": "גָּדוֹל",
+      "translit": "гадо́ль",
+      "ru": "большой",
+      "example": {
+        "he": "זה כלב גדול",
+        "translit": "зэ келев гадоль",
+        "ru": "Это большая собака"
+      },
+      "forms": {
+        "f": {
+          "he": "גדולה",
+          "niqqud": "גְּדוֹלָה",
+          "translit": "гдола́"
+        },
+        "mp": {
+          "he": "גדולים",
+          "niqqud": "גְּדוֹלִים",
+          "translit": "гдоли́м"
+        },
+        "fp": {
+          "he": "גדולות",
+          "niqqud": "גְּדוֹלוֹת",
+          "translit": "гдоло́т"
+        }
+      },
+      "image": "/words/qualities-1-big.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-small",
+      "he": "קטן",
+      "niqqud": "קָטָן",
+      "translit": "ката́н",
+      "ru": "маленький",
+      "example": {
+        "he": "זאת ילדה קטנה",
+        "translit": "зот ялда ктана",
+        "ru": "Это маленькая девочка"
+      },
+      "forms": {
+        "f": {
+          "he": "קטנה",
+          "niqqud": "קְטַנָּה",
+          "translit": "ктана́"
+        },
+        "mp": {
+          "he": "קטנים",
+          "niqqud": "קְטַנִּים",
+          "translit": "ктани́м"
+        },
+        "fp": {
+          "he": "קטנות",
+          "niqqud": "קְטַנּוֹת",
+          "translit": "ктано́т"
+        }
+      },
+      "image": "/words/qualities-1-small.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-good",
+      "he": "טוב",
+      "niqqud": "טוֹב",
+      "translit": "тов",
+      "ru": "хороший",
+      "example": {
+        "he": "זה ספר טוב",
+        "translit": "зэ сефер тов",
+        "ru": "Это хорошая книга"
+      },
+      "forms": {
+        "f": {
+          "he": "טובה",
+          "niqqud": "טוֹבָה",
+          "translit": "това́"
+        },
+        "mp": {
+          "he": "טובים",
+          "niqqud": "טוֹבִים",
+          "translit": "тови́м"
+        },
+        "fp": {
+          "he": "טובות",
+          "niqqud": "טוֹבוֹת",
+          "translit": "тово́т"
+        }
+      },
+      "image": "/words/qualities-1-good.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-bad",
+      "he": "רע",
+      "niqqud": "רַע",
+      "translit": "ра",
+      "ru": "плохой, злой",
+      "example": {
+        "he": "זה רעיון רע",
+        "translit": "зэ раайон ра",
+        "ru": "Это плохая идея"
+      },
+      "forms": {
+        "f": {
+          "he": "רעה",
+          "niqqud": "רָעָה",
+          "translit": "раа́"
+        },
+        "mp": {
+          "he": "רעים",
+          "niqqud": "רָעִים",
+          "translit": "раи́м"
+        },
+        "fp": {
+          "he": "רעות",
+          "niqqud": "רָעוֹת",
+          "translit": "рао́т"
+        }
+      },
+      "image": "/words/qualities-1-bad.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-new",
+      "he": "חדש",
+      "niqqud": "חָדָשׁ",
+      "translit": "хада́ш",
+      "ru": "новый",
+      "example": {
+        "he": "זה טלפון חדש",
+        "translit": "зэ телефон хадаш",
+        "ru": "Это новый телефон"
+      },
+      "forms": {
+        "f": {
+          "he": "חדשה",
+          "niqqud": "חֲדָשָׁה",
+          "translit": "хадаша́"
+        },
+        "mp": {
+          "he": "חדשים",
+          "niqqud": "חֲדָשִׁים",
+          "translit": "хадаши́м"
+        },
+        "fp": {
+          "he": "חדשות",
+          "niqqud": "חֲדָשׁוֹת",
+          "translit": "хадашо́т"
+        }
+      },
+      "image": "/words/qualities-1-new.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-old",
+      "he": "ישן",
+      "niqqud": "יָשָׁן",
+      "translit": "яша́н",
+      "ru": "старый (о вещах)",
+      "example": {
+        "he": "זה מחשב ישן",
+        "translit": "зэ махшев яшан",
+        "ru": "Это старый компьютер"
+      },
+      "forms": {
+        "f": {
+          "he": "ישנה",
+          "niqqud": "יְשָׁנָה",
+          "translit": "йешана́"
+        },
+        "mp": {
+          "he": "ישנים",
+          "niqqud": "יְשָׁנִים",
+          "translit": "йешани́м"
+        },
+        "fp": {
+          "he": "ישנות",
+          "niqqud": "יְשָׁנוֹת",
+          "translit": "йешано́т"
+        }
+      },
+      "image": "/words/qualities-1-old.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-long",
+      "he": "ארוך",
+      "niqqud": "אָרוֹךְ",
+      "translit": "аро́х",
+      "ru": "длинный",
+      "example": {
+        "he": "זה רחוב ארוך",
+        "translit": "зэ рехов арох",
+        "ru": "Это длинная улица"
+      },
+      "forms": {
+        "f": {
+          "he": "ארוכה",
+          "niqqud": "אֲרוּכָּה",
+          "translit": "арука́"
+        },
+        "mp": {
+          "he": "ארוכים",
+          "niqqud": "אֲרוּכִּים",
+          "translit": "аруки́м"
+        },
+        "fp": {
+          "he": "ארוכות",
+          "niqqud": "אֲרוּכּוֹת",
+          "translit": "аруко́т"
+        }
+      },
+      "image": "/words/qualities-1-long.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-short",
+      "he": "קצר",
+      "niqqud": "קָצָר",
+      "translit": "каца́р",
+      "ru": "короткий",
+      "example": {
+        "he": "זאת שמלה קצרה",
+        "translit": "зот симла кцара",
+        "ru": "Это короткое платье"
+      },
+      "forms": {
+        "f": {
+          "he": "קצרה",
+          "niqqud": "קְצָרָה",
+          "translit": "кцара́"
+        },
+        "mp": {
+          "he": "קצרים",
+          "niqqud": "קְצָרִים",
+          "translit": "кцари́м"
+        },
+        "fp": {
+          "he": "קצרות",
+          "niqqud": "קְצָרוֹת",
+          "translit": "кцаро́т"
+        }
+      },
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-hot",
+      "he": "חם",
+      "niqqud": "חַם",
+      "translit": "хам",
+      "ru": "горячий, тёплый",
+      "example": {
+        "he": "זה יום חם",
+        "translit": "зэ йом хам",
+        "ru": "Это жаркий день"
+      },
+      "forms": {
+        "f": {
+          "he": "חמה",
+          "niqqud": "חַמָּה",
+          "translit": "хама́"
+        },
+        "mp": {
+          "he": "חמים",
+          "niqqud": "חַמִּים",
+          "translit": "хами́м"
+        },
+        "fp": {
+          "he": "חמות",
+          "niqqud": "חַמּוֹת",
+          "translit": "хамо́т"
+        }
+      },
+      "image": "/words/qualities-1-hot.svg",
+      "reviewed": false
+    },
+    {
+      "id": "qualities-1-cold",
+      "he": "קר",
+      "niqqud": "קַר",
+      "translit": "кар",
+      "ru": "холодный",
+      "example": {
+        "he": "זה חורף קר",
+        "translit": "зэ хореф кар",
+        "ru": "Это холодная зима"
+      },
+      "forms": {
+        "f": {
+          "he": "קרה",
+          "niqqud": "קָרָה",
+          "translit": "кара́"
+        },
+        "mp": {
+          "he": "קרים",
+          "niqqud": "קָרִים",
+          "translit": "кари́м"
+        },
+        "fp": {
+          "he": "קרות",
+          "niqqud": "קָרוֹת",
+          "translit": "каро́т"
+        }
+      },
+      "image": "/words/qualities-1-cold.svg",
+      "reviewed": false
+    }
+  ]
+}

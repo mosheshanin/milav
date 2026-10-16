@@ -77,106 +77,93 @@
       "audio": "/audio/food-1-cheese.mp3"
     },
     {
-      "id": "food-1-apple",
-      "he": "תפוח",
-      "niqqud": "תַּפּוּחַ",
-      "translit": "тапу́ах",
-      "ru": "яблоко",
+      "id": "food-1-meat",
+      "he": "בשר",
+      "niqqud": "בָּשָׂר",
+      "translit": "баса́р",
+      "ru": "мясо",
       "gender": "m",
       "example": {
-        "he": "זה תפוח טעים",
-        "translit": "зэ тапуах таим",
-        "ru": "Это вкусное яблоко",
-        "audio": "/audio/food-1-apple-phrase.mp3"
+        "he": "זה בשר טרי",
+        "translit": "зэ басар тари",
+        "ru": "Это свежее мясо"
       },
-      "image": "/words/food-1-apple.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-apple.mp3"
+      "image": "/words/food-1-meat.svg",
+      "reviewed": false
     },
     {
-      "id": "food-1-banana",
-      "he": "בננה",
-      "niqqud": "בָּנָנָה",
-      "translit": "бана́на",
-      "ru": "банан",
-      "gender": "f",
-      "example": {
-        "he": "זאת בננה מתוקה",
-        "translit": "зот банана мтука",
-        "ru": "Это сладкий банан",
-        "audio": "/audio/food-1-banana-phrase.mp3"
-      },
-      "image": "/words/food-1-banana.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-banana.mp3"
-    },
-    {
-      "id": "food-1-orange",
-      "he": "תפוז",
-      "niqqud": "תַּפּוּז",
-      "translit": "тапу́з",
-      "ru": "апельсин",
+      "id": "food-1-chicken",
+      "he": "עוף",
+      "niqqud": "עוֹף",
+      "translit": "оф",
+      "ru": "курица (мясо)",
       "gender": "m",
       "example": {
-        "he": "זה תפוז מתוק",
-        "translit": "зэ тапуз маток",
-        "ru": "Это сладкий апельсин",
-        "audio": "/audio/food-1-orange-phrase.mp3"
+        "he": "זה עוף טעים",
+        "translit": "зэ оф таим",
+        "ru": "Это вкусная курица"
       },
-      "image": "/words/food-1-orange.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-orange.mp3"
+      "image": "/words/food-1-chicken.svg",
+      "reviewed": false
     },
     {
-      "id": "food-1-avocado",
-      "he": "אבוקדו",
-      "niqqud": "אָבוֹקָדוֹ",
-      "translit": "авока́до",
-      "ru": "авокадо",
+      "id": "food-1-rice",
+      "he": "אורז",
+      "niqqud": "אוֹרֶז",
+      "translit": "о́рез",
+      "ru": "рис",
       "gender": "m",
       "example": {
-        "he": "זה אבוקדו טעים",
-        "translit": "зэ авокадо таим",
-        "ru": "Это вкусное авокадо",
-        "audio": "/audio/food-1-avocado-phrase.mp3"
+        "he": "זה אורז לבן",
+        "translit": "зэ орез лаван",
+        "ru": "Это белый рис"
       },
-      "image": "/words/food-1-avocado.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-avocado.mp3"
+      "image": "/words/food-1-rice.svg",
+      "reviewed": false
     },
     {
-      "id": "food-1-cucumber",
-      "he": "מלפפון",
-      "niqqud": "מְלָפְפוֹן",
-      "translit": "мелафефо́н",
-      "ru": "огурец",
+      "id": "food-1-sugar",
+      "he": "סוכר",
+      "niqqud": "סוּכָּר",
+      "translit": "сука́р",
+      "ru": "сахар",
       "gender": "m",
       "example": {
-        "he": "זה מלפפון קטן",
-        "translit": "зэ мелафефон катан",
-        "ru": "Это маленький огурец",
-        "audio": "/audio/food-1-cucumber-phrase.mp3"
+        "he": "זה סוכר לבן",
+        "translit": "зэ сукар лаван",
+        "ru": "Это белый сахар"
       },
-      "image": "/words/food-1-cucumber.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-cucumber.mp3"
+      "reviewed": false
     },
     {
-      "id": "food-1-carrot",
-      "he": "גזר",
-      "niqqud": "גֶּזֶר",
-      "translit": "ге́зер",
-      "ru": "морковь",
+      "id": "food-1-salt",
+      "he": "מלח",
+      "niqqud": "מֶלַח",
+      "translit": "ме́лах",
+      "ru": "соль",
       "gender": "m",
       "example": {
-        "he": "זה גזר גדול",
-        "translit": "зэ гезер гадоль",
-        "ru": "Это большая морковь",
-        "audio": "/audio/food-1-carrot-phrase.mp3"
+        "he": "זה מלח ים",
+        "translit": "зэ мелах ям",
+        "ru": "Это морская соль"
       },
-      "image": "/words/food-1-carrot.svg",
-      "reviewed": false,
-      "audio": "/audio/food-1-carrot.mp3"
+      "image": "/words/food-1-salt.svg",
+      "reviewed": false
+    },
+    {
+      "id": "food-1-oil",
+      "he": "שמן",
+      "niqqud": "שֶׁמֶן",
+      "translit": "ше́мен",
+      "ru": "масло (растительное)",
+      "gender": "m",
+      "example": {
+        "he": "זה שמן זית",
+        "translit": "зэ шемен зайит",
+        "ru": "Это оливковое масло"
+      },
+      "image": "/words/food-1-oil.svg",
+      "reviewed": false
     }
   ]
 }

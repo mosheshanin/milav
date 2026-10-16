@@ -125,38 +125,6 @@
       "audio": "/audio/home-2-lamp.mp3"
     },
     {
-      "id": "home-2-carpet",
-      "he": "שטיח",
-      "niqqud": "שָׁטִיחַ",
-      "translit": "шати́ах",
-      "ru": "ковёр",
-      "gender": "m",
-      "example": {
-        "he": "זה שטיח רך",
-        "translit": "зэ шатиах рах",
-        "ru": "Это мягкий ковёр",
-        "audio": "/audio/home-2-carpet-phrase.mp3"
-      },
-      "reviewed": false,
-      "audio": "/audio/home-2-carpet.mp3"
-    },
-    {
-      "id": "home-2-curtain",
-      "he": "וילון",
-      "niqqud": "וִילוֹן",
-      "translit": "вило́н",
-      "ru": "штора",
-      "gender": "m",
-      "example": {
-        "he": "זה וילון יפה",
-        "translit": "зэ вилон яфэ",
-        "ru": "Это красивая штора",
-        "audio": "/audio/home-2-curtain-phrase.mp3"
-      },
-      "reviewed": false,
-      "audio": "/audio/home-2-curtain.mp3"
-    },
-    {
       "id": "home-2-pillow",
       "he": "כרית",
       "niqqud": "כָּרִית",
@@ -171,6 +139,35 @@
       },
       "reviewed": false,
       "audio": "/audio/home-2-pillow.mp3"
+    },
+    {
+      "id": "home-2-blanket",
+      "he": "שמיכה",
+      "niqqud": "שְׂמִיכָה",
+      "translit": "смиха́",
+      "ru": "одеяло",
+      "gender": "f",
+      "example": {
+        "he": "זאת שמיכה חמה",
+        "translit": "зот смиха хама",
+        "ru": "Это тёплое одеяло"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "home-2-mirror",
+      "he": "מראה",
+      "niqqud": "מַרְאָה",
+      "translit": "мара́",
+      "ru": "зеркало",
+      "gender": "f",
+      "example": {
+        "he": "זאת מראה גדולה",
+        "translit": "зот мара гдола",
+        "ru": "Это большое зеркало"
+      },
+      "image": "/words/home-2-mirror.svg",
+      "reviewed": false
     }
   ]
 }

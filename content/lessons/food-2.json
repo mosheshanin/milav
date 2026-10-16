@@ -6,58 +6,58 @@
   "topic": "Еда",
   "number": 2,
   "free": true,
-  "title": "Фрукты и ягоды",
+  "title": "Фрукты и овощи",
   "words": [
     {
-      "id": "food-2-pear",
-      "he": "אגס",
-      "niqqud": "אַגָּס",
-      "translit": "ага́с",
-      "ru": "груша",
+      "id": "food-2-apple",
+      "he": "תפוח",
+      "niqqud": "תַּפּוּחַ",
+      "translit": "тапу́ах",
+      "ru": "яблоко",
       "gender": "m",
       "example": {
-        "he": "זה אגס מתוק",
-        "translit": "зэ агас маток",
-        "ru": "Это сладкая груша",
-        "audio": "/audio/food-2-pear-phrase.mp3"
+        "he": "זה תפוח טעים",
+        "translit": "зэ тапуах таим",
+        "ru": "Это вкусное яблоко",
+        "audio": "/audio/food-2-apple-phrase.mp3"
       },
-      "image": "/words/food-2-pear.svg",
+      "image": "/words/food-2-apple.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-pear.mp3"
+      "audio": "/audio/food-2-apple.mp3"
     },
     {
-      "id": "food-2-strawberry",
-      "he": "תות",
-      "niqqud": "תּוּת",
-      "translit": "тут",
-      "ru": "клубника",
-      "gender": "m",
+      "id": "food-2-banana",
+      "he": "בננה",
+      "niqqud": "בָּנָנָה",
+      "translit": "бана́на",
+      "ru": "банан",
+      "gender": "f",
       "example": {
-        "he": "זה תות מתוק",
-        "translit": "зэ тут маток",
-        "ru": "Это сладкая клубника",
-        "audio": "/audio/food-2-strawberry-phrase.mp3"
+        "he": "זאת בננה מתוקה",
+        "translit": "зот банана мтука",
+        "ru": "Это сладкий банан",
+        "audio": "/audio/food-2-banana-phrase.mp3"
       },
-      "image": "/words/food-2-strawberry.svg",
+      "image": "/words/food-2-banana.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-strawberry.mp3"
+      "audio": "/audio/food-2-banana.mp3"
     },
     {
-      "id": "food-2-watermelon",
-      "he": "אבטיח",
-      "niqqud": "אֲבַטִּיחַ",
-      "translit": "авати́ах",
-      "ru": "арбуз",
+      "id": "food-2-orange",
+      "he": "תפוז",
+      "niqqud": "תַּפּוּז",
+      "translit": "тапу́з",
+      "ru": "апельсин",
       "gender": "m",
       "example": {
-        "he": "זה אבטיח גדול",
-        "translit": "зэ аватиах гадоль",
-        "ru": "Это большой арбуз",
-        "audio": "/audio/food-2-watermelon-phrase.mp3"
+        "he": "זה תפוז מתוק",
+        "translit": "зэ тапуз маток",
+        "ru": "Это сладкий апельсин",
+        "audio": "/audio/food-2-orange-phrase.mp3"
       },
-      "image": "/words/food-2-watermelon.svg",
+      "image": "/words/food-2-orange.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-watermelon.mp3"
+      "audio": "/audio/food-2-orange.mp3"
     },
     {
       "id": "food-2-lemon",
@@ -77,105 +77,104 @@
       "audio": "/audio/food-2-lemon.mp3"
     },
     {
-      "id": "food-2-peach",
-      "he": "אפרסק",
-      "niqqud": "אֲפַרְסֵק",
-      "translit": "афарсе́к",
-      "ru": "персик",
+      "id": "food-2-watermelon",
+      "he": "אבטיח",
+      "niqqud": "אֲבַטִּיחַ",
+      "translit": "авати́ах",
+      "ru": "арбуз",
       "gender": "m",
       "example": {
-        "he": "זה אפרסק טעים",
-        "translit": "зэ афарсек таим",
-        "ru": "Это вкусный персик",
-        "audio": "/audio/food-2-peach-phrase.mp3"
+        "he": "זה אבטיח גדול",
+        "translit": "зэ аватиах гадоль",
+        "ru": "Это большой арбуз",
+        "audio": "/audio/food-2-watermelon-phrase.mp3"
       },
-      "image": "/words/food-2-peach.svg",
+      "image": "/words/food-2-watermelon.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-peach.mp3"
+      "audio": "/audio/food-2-watermelon.mp3"
     },
     {
-      "id": "food-2-cherry",
-      "he": "דובדבן",
-      "niqqud": "דּוּבְדְּבָן",
-      "translit": "дувдева́н",
-      "ru": "вишня",
-      "gender": "m",
+      "id": "food-2-tomato",
+      "he": "עגבנייה",
+      "niqqud": "עַגְבָנִייָּה",
+      "translit": "агвания́",
+      "ru": "помидор",
+      "gender": "f",
       "example": {
-        "he": "זה דובדבן קטן",
-        "translit": "зэ дувдеван катан",
-        "ru": "Это маленькая вишня",
-        "audio": "/audio/food-2-cherry-phrase.mp3"
+        "he": "זאת עגבנייה אדומה",
+        "translit": "зот агвания адума",
+        "ru": "Это красный помидор"
       },
-      "image": "/words/food-2-cherry.svg",
-      "reviewed": false,
-      "audio": "/audio/food-2-cherry.mp3"
+      "image": "/words/food-2-tomato.svg",
+      "reviewed": false
     },
     {
-      "id": "food-2-pineapple",
-      "he": "אננס",
-      "niqqud": "אֲנָנָס",
-      "translit": "анана́с",
-      "ru": "ананас",
+      "id": "food-2-cucumber",
+      "he": "מלפפון",
+      "niqqud": "מְלָפְפוֹן",
+      "translit": "мелафефо́н",
+      "ru": "огурец",
       "gender": "m",
       "example": {
-        "he": "זה אננס מתוק",
-        "translit": "зэ ананас маток",
-        "ru": "Это сладкий ананас",
-        "audio": "/audio/food-2-pineapple-phrase.mp3"
+        "he": "זה מלפפון קטן",
+        "translit": "зэ мелафефон катан",
+        "ru": "Это маленький огурец",
+        "audio": "/audio/food-2-cucumber-phrase.mp3"
       },
-      "image": "/words/food-2-pineapple.svg",
+      "image": "/words/food-2-cucumber.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-pineapple.mp3"
+      "audio": "/audio/food-2-cucumber.mp3"
     },
     {
-      "id": "food-2-mango",
-      "he": "מנגו",
-      "niqqud": "מַנְגּוֹ",
-      "translit": "ма́нго",
-      "ru": "манго",
+      "id": "food-2-carrot",
+      "he": "גזר",
+      "niqqud": "גֶּזֶר",
+      "translit": "ге́зер",
+      "ru": "морковь",
       "gender": "m",
       "example": {
-        "he": "זה מנגו טעים",
-        "translit": "зэ манго таим",
-        "ru": "Это вкусное манго",
-        "audio": "/audio/food-2-mango-phrase.mp3"
+        "he": "זה גזר גדול",
+        "translit": "зэ гезер гадоль",
+        "ru": "Это большая морковь",
+        "audio": "/audio/food-2-carrot-phrase.mp3"
       },
-      "image": "/words/food-2-mango.svg",
+      "image": "/words/food-2-carrot.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-mango.mp3"
+      "audio": "/audio/food-2-carrot.mp3"
     },
     {
-      "id": "food-2-coconut",
-      "he": "קוקוס",
-      "niqqud": "קוֹקוֹס",
-      "translit": "ко́кос",
-      "ru": "кокос",
+      "id": "food-2-onion",
+      "he": "בצל",
+      "niqqud": "בָּצָל",
+      "translit": "баца́ль",
+      "ru": "лук",
       "gender": "m",
       "example": {
-        "he": "זה קוקוס גדול",
-        "translit": "зэ кокос гадоль",
-        "ru": "Это большой кокос",
-        "audio": "/audio/food-2-coconut-phrase.mp3"
+        "he": "זה בצל גדול",
+        "translit": "зэ бацаль гадоль",
+        "ru": "Это большой лук",
+        "audio": "/audio/food-2-onion-phrase.mp3"
       },
-      "image": "/words/food-2-coconut.svg",
+      "image": "/words/food-2-onion.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-coconut.mp3"
+      "audio": "/audio/food-2-onion.mp3"
     },
     {
-      "id": "food-2-pomegranate",
-      "he": "רימון",
-      "niqqud": "רִימוֹן",
-      "translit": "римо́н",
-      "ru": "гранат",
+      "id": "food-2-pepper",
+      "he": "פלפל",
+      "niqqud": "פִּלְפֵּל",
+      "translit": "пилпе́ль",
+      "ru": "перец",
       "gender": "m",
       "example": {
-        "he": "זה רימון מתוק",
-        "translit": "зэ римон маток",
-        "ru": "Это сладкий гранат",
-        "audio": "/audio/food-2-pomegranate-phrase.mp3"
+        "he": "זה פלפל חריף",
+        "translit": "зэ пилпель хариф",
+        "ru": "Это острый перец",
+        "audio": "/audio/food-2-pepper-phrase.mp3"
       },
+      "image": "/words/food-2-pepper.svg",
       "reviewed": false,
-      "audio": "/audio/food-2-pomegranate.mp3"
+      "audio": "/audio/food-2-pepper.mp3"
     }
   ]
 }

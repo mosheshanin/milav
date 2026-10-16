@@ -21,7 +21,7 @@
         "ד",
         "ה"
       ],
-      "v": "97888fbd1a"
+      "v": "98a6054ff3"
     },
     {
       "id": "alphabet-2",
@@ -44,7 +44,7 @@
         "ט",
         "י"
       ],
-      "v": "f24926fb8d"
+      "v": "32cbdbb7ed"
     },
     {
       "id": "alphabet-3",
@@ -91,7 +91,7 @@
         "פ",
         "ף"
       ],
-      "v": "4e5b77b27b"
+      "v": "6578019f6a"
     },
     {
       "id": "alphabet-5",
@@ -115,7 +115,7 @@
         "ש",
         "ת"
       ],
-      "v": "2e143b6d4a"
+      "v": "633581cefd"
     },
     {
       "id": "alphabet-6",
@@ -152,16 +152,33 @@
         "write",
         "type"
       ],
-      "v": "36ede18284"
+      "v": "82cc33328e"
     },
     {
-      "id": "animals-2",
-      "topicId": "animals",
+      "id": "body-1",
+      "topicId": "body",
       "section": "nouns",
-      "topic": "Животные",
+      "topic": "Тело",
+      "number": 1,
+      "free": true,
+      "title": "Голова и лицо",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "687c71af8a"
+    },
+    {
+      "id": "body-2",
+      "topicId": "body",
+      "section": "nouns",
+      "topic": "Тело",
       "number": 2,
       "free": true,
-      "title": "Дикие животные",
+      "title": "Руки, ноги и сердце",
       "count": 10,
       "stages": [
         "listen",
@@ -169,24 +186,7 @@
         "write",
         "type"
       ],
-      "v": "31b41ee4f2"
-    },
-    {
-      "id": "animals-3",
-      "topicId": "animals",
-      "section": "nouns",
-      "topic": "Животные",
-      "number": 3,
-      "free": true,
-      "title": "Мелкие и морские",
-      "count": 10,
-      "stages": [
-        "listen",
-        "speak",
-        "write",
-        "type"
-      ],
-      "v": "57816498ee"
+      "v": "23d074fe1c"
     },
     {
       "id": "colors-1",
@@ -206,47 +206,13 @@
       "v": "26bec89ef2"
     },
     {
-      "id": "colors-2",
-      "topicId": "colors",
-      "section": "adjectives",
-      "topic": "Цвета",
-      "number": 2,
-      "free": true,
-      "title": "Оттенки и свойства",
-      "count": 10,
-      "stages": [
-        "listen",
-        "speak",
-        "write",
-        "type"
-      ],
-      "v": "1d44b36fac"
-    },
-    {
-      "id": "colors-3",
-      "topicId": "colors",
-      "section": "adjectives",
-      "topic": "Цвета",
-      "number": 3,
-      "free": true,
-      "title": "Узоры и оттенки",
-      "count": 10,
-      "stages": [
-        "listen",
-        "speak",
-        "write",
-        "type"
-      ],
-      "v": "da091858ee"
-    },
-    {
       "id": "family-1",
       "topicId": "family",
       "section": "nouns",
       "topic": "Семья",
       "number": 1,
       "free": true,
-      "title": "Близкие",
+      "title": "Самые близкие",
       "count": 10,
       "stages": [
         "listen",
@@ -254,7 +220,7 @@
         "write",
         "type"
       ],
-      "v": "a8b2a6c694"
+      "v": "cfc0d19a97"
     },
     {
       "id": "family-2",
@@ -263,7 +229,7 @@
       "topic": "Семья",
       "number": 2,
       "free": true,
-      "title": "Родные и друзья",
+      "title": "Родственники",
       "count": 10,
       "stages": [
         "listen",
@@ -271,7 +237,7 @@
         "write",
         "type"
       ],
-      "v": "321d74784a"
+      "v": "59b7030523"
     },
     {
       "id": "family-3",
@@ -280,7 +246,7 @@
       "topic": "Семья",
       "number": 3,
       "free": true,
-      "title": "Мужчины и женщины",
+      "title": "Люди вокруг",
       "count": 10,
       "stages": [
         "listen",
@@ -288,7 +254,7 @@
         "write",
         "type"
       ],
-      "v": "aa02a55c50"
+      "v": "a4813986d2"
     },
     {
       "id": "food-1",
@@ -305,7 +271,7 @@
         "write",
         "type"
       ],
-      "v": "e8242311f5"
+      "v": "d9a8c5067f"
     },
     {
       "id": "food-2",
@@ -314,7 +280,7 @@
       "topic": "Еда",
       "number": 2,
       "free": true,
-      "title": "Фрукты и ягоды",
+      "title": "Фрукты и овощи",
       "count": 10,
       "stages": [
         "listen",
@@ -322,7 +288,7 @@
         "write",
         "type"
       ],
-      "v": "90ebf9c6be"
+      "v": "0ac537d1ab"
     },
     {
       "id": "food-3",
@@ -331,7 +297,7 @@
       "topic": "Еда",
       "number": 3,
       "free": true,
-      "title": "Овощи и блюда",
+      "title": "Напитки и блюда",
       "count": 10,
       "stages": [
         "listen",
@@ -339,7 +305,7 @@
         "write",
         "type"
       ],
-      "v": "6d1cea44e8"
+      "v": "075b4b457c"
     },
     {
       "id": "home-1",
@@ -356,7 +322,7 @@
         "write",
         "type"
       ],
-      "v": "44b413fd08"
+      "v": "4dea9982fa"
     },
     {
       "id": "home-2",
@@ -373,7 +339,7 @@
         "write",
         "type"
       ],
-      "v": "0eab49dd28"
+      "v": "0f472478b1"
     },
     {
       "id": "home-3",
@@ -382,7 +348,7 @@
       "topic": "Дом и мебель",
       "number": 3,
       "free": true,
-      "title": "Бытовые предметы",
+      "title": "Вещи в доме",
       "count": 10,
       "stages": [
         "listen",
@@ -390,7 +356,7 @@
         "write",
         "type"
       ],
-      "v": "e18b8fa9aa"
+      "v": "8b09738984"
     },
     {
       "id": "paal-1",
@@ -493,6 +459,40 @@
         "type"
       ],
       "v": "f255802e2a"
+    },
+    {
+      "id": "qualities-1",
+      "topicId": "qualities",
+      "section": "adjectives",
+      "topic": "Главные качества",
+      "number": 1,
+      "free": true,
+      "title": "Большой и маленький",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "da4f99d3b9"
+    },
+    {
+      "id": "qualities-2",
+      "topicId": "qualities",
+      "section": "adjectives",
+      "topic": "Главные качества",
+      "number": 2,
+      "free": true,
+      "title": "Дорогой и дешёвый",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "7e6816f031"
     }
   ],
   "info": {
@@ -511,18 +511,22 @@
         "id": "animals",
         "title": "Животные",
         "lessonIds": [
-          "animals-1",
-          "animals-2",
-          "animals-3"
+          "animals-1"
+        ]
+      },
+      {
+        "id": "body",
+        "title": "Тело",
+        "lessonIds": [
+          "body-1",
+          "body-2"
         ]
       },
       {
         "id": "colors",
         "title": "Цвета",
         "lessonIds": [
-          "colors-1",
-          "colors-2",
-          "colors-3"
+          "colors-1"
         ]
       },
       {
@@ -568,6 +572,14 @@
           "piel-1",
           "piel-2",
           "piel-3"
+        ]
+      },
+      {
+        "id": "qualities",
+        "title": "Главные качества",
+        "lessonIds": [
+          "qualities-1",
+          "qualities-2"
         ]
       }
     ]

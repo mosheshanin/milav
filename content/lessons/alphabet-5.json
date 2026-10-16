@@ -62,8 +62,8 @@
         "niqqud": "קוֹקוֹס",
         "translit": "ко́кос",
         "ru": "кокос",
-        "image": "/words/food-2-coconut.svg",
-        "audio": "/audio/food-2-coconut.mp3"
+        "image": "/words/alphabet-5-qof-example.svg",
+        "audio": "/audio/alphabet-5-qof-example.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-5-qof.mp3"
@@ -82,7 +82,7 @@
         "niqqud": "רִימוֹן",
         "translit": "римо́н",
         "ru": "гранат",
-        "audio": "/audio/food-2-pomegranate.mp3"
+        "audio": "/audio/alphabet-5-resh-example.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-5-resh.mp3"
@@ -121,8 +121,8 @@
         "niqqud": "תַּפּוּחַ",
         "translit": "тапу́ах",
         "ru": "яблоко",
-        "image": "/words/food-1-apple.svg",
-        "audio": "/audio/food-1-apple.mp3"
+        "image": "/words/food-2-apple.svg",
+        "audio": "/audio/food-2-apple.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-5-tav.mp3"

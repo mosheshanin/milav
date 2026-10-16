@@ -1,0 +1,159 @@
+{
+  "$schema": "../schema.json",
+  "id": "body-1",
+  "topicId": "body",
+  "section": "nouns",
+  "topic": "Тело",
+  "number": 1,
+  "free": true,
+  "title": "Голова и лицо",
+  "words": [
+    {
+      "id": "body-1-head",
+      "he": "ראש",
+      "niqqud": "רֹאשׁ",
+      "translit": "рош",
+      "ru": "голова",
+      "gender": "m",
+      "example": {
+        "he": "זה ראש גדול",
+        "translit": "зэ рош гадоль",
+        "ru": "Это большая голова"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-1-eye",
+      "he": "עין",
+      "niqqud": "עַיִן",
+      "translit": "а́йин",
+      "ru": "глаз",
+      "gender": "f",
+      "example": {
+        "he": "זאת עין כחולה",
+        "translit": "зот айин кхула",
+        "ru": "Это голубой глаз"
+      },
+      "image": "/words/body-1-eye.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-ear",
+      "he": "אוזן",
+      "niqqud": "אוֹזֶן",
+      "translit": "о́зен",
+      "ru": "ухо",
+      "gender": "f",
+      "example": {
+        "he": "זאת אוזן קטנה",
+        "translit": "зот озен ктана",
+        "ru": "Это маленькое ухо"
+      },
+      "image": "/words/body-1-ear.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-nose",
+      "he": "אף",
+      "niqqud": "אַף",
+      "translit": "аф",
+      "ru": "нос",
+      "gender": "m",
+      "example": {
+        "he": "זה אף ארוך",
+        "translit": "зэ аф арох",
+        "ru": "Это длинный нос"
+      },
+      "image": "/words/body-1-nose.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-mouth",
+      "he": "פה",
+      "niqqud": "פֶּה",
+      "translit": "пе",
+      "ru": "рот",
+      "gender": "m",
+      "example": {
+        "he": "זה פה קטן",
+        "translit": "зэ пе катан",
+        "ru": "Это маленький рот"
+      },
+      "image": "/words/body-1-mouth.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-tooth",
+      "he": "שן",
+      "niqqud": "שֵׁן",
+      "translit": "шен",
+      "ru": "зуб",
+      "gender": "f",
+      "example": {
+        "he": "זאת שן לבנה",
+        "translit": "зот шен лвана",
+        "ru": "Это белый зуб"
+      },
+      "image": "/words/body-1-tooth.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-tongue",
+      "he": "לשון",
+      "niqqud": "לָשׁוֹן",
+      "translit": "лашо́н",
+      "ru": "язык (во рту)",
+      "gender": "f",
+      "example": {
+        "he": "זאת לשון אדומה",
+        "translit": "зот лашон адума",
+        "ru": "Это красный язык"
+      },
+      "image": "/words/body-1-tongue.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-hair",
+      "he": "שיער",
+      "niqqud": "שֵׂיעָר",
+      "translit": "сеа́р",
+      "ru": "волосы",
+      "gender": "m",
+      "example": {
+        "he": "זה שיער ארוך",
+        "translit": "зэ сеар арох",
+        "ru": "Это длинные волосы"
+      },
+      "image": "/words/body-1-hair.svg",
+      "reviewed": false
+    },
+    {
+      "id": "body-1-neck",
+      "he": "צוואר",
+      "niqqud": "צַווָּאר",
+      "translit": "цава́р",
+      "ru": "шея",
+      "gender": "m",
+      "example": {
+        "he": "זה צוואר ארוך",
+        "translit": "зэ цавар арох",
+        "ru": "Это длинная шея"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-1-cheek",
+      "he": "לחי",
+      "niqqud": "לֶחִי",
+      "translit": "ле́хи",
+      "ru": "щека",
+      "gender": "f",
+      "example": {
+        "he": "זאת לחי ורודה",
+        "translit": "зот лехи вруда",
+        "ru": "Это розовая щека"
+      },
+      "reviewed": false
+    }
+  ]
+}

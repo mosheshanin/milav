@@ -22,8 +22,8 @@
         "audio": "/audio/animals-1-cat-phrase.mp3"
       },
       "image": "/words/animals-1-cat.svg",
-      "audio": "/audio/animals-1-cat.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-cat.mp3"
     },
     {
       "id": "animals-1-dog",
@@ -39,8 +39,8 @@
         "audio": "/audio/animals-1-dog-phrase.mp3"
       },
       "image": "/words/animals-1-dog.svg",
-      "audio": "/audio/animals-1-dog.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-dog.mp3"
     },
     {
       "id": "animals-1-horse",
@@ -56,8 +56,8 @@
         "audio": "/audio/animals-1-horse-phrase.mp3"
       },
       "image": "/words/animals-1-horse.svg",
-      "audio": "/audio/animals-1-horse.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-horse.mp3"
     },
     {
       "id": "animals-1-bird",
@@ -73,8 +73,8 @@
         "audio": "/audio/animals-1-bird-phrase.mp3"
       },
       "image": "/words/animals-1-bird.svg",
-      "audio": "/audio/animals-1-bird.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-bird.mp3"
     },
     {
       "id": "animals-1-fish",
@@ -90,8 +90,8 @@
         "audio": "/audio/animals-1-fish-phrase.mp3"
       },
       "image": "/words/animals-1-fish.svg",
-      "audio": "/audio/animals-1-fish.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-fish.mp3"
     },
     {
       "id": "animals-1-cow",
@@ -107,24 +107,22 @@
         "audio": "/audio/animals-1-cow-phrase.mp3"
       },
       "image": "/words/animals-1-cow.svg",
-      "audio": "/audio/animals-1-cow.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-cow.mp3"
     },
     {
-      "id": "animals-1-rabbit",
-      "he": "ארנב",
-      "niqqud": "אַרְנָב",
-      "translit": "арна́в",
-      "ru": "кролик",
-      "gender": "m",
+      "id": "animals-1-animal",
+      "he": "חיה",
+      "niqqud": "חַיָּה",
+      "translit": "хая́",
+      "ru": "животное",
+      "gender": "f",
       "example": {
-        "he": "זה ארנב לבן",
-        "translit": "зэ арнав лаван",
-        "ru": "Это белый кролик",
-        "audio": "/audio/animals-1-rabbit-phrase.mp3"
+        "he": "זאת חיה קטנה",
+        "translit": "зот хая ктана",
+        "ru": "Это маленькое животное"
       },
-      "image": "/words/animals-1-rabbit.svg",
-      "audio": "/audio/animals-1-rabbit.mp3",
+      "image": "/words/animals-1-animal.svg",
       "reviewed": false
     },
     {
@@ -141,8 +139,8 @@
         "audio": "/audio/animals-1-mouse-phrase.mp3"
       },
       "image": "/words/animals-1-mouse.svg",
-      "audio": "/audio/animals-1-mouse.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-mouse.mp3"
     },
     {
       "id": "animals-1-elephant",
@@ -158,8 +156,8 @@
         "audio": "/audio/animals-1-elephant-phrase.mp3"
       },
       "image": "/words/animals-1-elephant.svg",
-      "audio": "/audio/animals-1-elephant.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-elephant.mp3"
     },
     {
       "id": "animals-1-lion",
@@ -175,8 +173,8 @@
         "audio": "/audio/animals-1-lion-phrase.mp3"
       },
       "image": "/words/animals-1-lion.svg",
-      "audio": "/audio/animals-1-lion.mp3",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-lion.mp3"
     }
   ]
 }

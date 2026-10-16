@@ -6,7 +6,7 @@
   "topic": "Семья",
   "number": 1,
   "free": true,
-  "title": "Близкие",
+  "title": "Самые близкие",
   "words": [
     {
       "id": "family-1-mom",
@@ -43,89 +43,36 @@
       "audio": "/audio/family-1-dad.mp3"
     },
     {
-      "id": "family-1-grandpa",
-      "he": "סבא",
-      "niqqud": "סַבָּא",
-      "translit": "са́ба",
-      "ru": "дедушка",
+      "id": "family-1-son",
+      "he": "בן",
+      "niqqud": "בֵּן",
+      "translit": "бен",
+      "ru": "сын",
       "gender": "m",
       "example": {
-        "he": "זה סבא חכם",
-        "translit": "зэ саба хахам",
-        "ru": "Это умный дедушка",
-        "audio": "/audio/family-1-grandpa-phrase.mp3"
+        "he": "זה בן חכם",
+        "translit": "зэ бен хахам",
+        "ru": "Это умный сын",
+        "audio": "/audio/family-1-son-phrase.mp3"
       },
-      "image": "/words/family-1-grandpa.svg",
       "reviewed": false,
-      "audio": "/audio/family-1-grandpa.mp3"
+      "audio": "/audio/family-1-son.mp3"
     },
     {
-      "id": "family-1-grandma",
-      "he": "סבתא",
-      "niqqud": "סַבְתָּא",
-      "translit": "са́вта",
-      "ru": "бабушка",
+      "id": "family-1-daughter",
+      "he": "בת",
+      "niqqud": "בַּת",
+      "translit": "бат",
+      "ru": "дочь",
       "gender": "f",
       "example": {
-        "he": "זאת סבתא טובה",
-        "translit": "зот савта това",
-        "ru": "Это хорошая бабушка",
-        "audio": "/audio/family-1-grandma-phrase.mp3"
+        "he": "זאת בת חכמה",
+        "translit": "зот бат хахама",
+        "ru": "Это умная дочь",
+        "audio": "/audio/family-1-daughter-phrase.mp3"
       },
-      "image": "/words/family-1-grandma.svg",
       "reviewed": false,
-      "audio": "/audio/family-1-grandma.mp3"
-    },
-    {
-      "id": "family-1-boy",
-      "he": "ילד",
-      "niqqud": "יֶלֶד",
-      "translit": "е́лед",
-      "ru": "мальчик",
-      "gender": "m",
-      "example": {
-        "he": "זה ילד חמוד",
-        "translit": "зэ елед хамуд",
-        "ru": "Это милый мальчик",
-        "audio": "/audio/family-1-boy-phrase.mp3"
-      },
-      "image": "/words/family-1-boy.svg",
-      "reviewed": false,
-      "audio": "/audio/family-1-boy.mp3"
-    },
-    {
-      "id": "family-1-girl",
-      "he": "ילדה",
-      "niqqud": "יַלְדָּה",
-      "translit": "ялда́",
-      "ru": "девочка",
-      "gender": "f",
-      "example": {
-        "he": "זאת ילדה חמודה",
-        "translit": "зот ялда хмуда",
-        "ru": "Это милая девочка",
-        "audio": "/audio/family-1-girl-phrase.mp3"
-      },
-      "image": "/words/family-1-girl.svg",
-      "reviewed": false,
-      "audio": "/audio/family-1-girl.mp3"
-    },
-    {
-      "id": "family-1-baby",
-      "he": "תינוק",
-      "niqqud": "תִּינוֹק",
-      "translit": "тино́к",
-      "ru": "малыш",
-      "gender": "m",
-      "example": {
-        "he": "זה תינוק חמוד",
-        "translit": "зэ тинок хамуд",
-        "ru": "Это милый малыш",
-        "audio": "/audio/family-1-baby-phrase.mp3"
-      },
-      "image": "/words/family-1-baby.svg",
-      "reviewed": false,
-      "audio": "/audio/family-1-baby.mp3"
+      "audio": "/audio/family-1-daughter.mp3"
     },
     {
       "id": "family-1-brother",
@@ -158,6 +105,53 @@
       },
       "reviewed": false,
       "audio": "/audio/family-1-sister.mp3"
+    },
+    {
+      "id": "family-1-husband",
+      "he": "בעל",
+      "niqqud": "בַּעַל",
+      "translit": "ба́аль",
+      "ru": "муж",
+      "gender": "m",
+      "example": {
+        "he": "זה בעל טוב",
+        "translit": "зэ бааль тов",
+        "ru": "Это хороший муж"
+      },
+      "image": "/words/family-1-husband.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-parents",
+      "he": "הורים",
+      "niqqud": "הוֹרִים",
+      "translit": "хори́м",
+      "ru": "родители",
+      "gender": "m",
+      "example": {
+        "he": "אלה הורים טובים",
+        "translit": "эле хорим товим",
+        "ru": "Это хорошие родители"
+      },
+      "image": "/words/family-1-parents.svg",
+      "reviewed": false
+    },
+    {
+      "id": "family-1-boy",
+      "he": "ילד",
+      "niqqud": "יֶלֶד",
+      "translit": "е́лед",
+      "ru": "мальчик, ребёнок",
+      "gender": "m",
+      "example": {
+        "he": "זה ילד חמוד",
+        "translit": "зэ елед хамуд",
+        "ru": "Это милый мальчик",
+        "audio": "/audio/family-1-boy-phrase.mp3"
+      },
+      "image": "/words/family-1-boy.svg",
+      "reviewed": false,
+      "audio": "/audio/family-1-boy.mp3"
     },
     {
       "id": "family-1-family",

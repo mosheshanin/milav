@@ -6,109 +6,67 @@
   "topic": "Еда",
   "number": 3,
   "free": true,
-  "title": "Овощи и блюда",
+  "title": "Напитки и блюда",
   "words": [
     {
-      "id": "food-3-onion",
-      "he": "בצל",
-      "niqqud": "בָּצָל",
-      "translit": "баца́ль",
-      "ru": "лук",
+      "id": "food-3-water",
+      "he": "מים",
+      "niqqud": "מַיִם",
+      "translit": "ма́йим",
+      "ru": "вода",
       "gender": "m",
       "example": {
-        "he": "זה בצל גדול",
-        "translit": "зэ бацаль гадоль",
-        "ru": "Это большой лук",
-        "audio": "/audio/food-3-onion-phrase.mp3"
+        "he": "אלה מים קרים",
+        "translit": "эле майим карим",
+        "ru": "Это холодная вода"
       },
-      "image": "/words/food-3-onion.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-onion.mp3"
+      "image": "/words/food-3-water.svg",
+      "reviewed": false
     },
     {
-      "id": "food-3-garlic",
-      "he": "שום",
-      "niqqud": "שׁוּם",
-      "translit": "шум",
-      "ru": "чеснок",
+      "id": "food-3-coffee",
+      "he": "קפה",
+      "niqqud": "קָפֶה",
+      "translit": "кафе́",
+      "ru": "кофе",
       "gender": "m",
       "example": {
-        "he": "זה שום קטן",
-        "translit": "зэ шум катан",
-        "ru": "Это маленький чеснок",
-        "audio": "/audio/food-3-garlic-phrase.mp3"
+        "he": "זה קפה חם",
+        "translit": "зэ кафе хам",
+        "ru": "Это горячий кофе"
       },
-      "image": "/words/food-3-garlic.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-garlic.mp3"
+      "image": "/words/food-3-coffee.svg",
+      "reviewed": false
     },
     {
-      "id": "food-3-pepper",
-      "he": "פלפל",
-      "niqqud": "פִּלְפֵּל",
-      "translit": "пилпе́ль",
-      "ru": "перец",
+      "id": "food-3-tea",
+      "he": "תה",
+      "niqqud": "תֵּה",
+      "translit": "те",
+      "ru": "чай",
       "gender": "m",
       "example": {
-        "he": "זה פלפל חריף",
-        "translit": "зэ пилпель хариф",
-        "ru": "Это острый перец",
-        "audio": "/audio/food-3-pepper-phrase.mp3"
+        "he": "זה תה חם",
+        "translit": "зэ те хам",
+        "ru": "Это горячий чай"
       },
-      "image": "/words/food-3-pepper.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-pepper.mp3"
+      "image": "/words/food-3-tea.svg",
+      "reviewed": false
     },
     {
-      "id": "food-3-corn",
-      "he": "תירס",
-      "niqqud": "תִּירָס",
-      "translit": "тира́с",
-      "ru": "кукуруза",
+      "id": "food-3-juice",
+      "he": "מיץ",
+      "niqqud": "מִיץ",
+      "translit": "миц",
+      "ru": "сок",
       "gender": "m",
       "example": {
-        "he": "זה תירס מתוק",
-        "translit": "зэ тирас маток",
-        "ru": "Это сладкая кукуруза",
-        "audio": "/audio/food-3-corn-phrase.mp3"
+        "he": "זה מיץ תפוזים",
+        "translit": "зэ миц тапузим",
+        "ru": "Это апельсиновый сок"
       },
-      "image": "/words/food-3-corn.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-corn.mp3"
-    },
-    {
-      "id": "food-3-broccoli",
-      "he": "ברוקולי",
-      "niqqud": "בְּרוֹקוֹלִי",
-      "translit": "броко́ли",
-      "ru": "брокколи",
-      "gender": "m",
-      "example": {
-        "he": "זה ברוקולי טעים",
-        "translit": "зэ броколи таим",
-        "ru": "Это вкусная брокколи",
-        "audio": "/audio/food-3-broccoli-phrase.mp3"
-      },
-      "image": "/words/food-3-broccoli.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-broccoli.mp3"
-    },
-    {
-      "id": "food-3-eggplant",
-      "he": "חציל",
-      "niqqud": "חָצִיל",
-      "translit": "хаци́ль",
-      "ru": "баклажан",
-      "gender": "m",
-      "example": {
-        "he": "זה חציל גדול",
-        "translit": "зэ хациль гадоль",
-        "ru": "Это большой баклажан",
-        "audio": "/audio/food-3-eggplant-phrase.mp3"
-      },
-      "image": "/words/food-3-eggplant.svg",
-      "reviewed": false,
-      "audio": "/audio/food-3-eggplant.mp3"
+      "image": "/words/food-3-juice.svg",
+      "reviewed": false
     },
     {
       "id": "food-3-soup",
@@ -126,6 +84,21 @@
       "image": "/words/food-3-soup.svg",
       "reviewed": false,
       "audio": "/audio/food-3-soup.mp3"
+    },
+    {
+      "id": "food-3-salad",
+      "he": "סלט",
+      "niqqud": "סָלָט",
+      "translit": "сала́т",
+      "ru": "салат",
+      "gender": "m",
+      "example": {
+        "he": "זה סלט ירקות",
+        "translit": "зэ салат йеракот",
+        "ru": "Это овощной салат"
+      },
+      "image": "/words/food-3-salad.svg",
+      "reviewed": false
     },
     {
       "id": "food-3-sandwich",
@@ -177,6 +150,21 @@
       "image": "/words/food-3-cake.svg",
       "reviewed": false,
       "audio": "/audio/food-3-cake.mp3"
+    },
+    {
+      "id": "food-3-food",
+      "he": "אוכל",
+      "niqqud": "אוֹכֶל",
+      "translit": "о́хель",
+      "ru": "еда",
+      "gender": "m",
+      "example": {
+        "he": "זה אוכל טעים",
+        "translit": "зэ охель таим",
+        "ru": "Это вкусная еда"
+      },
+      "image": "/words/food-3-food.svg",
+      "reviewed": false
     }
   ]
 }

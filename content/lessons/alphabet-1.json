@@ -22,8 +22,8 @@
         "niqqud": "אַרְנָב",
         "translit": "арна́в",
         "ru": "кролик",
-        "image": "/words/animals-1-rabbit.svg",
-        "audio": "/audio/animals-1-rabbit.mp3"
+        "image": "/words/alphabet-1-alef-example.svg",
+        "audio": "/audio/alphabet-1-alef-example.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-1-alef.mp3"
@@ -42,8 +42,8 @@
         "niqqud": "בָּנָנָה",
         "translit": "бана́на",
         "ru": "банан",
-        "image": "/words/food-1-banana.svg",
-        "audio": "/audio/food-1-banana.mp3"
+        "image": "/words/food-2-banana.svg",
+        "audio": "/audio/food-2-banana.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-1-bet.mp3"
@@ -62,8 +62,8 @@
         "niqqud": "גָּמָל",
         "translit": "гама́ль",
         "ru": "верблюд",
-        "image": "/words/animals-2-camel.svg",
-        "audio": "/audio/animals-2-camel.mp3"
+        "image": "/words/alphabet-1-gimel-example.svg",
+        "audio": "/audio/alphabet-1-gimel-example.mp3"
       },
       "reviewed": false,
       "audio": "/audio/alphabet-1-gimel.mp3"

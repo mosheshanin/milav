@@ -6,7 +6,7 @@
   "topic": "Дом и мебель",
   "number": 3,
   "free": true,
-  "title": "Бытовые предметы",
+  "title": "Вещи в доме",
   "words": [
     {
       "id": "home-3-fridge",
@@ -23,22 +23,6 @@
       },
       "reviewed": false,
       "audio": "/audio/home-3-fridge.mp3"
-    },
-    {
-      "id": "home-3-oven",
-      "he": "תנור",
-      "niqqud": "תַּנּוּר",
-      "translit": "тану́р",
-      "ru": "духовка",
-      "gender": "m",
-      "example": {
-        "he": "זה תנור חם",
-        "translit": "зэ танур хам",
-        "ru": "Это горячая духовка",
-        "audio": "/audio/home-3-oven-phrase.mp3"
-      },
-      "reviewed": false,
-      "audio": "/audio/home-3-oven.mp3"
     },
     {
       "id": "home-3-phone",
@@ -92,6 +76,23 @@
       "audio": "/audio/home-3-clock.mp3"
     },
     {
+      "id": "home-3-key",
+      "he": "מפתח",
+      "niqqud": "מַפְתֵּחַ",
+      "translit": "мафте́ах",
+      "ru": "ключ",
+      "gender": "m",
+      "example": {
+        "he": "זה מפתח קטן",
+        "translit": "зэ мафтеах катан",
+        "ru": "Это маленький ключ",
+        "audio": "/audio/home-3-key-phrase.mp3"
+      },
+      "image": "/words/home-3-key.svg",
+      "reviewed": false,
+      "audio": "/audio/home-3-key.mp3"
+    },
+    {
       "id": "home-3-plate",
       "he": "צלחת",
       "niqqud": "צַלַּחַת",
@@ -109,21 +110,19 @@
       "audio": "/audio/home-3-plate.mp3"
     },
     {
-      "id": "home-3-mug",
-      "he": "ספל",
-      "niqqud": "סֵפֶל",
-      "translit": "се́фель",
-      "ru": "кружка",
-      "gender": "m",
+      "id": "home-3-glass",
+      "he": "כוס",
+      "niqqud": "כּוֹס",
+      "translit": "кос",
+      "ru": "стакан, чашка",
+      "gender": "f",
       "example": {
-        "he": "זה ספל חם",
-        "translit": "зэ сефель хам",
-        "ru": "Это горячая кружка",
-        "audio": "/audio/home-3-mug-phrase.mp3"
+        "he": "זאת כוס מים",
+        "translit": "зот кос майим",
+        "ru": "Это стакан воды"
       },
-      "image": "/words/home-3-mug.svg",
-      "reviewed": false,
-      "audio": "/audio/home-3-mug.mp3"
+      "image": "/words/home-3-glass.svg",
+      "reviewed": false
     },
     {
       "id": "home-3-spoon",
@@ -160,21 +159,19 @@
       "audio": "/audio/home-3-fork.mp3"
     },
     {
-      "id": "home-3-key",
-      "he": "מפתח",
-      "niqqud": "מַפְתֵּחַ",
-      "translit": "мафте́ах",
-      "ru": "ключ",
-      "gender": "m",
+      "id": "home-3-knife",
+      "he": "סכין",
+      "niqqud": "סַכִּין",
+      "translit": "саки́н",
+      "ru": "нож",
+      "gender": "f",
       "example": {
-        "he": "זה מפתח קטן",
-        "translit": "зэ мафтеах катан",
-        "ru": "Это маленький ключ",
-        "audio": "/audio/home-3-key-phrase.mp3"
+        "he": "זאת סכין חדה",
+        "translit": "зот сакин хада",
+        "ru": "Это острый нож"
       },
-      "image": "/words/home-3-key.svg",
-      "reviewed": false,
-      "audio": "/audio/home-3-key.mp3"
+      "image": "/words/home-3-knife.svg",
+      "reviewed": false
     }
   ]
 }

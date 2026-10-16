@@ -10,6 +10,9 @@ const count = async (sql: string, ...params: unknown[]) => (await ctx.env.DB.pre
 const badgeIds = async (uid: number) =>
   (await ctx.env.DB.prepare("SELECT badge_id FROM user_badges WHERE user_id = ? ORDER BY badge_id").bind(uid).all<{ badge_id: string }>()).results.map((r) => r.badge_id);
 
+/** Бейдж темы зависит от того, сколько уроков в теме первого урока: в этих проверках он не важен. */
+const withoutTopic = (ids: string[]) => ids.filter((id) => !id.startsWith("topic-"));
+
 /** Проходит все четыре этапа слова и возвращает ответ на последний этап (в нём итог слова и бейджи). */
 async function finishWord(as: number, index: number) {
   const w = lesson.words[index]!;
@@ -111,7 +114,7 @@ describe("викторина: счётчики, бейджи, статус", () 
     const res = await playQuiz(1, await startQuiz(1));
     expect(res.result).toMatchObject({ passed: true, correct: 25, firstTimePassed: true, passedLessons: 1 });
     expect(res.result!.statusChanged).toBeUndefined();
-    expect(res.result!.play.newBadges.sort()).toEqual(["first-lesson", "quiz-perfect"]);
+    expect(withoutTopic(res.result!.play.newBadges).sort()).toEqual(["first-lesson", "quiz-perfect"]);
     expect(await statsRow(1)).toMatchObject({ passed_lessons: 1, perfect_quizzes: 1, sections_mask: 2, alphabet_lessons: 0, words_done: 10 });
     expect(await badgeIds(1)).toContain("first-lesson");
   });
@@ -132,7 +135,7 @@ describe("викторина: счётчики, бейджи, статус", () 
     await completeLesson(1);
     const res = await playQuiz(1, await startQuiz(1), [0, 1, 2, 3, 4]);
     expect(res.result).toMatchObject({ passed: true, correct: 20 });
-    expect(res.result!.play.newBadges).toEqual(["first-lesson"]);
+    expect(withoutTopic(res.result!.play.newBadges)).toEqual(["first-lesson"]);
     expect((await statsRow(1)).perfect_quizzes).toBe(0);
   });
 
@@ -154,7 +157,7 @@ describe("викторина: счётчики, бейджи, статус", () 
   });
 
   it("закрытие темы: последний урок темы выдаёт бейдж темы", async () => {
-    const topic = allLessons.filter((l) => l.topicId === "animals");
+    const topic = allLessons.filter((l) => l.topicId === "family");
     expect(topic.length).toBeGreaterThanOrEqual(2);
     // Все слова темы пройдены, кроме викторин: прогресс записан прямо в базу.
     await meOf(1);
@@ -166,10 +169,10 @@ describe("викторина: счётчики, бейджи, статус", () 
       }
     }
     for (const l of topic.slice(0, -1)) await playQuiz(1, await startQuiz(1, l.id));
-    expect(await badgeIds(1)).not.toContain("topic-animals");
+    expect(await badgeIds(1)).not.toContain("topic-family");
     const last = topic[topic.length - 1]!;
     const res = await playQuiz(1, await startQuiz(1, last.id));
-    expect(res.result!.play.newBadges).toContain("topic-animals");
+    expect(res.result!.play.newBadges).toContain("topic-family");
     expect((await statsRow(1)).topics_closed).toBe(1);
   });
 });
