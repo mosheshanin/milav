@@ -29,7 +29,7 @@ import { WriteWord } from "../components/WriteWord";
 import { Button, Card, Notice } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
 import { playLetterExample, playLetterName } from "../lib/audio";
-import { practiceWords } from "../lib/formsPractice";
+import { practiceWords } from "@milav/shared";
 import { useBackButton } from "../lib/useBackButton";
 
 type View = Stage | "end";

@@ -11,7 +11,7 @@ import {
   slotId,
   slotLabel,
   type PracticeQuestion,
-} from "./formsPractice";
+} from "@milav/shared";
 
 /** Предсказуемый генератор случайных чисел (mulberry32), чтобы тесты были воспроизводимыми. */
 function seeded(seed: number) {

@@ -1,18 +1,11 @@
-import {
-  VERB_FORM_LABELS,
-  VERB_TENSE_TITLES,
-  verbForms,
-  type StudyItem,
-  type VerbFormEntry,
-  type VerbTense,
-  type Word,
-  type WordForm,
-} from "@milav/shared";
-import { isWord } from "@milav/shared";
+import { VERB_FORM_LABELS, VERB_TENSE_TITLES, verbForms, type VerbFormEntry, type VerbTense } from "./verbs";
+import { isWord } from "./alphabet";
+import type { StudyItem, Word, WordForm } from "./types";
 
 /**
  * «Практика форм» (задача 9, этап 3): тренировка форм глагола после урока.
  * Всё считается на телефоне и нигде не сохраняется: практика не влияет на сдачу урока, очки, статусы и бейджи.
+ * Те же вопросы задаёт сервер в повторении слов (задача 10): форма глагола вместо инфинитива, `formQuestion`.
  * Логика здесь чистая (случайность подставляется снаружи), чтобы её проверять тестами без браузера.
  */
 
@@ -168,6 +161,17 @@ export function buildPractice(words: readonly Word[], rng: Random = Math.random,
     questions.push(made);
   }
   return questions;
+}
+
+/**
+ * Один вопрос о форме глагола для повторения слов: «выбери форму» или «что это за форма?» (вид случайный).
+ * null, если у слова нет форм или из них не собрать вопрос.
+ */
+export function formQuestion(word: Word, rng: Random = Math.random): PracticeQuestion | null {
+  if (!word.verb) return null;
+  const both = buildPractice([word], rng, 2);
+  if (both.length === 0) return null;
+  return both[Math.min(both.length - 1, Math.floor(rng() * both.length))]!;
 }
 
 /** Итог подхода одной строкой. */

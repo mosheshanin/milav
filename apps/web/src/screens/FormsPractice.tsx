@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 import { LessonGate } from "../components/LessonGate";
 import { SpeakerButton } from "../components/SpeakerButton";
 import { Button, Card, Chip, Notice } from "../components/ui";
-import { PRACTICE_QUESTIONS, buildPractice, practiceVerdict, practiceWords, type PracticeQuestion } from "../lib/formsPractice";
+import { PRACTICE_QUESTIONS, buildPractice, practiceVerdict, practiceWords, type PracticeQuestion } from "@milav/shared";
 import { useBackButton } from "../lib/useBackButton";
 
 /**

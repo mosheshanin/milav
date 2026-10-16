@@ -5,6 +5,7 @@ import {
   REPEAT_LAST_BOX,
   REPEAT_SESSION_SIZE,
   localEpochDay,
+  verbForms,
   wordLetters,
   type HomeResponse,
   type MyWordsResponse,
@@ -227,3 +228,55 @@ describe("повторение: подсчёт для напоминаний", (
     expect(await countDueForReminders(ctx.env.DB, [])).toEqual(new Map());
   });
 });
+
+describe("повторение: формы глаголов", () => {
+  const verbLesson = lessons.find((l) => l.words.every((w) => w.verb))!;
+  const verb = verbLesson.words[0]!;
+  const forms = verbForms(verb.verb!);
+  const id = (f: (typeof forms)[number]) => `${f.tense}:${f.key}`;
+  const past3ms = forms.find((f) => f.tense === "past" && f.key === "3ms")!;
+
+  beforeEach(async () => {
+    await api("/api/me", { as: STUDENT }, env());
+    for (const w of verbLesson.words) {
+      await ctx.env.DB.prepare(
+        "INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (?, ?, ?, 1, 1, 1, 1, '2026-10-10 08:00:00')",
+      )
+        .bind(STUDENT, w.id, verbLesson.id)
+        .run();
+    }
+  });
+
+  it("глагол спрашивается формой: варианты из форм того же глагола, одна верная", async () => {
+    const items = await loadLearned(ctx.env.DB, STUDENT);
+    const { questions } = buildRepeatSession(items, TODAY, () => 0.1);
+    expect(questions).toHaveLength(10);
+    for (const q of questions) {
+      expect(["form-pick", "form-name"]).toContain(q.type);
+      const qForms = verbForms(items.find((i) => i.wordId === q.wordId)!.word.verb!);
+      const ids = new Set(qForms.map((f) => `${f.tense}:${f.key}`));
+      expect(q.form!.options).toHaveLength(4);
+      expect(q.form!.options.map((o) => o.id)).toContain(q.form!.id);
+      for (const o of q.form!.options) expect(ids.has(o.id)).toBe(true);
+    }
+    // При rng ≥ доли форм глагол спрашивается как обычное слово.
+    expect(buildRepeatSession(items, TODAY, () => 0.9).questions.every((q) => !q.form)).toBe(true);
+  });
+
+  it("ответ о форме проверяет сервер и двигает коробку глагола", async () => {
+    expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: "past:zz", choice: id(past3ms) })).status).toBe(400);
+    expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: id(past3ms), choice: "nope" })).status).toBe(400);
+    const right = await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: id(past3ms), choice: id(past3ms) });
+    expect(right.body).toMatchObject({ correct: true, box: 1 });
+    const second = verbLesson.words[1]!;
+    const f2 = verbForms(second.verb!);
+    const asked = f2.find((f) => f.tense === "past" && f.key === "3ms")!;
+    const wrongChoice = f2.find((f) => f.form.niqqud !== asked.form.niqqud)!;
+    const wrong = await answer(STUDENT, { wordId: second.id, type: "form-name", form: id(asked), choice: id(wrongChoice) });
+    expect(wrong.body).toMatchObject({ correct: false, box: 0 });
+    const third = verbLesson.words[2]!;
+    const f3 = verbForms(third.verb!);
+    expect((await answer(STUDENT, { wordId: third.id, type: "form-pick", form: id(f3[0]!), giveUp: true })).body).toMatchObject({ correct: false });
+  });
+});
+

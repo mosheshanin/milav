@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { MyWordItem } from "@milav/shared";
-import { filterWords, repeatCardText, repeatVerdict, returnsText, strengthFilled, wordsCount } from "./repeat";
+import type { MyWordItem, RepeatQuestion, RepeatWord } from "@milav/shared";
+import { drillQueue, filterWords, localCorrect, repeatCardText, repeatVerdict, returnsText, strengthFilled, wordsCount } from "./repeat";
 
 const item = (id: string, box: number, dueIn: number): MyWordItem => ({
   word: { id, lessonId: "l", he: "א", translit: "а", ru: id },
@@ -35,3 +35,48 @@ describe("повторение в приложении", () => {
     expect([0, 3, 5, 9, -1].map(strengthFilled)).toEqual([1, 4, 6, 6, 1]);
   });
 });
+
+describe("проверка на телефоне и «Ещё раз»", () => {
+  const words: Record<string, RepeatWord> = {
+    a: { id: "a", lessonId: "l", he: "כלב", translit: "кэлев", ru: "собака" },
+    b: { id: "b", lessonId: "l", he: "חתול", translit: "хатуль", ru: "кот" },
+  };
+  const choice: RepeatQuestion = { wordId: "a", type: "he-ru", options: ["a", "b"] };
+  const type: RepeatQuestion = { wordId: "a", type: "type", options: [] };
+  const form = (t: "form-pick" | "form-name"): RepeatQuestion => ({
+    wordId: "v",
+    type: t,
+    options: [],
+    form: {
+      id: "future:2ms",
+      slot: "Будущее · ты (м.)",
+      niqqud: "תִּכְתֹּב",
+      translit: "тихтов",
+      options: [
+        { id: "future:2ms", text: t === "form-pick" ? "תִּכְתֹּב" : "Будущее · ты (м.)" },
+        { id: "future:3fs", text: t === "form-pick" ? "תִּכְתֹּב" : "Будущее · она" },
+        { id: "past:3ms", text: t === "form-pick" ? "כָּתַב" : "Прошедшее · он" },
+      ],
+    },
+  });
+
+  it("выбор, набор, «Не помню»", () => {
+    expect(localCorrect(choice, { choice: "a" }, words)).toBe(true);
+    expect(localCorrect(choice, { choice: "b" }, words)).toBe(false);
+    expect(localCorrect(type, { typed: "כלב" }, words)).toBe(true);
+    expect(localCorrect(type, { typed: "כלך" }, words)).toBe(false);
+    expect(localCorrect(choice, { giveUp: true }, words)).toBe(false);
+  });
+
+  it("форма глагола: в «выбери форму» верна любая форма с тем же написанием", () => {
+    expect(localCorrect(form("form-pick"), { choice: "future:3fs" }, words)).toBe(true);
+    expect(localCorrect(form("form-pick"), { choice: "past:3ms" }, words)).toBe(false);
+    expect(localCorrect(form("form-name"), { choice: "future:2ms" }, words)).toBe(true);
+    expect(localCorrect(form("form-name"), { choice: "future:3fs" }, words)).toBe(false);
+  });
+
+  it("«Ещё раз» берёт каждое забытое слово один раз", () => {
+    expect(drillQueue([choice, type, form("form-pick")]).map((q) => q.wordId)).toEqual(["a", "v"]);
+  });
+});
+

@@ -12,3 +12,17 @@ export * from "./admin";
 export * from "./reminders";
 export * from "./review";
 export * from "./repeat";
+export {
+  PRACTICE_OPTIONS,
+  PRACTICE_QUESTIONS,
+  buildPractice,
+  formQuestion,
+  practiceVerdict,
+  practiceWords,
+  shuffle,
+  slotId,
+  slotLabel,
+  type PracticeKind,
+  type PracticeOption,
+  type PracticeQuestion,
+} from "./formsPractice";

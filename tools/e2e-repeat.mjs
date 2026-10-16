@@ -11,7 +11,8 @@ const SHOTS = process.argv[2] ?? "e2e-shots/repeat";
 mkdirSync(SHOTS, { recursive: true });
 
 const lesson = JSON.parse(readFileSync(new URL("../content/lessons/animals-1.json", import.meta.url), "utf8"));
-const byRu = new Map(lesson.words.map((w) => [w.ru, w]));
+const verbLesson = JSON.parse(readFileSync(new URL("../content/lessons/paal-1.json", import.meta.url), "utf8"));
+const byRu = new Map([...lesson.words, ...verbLesson.words].map((w) => [w.ru, w]));
 
 function findChromium() {
   const root = process.env.PLAYWRIGHT_BROWSERS_PATH ?? "/opt/pw-browsers";
@@ -37,6 +38,7 @@ function check(condition, text) {
 
 const OWNER = 1001;
 const STUDENT = 3301;
+const VERB_STUDENT = 3302;
 const dev = (id) => ({ authorization: `dev ${id}:Tester` });
 
 async function setRepeat(value) {
@@ -48,20 +50,23 @@ async function setRepeat(value) {
   if (!res.ok) throw new Error(`не удалось переключить повторение: ${res.status}`);
 }
 
-// Чистый ученик, у которого все слова первого урока выучены 1 октября: все 10 пора повторить.
+/** Чистый ученик, у которого все слова урока выучены 1 октября: все 10 пора повторить. */
+const seed = (userId, l) =>
+  sql(
+    `DELETE FROM repeat_state WHERE user_id = ${userId}; DELETE FROM word_progress WHERE user_id = ${userId};` +
+      ` DELETE FROM user_stats WHERE user_id = ${userId}; DELETE FROM user_badges WHERE user_id = ${userId};` +
+      ` INSERT OR IGNORE INTO users (id, first_name) VALUES (${userId}, 'Tester');` +
+      l.words
+        .map(
+          (w) =>
+            ` INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at)` +
+            ` VALUES (${userId}, '${w.id}', '${l.id}', 1, 1, 1, 1, '2026-10-01 08:00:00');`,
+        )
+        .join(""),
+  );
 await setRepeat("all");
-sql(
-  `DELETE FROM repeat_state WHERE user_id = ${STUDENT}; DELETE FROM word_progress WHERE user_id = ${STUDENT};` +
-    ` DELETE FROM user_stats WHERE user_id = ${STUDENT}; DELETE FROM user_badges WHERE user_id = ${STUDENT};` +
-    ` INSERT OR IGNORE INTO users (id, first_name) VALUES (${STUDENT}, 'Tester');` +
-    lesson.words
-      .map(
-        (w) =>
-          ` INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at)` +
-          ` VALUES (${STUDENT}, '${w.id}', '${lesson.id}', 1, 1, 1, 1, '2026-10-01 08:00:00');`,
-      )
-      .join(""),
-);
+seed(VERB_STUDENT, verbLesson);
+seed(STUDENT, lesson);
 
 const browser = await chromium.launch({ executablePath: findChromium(), args: ["--no-sandbox"] });
 
@@ -156,6 +161,37 @@ const stats = sqlRow(`SELECT words_done, repeats_done, goal_words FROM user_stat
 check(stats?.repeats_done === 10 - wrong, "счётчик вспомненных слов");
 check(stats?.goal_words === 10, "повторённые слова засчитаны в цель дня");
 
+// ---------- «Ещё раз»: забытые слова по кругу, без записи ----------
+await page.click('[data-testid="repeat-drill"]');
+let drillSteps = 0;
+let drillWrongDone = false;
+while (drillSteps < 40) {
+  await page.waitForSelector('[data-testid="repeat-question"], [data-testid="drill-done"]');
+  if (await page.locator('[data-testid="drill-done"]').count()) break;
+  drillSteps++;
+  const type = await page.locator('[data-testid="repeat-question"]').getAttribute("data-type");
+  if (!drillWrongDone) {
+    // Первый ответ нарочно неверный: слово должно вернуться в конец очереди.
+    if (type === "type") await page.click('[data-testid="repeat-give-up"]');
+    else await page.locator('[data-testid="repeat-option"][data-correct="false"]').first().click();
+    drillWrongDone = true;
+    await shot(page, "06b-drill");
+  } else if (type === "type") {
+    const word = byRu.get((await text(page, "repeat-prompt")).trim());
+    for (const ch of [...word.he]) await page.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
+    await page.click('[data-testid="repeat-check"]');
+  } else {
+    await page.locator('[data-testid="repeat-option"][data-correct="true"]').click();
+  }
+  await page.waitForSelector('[data-testid="repeat-feedback"]');
+  await page.click('[data-testid="repeat-next"]');
+}
+check((await page.locator('[data-testid="drill-done"]').count()) === 1, "«Ещё раз» закончился: все забытые вспомнили");
+check(drillSteps === wrong + 1, `«Ещё раз»: неверно отвеченное слово спрошено снова (${drillSteps} вопросов на ${wrong} слов)`);
+const afterDrill = sqlRow(`SELECT SUM(box = 0) AS down FROM repeat_state WHERE user_id = ${STUDENT}`);
+const statsDrill = sqlRow(`SELECT repeats_done, goal_words FROM user_stats WHERE user_id = ${STUDENT}`);
+check(afterDrill?.down === wrong && statsDrill?.repeats_done === stats?.repeats_done && statsDrill?.goal_words === stats?.goal_words, "«Ещё раз» ничего не записал");
+
 // ---------- «Мои слова» ----------
 await page.click('[data-testid="repeat-words"]');
 await page.waitForSelector('[data-testid="words-list"]');
@@ -177,6 +213,41 @@ await page.context().close();
   await dark.waitForSelector('[data-testid="words-list"]');
   await shot(dark, "08-words-dark");
   await dark.context().close();
+}
+
+// ---------- Глаголы: формы в подходе ----------
+{
+  const vp = await openPage(VERB_STUDENT);
+  await vp.waitForSelector('[data-testid="home-repeat"]');
+  await closeCelebration(vp);
+  await vp.click('[data-testid="home-repeat-start"]');
+  const verbTypes = [];
+  let formShot = false;
+  for (let i = 0; i < 10; i++) {
+    await vp.waitForSelector('[data-testid="repeat-question"]');
+    const type = await vp.locator('[data-testid="repeat-question"]').getAttribute("data-type");
+    verbTypes.push(type);
+    if (type.startsWith("form-") && !formShot) {
+      await shot(vp, `09-${type}`);
+      formShot = true;
+    }
+    if (type === "type") {
+      const word = byRu.get((await text(vp, "repeat-prompt")).trim());
+      for (const ch of [...word.he]) await vp.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
+      await vp.click('[data-testid="repeat-check"]');
+    } else {
+      await vp.locator('[data-testid="repeat-option"][data-correct="true"]').first().click();
+    }
+    await vp.waitForSelector('[data-testid="repeat-feedback"]');
+    check((await vp.locator('[data-testid="repeat-feedback"]').getAttribute("data-correct")) === "true", `глагол ${i + 1} (${type}): верный ответ принят`);
+    if (type.startsWith("form-") && formShot && verbTypes.filter((t) => t.startsWith("form-")).length === 1) await shot(vp, "10-form-feedback");
+    check(await noOverflow(vp), `глагол ${i + 1} (${type}) без горизонтальной прокрутки`);
+    await vp.click('[data-testid="repeat-next"]');
+  }
+  check(verbTypes.some((t) => t.startsWith("form-")), `глаголы спрашиваются и формами (${verbTypes.join(", ")})`);
+  const vs = sqlRow(`SELECT COUNT(*) AS n, SUM(box = 1) AS up FROM repeat_state WHERE user_id = ${VERB_STUDENT}`);
+  check(vs?.n === 10 && vs.up === 10, "все 10 глаголов во второй коробке");
+  await vp.context().close();
 }
 
 // ---------- Выключатель в панели ----------

@@ -19,14 +19,29 @@ export const REPEAT_SESSION_SIZE = 10;
  * на клавиатуре. Без микрофона и рисования (решение владельца: повторять можно где угодно, 2–3 минуты на подход).
  */
 export const REPEAT_TYPES = ["hear-ru", "he-ru", "ru-he", "type"] as const;
-export type RepeatType = (typeof REPEAT_TYPES)[number];
+
+/**
+ * Формы глаголов (решение владельца 17.10): глагол в подходе примерно в половине случаев спрашивается формой,
+ * как в «Практике форм»: «выбери форму» (дан «Прошедшее · он», выбрать форму иврита) или «что это за форма?».
+ * Ответ двигает коробку глагола. Отдельных коробок у форм нет.
+ */
+export const REPEAT_FORM_TYPES = ["form-pick", "form-name"] as const;
+export const REPEAT_FORM_SHARE = 0.5;
+
+export type RepeatType = (typeof REPEAT_TYPES)[number] | (typeof REPEAT_FORM_TYPES)[number];
+export const ALL_REPEAT_TYPES: readonly RepeatType[] = [...REPEAT_TYPES, ...REPEAT_FORM_TYPES];
 
 export const REPEAT_TYPE_TITLES: Record<RepeatType, string> = {
   "hear-ru": "Послушай и выбери перевод",
   "he-ru": "Прочитай и выбери перевод",
   "ru-he": "Выбери слово на иврите",
   type: "Напиши на иврите",
+  "form-pick": "Выбери форму глагола",
+  "form-name": "Что это за форма?",
 };
+
+export const isFormRepeatType = (type: RepeatType): type is (typeof REPEAT_FORM_TYPES)[number] =>
+  type === "form-pick" || type === "form-name";
 
 /** Названия коробок для «Моих слов»: насколько крепко слово помнится. */
 export const REPEAT_BOX_TITLES = ["Новое", "Свежее", "Знакомое", "Уверенное", "Крепкое", "Прочное"] as const;
@@ -142,11 +157,27 @@ export interface RepeatWord {
   audio?: string;
 }
 
+/** Вопрос о форме глагола: какая форма спрашивается и варианты (`<время>:<ключ>`, как в «Практике форм»). */
+export interface RepeatFormQuestion {
+  /** Спрашиваемая форма, `past:3ms`. */
+  id: string;
+  /** «Прошедшее · он». */
+  slot: string;
+  /** Форма с огласовками, транскрипция и озвучка: для «что это за форма?» и разбора ответа. */
+  niqqud: string;
+  translit: string;
+  audio?: string;
+  /** У «выбери форму» текст варианта это форма иврита, у «что это за форма?» подпись «Прошедшее · он». */
+  options: { id: string; text: string }[];
+}
+
 export interface RepeatQuestion {
   wordId: string;
   type: RepeatType;
-  /** Варианты ответа (id слов) у упражнений с выбором; у «Напиши на иврите» пусто. */
+  /** Варианты ответа (id слов) у упражнений с выбором; у «Напиши на иврите» и форм глагола пусто. */
   options: string[];
+  /** Только у вопросов о форме глагола. */
+  form?: RepeatFormQuestion;
 }
 
 /** GET /api/repeat/session. */
@@ -161,6 +192,8 @@ export interface RepeatSessionResponse {
 export interface RepeatAnswerRequest {
   wordId: string;
   type: RepeatType;
+  /** У вопросов о форме: какая форма спрашивалась (`past:3ms`); `choice` тогда тоже форма. */
+  form?: string;
   choice?: string;
   typed?: string;
   /** «Не помню». */

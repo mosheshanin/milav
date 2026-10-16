@@ -8,8 +8,12 @@ import { Hono } from "hono";
 import { lessons } from "@milav/content";
 import {
   PAID_LESSONS_OPEN,
-  REPEAT_TYPES,
+  ALL_REPEAT_TYPES,
+  REPEAT_FORM_SHARE,
   applyRepeatAnswer,
+  formQuestion,
+  isFormRepeatType,
+  verbForms,
   chooseRepeatWords,
   initialRepeatState,
   isRepeatDue,
@@ -157,6 +161,25 @@ export function buildRepeatSession(items: readonly LearnedItem[], today: number,
   const questions: RepeatQuestion[] = chosen.map((item, i) => {
     const type = types[i]!;
     words[item.wordId] = toRepeatWord(item.lesson, item.word);
+    // Глагол примерно в половине случаев спрашивается формой (решение владельца 17.10).
+    if (item.word.verb && rng() < REPEAT_FORM_SHARE) {
+      const q = formQuestion(item.word, rng);
+      if (q) {
+        return {
+          wordId: item.wordId,
+          type: q.kind === "pick" ? "form-pick" : "form-name",
+          options: [],
+          form: {
+            id: q.correctId,
+            slot: q.slot,
+            niqqud: q.form.niqqud,
+            translit: q.form.translit,
+            ...(q.form.audio ? { audio: q.form.audio } : {}),
+            options: q.options,
+          },
+        };
+      }
+    }
     if (type === "type") return { wordId: item.wordId, type, options: [] };
     const distractors = shuffle(
       item.lesson.words.filter((w) => w.id !== item.wordId && w.ru !== item.word.ru && w.he !== item.word.he),
@@ -196,8 +219,8 @@ repeatRoutes.get("/api/repeat/session", async (c) => {
 // Ответ на одно слово: { wordId, type, choice | typed | giveUp }.
 repeatRoutes.post("/api/repeat/answer", rateLimit("repeat"), async (c) => {
   const user = c.get("user");
-  const body = await readJson<{ wordId?: unknown; type?: unknown; choice?: unknown; typed?: unknown; giveUp?: unknown }>(c.req.raw);
-  if (!body || typeof body.wordId !== "string" || !REPEAT_TYPES.includes(body.type as RepeatType)) {
+  const body = await readJson<{ wordId?: unknown; type?: unknown; form?: unknown; choice?: unknown; typed?: unknown; giveUp?: unknown }>(c.req.raw);
+  if (!body || typeof body.wordId !== "string" || !ALL_REPEAT_TYPES.includes(body.type as RepeatType)) {
     return c.json({ error: "bad_request" }, 400);
   }
   const type = body.type as RepeatType;
@@ -206,7 +229,20 @@ repeatRoutes.post("/api/repeat/answer", rateLimit("repeat"), async (c) => {
   if (!repeatable(body.wordId)) return c.json({ error: "subscription_required" }, 403);
 
   let correct: boolean;
-  if (body.giveUp === true) correct = false;
+  if (isFormRepeatType(type)) {
+    // Форма глагола: спрашиваемая форма и выбранная должны быть формами этого глагола. Верно, если выбранная пишется
+    // так же (с огласовками): у одинаково написанных форм (будущее «ты (м.)» и «она») оба ответа верны.
+    const forms = found.word.verb ? verbForms(found.word.verb) : [];
+    const formOf = (id: unknown) => (typeof id === "string" ? forms.find((f) => `${f.tense}:${f.key}` === id) : undefined);
+    const asked = formOf(body.form);
+    if (!asked) return c.json({ error: "bad_form" }, 400);
+    if (body.giveUp === true) correct = false;
+    else {
+      const chosen = formOf(body.choice);
+      if (!chosen) return c.json({ error: "bad_choice" }, 400);
+      correct = chosen.form.niqqud === asked.form.niqqud;
+    }
+  } else if (body.giveUp === true) correct = false;
   else if (type === "type") {
     const proof = verifyTyped(found.word, body.typed);
     if (!proof.ok && proof.status === 400) return c.json({ error: "proof_required" }, 400);
