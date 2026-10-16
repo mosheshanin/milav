@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { LETTER_STAGES, STAGES, type LessonMeta, type WordProgress } from "@milav/shared";
+import { LETTER_STAGES, PAID_LESSONS_OPEN, STAGES, type LessonMeta, type WordProgress } from "@milav/shared";
 import { findResume, orderLessons, type LessonState } from "./resume";
 
 function lesson(id: string, over: Partial<LessonMeta> = {}): LessonMeta {
@@ -83,10 +83,14 @@ describe("«Продолжить»", () => {
     expect(findResume(lessons, progress)).toEqual({ kind: "quiz", lessonId: "a1" });
   });
 
-  it("если сдано всё, предлагать нечего; платные и не загруженные уроки не предлагаются", () => {
+  it("если сдано всё, предлагать нечего; не загруженные уроки не предлагаются", () => {
     expect(findResume(lessons, { a1: state(10, {}, true), a2: state(10, {}, true), a3: state(10, {}, true) })).toBeNull();
-    expect(findResume([lesson("paid", { free: false })], { paid: state(0) })).toBeNull();
     expect(findResume(lessons, {})).toBeNull();
+  });
+
+  it("платный урок предлагается, пока платные открыты всем до Stars (PAID_LESSONS_OPEN)", () => {
+    expect(PAID_LESSONS_OPEN).toBe(true);
+    expect(findResume([lesson("paid", { free: false })], { paid: state(0) })).not.toBeNull();
   });
 });
 

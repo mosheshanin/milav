@@ -1,13 +1,14 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { allLessons } from "@milav/content";
 import { manifest } from "@milav/content/manifest";
+import { PAID_LESSONS_OPEN } from "@milav/shared";
 import { alphabetLesson, api, lesson, resetHarness, word } from "./test-utils/harness";
 
 beforeEach(resetHarness);
 
 const get = (id: string, as?: number) => api(`/api/lessons/${id}`, as ? { as } : {});
 
-/** Делает урок платным на время теста (платных уроков в контенте пока нет). */
+/** Делает урок платным на время теста. */
 async function asPaid<T>(id: string, run: () => Promise<T>): Promise<T> {
   const target = allLessons.find((l) => l.id === id)!;
   target.free = false;
@@ -48,15 +49,11 @@ describe("GET /api/lessons/:id (слова урока)", () => {
     expect(await res.json()).toEqual({ error: "lesson_not_found" });
   });
 
-  it("платный урок без доступа: 403 и ни одного слова в ответе", async () => {
+  it("платный урок, пока платные открыты всем до Stars (PAID_LESSONS_OPEN), отдаётся вместе с прогрессом", async () => {
+    expect(PAID_LESSONS_OPEN).toBe(true);
     await asPaid(lesson.id, async () => {
-      const res = await get(lesson.id, 1);
-      expect(res.status).toBe(403);
-      const text = await res.text();
-      expect(JSON.parse(text)).toEqual({ error: "subscription_required" });
-      expect(text.includes(word.he)).toBe(false);
-      // Прогресс платного урока тоже закрыт.
-      expect((await api(`/api/lessons/${lesson.id}/progress`, { as: 1 })).status).toBe(403);
+      expect((await get(lesson.id, 1)).status).toBe(200);
+      expect((await api(`/api/lessons/${lesson.id}/progress`, { as: 1 })).status).toBe(200);
     });
   });
 

@@ -1,4 +1,4 @@
-import { ALPHABET_SECTION, type LessonMeta, type Stage, type WordProgress } from "@milav/shared";
+import { ALPHABET_SECTION, PAID_LESSONS_OPEN, lessonOpenWithoutPurchase, type LessonMeta, type Stage, type WordProgress } from "@milav/shared";
 
 /** Порядок разделов на главной: алфавит первым, это стартовая точка новичка. */
 export const SECTION_ORDER = [ALPHABET_SECTION, "nouns", "verbs", "adjectives"] as const;
@@ -47,12 +47,12 @@ function isStarted(state: LessonState): boolean {
  * Место, с которого продолжить. Выводится из прогресса, который и так загружен на главной, поэтому в базе
  * ничего отдельно не хранится: берём первый начатый и не сданный урок (если такого нет, первый не сданный)
  * и в нём первое непройденное слово и этап. Когда все слова пройдены, а викторина не сдана, ведём к ней.
- * Платные уроки пока не предлагаем: прогресс по ним не загружается.
+ * Платные уроки предлагаем, только пока они открыты всем (PAID_LESSONS_OPEN): иначе прогресс по ним не загружается.
  */
 export function findResume(lessons: readonly ResumeLesson[], progress: Record<string, LessonState | undefined>): Resume | null {
   const open = orderLessons(lessons).filter((l) => {
     const state = progress[l.id];
-    return l.free && state && !state.quiz.passed;
+    return lessonOpenWithoutPurchase(l, PAID_LESSONS_OPEN) && state && !state.quiz.passed;
   });
   const lesson = open.find((l) => isStarted(progress[l.id]!)) ?? open[0];
   if (!lesson) return null;

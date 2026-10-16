@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { allLessons } from "@milav/content";
+import { lessonOpenWithoutPurchase } from "@milav/shared";
 import {
   alphabetLesson,
   api,
@@ -28,9 +29,10 @@ describe("/api/home", () => {
 
   it("новичку отдаёт все доступные уроки с пустым прогрессом", async () => {
     const body = await home(1);
-    const free = allLessons.filter((l) => l.free).map((l) => l.id);
-    expect(Object.keys(body.lessons).sort()).toEqual([...free].sort());
-    for (const id of free) {
+    // Пока платные уроки открыты всем до Stars (PAID_LESSONS_OPEN), доступны все уроки.
+    const open = allLessons.filter((l) => lessonOpenWithoutPurchase(l)).map((l) => l.id);
+    expect(Object.keys(body.lessons).sort()).toEqual([...open].sort());
+    for (const id of open) {
       expect(body.lessons[id].quiz).toEqual({ passed: false, bestCorrect: null });
       expect(body.lessons[id].words.every((w: any) => !w.listen && !w.completed)).toBe(true);
     }

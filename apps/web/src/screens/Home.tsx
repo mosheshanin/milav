@@ -4,7 +4,9 @@ import {
   ALPHABET_GROUPS,
   ALPHABET_TITLE,
   SECTION_TITLES,
+  PAID_LESSONS_OPEN,
   STAGE_TITLES,
+  lessonOpenWithoutPurchase,
   type LessonMeta,
   type Section,
 } from "@milav/shared";
@@ -395,7 +397,8 @@ function LessonRow({
               Сдан
             </Chip>
           )}
-          {!lesson.free && (
+          {/* Замок только у закрытых уроков: пока платные открыты всем до Stars, плашки нет. */}
+          {!lessonOpenWithoutPurchase(lesson, PAID_LESSONS_OPEN) && (
             <Chip tone="accent">
               <Lock className="size-4" aria-hidden />
               Подписка

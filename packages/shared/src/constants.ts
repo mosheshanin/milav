@@ -6,6 +6,17 @@ export const WORDS_PER_LESSON = 10;
 /** Сколько первых уроков каждой темы бесплатны, остальные платные (решение владельца). */
 export const FREE_LESSONS_PER_TOPIC = 3;
 
+/**
+ * Платные уроки временно открыты всем, пока нет оплаты Stars (решение владельца 16.10.2026, задача 7).
+ * В уроках `free` остаётся по правилу (false с 4-го урока), меняется только доступ. В задаче Stars вернуть false.
+ */
+export const PAID_LESSONS_OPEN = true;
+
+/** Открыт ли урок без покупки: бесплатный или платные временно открыты (PAID_LESSONS_OPEN). */
+export function lessonOpenWithoutPurchase(lesson: { free: boolean }, paidOpen: boolean = PAID_LESSONS_OPEN): boolean {
+  return lesson.free || paidOpen;
+}
+
 /** Очки за слово, пройденное по всем четырём этапам. */
 export const POINTS_PER_WORD = 1;
 

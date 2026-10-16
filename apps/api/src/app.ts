@@ -4,12 +4,14 @@ import {
   CLIENT_LOG_LIMITS,
   CLIENT_LOG_PATH,
   MAX_STAGE_BODY_BYTES,
+  PAID_LESSONS_OPEN,
   POINTS_PER_WORD,
   STAGES,
   TEMPLATE_VARIANTS_PER_LETTER,
   isAlphabetLesson,
   isSpeechMatch,
   lessonItems,
+  lessonOpenWithoutPurchase,
   stagesFor,
   type AnyLesson,
   type HomeResponse,
@@ -75,9 +77,12 @@ function inBackground(c: { executionCtx: { waitUntil(promise: Promise<unknown>):
   }
 }
 
-/** Доступен ли урок пользователю. Пока платных уроков нет, доступны только бесплатные (алфавит бесплатный всегда). */
+/**
+ * Доступен ли урок пользователю. Покупок пока нет (Stars, задача 8): бесплатные уроки открыты всегда (алфавит тоже),
+ * платные открыты, пока включён PAID_LESSONS_OPEN (решение владельца 16.10).
+ */
 function canAccessLesson(lesson: AnyLesson): boolean {
-  return lesson.free;
+  return lessonOpenWithoutPurchase(lesson, PAID_LESSONS_OPEN);
 }
 
 /**
