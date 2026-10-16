@@ -1,9 +1,21 @@
 import { describe, expect, it } from "vitest";
-import type { AlphabetLesson, Lesson, WordProgress } from "@milav/shared";
+import { LETTER_STAGES, STAGES, type LessonMeta, type WordProgress } from "@milav/shared";
 import { findResume, orderLessons, type LessonState } from "./resume";
 
-function lesson(id: string, over: Partial<Lesson> = {}): Lesson {
-  return { id, topicId: "animals", section: "nouns", topic: "Животные", number: 1, free: true, title: id, words: [], ...over };
+function lesson(id: string, over: Partial<LessonMeta> = {}): LessonMeta {
+  return {
+    id,
+    topicId: "animals",
+    section: "nouns",
+    topic: "Животные",
+    number: 1,
+    free: true,
+    title: id,
+    count: 10,
+    stages: [...STAGES],
+    v: "test",
+    ...over,
+  };
 }
 
 function word(id: string, done: Partial<WordProgress> = {}): WordProgress {
@@ -79,7 +91,7 @@ describe("«Продолжить»", () => {
 });
 
 describe("алфавит", () => {
-  const alphabet = (number: number): AlphabetLesson => ({
+  const alphabet = (number: number): LessonMeta => ({
     id: `alphabet-${number}`,
     topicId: "alphabet",
     section: "alphabet",
@@ -87,7 +99,10 @@ describe("алфавит", () => {
     number,
     free: true,
     title: `Алфавит ${number}`,
+    count: 5,
+    stages: [...LETTER_STAGES],
     letters: [],
+    v: "test",
   });
 
   /** Урок из 5 букв: первые `passedLetters` пройдены (без «говори»), у следующей отмечены этапы `current`. */

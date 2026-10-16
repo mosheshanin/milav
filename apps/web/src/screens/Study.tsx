@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Lock, PartyPopper } from "lucide-react";
-import { getAnyLesson } from "@milav/content";
 import {
-  STAGES,
   isAlphabetLesson,
   isLetter,
   lessonItems,
   stagesFor,
+  type AnyLesson,
   type Letter,
   type PlayEvent,
   type Stage,
@@ -17,6 +16,7 @@ import {
 import { ApiError, api, type SpeechResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { LessonGate } from "../components/LessonGate";
 import { PlayToast, eventHasNews } from "../components/play";
 import { ReminderOffer } from "../components/ReminderOffer";
 import { LetterCard } from "../components/LetterCard";
@@ -38,23 +38,27 @@ function firstOpenStage(stages: readonly Stage[], p: WordProgress, skippedSpeak:
   return stages.find((s) => !p[s] && !(s === "speak" && skippedSpeak)) ?? "end";
 }
 
-/** Изучение урока: карточка и четыре этапа слова или три этапа буквы (алфавит, без «говори»). */
-export function Study({
-  lessonId,
-  onBack,
-  onQuiz,
-  onPractice,
-}: {
-  lessonId: string;
+interface StudyProps {
   onBack: () => void;
   onQuiz: () => void;
   /** Открыть практику форм (только в уроках с глаголами). */
   onPractice: () => void;
-}) {
-  const lesson = getAnyLesson(lessonId);
-  const items = lesson ? lessonItems(lesson) : [];
-  const stages = lesson ? stagesFor(lesson) : STAGES;
-  const alphabet = lesson ? isAlphabetLesson(lesson) : false;
+}
+
+/** Изучение урока: слова урока приходят с сервера (LessonGate), затем карточка и этапы. */
+export function Study({ lessonId, ...props }: StudyProps & { lessonId: string }) {
+  return (
+    <LessonGate lessonId={lessonId} onBack={props.onBack}>
+      {(lesson) => <StudyLesson lesson={lesson} {...props} />}
+    </LessonGate>
+  );
+}
+
+/** Карточка и четыре этапа слова или три этапа буквы (алфавит, без «говори»). */
+function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { lesson: AnyLesson }) {
+  const items = lessonItems(lesson);
+  const stages = stagesFor(lesson);
+  const alphabet = isAlphabetLesson(lesson);
   const { me, setPoints, invalidate } = useApp();
   // Кнопка «назад» Telegram (и системная, и свайп) возвращает к списку уроков.
   useBackButton(onBack);
@@ -73,7 +77,6 @@ export function Study({
   const [offer, setOffer] = useState<"none" | "pending" | "done">("none");
 
   useEffect(() => {
-    if (!lesson) return;
     api.lessonProgress(lesson.id).then(
       (res) => {
         setProgress(res.words);
@@ -162,7 +165,6 @@ export function Study({
 
   const doneCount = useMemo(() => progress?.filter((p) => p.completed).length ?? 0, [progress]);
 
-  if (!lesson) return <Notice title="Урок не найден" />;
   if (loadError) {
     return (
       <>

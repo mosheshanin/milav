@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { catalog } from "@milav/content";
 import {
   RARITY_TITLES,
   countByRarity,
@@ -12,6 +11,7 @@ import { useApp } from "../AppContext";
 import { BadgeDetails, BadgeTile, GoalRing, StatusPathBar, WeekCard } from "../components/play";
 import { Header } from "../components/Header";
 import { Button, Card, Chip } from "../components/ui";
+import { catalog } from "../lib/lessons";
 import { cohortText, groupBadges, type BadgeView } from "../lib/play";
 import { useBackButton } from "../lib/useBackButton";
 

@@ -1,24 +1,22 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CheckCircle2, ChevronDown, ChevronRight, Lock } from "lucide-react";
-import { alphabetLessons, allLessons, lessons } from "@milav/content";
 import {
   ALPHABET_GROUPS,
   ALPHABET_TITLE,
   SECTION_TITLES,
   STAGE_TITLES,
-  isAlphabetLesson,
-  lessonItems,
-  type AnyLesson,
-  type Lesson,
+  type LessonMeta,
   type Section,
 } from "@milav/shared";
 import { api, type LessonProgressResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { prefetchLesson } from "../components/LessonGate";
 import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../components/play";
 import { Button, Card, Chip } from "../components/ui";
 import { lessonEmoji, topicEmoji } from "../lib/homeEmoji";
 import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
+import { alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { findResume } from "../lib/resume";
 
@@ -91,9 +89,15 @@ export function Home({
   }, []);
 
   // Кнопка «Продолжить» появляется, когда прогресс загружен: иначе она бы «прыгала».
-  const resume = settled ? findResume(allLessons, progress) : null;
-  const resumeLesson = resume ? allLessons.find((l) => l.id === resume.lessonId) : undefined;
-  const resumeLetters = resumeLesson ? isAlphabetLesson(resumeLesson) : false;
+  const resume = settled ? findResume(lessonMetas, progress) : null;
+  const resumeLesson = resume ? lessonMetas.find((l) => l.id === resume.lessonId) : undefined;
+  const resumeLetters = resumeLesson?.section === "alphabet";
+
+  // Урок, который предлагает «Продолжить», подгружается заранее: по нажатию он откроется без ожидания.
+  const resumeId = resume?.lessonId;
+  useEffect(() => {
+    if (resumeId) prefetchLesson(resumeId);
+  }, [resumeId]);
   const alphabetOpen = open.has(sectionKey("alphabet"));
 
   return (
@@ -171,7 +175,7 @@ export function Home({
               </div>
               {resume.kind === "word" && (
                 <div className="text-ink-soft" data-testid="continue-place">
-                  {resumeLetters ? "Буква" : "Слово"} {resume.wordIndex + 1} из {lessonItems(resumeLesson).length}, этап «
+                  {resumeLetters ? "Буква" : "Слово"} {resume.wordIndex + 1} из {resumeLesson.count}, этап «
                   {STAGE_TITLES[resume.stage]}»
                 </div>
               )}
@@ -191,7 +195,7 @@ export function Home({
               <FoldButton
                 open={alphabetOpen}
                 onToggle={() => toggle(sectionKey("alphabet"))}
-                lessons={alphabetLessons}
+                lessons={alphabetMetas}
                 progress={progress}
                 testId="fold-section-alphabet"
                 className="px-block py-3"
@@ -204,17 +208,17 @@ export function Home({
             </h2>
             {alphabetOpen && (
               <div className="flex flex-col gap-2 px-3 pb-3">
-                {alphabetLessons.map((lesson) => (
+                {alphabetMetas.map((lesson) => (
                   <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
                 ))}
-                {alphabetLessons.length < ALPHABET_GROUPS.length && (
+                {alphabetMetas.length < ALPHABET_GROUPS.length && (
                   <p className="text-ink-soft">Остальные уроки алфавита скоро появятся.</p>
                 )}
               </div>
             )}
           </section>
           {SECTIONS.map((section) => {
-            const inSection = lessons.filter((l) => l.section === section);
+            const inSection = wordMetas.filter((l) => l.section === section);
             const sectionOpen = open.has(sectionKey(section));
             return (
               <section key={section} className={FOLD_CARD} data-testid={`section-${section}`}>
@@ -283,8 +287,8 @@ export function Home({
   );
 }
 
-function topicsOf(items: Lesson[]): { topicId: string; topic: string; items: Lesson[] }[] {
-  const map = new Map<string, { topicId: string; topic: string; items: Lesson[] }>();
+function topicsOf(items: readonly LessonMeta[]): { topicId: string; topic: string; items: LessonMeta[] }[] {
+  const map = new Map<string, { topicId: string; topic: string; items: LessonMeta[] }>();
   for (const lesson of items) {
     const entry = map.get(lesson.topicId) ?? { topicId: lesson.topicId, topic: lesson.topic, items: [] };
     entry.items.push(lesson);
@@ -317,7 +321,7 @@ function FoldButton({
 }: {
   open: boolean;
   onToggle: () => void;
-  lessons: AnyLesson[];
+  lessons: readonly LessonMeta[];
   progress: Progress;
   testId: string;
   className?: string;
@@ -350,12 +354,12 @@ function LessonRow({
   progress,
   onOpen,
 }: {
-  lesson: AnyLesson;
+  lesson: LessonMeta;
   progress?: LessonProgressResponse;
   onOpen: (id: string) => void;
 }) {
-  const items = lessonItems(lesson);
-  const letters = isAlphabetLesson(lesson);
+  const total = lesson.count;
+  const letters = lesson.section === "alphabet";
   const done = progress?.words.filter((w) => w.completed).length ?? 0;
   const passed = progress?.quiz.passed ?? false;
   return (
@@ -375,16 +379,16 @@ function LessonRow({
         <div className="font-semibold">
           Урок {lesson.number}. {lesson.title}
         </div>
-        {isAlphabetLesson(lesson) && (
+        {lesson.letters && (
           <div dir="rtl" lang="he" className="font-hebrew text-xl text-ink-soft">
-            {lesson.letters.map((l) => l.he).join(" ")}
+            {lesson.letters.join(" ")}
           </div>
         )}
         <div className="mt-1 flex flex-wrap items-center gap-2">
-          <Chip tone={done === items.length ? "success" : "neutral"}>
-            {letters ? "Букв" : "Слов"}: {done} из {items.length}
+          <Chip tone={done === total ? "success" : "neutral"}>
+            {letters ? "Букв" : "Слов"}: {done} из {total}
           </Chip>
-          {!passed && done === items.length && <Chip tone="accent">Викторина открыта</Chip>}
+          {!passed && done === total && <Chip tone="accent">Викторина открыта</Chip>}
           {passed && (
             <Chip tone="success">
               <CheckCircle2 className="size-4" aria-hidden />

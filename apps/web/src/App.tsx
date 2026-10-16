@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
-import { getAnyLesson } from "@milav/content";
 import { AppProvider, useApp } from "./AppContext";
 import { Button, Notice } from "./components/ui";
+import { getLessonMeta } from "./lib/lessons";
 import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, browserStorage, hasSavedScreen, restoreScreen, saveScreen, type Screen } from "./lib/screen";
 import { Achievements } from "./screens/Achievements";
 import { Home } from "./screens/Home";
@@ -39,7 +39,7 @@ function AdminOnly({ children, onBack }: { children: ReactNode; onBack: () => vo
 function initialScreen(): Screen {
   const storage = browserStorage();
   if (!hasSavedScreen(storage) && launchTarget() === "record") return RECORD;
-  return restoreScreen(storage, (id) => !!getAnyLesson(id));
+  return restoreScreen(storage, (id) => !!getLessonMeta(id));
 }
 
 export function App() {

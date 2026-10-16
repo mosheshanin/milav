@@ -14,6 +14,7 @@ import type {
   CohortResponse,
   HomeResponse,
   LeaderboardResponse,
+  LessonContentResponse,
   LessonProgressResponse,
   MeResponse,
   PlayEvent,
@@ -103,6 +104,8 @@ export const api = {
   cohort: () => request<CohortResponse>("/api/cohort"),
   /** Главная: прогресс всех доступных уроков одним запросом. */
   home: () => request<HomeResponse>("/api/home"),
+  /** Слова (или буквы) урока: в файлах приложения их нет, сервер отдаёт урок только тем, у кого есть доступ. */
+  lesson: (lessonId: string) => request<LessonContentResponse>(`/api/lessons/${encodeURIComponent(lessonId)}`),
   lessonProgress: (lessonId: string) => request<LessonProgressResponse>(`/api/lessons/${lessonId}/progress`),
   /** Отметка этапа «слушай», «печатай» или «пиши»: для двух последних сервер проверяет доказательство (набранное слово, штрихи). */
   stage: (wordId: string, proof: StageProof) =>

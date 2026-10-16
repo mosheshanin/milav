@@ -1,4 +1,4 @@
-import { ALPHABET_SECTION, stagesFor, type AnyLesson, type Stage, type WordProgress } from "@milav/shared";
+import { ALPHABET_SECTION, type LessonMeta, type Stage, type WordProgress } from "@milav/shared";
 
 /** Порядок разделов на главной: алфавит первым, это стартовая точка новичка. */
 export const SECTION_ORDER = [ALPHABET_SECTION, "nouns", "verbs", "adjectives"] as const;
@@ -23,11 +23,14 @@ export type Resume =
     }
   | { kind: "quiz"; lessonId: string };
 
+/** Урок в манифесте: для выбора места продолжения слова не нужны, хватает числа слов и этапов. */
+type ResumeLesson = Pick<LessonMeta, "id" | "section" | "topic" | "number" | "free" | "stages">;
+
 /** Уроки в том порядке, в каком они показаны на главной: раздел (алфавит первый), тема (по первому появлению), номер урока. */
-export function orderLessons(lessons: AnyLesson[]): AnyLesson[] {
-  const result: AnyLesson[] = [];
+export function orderLessons<T extends ResumeLesson>(lessons: readonly T[]): T[] {
+  const result: T[] = [];
   for (const section of SECTION_ORDER) {
-    const topics = new Map<string, AnyLesson[]>();
+    const topics = new Map<string, T[]>();
     for (const lesson of lessons.filter((l) => l.section === section)) {
       topics.set(lesson.topic, [...(topics.get(lesson.topic) ?? []), lesson]);
     }
@@ -46,7 +49,7 @@ function isStarted(state: LessonState): boolean {
  * и в нём первое непройденное слово и этап. Когда все слова пройдены, а викторина не сдана, ведём к ней.
  * Платные уроки пока не предлагаем: прогресс по ним не загружается.
  */
-export function findResume(lessons: AnyLesson[], progress: Record<string, LessonState | undefined>): Resume | null {
+export function findResume(lessons: readonly ResumeLesson[], progress: Record<string, LessonState | undefined>): Resume | null {
   const open = orderLessons(lessons).filter((l) => {
     const state = progress[l.id];
     return l.free && state && !state.quiz.passed;
@@ -64,7 +67,7 @@ export function findResume(lessons: AnyLesson[], progress: Record<string, Lesson
     lessonId: lesson.id,
     wordIndex,
     // Этапы урока свои: у буквы нет «говори», иначе после «слушай» её отправило бы на несуществующий этап.
-    stage: stagesFor(lesson).find((s) => !word[s]) ?? "listen",
+    stage: lesson.stages.find((s) => !word[s]) ?? "listen",
     started: isStarted(state),
   };
 }

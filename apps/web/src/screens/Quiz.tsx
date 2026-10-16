@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
-import { getAnyLesson } from "@milav/content";
 import {
   QUESTION_TITLES,
   isAlphabetLesson,
@@ -21,6 +20,7 @@ import {
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
+import { LessonGate } from "../components/LessonGate";
 import { CelebrationSheet } from "../components/play";
 import { HebrewKeyboard } from "../components/HebrewKeyboard";
 import { ListenButton } from "../components/ListenButton";
@@ -37,10 +37,14 @@ import { confirmAction, setClosingConfirmation } from "../telegram";
  * Вопросы выдаёт сервер, каждый ответ проверяется на сервере, итог считает и записывает сервер (apps/api/src/quizSession.ts).
  */
 export function Quiz({ lessonId, onBack, onHome }: { lessonId: string; onBack: () => void; onHome: () => void }) {
-  const lesson = getAnyLesson(lessonId);
   const [round, setRound] = useState(0);
-  if (!lesson) return <Notice title="Урок не найден" />;
-  return <QuizRound key={round} lesson={lesson} onBack={onBack} onHome={onHome} onRestart={() => setRound(round + 1)} />;
+  return (
+    <LessonGate lessonId={lessonId} title="Викторина" onBack={onBack}>
+      {(lesson) => (
+        <QuizRound key={round} lesson={lesson} onBack={onBack} onHome={onHome} onRestart={() => setRound(round + 1)} />
+      )}
+    </LessonGate>
+  );
 }
 
 type Load = { state: "loading" } | { state: "error"; message: string } | { state: "ready"; session: QuizStartResponse };

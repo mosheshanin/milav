@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
-import { getAnyLesson } from "@milav/content";
-import { lessonItems, type Word } from "@milav/shared";
+import { lessonItems, type AnyLesson, type Word } from "@milav/shared";
 import { Header } from "../components/Header";
+import { LessonGate } from "../components/LessonGate";
 import { SpeakerButton } from "../components/SpeakerButton";
 import { Button, Card, Chip, Notice } from "../components/ui";
 import { PRACTICE_QUESTIONS, buildPractice, practiceVerdict, practiceWords, type PracticeQuestion } from "../lib/formsPractice";
@@ -13,11 +13,17 @@ import { useBackButton } from "../lib/useBackButton";
  * это свободная тренировка, ошибки ничем не грозят (решение владельца 14.10, `docs/SPEC.md`).
  */
 export function FormsPractice({ lessonId, onBack }: { lessonId: string; onBack: () => void }) {
-  const lesson = getAnyLesson(lessonId);
-  const words = useMemo(() => (lesson ? practiceWords(lessonItems(lesson)) : []), [lesson]);
+  return (
+    <LessonGate lessonId={lessonId} title="Практика форм" onBack={onBack}>
+      {(lesson) => <LessonPractice lesson={lesson} onBack={onBack} />}
+    </LessonGate>
+  );
+}
+
+function LessonPractice({ lesson, onBack }: { lesson: AnyLesson; onBack: () => void }) {
+  const words = useMemo(() => practiceWords(lessonItems(lesson)), [lesson]);
   useBackButton(onBack);
 
-  if (!lesson) return <Notice title="Урок не найден" />;
   if (!words.length) {
     return (
       <>

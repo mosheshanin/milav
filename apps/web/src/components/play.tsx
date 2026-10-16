@@ -2,7 +2,6 @@
 // Анимации только прозрачность и сдвиг (классы animate-* в index.css), inline-стилей нет: CSP их запрещает.
 import { useEffect } from "react";
 import { Flame, Share2, Target, X } from "lucide-react";
-import { catalog } from "@milav/content";
 import {
   RARITY_TITLES,
   shareText as badgeShareText,
@@ -14,6 +13,7 @@ import {
 import { api } from "../api";
 import { BADGE_ICON_COMPONENTS } from "../lib/badgeIcons";
 import { haptic } from "../lib/haptic";
+import { catalog } from "../lib/lessons";
 import { RARITY_CLASSES, formatEarnedDate, statusPathText, weekdayLabels, type BadgeView } from "../lib/play";
 import { shareText } from "../lib/share";
 import { Button, Card } from "./ui";
