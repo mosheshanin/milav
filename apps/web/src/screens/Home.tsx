@@ -123,7 +123,8 @@ export function Home({
             <div className="flex-1">
               <div className="font-semibold">Итоги прошлой недели</div>
               <div className="text-sm text-ink-soft">
-                Выучено {me.play.recap.words} {plural(me.play.recap.words, "слово", "слова", "слов")}, дней занятий:{" "}
+                {/* С задачи 10 в счёт недели идут и повторённые слова. */}
+                Выучено и повторено {me.play.recap.words} {plural(me.play.recap.words, "слово", "слова", "слов")}, дней занятий:{" "}
                 {me.play.recap.days}.
               </div>
             </div>
