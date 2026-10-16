@@ -11,7 +11,7 @@
   "scripts": {
     "dev:web": "npm run dev -w apps/web",
     "dev:api": "wrangler dev --env local",
-    "build": "npm run build -w apps/web",
+    "build": "npm run build -w apps/web && node tools/check-bundle.mjs",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "vitest run",
     "check": "npm run typecheck && npm test && npm run build",

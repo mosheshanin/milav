@@ -36,3 +36,19 @@ describe("проверки контента входят в check и CI", () => 
     for (const name of ["content:index", "content:new", "content:report"]) expect(scripts[name], name).toBeTruthy();
   });
 });
+
+describe("манифест приложения: защита и пересборка", () => {
+  it("сборка проверяет, что в файлах приложения нет слов уроков, и check включает сборку", () => {
+    expect(scripts.build).toContain("node tools/check-bundle.mjs");
+    expect(scripts.check).toContain("npm run build");
+    expect(root("tools/check-bundle.mjs")).toContain("apps/web/dist");
+  });
+
+  it("озвучка и ящик картинок пересобирают манифест после правки уроков и коммитят его", () => {
+    const audio = root(".github/workflows/generate-audio.yml");
+    expect(audio).toContain("npm run content:index");
+    expect(audio).toMatch(/git add [^\n]*content\/manifest\.json/);
+    expect(root("tools/images-inbox.ts")).toContain("writeContentIndex()");
+    expect(root(".github/workflows/images-inbox.yml")).toMatch(/git add [^\n]*content\/manifest\.json/);
+  });
+});
