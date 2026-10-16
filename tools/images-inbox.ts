@@ -7,6 +7,7 @@
 // Код возврата 1, если часть файлов отклонена; принятые при этом всё равно обработаны.
 import { existsSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
+import { writeContentIndex } from "../content/writeIndex";
 import {
   IMAGE_MAX_SIDE,
   INBOX_MAX_KB,
@@ -101,6 +102,8 @@ for (const { file, ext, target } of plan.accepted) {
 
 if (!dry) {
   for (const { file, data } of raw) writeFileSync(new URL(file, lessonsDir), JSON.stringify(data, null, 2) + "\n");
+  // У изменённых уроков новая версия: манифест приложения пересобирается, иначе тест манифеста остановит выкладку.
+  writeContentIndex();
 }
 
 console.log(`Готово: обработано ${done}, отклонено ${problems.length}.`);

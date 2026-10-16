@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A apps/web/public/words content/lessons content/inbox
+          git add -A apps/web/public/words content/lessons content/inbox content/manifest.json
           git diff --cached --quiet && echo "Нечего сохранять" && exit 0
           git commit -m "Картинки слов из ящика"
           git pull --rebase origin main

@@ -1,8 +1,6 @@
-// Обновляет content/registry.ts по файлам из content/lessons. Запуск: npm run content:index
-import { writeFileSync } from "node:fs";
-import { renderRegistry } from "../content/registryGen";
+// Обновляет content/registry.ts (для сервера) и content/manifest.json (для приложения) по файлам из content/lessons.
+// Запуск: npm run content:index
+import { writeContentIndex } from "../content/writeIndex";
 
-const registry = new URL("../content/registry.ts", import.meta.url);
-const text = renderRegistry(new URL("../content/lessons/", import.meta.url));
-writeFileSync(registry, text);
-console.log(`content/registry.ts обновлён: уроков ${(text.match(/^import /gm) ?? []).length}`);
+const count = writeContentIndex();
+console.log(`content/registry.ts и content/manifest.json обновлены: уроков ${count}`);

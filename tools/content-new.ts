@@ -15,7 +15,7 @@ import {
   templateProblems,
   type NewLessonOptions,
 } from "../content/template";
-import { renderRegistry } from "../content/registryGen";
+import { writeContentIndex } from "../content/writeIndex";
 
 const { values } = parseArgs({
   options: {
@@ -44,7 +44,7 @@ if (topicId === ALPHABET_TOPIC_ID || values.section === ALPHABET_SECTION) {
     process.exit(1);
   }
   writeFileSync(new URL(`../content/lessons/${id}.json`, import.meta.url), JSON.stringify(buildAlphabetTemplate(number, title), null, 2) + "\n");
-  writeFileSync(new URL("../content/registry.ts", import.meta.url), renderRegistry(new URL("../content/lessons/", import.meta.url)));
+  writeContentIndex();
   console.log(`Создано: content/lessons/${id}.json (буквы: ${ALPHABET_GROUPS[number - 1]!.join(" ")}, бесплатный), реестр обновлён.`);
   console.log("Дальше: заполнить название буквы на иврите (he, niqqud), звук и слово-пример (he, niqqud, translit, ru),");
   console.log("проверить `npm run validate:content`, озвучить через workflow «Озвучка слов» (docs/AUDIO.md).");
@@ -86,7 +86,7 @@ if (existsSync(file)) {
   process.exit(1);
 }
 writeFileSync(file, JSON.stringify(buildLessonTemplate(options), null, 2) + "\n");
-writeFileSync(new URL("../content/registry.ts", import.meta.url), renderRegistry(new URL("../content/lessons/", import.meta.url)));
+writeContentIndex();
 
 console.log(`Создано: content/lessons/${id}.json (бесплатный: ${options.number <= 3 ? "да" : "нет"}), реестр обновлён.`);
 console.log("Дальше: заполнить пустые поля (he, niqqud, translit, ru, пример), добавить image при наличии,");

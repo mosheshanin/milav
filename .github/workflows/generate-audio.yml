@@ -37,6 +37,11 @@ jobs:
         with:
           node-version: 22
 
+      # Зависимости нужны только боевой озвучке: после неё пересобирается манифест уроков (content:index).
+      - name: Установка зависимостей
+        if: inputs.action == 'publish'
+        run: npm ci
+
       - name: Список голосов
         if: inputs.action == 'voices'
         run: node tools/generate-audio.mjs --voices
@@ -56,12 +61,17 @@ jobs:
         if: inputs.action == 'publish'
         run: node tools/generate-audio.mjs --voice "${{ inputs.voice }}" --text "${{ inputs.text }}" --update-content ${{ inputs.force && '--force' || '' }}
 
+      # Поле audio в уроке меняет его версию: манифест приложения пересобирается, иначе тест манифеста остановит выкладку.
+      - name: Манифест уроков
+        if: inputs.action == 'publish'
+        run: npm run content:index
+
       - name: Сохранить в репозиторий
         if: inputs.action == 'publish'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/public/audio content/lessons
+          git add apps/web/public/audio content/lessons content/manifest.json content/registry.ts
           git diff --cached --quiet && echo "Нечего сохранять" && exit 0
           git commit -m "Озвучка слов: ${{ inputs.voice }}, текст ${{ inputs.text }}"
           git push

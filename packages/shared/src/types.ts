@@ -167,6 +167,33 @@ export type AnyLesson = Lesson | AlphabetLesson;
 /** То, что изучают в уроке: слово или буква. */
 export type StudyItem = Word | Letter;
 
+/**
+ * Урок в манифесте: всё, что нужно главной, без самих слов. Манифест лежит в приложении, а слова урока приложение
+ * получает по API (GET /api/lessons/:id) с проверкой доступа, чтобы платные слова не попадали в файлы приложения.
+ */
+export interface LessonMeta {
+  id: string;
+  topicId: string;
+  section: Section | "alphabet";
+  topic: string;
+  number: number;
+  free: boolean;
+  title: string;
+  /** Сколько в уроке слов (в алфавите форм букв). */
+  count: number;
+  /** Этапы урока по порядку (у слов четыре, у букв три, у звуков с гереш два). */
+  stages: Stage[];
+  /** Только алфавит: формы букв урока, их видно в строке урока на главной. Алфавит бесплатный всегда. */
+  letters?: string[];
+  /** Версия содержимого урока (начало хэша файла): по ней приложение понимает, что сохранённая копия устарела. */
+  v: string;
+}
+
+/** Ответ GET /api/lessons/:id: урок целиком. Платный урок без доступа даёт 403 `subscription_required`. */
+export interface LessonContentResponse {
+  lesson: AnyLesson;
+}
+
 /** Название темы алфавита на главной. */
 export const ALPHABET_TITLE = "Алфавит";
 

@@ -1,5 +1,6 @@
 import type { AlphabetLesson, AnyLesson, Catalog, ContentInfo, Letter, Lesson, StudyItem, Word } from "@milav/shared";
 import { buildCatalog, isAlphabetLesson } from "@milav/shared";
+import { contentInfoOf } from "./info";
 import { lessonFiles } from "./registry";
 
 /**
@@ -55,20 +56,7 @@ export function findStudyItem(id: string): { lesson: AnyLesson; item: StudyItem 
 
 /** Сведения о контенте для геймификации: сколько слов, уроков, разделов и тем (от них зависит, какие бейджи достижимы). */
 export function contentInfo(): ContentInfo {
-  const topics = new Map<string, { id: string; title: string; lessonIds: string[] }>();
-  for (const lesson of lessons) {
-    const topic = topics.get(lesson.topicId) ?? { id: lesson.topicId, title: lesson.topic, lessonIds: [] };
-    topic.lessonIds.push(lesson.id);
-    topics.set(lesson.topicId, topic);
-  }
-  return {
-    totalWords: lessons.reduce((n, l) => n + l.words.length, 0),
-    totalLessons: allLessons.length,
-    alphabetLessons: alphabetLessons.length,
-    alphabetLetters: alphabetLessons.reduce((n, l) => n + l.letters.length, 0),
-    sections: [...new Set(allLessons.map((l) => l.section))],
-    topics: [...topics.values()],
-  };
+  return contentInfoOf(allLessons);
 }
 
 /** Каталог бейджей для текущего контента. Один и тот же код считает его на сервере и в приложении. */

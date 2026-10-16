@@ -11,7 +11,7 @@
 import { existsSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
 import { isBinyan, type Binyan } from "@milav/shared";
-import { renderRegistry } from "../content/registryGen";
+import { writeContentIndex } from "../content/writeIndex";
 import { VERB_TOPICS, buildVerbLesson } from "../content/verbLessons";
 
 const { values } = parseArgs({ options: { binyan: { type: "string" }, lesson: { type: "string" }, "dry-run": { type: "boolean" } } });
@@ -46,6 +46,6 @@ for (const binyan of binyans) {
   }
 }
 if (!values["dry-run"] && created > 0) {
-  writeFileSync(new URL("../content/registry.ts", import.meta.url), renderRegistry(new URL("../content/lessons/", import.meta.url)));
+  writeContentIndex();
   console.log("Реестр уроков обновлён.");
 }

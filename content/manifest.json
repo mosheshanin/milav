@@ -1,0 +1,575 @@
+{
+  "lessons": [
+    {
+      "id": "alphabet-1",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 1,
+      "free": true,
+      "title": "Первые буквы",
+      "count": 5,
+      "stages": [
+        "listen",
+        "write",
+        "type"
+      ],
+      "letters": [
+        "א",
+        "ב",
+        "ג",
+        "ד",
+        "ה"
+      ],
+      "v": "97888fbd1a"
+    },
+    {
+      "id": "alphabet-2",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 2,
+      "free": true,
+      "title": "Продолжение алфавита",
+      "count": 5,
+      "stages": [
+        "listen",
+        "write",
+        "type"
+      ],
+      "letters": [
+        "ו",
+        "ז",
+        "ח",
+        "ט",
+        "י"
+      ],
+      "v": "f24926fb8d"
+    },
+    {
+      "id": "alphabet-3",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 3,
+      "free": true,
+      "title": "Каф, ламед, мем",
+      "count": 5,
+      "stages": [
+        "listen",
+        "write",
+        "type"
+      ],
+      "letters": [
+        "כ",
+        "ך",
+        "ל",
+        "מ",
+        "ם"
+      ],
+      "v": "536eca19db"
+    },
+    {
+      "id": "alphabet-4",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 4,
+      "free": true,
+      "title": "Нун, самех, аин, пе",
+      "count": 6,
+      "stages": [
+        "listen",
+        "write",
+        "type"
+      ],
+      "letters": [
+        "נ",
+        "ן",
+        "ס",
+        "ע",
+        "פ",
+        "ף"
+      ],
+      "v": "4e5b77b27b"
+    },
+    {
+      "id": "alphabet-5",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 5,
+      "free": true,
+      "title": "Последние буквы",
+      "count": 6,
+      "stages": [
+        "listen",
+        "write",
+        "type"
+      ],
+      "letters": [
+        "צ",
+        "ץ",
+        "ק",
+        "ר",
+        "ש",
+        "ת"
+      ],
+      "v": "2e143b6d4a"
+    },
+    {
+      "id": "alphabet-6",
+      "topicId": "alphabet",
+      "section": "alphabet",
+      "topic": "Алфавит",
+      "number": 6,
+      "free": true,
+      "title": "Звуки дж, ж, ч",
+      "count": 3,
+      "stages": [
+        "listen",
+        "type"
+      ],
+      "letters": [
+        "ג׳",
+        "ז׳",
+        "צ׳"
+      ],
+      "v": "21835b4cb3"
+    },
+    {
+      "id": "animals-1",
+      "topicId": "animals",
+      "section": "nouns",
+      "topic": "Животные",
+      "number": 1,
+      "free": true,
+      "title": "Знакомые животные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "36ede18284"
+    },
+    {
+      "id": "animals-2",
+      "topicId": "animals",
+      "section": "nouns",
+      "topic": "Животные",
+      "number": 2,
+      "free": true,
+      "title": "Дикие животные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "31b41ee4f2"
+    },
+    {
+      "id": "animals-3",
+      "topicId": "animals",
+      "section": "nouns",
+      "topic": "Животные",
+      "number": 3,
+      "free": true,
+      "title": "Мелкие и морские",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "57816498ee"
+    },
+    {
+      "id": "colors-1",
+      "topicId": "colors",
+      "section": "adjectives",
+      "topic": "Цвета",
+      "number": 1,
+      "free": true,
+      "title": "Основные цвета",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "26bec89ef2"
+    },
+    {
+      "id": "colors-2",
+      "topicId": "colors",
+      "section": "adjectives",
+      "topic": "Цвета",
+      "number": 2,
+      "free": true,
+      "title": "Оттенки и свойства",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1d44b36fac"
+    },
+    {
+      "id": "colors-3",
+      "topicId": "colors",
+      "section": "adjectives",
+      "topic": "Цвета",
+      "number": 3,
+      "free": true,
+      "title": "Узоры и оттенки",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "da091858ee"
+    },
+    {
+      "id": "family-1",
+      "topicId": "family",
+      "section": "nouns",
+      "topic": "Семья",
+      "number": 1,
+      "free": true,
+      "title": "Близкие",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a8b2a6c694"
+    },
+    {
+      "id": "family-2",
+      "topicId": "family",
+      "section": "nouns",
+      "topic": "Семья",
+      "number": 2,
+      "free": true,
+      "title": "Родные и друзья",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "321d74784a"
+    },
+    {
+      "id": "family-3",
+      "topicId": "family",
+      "section": "nouns",
+      "topic": "Семья",
+      "number": 3,
+      "free": true,
+      "title": "Мужчины и женщины",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "aa02a55c50"
+    },
+    {
+      "id": "food-1",
+      "topicId": "food",
+      "section": "nouns",
+      "topic": "Еда",
+      "number": 1,
+      "free": true,
+      "title": "Продукты",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e8242311f5"
+    },
+    {
+      "id": "food-2",
+      "topicId": "food",
+      "section": "nouns",
+      "topic": "Еда",
+      "number": 2,
+      "free": true,
+      "title": "Фрукты и ягоды",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "90ebf9c6be"
+    },
+    {
+      "id": "food-3",
+      "topicId": "food",
+      "section": "nouns",
+      "topic": "Еда",
+      "number": 3,
+      "free": true,
+      "title": "Овощи и блюда",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "6d1cea44e8"
+    },
+    {
+      "id": "home-1",
+      "topicId": "home",
+      "section": "nouns",
+      "topic": "Дом и мебель",
+      "number": 1,
+      "free": true,
+      "title": "Дом и комнаты",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "44b413fd08"
+    },
+    {
+      "id": "home-2",
+      "topicId": "home",
+      "section": "nouns",
+      "topic": "Дом и мебель",
+      "number": 2,
+      "free": true,
+      "title": "Мебель",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "0eab49dd28"
+    },
+    {
+      "id": "home-3",
+      "topicId": "home",
+      "section": "nouns",
+      "topic": "Дом и мебель",
+      "number": 3,
+      "free": true,
+      "title": "Бытовые предметы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e18b8fa9aa"
+    },
+    {
+      "id": "paal-1",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 1,
+      "free": true,
+      "title": "Первые глаголы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "c849e84074"
+    },
+    {
+      "id": "paal-2",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 2,
+      "free": true,
+      "title": "Действия руками",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "569b2e413f"
+    },
+    {
+      "id": "paal-3",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 3,
+      "free": true,
+      "title": "Ещё десять глаголов",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "ac4579b3cf"
+    },
+    {
+      "id": "piel-1",
+      "topicId": "piel",
+      "section": "verbs",
+      "topic": "Пиэль",
+      "number": 1,
+      "free": true,
+      "title": "Общение и дом",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "b8686f92e0"
+    },
+    {
+      "id": "piel-2",
+      "topicId": "piel",
+      "section": "verbs",
+      "topic": "Пиэль",
+      "number": 2,
+      "free": true,
+      "title": "Дела и работа",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "26cf5e75f8"
+    },
+    {
+      "id": "piel-3",
+      "topicId": "piel",
+      "section": "verbs",
+      "topic": "Пиэль",
+      "number": 3,
+      "free": true,
+      "title": "Ещё десять глаголов",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "f255802e2a"
+    }
+  ],
+  "info": {
+    "totalWords": 210,
+    "totalLessons": 27,
+    "alphabetLessons": 6,
+    "alphabetLetters": 30,
+    "sections": [
+      "alphabet",
+      "nouns",
+      "adjectives",
+      "verbs"
+    ],
+    "topics": [
+      {
+        "id": "animals",
+        "title": "Животные",
+        "lessonIds": [
+          "animals-1",
+          "animals-2",
+          "animals-3"
+        ]
+      },
+      {
+        "id": "colors",
+        "title": "Цвета",
+        "lessonIds": [
+          "colors-1",
+          "colors-2",
+          "colors-3"
+        ]
+      },
+      {
+        "id": "family",
+        "title": "Семья",
+        "lessonIds": [
+          "family-1",
+          "family-2",
+          "family-3"
+        ]
+      },
+      {
+        "id": "food",
+        "title": "Еда",
+        "lessonIds": [
+          "food-1",
+          "food-2",
+          "food-3"
+        ]
+      },
+      {
+        "id": "home",
+        "title": "Дом и мебель",
+        "lessonIds": [
+          "home-1",
+          "home-2",
+          "home-3"
+        ]
+      },
+      {
+        "id": "paal",
+        "title": "Пааль",
+        "lessonIds": [
+          "paal-1",
+          "paal-2",
+          "paal-3"
+        ]
+      },
+      {
+        "id": "piel",
+        "title": "Пиэль",
+        "lessonIds": [
+          "piel-1",
+          "piel-2",
+          "piel-3"
+        ]
+      }
+    ]
+  }
+}
