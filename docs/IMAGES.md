@@ -26,33 +26,41 @@
 
 ## Слова без картинки
 
-Список обновляется командой `npm run content:report -- --no-image` (на момент 14.10.2026: 26). Эмодзи Twemoji, которые подходят по смыслу, уже стоят у остальных слов; для этих слов подходящего эмодзи нет, а подобрать единый по стилю и лицензии набор рисунков без вашего участия не получилось, поэтому они ждут ваших картинок.
+Список обновляется командой `npm run content:report -- --no-image` (на момент 16.10.2026: 34 без глаголов; у глаголов картинок пока нет). Эмодзи Twemoji, которые подходят по смыслу, уже стоят у остальных слов; для этих слов подходящего эмодзи нет, а подобрать единый по стилю и лицензии набор рисунков без вашего участия не получилось, поэтому они ждут ваших картинок.
 
 | Файл для ящика | Иврит | Перевод | Примечание |
 |---|---|---|---|
 | `alphabet-1-he.png` | הר | гора | слово-пример буквы |
-| `alphabet-5-resh.png` | רימון | гранат | слово-пример буквы; это слово `food-2-pomegranate`, достаточно его файла, буква получит ту же картинку |
-| `colors-2-yellowish.png` | צהבהב | желтоватый |  |
+| `alphabet-5-resh.png` | רימון | гранат | слово-пример буквы |
+| `body-1-head.png` | ראש | голова |  |
+| `body-1-neck.png` | צוואר | шея |  |
+| `body-1-cheek.png` | לחי | щека |  |
+| `body-2-back.png` | גב | спина |  |
+| `body-2-belly.png` | בטן | живот |  |
+| `body-2-shoulder.png` | כתף | плечо |  |
+| `body-2-knee.png` | ברך | колено |  |
+| `family-1-son.png` | בן | сын |  |
+| `family-1-daughter.png` | בת | дочь |  |
 | `family-1-brother.png` | אח | брат |  |
 | `family-1-sister.png` | אחות | сестра |  |
-| `family-2-uncle.png` | דוד | дядя |  |
-| `family-2-aunt.png` | דודה | тётя |  |
-| `family-2-son.png` | בן | сын |  |
-| `family-2-daughter.png` | בת | дочь |  |
 | `family-2-grandson.png` | נכד | внук |  |
 | `family-2-granddaughter.png` | נכדה | внучка |  |
+| `family-2-uncle.png` | דוד | дядя |  |
+| `family-2-aunt.png` | דודה | тётя |  |
 | `family-3-lad.png` | בחור | парень |  |
 | `family-3-lass.png` | בחורה | девушка |  |
 | `family-3-guest.png` | אורח | гость |  |
-| `food-2-pomegranate.png` | רימון | гранат |  |
+| `food-1-sugar.png` | סוכר | сахар |  |
 | `home-1-room.png` | חדר | комната |  |
-| `home-1-floor.png` | רצפה | пол |  |
-| `home-1-roof.png` | גג | крыша |  |
+| `home-1-balcony.png` | מרפסת | балкон |  |
 | `home-2-table.png` | שולחן | стол |  |
 | `home-2-wardrobe.png` | ארון | шкаф |  |
 | `home-2-shelf.png` | מדף | полка |  |
-| `home-2-carpet.png` | שטיח | ковёр |  |
-| `home-2-curtain.png` | וילון | штора |  |
 | `home-2-pillow.png` | כרית | подушка |  |
+| `home-2-blanket.png` | שמיכה | одеяло |  |
 | `home-3-fridge.png` | מקרר | холодильник |  |
-| `home-3-oven.png` | תנור | духовка |  |
+| `qualities-1-short.png` | קצר | короткий |  |
+| `qualities-2-full.png` | מלא | полный |  |
+| `qualities-2-empty.png` | ריק | пустой |  |
+| `qualities-2-near.png` | קרוב | близкий |  |
+| `qualities-2-far.png` | רחוק | далёкий |  |
