@@ -9,6 +9,7 @@ import {
   ADMIN_LOG_PAGE,
   CONFIG_KEYS,
   DEFAULT_DAILY_GOAL,
+  FEATURE_MODES,
   MAX_STAFF,
   STAFF_ROLES,
   isValidConfigValue,
@@ -121,10 +122,15 @@ export async function staffOf(env: Bindings, userId: number): Promise<StaffInfo 
   return row && STAFF_ROLES.includes(row.role) ? { role: row.role, owner: false } : null;
 }
 
+const isFeatureMode = (value: unknown): value is AppConfig["reminders"] => (FEATURE_MODES as readonly unknown[]).includes(value);
+
 /** Значения по умолчанию, пока настройку не меняли из панели. */
 export function configDefaults(env: Bindings): AppConfig {
   return {
     leaderboard: env.LEADERBOARD_ENABLED === "1" ? "all" : "off",
+    // Напоминания сначала проверяет команда на своих телефонах, потом владелец включает «Все» в панели.
+    // Локально (env.local) по умолчанию выключены, чтобы предложение не мешало сквозным тестам уроков.
+    reminders: isFeatureMode(env.REMINDERS_DEFAULT) ? env.REMINDERS_DEFAULT : "team",
     defaultDailyGoal: DEFAULT_DAILY_GOAL,
   };
 }

@@ -45,6 +45,16 @@ import {
 import { adminRoutes, loadConfig, ownerIds, requireAdmin, staffOf } from "./admin";
 import { recordActivity } from "./adminStats";
 import {
+  ensureScheduler,
+  handleReminderCallback,
+  loadReminderRow,
+  noteAppOpen,
+  reminderCommandReply,
+  reminderInfo,
+  reminderRoutes,
+  remindersOn,
+} from "./reminders";
+import {
   BOT_MAX_UPDATE_BYTES,
   BOT_WEBHOOK_PATH,
   commandOf,
@@ -150,6 +160,23 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
   const raw = await readBodyLimited(c.req.raw, BOT_MAX_UPDATE_BYTES);
   const update = raw ? parseJson<TelegramUpdate>(raw) : null;
   if (!update || typeof update !== "object") return c.body(null, 200);
+  // Кнопки под напоминаниями: ответ всплывающей подсказкой (answerCallbackQuery).
+  if (update.callback_query) {
+    const answer = await handleReminderCallback(c.env, update.callback_query);
+    if (answer) logEvent("bot_callback", { uid: update.callback_query.from?.id, data: update.callback_query.data?.slice(0, 16) });
+    return answer ? c.json(answer) : c.body(null, 200);
+  }
+  const message = update.message;
+  if (
+    commandOf(message?.text) === "reminders" &&
+    message?.chat?.type === "private" &&
+    typeof message.chat.id === "number" &&
+    typeof message.from?.id === "number" &&
+    !message.from.is_bot
+  ) {
+    logEvent("bot_message", { uid: message.from.id, cmd: "reminders" });
+    return c.json(await reminderCommandReply(c.env, message.chat.id, message.from.id));
+  }
   const reply = replyTo(update, `${new URL(c.req.url).origin}/`);
   if (!reply) return c.body(null, 200);
   logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
@@ -172,14 +199,21 @@ app.get("/api/me", requireUser, async (c) => {
   logEvent("app_open", { uid: user.id, tz: timezone, points: totalsOf(stats).points });
   // Владелец открыл приложение: в фоне проверяем вебхук бота и при необходимости регистрируем его (bot.ts).
   if (ownerIds(c.env).has(user.id)) {
-    const setup = ensureBotSetupOnce(c.env, new URL(c.req.url).origin);
+    const origin = new URL(c.req.url).origin;
+    const setup = ensureBotSetupOnce(c.env, origin);
     if (setup) inBackground(c, setup);
+    // И таймер напоминаний (scheduler.ts): заводится, если ещё не заведён.
+    inBackground(c, ensureScheduler(c.env, origin));
   }
+  // Напоминания: открыли приложение после напоминания (статистика текста) и данные для «Настроек».
+  const reminderRow = await loadReminderRow(c.env.DB, user.id);
+  await noteAppOpen(c.env.DB, reminderRow, now);
   const staff = await staffOf(c.env, user.id);
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },
     ...totalsOf(stats),
     play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, await featuresFor(c.env, user.id)),
+    ...((await remindersOn(c.env, user.id)) ? { reminders: reminderInfo(reminderRow, now) } : {}),
     ...(staff ? { staff } : {}),
   };
   return c.json(body);
@@ -444,6 +478,9 @@ app.delete("/api/templates", requireUser, requireAdmin, rateLimit("templates"), 
 
 // Геймификация: достижения, настройки, таблица лидеров, сравнение (play.ts).
 app.route("/", playRoutes);
+
+// Напоминания от бота: настройки ученика (reminders.ts). Таймер отправки: scheduler.ts.
+app.route("/", reminderRoutes);
 
 // Панель администратора: обзор, настройки приложения, команда, журнал (admin.ts, docs/ADMIN.md).
 app.route("/", adminRoutes);

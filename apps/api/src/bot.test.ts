@@ -157,7 +157,7 @@ describe("самонастройка вебхука", () => {
     expect(set.body.url).toBe(await webhookUrl(ORIGIN, TOKEN));
     expect(set.body.url.startsWith(`${ORIGIN}${BOT_WEBHOOK_PATH}?v=`)).toBe(true);
     expect(set.body.secret_token).toBe(await webhookSecret(TOKEN));
-    expect(set.body.allowed_updates).toEqual(["message"]);
+    expect(set.body.allowed_updates).toEqual(["message", "callback_query"]);
     expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands).toEqual(BOT_COMMANDS);
     expect(tg.calls.find((c) => c.method === "setMyDescription")!.body.description).toBe(BOT_DESCRIPTION);
     expect(tg.methods()).toContain("setMyShortDescription");
@@ -171,7 +171,7 @@ describe("самонастройка вебхука", () => {
   });
 
   it("если вебхук уже наш, ничего не меняет (один запрос)", async () => {
-    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["message"] });
+    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message"] });
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, tg.fetchFn)).toBe("ok");
     expect(tg.methods()).toEqual(["getWebhookInfo"]);
   });

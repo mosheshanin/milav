@@ -32,6 +32,21 @@ export function localEpochDay(tz: string, ms: number): number {
   return Math.floor(Date.UTC(get("year"), get("month") - 1, get("day")) / MS_PER_DAY);
 }
 
+/**
+ * Момент начала местного дня `day` в поясе `tz` (мс). Местная полночь всегда на целой минуте (у всех поясов IANA
+ * смещение кратно минуте), поэтому ищем её делением пополам по минутам в окне ±15 часов.
+ */
+export function localDayStartMs(tz: string, day: number): number {
+  let lo = day * 1440 - 15 * 60; // минуты: заведомо до местной полуночи
+  let hi = day * 1440 + 15 * 60; // и заведомо после
+  while (hi - lo > 1) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (localEpochDay(tz, mid * 60_000) >= day) hi = mid;
+    else lo = mid;
+  }
+  return hi * 60_000;
+}
+
 /** Момент из времени базы (`YYYY-MM-DD HH:MM:SS`, UTC) в миллисекундах. NaN, если строка не разобралась. */
 export function parseDbTime(value: string): number {
   return Date.parse(`${value.replace(" ", "T")}Z`);

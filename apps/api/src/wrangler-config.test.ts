@@ -125,3 +125,20 @@ describe("wrangler.jsonc: журналы", () => {
     expect(config.observability?.head_sampling_rate).toBeGreaterThan(0);
   });
 });
+
+describe("wrangler.jsonc: напоминания", () => {
+  // Таймер напоминаний это Durable Object: привязки не наследуются окружениями, поэтому нужны и в проде, и в env.local.
+  // Класс создаётся миграцией с SQLite-хранилищем (на бесплатном тарифе другого нет).
+  it("привязка таймера есть в проде и в env.local, миграция создаёт класс с SQLite", () => {
+    const binding = { name: "REMINDER_SCHEDULER", class_name: "ReminderScheduler" };
+    expect(config.durable_objects?.bindings).toEqual([binding]);
+    expect(config.env?.local?.durable_objects?.bindings).toEqual([binding]);
+    expect(config.migrations).toEqual([{ tag: "v1-reminders", new_sqlite_classes: ["ReminderScheduler"] }]);
+  });
+
+  // В проде напоминания по умолчанию «только для команды» (без переменной); локально выключены ради тестов уроков.
+  it("REMINDERS_DEFAULT задан только в env.local", () => {
+    expect(findKeyPaths(config, "REMINDERS_DEFAULT")).toEqual(["env.local.vars.REMINDERS_DEFAULT"]);
+    expect(config.env?.local?.vars?.REMINDERS_DEFAULT).toBe("off");
+  });
+});

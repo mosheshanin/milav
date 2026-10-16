@@ -137,6 +137,7 @@ describe("настройки приложения", () => {
   it("по умолчанию таблица лидеров берётся из LEADERBOARD_ENABLED, цель дня 5", async () => {
     expect(await config()).toEqual([
       { key: "leaderboard", value: "off", isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "reminders", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "defaultDailyGoal", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
     ]);
     const on = env({ LEADERBOARD_ENABLED: "1" });

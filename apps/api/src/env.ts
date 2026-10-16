@@ -1,5 +1,6 @@
 import type { StaffInfo } from "@milav/shared";
 import type { AuthUser } from "./auth";
+import type { ReminderScheduler } from "./scheduler";
 
 /** Привязки и переменные Worker (см. wrangler.jsonc). */
 export type Bindings = {
@@ -25,6 +26,10 @@ export type Bindings = {
    * не поменяли в панели администратора (app_config, admin.ts): значение из панели главнее.
    */
   LEADERBOARD_ENABLED?: string;
+  /** Напоминания по умолчанию (пока их не меняли в панели): "off", "team" или "all". Без переменной "team". */
+  REMINDERS_DEFAULT?: string;
+  /** Таймер напоминаний (Durable Object, scheduler.ts). В тестах его нет. */
+  REMINDER_SCHEDULER?: DurableObjectNamespace<ReminderScheduler>;
 };
 
 export type AppEnv = {

@@ -34,6 +34,11 @@
   // добровольное, имя из Telegram, выйти можно в любой момент). Выключить: "0", участники и очки сохраняются.
   "vars": { "LEADERBOARD_ENABLED": "1" },
 
+  // Таймер напоминаний от бота (apps/api/src/scheduler.ts): один Durable Object с будильником раз в 10 минут.
+  // Не cron: на бесплатном тарифе расписаний 5 на весь аккаунт. На бесплатном тарифе доступно только SQLite-хранилище.
+  "durable_objects": { "bindings": [{ "name": "REMINDER_SCHEDULER", "class_name": "ReminderScheduler" }] },
+  "migrations": [{ "tag": "v1-reminders", "new_sqlite_classes": ["ReminderScheduler"] }],
+
   // Локальная разработка: npm run dev:api (без Workers AI и с тестовым входом)
   "env": {
     "local": {
@@ -55,7 +60,9 @@
       // TEMPLATE_RECORDER_IDS: тестовый «записывающий» для локальной разработки и сквозного теста (id тестового входа).
       // В продакшене это секрет Cloudflare с настоящим Telegram id владельца, в репозитории его нет.
       // LEADERBOARD_ENABLED: таблица лидеров включена локально, чтобы её проверял сквозной тест.
-      "vars": { "ALLOW_DEV_AUTH": "true", "TEMPLATE_RECORDER_IDS": "1001", "LEADERBOARD_ENABLED": "1" }
+      // REMINDERS_DEFAULT: напоминания локально выключены (их включает сквозной тест e2e-reminders через панель).
+      "vars": { "ALLOW_DEV_AUTH": "true", "TEMPLATE_RECORDER_IDS": "1001", "LEADERBOARD_ENABLED": "1", "REMINDERS_DEFAULT": "off" },
+      "durable_objects": { "bindings": [{ "name": "REMINDER_SCHEDULER", "class_name": "ReminderScheduler" }] }
     }
   }
 }

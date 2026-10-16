@@ -16,8 +16,11 @@ import { logError, logEvent, logWarn } from "./telemetry";
 /** Путь вебхука (под /api/*, поэтому запрос доходит до Worker, а не до статики). */
 export const BOT_WEBHOOK_PATH = "/api/bot/webhook";
 
-/** Какие обновления получает бот. Для платежей Stars позже добавятся pre_checkout_query (и successful_payment в message). */
-export const BOT_ALLOWED_UPDATES = ["message"] as const;
+/**
+ * Какие обновления получает бот: сообщения и нажатия кнопок под напоминаниями (callback_query). Для платежей Stars
+ * позже добавятся pre_checkout_query (и successful_payment в message). Самонастройка перерегистрирует вебхук сама.
+ */
+export const BOT_ALLOWED_UPDATES = ["message", "callback_query"] as const;
 
 /** Самое большое обновление, которое принимаем (обычное сообщение занимает 1–2 КБ). */
 export const BOT_MAX_UPDATE_BYTES = 64 * 1024;
@@ -26,6 +29,7 @@ export const BOT_MAX_UPDATE_BYTES = 64 * 1024;
 export const BOT_COMMANDS = [
   { command: "start", description: "Открыть приложение" },
   { command: "help", description: "Как заниматься" },
+  { command: "reminders", description: "Напоминания: включить или отключить" },
 ] as const;
 
 /** Описание в пустом чате («Что умеет этот бот?») и короткое описание в профиле. Ставятся, только если пусты. */
@@ -82,6 +86,8 @@ export interface TelegramUpdate {
     chat?: { id?: number; type?: string };
     from?: { id?: number; is_bot?: boolean; first_name?: string };
   };
+  /** Нажатие кнопки под сообщением бота (напоминания: «Завтра не напоминать», «Отключить»). */
+  callback_query?: { id?: string; data?: string; from?: { id?: number; first_name?: string } };
 }
 
 /** Ответ в теле вебхука: Telegram выполнит этот метод сам. */
@@ -123,6 +129,7 @@ export const HELP_TEXT = [
   "",
   "Для этапа «Говори» нужен микрофон: приложение попросит доступ.",
   "Цель дня, тема оформления и другие настройки — в приложении, шестерёнка вверху главной.",
+  "Напоминания заниматься: команда /reminders.",
 ].join("\n");
 
 export const FALLBACK_TEXT = "Я пока не отвечаю на сообщения, все занятия в приложении. Нажмите кнопку ниже 👇";

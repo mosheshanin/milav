@@ -38,6 +38,11 @@ export const APP_CONFIG = {
     title: "Таблица лидеров",
     hint: "«Команда»: таблицу видят только администраторы и проверяющие. При выключении данные участников сохраняются.",
   },
+  reminders: {
+    kind: "feature",
+    title: "Напоминания от бота",
+    hint: "Предложение включить напоминания, раздел в «Настройках» и отправка. «Команда»: только администраторам и проверяющим (для проверки). При выключении сообщения перестают уходить, выбор учеников сохраняется.",
+  },
   defaultDailyGoal: {
     kind: "choice",
     title: "Цель дня для новых учеников",
@@ -51,6 +56,7 @@ export const CONFIG_KEYS = Object.keys(APP_CONFIG) as ConfigKey[];
 
 export interface AppConfig {
   leaderboard: FeatureMode;
+  reminders: FeatureMode;
   defaultDailyGoal: number;
 }
 

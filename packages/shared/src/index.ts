@@ -9,3 +9,4 @@ export * from "./handwriting";
 export * from "./gamification";
 export * from "./telemetry";
 export * from "./admin";
+export * from "./reminders";

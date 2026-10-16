@@ -1,4 +1,5 @@
 import type { StaffInfo } from "./admin";
+import type { ReminderInfo } from "./reminders";
 import type { PlayEvent, PlayInfo } from "./gamification/types";
 import type { Stroke } from "./handwriting/types";
 import type { VerbData } from "./verbs";
@@ -197,6 +198,8 @@ export interface MeResponse {
   status: StatusInfo;
   /** Ритм, цель дня, путь к следующему статусу и настройки (геймификация). */
   play: PlayInfo;
+  /** Напоминания от бота. Поля нет, если функция выключена для этого человека. */
+  reminders?: ReminderInfo;
   /** Роль в команде (панель администратора). У учеников поля нет. */
   staff?: StaffInfo;
 }

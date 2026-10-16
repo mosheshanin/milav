@@ -6,6 +6,7 @@
 import {
   LEADERBOARD_TZ,
   epochDayToIso,
+  localDayStartMs,
   localEpochDay,
   type AdminOverviewResponse,
   type DayNumbers,
@@ -16,19 +17,9 @@ import {
 export const OVERVIEW_DAYS = 14;
 
 const TZ = LEADERBOARD_TZ;
-const MINUTE = 60_000;
 
-/** Момент начала дня `day` по Иерусалиму (мс). Полночь всегда на целой минуте; ищем её делением пополам. */
-export function dayStartMs(day: number): number {
-  let lo = day * 1440 - 15 * 60; // минуты: заведомо до местной полуночи
-  let hi = day * 1440 + 15 * 60; // и заведомо после
-  while (hi - lo > 1) {
-    const mid = Math.floor((lo + hi) / 2);
-    if (localEpochDay(TZ, mid * MINUTE) >= day) hi = mid;
-    else lo = mid;
-  }
-  return hi * MINUTE;
-}
+/** Момент начала дня `day` по Иерусалиму (мс). */
+export const dayStartMs = (day: number): number => localDayStartMs(TZ, day);
 
 /** Время в формате базы (`YYYY-MM-DD HH:MM:SS`, UTC). */
 const dbTime = (ms: number) => new Date(ms).toISOString().replace("T", " ").slice(0, 19);
