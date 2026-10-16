@@ -18,6 +18,7 @@ import { ApiError, api, type SpeechResponse } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
 import { PlayToast, eventHasNews } from "../components/play";
+import { ReminderOffer } from "../components/ReminderOffer";
 import { LetterCard } from "../components/LetterCard";
 import { ListenButton } from "../components/ListenButton";
 import { SpeakRecorder } from "../components/SpeakRecorder";
@@ -54,7 +55,7 @@ export function Study({
   const items = lesson ? lessonItems(lesson) : [];
   const stages = lesson ? stagesFor(lesson) : STAGES;
   const alphabet = lesson ? isAlphabetLesson(lesson) : false;
-  const { setPoints, invalidate } = useApp();
+  const { me, setPoints, invalidate } = useApp();
   // Кнопка «назад» Telegram (и системная, и свайп) возвращает к списку уроков.
   useBackButton(onBack);
   const [progress, setProgress] = useState<WordProgress[] | null>(null);
@@ -68,6 +69,8 @@ export function Study({
   const [justEarned, setJustEarned] = useState(false);
   /** Новости геймификации после слова: бейдж или цель дня. */
   const [toast, setToast] = useState<PlayEvent | null>(null);
+  /** Предложить напоминания: после выученного слова, один раз за открытие урока (сервер решает, можно ли). */
+  const [offer, setOffer] = useState<"none" | "pending" | "done">("none");
 
   useEffect(() => {
     if (!lesson) return;
@@ -127,6 +130,7 @@ export function Study({
         const res = await api.stage(word.id, proof);
         replace(res.progress, res.points);
         if (res.pointsAwarded > 0) setJustEarned(true);
+        if (res.pointsAwarded > 0 && me.reminders?.offer && offer === "none") setOffer("pending");
         if (eventHasNews(res.play)) setToast(res.play);
         advance(proof.stage, res.progress, skipped.has(word.id));
       } catch (e) {
@@ -135,7 +139,7 @@ export function Study({
         setBusy(false);
       }
     },
-    [word, busy, replace, advance, skipped],
+    [word, busy, replace, advance, skipped, me.reminders?.offer, offer],
   );
 
   const onSpeakPassed = useCallback(
@@ -143,10 +147,11 @@ export function Study({
       if (!word || !res.progress) return;
       replace(res.progress, res.points);
       if (res.pointsAwarded) setJustEarned(true);
+      if (res.pointsAwarded && me.reminders?.offer && offer === "none") setOffer("pending");
       if (eventHasNews(res.play)) setToast(res.play);
       advance("speak", res.progress, skipped.has(word.id));
     },
-    [word, replace, advance, skipped],
+    [word, replace, advance, skipped, me.reminders?.offer, offer],
   );
 
   const onSpeakSkipped = useCallback(() => {
@@ -283,6 +288,8 @@ export function Study({
         )}
       </main>
       {toast && <PlayToast event={toast} onDone={() => setToast(null)} />}
+      {/* Предложение напоминаний ждёт, пока уйдёт уведомление о бейдже или цели дня. */}
+      {offer === "pending" && !toast && <ReminderOffer onClose={() => setOffer("done")} />}
     </>
   );
 }

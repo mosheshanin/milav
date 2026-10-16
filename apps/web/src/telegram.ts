@@ -7,6 +7,8 @@ export interface TelegramUser {
   last_name?: string;
   username?: string;
   language_code?: string;
+  /** Может ли бот писать человеку (нажимал «Старт» или разрешил в приложении). */
+  allows_write_to_pm?: boolean;
 }
 
 /** Кнопка «назад» в шапке Telegram (она же системная кнопка и свайп назад на телефонах). Есть с версии 6.1. */
@@ -38,6 +40,8 @@ export interface TelegramWebApp {
     notificationOccurred: (type: "error" | "success" | "warning") => void;
     impactOccurred: (style: "light" | "medium" | "heavy" | "rigid" | "soft") => void;
   };
+  /** Просит разрешение «боту можно писать вам» (с версии 6.9): родной диалог Telegram. */
+  requestWriteAccess?: (callback?: (granted: boolean) => void) => void;
   /** Открывает ссылку t.me внутри Telegram (например, выбор чата для «Поделиться»). */
   openTelegramLink?: (url: string) => void;
   /** Схема оформления Telegram: светлая или тёмная (для темы «Как в Telegram»). */

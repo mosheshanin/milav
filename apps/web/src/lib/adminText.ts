@@ -10,6 +10,12 @@ import {
 } from "@milav/shared";
 import { ApiError } from "../api";
 
+/** Начало длинного текста для строки журнала. */
+const short = (value: unknown) => {
+  const text = String(value ?? "");
+  return text.length > 60 ? `${text.slice(0, 57)}…` : text;
+};
+
 const roleTitle = (value: unknown) => (STAFF_ROLE_TITLES[value as StaffRole] ?? String(value)).toLowerCase();
 
 /** Что произошло, одной строкой: «Таблица лидеров: Все → Команда», «Добавлен проверяющий 123». */
@@ -27,6 +33,14 @@ export function logEntryText(entry: AdminLogEntry): string {
       return `Роль id ${target}: ${roleTitle(entry.oldValue)} → ${roleTitle(entry.newValue)}`;
     case "staff.remove":
       return `Убран из команды: id ${target} (был ${roleTitle(entry.oldValue)})`;
+    case "reminder.add":
+      return `Новый текст напоминания №${target}: «${short(entry.newValue)}»`;
+    case "reminder.edit":
+      return `Текст напоминания №${target}: «${short(entry.oldValue)}» → «${short(entry.newValue)}»`;
+    case "reminder.toggle":
+      return `Текст напоминания №${target} ${entry.newValue ? "включён" : "выключен"}`;
+    case "reminder.remove":
+      return `Удалён текст напоминания №${target}: «${short(entry.oldValue)}»`;
     default:
       return `${entry.action} ${target}`.trim();
   }
@@ -84,6 +98,21 @@ export function adminErrorText(error: unknown): string {
     if (error.status !== 0) return "Сервер не принял изменение. Попробуйте ещё раз.";
   }
   return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
+}
+
+/** Ошибка проверки текста напоминания по-русски. */
+export function reminderTextErrorText(error: string, name?: string): string {
+  switch (error.replace(/^text_/, "")) {
+    case "empty":
+      return "Текст пустой.";
+    case "too_long":
+      return "Текст длиннее 500 знаков.";
+    case "bad_braces":
+      return "Фигурные скобки только для подстановок: {имя}. Проверьте, что у каждой открывающей есть закрывающая.";
+    case "unknown_placeholder":
+      return `Неизвестная подстановка {${name ?? ""}}. Список подстановок над текстами.`;
+  }
+  return "Текст не подходит.";
 }
 
 /** Telegram id из поля ввода: только цифры (пробелы по краям отбрасываются), иначе null. */

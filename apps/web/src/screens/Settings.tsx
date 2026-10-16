@@ -5,6 +5,7 @@ import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
 import { Choice, Section, Toggle } from "../components/Controls";
+import { RemindersSettings } from "../components/RemindersSettings";
 import { Button } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
 import { hapticsEnabled, setHapticsEnabled } from "../lib/haptic";
@@ -73,6 +74,8 @@ export function Settings({ onBack, onAdmin }: { onBack: () => void; onAdmin: () 
             onChange={(n) => void change({ dailyGoal: n })}
           />
         </Section>
+
+        <RemindersSettings />
 
         <Section title="Звук и отклик">
           <Toggle

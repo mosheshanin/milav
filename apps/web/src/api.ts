@@ -1,5 +1,10 @@
 import type {
   AdminConfigResponse,
+  AdminRemindersResponse,
+  ReminderInfo,
+  ReminderKind,
+  ReminderSettingsRequest,
+  ReminderTextItem,
   AdminLogResponse,
   AdminOverviewResponse,
   AdminTeamResponse,
@@ -92,6 +97,8 @@ export const api = {
   /** Человек увидел поздравление с этими бейджами. */
   seen: (ids: string[]) => request<{ ok: true }>("/api/achievements/seen", json({ ids })),
   settings: (body: SettingsRequest) => request<{ play: PlayInfo }>("/api/settings", jsonPut(body)),
+  /** Напоминания от бота: включить (бот сразу пришлёт подтверждение), выключить, время, «Не сейчас». */
+  reminders: (body: ReminderSettingsRequest) => request<{ reminders: ReminderInfo }>("/api/reminders", jsonPut(body)),
   leaderboard: (board: "week" | "all") => request<LeaderboardResponse>(`/api/leaderboard?board=${board}`),
   cohort: () => request<CohortResponse>("/api/cohort"),
   /** Главная: прогресс всех доступных уроков одним запросом. */
@@ -134,5 +141,11 @@ export const api = {
     setRole: (userId: number, role: StaffRole) => request<{ ok: true; changed: boolean }>("/api/admin/team", jsonPut({ userId, role })),
     removeFromTeam: (userId: number) => request<{ ok: true }>(`/api/admin/team?userId=${userId}`, { method: "DELETE" }),
     log: (before?: number) => request<AdminLogResponse>(`/api/admin/log${before ? `?before=${before}` : ""}`),
+    reminders: () => request<AdminRemindersResponse>("/api/admin/reminders"),
+    addReminder: (kind: ReminderKind, text: string) => request<{ item: ReminderTextItem }>("/api/admin/reminders", json({ kind, text })),
+    editReminder: (id: number, body: { text?: string; enabled?: boolean }) =>
+      request<{ item: ReminderTextItem; changed: boolean }>(`/api/admin/reminders/${id}`, jsonPut(body)),
+    deleteReminder: (id: number) => request<{ ok: true }>(`/api/admin/reminders/${id}`, { method: "DELETE" }),
+    sendReminderToMe: (id: number) => request<{ ok: true; text: string; sent: boolean }>(`/api/admin/reminders/${id}/send`, json({})),
   },
 };

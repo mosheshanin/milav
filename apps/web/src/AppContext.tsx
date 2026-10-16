@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import type { MeResponse, PlayInfo } from "@milav/shared";
+import type { MeResponse, PlayInfo, ReminderInfo } from "@milav/shared";
 import { ApiError, api } from "./api";
 import { authHeader } from "./telegram";
 
@@ -21,6 +21,8 @@ interface AppValue {
   invalidate: () => void;
   /** Подставляет новую цель дня и счётчик непросмотренных после ответа сервера. */
   applyPlay: (play: PlayInfo) => void;
+  /** Подставляет новые настройки напоминаний после ответа сервера. */
+  applyReminders: (reminders: ReminderInfo) => void;
 }
 
 /** Профиль считается свежим столько миллисекунд после чтения. */
@@ -74,6 +76,7 @@ export function AppProvider({
               fetchedAt.current = 0;
             },
             applyPlay: (play) => setLoad({ state: "ready", me: { ...load.me, play } }),
+            applyReminders: (reminders) => setLoad({ state: "ready", me: { ...load.me, reminders } }),
           }
         : null,
     [load, fetchMe],
