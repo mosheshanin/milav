@@ -120,10 +120,12 @@
       "example": {
         "he": "זאת חיה קטנה",
         "translit": "зот хая ктана",
-        "ru": "Это маленькое животное"
+        "ru": "Это маленькое животное",
+        "audio": "/audio/animals-1-animal-phrase.mp3"
       },
       "image": "/words/animals-1-animal.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/animals-1-animal.mp3"
     },
     {
       "id": "animals-1-mouse",

@@ -35,10 +35,12 @@
       "example": {
         "he": "זאת דירה חדשה",
         "translit": "зот дира хадаша",
-        "ru": "Это новая квартира"
+        "ru": "Это новая квартира",
+        "audio": "/audio/home-1-apartment-phrase.mp3"
       },
       "image": "/words/home-1-apartment.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-apartment.mp3"
     },
     {
       "id": "home-1-room",
@@ -100,10 +102,12 @@
       "example": {
         "he": "אלה שירותים נקיים",
         "translit": "эле шерутим нкиим",
-        "ru": "Это чистый туалет"
+        "ru": "Это чистый туалет",
+        "audio": "/audio/home-1-toilet-phrase.mp3"
       },
       "image": "/words/home-1-toilet.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-toilet.mp3"
     },
     {
       "id": "home-1-door",
@@ -149,10 +153,12 @@
       "example": {
         "he": "זאת קומה שנייה",
         "translit": "зот кома шния",
-        "ru": "Это второй этаж"
+        "ru": "Это второй этаж",
+        "audio": "/audio/home-1-storey-phrase.mp3"
       },
       "image": "/words/home-1-storey.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-storey.mp3"
     },
     {
       "id": "home-1-balcony",
@@ -164,9 +170,11 @@
       "example": {
         "he": "זאת מרפסת גדולה",
         "translit": "зот мирпесет гдола",
-        "ru": "Это большой балкон"
+        "ru": "Это большой балкон",
+        "audio": "/audio/home-1-balcony-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-1-balcony.mp3"
     }
   ]
 }

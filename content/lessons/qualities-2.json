@@ -17,27 +17,32 @@
       "example": {
         "he": "זה שעון יקר",
         "translit": "зэ шаон якар",
-        "ru": "Это дорогие часы"
+        "ru": "Это дорогие часы",
+        "audio": "/audio/qualities-2-expensive-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "יקרה",
           "niqqud": "יְקָרָה",
-          "translit": "йекара́"
+          "translit": "йекара́",
+          "audio": "/audio/qualities-2-expensive-form-f.mp3"
         },
         "mp": {
           "he": "יקרים",
           "niqqud": "יְקָרִים",
-          "translit": "йекари́м"
+          "translit": "йекари́м",
+          "audio": "/audio/qualities-2-expensive-form-mp.mp3"
         },
         "fp": {
           "he": "יקרות",
           "niqqud": "יְקָרוֹת",
-          "translit": "йекаро́т"
+          "translit": "йекаро́т",
+          "audio": "/audio/qualities-2-expensive-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-expensive.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-expensive.mp3"
     },
     {
       "id": "qualities-2-cheap",
@@ -48,27 +53,32 @@
       "example": {
         "he": "זאת חולצה זולה",
         "translit": "зот хульца зола",
-        "ru": "Это дешёвая рубашка"
+        "ru": "Это дешёвая рубашка",
+        "audio": "/audio/qualities-2-cheap-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "זולה",
           "niqqud": "זוֹלָה",
-          "translit": "зола́"
+          "translit": "зола́",
+          "audio": "/audio/qualities-2-cheap-form-f.mp3"
         },
         "mp": {
           "he": "זולים",
           "niqqud": "זוֹלִים",
-          "translit": "золи́м"
+          "translit": "золи́м",
+          "audio": "/audio/qualities-2-cheap-form-mp.mp3"
         },
         "fp": {
           "he": "זולות",
           "niqqud": "זוֹלוֹת",
-          "translit": "золо́т"
+          "translit": "золо́т",
+          "audio": "/audio/qualities-2-cheap-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-cheap.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-cheap.mp3"
     },
     {
       "id": "qualities-2-easy",
@@ -79,27 +89,32 @@
       "example": {
         "he": "זה מבחן קל",
         "translit": "зэ мивхан каль",
-        "ru": "Это лёгкий экзамен"
+        "ru": "Это лёгкий экзамен",
+        "audio": "/audio/qualities-2-easy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קלה",
           "niqqud": "קַלָּה",
-          "translit": "кала́"
+          "translit": "кала́",
+          "audio": "/audio/qualities-2-easy-form-f.mp3"
         },
         "mp": {
           "he": "קלים",
           "niqqud": "קַלִּים",
-          "translit": "кали́м"
+          "translit": "кали́м",
+          "audio": "/audio/qualities-2-easy-form-mp.mp3"
         },
         "fp": {
           "he": "קלות",
           "niqqud": "קַלּוֹת",
-          "translit": "кало́т"
+          "translit": "кало́т",
+          "audio": "/audio/qualities-2-easy-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-easy.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-easy.mp3"
     },
     {
       "id": "qualities-2-hard",
@@ -110,27 +125,32 @@
       "example": {
         "he": "זאת שאלה קשה",
         "translit": "зот шеэла каша",
-        "ru": "Это трудный вопрос"
+        "ru": "Это трудный вопрос",
+        "audio": "/audio/qualities-2-hard-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קשה",
           "niqqud": "קָשָׁה",
-          "translit": "каша́"
+          "translit": "каша́",
+          "audio": "/audio/qualities-2-hard-form-f.mp3"
         },
         "mp": {
           "he": "קשים",
           "niqqud": "קָשִׁים",
-          "translit": "каши́м"
+          "translit": "каши́м",
+          "audio": "/audio/qualities-2-hard-form-mp.mp3"
         },
         "fp": {
           "he": "קשות",
           "niqqud": "קָשׁוֹת",
-          "translit": "кашо́т"
+          "translit": "кашо́т",
+          "audio": "/audio/qualities-2-hard-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-hard.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-hard.mp3"
     },
     {
       "id": "qualities-2-beautiful",
@@ -141,27 +161,32 @@
       "example": {
         "he": "זאת עיר יפה",
         "translit": "зот ир яфа",
-        "ru": "Это красивый город"
+        "ru": "Это красивый город",
+        "audio": "/audio/qualities-2-beautiful-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "יפה",
           "niqqud": "יָפָה",
-          "translit": "яфа́"
+          "translit": "яфа́",
+          "audio": "/audio/qualities-2-beautiful-form-f.mp3"
         },
         "mp": {
           "he": "יפים",
           "niqqud": "יָפִים",
-          "translit": "яфи́м"
+          "translit": "яфи́м",
+          "audio": "/audio/qualities-2-beautiful-form-mp.mp3"
         },
         "fp": {
           "he": "יפות",
           "niqqud": "יָפוֹת",
-          "translit": "яфо́т"
+          "translit": "яфо́т",
+          "audio": "/audio/qualities-2-beautiful-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-beautiful.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-beautiful.mp3"
     },
     {
       "id": "qualities-2-full",
@@ -172,26 +197,31 @@
       "example": {
         "he": "זאת כוס מלאה",
         "translit": "зот кос млеа",
-        "ru": "Это полный стакан"
+        "ru": "Это полный стакан",
+        "audio": "/audio/qualities-2-full-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מלאה",
           "niqqud": "מְלֵאָה",
-          "translit": "млеа́"
+          "translit": "млеа́",
+          "audio": "/audio/qualities-2-full-form-f.mp3"
         },
         "mp": {
           "he": "מלאים",
           "niqqud": "מְלֵאִים",
-          "translit": "млеи́м"
+          "translit": "млеи́м",
+          "audio": "/audio/qualities-2-full-form-mp.mp3"
         },
         "fp": {
           "he": "מלאות",
           "niqqud": "מְלֵאוֹת",
-          "translit": "млео́т"
+          "translit": "млео́т",
+          "audio": "/audio/qualities-2-full-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-full.mp3"
     },
     {
       "id": "qualities-2-empty",
@@ -202,26 +232,31 @@
       "example": {
         "he": "זה בקבוק ריק",
         "translit": "зэ бакбук рейк",
-        "ru": "Это пустая бутылка"
+        "ru": "Это пустая бутылка",
+        "audio": "/audio/qualities-2-empty-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ריקה",
           "niqqud": "רֵיקָה",
-          "translit": "рейка́"
+          "translit": "рейка́",
+          "audio": "/audio/qualities-2-empty-form-f.mp3"
         },
         "mp": {
           "he": "ריקים",
           "niqqud": "רֵיקִים",
-          "translit": "рейки́м"
+          "translit": "рейки́м",
+          "audio": "/audio/qualities-2-empty-form-mp.mp3"
         },
         "fp": {
           "he": "ריקות",
           "niqqud": "רֵיקוֹת",
-          "translit": "рейко́т"
+          "translit": "рейко́т",
+          "audio": "/audio/qualities-2-empty-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-empty.mp3"
     },
     {
       "id": "qualities-2-near",
@@ -232,26 +267,31 @@
       "example": {
         "he": "זה חבר קרוב",
         "translit": "зэ хавер каров",
-        "ru": "Это близкий друг"
+        "ru": "Это близкий друг",
+        "audio": "/audio/qualities-2-near-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קרובה",
           "niqqud": "קְרוֹבָה",
-          "translit": "крова́"
+          "translit": "крова́",
+          "audio": "/audio/qualities-2-near-form-f.mp3"
         },
         "mp": {
           "he": "קרובים",
           "niqqud": "קְרוֹבִים",
-          "translit": "крови́м"
+          "translit": "крови́м",
+          "audio": "/audio/qualities-2-near-form-mp.mp3"
         },
         "fp": {
           "he": "קרובות",
           "niqqud": "קְרוֹבוֹת",
-          "translit": "крово́т"
+          "translit": "крово́т",
+          "audio": "/audio/qualities-2-near-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-near.mp3"
     },
     {
       "id": "qualities-2-far",
@@ -262,26 +302,31 @@
       "example": {
         "he": "זאת עיר רחוקה",
         "translit": "зот ир рхока",
-        "ru": "Это далёкий город"
+        "ru": "Это далёкий город",
+        "audio": "/audio/qualities-2-far-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רחוקה",
           "niqqud": "רְחוֹקָה",
-          "translit": "рхока́"
+          "translit": "рхока́",
+          "audio": "/audio/qualities-2-far-form-f.mp3"
         },
         "mp": {
           "he": "רחוקים",
           "niqqud": "רְחוֹקִים",
-          "translit": "рхоки́м"
+          "translit": "рхоки́м",
+          "audio": "/audio/qualities-2-far-form-mp.mp3"
         },
         "fp": {
           "he": "רחוקות",
           "niqqud": "רְחוֹקוֹת",
-          "translit": "рхоко́т"
+          "translit": "рхоко́т",
+          "audio": "/audio/qualities-2-far-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-far.mp3"
     },
     {
       "id": "qualities-2-important",
@@ -292,27 +337,32 @@
       "example": {
         "he": "זאת שאלה חשובה",
         "translit": "зот шеэла хашува",
-        "ru": "Это важный вопрос"
+        "ru": "Это важный вопрос",
+        "audio": "/audio/qualities-2-important-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חשובה",
           "niqqud": "חֲשׁוּבָה",
-          "translit": "хашува́"
+          "translit": "хашува́",
+          "audio": "/audio/qualities-2-important-form-f.mp3"
         },
         "mp": {
           "he": "חשובים",
           "niqqud": "חֲשׁוּבִים",
-          "translit": "хашуви́м"
+          "translit": "хашуви́м",
+          "audio": "/audio/qualities-2-important-form-mp.mp3"
         },
         "fp": {
           "he": "חשובות",
           "niqqud": "חֲשׁוּבוֹת",
-          "translit": "хашуво́т"
+          "translit": "хашуво́т",
+          "audio": "/audio/qualities-2-important-form-fp.mp3"
         }
       },
       "image": "/words/qualities-2-important.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-2-important.mp3"
     }
   ]
 }

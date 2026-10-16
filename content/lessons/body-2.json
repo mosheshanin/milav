@@ -18,10 +18,12 @@
       "example": {
         "he": "זה גוף חזק",
         "translit": "зэ гуф хазак",
-        "ru": "Это сильное тело"
+        "ru": "Это сильное тело",
+        "audio": "/audio/body-2-body-phrase.mp3"
       },
       "image": "/words/body-2-body.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-body.mp3"
     },
     {
       "id": "body-2-hand",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זאת יד קטנה",
         "translit": "зот яд ктана",
-        "ru": "Это маленькая рука"
+        "ru": "Это маленькая рука",
+        "audio": "/audio/body-2-hand-phrase.mp3"
       },
       "image": "/words/body-2-hand.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-hand.mp3"
     },
     {
       "id": "body-2-leg",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זאת רגל ארוכה",
         "translit": "зот регель арука",
-        "ru": "Это длинная нога"
+        "ru": "Это длинная нога",
+        "audio": "/audio/body-2-leg-phrase.mp3"
       },
       "image": "/words/body-2-leg.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-leg.mp3"
     },
     {
       "id": "body-2-finger",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זאת אצבע ארוכה",
         "translit": "зот эцба арука",
-        "ru": "Это длинный палец"
+        "ru": "Это длинный палец",
+        "audio": "/audio/body-2-finger-phrase.mp3"
       },
       "image": "/words/body-2-finger.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-finger.mp3"
     },
     {
       "id": "body-2-back",
@@ -78,9 +86,11 @@
       "example": {
         "he": "זה גב חזק",
         "translit": "зэ гав хазак",
-        "ru": "Это сильная спина"
+        "ru": "Это сильная спина",
+        "audio": "/audio/body-2-back-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-back.mp3"
     },
     {
       "id": "body-2-belly",
@@ -92,9 +102,11 @@
       "example": {
         "he": "זאת בטן גדולה",
         "translit": "зот бетен гдола",
-        "ru": "Это большой живот"
+        "ru": "Это большой живот",
+        "audio": "/audio/body-2-belly-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-belly.mp3"
     },
     {
       "id": "body-2-heart",
@@ -106,10 +118,12 @@
       "example": {
         "he": "זה לב טוב",
         "translit": "зэ лев тов",
-        "ru": "Это доброе сердце"
+        "ru": "Это доброе сердце",
+        "audio": "/audio/body-2-heart-phrase.mp3"
       },
       "image": "/words/body-2-heart.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-heart.mp3"
     },
     {
       "id": "body-2-shoulder",
@@ -121,9 +135,11 @@
       "example": {
         "he": "זאת כתף רחבה",
         "translit": "зот катеф рхава",
-        "ru": "Это широкое плечо"
+        "ru": "Это широкое плечо",
+        "audio": "/audio/body-2-shoulder-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-shoulder.mp3"
     },
     {
       "id": "body-2-knee",
@@ -135,9 +151,11 @@
       "example": {
         "he": "זאת ברך כואבת",
         "translit": "зот берех коэвет",
-        "ru": "Это колено болит"
+        "ru": "Это колено болит",
+        "audio": "/audio/body-2-knee-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-knee.mp3"
     },
     {
       "id": "body-2-blood",
@@ -149,10 +167,12 @@
       "example": {
         "he": "זה דם אדום",
         "translit": "зэ дам адом",
-        "ru": "Это красная кровь"
+        "ru": "Это красная кровь",
+        "audio": "/audio/body-2-blood-phrase.mp3"
       },
       "image": "/words/body-2-blood.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-2-blood.mp3"
     }
   ]
 }

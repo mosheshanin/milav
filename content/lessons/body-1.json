@@ -18,9 +18,11 @@
       "example": {
         "he": "זה ראש גדול",
         "translit": "зэ рош гадоль",
-        "ru": "Это большая голова"
+        "ru": "Это большая голова",
+        "audio": "/audio/body-1-head-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-head.mp3"
     },
     {
       "id": "body-1-eye",
@@ -32,10 +34,12 @@
       "example": {
         "he": "זאת עין כחולה",
         "translit": "зот айин кхула",
-        "ru": "Это голубой глаз"
+        "ru": "Это голубой глаз",
+        "audio": "/audio/body-1-eye-phrase.mp3"
       },
       "image": "/words/body-1-eye.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-eye.mp3"
     },
     {
       "id": "body-1-ear",
@@ -47,10 +51,12 @@
       "example": {
         "he": "זאת אוזן קטנה",
         "translit": "зот озен ктана",
-        "ru": "Это маленькое ухо"
+        "ru": "Это маленькое ухо",
+        "audio": "/audio/body-1-ear-phrase.mp3"
       },
       "image": "/words/body-1-ear.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-ear.mp3"
     },
     {
       "id": "body-1-nose",
@@ -62,10 +68,12 @@
       "example": {
         "he": "זה אף ארוך",
         "translit": "зэ аф арох",
-        "ru": "Это длинный нос"
+        "ru": "Это длинный нос",
+        "audio": "/audio/body-1-nose-phrase.mp3"
       },
       "image": "/words/body-1-nose.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-nose.mp3"
     },
     {
       "id": "body-1-mouth",
@@ -77,10 +85,12 @@
       "example": {
         "he": "זה פה קטן",
         "translit": "зэ пе катан",
-        "ru": "Это маленький рот"
+        "ru": "Это маленький рот",
+        "audio": "/audio/body-1-mouth-phrase.mp3"
       },
       "image": "/words/body-1-mouth.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-mouth.mp3"
     },
     {
       "id": "body-1-tooth",
@@ -92,10 +102,12 @@
       "example": {
         "he": "זאת שן לבנה",
         "translit": "зот шен лвана",
-        "ru": "Это белый зуб"
+        "ru": "Это белый зуб",
+        "audio": "/audio/body-1-tooth-phrase.mp3"
       },
       "image": "/words/body-1-tooth.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-tooth.mp3"
     },
     {
       "id": "body-1-tongue",
@@ -107,10 +119,12 @@
       "example": {
         "he": "זאת לשון אדומה",
         "translit": "зот лашон адума",
-        "ru": "Это красный язык"
+        "ru": "Это красный язык",
+        "audio": "/audio/body-1-tongue-phrase.mp3"
       },
       "image": "/words/body-1-tongue.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-tongue.mp3"
     },
     {
       "id": "body-1-hair",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זה שיער ארוך",
         "translit": "зэ сеар арох",
-        "ru": "Это длинные волосы"
+        "ru": "Это длинные волосы",
+        "audio": "/audio/body-1-hair-phrase.mp3"
       },
       "image": "/words/body-1-hair.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-hair.mp3"
     },
     {
       "id": "body-1-neck",
@@ -137,9 +153,11 @@
       "example": {
         "he": "זה צוואר ארוך",
         "translit": "зэ цавар арох",
-        "ru": "Это длинная шея"
+        "ru": "Это длинная шея",
+        "audio": "/audio/body-1-neck-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-neck.mp3"
     },
     {
       "id": "body-1-cheek",
@@ -151,9 +169,11 @@
       "example": {
         "he": "זאת לחי ורודה",
         "translit": "зот лехи вруда",
-        "ru": "Это розовая щека"
+        "ru": "Это розовая щека",
+        "audio": "/audio/body-1-cheek-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-1-cheek.mp3"
     }
   ]
 }

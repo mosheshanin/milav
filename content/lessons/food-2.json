@@ -103,10 +103,12 @@
       "example": {
         "he": "זאת עגבנייה אדומה",
         "translit": "зот агвания адума",
-        "ru": "Это красный помидор"
+        "ru": "Это красный помидор",
+        "audio": "/audio/food-2-tomato-phrase.mp3"
       },
       "image": "/words/food-2-tomato.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-2-tomato.mp3"
     },
     {
       "id": "food-2-cucumber",

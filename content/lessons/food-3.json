@@ -18,10 +18,12 @@
       "example": {
         "he": "אלה מים קרים",
         "translit": "эле майим карим",
-        "ru": "Это холодная вода"
+        "ru": "Это холодная вода",
+        "audio": "/audio/food-3-water-phrase.mp3"
       },
       "image": "/words/food-3-water.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-water.mp3"
     },
     {
       "id": "food-3-coffee",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה קפה חם",
         "translit": "зэ кафе хам",
-        "ru": "Это горячий кофе"
+        "ru": "Это горячий кофе",
+        "audio": "/audio/food-3-coffee-phrase.mp3"
       },
       "image": "/words/food-3-coffee.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-coffee.mp3"
     },
     {
       "id": "food-3-tea",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה תה חם",
         "translit": "зэ те хам",
-        "ru": "Это горячий чай"
+        "ru": "Это горячий чай",
+        "audio": "/audio/food-3-tea-phrase.mp3"
       },
       "image": "/words/food-3-tea.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-tea.mp3"
     },
     {
       "id": "food-3-juice",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה מיץ תפוזים",
         "translit": "зэ миц тапузим",
-        "ru": "Это апельсиновый сок"
+        "ru": "Это апельсиновый сок",
+        "audio": "/audio/food-3-juice-phrase.mp3"
       },
       "image": "/words/food-3-juice.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-juice.mp3"
     },
     {
       "id": "food-3-soup",
@@ -95,10 +103,12 @@
       "example": {
         "he": "זה סלט ירקות",
         "translit": "зэ салат йеракот",
-        "ru": "Это овощной салат"
+        "ru": "Это овощной салат",
+        "audio": "/audio/food-3-salad-phrase.mp3"
       },
       "image": "/words/food-3-salad.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-salad.mp3"
     },
     {
       "id": "food-3-sandwich",
@@ -161,10 +171,12 @@
       "example": {
         "he": "זה אוכל טעים",
         "translit": "зэ охель таим",
-        "ru": "Это вкусная еда"
+        "ru": "Это вкусная еда",
+        "audio": "/audio/food-3-food-phrase.mp3"
       },
       "image": "/words/food-3-food.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-3-food.mp3"
     }
   ]
 }

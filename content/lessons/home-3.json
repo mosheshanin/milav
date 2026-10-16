@@ -119,10 +119,12 @@
       "example": {
         "he": "זאת כוס מים",
         "translit": "зот кос майим",
-        "ru": "Это стакан воды"
+        "ru": "Это стакан воды",
+        "audio": "/audio/home-3-glass-phrase.mp3"
       },
       "image": "/words/home-3-glass.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-glass.mp3"
     },
     {
       "id": "home-3-spoon",
@@ -168,10 +170,12 @@
       "example": {
         "he": "זאת סכין חדה",
         "translit": "зот сакин хада",
-        "ru": "Это острый нож"
+        "ru": "Это острый нож",
+        "audio": "/audio/home-3-knife-phrase.mp3"
       },
       "image": "/words/home-3-knife.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-3-knife.mp3"
     }
   ]
 }

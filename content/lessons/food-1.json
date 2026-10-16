@@ -86,10 +86,12 @@
       "example": {
         "he": "זה בשר טרי",
         "translit": "зэ басар тари",
-        "ru": "Это свежее мясо"
+        "ru": "Это свежее мясо",
+        "audio": "/audio/food-1-meat-phrase.mp3"
       },
       "image": "/words/food-1-meat.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-meat.mp3"
     },
     {
       "id": "food-1-chicken",
@@ -101,10 +103,12 @@
       "example": {
         "he": "זה עוף טעים",
         "translit": "зэ оф таим",
-        "ru": "Это вкусная курица"
+        "ru": "Это вкусная курица",
+        "audio": "/audio/food-1-chicken-phrase.mp3"
       },
       "image": "/words/food-1-chicken.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-chicken.mp3"
     },
     {
       "id": "food-1-rice",
@@ -116,10 +120,12 @@
       "example": {
         "he": "זה אורז לבן",
         "translit": "зэ орез лаван",
-        "ru": "Это белый рис"
+        "ru": "Это белый рис",
+        "audio": "/audio/food-1-rice-phrase.mp3"
       },
       "image": "/words/food-1-rice.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-rice.mp3"
     },
     {
       "id": "food-1-sugar",
@@ -131,9 +137,11 @@
       "example": {
         "he": "זה סוכר לבן",
         "translit": "зэ сукар лаван",
-        "ru": "Это белый сахар"
+        "ru": "Это белый сахар",
+        "audio": "/audio/food-1-sugar-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-sugar.mp3"
     },
     {
       "id": "food-1-salt",
@@ -145,10 +153,12 @@
       "example": {
         "he": "זה מלח ים",
         "translit": "зэ мелах ям",
-        "ru": "Это морская соль"
+        "ru": "Это морская соль",
+        "audio": "/audio/food-1-salt-phrase.mp3"
       },
       "image": "/words/food-1-salt.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-salt.mp3"
     },
     {
       "id": "food-1-oil",
@@ -160,10 +170,12 @@
       "example": {
         "he": "זה שמן זית",
         "translit": "зэ шемен зайит",
-        "ru": "Это оливковое масло"
+        "ru": "Это оливковое масло",
+        "audio": "/audio/food-1-oil-phrase.mp3"
       },
       "image": "/words/food-1-oil.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-1-oil.mp3"
     }
   ]
 }

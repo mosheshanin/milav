@@ -116,10 +116,12 @@
       "example": {
         "he": "זה בעל טוב",
         "translit": "зэ бааль тов",
-        "ru": "Это хороший муж"
+        "ru": "Это хороший муж",
+        "audio": "/audio/family-1-husband-phrase.mp3"
       },
       "image": "/words/family-1-husband.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-husband.mp3"
     },
     {
       "id": "family-1-parents",
@@ -131,10 +133,12 @@
       "example": {
         "he": "אלה הורים טובים",
         "translit": "эле хорим товим",
-        "ru": "Это хорошие родители"
+        "ru": "Это хорошие родители",
+        "audio": "/audio/family-1-parents-phrase.mp3"
       },
       "image": "/words/family-1-parents.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/family-1-parents.mp3"
     },
     {
       "id": "family-1-boy",

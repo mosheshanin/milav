@@ -150,9 +150,11 @@
       "example": {
         "he": "זאת שמיכה חמה",
         "translit": "зот смиха хама",
-        "ru": "Это тёплое одеяло"
+        "ru": "Это тёплое одеяло",
+        "audio": "/audio/home-2-blanket-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-blanket.mp3"
     },
     {
       "id": "home-2-mirror",
@@ -164,10 +166,12 @@
       "example": {
         "he": "זאת מראה גדולה",
         "translit": "зот мара гдола",
-        "ru": "Это большое зеркало"
+        "ru": "Это большое зеркало",
+        "audio": "/audio/home-2-mirror-phrase.mp3"
       },
       "image": "/words/home-2-mirror.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/home-2-mirror.mp3"
     }
   ]
 }

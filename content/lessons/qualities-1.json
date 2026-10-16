@@ -17,27 +17,32 @@
       "example": {
         "he": "זה כלב גדול",
         "translit": "зэ келев гадоль",
-        "ru": "Это большая собака"
+        "ru": "Это большая собака",
+        "audio": "/audio/qualities-1-big-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "גדולה",
           "niqqud": "גְּדוֹלָה",
-          "translit": "гдола́"
+          "translit": "гдола́",
+          "audio": "/audio/qualities-1-big-form-f.mp3"
         },
         "mp": {
           "he": "גדולים",
           "niqqud": "גְּדוֹלִים",
-          "translit": "гдоли́м"
+          "translit": "гдоли́м",
+          "audio": "/audio/qualities-1-big-form-mp.mp3"
         },
         "fp": {
           "he": "גדולות",
           "niqqud": "גְּדוֹלוֹת",
-          "translit": "гдоло́т"
+          "translit": "гдоло́т",
+          "audio": "/audio/qualities-1-big-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-big.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-big.mp3"
     },
     {
       "id": "qualities-1-small",
@@ -48,27 +53,32 @@
       "example": {
         "he": "זאת ילדה קטנה",
         "translit": "зот ялда ктана",
-        "ru": "Это маленькая девочка"
+        "ru": "Это маленькая девочка",
+        "audio": "/audio/qualities-1-small-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קטנה",
           "niqqud": "קְטַנָּה",
-          "translit": "ктана́"
+          "translit": "ктана́",
+          "audio": "/audio/qualities-1-small-form-f.mp3"
         },
         "mp": {
           "he": "קטנים",
           "niqqud": "קְטַנִּים",
-          "translit": "ктани́м"
+          "translit": "ктани́м",
+          "audio": "/audio/qualities-1-small-form-mp.mp3"
         },
         "fp": {
           "he": "קטנות",
           "niqqud": "קְטַנּוֹת",
-          "translit": "ктано́т"
+          "translit": "ктано́т",
+          "audio": "/audio/qualities-1-small-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-small.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-small.mp3"
     },
     {
       "id": "qualities-1-good",
@@ -79,27 +89,32 @@
       "example": {
         "he": "זה ספר טוב",
         "translit": "зэ сефер тов",
-        "ru": "Это хорошая книга"
+        "ru": "Это хорошая книга",
+        "audio": "/audio/qualities-1-good-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "טובה",
           "niqqud": "טוֹבָה",
-          "translit": "това́"
+          "translit": "това́",
+          "audio": "/audio/qualities-1-good-form-f.mp3"
         },
         "mp": {
           "he": "טובים",
           "niqqud": "טוֹבִים",
-          "translit": "тови́м"
+          "translit": "тови́м",
+          "audio": "/audio/qualities-1-good-form-mp.mp3"
         },
         "fp": {
           "he": "טובות",
           "niqqud": "טוֹבוֹת",
-          "translit": "тово́т"
+          "translit": "тово́т",
+          "audio": "/audio/qualities-1-good-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-good.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-good.mp3"
     },
     {
       "id": "qualities-1-bad",
@@ -110,27 +125,32 @@
       "example": {
         "he": "זה רעיון רע",
         "translit": "зэ раайон ра",
-        "ru": "Это плохая идея"
+        "ru": "Это плохая идея",
+        "audio": "/audio/qualities-1-bad-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רעה",
           "niqqud": "רָעָה",
-          "translit": "раа́"
+          "translit": "раа́",
+          "audio": "/audio/qualities-1-bad-form-f.mp3"
         },
         "mp": {
           "he": "רעים",
           "niqqud": "רָעִים",
-          "translit": "раи́м"
+          "translit": "раи́м",
+          "audio": "/audio/qualities-1-bad-form-mp.mp3"
         },
         "fp": {
           "he": "רעות",
           "niqqud": "רָעוֹת",
-          "translit": "рао́т"
+          "translit": "рао́т",
+          "audio": "/audio/qualities-1-bad-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-bad.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-bad.mp3"
     },
     {
       "id": "qualities-1-new",
@@ -141,27 +161,32 @@
       "example": {
         "he": "זה טלפון חדש",
         "translit": "зэ телефон хадаш",
-        "ru": "Это новый телефон"
+        "ru": "Это новый телефон",
+        "audio": "/audio/qualities-1-new-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חדשה",
           "niqqud": "חֲדָשָׁה",
-          "translit": "хадаша́"
+          "translit": "хадаша́",
+          "audio": "/audio/qualities-1-new-form-f.mp3"
         },
         "mp": {
           "he": "חדשים",
           "niqqud": "חֲדָשִׁים",
-          "translit": "хадаши́м"
+          "translit": "хадаши́м",
+          "audio": "/audio/qualities-1-new-form-mp.mp3"
         },
         "fp": {
           "he": "חדשות",
           "niqqud": "חֲדָשׁוֹת",
-          "translit": "хадашо́т"
+          "translit": "хадашо́т",
+          "audio": "/audio/qualities-1-new-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-new.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-new.mp3"
     },
     {
       "id": "qualities-1-old",
@@ -172,27 +197,32 @@
       "example": {
         "he": "זה מחשב ישן",
         "translit": "зэ махшев яшан",
-        "ru": "Это старый компьютер"
+        "ru": "Это старый компьютер",
+        "audio": "/audio/qualities-1-old-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ישנה",
           "niqqud": "יְשָׁנָה",
-          "translit": "йешана́"
+          "translit": "йешана́",
+          "audio": "/audio/qualities-1-old-form-f.mp3"
         },
         "mp": {
           "he": "ישנים",
           "niqqud": "יְשָׁנִים",
-          "translit": "йешани́м"
+          "translit": "йешани́м",
+          "audio": "/audio/qualities-1-old-form-mp.mp3"
         },
         "fp": {
           "he": "ישנות",
           "niqqud": "יְשָׁנוֹת",
-          "translit": "йешано́т"
+          "translit": "йешано́т",
+          "audio": "/audio/qualities-1-old-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-old.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-old.mp3"
     },
     {
       "id": "qualities-1-long",
@@ -203,27 +233,32 @@
       "example": {
         "he": "זה רחוב ארוך",
         "translit": "зэ рехов арох",
-        "ru": "Это длинная улица"
+        "ru": "Это длинная улица",
+        "audio": "/audio/qualities-1-long-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ארוכה",
           "niqqud": "אֲרוּכָּה",
-          "translit": "арука́"
+          "translit": "арука́",
+          "audio": "/audio/qualities-1-long-form-f.mp3"
         },
         "mp": {
           "he": "ארוכים",
           "niqqud": "אֲרוּכִּים",
-          "translit": "аруки́м"
+          "translit": "аруки́м",
+          "audio": "/audio/qualities-1-long-form-mp.mp3"
         },
         "fp": {
           "he": "ארוכות",
           "niqqud": "אֲרוּכּוֹת",
-          "translit": "аруко́т"
+          "translit": "аруко́т",
+          "audio": "/audio/qualities-1-long-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-long.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-long.mp3"
     },
     {
       "id": "qualities-1-short",
@@ -234,26 +269,31 @@
       "example": {
         "he": "זאת שמלה קצרה",
         "translit": "зот симла кцара",
-        "ru": "Это короткое платье"
+        "ru": "Это короткое платье",
+        "audio": "/audio/qualities-1-short-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קצרה",
           "niqqud": "קְצָרָה",
-          "translit": "кцара́"
+          "translit": "кцара́",
+          "audio": "/audio/qualities-1-short-form-f.mp3"
         },
         "mp": {
           "he": "קצרים",
           "niqqud": "קְצָרִים",
-          "translit": "кцари́м"
+          "translit": "кцари́м",
+          "audio": "/audio/qualities-1-short-form-mp.mp3"
         },
         "fp": {
           "he": "קצרות",
           "niqqud": "קְצָרוֹת",
-          "translit": "кцаро́т"
+          "translit": "кцаро́т",
+          "audio": "/audio/qualities-1-short-form-fp.mp3"
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-short.mp3"
     },
     {
       "id": "qualities-1-hot",
@@ -264,27 +304,32 @@
       "example": {
         "he": "זה יום חם",
         "translit": "зэ йом хам",
-        "ru": "Это жаркий день"
+        "ru": "Это жаркий день",
+        "audio": "/audio/qualities-1-hot-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חמה",
           "niqqud": "חַמָּה",
-          "translit": "хама́"
+          "translit": "хама́",
+          "audio": "/audio/qualities-1-hot-form-f.mp3"
         },
         "mp": {
           "he": "חמים",
           "niqqud": "חַמִּים",
-          "translit": "хами́м"
+          "translit": "хами́м",
+          "audio": "/audio/qualities-1-hot-form-mp.mp3"
         },
         "fp": {
           "he": "חמות",
           "niqqud": "חַמּוֹת",
-          "translit": "хамо́т"
+          "translit": "хамо́т",
+          "audio": "/audio/qualities-1-hot-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-hot.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-hot.mp3"
     },
     {
       "id": "qualities-1-cold",
@@ -295,27 +340,32 @@
       "example": {
         "he": "זה חורף קר",
         "translit": "зэ хореф кар",
-        "ru": "Это холодная зима"
+        "ru": "Это холодная зима",
+        "audio": "/audio/qualities-1-cold-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "קרה",
           "niqqud": "קָרָה",
-          "translit": "кара́"
+          "translit": "кара́",
+          "audio": "/audio/qualities-1-cold-form-f.mp3"
         },
         "mp": {
           "he": "קרים",
           "niqqud": "קָרִים",
-          "translit": "кари́м"
+          "translit": "кари́м",
+          "audio": "/audio/qualities-1-cold-form-mp.mp3"
         },
         "fp": {
           "he": "קרות",
           "niqqud": "קָרוֹת",
-          "translit": "каро́т"
+          "translit": "каро́т",
+          "audio": "/audio/qualities-1-cold-form-fp.mp3"
         }
       },
       "image": "/words/qualities-1-cold.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/qualities-1-cold.mp3"
     }
   ]
 }
