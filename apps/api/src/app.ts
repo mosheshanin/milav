@@ -366,7 +366,11 @@ app.post("/api/quiz/start", requireUser, rateLimit("quiz"), async (c) => {
 
   await ensureUser(c.env.DB, user);
   const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lessonItems(lesson).map((item) => item.id));
-  if (!progress.every((p) => p.completed)) return c.json({ error: "lesson_not_completed" }, 409);
+  // Администратор может начать викторину до изучения всех слов, чтобы проверить её (решение владельца 17.10).
+  // Результат засчитывается как обычно.
+  if (!progress.every((p) => p.completed) && (await staffOf(c.env, user.id))?.role !== "admin") {
+    return c.json({ error: "lesson_not_completed" }, 409);
+  }
 
   const questions = generateLessonQuiz(lesson);
   const sessionId = await startSession(c.env.DB, user.id, lesson.id, questions, nowSeconds());

@@ -280,6 +280,12 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
             <Lock className="mx-auto mb-1 size-icon" aria-hidden />
             <b>Викторина</b> откроется, когда {alphabet ? `все ${total} букв урока будут пройдены по ${stages.length === 2 ? "двум" : "трём"} этапам` : `все ${total} слов урока будут пройдены по четырём этапам`}.
             Сейчас: {doneCount} из {total}.
+            {/* Администратор может проверить викторину раньше (сервер тоже это разрешает только администраторам). */}
+            {me.staff?.role === "admin" && (
+              <Button variant="ghost" block className="mt-3" onClick={onQuiz} data-testid="open-quiz-admin">
+                Викторина (администратор)
+              </Button>
+            )}
           </div>
         )}
 

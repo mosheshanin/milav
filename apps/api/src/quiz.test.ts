@@ -91,6 +91,39 @@ describe("начало викторины", () => {
     expect(await count("SELECT COUNT(*) AS n FROM quiz_sessions")).toBe(0);
   });
 
+  it("администратор начинает викторину до изучения слов, и сдача засчитывается; проверяющему нельзя", async () => {
+    const ADMIN = 4401;
+    const REVIEWER = 4402;
+    const env = { ...ctx.env, ADMIN_IDS: String(ADMIN) };
+    const start = (as: number) =>
+      api("/api/quiz/start", { method: "POST", as, body: JSON.stringify({ lessonId: lesson.id }), headers: { "Content-Type": "application/json" } }, env);
+    await api("/api/me", { as: REVIEWER }, env);
+    await api(
+      "/api/admin/team",
+      { method: "PUT", as: ADMIN, body: JSON.stringify({ userId: REVIEWER, role: "reviewer" }), headers: { "Content-Type": "application/json" } },
+      env,
+    );
+    expect((await start(REVIEWER)).status).toBe(409);
+    const res = await start(ADMIN);
+    expect(res.status).toBe(200);
+    const session = (await res.json()) as QuizStartResponse;
+    expect(session.questions).toHaveLength(25);
+    let last: any;
+    for (let i = 0; i < session.questions.length; i++) {
+      const q = session.questions[i]!;
+      const w = wordOf(q);
+      const body = (extra: object) =>
+        api("/api/quiz/answer", { method: "POST", as: ADMIN, body: JSON.stringify({ sessionId: session.sessionId, index: i, ...extra }), headers: { "Content-Type": "application/json" } }, env);
+      if (q.type === "speak") {
+        ctx.heard = w.he;
+        last = await (await api(`/api/quiz/speech?sessionId=${session.sessionId}&index=${i}`, { method: "POST", as: ADMIN, body: new Uint8Array(2000), headers: { "Content-Type": "audio/webm" } }, env)).json();
+      } else if (q.type === "write") last = await (await body({ strokes: await wordStrokes(w) })).json();
+      else last = await (await body({ choice: q.wordId })).json();
+    }
+    expect(last.result.passed).toBe(true);
+    expect(await count(`SELECT COUNT(*) AS n FROM lesson_passed WHERE user_id = ${ADMIN}`)).toBe(1);
+  });
+
   it("плохие запросы: без входа, без урока, неизвестный урок", async () => {
     expect((await api("/api/quiz/start", { method: "POST" })).status).toBe(401);
     expect((await post("/api/quiz/start", 1, {})).status).toBe(400);

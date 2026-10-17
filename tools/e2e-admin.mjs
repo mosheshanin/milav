@@ -227,6 +227,30 @@ await shot(page, "a7-overview-dark");
   await student.context().close();
 }
 
+// Викторина до изучения слов: кнопка только у администратора (решение владельца 17.10).
+{
+  const LESSON = "colors-1";
+  for (const id of [OWNER, STUDENT]) sql(`DELETE FROM word_progress WHERE user_id = ${id} AND lesson_id = '${LESSON}';`);
+  const openLesson = async (p) => {
+    await p.evaluate((l) => sessionStorage.setItem("milav:screen", JSON.stringify({ name: "study", lessonId: l })), LESSON);
+    await p.reload();
+    await p.waitForSelector('[data-testid="quiz-locked"]');
+  };
+  const student = await openPage(STUDENT);
+  await openLesson(student);
+  check((await student.locator('[data-testid="open-quiz-admin"]').count()) === 0, "у ученика нет кнопки викторины до изучения слов");
+  check((await student.request.post(`${BASE}/api/quiz/start`, { headers: dev(STUDENT), data: { lessonId: LESSON } })).status() === 409, "ученику сервер не даёт начать викторину (409)");
+  await student.context().close();
+
+  const owner = await openPage(OWNER);
+  await openLesson(owner);
+  await shot(owner, "a8-quiz-admin-button");
+  await owner.click('[data-testid="open-quiz-admin"]');
+  await owner.waitForSelector('[data-testid="option"], [data-testid="prompt"]');
+  check(true, "администратор открыл викторину до изучения слов");
+  await owner.context().close();
+}
+
 await browser.close();
 reset();
 
