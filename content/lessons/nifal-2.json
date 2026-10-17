@@ -17,7 +17,8 @@
       "example": {
         "he": "אני נזהר מאוד",
         "translit": "ани низхар меод",
-        "ru": "Я очень осторожен"
+        "ru": "Я очень осторожен",
+        "audio": "/audio/nifal-2-beware-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -26,147 +27,175 @@
           "ms": {
             "he": "נזהר",
             "niqqud": "נִזְהָר",
-            "translit": "низха́р"
+            "translit": "низха́р",
+            "audio": "/audio/nifal-2-beware-form-present-ms.mp3"
           },
           "fs": {
             "he": "נזהרת",
             "niqqud": "נִזְהֶרֶת",
-            "translit": "низхе́рет"
+            "translit": "низхе́рет",
+            "audio": "/audio/nifal-2-beware-form-present-fs.mp3"
           },
           "mp": {
             "he": "נזהרים",
             "niqqud": "נִזְהָרִים",
-            "translit": "низхари́м"
+            "translit": "низхари́м",
+            "audio": "/audio/nifal-2-beware-form-present-mp.mp3"
           },
           "fp": {
             "he": "נזהרות",
             "niqqud": "נִזְהָרוֹת",
-            "translit": "низхаро́т"
+            "translit": "низхаро́т",
+            "audio": "/audio/nifal-2-beware-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נזהרתי",
             "niqqud": "נִזְהַרְתִּי",
-            "translit": "низха́рти"
+            "translit": "низха́рти",
+            "audio": "/audio/nifal-2-beware-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נזהרת",
             "niqqud": "נִזְהַרְתָּ",
-            "translit": "низха́рта"
+            "translit": "низха́рта",
+            "audio": "/audio/nifal-2-beware-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נזהרת",
             "niqqud": "נִזְהַרְתְּ",
-            "translit": "низха́рт"
+            "translit": "низха́рт",
+            "audio": "/audio/nifal-2-beware-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נזהר",
             "niqqud": "נִזְהַר",
-            "translit": "низха́р"
+            "translit": "низха́р",
+            "audio": "/audio/nifal-2-beware-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נזהרה",
             "niqqud": "נִזְהֲרָה",
-            "translit": "низхара́"
+            "translit": "низхара́",
+            "audio": "/audio/nifal-2-beware-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נזהרנו",
             "niqqud": "נִזְהַרְנוּ",
-            "translit": "низха́рну"
+            "translit": "низха́рну",
+            "audio": "/audio/nifal-2-beware-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נזהרתם",
             "niqqud": "נִזְהַרְתֶּם",
-            "translit": "низхарте́м"
+            "translit": "низхарте́м",
+            "audio": "/audio/nifal-2-beware-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נזהרתן",
             "niqqud": "נִזְהַרְתֶּן",
-            "translit": "низхарте́н"
+            "translit": "низхарте́н",
+            "audio": "/audio/nifal-2-beware-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נזהרו",
             "niqqud": "נִזְהֲרוּ",
-            "translit": "низхару́"
+            "translit": "низхару́",
+            "audio": "/audio/nifal-2-beware-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אזהר",
             "niqqud": "אֶזָּהֵר",
-            "translit": "эзахе́р"
+            "translit": "эзахе́р",
+            "audio": "/audio/nifal-2-beware-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיזהר",
             "niqqud": "תִּיזָּהֵר",
-            "translit": "тизахе́р"
+            "translit": "тизахе́р",
+            "audio": "/audio/nifal-2-beware-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיזהרי",
             "niqqud": "תִּיזָּהֲרִי",
-            "translit": "тизахари́"
+            "translit": "тизахари́",
+            "audio": "/audio/nifal-2-beware-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייזהר",
             "niqqud": "יִיזָּהֵר",
-            "translit": "изахе́р"
+            "translit": "изахе́р",
+            "audio": "/audio/nifal-2-beware-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיזהר",
             "niqqud": "תִּיזָּהֵר",
-            "translit": "тизахе́р"
+            "translit": "тизахе́р",
+            "audio": "/audio/nifal-2-beware-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניזהר",
             "niqqud": "נִיזָּהֵר",
-            "translit": "низахе́р"
+            "translit": "низахе́р",
+            "audio": "/audio/nifal-2-beware-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיזהרו",
             "niqqud": "תִּיזָּהֲרוּ",
-            "translit": "тизахару́"
+            "translit": "тизахару́",
+            "audio": "/audio/nifal-2-beware-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיזהרנה",
             "niqqud": "תִּיזָּהַרְנָה",
-            "translit": "тизаха́рна"
+            "translit": "тизаха́рна",
+            "audio": "/audio/nifal-2-beware-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייזהרו",
             "niqqud": "יִיזָּהֲרוּ",
-            "translit": "изахару́"
+            "translit": "изахару́",
+            "audio": "/audio/nifal-2-beware-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייזהרנה",
             "niqqud": "יִיזָּהַרְנָה",
-            "translit": "изаха́рна"
+            "translit": "изаха́рна",
+            "audio": "/audio/nifal-2-beware-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "היזהר",
             "niqqud": "הִיזָּהֵר",
-            "translit": "хизахе́р"
+            "translit": "хизахе́р",
+            "audio": "/audio/nifal-2-beware-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "היזהרי",
             "niqqud": "הִיזָּהֲרִי",
-            "translit": "хизахари́"
+            "translit": "хизахари́",
+            "audio": "/audio/nifal-2-beware-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "היזהרו",
             "niqqud": "הִיזָּהֲרוּ",
-            "translit": "хизахару́"
+            "translit": "хизахару́",
+            "audio": "/audio/nifal-2-beware-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "היזהרנה",
             "niqqud": "הִיזָּהַרְנָה",
-            "translit": "хизаха́рна"
+            "translit": "хизаха́рна",
+            "audio": "/audio/nifal-2-beware-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-beware.mp3"
     },
     {
       "id": "nifal-2-fight",
@@ -177,7 +206,8 @@
       "example": {
         "he": "חייל נלחם באומץ",
         "translit": "хаяль нилхам беомец",
-        "ru": "Солдат смело сражается"
+        "ru": "Солдат смело сражается",
+        "audio": "/audio/nifal-2-fight-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -186,147 +216,175 @@
           "ms": {
             "he": "נלחם",
             "niqqud": "נִלְחָם",
-            "translit": "нилха́м"
+            "translit": "нилха́м",
+            "audio": "/audio/nifal-2-fight-form-present-ms.mp3"
           },
           "fs": {
             "he": "נלחמת",
             "niqqud": "נִלְחֶמֶת",
-            "translit": "нилхе́мет"
+            "translit": "нилхе́мет",
+            "audio": "/audio/nifal-2-fight-form-present-fs.mp3"
           },
           "mp": {
             "he": "נלחמים",
             "niqqud": "נִלְחָמִים",
-            "translit": "нилхами́м"
+            "translit": "нилхами́м",
+            "audio": "/audio/nifal-2-fight-form-present-mp.mp3"
           },
           "fp": {
             "he": "נלחמות",
             "niqqud": "נִלְחָמוֹת",
-            "translit": "нилхамо́т"
+            "translit": "нилхамо́т",
+            "audio": "/audio/nifal-2-fight-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נלחמתי",
             "niqqud": "נִלְחַמְתִּי",
-            "translit": "нилха́мти"
+            "translit": "нилха́мти",
+            "audio": "/audio/nifal-2-fight-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נלחמת",
             "niqqud": "נִלְחַמְתָּ",
-            "translit": "нилха́мта"
+            "translit": "нилха́мта",
+            "audio": "/audio/nifal-2-fight-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נלחמת",
             "niqqud": "נִלְחַמְתְּ",
-            "translit": "нилха́мт"
+            "translit": "нилха́мт",
+            "audio": "/audio/nifal-2-fight-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נלחם",
             "niqqud": "נִלְחַם",
-            "translit": "нилха́м"
+            "translit": "нилха́м",
+            "audio": "/audio/nifal-2-fight-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נלחמה",
             "niqqud": "נִלְחֲמָה",
-            "translit": "нилхама́"
+            "translit": "нилхама́",
+            "audio": "/audio/nifal-2-fight-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נלחמנו",
             "niqqud": "נִלְחַמְנוּ",
-            "translit": "нилха́мну"
+            "translit": "нилха́мну",
+            "audio": "/audio/nifal-2-fight-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נלחמתם",
             "niqqud": "נִלְחַמְתֶּם",
-            "translit": "нилхамте́м"
+            "translit": "нилхамте́м",
+            "audio": "/audio/nifal-2-fight-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נלחמתן",
             "niqqud": "נִלְחַמְתֶּן",
-            "translit": "нилхамте́н"
+            "translit": "нилхамте́н",
+            "audio": "/audio/nifal-2-fight-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נלחמו",
             "niqqud": "נִלְחֲמוּ",
-            "translit": "нилхаму́"
+            "translit": "нилхаму́",
+            "audio": "/audio/nifal-2-fight-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אלחם",
             "niqqud": "אֶלָּחֵם",
-            "translit": "элахе́м"
+            "translit": "элахе́м",
+            "audio": "/audio/nifal-2-fight-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תילחם",
             "niqqud": "תִּילָּחֵם",
-            "translit": "тилахе́м"
+            "translit": "тилахе́м",
+            "audio": "/audio/nifal-2-fight-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תילחמי",
             "niqqud": "תִּילָּחֲמִי",
-            "translit": "тилахами́"
+            "translit": "тилахами́",
+            "audio": "/audio/nifal-2-fight-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יילחם",
             "niqqud": "יִילָּחֵם",
-            "translit": "илахе́м"
+            "translit": "илахе́м",
+            "audio": "/audio/nifal-2-fight-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תילחם",
             "niqqud": "תִּילָּחֵם",
-            "translit": "тилахе́м"
+            "translit": "тилахе́м",
+            "audio": "/audio/nifal-2-fight-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נילחם",
             "niqqud": "נִילָּחֵם",
-            "translit": "нилахе́м"
+            "translit": "нилахе́м",
+            "audio": "/audio/nifal-2-fight-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תילחמו",
             "niqqud": "תִּילָּחֲמוּ",
-            "translit": "тилахаму́"
+            "translit": "тилахаму́",
+            "audio": "/audio/nifal-2-fight-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תילחמנה",
             "niqqud": "תִּילָּחַמְנָה",
-            "translit": "тилаха́мна"
+            "translit": "тилаха́мна",
+            "audio": "/audio/nifal-2-fight-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יילחמו",
             "niqqud": "יִילָּחֲמוּ",
-            "translit": "илахаму́"
+            "translit": "илахаму́",
+            "audio": "/audio/nifal-2-fight-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יילחמנה",
             "niqqud": "יִילָּחַמְנָה",
-            "translit": "илаха́мна"
+            "translit": "илаха́мна",
+            "audio": "/audio/nifal-2-fight-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "הילחם",
             "niqqud": "הִילָּחֵם",
-            "translit": "хилахе́м"
+            "translit": "хилахе́м",
+            "audio": "/audio/nifal-2-fight-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "הילחמי",
             "niqqud": "הִילָּחֲמִי",
-            "translit": "хилахами́"
+            "translit": "хилахами́",
+            "audio": "/audio/nifal-2-fight-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "הילחמו",
             "niqqud": "הִילָּחֲמוּ",
-            "translit": "хилахаму́"
+            "translit": "хилахаму́",
+            "audio": "/audio/nifal-2-fight-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "הילחמנה",
             "niqqud": "הִילָּחַמְנָה",
-            "translit": "хилаха́мна"
+            "translit": "хилаха́мна",
+            "audio": "/audio/nifal-2-fight-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-fight.mp3"
     },
     {
       "id": "nifal-2-fail",
@@ -337,7 +395,8 @@
       "example": {
         "he": "הוא תמיד נכשל",
         "translit": "ху тамид нихшал",
-        "ru": "Он всегда терпит неудачу"
+        "ru": "Он всегда терпит неудачу",
+        "audio": "/audio/nifal-2-fail-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -346,125 +405,149 @@
           "ms": {
             "he": "נכשל",
             "niqqud": "נִכְשָׁל",
-            "translit": "нихша́л"
+            "translit": "нихша́л",
+            "audio": "/audio/nifal-2-fail-form-present-ms.mp3"
           },
           "fs": {
             "he": "נכשלת",
             "niqqud": "נִכְשֶׁלֶת",
-            "translit": "нихше́лет"
+            "translit": "нихше́лет",
+            "audio": "/audio/nifal-2-fail-form-present-fs.mp3"
           },
           "mp": {
             "he": "נכשלים",
             "niqqud": "נִכְשָׁלִים",
-            "translit": "нихшали́м"
+            "translit": "нихшали́м",
+            "audio": "/audio/nifal-2-fail-form-present-mp.mp3"
           },
           "fp": {
             "he": "נכשלות",
             "niqqud": "נִכְשָׁלוֹת",
-            "translit": "нихшало́т"
+            "translit": "нихшало́т",
+            "audio": "/audio/nifal-2-fail-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נכשלתי",
             "niqqud": "נִכְשַׁלְתִּי",
-            "translit": "нихша́лти"
+            "translit": "нихша́лти",
+            "audio": "/audio/nifal-2-fail-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נכשלת",
             "niqqud": "נִכְשַׁלְתָּ",
-            "translit": "нихша́лта"
+            "translit": "нихша́лта",
+            "audio": "/audio/nifal-2-fail-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נכשלת",
             "niqqud": "נִכְשַׁלְתְּ",
-            "translit": "нихша́лт"
+            "translit": "нихша́лт",
+            "audio": "/audio/nifal-2-fail-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נכשל",
             "niqqud": "נִכְשַׁל",
-            "translit": "нихша́л"
+            "translit": "нихша́л",
+            "audio": "/audio/nifal-2-fail-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נכשלה",
             "niqqud": "נִכְשְׁלָה",
-            "translit": "нихшела́"
+            "translit": "нихшела́",
+            "audio": "/audio/nifal-2-fail-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נכשלנו",
             "niqqud": "נִכְשַׁלְנוּ",
-            "translit": "нихша́лну"
+            "translit": "нихша́лну",
+            "audio": "/audio/nifal-2-fail-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נכשלתם",
             "niqqud": "נִכְשַׁלְתֶּם",
-            "translit": "нихшалте́м"
+            "translit": "нихшалте́м",
+            "audio": "/audio/nifal-2-fail-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נכשלתן",
             "niqqud": "נִכְשַׁלְתֶּן",
-            "translit": "нихшалте́н"
+            "translit": "нихшалте́н",
+            "audio": "/audio/nifal-2-fail-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נכשלו",
             "niqqud": "נִכְשְׁלוּ",
-            "translit": "нихшелу́"
+            "translit": "нихшелу́",
+            "audio": "/audio/nifal-2-fail-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אכשל",
             "niqqud": "אֶכָּשֵׁל",
-            "translit": "экаше́л"
+            "translit": "экаше́л",
+            "audio": "/audio/nifal-2-fail-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיכשל",
             "niqqud": "תִּיכָּשֵׁל",
-            "translit": "тикаше́л"
+            "translit": "тикаше́л",
+            "audio": "/audio/nifal-2-fail-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיכשלי",
             "niqqud": "תִּיכָּשְׁלִי",
-            "translit": "тикашли́"
+            "translit": "тикашли́",
+            "audio": "/audio/nifal-2-fail-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייכשל",
             "niqqud": "יִיכָּשֵׁל",
-            "translit": "икаше́л"
+            "translit": "икаше́л",
+            "audio": "/audio/nifal-2-fail-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיכשל",
             "niqqud": "תִּיכָּשֵׁל",
-            "translit": "тикаше́л"
+            "translit": "тикаше́л",
+            "audio": "/audio/nifal-2-fail-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניכשל",
             "niqqud": "נִיכָּשֵׁל",
-            "translit": "никаше́л"
+            "translit": "никаше́л",
+            "audio": "/audio/nifal-2-fail-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיכשלו",
             "niqqud": "תִּיכָּשְׁלוּ",
-            "translit": "тикашлу́"
+            "translit": "тикашлу́",
+            "audio": "/audio/nifal-2-fail-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיכשלנה",
             "niqqud": "תִּיכָּשַׁלְנָה",
-            "translit": "тикаша́лна"
+            "translit": "тикаша́лна",
+            "audio": "/audio/nifal-2-fail-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייכשלו",
             "niqqud": "יִיכָּשְׁלוּ",
-            "translit": "икашлу́"
+            "translit": "икашлу́",
+            "audio": "/audio/nifal-2-fail-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייכשלנה",
             "niqqud": "יִיכָּשַׁלְנָה",
-            "translit": "икаша́лна"
+            "translit": "икаша́лна",
+            "audio": "/audio/nifal-2-fail-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-fail.mp3"
     },
     {
       "id": "nifal-2-offend",
@@ -475,7 +558,8 @@
       "example": {
         "he": "אני נפגע בקלות",
         "translit": "ани нифга бекалут",
-        "ru": "Я легко обижаюсь"
+        "ru": "Я легко обижаюсь",
+        "audio": "/audio/nifal-2-offend-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -484,125 +568,149 @@
           "ms": {
             "he": "נפגע",
             "niqqud": "נִפְגָּע",
-            "translit": "нифга́"
+            "translit": "нифга́",
+            "audio": "/audio/nifal-2-offend-form-present-ms.mp3"
           },
           "fs": {
             "he": "נפגעת",
             "niqqud": "נִפְגַּעַת",
-            "translit": "нифга́ат"
+            "translit": "нифга́ат",
+            "audio": "/audio/nifal-2-offend-form-present-fs.mp3"
           },
           "mp": {
             "he": "נפגעים",
             "niqqud": "נִפְגָּעִים",
-            "translit": "нифгаи́м"
+            "translit": "нифгаи́м",
+            "audio": "/audio/nifal-2-offend-form-present-mp.mp3"
           },
           "fp": {
             "he": "נפגעות",
             "niqqud": "נִפְגָּעוֹת",
-            "translit": "нифгао́т"
+            "translit": "нифгао́т",
+            "audio": "/audio/nifal-2-offend-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נפגעתי",
             "niqqud": "נִפְגַּעְתִּי",
-            "translit": "нифга́ти"
+            "translit": "нифга́ти",
+            "audio": "/audio/nifal-2-offend-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נפגעת",
             "niqqud": "נִפְגַּעְתָּ",
-            "translit": "нифга́та"
+            "translit": "нифга́та",
+            "audio": "/audio/nifal-2-offend-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נפגעת",
             "niqqud": "נִפְגַּעַתְּ",
-            "translit": "нифга́ат"
+            "translit": "нифга́ат",
+            "audio": "/audio/nifal-2-offend-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נפגע",
             "niqqud": "נִפְגַּע",
-            "translit": "нифга́"
+            "translit": "нифга́",
+            "audio": "/audio/nifal-2-offend-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נפגעה",
             "niqqud": "נִפְגְּעָה",
-            "translit": "нифгеа́"
+            "translit": "нифгеа́",
+            "audio": "/audio/nifal-2-offend-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נפגענו",
             "niqqud": "נִפְגַּעְנוּ",
-            "translit": "нифга́ну"
+            "translit": "нифга́ну",
+            "audio": "/audio/nifal-2-offend-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נפגעתם",
             "niqqud": "נִפְגַּעְתֶּם",
-            "translit": "нифгате́м"
+            "translit": "нифгате́м",
+            "audio": "/audio/nifal-2-offend-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נפגעתן",
             "niqqud": "נִפְגַּעְתֶּן",
-            "translit": "нифгате́н"
+            "translit": "нифгате́н",
+            "audio": "/audio/nifal-2-offend-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נפגעו",
             "niqqud": "נִפְגְּעוּ",
-            "translit": "нифгеу́"
+            "translit": "нифгеу́",
+            "audio": "/audio/nifal-2-offend-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אפגע",
             "niqqud": "אֶפָּגַע",
-            "translit": "эпага́"
+            "translit": "эпага́",
+            "audio": "/audio/nifal-2-offend-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיפגע",
             "niqqud": "תִּיפָּגַע",
-            "translit": "типага́"
+            "translit": "типага́",
+            "audio": "/audio/nifal-2-offend-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיפגעי",
             "niqqud": "תִּיפָּגְעִי",
-            "translit": "типаги́"
+            "translit": "типаги́",
+            "audio": "/audio/nifal-2-offend-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייפגע",
             "niqqud": "יִיפָּגַע",
-            "translit": "ипага́"
+            "translit": "ипага́",
+            "audio": "/audio/nifal-2-offend-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיפגע",
             "niqqud": "תִּיפָּגַע",
-            "translit": "типага́"
+            "translit": "типага́",
+            "audio": "/audio/nifal-2-offend-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניפגע",
             "niqqud": "נִיפָּגַע",
-            "translit": "нипага́"
+            "translit": "нипага́",
+            "audio": "/audio/nifal-2-offend-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיפגעו",
             "niqqud": "תִּיפָּגְעוּ",
-            "translit": "типагу́"
+            "translit": "типагу́",
+            "audio": "/audio/nifal-2-offend-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיפגענה",
             "niqqud": "תִּיפָּגַעְנָה",
-            "translit": "типага́на"
+            "translit": "типага́на",
+            "audio": "/audio/nifal-2-offend-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייפגעו",
             "niqqud": "יִיפָּגְעוּ",
-            "translit": "ипагу́"
+            "translit": "ипагу́",
+            "audio": "/audio/nifal-2-offend-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייפגענה",
             "niqqud": "יִיפָּגַעְנָה",
-            "translit": "ипага́на"
+            "translit": "ипага́на",
+            "audio": "/audio/nifal-2-offend-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-offend.mp3"
     },
     {
       "id": "nifal-2-fear",
@@ -613,7 +721,8 @@
       "example": {
         "he": "אני נבהל מכלבים",
         "translit": "ани нивхал миклавим",
-        "ru": "Я пугаюсь собак"
+        "ru": "Я пугаюсь собак",
+        "audio": "/audio/nifal-2-fear-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -622,125 +731,149 @@
           "ms": {
             "he": "נבהל",
             "niqqud": "נִבְהָל",
-            "translit": "нивха́л"
+            "translit": "нивха́л",
+            "audio": "/audio/nifal-2-fear-form-present-ms.mp3"
           },
           "fs": {
             "he": "נבהלת",
             "niqqud": "נִבְהֶלֶת",
-            "translit": "нивхе́лет"
+            "translit": "нивхе́лет",
+            "audio": "/audio/nifal-2-fear-form-present-fs.mp3"
           },
           "mp": {
             "he": "נבהלים",
             "niqqud": "נִבְהָלִים",
-            "translit": "нивхали́м"
+            "translit": "нивхали́м",
+            "audio": "/audio/nifal-2-fear-form-present-mp.mp3"
           },
           "fp": {
             "he": "נבהלות",
             "niqqud": "נִבְהָלוֹת",
-            "translit": "нивхало́т"
+            "translit": "нивхало́т",
+            "audio": "/audio/nifal-2-fear-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נבהלתי",
             "niqqud": "נִבְהַלְתִּי",
-            "translit": "нивха́лти"
+            "translit": "нивха́лти",
+            "audio": "/audio/nifal-2-fear-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נבהלת",
             "niqqud": "נִבְהַלְתָּ",
-            "translit": "нивха́лта"
+            "translit": "нивха́лта",
+            "audio": "/audio/nifal-2-fear-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נבהלת",
             "niqqud": "נִבְהַלְתְּ",
-            "translit": "нивха́лт"
+            "translit": "нивха́лт",
+            "audio": "/audio/nifal-2-fear-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נבהל",
             "niqqud": "נִבְהַל",
-            "translit": "нивха́л"
+            "translit": "нивха́л",
+            "audio": "/audio/nifal-2-fear-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נבהלה",
             "niqqud": "נִבְהֲלָה",
-            "translit": "нивхала́"
+            "translit": "нивхала́",
+            "audio": "/audio/nifal-2-fear-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נבהלנו",
             "niqqud": "נִבְהַלְנוּ",
-            "translit": "нивха́лну"
+            "translit": "нивха́лну",
+            "audio": "/audio/nifal-2-fear-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נבהלתם",
             "niqqud": "נִבְהַלְתֶּם",
-            "translit": "нивхалте́м"
+            "translit": "нивхалте́м",
+            "audio": "/audio/nifal-2-fear-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נבהלתן",
             "niqqud": "נִבְהַלְתֶּן",
-            "translit": "нивхалте́н"
+            "translit": "нивхалте́н",
+            "audio": "/audio/nifal-2-fear-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נבהלו",
             "niqqud": "נִבְהֲלוּ",
-            "translit": "нивхалу́"
+            "translit": "нивхалу́",
+            "audio": "/audio/nifal-2-fear-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אבהל",
             "niqqud": "אֶבָּהֵל",
-            "translit": "эбахе́л"
+            "translit": "эбахе́л",
+            "audio": "/audio/nifal-2-fear-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיבהל",
             "niqqud": "תִּיבָּהֵל",
-            "translit": "тибахе́л"
+            "translit": "тибахе́л",
+            "audio": "/audio/nifal-2-fear-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיבהלי",
             "niqqud": "תִּיבָּהֲלִי",
-            "translit": "тибахали́"
+            "translit": "тибахали́",
+            "audio": "/audio/nifal-2-fear-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייבהל",
             "niqqud": "יִיבָּהֵל",
-            "translit": "ибахе́л"
+            "translit": "ибахе́л",
+            "audio": "/audio/nifal-2-fear-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיבהל",
             "niqqud": "תִּיבָּהֵל",
-            "translit": "тибахе́л"
+            "translit": "тибахе́л",
+            "audio": "/audio/nifal-2-fear-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניבהל",
             "niqqud": "נִיבָּהֵל",
-            "translit": "нибахе́л"
+            "translit": "нибахе́л",
+            "audio": "/audio/nifal-2-fear-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיבהלו",
             "niqqud": "תִּיבָּהֲלוּ",
-            "translit": "тибахалу́"
+            "translit": "тибахалу́",
+            "audio": "/audio/nifal-2-fear-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיבהלנה",
             "niqqud": "תִּיבָּהַלְנָה",
-            "translit": "тибаха́лна"
+            "translit": "тибаха́лна",
+            "audio": "/audio/nifal-2-fear-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייבהלו",
             "niqqud": "יִיבָּהֲלוּ",
-            "translit": "ибахалу́"
+            "translit": "ибахалу́",
+            "audio": "/audio/nifal-2-fear-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייבהלנה",
             "niqqud": "יִיבָּהַלְנָה",
-            "translit": "ибаха́лна"
+            "translit": "ибаха́лна",
+            "audio": "/audio/nifal-2-fear-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-fear.mp3"
     },
     {
       "id": "nifal-2-bump",
@@ -751,7 +884,8 @@
       "example": {
         "he": "אני נתקל בחבר",
         "translit": "ани ниткал бехавер",
-        "ru": "Я случайно натыкаюсь на друга"
+        "ru": "Я случайно натыкаюсь на друга",
+        "audio": "/audio/nifal-2-bump-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -760,125 +894,149 @@
           "ms": {
             "he": "נתקל",
             "niqqud": "נִתְקָל",
-            "translit": "нитка́л"
+            "translit": "нитка́л",
+            "audio": "/audio/nifal-2-bump-form-present-ms.mp3"
           },
           "fs": {
             "he": "נתקלת",
             "niqqud": "נִתְקֶלֶת",
-            "translit": "нитке́лет"
+            "translit": "нитке́лет",
+            "audio": "/audio/nifal-2-bump-form-present-fs.mp3"
           },
           "mp": {
             "he": "נתקלים",
             "niqqud": "נִתְקָלִים",
-            "translit": "ниткали́м"
+            "translit": "ниткали́м",
+            "audio": "/audio/nifal-2-bump-form-present-mp.mp3"
           },
           "fp": {
             "he": "נתקלות",
             "niqqud": "נִתְקָלוֹת",
-            "translit": "ниткало́т"
+            "translit": "ниткало́т",
+            "audio": "/audio/nifal-2-bump-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נתקלתי",
             "niqqud": "נִתְקַלְתִּי",
-            "translit": "нитка́лти"
+            "translit": "нитка́лти",
+            "audio": "/audio/nifal-2-bump-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נתקלת",
             "niqqud": "נִתְקַלְתָּ",
-            "translit": "нитка́лта"
+            "translit": "нитка́лта",
+            "audio": "/audio/nifal-2-bump-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נתקלת",
             "niqqud": "נִתְקַלְתְּ",
-            "translit": "нитка́лт"
+            "translit": "нитка́лт",
+            "audio": "/audio/nifal-2-bump-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נתקל",
             "niqqud": "נִתְקַל",
-            "translit": "нитка́л"
+            "translit": "нитка́л",
+            "audio": "/audio/nifal-2-bump-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נתקלה",
             "niqqud": "נִתְקְלָה",
-            "translit": "ниткела́"
+            "translit": "ниткела́",
+            "audio": "/audio/nifal-2-bump-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נתקלנו",
             "niqqud": "נִתְקַלְנוּ",
-            "translit": "нитка́лну"
+            "translit": "нитка́лну",
+            "audio": "/audio/nifal-2-bump-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נתקלתם",
             "niqqud": "נִתְקַלְתֶּם",
-            "translit": "ниткалте́м"
+            "translit": "ниткалте́м",
+            "audio": "/audio/nifal-2-bump-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נתקלתן",
             "niqqud": "נִתְקַלְתֶּן",
-            "translit": "ниткалте́н"
+            "translit": "ниткалте́н",
+            "audio": "/audio/nifal-2-bump-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נתקלו",
             "niqqud": "נִתְקְלוּ",
-            "translit": "ниткелу́"
+            "translit": "ниткелу́",
+            "audio": "/audio/nifal-2-bump-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתקל",
             "niqqud": "אֶתָּקֵל",
-            "translit": "этаке́л"
+            "translit": "этаке́л",
+            "audio": "/audio/nifal-2-bump-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיתקל",
             "niqqud": "תִּיתָּקֵל",
-            "translit": "титаке́л"
+            "translit": "титаке́л",
+            "audio": "/audio/nifal-2-bump-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיתקלי",
             "niqqud": "תִּיתָּקְלִי",
-            "translit": "титакли́"
+            "translit": "титакли́",
+            "audio": "/audio/nifal-2-bump-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייתקל",
             "niqqud": "יִיתָּקֵל",
-            "translit": "итаке́л"
+            "translit": "итаке́л",
+            "audio": "/audio/nifal-2-bump-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיתקל",
             "niqqud": "תִּיתָּקֵל",
-            "translit": "титаке́л"
+            "translit": "титаке́л",
+            "audio": "/audio/nifal-2-bump-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניתקל",
             "niqqud": "נִיתָּקֵל",
-            "translit": "нитаке́л"
+            "translit": "нитаке́л",
+            "audio": "/audio/nifal-2-bump-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיתקלו",
             "niqqud": "תִּיתָּקְלוּ",
-            "translit": "титаклу́"
+            "translit": "титаклу́",
+            "audio": "/audio/nifal-2-bump-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיתקלנה",
             "niqqud": "תִּיתָּקַלְנָה",
-            "translit": "титака́лна"
+            "translit": "титака́лна",
+            "audio": "/audio/nifal-2-bump-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייתקלו",
             "niqqud": "יִיתָּקְלוּ",
-            "translit": "итаклу́"
+            "translit": "итаклу́",
+            "audio": "/audio/nifal-2-bump-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייתקלנה",
             "niqqud": "יִיתָּקַלְנָה",
-            "translit": "итака́лна"
+            "translit": "итака́лна",
+            "audio": "/audio/nifal-2-bump-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-bump.mp3"
     },
     {
       "id": "nifal-2-avoid",
@@ -889,7 +1047,8 @@
       "example": {
         "he": "אני נמנע מסוכר",
         "translit": "ани нимна мисукар",
-        "ru": "Я воздерживаюсь от сахара"
+        "ru": "Я воздерживаюсь от сахара",
+        "audio": "/audio/nifal-2-avoid-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -898,147 +1057,175 @@
           "ms": {
             "he": "נמנע",
             "niqqud": "נִמְנָע",
-            "translit": "нимна́"
+            "translit": "нимна́",
+            "audio": "/audio/nifal-2-avoid-form-present-ms.mp3"
           },
           "fs": {
             "he": "נמנעת",
             "niqqud": "נִמְנַעַת",
-            "translit": "нимна́ат"
+            "translit": "нимна́ат",
+            "audio": "/audio/nifal-2-avoid-form-present-fs.mp3"
           },
           "mp": {
             "he": "נמנעים",
             "niqqud": "נִמְנָעִים",
-            "translit": "нимнаи́м"
+            "translit": "нимнаи́м",
+            "audio": "/audio/nifal-2-avoid-form-present-mp.mp3"
           },
           "fp": {
             "he": "נמנעות",
             "niqqud": "נִמְנָעוֹת",
-            "translit": "нимнао́т"
+            "translit": "нимнао́т",
+            "audio": "/audio/nifal-2-avoid-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נמנעתי",
             "niqqud": "נִמְנַעְתִּי",
-            "translit": "нимна́ти"
+            "translit": "нимна́ти",
+            "audio": "/audio/nifal-2-avoid-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נמנעת",
             "niqqud": "נִמְנַעְתָּ",
-            "translit": "нимна́та"
+            "translit": "нимна́та",
+            "audio": "/audio/nifal-2-avoid-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נמנעת",
             "niqqud": "נִמְנַעַתְּ",
-            "translit": "нимна́ат"
+            "translit": "нимна́ат",
+            "audio": "/audio/nifal-2-avoid-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נמנע",
             "niqqud": "נִמְנַע",
-            "translit": "нимна́"
+            "translit": "нимна́",
+            "audio": "/audio/nifal-2-avoid-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נמנעה",
             "niqqud": "נִמְנְעָה",
-            "translit": "нимнеа́"
+            "translit": "нимнеа́",
+            "audio": "/audio/nifal-2-avoid-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נמנענו",
             "niqqud": "נִמְנַעְנוּ",
-            "translit": "нимна́ну"
+            "translit": "нимна́ну",
+            "audio": "/audio/nifal-2-avoid-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נמנעתם",
             "niqqud": "נִמְנַעְתֶּם",
-            "translit": "нимнате́м"
+            "translit": "нимнате́м",
+            "audio": "/audio/nifal-2-avoid-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נמנעתן",
             "niqqud": "נִמְנַעְתֶּן",
-            "translit": "нимнате́н"
+            "translit": "нимнате́н",
+            "audio": "/audio/nifal-2-avoid-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נמנעו",
             "niqqud": "נִמְנְעוּ",
-            "translit": "нимнеу́"
+            "translit": "нимнеу́",
+            "audio": "/audio/nifal-2-avoid-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אמנע",
             "niqqud": "אֶמָּנַע",
-            "translit": "эмана́"
+            "translit": "эмана́",
+            "audio": "/audio/nifal-2-avoid-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תימנע",
             "niqqud": "תִּימָּנַע",
-            "translit": "тимана́"
+            "translit": "тимана́",
+            "audio": "/audio/nifal-2-avoid-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תימנעי",
             "niqqud": "תִּימָּנְעִי",
-            "translit": "тимани́"
+            "translit": "тимани́",
+            "audio": "/audio/nifal-2-avoid-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יימנע",
             "niqqud": "יִימָּנַע",
-            "translit": "имана́"
+            "translit": "имана́",
+            "audio": "/audio/nifal-2-avoid-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תימנע",
             "niqqud": "תִּימָּנַע",
-            "translit": "тимана́"
+            "translit": "тимана́",
+            "audio": "/audio/nifal-2-avoid-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נימנע",
             "niqqud": "נִימָּנַע",
-            "translit": "нимана́"
+            "translit": "нимана́",
+            "audio": "/audio/nifal-2-avoid-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תימנעו",
             "niqqud": "תִּימָּנְעוּ",
-            "translit": "тиману́"
+            "translit": "тиману́",
+            "audio": "/audio/nifal-2-avoid-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תימנענה",
             "niqqud": "תִּימָּנַעְנָה",
-            "translit": "тимана́на"
+            "translit": "тимана́на",
+            "audio": "/audio/nifal-2-avoid-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יימנעו",
             "niqqud": "יִימָּנְעוּ",
-            "translit": "иману́"
+            "translit": "иману́",
+            "audio": "/audio/nifal-2-avoid-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יימנענה",
             "niqqud": "יִימָּנַעְנָה",
-            "translit": "имана́на"
+            "translit": "имана́на",
+            "audio": "/audio/nifal-2-avoid-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "הימנע",
             "niqqud": "הִימָּנַע",
-            "translit": "химана́"
+            "translit": "химана́",
+            "audio": "/audio/nifal-2-avoid-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "הימנעי",
             "niqqud": "הִימָּנְעִי",
-            "translit": "химани́"
+            "translit": "химани́",
+            "audio": "/audio/nifal-2-avoid-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "הימנעו",
             "niqqud": "הִימָּנְעוּ",
-            "translit": "химану́"
+            "translit": "химану́",
+            "audio": "/audio/nifal-2-avoid-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "הימנענה",
             "niqqud": "הִימָּנַעְנָה",
-            "translit": "химана́на"
+            "translit": "химана́на",
+            "audio": "/audio/nifal-2-avoid-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-avoid.mp3"
     },
     {
       "id": "nifal-2-elect",
@@ -1049,7 +1236,8 @@
       "example": {
         "he": "הוא נבחר ליושב ראש",
         "translit": "ху нивхар лейошев рош",
-        "ru": "Его выбирают председателем"
+        "ru": "Его выбирают председателем",
+        "audio": "/audio/nifal-2-elect-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -1058,125 +1246,149 @@
           "ms": {
             "he": "נבחר",
             "niqqud": "נִבְחָר",
-            "translit": "нивха́р"
+            "translit": "нивха́р",
+            "audio": "/audio/nifal-2-elect-form-present-ms.mp3"
           },
           "fs": {
             "he": "נבחרת",
             "niqqud": "נִבְחֶרֶת",
-            "translit": "нивхе́рет"
+            "translit": "нивхе́рет",
+            "audio": "/audio/nifal-2-elect-form-present-fs.mp3"
           },
           "mp": {
             "he": "נבחרים",
             "niqqud": "נִבְחָרִים",
-            "translit": "нивхари́м"
+            "translit": "нивхари́м",
+            "audio": "/audio/nifal-2-elect-form-present-mp.mp3"
           },
           "fp": {
             "he": "נבחרות",
             "niqqud": "נִבְחָרוֹת",
-            "translit": "нивхаро́т"
+            "translit": "нивхаро́т",
+            "audio": "/audio/nifal-2-elect-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נבחרתי",
             "niqqud": "נִבְחַרְתִּי",
-            "translit": "нивха́рти"
+            "translit": "нивха́рти",
+            "audio": "/audio/nifal-2-elect-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נבחרת",
             "niqqud": "נִבְחַרְתָּ",
-            "translit": "нивха́рта"
+            "translit": "нивха́рта",
+            "audio": "/audio/nifal-2-elect-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נבחרת",
             "niqqud": "נִבְחַרְתְּ",
-            "translit": "нивха́рт"
+            "translit": "нивха́рт",
+            "audio": "/audio/nifal-2-elect-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נבחר",
             "niqqud": "נִבְחַר",
-            "translit": "нивха́р"
+            "translit": "нивха́р",
+            "audio": "/audio/nifal-2-elect-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נבחרה",
             "niqqud": "נִבְחֲרָה",
-            "translit": "нивхара́"
+            "translit": "нивхара́",
+            "audio": "/audio/nifal-2-elect-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נבחרנו",
             "niqqud": "נִבְחַרְנוּ",
-            "translit": "нивха́рну"
+            "translit": "нивха́рну",
+            "audio": "/audio/nifal-2-elect-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נבחרתם",
             "niqqud": "נִבְחַרְתֶּם",
-            "translit": "нивхарте́м"
+            "translit": "нивхарте́м",
+            "audio": "/audio/nifal-2-elect-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נבחרתן",
             "niqqud": "נִבְחַרְתֶּן",
-            "translit": "нивхарте́н"
+            "translit": "нивхарте́н",
+            "audio": "/audio/nifal-2-elect-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נבחרו",
             "niqqud": "נִבְחֲרוּ",
-            "translit": "нивхару́"
+            "translit": "нивхару́",
+            "audio": "/audio/nifal-2-elect-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אבחר",
             "niqqud": "אֶבָּחֵר",
-            "translit": "эбахе́р"
+            "translit": "эбахе́р",
+            "audio": "/audio/nifal-2-elect-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיבחר",
             "niqqud": "תִּיבָּחֵר",
-            "translit": "тибахе́р"
+            "translit": "тибахе́р",
+            "audio": "/audio/nifal-2-elect-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיבחרי",
             "niqqud": "תִּיבָּחֲרִי",
-            "translit": "тибахари́"
+            "translit": "тибахари́",
+            "audio": "/audio/nifal-2-elect-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייבחר",
             "niqqud": "יִיבָּחֵר",
-            "translit": "ибахе́р"
+            "translit": "ибахе́р",
+            "audio": "/audio/nifal-2-elect-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיבחר",
             "niqqud": "תִּיבָּחֵר",
-            "translit": "тибахе́р"
+            "translit": "тибахе́р",
+            "audio": "/audio/nifal-2-elect-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניבחר",
             "niqqud": "נִיבָּחֵר",
-            "translit": "нибахе́р"
+            "translit": "нибахе́р",
+            "audio": "/audio/nifal-2-elect-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיבחרו",
             "niqqud": "תִּיבָּחֲרוּ",
-            "translit": "тибахару́"
+            "translit": "тибахару́",
+            "audio": "/audio/nifal-2-elect-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיבחרנה",
             "niqqud": "תִּיבָּחַרְנָה",
-            "translit": "тибаха́рна"
+            "translit": "тибаха́рна",
+            "audio": "/audio/nifal-2-elect-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייבחרו",
             "niqqud": "יִיבָּחֲרוּ",
-            "translit": "ибахару́"
+            "translit": "ибахару́",
+            "audio": "/audio/nifal-2-elect-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייבחרנה",
             "niqqud": "יִיבָּחַרְנָה",
-            "translit": "ибаха́рна"
+            "translit": "ибаха́рна",
+            "audio": "/audio/nifal-2-elect-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-elect.mp3"
     },
     {
       "id": "nifal-2-examine",
@@ -1187,7 +1399,8 @@
       "example": {
         "he": "אני נבדק אצל רופא",
         "translit": "ани нивдак ецель рофе",
-        "ru": "Я обследуюсь у врача"
+        "ru": "Я обследуюсь у врача",
+        "audio": "/audio/nifal-2-examine-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -1196,125 +1409,149 @@
           "ms": {
             "he": "נבדק",
             "niqqud": "נִבְדָּק",
-            "translit": "нивда́к"
+            "translit": "нивда́к",
+            "audio": "/audio/nifal-2-examine-form-present-ms.mp3"
           },
           "fs": {
             "he": "נבדקת",
             "niqqud": "נִבְדֶּקֶת",
-            "translit": "нивде́кет"
+            "translit": "нивде́кет",
+            "audio": "/audio/nifal-2-examine-form-present-fs.mp3"
           },
           "mp": {
             "he": "נבדקים",
             "niqqud": "נִבְדָּקִים",
-            "translit": "нивдаки́м"
+            "translit": "нивдаки́м",
+            "audio": "/audio/nifal-2-examine-form-present-mp.mp3"
           },
           "fp": {
             "he": "נבדקות",
             "niqqud": "נִבְדָּקוֹת",
-            "translit": "нивдако́т"
+            "translit": "нивдако́т",
+            "audio": "/audio/nifal-2-examine-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נבדקתי",
             "niqqud": "נִבְדַּקְתִּי",
-            "translit": "нивда́кти"
+            "translit": "нивда́кти",
+            "audio": "/audio/nifal-2-examine-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נבדקת",
             "niqqud": "נִבְדַּקְתָּ",
-            "translit": "нивда́кта"
+            "translit": "нивда́кта",
+            "audio": "/audio/nifal-2-examine-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נבדקת",
             "niqqud": "נִבְדַּקְתְּ",
-            "translit": "нивда́кт"
+            "translit": "нивда́кт",
+            "audio": "/audio/nifal-2-examine-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נבדק",
             "niqqud": "נִבְדַּק",
-            "translit": "нивда́к"
+            "translit": "нивда́к",
+            "audio": "/audio/nifal-2-examine-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נבדקה",
             "niqqud": "נִבְדְּקָה",
-            "translit": "нивдека́"
+            "translit": "нивдека́",
+            "audio": "/audio/nifal-2-examine-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נבדקנו",
             "niqqud": "נִבְדַּקְנוּ",
-            "translit": "нивда́кну"
+            "translit": "нивда́кну",
+            "audio": "/audio/nifal-2-examine-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נבדקתם",
             "niqqud": "נִבְדַּקְתֶּם",
-            "translit": "нивдакте́м"
+            "translit": "нивдакте́м",
+            "audio": "/audio/nifal-2-examine-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נבדקתן",
             "niqqud": "נִבְדַּקְתֶּן",
-            "translit": "нивдакте́н"
+            "translit": "нивдакте́н",
+            "audio": "/audio/nifal-2-examine-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נבדקו",
             "niqqud": "נִבְדְּקוּ",
-            "translit": "нивдеку́"
+            "translit": "нивдеку́",
+            "audio": "/audio/nifal-2-examine-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אבדק",
             "niqqud": "אֶבָּדֵק",
-            "translit": "эбаде́к"
+            "translit": "эбаде́к",
+            "audio": "/audio/nifal-2-examine-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תיבדק",
             "niqqud": "תִּיבָּדֵק",
-            "translit": "тибаде́к"
+            "translit": "тибаде́к",
+            "audio": "/audio/nifal-2-examine-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תיבדקי",
             "niqqud": "תִּיבָּדְקִי",
-            "translit": "тибадки́"
+            "translit": "тибадки́",
+            "audio": "/audio/nifal-2-examine-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ייבדק",
             "niqqud": "יִיבָּדֵק",
-            "translit": "ибаде́к"
+            "translit": "ибаде́к",
+            "audio": "/audio/nifal-2-examine-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תיבדק",
             "niqqud": "תִּיבָּדֵק",
-            "translit": "тибаде́к"
+            "translit": "тибаде́к",
+            "audio": "/audio/nifal-2-examine-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ניבדק",
             "niqqud": "נִיבָּדֵק",
-            "translit": "нибаде́к"
+            "translit": "нибаде́к",
+            "audio": "/audio/nifal-2-examine-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תיבדקו",
             "niqqud": "תִּיבָּדְקוּ",
-            "translit": "тибадку́"
+            "translit": "тибадку́",
+            "audio": "/audio/nifal-2-examine-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תיבדקנה",
             "niqqud": "תִּיבָּדַקְנָה",
-            "translit": "тибада́кна"
+            "translit": "тибада́кна",
+            "audio": "/audio/nifal-2-examine-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ייבדקו",
             "niqqud": "יִיבָּדְקוּ",
-            "translit": "ибадку́"
+            "translit": "ибадку́",
+            "audio": "/audio/nifal-2-examine-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ייבדקנה",
             "niqqud": "יִיבָּדַקְנָה",
-            "translit": "ибада́кна"
+            "translit": "ибада́кна",
+            "audio": "/audio/nifal-2-examine-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-examine.mp3"
     },
     {
       "id": "nifal-2-infect",
@@ -1325,7 +1562,8 @@
       "example": {
         "he": "הוא נדבק בשפעת",
         "translit": "ху нидбак бешапаат",
-        "ru": "Он заражается гриппом"
+        "ru": "Он заражается гриппом",
+        "audio": "/audio/nifal-2-infect-phrase.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -1334,125 +1572,149 @@
           "ms": {
             "he": "נדבק",
             "niqqud": "נִדְבָּק",
-            "translit": "нидба́к"
+            "translit": "нидба́к",
+            "audio": "/audio/nifal-2-infect-form-present-ms.mp3"
           },
           "fs": {
             "he": "נדבקת",
             "niqqud": "נִדְבֶּקֶת",
-            "translit": "нидбе́кет"
+            "translit": "нидбе́кет",
+            "audio": "/audio/nifal-2-infect-form-present-fs.mp3"
           },
           "mp": {
             "he": "נדבקים",
             "niqqud": "נִדְבָּקִים",
-            "translit": "нидбаки́м"
+            "translit": "нидбаки́м",
+            "audio": "/audio/nifal-2-infect-form-present-mp.mp3"
           },
           "fp": {
             "he": "נדבקות",
             "niqqud": "נִדְבָּקוֹת",
-            "translit": "нидбако́т"
+            "translit": "нидбако́т",
+            "audio": "/audio/nifal-2-infect-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נדבקתי",
             "niqqud": "נִדְבַּקְתִּי",
-            "translit": "нидба́кти"
+            "translit": "нидба́кти",
+            "audio": "/audio/nifal-2-infect-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נדבקת",
             "niqqud": "נִדְבַּקְתָּ",
-            "translit": "нидба́кта"
+            "translit": "нидба́кта",
+            "audio": "/audio/nifal-2-infect-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נדבקת",
             "niqqud": "נִדְבַּקְתְּ",
-            "translit": "нидба́кт"
+            "translit": "нидба́кт",
+            "audio": "/audio/nifal-2-infect-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נדבק",
             "niqqud": "נִדְבַּק",
-            "translit": "нидба́к"
+            "translit": "нидба́к",
+            "audio": "/audio/nifal-2-infect-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נדבקה",
             "niqqud": "נִדְבְּקָה",
-            "translit": "нидбека́"
+            "translit": "нидбека́",
+            "audio": "/audio/nifal-2-infect-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נדבקנו",
             "niqqud": "נִדְבַּקְנוּ",
-            "translit": "нидба́кну"
+            "translit": "нидба́кну",
+            "audio": "/audio/nifal-2-infect-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נדבקתם",
             "niqqud": "נִדְבַּקְתֶּם",
-            "translit": "нидбакте́м"
+            "translit": "нидбакте́м",
+            "audio": "/audio/nifal-2-infect-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נדבקתן",
             "niqqud": "נִדְבַּקְתֶּן",
-            "translit": "нидбакте́н"
+            "translit": "нидбакте́н",
+            "audio": "/audio/nifal-2-infect-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נדבקו",
             "niqqud": "נִדְבְּקוּ",
-            "translit": "нидбеку́"
+            "translit": "нидбеку́",
+            "audio": "/audio/nifal-2-infect-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אדבק",
             "niqqud": "אֶדָּבֵק",
-            "translit": "эдаве́к"
+            "translit": "эдаве́к",
+            "audio": "/audio/nifal-2-infect-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תידבק",
             "niqqud": "תִּידָּבֵק",
-            "translit": "тидаве́к"
+            "translit": "тидаве́к",
+            "audio": "/audio/nifal-2-infect-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תידבקי",
             "niqqud": "תִּידָּבְקִי",
-            "translit": "тидавки́"
+            "translit": "тидавки́",
+            "audio": "/audio/nifal-2-infect-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יידבק",
             "niqqud": "יִידָּבֵק",
-            "translit": "идаве́к"
+            "translit": "идаве́к",
+            "audio": "/audio/nifal-2-infect-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תידבק",
             "niqqud": "תִּידָּבֵק",
-            "translit": "тидаве́к"
+            "translit": "тидаве́к",
+            "audio": "/audio/nifal-2-infect-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נידבק",
             "niqqud": "נִידָּבֵק",
-            "translit": "нидаве́к"
+            "translit": "нидаве́к",
+            "audio": "/audio/nifal-2-infect-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תידבקו",
             "niqqud": "תִּידָּבְקוּ",
-            "translit": "тидавку́"
+            "translit": "тидавку́",
+            "audio": "/audio/nifal-2-infect-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תידבקנה",
             "niqqud": "תִּידָּבַקְנָה",
-            "translit": "тидава́кна"
+            "translit": "тидава́кна",
+            "audio": "/audio/nifal-2-infect-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יידבקו",
             "niqqud": "יִידָּבְקוּ",
-            "translit": "идавку́"
+            "translit": "идавку́",
+            "audio": "/audio/nifal-2-infect-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יידבקנה",
             "niqqud": "יִידָּבַקְנָה",
-            "translit": "идава́кна"
+            "translit": "идава́кна",
+            "audio": "/audio/nifal-2-infect-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/nifal-2-infect.mp3"
     }
   ]
 }
