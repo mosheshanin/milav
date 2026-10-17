@@ -478,6 +478,57 @@
       "v": "b9269ef3c2"
     },
     {
+      "id": "nifal-1",
+      "topicId": "nifal",
+      "section": "verbs",
+      "topic": "Нифъаль",
+      "number": 1,
+      "free": true,
+      "title": "Самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "e52812d636"
+    },
+    {
+      "id": "nifal-2",
+      "topicId": "nifal",
+      "section": "verbs",
+      "topic": "Нифъаль",
+      "number": 2,
+      "free": true,
+      "title": "Люди и чувства",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "136cff64cb"
+    },
+    {
+      "id": "nifal-3",
+      "topicId": "nifal",
+      "section": "verbs",
+      "topic": "Нифъаль",
+      "number": 3,
+      "free": true,
+      "title": "Дела и вещи",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "74357ec9a1"
+    },
+    {
       "id": "paal-1",
       "topicId": "paal",
       "section": "verbs",
@@ -632,8 +683,8 @@
     }
   ],
   "info": {
-    "totalWords": 290,
-    "totalLessons": 35,
+    "totalWords": 320,
+    "totalLessons": 38,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -703,6 +754,15 @@
           "home-2",
           "home-3",
           "home-4"
+        ]
+      },
+      {
+        "id": "nifal",
+        "title": "Нифъаль",
+        "lessonIds": [
+          "nifal-1",
+          "nifal-2",
+          "nifal-3"
         ]
       },
       {

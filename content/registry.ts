@@ -26,6 +26,9 @@ import lesson_home_1 from "./lessons/home-1.json";
 import lesson_home_2 from "./lessons/home-2.json";
 import lesson_home_3 from "./lessons/home-3.json";
 import lesson_home_4 from "./lessons/home-4.json";
+import lesson_nifal_1 from "./lessons/nifal-1.json";
+import lesson_nifal_2 from "./lessons/nifal-2.json";
+import lesson_nifal_3 from "./lessons/nifal-3.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
@@ -63,6 +66,9 @@ export const lessonFiles: unknown[] = [
   lesson_home_2,
   lesson_home_3,
   lesson_home_4,
+  lesson_nifal_1,
+  lesson_nifal_2,
+  lesson_nifal_3,
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
