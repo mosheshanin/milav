@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Mic, Square } from "lucide-react";
+import { CircleCheck, Mic, Square } from "lucide-react";
 import { ApiError } from "../api";
 import { micPermission, type MicState } from "../lib/mic";
 import { reportEvent } from "../lib/telemetry";
 import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
 import { MicAsk, MicDenied } from "./MicNotice";
+import { AutoNextButton } from "./AutoNextButton";
 import { Equalizer } from "./Equalizer";
 import { Button } from "./ui";
 
 /** После скольких неудач в обучении предлагаем отложить этап. */
 const STUDY_FAILS_BEFORE_SKIP = 2;
 
-type Phase = "idle" | "recording" | "checking";
+type Phase = "idle" | "recording" | "checking" | "passed";
 
 /** Что сервер ответил на запись голоса. В викторине сервер сам считает попытки и говорит, были ли они последними. */
 export interface SpeakVerdict {
@@ -49,6 +50,7 @@ const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
 /**
  * Запись голоса и проверка на сервере (`check` отправляет запись и возвращает ответ сервера).
  * study: сервер сам отмечает этап, `onPassed` получает ответ; после нескольких неудач можно отложить (`onGiveUp`).
+ *        Если передан `onContinue`, после успеха остаётся «Верно!» с кнопкой «Дальше», которая сама срабатывает через 2 секунды.
  * quiz: попытки считает сервер; когда они кончились, вызывается `onFailed` с ответом сервера,
  *       а `onGiveUp` вызывается, если ученик сам отказался от вопроса (нет микрофона, «Пропустить»).
  */
@@ -58,12 +60,15 @@ export function SpeakRecorder<R extends SpeakVerdict>({
   onPassed,
   onFailed,
   onGiveUp,
+  onContinue,
 }: {
   mode: "study" | "quiz";
   check: (audio: Blob) => Promise<R>;
   onPassed: (response: R) => void;
   onFailed?: (response: R) => void;
   onGiveUp: () => void;
+  /** Обучение: переход к следующему этапу после успеха (кнопка «Дальше» с автопереходом). */
+  onContinue?: () => void;
 }) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [recording, setRecording] = useState<ActiveRecording | null>(null);
@@ -122,7 +127,8 @@ export function SpeakRecorder<R extends SpeakVerdict>({
     try {
       const result = await check(blob);
       if (result.match) {
-        setPhase("idle");
+        setPhase(onContinue ? "passed" : "idle");
+        setHeard(null);
         onPassed(result);
         return;
       }
@@ -160,6 +166,20 @@ export function SpeakRecorder<R extends SpeakVerdict>({
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">
           {skipLabel}
         </Button>
+      </div>
+    );
+  }
+
+  if (phase === "passed" && onContinue) {
+    return (
+      <div className="flex flex-col items-stretch gap-block text-center" data-testid="speak-passed">
+        <p className="flex items-center justify-center gap-2 font-semibold text-success" role="status">
+          <CircleCheck className="size-icon" aria-hidden />
+          Верно! Произношение засчитано.
+        </p>
+        <AutoNextButton tone="success" running onNext={onContinue} testId="speak-next">
+          Дальше
+        </AutoNextButton>
       </div>
     );
   }

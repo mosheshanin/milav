@@ -2,13 +2,22 @@ import { useState } from "react";
 import { GERESH, typedLetters } from "@milav/shared";
 import type { Spelled } from "./WriteWord";
 import { HebrewKeyboard } from "./HebrewKeyboard";
-import { Button } from "./ui";
+import { AutoNextButton } from "./AutoNextButton";
 
 /**
  * Набор слова (или одной буквы) на экранной клавиатуре. Слово видно на карточке выше.
  * Звуки дж, ж, ч набирают двумя знаками: буква и гереш (ג׳); для них на клавиатуре есть клавиша ׳.
+ * `autoNext`: после верного набора кнопка «Дальше» сама срабатывает через 2 секунды (этапы урока).
  */
-export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: string) => void }) {
+export function TypeWord({
+  word,
+  onDone,
+  autoNext = false,
+}: {
+  word: Spelled;
+  onDone: (typed: string) => void;
+  autoNext?: boolean;
+}) {
   const target = typedLetters(word.he);
   const needsGeresh = target.includes(GERESH);
   const [typed, setTyped] = useState<string[]>([]);
@@ -31,9 +40,9 @@ export function TypeWord({ word, onDone }: { word: Spelled; onDone: (typed: stri
       </div>
 
       {correct ? (
-        <Button variant="success" onClick={() => onDone(typed.join(""))} data-testid="type-done">
+        <AutoNextButton tone="success" running={autoNext} onNext={() => onDone(typed.join(""))} testId="type-done">
           Верно! Дальше
-        </Button>
+        </AutoNextButton>
       ) : (
         <>
           <HebrewKeyboard

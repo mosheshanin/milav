@@ -11,6 +11,7 @@ import {
   type Template,
 } from "@milav/shared";
 import { DrawCanvas, type DrawHandle } from "./DrawCanvas";
+import { AutoNextButton } from "./AutoNextButton";
 import { Button } from "./ui";
 
 export interface WriteResult {
@@ -40,17 +41,20 @@ export function lettersOf(word: Spelled): string[] {
  * study: слово видно, буква подсказана бледным контуром, попыток сколько угодно.
  * quiz: слово не показано, подсказки нет, на каждую букву WRITE_ATTEMPTS_PER_LETTER попытки;
  *       если обе неудачны, буква засчитывается как ошибка, показывается верная и идём дальше.
+ * `autoNext`: когда все буквы написаны без ошибок, кнопка `doneLabel` сама срабатывает через 2 секунды (этапы урока).
  */
 export function WriteWord({
   word,
   mode,
   onDone,
   doneLabel,
+  autoNext = false,
 }: {
   word: Spelled;
   mode: "study" | "quiz";
   onDone: (result: WriteResult) => void;
   doneLabel: string;
+  autoNext?: boolean;
 }) {
   const letters = lettersOf(word);
   const canvas = useRef<DrawHandle>(null);
@@ -139,12 +143,13 @@ export function WriteWord({
           <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
             {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : "Слово написано!"}
           </p>
-          <Button
-            onClick={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
-            data-testid="write-done"
+          <AutoNextButton
+            running={autoNext && failedLetters === 0}
+            onNext={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
+            testId="write-done"
           >
             {doneLabel}
-          </Button>
+          </AutoNextButton>
         </>
       ) : (
         <>

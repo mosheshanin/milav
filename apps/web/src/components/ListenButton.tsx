@@ -7,7 +7,7 @@ import { Button } from "./ui";
 /**
  * Кнопка «послушать». По умолчанию играет слово; `play` подменяет проигрывание (название буквы, слово-пример),
  * тогда файл для заблаговременной загрузки передаётся в `preload`.
- * `onPlayed` вызывается, когда звук проигран.
+ * `onPlayed` вызывается, когда звук проигран; `onStart` при нажатии (до загрузки и звука).
  * Пока звук грузится, вместо значка крутится кольцо и подпись «Загружается…»; пока звучит, кнопка закрашена и подпись «Играет…».
  */
 export function ListenButton({
@@ -17,6 +17,7 @@ export function ListenButton({
   label = "Послушать",
   testId = "listen",
   onPlayed,
+  onStart,
 }: {
   word?: Playable;
   play?: (hooks: PlayHooks) => Promise<boolean>;
@@ -24,6 +25,7 @@ export function ListenButton({
   label?: string;
   testId?: string;
   onPlayed?: () => void;
+  onStart?: () => void;
 }) {
   const { state, run, busy } = usePlayback();
   const [failed, setFailed] = useState(false);
@@ -33,6 +35,7 @@ export function ListenButton({
 
   async function play() {
     setFailed(false);
+    onStart?.();
     const ok = await run((hooks) =>
       playOverride ? playOverride(hooks) : word ? playWord(word, hooks) : Promise.resolve(false),
     );

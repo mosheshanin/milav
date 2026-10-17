@@ -187,10 +187,18 @@ if (first.forms) {
 check(await page.locator('[data-testid="listen-next"]').isDisabled(), "«Дальше» заблокировано, пока не послушал");
 await page.click('[data-testid="listen"]');
 await page.waitForFunction(() => !document.querySelector('[data-testid="listen-next"]').disabled);
+// Автопереход: после прослушивания кнопка «Дальше» заливается слева направо и через 2 с сама ведёт дальше.
+await page.waitForSelector('[data-testid="listen-next"][data-auto-next="running"]');
+const autoFrom = Date.now();
+await page.waitForTimeout(800);
+const clip = await page.$eval('[data-testid="listen-next"] > span[aria-hidden]', (el) => el.style.clipPath).catch(() => "");
+const right = Number(/inset\(0(?:px)? ([\d.]+)%/.exec(clip)?.[1] ?? NaN);
+check(right > 5 && right < 95, `«Дальше» заливается слева направо (не залито справа: ${right}%)`);
 await shot(page, "03-listened");
-await page.click('[data-testid="listen-next"]');
-
-await page.waitForSelector('[data-testid="speak-start"]');
+// Кнопку не нажимаем: этап должен смениться сам.
+await page.waitForSelector('[data-testid="speak-start"]', { timeout: 4000 });
+const autoMs = Date.now() - autoFrom;
+check(autoMs >= 1500 && autoMs < 3500, `автопереход к «Говори» без нажатия через ${autoMs} мс`);
 await page.click('[data-testid="speak-start"]');
 await page.waitForSelector('[data-testid="equalizer"]');
 // Фальшивый микрофон Chromium пищит раз в секунду: снимаем высоты столбиков несколько раз за время записи.
@@ -225,8 +233,8 @@ await page.waitForSelector('[data-testid="keyboard"]');
 await shot(page, "07-type");
 await typeWord(page, first.he);
 await shot(page, "08-type-correct");
-await page.click('[data-testid="type-done"]');
-await page.waitForSelector("text=Вернуться к «Говори»");
+// «Верно! Дальше» тоже переходит сам (кнопку не нажимаем).
+await page.waitForSelector("text=Вернуться к «Говори»", { timeout: 5000 });
 check(true, "без «говори» слово не засчитано, предложено вернуться");
 await shot(page, "09-speak-pending");
 

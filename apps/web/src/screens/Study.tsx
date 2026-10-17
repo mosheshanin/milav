@@ -26,6 +26,7 @@ import { StageTabs } from "../components/StageTabs";
 import { TypeWord } from "../components/TypeWord";
 import { WordCard } from "../components/WordCard";
 import { WriteWord } from "../components/WriteWord";
+import { AutoNextButton } from "../components/AutoNextButton";
 import { Button, Card, Notice } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
 import { playLetterExample, playLetterName } from "../lib/audio";
@@ -152,9 +153,9 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
       if (res.pointsAwarded) setJustEarned(true);
       if (res.pointsAwarded && me.reminders?.offer && offer === "none") setOffer("pending");
       if (eventHasNews(res.play)) setToast(res.play);
-      advance("speak", res.progress, skipped.has(word.id));
+      // К следующему этапу переходит кнопка «Дальше» (сама через 2 секунды), прогресс уже обновлён.
     },
-    [word, replace, advance, skipped, me.reminders?.offer, offer],
+    [word, replace, me.reminders?.offer, offer],
   );
 
   const onSpeakSkipped = useCallback(() => {
@@ -238,6 +239,7 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
                 check={(audio) => api.speech(word.id, audio)}
                 onPassed={onSpeakPassed}
                 onGiveUp={onSpeakSkipped}
+                onContinue={() => advance("speak", current, isSkipped)}
               />
             </>
           )}
@@ -246,10 +248,11 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
               word={word}
               mode="study"
               doneLabel="Дальше"
+              autoNext
               onDone={(result) => void saveStage({ stage: "write", strokes: result.letterStrokes })}
             />
           )}
-          {view === "type" && <TypeWord word={word} onDone={(typed) => void saveStage({ stage: "type", typed })} />}
+          {view === "type" && <TypeWord word={word} autoNext onDone={(typed) => void saveStage({ stage: "type", typed })} />}
           {view === "end" && (
             <EndPanel
               completed={current.completed}
@@ -323,6 +326,27 @@ function ListenStage({
   onNext: () => void;
 }) {
   const [played, setPlayed] = useState(done);
+  /**
+   * Автопереход: отсчёт 2 секунды идёт после того, как звук доиграл. Новое нажатие «послушать»
+   * его останавливает, а после нового прослушивания отсчёт начинается заново (ключ меняется).
+   */
+  const [countdown, setCountdown] = useState<number | null>(null);
+  const heard = () => {
+    setPlayed(true);
+    setCountdown((n) => (n ?? 0) + 1);
+  };
+  const stop = () => setCountdown(null);
+  const next = (
+    <AutoNextButton
+      key={countdown ?? "idle"}
+      running={countdown !== null}
+      onNext={onNext}
+      disabled={!played || busy}
+      testId="listen-next"
+    >
+      Дальше
+    </AutoNextButton>
+  );
   if (isLetter(item)) {
     // Название буквы нужно прослушать; слово-пример можно послушать по желанию.
     return (
@@ -332,27 +356,26 @@ function ListenStage({
           play={(hooks) => playLetterName(item, hooks)}
           preload={item.audio}
           label="Название буквы"
-          onPlayed={() => setPlayed(true)}
+          onStart={stop}
+          onPlayed={heard}
         />
         <ListenButton
           play={(hooks) => playLetterExample(item, hooks)}
           preload={item.example.audio}
           label="Слово-пример"
           testId="listen-example"
+          onStart={stop}
+          onPlayed={() => played && heard()}
         />
-        <Button onClick={onNext} disabled={!played || busy} data-testid="listen-next">
-          Дальше
-        </Button>
+        {next}
       </>
     );
   }
   return (
     <>
       <p className="text-center text-ink-soft">Послушайте слово и повторите про себя.</p>
-      <ListenButton word={item} onPlayed={() => setPlayed(true)} />
-      <Button onClick={onNext} disabled={!played || busy} data-testid="listen-next">
-        Дальше
-      </Button>
+      <ListenButton word={item} onStart={stop} onPlayed={heard} />
+      {next}
     </>
   );
 }
