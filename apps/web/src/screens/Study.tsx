@@ -189,27 +189,6 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
     <>
       <Header title={`Урок ${lesson.number}. ${lesson.title}`} subtitle={`${lesson.topic} · ${noun} пройдено: ${doneCount} из ${total}`} onBack={onBack} />
       <main className="mx-auto flex max-w-md flex-col gap-block p-block pb-section">
-        <nav
-          className={alphabet ? "flex flex-wrap justify-center gap-2" : "grid grid-cols-10 gap-1"}
-          aria-label={alphabet ? "Буквы урока" : "Слова урока"}
-        >
-          {progress.map((p, i) => (
-            <button
-              key={p.wordId}
-              type="button"
-              onClick={() => selectWord(i)}
-              aria-label={`${alphabet ? "Буква" : "Слово"} ${i + 1}`}
-              aria-current={i === index}
-              data-testid={`dot-${i}`}
-              className={`rounded-full font-semibold ${alphabet ? "size-11 font-hebrew text-xl" : "aspect-square text-xs"} ${
-                i === index ? "bg-accent text-white" : p.completed ? "bg-success-soft text-success" : "bg-line text-ink-soft"
-              }`}
-            >
-              {alphabet ? (items[i] as Letter).he : i + 1}
-            </button>
-          ))}
-        </nav>
-
         {isLetter(word) ? (
           <LetterCard letter={word} compact={view === "write" || view === "type"} />
         ) : (
@@ -271,6 +250,28 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
             </p>
           )}
         </Card>
+
+        {/* Слова урока внизу, под этапом: сверху карточка слова и этапы. */}
+        <nav
+          className={alphabet ? "flex flex-wrap justify-center gap-2" : "grid grid-cols-10 gap-1"}
+          aria-label={alphabet ? "Буквы урока" : "Слова урока"}
+        >
+          {progress.map((p, i) => (
+            <button
+              key={p.wordId}
+              type="button"
+              onClick={() => selectWord(i)}
+              aria-label={`${alphabet ? "Буква" : "Слово"} ${i + 1}`}
+              aria-current={i === index}
+              data-testid={`dot-${i}`}
+              className={`rounded-full font-semibold ${alphabet ? "size-11 font-hebrew text-xl" : "aspect-square text-xs"} ${
+                i === index ? "bg-accent text-white" : p.completed ? "bg-success-soft text-success" : "bg-line text-ink-soft"
+              }`}
+            >
+              {alphabet ? (items[i] as Letter).he : i + 1}
+            </button>
+          ))}
+        </nav>
 
         {allDone ? (
           view !== "end" && (
