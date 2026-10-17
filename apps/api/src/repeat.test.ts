@@ -264,6 +264,35 @@ describe("повторение: формы глаголов", () => {
     expect(buildRepeatSession(items, TODAY, () => 0.9).questions.every((q) => !q.form)).toBe(true);
   });
 
+  it("нифъаль: прошедшее 3ms и настоящее ms звучат одинаково, любой выбор из них верен", async () => {
+    const nifal = lessons.find((l) => l.id === "nifal-3")!;
+    const word = nifal.words.find((w) => w.id === "nifal-3-written")!;
+    await ctx.env.DB.prepare(
+      "INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (?, ?, ?, 1, 1, 1, 1, '2026-10-10 08:00:00')",
+    )
+      .bind(STUDENT, word.id, nifal.id)
+      .run();
+    const nf = verbForms(word.verb!);
+    const past = nf.find((f) => f.tense === "past" && f.key === "3ms")!;
+    const present = nf.find((f) => f.tense === "present" && f.key === "ms")!;
+    expect(past.form.niqqud).not.toBe(present.form.niqqud);
+    expect(formSound(past.form)).toBe(formSound(present.form));
+    const same = await answer(STUDENT, { wordId: word.id, type: "form-name", form: id(past), choice: id(present) });
+    expect(same.body).toMatchObject({ correct: true });
+    // Звучащая иначе форма остаётся неверной (на другом слове: второй ответ по тому же слову в тот же день не принимается).
+    const word2 = nifal.words.find((w) => w.id !== word.id)!;
+    await ctx.env.DB.prepare(
+      "INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (?, ?, ?, 1, 1, 1, 1, '2026-10-10 08:00:00')",
+    )
+      .bind(STUDENT, word2.id, nifal.id)
+      .run();
+    const f2 = verbForms(word2.verb!);
+    const asked = f2.find((f) => f.tense === "past" && f.key === "3ms")!;
+    const notSame = f2.find((f) => formSound(f.form) !== formSound(asked.form))!;
+    const wrong = await answer(STUDENT, { wordId: word2.id, type: "form-name", form: id(asked), choice: id(notSame) });
+    expect(wrong.body).toMatchObject({ correct: false });
+  });
+
   it("ответ о форме проверяет сервер и двигает коробку глагола", async () => {
     expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: "past:zz", choice: id(past3ms) })).status).toBe(400);
     expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: id(past3ms), choice: "nope" })).status).toBe(400);
