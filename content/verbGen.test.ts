@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { VERB_FORMS_TOTAL, normalizeHebrew, verbForms } from "@milav/shared";
-import { DIBER, DIBER_INFINITIVE, KATAV, KATAV_INFINITIVE } from "./verbFixture";
+import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, KATAV, KATAV_INFINITIVE } from "./verbFixture";
 import { stressProblems, skeletonProblems, stripStress, syllables, verbProblems } from "./rules";
-import { SIN_ROOTS, conjugatePaal, conjugatePiel, paalRootProblems, pielRootProblems } from "./verbGen";
-import { PAAL_LESSONS, PIEL_LESSONS, buildPaalLesson, buildPielLesson } from "./verbLessons";
+import { SIN_ROOTS, conjugateHifil, conjugatePaal, conjugatePiel, hifilRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
+import { HIFIL_LESSONS, PAAL_LESSONS, PIEL_LESSONS, buildHifilLesson, buildPaalLesson, buildPielLesson } from "./verbLessons";
 
 const ROOTS = PAAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
 
@@ -320,5 +320,157 @@ describe("уроки пиэль: составлены генератором", (
     const speak = (buildPielLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[0]!;
     expect(speak.example).toMatchObject({ he: "אני מדבר עברית", translit: "ани медабер иврит" });
     expect(() => buildPielLesson(4)).toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Хифъиль
+
+const HIFIL_ROOTS = HIFIL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
+
+describe("генератор форм хифъиль: образец «объяснять»", () => {
+  /** Огласовки сравниваем в нормальной форме Unicode: образец набран вручную, порядок знаков может отличаться. */
+  const nfd = (f: { he: string; niqqud: string; translit: string }) => ({ ...f, niqqud: f.niqqud.normalize("NFD") });
+
+  it("для корня סבר получает те же 27 форм и инфинитив, что набраны в образце вручную", () => {
+    const { infinitive, verb } = conjugateHifil("סבר");
+    expect(nfd(infinitive)).toEqual(nfd(HISBIR_INFINITIVE));
+    expect(verb.binyan).toBe("hifil");
+    expect(verb.root).toBe("סבר");
+    for (const { tense, key, form } of verbForms(HISBIR)) {
+      const got = (verb[tense] as Record<string, typeof form>)[key]!;
+      expect(nfd(got), `${tense}.${key}`).toEqual(nfd(form));
+    }
+    expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+  });
+
+  it("всегда 27 форм, приставки бинъяна на месте (להה, מ, ה в прошедшем)", () => {
+    for (const root of HIFIL_ROOTS) {
+      const { infinitive, verb } = conjugateHifil(root);
+      expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+      expect(infinitive.he.startsWith("לה")).toBe(true);
+      expect(verb.present.ms.he.startsWith("מ")).toBe(true);
+      for (const f of Object.values(verb.past)) expect(f.he.startsWith("ה"), f.he).toBe(true);
+    }
+  });
+});
+
+describe("генератор форм хифъиль: правила", () => {
+  const same = (actual: string, expected: string) => expect(actual.normalize("NFD")).toBe(expected.normalize("NFD"));
+  const form = (root: string, tense: "present" | "past" | "future" | "imperative", key: string) => {
+    const set = conjugateHifil(root).verb[tense] as Record<string, { he: string; niqqud: string; translit: string }>;
+    return set[key]!;
+  };
+
+  it("первая буква корня после гласной приставки без дагеша, вторая после немой шва с дагешем", () => {
+    same(conjugateHifil("כנס").infinitive.niqqud, "לְהַכְנִיס");
+    expect(conjugateHifil("כנס").infinitive.translit).toBe("лехахни́с");
+    same(form("כתב", "past", "3ms").niqqud, "הִכְתִּיב");
+    expect(form("פסק", "future", "3ms").translit).toBe("яфси́к");
+    same(form("דפס", "present", "ms").niqqud, "מַדְפִּיס");
+  });
+
+  it("приставки: הִ «хи», הַ «ха», מַ «ма», אַ «а», תַּ с дагешем «та», יַ «я», נַ «на»", () => {
+    expect(form("זכר", "past", "3ms").translit).toBe("хизки́р");
+    expect(form("זכר", "imperative", "ms").translit).toBe("хазке́р");
+    expect(form("זכר", "future", "1s").translit).toBe("азки́р");
+    same(form("זכר", "future", "2ms").niqqud, "תַּזְכִּיר");
+    expect(form("זכר", "future", "3ms").translit).toBe("язки́р");
+    expect(form("זכר", "future", "1p").translit).toBe("назки́р");
+  });
+
+  it("ударение на основе: 3fs и 3p прошедшего, 2fs, 2mp, 3mp будущего, fs и mp повелительного; у настоящего ж.р. и мн.ч. на конце", () => {
+    expect(form("קשב", "past", "3fs").translit).toBe("хикши́ва");
+    expect(form("קשב", "past", "3p").translit).toBe("хикши́ву");
+    expect(form("קשב", "future", "2fs").translit).toBe("такши́ви");
+    expect(form("קשב", "future", "3mp").translit).toBe("якши́ву");
+    expect(form("קשב", "imperative", "fs").translit).toBe("хакши́ви");
+    expect(form("קשב", "present", "fs").translit).toBe("макшива́");
+    expect(form("קשב", "present", "mp").translit).toBe("макшиви́м");
+    expect(form("קשב", "past", "1s").translit).toBe("хикша́вти");
+    expect(form("קשב", "past", "2mp").translit).toBe("хикшавте́м");
+  });
+
+  it("третья נ сливается с окончаниями -נוּ и -נָה: הִזְמַנּוּ, תַּזְמֵנָּה", () => {
+    same(form("זמנ", "past", "1p").niqqud, "הִזְמַנּוּ");
+    expect(form("זמנ", "past", "1p").he).toBe("הזמנו");
+    expect(form("זמנ", "past", "1p").translit).toBe("хизма́ну");
+    same(form("זמנ", "future", "2fp").niqqud, "תַּזְמֵנָּה");
+    same(form("זמנ", "imperative", "fp").niqqud, "הַזְמֵנָּה");
+    same(form("זמנ", "past", "1s").niqqud, "הִזְמַנְתִּי");
+    expect(form("זמנ", "present", "ms").he).toBe("מזמין");
+  });
+
+  it("вторая буква может быть гортанной: הִתְחִיל, הִשְׁאִיר", () => {
+    same(conjugateHifil("תחל").infinitive.niqqud, "לְהַתְחִיל");
+    expect(conjugateHifil("תחל").infinitive.translit).toBe("лехатхи́л");
+    same(form("שאר", "past", "1s").niqqud, "הִשְׁאַרְתִּי");
+    expect(form("שאר", "present", "ms").translit).toBe("маши́р");
+  });
+
+  it("конечные формы и ךְ: הִמְשִׁיךְ, הַמְשֵׁךְ, מַמְלִיץ", () => {
+    same(form("משכ", "past", "3ms").niqqud, "הִמְשִׁיךְ");
+    same(form("משכ", "imperative", "ms").niqqud, "הַמְשֵׁךְ");
+    expect(form("מלצ", "present", "ms").he).toBe("ממליץ");
+    expect(form("משכ", "present", "fs").he).toBe("ממשיכה");
+  });
+});
+
+describe("генератор форм хифъиль: отказ на неподходящих корнях", () => {
+  const bad: [string, string][] = [
+    ["חלט", "гортанная первая буква"],
+    ["נכר", "נ в начале"],
+    ["צלח", "гортанная третья буква"],
+    ["שקת", "ת в конце"],
+    ["כונ", "ו в корне"],
+    ["שכר", "пишется с син"],
+    ["סבב", "одинаковые буквы"],
+    ["סב", "две буквы"],
+  ];
+  for (const [root, why] of bad) {
+    it(`корень ${root} (${why}) отклоняется`, () => {
+      expect(hifilRootProblems(root).length).toBeGreaterThan(0);
+      expect(() => conjugateHifil(root)).toThrow();
+    });
+  }
+});
+
+describe("уроки хифъиль: составлены генератором", () => {
+  it("3 урока по 10 глаголов, все корни разные, ключи уникальны, корни не с син", () => {
+    expect(HIFIL_LESSONS).toHaveLength(3);
+    for (const lesson of HIFIL_LESSONS) expect(lesson.verbs).toHaveLength(10);
+    expect(new Set(HIFIL_ROOTS).size).toBe(30);
+    const keys = HIFIL_LESSONS.flatMap((l) => l.verbs.map((v) => v.key));
+    expect(new Set(keys).size).toBe(30);
+    for (const root of HIFIL_ROOTS) expect(SIN_ROOTS).not.toContain(root);
+  });
+
+  it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
+    for (const root of HIFIL_ROOTS) expect(hifilRootProblems(root), root).toEqual([]);
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildHifilLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
+      for (const word of lesson.words) {
+        expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
+        for (const { form } of verbForms(word.verb)) {
+          expect(stressProblems(form.translit), form.translit).toEqual([]);
+          expect(skeletonProblems(form.he, form.translit), form.translit).toEqual([]);
+          expect(normalizeHebrew(form.niqqud)).toBe(normalizeHebrew(form.he));
+        }
+      }
+    }
+  });
+
+  it("урок 1–3 бесплатный, id hifil-<номер>, тема «Хифъиль» раздел verbs; фраза с настоящим временем", () => {
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildHifilLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
+      expect(lesson).toMatchObject({ id: `hifil-${n}`, free: true, topicId: "hifil", section: "verbs", topic: "Хифъиль" });
+      for (const w of lesson.words) {
+        expect(w.id.startsWith(`hifil-${n}-`)).toBe(true);
+        expect(w.example.he).not.toContain("{");
+      }
+    }
+    const explain = (buildHifilLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[1]!;
+    expect(explain.example).toMatchObject({ he: "אני מסביר לך", translit: "ани масбир леха" });
+    expect(() => buildHifilLesson(4)).toThrow();
   });
 });

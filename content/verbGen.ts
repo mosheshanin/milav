@@ -17,7 +17,12 @@ import { ACUTE } from "./rules";
  * Пиэль (`conjugatePiel`): те же ограничения и ещё два: вторая буква корня не ר (ר не удваивается, гласная перед ней
  * меняется: בֵּרֵךְ) и третья не נ и не ת (они сливаются с окончаниями: סִמַּנּוּ, שִׁכַּתְּ).
  *
- * Каждый генератор отклоняет корень, который ему не подходит (`paalRootProblems`, `pielRootProblems`).
+ * Хифъиль (`conjugateHifil`, 17.10): приставки הִ / הַ / מַ / תַּ / יַ, во второй букве корня хирик с י (הִסְבִּיר).
+ * Первая буква корня не гортанная и не נ (הֶחְלִיט, הִכִּיר строятся иначе), третья не гортанная (הִצְלִיחַ) и не ת;
+ * зато вторая может быть א ח ע (הִשְׁאִיר, הִתְחִיל): в хифъиле под ней никогда не бывает шва. Третья נ сливается
+ * с окончанием -נוּ и -נָה (הִזְמַנּוּ, תַּזְמֵנָּה), это генератор учитывает.
+ *
+ * Каждый генератор отклоняет корень, который ему не подходит (`paalRootProblems`, `pielRootProblems`, `hifilRootProblems`).
  */
 
 /**
@@ -113,9 +118,13 @@ function consonantSound(letter: string, dagesh: boolean): string {
       return "р";
     case "ש":
       return "ш";
+    case "ה":
+    case "ח":
+      return "х";
     // Приставка י читается без «й»: יִ «и», יְ «е». א в приставке только несёт гласную: звука согласной нет.
     case "י":
     case "א":
+    case "ע":
       return "";
     default:
       throw new Error(`нет звука для буквы ${letter}`);
@@ -162,7 +171,8 @@ function render(units: Unit[], stress: Stress): Rendered {
       syllable = true;
     } else if (unit.v && unit.v !== "S" && unit.v !== "V") {
       // Сеголь в начале слова под א читается «э» (эхтов), в остальных местах «е».
-      sound += i === 0 && letter === "א" && unit.v === "E" ? "э" : SOUND[unit.v];
+      // Приставка יַ в хифъиле читается «я» (ясби́р).
+      sound += i === 0 && letter === "א" && unit.v === "E" ? "э" : i === 0 && letter === "י" && unit.v === "a" ? "я" : SOUND[unit.v];
       syllable = true;
     }
     chunks.push({ text: sound, syllable });
@@ -201,6 +211,21 @@ export function pielRootProblems(root: string): string[] {
   const [, c2, c3] = [...root];
   if (c2 === "ר") problems.push(`корень «${root}»: ר во второй букве не удваивается (в пиэль меняется гласная: בֵּרֵךְ)`);
   if (c3 === "נ" || c3 === "ת") problems.push(`корень «${root}»: ${c3} в конце сливается с окончанием (סִמַּנּוּ, שִׁכַּתְּ)`);
+  return problems;
+}
+
+/** Проблемы корня: подходит ли он генератору хифъиль (вторая буква может быть א ח ע, третья может быть נ). */
+export function hifilRootProblems(root: string): string[] {
+  const problems: string[] = [];
+  const letters = [...root];
+  const [c1, c2, c3] = letters;
+  const strong = (l: string | undefined) => l !== undefined && /^[בגדזטכלמנספצקרשת]$/.test(l);
+  if (letters.length !== 3) problems.push(`корень «${root}»: нужны ровно 3 буквы`);
+  if (!strong(c1) || c1 === "נ") problems.push(`корень «${root}»: первая буква должна быть из בגדזטכלמספצקרשת (без гортанных, י ו и נ)`);
+  if (!(strong(c2) || (c2 !== undefined && "אחע".includes(c2)))) problems.push(`корень «${root}»: вторая буква должна быть из בגדזטכלמנספצקרשת или א ח ע`);
+  if (!strong(c3) || c3 === "ת") problems.push(`корень «${root}»: третья буква должна быть из בגדזטכלמנספצקרש (без гортанных, י ו и ת)`);
+  if (new Set(letters).size !== letters.length) problems.push(`корень «${root}»: есть одинаковые буквы (удвоенный корень)`);
+  if (SIN_ROOTS.includes(root)) problems.push(`корень «${root}» пишется с «син» (שׂ), а генератор ставит «шин» (ש)`);
   return problems;
 }
 
@@ -363,6 +388,89 @@ function pielSpecs(root: string): Specs {
   };
 }
 
+/**
+ * Хифъиль (הִפְעִיל). Две основы: долгая -כְתִּיב (хирик и י под второй буквой: הִכְתִּיב, מַכְתִּיב, יַכְתִּיב, הַכְתִּיבִי) и
+ * короткая: -כְתַּבְ- в прошедшем перед согласным окончанием (הִכְתַּבְתִּי) и -כְתֵּב в повелительном м.р. и в книжных
+ * формах на -נָה (הַכְתֵּב, תַּכְתֵּבְנָה). Первая буква корня после гласной приставки без дагеша (הִכְנִיס «хихни́с»).
+ * Ударение на основе, а не на окончании: הִכְתִּיבָה «хихти́ва», תַּכְתִּיבוּ «тахти́ву»; у настоящего ж.р. и мн.ч. на конце
+ * (махтива́, махтиви́м). Третья נ сливается с окончаниями -נוּ и -נָה: הִזְמַנּוּ, תַּזְמֵנָּה.
+ */
+function hifilSpecs(root: string): Specs {
+  const [c1, c2, c3] = [...root] as [string, string, string];
+  const nun = c3 === "נ";
+  /** Долгая основа с приставкой и окончанием. */
+  const long = (prefix: Unit[], tail: "" | "a" | "i" | "u" | "im" | "ot"): Unit[] => {
+    const head = [...prefix, u(c1, "S"), u(c2, "i", { mater: YOD_HIRIK })];
+    switch (tail) {
+      case "":
+        return [...head, u(c3)];
+      case "a":
+        return [...head, u(c3, "A", { tail: "ה" })];
+      case "i":
+        return [...head, u(c3, "i", { tail: "י" })];
+      case "u":
+        return [...head, u(c3, undefined, { mater: VAV_SHURUK })];
+      case "im":
+        return [...head, u(c3, "i", { tail: "י" }), u("ם")];
+      case "ot":
+        return [...head, u(c3, undefined, { mater: VAV_HOLAM }), u("ת")];
+    }
+  };
+  /** Короткая основа с цере: הַכְתֵּב или книжная форма на -נָה (при третьей נ одна נ с дагешем: תַּזְמֵנָּה). */
+  const shortE = (prefix: Unit[], na: boolean): Unit[] => {
+    const head = [...prefix, u(c1, "S"), u(c2, "e")];
+    if (!na) return [...head, u(c3)];
+    return nun ? [...head, u(c3, "A", { forte: true, tail: "ה" })] : [...head, u(c3, "S"), u("נ", "A", { tail: "ה" })];
+  };
+  /** Прошедшее с короткой основой: הִכְתַּבְ + окончание. */
+  const pastShort = (...ending: Unit[]): Unit[] => [u("ה", "i"), u(c1, "S"), u(c2, "a"), u(c3, "S"), ...ending];
+  const pre = (letter: string): Unit[] => [u(letter, "a")];
+  const past = [u("ה", "i")];
+
+  return {
+    infinitive: [long([u("ל", "W"), u("ה", "a")], ""), "last"],
+    present: {
+      ms: [long(pre("מ"), ""), "last"],
+      fs: [long(pre("מ"), "a"), "last"],
+      mp: [long(pre("מ"), "im"), "last"],
+      fp: [long(pre("מ"), "ot"), "last"],
+    },
+    // Ударение: -ти, -та, -ну безударные (хисба́рти), -тем, -тен ударные; 3-е лицо ударное на основе (хисби́р, хисби́ра, хисби́ру).
+    past: {
+      "1s": [pastShort(u("ת", "i", { tail: "י" })), "penult"],
+      "2ms": [pastShort(u("ת", "A")), "penult"],
+      "2fs": [pastShort(u("ת", "S")), "last"],
+      "3ms": [long(past, ""), "last"],
+      "3fs": [long(past, "a"), "penult"],
+      "1p": [
+        nun ? [u("ה", "i"), u(c1, "S"), u(c2, "a"), u(c3, undefined, { forte: true, mater: VAV_SHURUK })] : pastShort(u("נ", undefined, { mater: VAV_SHURUK })),
+        "penult",
+      ],
+      "2mp": [pastShort(u("ת", "E"), u("ם")), "last"],
+      "2fp": [pastShort(u("ת", "E"), u("ן")), "last"],
+      "3p": [long(past, "u"), "penult"],
+    },
+    future: {
+      "1s": [long(pre("א"), ""), "last"],
+      "2ms": [long(pre("ת"), ""), "last"],
+      "2fs": [long(pre("ת"), "i"), "penult"],
+      "3ms": [long(pre("י"), ""), "last"],
+      "3fs": [long(pre("ת"), ""), "last"],
+      "1p": [long(pre("נ"), ""), "last"],
+      "2mp": [long(pre("ת"), "u"), "penult"],
+      "2fp": [shortE(pre("ת"), true), "penult"],
+      "3mp": [long(pre("י"), "u"), "penult"],
+      "3fp": [shortE(pre("י"), true), "penult"],
+    },
+    imperative: {
+      ms: [shortE(pre("ה"), false), "last"],
+      fs: [long(pre("ה"), "i"), "penult"],
+      mp: [long(pre("ה"), "u"), "penult"],
+      fp: [shortE(pre("ה"), true), "penult"],
+    },
+  };
+}
+
 const toForm = ([units, stress]: FormSpec): WordForm => render(units, stress);
 
 export interface ConjugatedVerb {
@@ -398,4 +506,11 @@ export function conjugatePiel(root: string): ConjugatedVerb {
   const problems = pielRootProblems(root);
   if (problems.length) throw new Error(problems.join("\n"));
   return conjugate("piel", root, pielSpecs(root));
+}
+
+/** Все 27 форм глагола хифъиль с сильным корнем. Бросает ошибку, если корень генератору не подходит. */
+export function conjugateHifil(root: string): ConjugatedVerb {
+  const problems = hifilRootProblems(root);
+  if (problems.length) throw new Error(problems.join("\n"));
+  return conjugate("hifil", root, hifilSpecs(root));
 }

@@ -1,6 +1,6 @@
 import { FREE_LESSONS_PER_TOPIC, type Binyan } from "@milav/shared";
 import { stripStress } from "./rules";
-import { conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
+import { conjugateHifil, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
 
 /**
  * Состав уроков глаголов с сильными корнями: корень, перевод и фраза-пример для каждого глагола, по темам-бинъянам.
@@ -123,10 +123,59 @@ export const PIEL_LESSONS: VerbLessonSpec[] = [
   },
 ];
 
+export const HIFIL_LESSONS: VerbLessonSpec[] = [
+  {
+    title: "Самые нужные",
+    verbs: [
+      { key: "start", root: "תחל", ru: "начинать", phrase: p("הוא {ms} עבודה חדשה", "ху {ms} авода хадаша", "Он начинает новую работу") },
+      { key: "explain", root: "סבר", ru: "объяснять", phrase: p("אני {ms} לך", "ани {ms} леха", "Я объясняю тебе") },
+      { key: "order", root: "זמנ", ru: "приглашать, заказывать", phrase: p("אני {ms} פיצה", "ани {ms} пица", "Я заказываю пиццу") },
+      { key: "continue", root: "משכ", ru: "продолжать", phrase: p("הוא {ms} ללמוד", "ху {ms} лилмод", "Он продолжает учиться") },
+      { key: "feel", root: "רגש", ru: "чувствовать", phrase: p("אני {ms} טוב", "ани {ms} тов", "Я хорошо себя чувствую") },
+      { key: "stop", root: "פסק", ru: "прекращать, переставать", phrase: p("היא {fs} לעשן", "хи {fs} леашен", "Она бросает курить") },
+      { key: "leave", root: "שאר", ru: "оставлять", phrase: p("אני {ms} הודעה", "ани {ms} ходаа", "Я оставляю сообщение") },
+      { key: "agree", root: "סכמ", ru: "соглашаться", phrase: p("אני {ms} איתך", "ани {ms} итха", "Я с тобой согласен") },
+      { key: "light", root: "דלק", ru: "зажигать, включать (свет)", phrase: p("הוא {ms} אור", "ху {ms} ор", "Он включает свет") },
+      { key: "listen", root: "קשב", ru: "слушать (внимательно)", phrase: p("היא {fs} למוזיקה", "хи {fs} ламузика", "Она слушает музыку") },
+    ],
+  },
+  {
+    title: "Дела и события",
+    verbs: [
+      { key: "remind", root: "זכר", ru: "напоминать", phrase: p("אמא {fs} לי לקנות לחם", "има {fs} ли ликнот лехем", "Мама напоминает мне купить хлеб") },
+      { key: "insert", root: "כנס", ru: "вносить, вводить", phrase: p("הוא {ms} סיסמה", "ху {ms} сисма", "Он вводит пароль") },
+      { key: "dress", root: "לבש", ru: "одевать (кого-то)", phrase: p("אמא {fs} ילד", "има {fs} елед", "Мама одевает ребёнка") },
+      { key: "enlarge", root: "גדל", ru: "увеличивать", phrase: p("אני {ms} תמונה", "ани {ms} тмуна", "Я увеличиваю фотографию") },
+      { key: "complete", root: "שלמ", ru: "завершать, дополнять", phrase: p("הוא {ms} משימה", "ху {ms} месима", "Он завершает задание") },
+      { key: "hide", root: "סתר", ru: "прятать", phrase: p("הוא {ms} מתנה", "ху {ms} матана", "Он прячет подарок") },
+      { key: "lose", root: "פסד", ru: "проигрывать, терять", phrase: p("אני {ms} כסף", "ани {ms} кесеф", "Я теряю деньги") },
+      { key: "recommend", root: "מלצ", ru: "рекомендовать, советовать", phrase: p("אני {ms} על מסעדה", "ани {ms} аль мисада", "Я советую ресторан") },
+      { key: "manage", root: "ספק", ru: "успевать", phrase: p("אני לא {ms} לאכול", "ани ло {ms} леехоль", "Я не успеваю поесть") },
+      { key: "early", root: "קדמ", ru: "приходить рано, опережать", phrase: p("הוא תמיד {ms}", "ху тамид {ms}", "Он всегда приходит рано") },
+    ],
+  },
+  {
+    title: "Ещё десять глаголов",
+    verbs: [
+      { key: "print", root: "דפס", ru: "печатать (на принтере)", phrase: p("אני {ms} מכתב", "ани {ms} михтав", "Я распечатываю письмо") },
+      { key: "record", root: "קלט", ru: "записывать (звук, видео)", phrase: p("היא {fs} שיר", "хи {fs} шир", "Она записывает песню") },
+      { key: "lull", root: "רדמ", ru: "усыплять", phrase: p("שיר {ms} אותי", "шир {ms} оти", "Песня меня усыпляет") },
+      { key: "exaggerate", root: "גזמ", ru: "преувеличивать", phrase: p("אתה {ms}", "ата {ms}", "Ты преувеличиваешь") },
+      { key: "guide", root: "דרכ", ru: "вести, инструктировать", phrase: p("היא {fs} קבוצה", "хи {fs} квуца", "Она ведёт группу") },
+      { key: "separate", root: "פרד", ru: "отделять, разнимать", phrase: p("אני {ms} בין ילדים", "ани {ms} бейн еладим", "Я разнимаю детей") },
+      { key: "limit", root: "גבל", ru: "ограничивать", phrase: p("אני {ms} זמן מסך", "ани {ms} зман масах", "Я ограничиваю время у экрана") },
+      { key: "laydown", root: "שכב", ru: "укладывать", phrase: p("אמא {fs} תינוק", "има {fs} тинок", "Мама укладывает малыша") },
+      { key: "assemble", root: "רכב", ru: "собирать (из частей)", phrase: p("הוא {ms} ארון", "ху {ms} арон", "Он собирает шкаф") },
+      { key: "dictate", root: "כתב", ru: "диктовать", phrase: p("מורה {fs} מילים", "мора {fs} милим", "Учительница диктует слова") },
+    ],
+  },
+];
+
 /** Темы глаголов, которые умеет строить `npm run content:verbs`: название темы, состав уроков и генератор форм. */
 export const VERB_TOPICS: Partial<Record<Binyan, { topic: string; lessons: VerbLessonSpec[]; conjugate: (root: string) => ConjugatedVerb }>> = {
   paal: { topic: "Пааль", lessons: PAAL_LESSONS, conjugate: conjugatePaal },
   piel: { topic: "Пиэль", lessons: PIEL_LESSONS, conjugate: conjugatePiel },
+  hifil: { topic: "Хифъиль", lessons: HIFIL_LESSONS, conjugate: conjugateHifil },
 };
 
 /** Объект урока темы-бинъяна в порядке полей, как в остальных файлах. */
@@ -171,4 +220,9 @@ export function buildPaalLesson(number: number): Record<string, unknown> {
 /** Урок пиэль. */
 export function buildPielLesson(number: number): Record<string, unknown> {
   return buildVerbLesson("piel", number);
+}
+
+/** Урок хифъиль. */
+export function buildHifilLesson(number: number): Record<string, unknown> {
+  return buildVerbLesson("hifil", number);
 }

@@ -106,6 +106,9 @@ jobs:
       - name: Сквозной тест, урок глаголов пиэль (piel-1)
         run: E2E_LESSON=piel-1 node tools/e2e-lesson.mjs e2e-shots/piel-1
 
+      - name: Сквозной тест, урок глаголов хифъиль (hifil-1)
+        run: E2E_LESSON=hifil-1 node tools/e2e-lesson.mjs e2e-shots/hifil-1
+
       # Алфавит: урок из букв (слушай, пиши, печатай), викторина из 20 вопросов, прерывание на 5-й ошибке, защита от подделки.
       - name: Сквозной тест алфавита (alphabet-1)
         run: node tools/e2e-alphabet.mjs e2e-shots/alphabet-1

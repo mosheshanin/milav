@@ -359,6 +359,57 @@
       "v": "24be2f2400"
     },
     {
+      "id": "hifil-1",
+      "topicId": "hifil",
+      "section": "verbs",
+      "topic": "Хифъиль",
+      "number": 1,
+      "free": true,
+      "title": "Самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a8a4f16b9f"
+    },
+    {
+      "id": "hifil-2",
+      "topicId": "hifil",
+      "section": "verbs",
+      "topic": "Хифъиль",
+      "number": 2,
+      "free": true,
+      "title": "Дела и события",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "da8f186c9c"
+    },
+    {
+      "id": "hifil-3",
+      "topicId": "hifil",
+      "section": "verbs",
+      "topic": "Хифъиль",
+      "number": 3,
+      "free": true,
+      "title": "Ещё десять глаголов",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a7f8e9d062"
+    },
+    {
       "id": "home-1",
       "topicId": "home",
       "section": "nouns",
@@ -581,8 +632,8 @@
     }
   ],
   "info": {
-    "totalWords": 260,
-    "totalLessons": 32,
+    "totalWords": 290,
+    "totalLessons": 35,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -633,6 +684,15 @@
           "food-2",
           "food-3",
           "food-4"
+        ]
+      },
+      {
+        "id": "hifil",
+        "title": "Хифъиль",
+        "lessonIds": [
+          "hifil-1",
+          "hifil-2",
+          "hifil-3"
         ]
       },
       {

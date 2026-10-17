@@ -18,6 +18,7 @@ export const TOPIC_EMOJI: Record<string, string> = {
   qualities: "⚖️",
   paal: "✍️",
   piel: "💬",
+  hifil: "🚀",
 };
 
 /** По id урока. */
@@ -54,6 +55,9 @@ export const LESSON_EMOJI: Record<string, string> = {
   "piel-1": "🗣️",
   "piel-2": "💼",
   "piel-3": "✨",
+  "hifil-1": "▶️",
+  "hifil-2": "📌",
+  "hifil-3": "🧩",
 };
 
 export function topicEmoji(topicId: string): string {
