@@ -17,6 +17,7 @@ export {
   PRACTICE_QUESTIONS,
   buildPractice,
   formQuestion,
+  formSound,
   practiceVerdict,
   practiceWords,
   shuffle,

@@ -1,10 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { KATAV, katavWord } from "../../../../content/verbFixture";
+import { KATAV, NIKHTAV, katavWord } from "../../../../content/verbFixture";
 import { verbForms, type Word, type WordForm } from "@milav/shared";
 import {
   PRACTICE_OPTIONS,
   PRACTICE_QUESTIONS,
   buildPractice,
+  formSound,
   practiceVerdict,
   practiceWords,
   shuffle,
@@ -218,5 +219,50 @@ describe("практика форм: книжные формы не спраши
         for (const o of q.options) expect(book.has(o.id), o.id).toBe(false);
       }
     }
+  });
+});
+
+describe("практика форм: формы, звучащие одинаково (нифъаль)", () => {
+  const nifalWord = (): Word => ({ ...katavWord(), id: "nifal-3-written", he: "להיכתב", verb: structuredClone(NIKHTAV) }) as unknown as Word;
+  const entries = verbForms(NIKHTAV);
+  const soundOf = (id: string) => formSound(entries.find((e) => slotId(e.tense, e.key) === id)!.form);
+
+  it("прошедшее 3ms и настоящее ms звучат одинаково, но пишутся с разной огласовкой", () => {
+    expect(formSound(NIKHTAV.past["3ms"])).toBe(formSound(NIKHTAV.present.ms));
+    expect(NIKHTAV.past["3ms"].niqqud).not.toBe(NIKHTAV.present.ms.niqqud);
+  });
+
+  it("«определи форму»: такие формы не спрашиваются, и звучание верного ответа в вопросе встречается один раз", () => {
+    let seen = 0;
+    for (const seed of ALL_SEEDS) {
+      for (const q of buildPractice([nifalWord()], seeded(seed)).filter((x) => x.kind === "identify")) {
+        seen++;
+        expect(["past:3ms", "present:ms"]).not.toContain(q.correctId);
+        const same = entries.filter((e) => formSound(e.form) === formSound(q.form));
+        expect(same.map((e) => slotId(e.tense, e.key))).toEqual([q.correctId]);
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
+  });
+
+  it("в вариантах нет формы, звучащей так же, как верная", () => {
+    for (const seed of ALL_SEEDS) {
+      for (const q of buildPractice([nifalWord()], seeded(seed))) {
+        for (const o of q.options.filter((x) => x.id !== q.correctId)) {
+          expect(soundOf(o.id), `${q.slot}: ${o.id}`).not.toBe(formSound(q.form));
+        }
+      }
+    }
+  });
+
+  it("«выбери форму»: прошедшее 3ms можно спросить, но настоящее ms рядом не стоит", () => {
+    let seen = 0;
+    for (const seed of ALL_SEEDS) {
+      for (const q of buildPractice([nifalWord()], seeded(seed), 40).filter((x) => x.kind === "pick" && x.correctId === "past:3ms")) {
+        seen++;
+        expect(q.options.map((o) => o.id)).not.toContain("present:ms");
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
   });
 });

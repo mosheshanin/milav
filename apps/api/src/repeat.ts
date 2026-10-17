@@ -12,6 +12,7 @@ import {
   REPEAT_FORM_SHARE,
   applyRepeatAnswer,
   formQuestion,
+  formSound,
   isFormRepeatType,
   verbForms,
   chooseRepeatWords,
@@ -231,7 +232,8 @@ repeatRoutes.post("/api/repeat/answer", rateLimit("repeat"), async (c) => {
   let correct: boolean;
   if (isFormRepeatType(type)) {
     // Форма глагола: спрашиваемая форма и выбранная должны быть формами этого глагола. Верно, если выбранная пишется
-    // так же (с огласовками): у одинаково написанных форм (будущее «ты (м.)» и «она») оба ответа верны.
+    // так же (с огласовками) или звучит так же: у одинаково написанных форм (будущее «ты (м.)» и «она») и у форм, звучащих
+    // одинаково (нифъаль: прошедшее 3ms и настоящее ms), оба ответа верны.
     const forms = found.word.verb ? verbForms(found.word.verb) : [];
     const formOf = (id: unknown) => (typeof id === "string" ? forms.find((f) => `${f.tense}:${f.key}` === id) : undefined);
     const asked = formOf(body.form);
@@ -240,7 +242,7 @@ repeatRoutes.post("/api/repeat/answer", rateLimit("repeat"), async (c) => {
     else {
       const chosen = formOf(body.choice);
       if (!chosen) return c.json({ error: "bad_choice" }, 400);
-      correct = chosen.form.niqqud === asked.form.niqqud;
+      correct = chosen.form.niqqud === asked.form.niqqud || formSound(chosen.form) === formSound(asked.form);
     }
   } else if (body.giveUp === true) correct = false;
   else if (type === "type") {

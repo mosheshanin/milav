@@ -4,6 +4,7 @@ import {
   REPEAT_INTERVALS,
   REPEAT_LAST_BOX,
   REPEAT_SESSION_SIZE,
+  formSound,
   localEpochDay,
   verbForms,
   wordLetters,
@@ -271,7 +272,7 @@ describe("повторение: формы глаголов", () => {
     const second = verbLesson.words[1]!;
     const f2 = verbForms(second.verb!);
     const asked = f2.find((f) => f.tense === "past" && f.key === "3ms")!;
-    const wrongChoice = f2.find((f) => f.form.niqqud !== asked.form.niqqud)!;
+    const wrongChoice = f2.find((f) => f.form.niqqud !== asked.form.niqqud && formSound(f.form) !== formSound(asked.form))!;
     const wrong = await answer(STUDENT, { wordId: second.id, type: "form-name", form: id(asked), choice: id(wrongChoice) });
     expect(wrong.body).toMatchObject({ correct: false, box: 0 });
     const third = verbLesson.words[2]!;

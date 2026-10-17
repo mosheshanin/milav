@@ -48,6 +48,13 @@ export type Random = () => number;
 
 export const slotId = (tense: VerbTense, key: string): string => `${tense}:${key}`;
 
+/**
+ * Как форма звучит: транскрипция без знака ударения. В нифъале прошедшее 3ms и настоящее ms звучат одинаково (нихта́в) и
+ * различаются только огласовкой (патах, камац): на слух и по смыслу вопроса «что это за форма?» у них один ответ,
+ * поэтому такие формы не спрашиваются и не ставятся вариантом рядом друг с другом.
+ */
+export const formSound = (form: WordForm): string => form.translit.replace(/\u0301/g, "");
+
 /** «Прошедшее · он», «Настоящее · м. р., ед. ч.». */
 export function slotLabel(tense: VerbTense, key: string): string {
   return `${VERB_TENSE_TITLES[tense]} · ${VERB_FORM_LABELS[tense][key] ?? key}`;
@@ -78,6 +85,8 @@ function distractors(entries: readonly VerbFormEntry[], correct: VerbFormEntry, 
   const seen = new Set<string>([correct.form.niqqud]);
   const pool = shuffle(entries, rng).filter((e) => {
     if (e.form.niqqud === correct.form.niqqud) return false;
+    // Форма, звучащая так же, как верная (нифъаль: прошедшее 3ms и настоящее ms), была бы вторым верным ответом.
+    if (formSound(e.form) === formSound(correct.form)) return false;
     if (kind === "pick") {
       if (seen.has(e.form.niqqud)) return false;
       seen.add(e.form.niqqud);
@@ -111,11 +120,12 @@ function makeQuestion(word: Word, entries: readonly VerbFormEntry[], correct: Ve
 }
 
 /**
- * Форма годится для вопроса `identify`, только если её написание (с огласовками) встречается у глагола один раз.
- * Иначе у вопроса два верных ответа: например, «ты (м.)» и «она» в будущем времени пишутся и читаются одинаково (תכתוב).
+ * Форма годится для вопроса `identify`, только если её написание (с огласовками) и звучание встречаются у глагола один раз.
+ * Иначе у вопроса два верных ответа: например, «ты (м.)» и «она» в будущем времени пишутся и читаются одинаково (תכתוב),
+ * а в нифъале прошедшее 3ms и настоящее ms звучат одинаково (נִכְתַּב, נִכְתָּב).
  */
 function isUnique(entries: readonly VerbFormEntry[], entry: VerbFormEntry): boolean {
-  return entries.filter((e) => e.form.niqqud === entry.form.niqqud).length === 1;
+  return entries.filter((e) => e.form.niqqud === entry.form.niqqud || formSound(e.form) === formSound(entry.form)).length === 1;
 }
 
 /**
