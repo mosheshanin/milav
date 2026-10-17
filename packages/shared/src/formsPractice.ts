@@ -1,4 +1,4 @@
-import { VERB_FORM_LABELS, VERB_TENSE_TITLES, verbForms, type VerbFormEntry, type VerbTense } from "./verbs";
+import { VERB_FORM_LABELS, VERB_TENSE_TITLES, spokenVerbForms, type VerbFormEntry, type VerbTense } from "./verbs";
 import { isWord } from "./alphabet";
 import type { StudyItem, Word, WordForm } from "./types";
 
@@ -127,7 +127,8 @@ export function buildPractice(words: readonly Word[], rng: Random = Math.random,
   const verbs = shuffle(
     words.filter((w) => w.verb),
     rng,
-  ).map((word) => ({ word, entries: verbForms(word.verb!) }));
+    // Книжные формы (תכתובנה) не спрашиваем ни как ответ, ни как неверный вариант: вопрос 31.
+  ).map((word) => ({ word, entries: spokenVerbForms(word.verb!) }));
   if (!verbs.length) return [];
   const used = new Set<string>();
   const questions: PracticeQuestion[] = [];

@@ -208,3 +208,15 @@ describe("практика форм: итог", () => {
     expect(practiceVerdict(0, 0)).toBe("Пока нечего повторять");
   });
 });
+
+describe("практика форм: книжные формы не спрашиваются (вопрос 31)", () => {
+  it("ни в правильных ответах, ни в вариантах нет תכתובנה и כתובנה", () => {
+    const book = new Set(["future:2fp", "future:3fp", "imperative:fp"]);
+    for (let seed = 1; seed <= 40; seed++) {
+      for (const q of buildPractice([verbWord()], seeded(seed))) {
+        expect(book.has(q.correctId), q.correctId).toBe(false);
+        for (const o of q.options) expect(book.has(o.id), o.id).toBe(false);
+      }
+    }
+  });
+});

@@ -51,11 +51,18 @@ export function VerbForms({ verb }: { verb: VerbData }) {
             <dl>
               {tab.rows.map((row) => (
                 <div key={row.key} className="flex items-center justify-between gap-1.5" data-testid={`verb-row-${tab.tense}-${row.key}`}>
-                  <dt className="flex min-w-0 items-baseline gap-1.5 text-xs text-ink-soft">
-                    <span>{row.label}</span>
-                    {row.pronoun && (
-                      <span dir="rtl" lang="he" className="font-hebrew text-sm">
-                        {row.pronoun}
+                  <dt className="flex min-w-0 flex-col text-xs text-ink-soft">
+                    <span className="flex items-baseline gap-1.5 whitespace-nowrap">
+                      <span>{row.label}</span>
+                      {row.pronoun && (
+                        <span dir="rtl" lang="he" className="font-hebrew text-sm">
+                          {row.pronoun}
+                        </span>
+                      )}
+                    </span>
+                    {row.book && (
+                      <span className="self-start rounded-full bg-line px-1.5 text-xs text-ink-soft" data-testid={`verb-book-${tab.tense}-${row.key}`}>
+                        книжн.
                       </span>
                     )}
                   </dt>
@@ -73,6 +80,11 @@ export function VerbForms({ verb }: { verb: VerbData }) {
                 </div>
               ))}
             </dl>
+            {tab.rows.some((r) => r.book) && (
+              <p className="mt-1 text-xs text-ink-soft" data-testid="verb-book-note">
+                книжн. — книжная форма: в разговоре вместо неё обычно говорят форму мужского рода.
+              </p>
+            )}
           </div>
         </>
       )}

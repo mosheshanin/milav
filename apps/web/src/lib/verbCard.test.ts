@@ -82,3 +82,10 @@ describe("карточка глагола: плашка бинъяна и кор
     expect(verbBadge({ ...verb(), binyan: "kal" as VerbData["binyan"] }).binyan).toBe("kal");
   });
 });
+
+describe("карточка глагола: книжные формы (вопрос 31)", () => {
+  it("помечены будущее 2fp, 3fp и повелительное fp, остальные нет", () => {
+    const marked = verbTabs(verb()).flatMap((t) => t.rows.filter((r) => r.book).map((r) => `${t.tense}:${r.key}`));
+    expect(marked).toEqual(["future:2fp", "future:3fp", "imperative:fp"]);
+  });
+});

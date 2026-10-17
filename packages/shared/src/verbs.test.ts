@@ -89,3 +89,18 @@ describe("глаголы: verbForms и путь к озвучке", () => {
     expect(verbFormAudioPath("paal-1-write", "imperative", "fp")).toMatch(/^\/audio\/[a-z0-9-]+\.mp3$/);
   });
 });
+
+describe("книжные формы (вопрос 31)", () => {
+  it("книжные: будущее 2fp и 3fp, повелительное fp; остальные нет", async () => {
+    const { isBookForm, BOOK_FORMS } = await import("./verbs");
+    expect(isBookForm("future", "2fp")).toBe(true);
+    expect(isBookForm("future", "3fp")).toBe(true);
+    expect(isBookForm("imperative", "fp")).toBe(true);
+    expect(isBookForm("future", "3mp")).toBe(false);
+    expect(isBookForm("past", "2fp")).toBe(false);
+    expect(isBookForm("present", "fp")).toBe(false);
+    for (const [tense, keys] of Object.entries(BOOK_FORMS)) {
+      for (const key of keys!) expect(VERB_FORM_KEYS[tense as keyof typeof VERB_FORM_KEYS]).toContain(key);
+    }
+  });
+});

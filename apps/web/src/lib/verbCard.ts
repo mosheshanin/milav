@@ -5,6 +5,7 @@ import {
   VERB_PRONOUNS_HE,
   VERB_TENSES,
   VERB_TENSE_TITLES,
+  isBookForm,
   type VerbData,
   type VerbTense,
   type WordForm,
@@ -25,6 +26,8 @@ export interface VerbRow {
   /** Местоимение иврита: אני, הוא… В настоящем времени и в повелительном его нет. */
   pronoun: string | undefined;
   form: WordForm;
+  /** Книжная форма (תכתובנה): на карточке с пометкой «книжн.», в упражнениях её нет. */
+  book: boolean;
 }
 
 export interface VerbTab {
@@ -48,7 +51,7 @@ export function verbTabs(verb: VerbData): VerbTab[] {
     const rows = VERB_FORM_KEYS[tense].flatMap((key): VerbRow[] => {
       const form = set[key];
       if (!form) return [];
-      return [{ key, label: VERB_FORM_LABELS[tense][key] ?? key, pronoun: withPronoun ? VERB_PRONOUNS_HE[key] : undefined, form }];
+      return [{ key, label: VERB_FORM_LABELS[tense][key] ?? key, pronoun: withPronoun ? VERB_PRONOUNS_HE[key] : undefined, form, book: isBookForm(tense, key) }];
     });
     return rows.length ? [{ tense, title: VERB_TENSE_TITLES[tense], short: VERB_TENSE_SHORT[tense], rows }] : [];
   });

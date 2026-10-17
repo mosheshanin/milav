@@ -140,6 +140,25 @@ export function verbForms(verb: VerbData): VerbFormEntry[] {
   return entries;
 }
 
+/**
+ * Книжные формы (вопрос 31, решение владельца 17.10): будущее «вы (ж.)» и «они (ж.)» (תכתובנה) и повелительное «вы (ж.)»
+ * (כתובנה). В речи их почти не говорят, вместо них звучат формы мужского рода. На карточке они остаются с пометкой
+ * «книжн.», а в «Практике форм» и в повторении не спрашиваются. В данных уроков они есть, как и раньше.
+ */
+export const BOOK_FORMS: Readonly<Partial<Record<VerbTense, readonly string[]>>> = {
+  future: ["2fp", "3fp"],
+  imperative: ["fp"],
+};
+
+export function isBookForm(tense: VerbTense, key: string): boolean {
+  return BOOK_FORMS[tense]?.includes(key) ?? false;
+}
+
+/** Формы, которые спрашиваем в упражнениях: все, кроме книжных. */
+export function spokenVerbForms(verb: VerbData): VerbFormEntry[] {
+  return verbForms(verb).filter((e) => !isBookForm(e.tense, e.key));
+}
+
 /** Сколько форм у полного глагола: 4 + 9 + 10 + 4. */
 export const VERB_FORMS_TOTAL =
   PRESENT_KEYS.length + PAST_KEYS.length + FUTURE_KEYS.length + IMPERATIVE_KEYS.length;
