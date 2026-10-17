@@ -22,7 +22,15 @@ import { ACUTE } from "./rules";
  * зато вторая может быть א ח ע (הִשְׁאִיר, הִתְחִיל): в хифъиле под ней никогда не бывает шва. Третья נ сливается
  * с окончанием -נוּ и -נָה (הִזְמַנּוּ, תַּזְמֵנָּה), это генератор учитывает.
  *
- * Каждый генератор отклоняет корень, который ему не подходит (`paalRootProblems`, `pielRootProblems`, `hifilRootProblems`).
+ * Нифъиль (`conjugateNifal`, 17.10): приставка נִ в прошедшем и настоящем (נִכְתַּב, נִכְתָּב), в будущем, инфинитиве и
+ * повелительном נ растворяется в первой букве корня: она получает дагеш и камац (יִכָּתֵב, לְהִיכָּתֵב, הִיכָּתֵב), а ב כ פ
+ * становятся твёрдыми (икате́в, но нихта́в). Без огласовок приставка пишется с י: ייכתב, תיכתב, ניכתב, היכתב, להיכתב; в 1-м
+ * лице י нет (אכתב). Подвижная шва второй буквы после немой читается «е» (נִכְתְּבָה «нихтева́»). Прошедшее 3ms и настоящее ms
+ * звучат одинаково (нихта́в). Первая буква корня не гортанная и не ר, נ (נֶחְשָׁב, יֵחָשֵׁב строятся иначе); вторая может быть
+ * א ה ח ע (под ней вместо шва хатаф-патах: נִשְׁאֲרָה), третья может быть ח ע (патах вместо цере и сеголя: יִפָּתַח, נִפְתַּחַת).
+ *
+ * Каждый генератор отклоняет корень, который ему не подходит (`paalRootProblems`, `pielRootProblems`, `hifilRootProblems`,
+ * `nifalRootProblems`).
  */
 
 /**
@@ -224,6 +232,26 @@ export function hifilRootProblems(root: string): string[] {
   if (!strong(c1) || c1 === "נ") problems.push(`корень «${root}»: первая буква должна быть из בגדזטכלמספצקרשת (без гортанных, י ו и נ)`);
   if (!(strong(c2) || (c2 !== undefined && "אחע".includes(c2)))) problems.push(`корень «${root}»: вторая буква должна быть из בגדזטכלמנספצקרשת или א ח ע`);
   if (!strong(c3) || c3 === "ת") problems.push(`корень «${root}»: третья буква должна быть из בגדזטכלמנספצקרש (без гортанных, י ו и ת)`);
+  if (new Set(letters).size !== letters.length) problems.push(`корень «${root}»: есть одинаковые буквы (удвоенный корень)`);
+  if (SIN_ROOTS.includes(root)) problems.push(`корень «${root}» пишется с «син» (שׂ), а генератор ставит «шин» (ש)`);
+  return problems;
+}
+
+/**
+ * Проблемы корня: подходит ли он генератору нифъаль. Первая буква: без гортанных и ר (у них нет дагеша, другие гласные),
+ * без נ, י, ו. Вторая: любая сильная или א ה ח ע. Третья: сильная или ח ע, без נ и ת (сливаются с окончаниями), без א ה י ו.
+ */
+export function nifalRootProblems(root: string): string[] {
+  const problems: string[] = [];
+  const letters = [...root];
+  const [c1, c2, c3] = letters;
+  const has = (set: string, letter: string | undefined) => letter !== undefined && set.includes(letter);
+  if (letters.length !== 3) problems.push(`корень «${root}»: нужны ровно 3 буквы`);
+  if (!has("בגדזטכלמספצקשת", c1)) {
+    problems.push(`корень «${root}»: первая буква должна быть из בגדזטכלמספצקשת (без гортанных א ה ח ע, без ר, נ, י, ו: у них другие гласные)`);
+  }
+  if (!has("בגדזטכלמנספצקרשתאהחע", c2)) problems.push(`корень «${root}»: вторая буква должна быть из בגדזטכלמנספצקרשת или א ה ח ע`);
+  if (!has("בגדזטכלמספצקרשחע", c3)) problems.push(`корень «${root}»: третья буква должна быть из בגדזטכלמספצקרש или ח ע (без נ, ת, א, ה, י, ו)`);
   if (new Set(letters).size !== letters.length) problems.push(`корень «${root}»: есть одинаковые буквы (удвоенный корень)`);
   if (SIN_ROOTS.includes(root)) problems.push(`корень «${root}» пишется с «син» (שׂ), а генератор ставит «шин» (ש)`);
   return problems;
@@ -471,6 +499,92 @@ function hifilSpecs(root: string): Specs {
   };
 }
 
+/**
+ * Нифъаль (נִפְעַל). Прошедшее и настоящее: приставка נִ, немая шва под первой буквой, вторая с дагешем (бегадкефат):
+ * נִכְתַּב, נִכְתָּב, נִכְתֶּבֶת. Будущее, инфинитив и повелительное: первая буква корня с дагешем и камацем, вторая с цере:
+ * יִכָּתֵב, לְהִיכָּתֵב, הִיכָּתֵב (י после приставки это хирик в полном письме: ייכתב, תיכתב, ניכתב; в 1-м лице אֶכָּתֵב без י).
+ * Подвижная шва второй буквы читается «е» после немой шва (נִכְתְּבָה «нихтева́») и без звука после гласной (תִּכָּתְבִי «тикатви́»);
+ * у гортанной второй буквы вместо неё хатаф-патах (נִשְׁאֲרָה «нишара́»). Гортанная ח ע в конце корня меняет цере и сеголь на патах
+ * (יִפָּתַח, נִפְתַּחַת). Ударение как в других бинъянах: -ти, -та, -ну безударные (нихта́вти), 3-е лицо ударное на конце
+ * (нихтева́, нихтеву́), у ж.р. настоящего и форм на -на на предпоследнем слоге.
+ */
+function nifalSpecs(root: string): Specs {
+  const [c1, c2, c3] = [...root] as [string, string, string];
+  const guttural2 = "אהחע".includes(c2);
+  const guttural3 = "חע".includes(c3);
+  /** Подвижная шва под второй буквой: «е» после немой шва (прошедшее), без звука после гласной (будущее); у гортанной хатаф-патах. */
+  const afterSilent: Vowel = guttural2 ? "H" : "W";
+  const afterVowel: Vowel = guttural2 ? "H" : "V";
+  /** Гласная второй буквы в «закрытой» основе: цере, у корней на ח ע патах. */
+  const stem: Vowel = guttural3 ? "a" : "e";
+  const prefixNun = u("נ", "i");
+  /** Прошедшее и настоящее: נִ + первая с немой шва + вторая + остальное. */
+  const base = (c2v: Vowel, rest: Unit[]): Unit[] => [prefixNun, u(c1, "S"), u(c2, c2v), ...rest];
+  /** Первая буква корня после растворившейся נ: дагеш и камац (в 3-м лице будущего прошедшее твёрдое: икате́в). */
+  const first = (): Unit => u(c1, "A", { forte: true });
+  /** Основа будущего, инфинитива и повелительного. */
+  const tail = (prefix: Unit[], kind: "e" | "V-i" | "V-u" | "on"): FormSpec => {
+    const head = [...prefix, first()];
+    switch (kind) {
+      case "e":
+        return [[...head, u(c2, stem), u(c3)], "last"];
+      case "V-i":
+        return [[...head, u(c2, afterVowel), u(c3, "i", { tail: "י" })], "last"];
+      case "V-u":
+        return [[...head, u(c2, afterVowel), u(c3, undefined, { mater: VAV_SHURUK })], "last"];
+      case "on":
+        return [[...head, u(c2, "a"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"];
+    }
+  };
+  /** Приставка будущего: אֶ в 1-м лице без י, остальные с хириком и י (תיכתב, ייכתב, ניכתב). */
+  const pre = (letter: string): Unit[] => [letter === "א" ? u("א", "E") : u(letter, "i", { tail: "י" })];
+  const hi = (): Unit[] => [u("ה", "i", { tail: "י" })];
+  /** 2fs прошедшего: у корня на ח ע перед ת стоит патах (נִפְתַּחַתְּ), ударение на предпоследнем слоге. */
+  const past2fs: FormSpec = guttural3
+    ? [base("a", [u(c3, "a"), u("ת", "S", { forte: true })]), "penult"]
+    : [base("a", [u(c3, "S"), u("ת", "S")]), "last"];
+
+  return {
+    infinitive: tail([u("ל", "W"), ...hi()], "e"),
+    present: {
+      ms: [base("A", [u(c3)]), "last"],
+      fs: [guttural3 ? base("a", [u(c3, "a"), u("ת")]) : base("E", [u(c3, "E"), u("ת")]), "penult"],
+      mp: [base("A", [u(c3, "i", { tail: "י" }), u("ם")]), "last"],
+      fp: [base("A", [u(c3, undefined, { mater: VAV_HOLAM }), u("ת")]), "last"],
+    },
+    // Прошедшее 3ms и настоящее ms звучат одинаково (нихта́в), различаются только огласовкой (патах, камац).
+    past: {
+      "1s": [base("a", [u(c3, "S"), u("ת", "i", { tail: "י" })]), "penult"],
+      "2ms": [base("a", [u(c3, "S"), u("ת", "A")]), "penult"],
+      "2fs": past2fs,
+      "3ms": [base("a", [u(c3)]), "last"],
+      "3fs": [base(afterSilent, [u(c3, "A", { tail: "ה" })]), "last"],
+      "1p": [base("a", [u(c3, "S"), u("נ", undefined, { mater: VAV_SHURUK })]), "penult"],
+      "2mp": [base("a", [u(c3, "S"), u("ת", "E"), u("ם")]), "last"],
+      "2fp": [base("a", [u(c3, "S"), u("ת", "E"), u("ן")]), "last"],
+      "3p": [base(afterSilent, [u(c3, undefined, { mater: VAV_SHURUK })]), "last"],
+    },
+    future: {
+      "1s": tail(pre("א"), "e"),
+      "2ms": tail(pre("ת"), "e"),
+      "2fs": tail(pre("ת"), "V-i"),
+      "3ms": tail(pre("י"), "e"),
+      "3fs": tail(pre("ת"), "e"),
+      "1p": tail(pre("נ"), "e"),
+      "2mp": tail(pre("ת"), "V-u"),
+      "2fp": tail(pre("ת"), "on"),
+      "3mp": tail(pre("י"), "V-u"),
+      "3fp": tail(pre("י"), "on"),
+    },
+    imperative: {
+      ms: tail(hi(), "e"),
+      fs: tail(hi(), "V-i"),
+      mp: tail(hi(), "V-u"),
+      fp: tail(hi(), "on"),
+    },
+  };
+}
+
 const toForm = ([units, stress]: FormSpec): WordForm => render(units, stress);
 
 export interface ConjugatedVerb {
@@ -513,4 +627,11 @@ export function conjugateHifil(root: string): ConjugatedVerb {
   const problems = hifilRootProblems(root);
   if (problems.length) throw new Error(problems.join("\n"));
   return conjugate("hifil", root, hifilSpecs(root));
+}
+
+/** Все формы глагола нифъаль с сильным корнем (до 27, повелительное строится всегда: у страдательных его убирает состав урока). */
+export function conjugateNifal(root: string): ConjugatedVerb {
+  const problems = nifalRootProblems(root);
+  if (problems.length) throw new Error(problems.join("\n"));
+  return conjugate("nifal", root, nifalSpecs(root));
 }

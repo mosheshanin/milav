@@ -1,6 +1,6 @@
 import { FREE_LESSONS_PER_TOPIC, type Binyan } from "@milav/shared";
 import { stripStress } from "./rules";
-import { conjugateHifil, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
+import { conjugateHifil, conjugateNifal, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
 
 /**
  * Состав уроков глаголов с сильными корнями: корень, перевод и фраза-пример для каждого глагола, по темам-бинъянам.
@@ -14,6 +14,8 @@ export interface VerbSpec {
   ru: string;
   /** Фраза-пример с глаголом в настоящем времени. `{ms}` и `{fs}` заменяются на форму (иврит и транскрипцию). */
   phrase: { he: string; translit: string; ru: string };
+  /** У глагола нет повелительного наклонения (страдательные нифъаль: נסגר, נגמר): блок `imperative` в слове не создаётся. */
+  noImperative?: true;
 }
 
 export interface VerbLessonSpec {
@@ -171,11 +173,67 @@ export const HIFIL_LESSONS: VerbLessonSpec[] = [
   },
 ];
 
+/**
+ * Нифъаль 1–3 (17.10): сильные корни и корни с гортанной второй или третьей буквой (`nifalRootProblems`); с гортанной первой
+ * (נֶחְשָׁב, נֶעֱלַם) и ר в начале (נִרְדַּם) в этих уроках нет, они пойдут в «Нифъаль 4». 15 из 30 корней уже были в пааль и хифъиле
+ * (פגש/נפגש, סגר/נסגר, זכר/נזכר, כנס/נכנס): страдательная и возвратная пара к знакомому глаголу. Значения: страдательные
+ * (נסגר «закрывается»), возвратные и средние (נכנס «входит»). Фразы без артикля ה-: подлежащее «זה», местоимение или
+ * существительное без артикля. Повелительное оставлено только у глаголов, где оно живёт в речи (`noImperative` у остальных).
+ */
+export const NIFAL_LESSONS: VerbLessonSpec[] = [
+  {
+    title: "Самые нужные",
+    verbs: [
+      { key: "enter", root: "כנס", ru: "входить", phrase: p("אני {ms} פנימה", "ани {ms} пнима", "Я захожу внутрь") },
+      { key: "stay", root: "שאר", ru: "оставаться", phrase: p("אני {ms} כאן", "ани {ms} кан", "Я остаюсь здесь") },
+      { key: "meet", root: "פגש", ru: "встречаться, видеться", phrase: p("אני {ms} עם חבר", "ани {ms} им хавер", "Я встречаюсь с другом"), noImperative: true },
+      { key: "end", root: "גמר", ru: "заканчиваться", phrase: p("זה {ms} מהר", "зэ {ms} махер", "Это быстро заканчивается"), noImperative: true },
+      { key: "open", root: "פתח", ru: "открываться", phrase: p("דלת {fs} לבד", "делет {fs} левад", "Дверь открывается сама"), noImperative: true },
+      { key: "close", root: "סגר", ru: "закрываться", phrase: p("חלון {ms} לאט", "халон {ms} леат", "Окно закрывается медленно"), noImperative: true },
+      { key: "break", root: "שבר", ru: "ломаться, разбиваться", phrase: p("כוס {fs} בקלות", "кос {fs} бекалут", "Стакан легко разбивается"), noImperative: true },
+      { key: "sound", root: "שמע", ru: "звучать, слышаться", phrase: p("זה {ms} טוב", "зэ {ms} тов", "Это звучит хорошо"), noImperative: true },
+      { key: "recall", root: "זכר", ru: "вспоминать", phrase: p("אני {ms} בשיר", "ани {ms} бешир", "Я вспоминаю песню") },
+      { key: "part", root: "פרד", ru: "прощаться, расставаться", phrase: p("אני {ms} מחבר", "ани {ms} мехавер", "Я прощаюсь с другом"), noImperative: true },
+    ],
+  },
+  {
+    title: "Люди и чувства",
+    verbs: [
+      { key: "beware", root: "זהר", ru: "остерегаться, быть осторожным", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я очень осторожен") },
+      { key: "fight", root: "לחמ", ru: "воевать, сражаться, бороться", phrase: p("חייל {ms} באומץ", "хаяль {ms} беомец", "Солдат смело сражается") },
+      { key: "fail", root: "כשל", ru: "терпеть неудачу, проваливаться", phrase: p("הוא תמיד {ms}", "ху тамид {ms}", "Он всегда терпит неудачу"), noImperative: true },
+      { key: "offend", root: "פגע", ru: "обижаться, пострадать", phrase: p("אני {ms} בקלות", "ани {ms} бекалут", "Я легко обижаюсь"), noImperative: true },
+      { key: "fear", root: "בהל", ru: "пугаться", phrase: p("אני {ms} מכלבים", "ани {ms} миклавим", "Я пугаюсь собак"), noImperative: true },
+      { key: "bump", root: "תקל", ru: "сталкиваться, натыкаться", phrase: p("אני {ms} בחבר", "ани {ms} бехавер", "Я случайно натыкаюсь на друга"), noImperative: true },
+      { key: "avoid", root: "מנע", ru: "избегать, воздерживаться", phrase: p("אני {ms} מסוכר", "ани {ms} мисукар", "Я воздерживаюсь от сахара") },
+      { key: "elect", root: "בחר", ru: "быть избранным, избираться", phrase: p("הוא {ms} ליושב ראש", "ху {ms} лейошев рош", "Его выбирают председателем"), noImperative: true },
+      { key: "examine", root: "בדק", ru: "проверяться, обследоваться", phrase: p("אני {ms} אצל רופא", "ани {ms} ецель рофе", "Я обследуюсь у врача"), noImperative: true },
+      { key: "infect", root: "דבק", ru: "приклеиваться, заражаться", phrase: p("הוא {ms} בשפעת", "ху {ms} бешапаат", "Он заражается гриппом"), noImperative: true },
+    ],
+  },
+  {
+    title: "Дела и вещи",
+    verbs: [
+      { key: "send", root: "שלח", ru: "отправляться, быть отправленным", phrase: p("מכתב {ms} היום", "михтав {ms} хайом", "Письмо отправляется сегодня"), noImperative: true },
+      { key: "set", root: "קבע", ru: "назначаться, устанавливаться", phrase: p("פגישה {fs} למחר", "пгиша {fs} лемахар", "Встреча назначается на завтра"), noImperative: true },
+      { key: "sell", root: "מכר", ru: "продаваться", phrase: p("דירה {fs} במיליון", "дира {fs} бемильон", "Квартира продаётся за миллион"), noImperative: true },
+      { key: "erase", root: "מחק", ru: "стираться, удаляться", phrase: p("הודעה {fs} אחרי יום", "ходаа {fs} ахарей йом", "Сообщение удаляется через день"), noImperative: true },
+      { key: "guard", root: "שמר", ru: "беречься, сохраняться", phrase: p("אוכל {ms} שלושה ימים", "охель {ms} шлоша ямим", "Еда хранится три дня") },
+      { key: "written", root: "כתב", ru: "писаться, быть написанным", phrase: p("ספר {ms} עכשיו", "сефер {ms} ахшав", "Книга пишется сейчас"), noImperative: true },
+      { key: "stolen", root: "גנב", ru: "быть украденным", phrase: p("רכב {ms} בלילה", "рехев {ms} балайла", "Машину крадут ночью"), noImperative: true },
+      { key: "spill", root: "שפכ", ru: "проливаться", phrase: p("מיץ {ms} בקלות", "миц {ms} бекалут", "Сок легко проливается"), noImperative: true },
+      { key: "last", root: "משכ", ru: "продолжаться, тянуться", phrase: p("שיעור {ms} שעה", "шиюр {ms} шаа", "Урок длится час"), noImperative: true },
+      { key: "cease", root: "פסק", ru: "прекращаться, прерываться", phrase: p("גשם {ms} מהר", "гешем {ms} махер", "Дождь быстро прекращается"), noImperative: true },
+    ],
+  },
+];
+
 /** Темы глаголов, которые умеет строить `npm run content:verbs`: название темы, состав уроков и генератор форм. */
 export const VERB_TOPICS: Partial<Record<Binyan, { topic: string; lessons: VerbLessonSpec[]; conjugate: (root: string) => ConjugatedVerb }>> = {
   paal: { topic: "Пааль", lessons: PAAL_LESSONS, conjugate: conjugatePaal },
   piel: { topic: "Пиэль", lessons: PIEL_LESSONS, conjugate: conjugatePiel },
   hifil: { topic: "Хифъиль", lessons: HIFIL_LESSONS, conjugate: conjugateHifil },
+  nifal: { topic: "Нифъаль", lessons: NIFAL_LESSONS, conjugate: conjugateNifal },
 };
 
 /** Объект урока темы-бинъяна в порядке полей, как в остальных файлах. */
@@ -196,6 +254,8 @@ export function buildVerbLesson(binyan: Binyan, number: number): Record<string, 
     title: spec.title,
     words: spec.verbs.map((v) => {
       const { infinitive, verb } = topic.conjugate(v.root);
+      // У страдательных глаголов повелительного нет: блок убираем целиком (неполный блок схема не пропускает).
+      if (v.noImperative) delete verb.imperative;
       const fill = (text: string, field: "he" | "translit") =>
         text.replace(/\{(ms|fs)\}/g, (_, key: "ms" | "fs") => (field === "he" ? verb.present[key].he : stripStress(verb.present[key].translit)));
       return {
@@ -225,4 +285,9 @@ export function buildPielLesson(number: number): Record<string, unknown> {
 /** Урок хифъиль. */
 export function buildHifilLesson(number: number): Record<string, unknown> {
   return buildVerbLesson("hifil", number);
+}
+
+/** Урок нифъаль. */
+export function buildNifalLesson(number: number): Record<string, unknown> {
+  return buildVerbLesson("nifal", number);
 }

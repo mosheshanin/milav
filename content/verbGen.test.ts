@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { VERB_FORMS_TOTAL, normalizeHebrew, verbForms } from "@milav/shared";
-import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, KATAV, KATAV_INFINITIVE } from "./verbFixture";
+import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, KATAV, KATAV_INFINITIVE, NIKHTAV, NIKHTAV_INFINITIVE } from "./verbFixture";
 import { stressProblems, skeletonProblems, stripStress, syllables, verbProblems } from "./rules";
-import { SIN_ROOTS, conjugateHifil, conjugatePaal, conjugatePiel, hifilRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
-import { HIFIL_LESSONS, PAAL_LESSONS, PIEL_LESSONS, buildHifilLesson, buildPaalLesson, buildPielLesson } from "./verbLessons";
+import { SIN_ROOTS, conjugateHifil, conjugateNifal, conjugatePaal, conjugatePiel, hifilRootProblems, nifalRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
+import { HIFIL_LESSONS, NIFAL_LESSONS, PAAL_LESSONS, PIEL_LESSONS, buildHifilLesson, buildNifalLesson, buildPaalLesson, buildPielLesson } from "./verbLessons";
 
 const ROOTS = PAAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
 
@@ -472,5 +472,212 @@ describe("уроки хифъиль: составлены генератором
     const explain = (buildHifilLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[1]!;
     expect(explain.example).toMatchObject({ he: "אני מסביר לך", translit: "ани масбир леха" });
     expect(() => buildHifilLesson(4)).toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Нифъаль
+
+const NIFAL_ROOTS = NIFAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
+
+describe("генератор форм нифъаль: образец «писаться»", () => {
+  /** Огласовки сравниваем в нормальной форме Unicode: образец набран вручную, порядок знаков может отличаться. */
+  const nfd = (f: { he: string; niqqud: string; translit: string }) => ({ ...f, niqqud: f.niqqud.normalize("NFD") });
+
+  it("для корня כתב получает те же 27 форм и инфинитив, что набраны в образце вручную", () => {
+    const { infinitive, verb } = conjugateNifal("כתב");
+    expect(nfd(infinitive)).toEqual(nfd(NIKHTAV_INFINITIVE));
+    expect(verb.binyan).toBe("nifal");
+    expect(verb.root).toBe("כתב");
+    for (const { tense, key, form } of verbForms(NIKHTAV)) {
+      const got = (verb[tense] as Record<string, typeof form>)[key]!;
+      expect(nfd(got), `${tense}.${key}`).toEqual(nfd(form));
+    }
+    expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+    expect(verbProblems(NIKHTAV_INFINITIVE.he, NIKHTAV)).toEqual([]);
+  });
+
+  it("всегда 27 форм, приставки бинъяна на месте (להה, נ в прошедшем и настоящем)", () => {
+    for (const root of NIFAL_ROOTS) {
+      const { infinitive, verb } = conjugateNifal(root);
+      expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+      expect(infinitive.he.startsWith("לה")).toBe(true);
+      expect(verb.present.ms.he.startsWith("נ")).toBe(true);
+      for (const f of Object.values(verb.past)) expect(f.he.startsWith("נ"), f.he).toBe(true);
+    }
+  });
+});
+
+describe("генератор форм нифъаль: правила", () => {
+  const same = (actual: string, expected: string) => expect(actual.normalize("NFD")).toBe(expected.normalize("NFD"));
+  const form = (root: string, tense: "present" | "past" | "future" | "imperative", key: string) => {
+    const set = conjugateNifal(root).verb[tense] as Record<string, { he: string; niqqud: string; translit: string }>;
+    return set[key]!;
+  };
+
+  it("полное письмо: ייכתב, תיכתב, ניכתב, היכתב, להיכתב, но אכתב без י", () => {
+    expect(form("כתב", "future", "3ms").he).toBe("ייכתב");
+    expect(form("כתב", "future", "3mp").he).toBe("ייכתבו");
+    expect(form("כתב", "future", "2ms").he).toBe("תיכתב");
+    expect(form("כתב", "future", "1p").he).toBe("ניכתב");
+    expect(form("כתב", "future", "1s").he).toBe("אכתב");
+    expect(form("כתב", "imperative", "ms").he).toBe("היכתב");
+    expect(conjugateNifal("כתב").infinitive.he).toBe("להיכתב");
+  });
+
+  it("дагеш и камац у первой буквы корня в будущем: ב כ פ твёрдые, в прошедшем и настоящем мягкие", () => {
+    expect(form("כנס", "past", "3ms").translit).toBe("нихна́с");
+    expect(form("כנס", "future", "3ms").translit).toBe("икане́с");
+    expect(conjugateNifal("כנס").infinitive.translit).toBe("лехикане́с");
+    expect(form("פגש", "past", "3ms").translit).toBe("нифга́ш");
+    expect(form("פגש", "future", "1p").translit).toBe("нипаге́ш");
+    expect(form("בדק", "past", "3ms").translit).toBe("нивда́к");
+    expect(form("בדק", "future", "3ms").translit).toBe("ибаде́к");
+    same(form("שבר", "future", "3ms").niqqud, "יִישָּׁבֵר");
+    same(form("פגש", "future", "3ms").niqqud, "יִיפָּגֵשׁ");
+  });
+
+  it("шва второй буквы: «е» после немой шва (3fs, 3p прошедшего), без звука после гласной (будущее, повелительное)", () => {
+    expect(form("סגר", "past", "3fs").translit).toBe("нисгера́");
+    expect(form("סגר", "past", "3p").translit).toBe("нисгеру́");
+    expect(form("סגר", "future", "2fs").translit).toBe("тисагри́");
+    expect(form("סגר", "future", "3mp").translit).toBe("исагру́");
+    expect(form("סגר", "imperative", "fs").translit).toBe("хисагри́");
+    same(form("סגר", "past", "3fs").niqqud, "נִסְגְּרָה");
+  });
+
+  it("ударение: -ти, -та, -ну безударные, 3-е лицо на конце, ж.р. настоящего и формы на -на на предпоследнем", () => {
+    expect(form("סגר", "past", "1s").translit).toBe("нисга́рти");
+    expect(form("סגר", "past", "2ms").translit).toBe("нисга́рта");
+    expect(form("סגר", "past", "1p").translit).toBe("нисга́рну");
+    expect(form("סגר", "past", "2mp").translit).toBe("нисгарте́м");
+    expect(form("סגר", "present", "fs").translit).toBe("нисге́рет");
+    expect(form("סגר", "present", "mp").translit).toBe("нисгари́м");
+    expect(form("סגר", "present", "fp").translit).toBe("нисгаро́т");
+    expect(form("סגר", "future", "2fp").translit).toBe("тисага́рна");
+    expect(form("סגר", "imperative", "fp").translit).toBe("хисага́рна");
+  });
+
+  it("прошедшее 3ms и настоящее ms звучат одинаково, различаются только огласовкой (патах, камац)", () => {
+    for (const root of NIFAL_ROOTS) {
+      const past = form(root, "past", "3ms");
+      const present = form(root, "present", "ms");
+      expect(past.he, root).toBe(present.he);
+      expect(stripStress(past.translit), root).toBe(stripStress(present.translit));
+      expect(past.niqqud, root).not.toBe(present.niqqud);
+    }
+  });
+
+  it("вторая буква гортанная: хатаф-патах вместо шва (נִשְׁאֲרָה, תִּזָּהֲרִי), нет шва у ה в נִזְהֲרוּ", () => {
+    same(form("שאר", "past", "3fs").niqqud, "נִשְׁאֲרָה");
+    same(form("שאר", "future", "2fs").niqqud, "תִּישָּׁאֲרִי");
+    expect(form("שאר", "past", "3fs").translit).toBe("нишара́");
+    same(form("זהר", "past", "3p").niqqud, "נִזְהֲרוּ");
+    same(form("זהר", "future", "2mp").niqqud, "תִּיזָּהֲרוּ");
+    same(form("לחמ", "past", "3fs").niqqud, "נִלְחֲמָה");
+    same(form("לחמ", "future", "3ms").niqqud, "יִילָּחֵם");
+    same(form("לחמ", "imperative", "mp").niqqud, "הִילָּחֲמוּ");
+    expect(conjugateNifal("שאר").infinitive.translit).toBe("лехишае́р");
+  });
+
+  it("третья буква ח или ע: патах вместо цере и сеголя (יִפָּתַח, נִפְתַּחַת), перед окончанием как у остальных", () => {
+    same(form("פתח", "future", "3ms").niqqud, "יִיפָּתַח");
+    same(conjugateNifal("פתח").infinitive.niqqud, "לְהִיפָּתַח");
+    same(form("פתח", "present", "fs").niqqud, "נִפְתַּחַת");
+    expect(form("פתח", "present", "fs").translit).toBe("нифта́хат");
+    same(form("פתח", "present", "ms").niqqud, "נִפְתָּח");
+    same(form("פתח", "past", "2fs").niqqud, "נִפְתַּחַתְּ");
+    same(form("פתח", "past", "2ms").niqqud, "נִפְתַּחְתָּ");
+    same(form("פתח", "past", "3fs").niqqud, "נִפְתְּחָה");
+    same(form("פתח", "future", "2fs").niqqud, "תִּיפָּתְחִי");
+    same(form("שמע", "future", "2ms").niqqud, "תִּישָּׁמַע");
+    same(form("מנע", "imperative", "ms").niqqud, "הִימָּנַע");
+    same(form("מנע", "present", "fs").niqqud, "נִמְנַעַת");
+  });
+
+  it("конечные формы и ךְ: נִמְשַׁךְ, נִמְשָׁךְ, לְהִימָּשֵׁךְ, נִשְׁפַּךְ", () => {
+    same(form("משכ", "past", "3ms").niqqud, "נִמְשַׁךְ");
+    same(form("משכ", "present", "ms").niqqud, "נִמְשָׁךְ");
+    same(conjugateNifal("משכ").infinitive.niqqud, "לְהִימָּשֵׁךְ");
+    same(form("משכ", "present", "fs").niqqud, "נִמְשֶׁכֶת");
+    expect(form("לחמ", "present", "ms").he).toBe("נלחם");
+    same(form("לחמ", "past", "3ms").niqqud, "נִלְחַם");
+  });
+});
+
+describe("генератор форм нифъаль: отказ на неподходящих корнях", () => {
+  const bad: [string, string][] = [
+    ["חשב", "гортанная первая буква"],
+    ["עלמ", "гортанная первая буква"],
+    ["רדמ", "ר в начале"],
+    ["נצל", "נ в начале"],
+    ["ילד", "י в начале"],
+    ["מצא", "гортанная א в конце"],
+    ["בנה", "ה в конце"],
+    ["שקת", "ת в конце"],
+    ["קנה", "ה в конце"],
+    ["כונ", "ו в корне"],
+    ["שכר", "пишется с син"],
+    ["סבב", "одинаковые буквы"],
+    ["סב", "две буквы"],
+  ];
+  for (const [root, why] of bad) {
+    it(`корень ${root} (${why}) отклоняется`, () => {
+      expect(nifalRootProblems(root).length).toBeGreaterThan(0);
+      expect(() => conjugateNifal(root)).toThrow();
+    });
+  }
+});
+
+describe("уроки нифъаль: составлены генератором", () => {
+  it("3 урока по 10 глаголов, все корни разные, ключи уникальны, корни не с син", () => {
+    expect(NIFAL_LESSONS).toHaveLength(3);
+    for (const lesson of NIFAL_LESSONS) expect(lesson.verbs).toHaveLength(10);
+    expect(new Set(NIFAL_ROOTS).size).toBe(30);
+    const keys = NIFAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.key));
+    expect(new Set(keys).size).toBe(30);
+    for (const root of NIFAL_ROOTS) expect(SIN_ROOTS).not.toContain(root);
+  });
+
+  it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
+    for (const root of NIFAL_ROOTS) expect(nifalRootProblems(root), root).toEqual([]);
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildNifalLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
+      for (const word of lesson.words) {
+        expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
+        for (const { form } of verbForms(word.verb)) {
+          expect(stressProblems(form.translit), form.translit).toEqual([]);
+          expect(skeletonProblems(form.he, form.translit), form.translit).toEqual([]);
+          expect(normalizeHebrew(form.niqqud)).toBe(normalizeHebrew(form.he));
+        }
+      }
+    }
+  });
+
+  it("повелительное только у семи глаголов, где оно живёт в речи: остальным блок убран целиком", () => {
+    const withImperative = NIFAL_LESSONS.flatMap((l) => l.verbs).filter((v) => !v.noImperative).map((v) => v.root);
+    expect(withImperative.sort()).toEqual(["זהר", "זכר", "כנס", "לחמ", "מנע", "שאר", "שמר"].sort());
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildNifalLesson(n) as { words: { verb: { imperative?: unknown; root: string } }[] };
+      for (const w of lesson.words) {
+        const spec = NIFAL_LESSONS[n - 1]!.verbs.find((v) => v.root === w.verb.root)!;
+        expect("imperative" in w.verb, w.verb.root).toBe(!spec.noImperative);
+        expect(verbForms(w.verb as Parameters<typeof verbForms>[0]), w.verb.root).toHaveLength(spec.noImperative ? 23 : 27);
+      }
+    }
+  });
+
+  it("урок 1–3 бесплатный, id nifal-<номер>, тема «Нифъаль» раздел verbs; фраза с настоящим временем", () => {
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildNifalLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
+      expect(lesson).toMatchObject({ id: `nifal-${n}`, free: true, topicId: "nifal", section: "verbs", topic: "Нифъаль" });
+      for (const w of lesson.words) {
+        expect(w.id.startsWith(`nifal-${n}-`)).toBe(true);
+        expect(w.example.he).not.toContain("{");
+      }
+    }
+    const enter = (buildNifalLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[0]!;
+    expect(enter.example).toMatchObject({ he: "אני נכנס פנימה", translit: "ани нихнас пнима" });
+    expect(() => buildNifalLesson(4)).toThrow();
   });
 });
