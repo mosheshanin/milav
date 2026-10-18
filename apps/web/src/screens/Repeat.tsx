@@ -13,6 +13,7 @@ import {
 } from "@milav/shared";
 import { ApiError, api } from "../api";
 import { useApp } from "../AppContext";
+import { AutoNextButton } from "../components/AutoNextButton";
 import { Header } from "../components/Header";
 import { HebrewKeyboard } from "../components/HebrewKeyboard";
 import { ListenButton } from "../components/ListenButton";
@@ -355,9 +356,15 @@ function QuestionScreen({
           {current && (
             <>
               <Feedback answered={current} word={word} />
-              <Button onClick={onNext} data-testid="repeat-next">
+              {/* Верный ответ: «Дальше» сама срабатывает через 2 секунды, после ошибки только по кнопке (успеть прочитать разбор). */}
+              <AutoNextButton
+                running={current.correct}
+                tone={current.correct ? "success" : "primary"}
+                onNext={onNext}
+                testId="repeat-next"
+              >
                 {nextLabel}
-              </Button>
+              </AutoNextButton>
             </>
           )}
         </Card>

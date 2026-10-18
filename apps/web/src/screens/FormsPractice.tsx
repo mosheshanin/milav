@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { lessonItems, type AnyLesson, type Word } from "@milav/shared";
+import { AutoNextButton } from "../components/AutoNextButton";
 import { Header } from "../components/Header";
 import { LessonGate } from "../components/LessonGate";
 import { SpeakerButton } from "../components/SpeakerButton";
@@ -193,9 +194,10 @@ function QuestionCard({
               {question.form.niqqud}
             </span>
           </div>
-          <Button onClick={onNext} data-testid="practice-next">
+          {/* Верный ответ: «Дальше» сама срабатывает через 2 секунды, после ошибки только по кнопке. */}
+          <AutoNextButton running={correct} tone={correct ? "success" : "primary"} onNext={onNext} testId="practice-next">
             {last ? "Результат" : "Дальше"}
-          </Button>
+          </AutoNextButton>
         </div>
       )}
     </Card>

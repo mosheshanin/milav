@@ -1,6 +1,7 @@
 import { Hono } from "hono";
-import { allLessons, catalog, findStudyItem, findWord, getAnyLesson } from "@milav/content";
+import { allLessons, catalog, findStudyItem, findWord, getAnyLesson, getQuizLesson } from "@milav/content";
 import {
+  ALPHABET_ALL_ID,
   CLIENT_LOG_LIMITS,
   CLIENT_LOG_PATH,
   DEFAULT_TZ,
@@ -26,7 +27,16 @@ import {
 } from "@milav/shared";
 import { requireUser, userFromHeader } from "./auth";
 import { boardWeekNow } from "./board";
-import { ensureUser, getHomeProgress, getLessonProgress, getQuizSummary, markStage, touchUser, type StageResult } from "./db";
+import {
+  ensureUser,
+  getCompletedItemIds,
+  getHomeProgress,
+  getLessonProgress,
+  getQuizSummary,
+  markStage,
+  touchUser,
+  type StageResult,
+} from "./db";
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
 import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, playRoutes, repeatOn } from "./play";
@@ -233,7 +243,9 @@ app.get("/api/home", requireUser, async (c) => {
   const user = c.get("user");
   const available = allLessons
     .filter(canAccessLesson)
-    .map((lesson) => ({ id: lesson.id, itemIds: lessonItems(lesson).map((item) => item.id) }));
+    // Общая викторина по всем буквам: у неё нет своих слов, главной нужен только результат («сдана», лучший счёт).
+    .map((lesson) => ({ id: lesson.id, itemIds: lessonItems(lesson).map((item) => item.id) }))
+    .concat({ id: ALPHABET_ALL_ID, itemIds: [] });
   const body: HomeResponse = { lessons: await getHomeProgress(c.env.DB, user.id, available) };
   // Повторение: сколько слов пора повторить (граница дня по поясу ученика, который приложение прислало в /api/me).
   if (await repeatOn(c.env, user.id)) {
@@ -361,15 +373,24 @@ app.post("/api/quiz/start", requireUser, rateLimit("quiz"), async (c) => {
   const body = await readJson<{ lessonId?: unknown }>(c.req.raw);
   if (typeof body?.lessonId !== "string") return c.json({ error: "bad_request" }, 400);
 
-  const lesson = getAnyLesson(body.lessonId);
+  const lesson = getQuizLesson(body.lessonId);
   if (!lesson) return c.json({ error: "lesson_not_found" }, 404);
   if (!canAccessLesson(lesson)) return c.json({ error: "subscription_required" }, 403);
 
   await ensureUser(c.env.DB, user);
-  const progress = await getLessonProgress(c.env.DB, user.id, lesson.id, lessonItems(lesson).map((item) => item.id));
+  // Общая викторина по всем буквам открывается, когда выучены все буквы уроков алфавита (они лежат в разных уроках),
+  // обычная по уроку, когда выучены все слова этого урока.
+  const learned =
+    lesson.id === ALPHABET_ALL_ID
+      ? await getCompletedItemIds(c.env.DB, user.id)
+      : new Set(
+          (await getLessonProgress(c.env.DB, user.id, lesson.id, lessonItems(lesson).map((item) => item.id)))
+            .filter((p) => p.completed)
+            .map((p) => p.wordId),
+        );
   // Администратор может начать викторину до изучения всех слов, чтобы проверить её (решение владельца 17.10).
   // Результат засчитывается как обычно.
-  if (!progress.every((p) => p.completed) && (await staffOf(c.env, user.id))?.role !== "admin") {
+  if (!lessonItems(lesson).every((item) => learned.has(item.id)) && (await staffOf(c.env, user.id))?.role !== "admin") {
     return c.json({ error: "lesson_not_completed" }, 409);
   }
 

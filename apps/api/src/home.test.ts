@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { allLessons } from "@milav/content";
-import { lessonOpenWithoutPurchase } from "@milav/shared";
+import { ALPHABET_ALL_ID, lessonOpenWithoutPurchase } from "@milav/shared";
 import {
   alphabetLesson,
   api,
@@ -31,11 +31,13 @@ describe("/api/home", () => {
     const body = await home(1);
     // Пока платные уроки открыты всем до Stars (PAID_LESSONS_OPEN), доступны все уроки.
     const open = allLessons.filter((l) => lessonOpenWithoutPurchase(l)).map((l) => l.id);
-    expect(Object.keys(body.lessons).sort()).toEqual([...open].sort());
+    // Плюс общая викторина по всем буквам: у неё нет своих слов, главной нужен только её результат.
+    expect(Object.keys(body.lessons).sort()).toEqual([...open, ALPHABET_ALL_ID].sort());
     for (const id of open) {
       expect(body.lessons[id].quiz).toEqual({ passed: false, bestCorrect: null });
       expect(body.lessons[id].words.every((w: any) => !w.listen && !w.completed)).toBe(true);
     }
+    expect(body.lessons[ALPHABET_ALL_ID]).toEqual({ words: [], quiz: { passed: false, bestCorrect: null } });
   });
 
   it("совпадает с прежним запросом прогресса по каждому уроку (слова, буквы, сданная викторина)", async () => {

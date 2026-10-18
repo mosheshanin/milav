@@ -1,4 +1,5 @@
 import { Suspense, lazy, useEffect, useState, type ReactNode } from "react";
+import { ALPHABET_ALL_ID } from "@milav/shared";
 import { AppProvider, useApp } from "./AppContext";
 import { Button, Notice } from "./components/ui";
 import { getLessonMeta } from "./lib/lessons";
@@ -116,7 +117,8 @@ export function App() {
       {screen.name === "quiz" && (
         <Quiz
           lessonId={screen.lessonId}
-          onBack={() => setScreen({ name: "study", lessonId: screen.lessonId })}
+          // У общей викторины по всем буквам нет своего урока, из неё возвращаются на главную.
+          onBack={() => setScreen(screen.lessonId === ALPHABET_ALL_ID ? HOME : { name: "study", lessonId: screen.lessonId })}
           onHome={() => setScreen(HOME)}
         />
       )}

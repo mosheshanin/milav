@@ -1,8 +1,12 @@
 // Общие правила по виду урока: что изучают в уроке (слова или буквы), какие этапы и какая викторина.
 // Чистые функции без зависимостей от приложения и сервера: ими пользуются и приложение, и Worker, и инструменты контента.
 import {
+  ALPHABET_ALL_ID,
+  ALPHABET_ALL_QUIZ_RULES,
+  ALPHABET_ALL_TITLE,
   ALPHABET_QUIZ_RULES,
   ALPHABET_SECTION,
+  ALPHABET_TOPIC_ID,
   FINAL_LETTERS,
   GERESH,
   GERESH_QUIZ_RULES,
@@ -45,7 +49,32 @@ export function stagesFor(lesson: AnyLesson): readonly Stage[] {
 /** Правила викторины урока. */
 export function quizRulesFor(lesson: AnyLesson | undefined): QuizRules {
   if (lesson?.section !== ALPHABET_SECTION) return WORD_QUIZ_RULES;
+  if (lesson.id === ALPHABET_ALL_ID) return ALPHABET_ALL_QUIZ_RULES;
   return isGereshLesson(lesson) ? GERESH_QUIZ_RULES : ALPHABET_QUIZ_RULES;
+}
+
+/** Это общая викторина по всем буквам (а не обычный урок)? */
+export function isAlphabetAll(lessonId: string | undefined): boolean {
+  return lessonId === ALPHABET_ALL_ID;
+}
+
+/**
+ * «Урок» общей викторины: все буквы уроков алфавита, кроме урока со звуками с гереш, по порядку уроков.
+ * Настоящего урока в контенте нет (его не видно в манифесте, на главной и в счётчиках): сервер и приложение собирают
+ * его из уроков алфавита этой же функцией, поэтому буквы и их порядок у них всегда совпадают.
+ */
+export function alphabetAllLesson(lessons: readonly AlphabetLesson[]): AlphabetLesson {
+  const real = lessons.filter((l) => !isGereshLesson(l)).sort((a, b) => a.number - b.number);
+  return {
+    id: ALPHABET_ALL_ID,
+    topicId: ALPHABET_TOPIC_ID,
+    section: ALPHABET_SECTION,
+    topic: real[0]?.topic ?? ALPHABET_ALL_TITLE,
+    number: 0,
+    free: true,
+    title: ALPHABET_ALL_TITLE,
+    letters: real.flatMap((l) => l.letters),
+  };
 }
 
 export function isLetter(item: StudyItem): item is Letter {

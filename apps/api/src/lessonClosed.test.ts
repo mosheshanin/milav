@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { allLessons } from "@milav/content";
+import { ALPHABET_ALL_ID } from "@milav/shared";
 import { api, lesson, resetHarness, word } from "./test-utils/harness";
 
 // Как будет после Stars: платные уроки закрыты без покупки. Пока PAID_LESSONS_OPEN = true, проверяем закрытие подменой.
@@ -39,7 +40,8 @@ describe("платные уроки закрыты (PAID_LESSONS_OPEN = false)",
   it("на главной только бесплатные уроки", async () => {
     await asPaid(async () => {
       const body = (await (await api("/api/home", { as: 1 })).json()) as { lessons: Record<string, unknown> };
-      expect(Object.keys(body.lessons).sort()).toEqual(allLessons.filter((l) => l.free).map((l) => l.id).sort());
+      // Бесплатные уроки и общая викторина по всем буквам (алфавит бесплатный).
+      expect(Object.keys(body.lessons).sort()).toEqual([...allLessons.filter((l) => l.free).map((l) => l.id), ALPHABET_ALL_ID].sort());
       expect(body.lessons[lesson.id]).toBeUndefined();
     });
   });

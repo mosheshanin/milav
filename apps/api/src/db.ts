@@ -1,4 +1,4 @@
-import { STAGES, type LessonProgressResponse, type Stage, type WordProgress } from "@milav/shared";
+import { ALPHABET_ALL_ID, STAGES, type LessonProgressResponse, type Stage, type WordProgress } from "@milav/shared";
 import type { AuthUser } from "./auth";
 
 const STAGE_COLUMN: Record<Stage, string> = {
@@ -74,7 +74,7 @@ export async function getHomeProgress(
   const [progress, best, passed] = await db.batch<unknown>([
     db.prepare("SELECT * FROM word_progress WHERE user_id = ?").bind(userId),
     db
-      .prepare("SELECT lesson_id, MAX(correct) AS best FROM quiz_attempts WHERE user_id = ? GROUP BY lesson_id")
+      .prepare("SELECT lesson_id, MAX(correct) AS best, MAX(passed) AS ok FROM quiz_attempts WHERE user_id = ? GROUP BY lesson_id")
       .bind(userId),
     db.prepare("SELECT lesson_id FROM lesson_passed WHERE user_id = ?").bind(userId),
   ]);
@@ -84,19 +84,29 @@ export async function getHomeProgress(
     inLesson.set(row.word_id, row);
     rows.set(row.lesson_id, inLesson);
   }
-  const bestBy = new Map(
-    ((best?.results ?? []) as { lesson_id: string; best: number | null }[]).map((r) => [r.lesson_id, r.best]),
-  );
+  const bestRows = (best?.results ?? []) as { lesson_id: string; best: number | null; ok: number | null }[];
+  const bestBy = new Map(bestRows.map((r) => [r.lesson_id, r.best]));
+  // Общая викторина по всем буквам не урок и в lesson_passed не попадает: «сдана» по успешной попытке.
+  const allPassed = bestRows.some((r) => r.lesson_id === ALPHABET_ALL_ID && !!r.ok);
   const passedSet = new Set(((passed?.results ?? []) as { lesson_id: string }[]).map((r) => r.lesson_id));
   const out: Record<string, LessonProgressResponse> = {};
   for (const lesson of lessons) {
     const inLesson = rows.get(lesson.id);
     out[lesson.id] = {
       words: lesson.itemIds.map((id) => toProgress(id, inLesson?.get(id))),
-      quiz: { passed: passedSet.has(lesson.id), bestCorrect: bestBy.get(lesson.id) ?? null },
+      quiz: { passed: lesson.id === ALPHABET_ALL_ID ? allPassed : passedSet.has(lesson.id), bestCorrect: bestBy.get(lesson.id) ?? null },
     };
   }
   return out;
+}
+
+/** Id всех слов и букв, выученных пользователем (пройдены все этапы). Нужно общей викторине: буквы лежат в разных уроках. */
+export async function getCompletedItemIds(db: D1Database, userId: number): Promise<Set<string>> {
+  const { results } = await db
+    .prepare("SELECT word_id FROM word_progress WHERE user_id = ? AND completed_at IS NOT NULL")
+    .bind(userId)
+    .all<{ word_id: string }>();
+  return new Set(results.map((r) => r.word_id));
 }
 
 /** Что обновить в счётчиках в том же пакете, что и отметку этапа (см. markStage). */
@@ -208,8 +218,13 @@ export async function getQuizSummary(
     .prepare("SELECT MAX(correct) AS best FROM quiz_attempts WHERE user_id = ? AND lesson_id = ?")
     .bind(userId, lessonId)
     .first<{ best: number | null }>();
+  // Общая викторина по всем буквам не урок и в lesson_passed не попадает: «сдана» по успешной попытке.
   const passed = await db
-    .prepare("SELECT 1 AS ok FROM lesson_passed WHERE user_id = ? AND lesson_id = ?")
+    .prepare(
+      lessonId === ALPHABET_ALL_ID
+        ? "SELECT 1 AS ok FROM quiz_attempts WHERE user_id = ? AND lesson_id = ? AND passed = 1 LIMIT 1"
+        : "SELECT 1 AS ok FROM lesson_passed WHERE user_id = ? AND lesson_id = ?",
+    )
     .bind(userId, lessonId)
     .first<{ ok: number }>();
   return { passed: !!passed, bestCorrect: best?.best ?? null };

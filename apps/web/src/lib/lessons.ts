@@ -3,7 +3,17 @@
 // Загруженный урок хранится в памяти и в localStorage (по версии из манифеста), чтобы повторное открытие было мгновенным.
 // Подробно: docs/CONTENT.md, «Манифест и выдача уроков».
 import { manifest } from "@milav/content/manifest";
-import { ALPHABET_SECTION, buildCatalog, type AnyLesson, type Catalog, type LessonMeta } from "@milav/shared";
+import {
+  ALPHABET_ALL_ID,
+  ALPHABET_SECTION,
+  alphabetAllLesson,
+  buildCatalog,
+  isAlphabetLesson,
+  isGereshForm,
+  type AnyLesson,
+  type Catalog,
+  type LessonMeta,
+} from "@milav/shared";
 
 /** Все уроки без слов: сначала алфавит по номеру, потом остальные. */
 export const lessonMetas: readonly LessonMeta[] = manifest.lessons;
@@ -13,6 +23,11 @@ export const wordMetas: readonly LessonMeta[] = lessonMetas.filter((l) => l.sect
 
 export function getLessonMeta(id: string): LessonMeta | undefined {
   return lessonMetas.find((l) => l.id === id);
+}
+
+/** Уроки алфавита, из букв которых состоит общая викторина: все, кроме урока со звуками дж, ж, ч (там не буквы). */
+export function alphabetAllLessonIds(metas: readonly LessonMeta[] = alphabetMetas): string[] {
+  return metas.filter((m) => m.section === ALPHABET_SECTION && !m.letters?.every(isGereshForm)).map((m) => m.id);
 }
 
 /** Каталог бейджей: тот же, что считает сервер (это проверяет тест content/manifest.test.ts). */
@@ -143,4 +158,23 @@ export function createLessonLoader(
   }
 
   return { cached, load };
+}
+
+/**
+ * Загрузчик, который умеет и «урок» общей викторины (`alphabet-all`): его нет в манифесте, он собирается из букв
+ * уроков алфавита (они берутся из того же загрузчика, поэтому уже загруженные не запрашиваются снова).
+ */
+export function withAlphabetAll(loader: LessonLoader, ids: () => string[] = alphabetAllLessonIds): LessonLoader {
+  const parts = (lessons: (AnyLesson | undefined)[]) => alphabetAllLesson(lessons.filter((l): l is AnyLesson => !!l).filter(isAlphabetLesson));
+  return {
+    cached(id) {
+      if (id !== ALPHABET_ALL_ID) return loader.cached(id);
+      const all = ids().map((i) => loader.cached(i));
+      return all.length > 0 && all.every(Boolean) ? parts(all) : undefined;
+    },
+    async load(id) {
+      if (id !== ALPHABET_ALL_ID) return loader.load(id);
+      return parts(await Promise.all(ids().map((i) => loader.load(i))));
+    },
+  };
 }

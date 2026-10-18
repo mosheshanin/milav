@@ -1,5 +1,5 @@
 import type { AlphabetLesson, AnyLesson, Catalog, ContentInfo, Letter, Lesson, StudyItem, Word } from "@milav/shared";
-import { buildCatalog, isAlphabetLesson } from "@milav/shared";
+import { ALPHABET_ALL_ID, alphabetAllLesson, buildCatalog, isAlphabetLesson } from "@milav/shared";
 import { contentInfoOf } from "./info";
 import { lessonFiles } from "./registry";
 
@@ -28,6 +28,17 @@ export function getLesson(id: string): Lesson | undefined {
 /** Урок любого вида по id. */
 export function getAnyLesson(id: string): AnyLesson | undefined {
   return allLessons.find((l) => l.id === id);
+}
+
+/**
+ * «Урок» общей викторины по всем буквам: буквы уроков алфавита без звуков с гереш. Это не настоящий урок, его нет в
+ * `allLessons`, манифесте и счётчиках (сданные уроки, статус, бейджи), он нужен только викторине.
+ */
+export const alphabetAll: AlphabetLesson = alphabetAllLesson(alphabetLessons);
+
+/** Урок для викторины: обычный или общий по всем буквам (`alphabet-all`). */
+export function getQuizLesson(id: string): AnyLesson | undefined {
+  return id === ALPHABET_ALL_ID ? alphabetAll : getAnyLesson(id);
 }
 
 export function findWord(wordId: string): { lesson: Lesson; word: Word } | undefined {

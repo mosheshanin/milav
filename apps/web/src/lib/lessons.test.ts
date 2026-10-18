@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { allLessons } from "@milav/content";
-import type { AnyLesson } from "@milav/shared";
+import { alphabetAll, alphabetLessons, allLessons } from "@milav/content";
+import { ALPHABET_ALL_ID, type AnyLesson } from "@milav/shared";
 import {
   MAX_SAVED_LESSONS,
   UnknownLessonError,
+  alphabetAllLessonIds,
   alphabetMetas,
   catalog,
   createLessonLoader,
@@ -11,6 +12,7 @@ import {
   lessonMetas,
   readSaved,
   savedKey,
+  withAlphabetAll,
   wordMetas,
   writeSaved,
   type LessonStore,
@@ -130,5 +132,42 @@ describe("загрузка урока", () => {
     const loader = createLessonLoader(fetchLesson, null, metaOf);
     await expect(loader.load("nope-1")).rejects.toBeInstanceOf(UnknownLessonError);
     expect(fetchLesson).not.toHaveBeenCalled();
+  });
+});
+
+describe("общая викторина по всем буквам", () => {
+  const realIds = alphabetLessons.filter((l) => l.letters.length >= 5).map((l) => l.id);
+
+  it("в неё входят уроки алфавита 1–5, урок со звуками дж, ж, ч нет", () => {
+    expect(alphabetAllLessonIds()).toEqual(realIds);
+    expect(alphabetAllLessonIds()).toHaveLength(5);
+    expect(alphabetAllLessonIds()).not.toContain(alphabetLessons.at(-1)!.id);
+  });
+
+  it("«урок» собирается из загруженных уроков алфавита и совпадает с серверным", async () => {
+    const fetchLesson = vi.fn(async (id: string) => allLessons.find((l) => l.id === id)!);
+    const loader = withAlphabetAll(createLessonLoader(fetchLesson, null));
+    expect(loader.cached(ALPHABET_ALL_ID)).toBeUndefined();
+    const all = await loader.load(ALPHABET_ALL_ID);
+    expect(all).toEqual(alphabetAll);
+    // Каждый урок алфавита запрошен один раз, запроса «alphabet-all» к серверу нет.
+    expect(fetchLesson.mock.calls.map(([id]) => id).sort()).toEqual([...realIds].sort());
+    // Дальше всё из памяти.
+    expect(loader.cached(ALPHABET_ALL_ID)).toEqual(alphabetAll);
+    await loader.load(ALPHABET_ALL_ID);
+    expect(fetchLesson).toHaveBeenCalledTimes(5);
+  });
+
+  it("обычные уроки идут как раньше, неизвестный урок не спрашивает сервер", async () => {
+    const fetchLesson = vi.fn(async (id: string) => allLessons.find((l) => l.id === id)!);
+    const loader = withAlphabetAll(createLessonLoader(fetchLesson, null));
+    expect((await loader.load(lesson.id)).id).toBe(lesson.id);
+    await expect(loader.load("nope")).rejects.toBeInstanceOf(UnknownLessonError);
+    expect(fetchLesson).toHaveBeenCalledTimes(1);
+  });
+
+  it("ошибка загрузки одного из уроков алфавита доходит до экрана", async () => {
+    const loader = withAlphabetAll(createLessonLoader(async () => Promise.reject(new Error("network")), null));
+    await expect(loader.load(ALPHABET_ALL_ID)).rejects.toThrow("network");
   });
 });

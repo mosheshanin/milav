@@ -1,4 +1,6 @@
 import {
+  ALPHABET_ALL_ID,
+  ALPHABET_ALL_QUIZ_RULES,
   ALPHABET_QUESTION_TYPES,
   ALPHABET_QUIZ_RULES,
   GERESH_QUESTION_TYPES,
@@ -98,7 +100,38 @@ export function generateAlphabetQuiz(letters: Letter[], rng: Rng = secureRandom)
   return questions;
 }
 
-/** Викторина урока любого вида. */
+/**
+ * Общая викторина по всем буквам алфавита: по 7 вопросов четырёх типов, всего 28 на 27 форм. Порядок типов тот же, что
+ * в викторине урока. Буквы раздаются по типам по кругу из перемешанного списка, поэтому каждая буква спрашивается хотя
+ * бы один раз (в каком-то из типов), а лишние места добирает случайная буква, которой в этом типе ещё нет.
+ * Внутри типа буквы не повторяются. Неверные варианты в выборе берутся из всех букв, а не из одного урока.
+ */
+export function generateAlphabetAllQuiz(letters: Letter[], rng: Rng = secureRandom): QuizQuestion[] {
+  const types = ALPHABET_QUESTION_TYPES;
+  const perType = ALPHABET_ALL_QUIZ_RULES.perType;
+  const buckets: Letter[][] = types.map(() => []);
+  shuffle(letters, rng).forEach((letter, i) => {
+    const bucket = buckets[i % types.length]!;
+    if (bucket.length < perType) bucket.push(letter);
+  });
+  const questions: QuizQuestion[] = [];
+  types.forEach((type, t) => {
+    const bucket = buckets[t]!;
+    const spare = shuffle(
+      letters.filter((l) => !bucket.includes(l)),
+      rng,
+    );
+    while (bucket.length < perType && spare.length > 0) bucket.push(spare.shift()!);
+    for (const letter of shuffle(bucket, rng)) {
+      const options = type === "hear-letter" || type === "letter-name" ? letterOptions(letter, letters, rng) : [];
+      questions.push({ type, wordId: letter.id, options });
+    }
+  });
+  return questions;
+}
+
+/** Викторина урока любого вида (и общая по всем буквам). */
 export function generateLessonQuiz(lesson: AnyLesson, rng: Rng = secureRandom): QuizQuestion[] {
+  if (lesson.id === ALPHABET_ALL_ID && isAlphabetLesson(lesson)) return generateAlphabetAllQuiz(lesson.letters, rng);
   return isAlphabetLesson(lesson) ? generateAlphabetQuiz(lesson.letters, rng) : generateQuiz(lesson.words, rng);
 }

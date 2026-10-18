@@ -145,6 +145,10 @@ jobs:
       - name: Сквозной тест алфавита (alphabet-6, звуки дж, ж, ч)
         run: node tools/e2e-geresh.mjs e2e-shots/alphabet-6
 
+      # Общая викторина по всем буквам (28 вопросов) и автопереход в викторине: верный ответ сам ведёт дальше, ошибка нет.
+      - name: Сквозной тест общей викторины алфавита
+        run: node tools/e2e-alphabet-all.mjs e2e-shots/alphabet-all
+
       - name: Сквозной тест записи шаблонов букв
         run: node tools/e2e-record.mjs e2e-shots
 

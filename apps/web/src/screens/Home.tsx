@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { CheckCircle2, ChevronDown, ChevronRight, Lock, RefreshCw } from "lucide-react";
 import {
+  ALPHABET_ALL_ID,
+  ALPHABET_ALL_QUIZ_RULES,
+  ALPHABET_ALL_TITLE,
   ALPHABET_GROUPS,
   ALPHABET_TITLE,
   SECTION_TITLES,
@@ -19,7 +22,7 @@ import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../componen
 import { Button, Card, Chip } from "../components/ui";
 import { lessonEmoji, topicEmoji } from "../lib/homeEmoji";
 import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
-import { alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
+import { alphabetAllLessonIds, alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { repeatCardText } from "../lib/repeat";
 import { findResume } from "../lib/resume";
@@ -227,6 +230,12 @@ export function Home({
                 {alphabetMetas.map((lesson) => (
                   <LessonRow key={lesson.id} lesson={lesson} progress={progress[lesson.id]} onOpen={onOpen} />
                 ))}
+                <GeneralQuizRow
+                  progress={progress}
+                  settled={settled}
+                  admin={me.staff?.role === "admin"}
+                  onOpen={() => onOpenQuiz(ALPHABET_ALL_ID)}
+                />
                 {alphabetMetas.length < ALPHABET_GROUPS.length && (
                   <p className="text-ink-soft">Остальные уроки алфавита скоро появятся.</p>
                 )}
@@ -394,6 +403,66 @@ function FoldButton({
         className={`size-icon shrink-0 text-ink-soft transition-transform ${open ? "rotate-180" : ""}`}
         aria-hidden
       />
+    </button>
+  );
+}
+
+/**
+ * Общая викторина по всем буквам алфавита: открывается, когда выучены все буквы уроков 1–5 (звуки дж, ж, ч в неё не
+ * входят). Это не урок: в «сданные уроки» и статус она не идёт. Администратор может открыть её раньше (сервер тоже).
+ */
+function GeneralQuizRow({
+  progress,
+  settled,
+  admin,
+  onOpen,
+}: {
+  progress: Progress;
+  settled: boolean;
+  admin: boolean;
+  onOpen: () => void;
+}) {
+  const ids = alphabetAllLessonIds();
+  const total = ids.reduce((n, id) => n + (alphabetMetas.find((m) => m.id === id)?.count ?? 0), 0);
+  const learned = ids.reduce((n, id) => n + (progress[id]?.words.filter((w) => w.completed).length ?? 0), 0);
+  const quiz = progress[ALPHABET_ALL_ID]?.quiz;
+  const unlocked = settled && total > 0 && learned === total;
+  const canOpen = unlocked || (admin && settled);
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      disabled={!canOpen}
+      data-testid="general-quiz"
+      data-unlocked={unlocked}
+      className="flex w-full items-center gap-2.5 rounded-control bg-page p-2.5 text-left active:bg-line disabled:active:bg-page"
+    >
+      <span
+        className="flex size-10 shrink-0 items-center justify-center rounded-control bg-surface text-xl leading-none"
+        aria-hidden
+      >
+        🎯
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="font-semibold">Общая викторина. {ALPHABET_ALL_TITLE}</div>
+        <div className="text-sm text-ink-soft">{ALPHABET_ALL_QUIZ_RULES.size} вопросов по всем буквам, без звуков дж, ж, ч</div>
+        <div className="mt-1 flex flex-wrap items-center gap-2">
+          {quiz?.passed ? (
+            <Chip tone="success">
+              <CheckCircle2 className="size-4" aria-hidden />
+              Сдана
+            </Chip>
+          ) : unlocked ? (
+            <Chip tone="accent">Викторина открыта</Chip>
+          ) : (
+            <Chip tone="neutral">
+              <Lock className="size-4" aria-hidden />
+              Букв: {learned} из {total}
+            </Chip>
+          )}
+        </div>
+      </div>
+      {canOpen && <ChevronRight className="size-icon shrink-0 text-ink-soft" aria-hidden />}
     </button>
   );
 }

@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import type { AnyLesson } from "@milav/shared";
 import { ApiError, api } from "../api";
-import { UnknownLessonError, browserLessonStore, createLessonLoader, getLessonMeta } from "../lib/lessons";
+import { UnknownLessonError, browserLessonStore, createLessonLoader, getLessonMeta, withAlphabetAll } from "../lib/lessons";
 import { useBackButton } from "../lib/useBackButton";
 import { Header } from "./Header";
 import { Button, Notice } from "./ui";
 
 /** Один загрузчик на всё приложение: урок, открытый в «Изучении», в викторине уже не запрашивается. */
-const loader = createLessonLoader(async (id) => (await api.lesson(id)).lesson, browserLessonStore());
+/** Он же собирает «урок» общей викторины по всем буквам из уроков алфавита (`alphabet-all`). */
+const loader = withAlphabetAll(createLessonLoader(async (id) => (await api.lesson(id)).lesson, browserLessonStore()));
 
 /** Заранее подгрузить урок (например, тот, что предлагает «Продолжить»), чтобы он открылся без ожидания. */
 export function prefetchLesson(id: string): void {

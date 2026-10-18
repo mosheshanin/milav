@@ -1,7 +1,8 @@
 // Сессия викторины в D1: вопросы выдаёт сервер, каждый ответ проверяется и записывается здесь.
 // Схема и объяснение метки состояния (rev): migrations/0003_quiz_sessions.sql.
-import { catalog, getAnyLesson } from "@milav/content";
+import { catalog, getAnyLesson, getQuizLesson } from "@milav/content";
 import {
+  ALPHABET_ALL_ID,
   QUIZ_SESSION_TTL_SECONDS,
   SECTION_BITS,
   SPEAK_ATTEMPTS_IN_QUIZ,
@@ -149,9 +150,11 @@ async function finishQuiz(
     .bind(session.userId, session.lessonId)
     .first<{ perfect: number }>();
 
-  const firstTimePassed = done.passed && !passedIds.has(session.lessonId);
+  // Общая викторина по всем буквам не урок: в сданные уроки, статус и бейджи она не идёт (меняет только ритм дня).
+  const countsAsLesson = session.lessonId !== ALPHABET_ALL_ID;
+  const firstTimePassed = countsAsLesson && done.passed && !passedIds.has(session.lessonId);
   // Безошибочной считается викторина без ошибок по каждому уроку один раз (повторы одного урока бейдж не накручивают).
-  const perfectNew = done.correct === done.total && !prior?.perfect;
+  const perfectNew = countsAsLesson && done.correct === done.total && !prior?.perfect;
   const passedAfter = firstTimePassed ? new Set(passedIds).add(session.lessonId) : passedIds;
   const section = getAnyLesson(session.lessonId)?.section ?? "";
 
@@ -248,8 +251,8 @@ export async function commitAnswer(
   step: AnswerStep,
 ): Promise<CommitResult> {
   const question = session.questions[session.nextIndex]!;
-  // Правила зависят от вида урока: у слов 25 вопросов и 5 допустимых ошибок, у алфавита 20 и 4.
-  const rules = quizRulesFor(getAnyLesson(session.lessonId));
+  // Правила зависят от вида урока: у слов 25 вопросов и 5 допустимых ошибок, у алфавита 20 и 4, у общей викторины 28 и 6.
+  const rules = quizRulesFor(getQuizLesson(session.lessonId));
   const newRev = crypto.randomUUID();
   const total = session.questions.length;
 
@@ -327,7 +330,8 @@ export async function commitAnswer(
         )
         .bind(session.userId, newRev, session.lessonId, correct, total, passed ? 1 : 0),
     );
-    if (passed) {
+    // Только настоящий урок попадает в сданные (по этой таблице пересчитываются статус и бейджи).
+    if (passed && session.lessonId !== ALPHABET_ALL_ID) {
       statements.push(
         db
           .prepare(`INSERT OR IGNORE INTO lesson_passed (user_id, lesson_id) SELECT ?1, ?3 WHERE ${ours}`)

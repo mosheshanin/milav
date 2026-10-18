@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import {
+  ALPHABET_ALL_ID,
   QUESTION_TITLES,
   isAlphabetLesson,
   isGereshForm,
@@ -19,6 +20,7 @@ import {
 } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
+import { AutoNextButton } from "../components/AutoNextButton";
 import { Header } from "../components/Header";
 import { LessonGate } from "../components/LessonGate";
 import { CelebrationSheet } from "../components/play";
@@ -33,7 +35,9 @@ import { useBackButton } from "../lib/useBackButton";
 import { confirmAction, setClosingConfirmation } from "../telegram";
 
 /**
- * Викторина по уроку: 25 вопросов у слов, 20 у алфавита (правила: `quizRulesFor`), ошибки видны сразу.
+ * Викторина по уроку: 25 вопросов у слов, 20 у алфавита, 28 у общей викторины по всем буквам (правила: `quizRulesFor`),
+ * ошибки видны сразу. После верного ответа кнопка «Дальше» сама срабатывает через 2 секунды (`AutoNextButton`, как на
+ * этапах урока); после ошибки переход только по кнопке, чтобы успеть прочитать верный ответ.
  * Вопросы выдаёт сервер, каждый ответ проверяется на сервере, итог считает и записывает сервер (apps/api/src/quizSession.ts).
  */
 export function Quiz({ lessonId, onBack, onHome }: { lessonId: string; onBack: () => void; onHome: () => void }) {
@@ -108,7 +112,7 @@ function QuizRound({
                 Повторить
               </Button>
               <Button variant="ghost" block onClick={onBack}>
-                {isAlphabetLesson(lesson) ? "Назад к буквам" : "Назад к словам"}
+                {lesson.id === ALPHABET_ALL_ID ? "К урокам" : isAlphabetLesson(lesson) ? "Назад к буквам" : "Назад к словам"}
               </Button>
             </>
           )}
@@ -149,6 +153,8 @@ function QuizPlay({
   const { sessionId, questions } = session;
   const items = lessonItems(lesson);
   const alphabet = isAlphabetLesson(lesson);
+  /** Общая викторина по всем буквам: это не урок, «назад» ведёт на главную, в статус она не идёт. */
+  const general = lesson.id === ALPHABET_ALL_ID;
   const rules = quizRulesFor(lesson);
   const [index, setIndex] = useState(0);
   /** Верно ли ответили на каждый уже принятый вопрос (так, как решил сервер). */
@@ -289,7 +295,7 @@ function QuizPlay({
                 Начать заново
               </Button>
               <Button variant="ghost" block onClick={onBack}>
-                {alphabet ? "Назад к буквам" : "Назад к словам"}
+                {general ? "К урокам" : alphabet ? "Назад к буквам" : "Назад к словам"}
               </Button>
             </div>
           </Card>
@@ -311,16 +317,18 @@ function QuizPlay({
               Ошибок больше {rules.maxMistakes}
             </h2>
             <p className="text-ink-soft">
-              Урок в этот раз не сдан. Результат не сохранён: всё так, как будто викторина не начиналась. Повторите{" "}
-              {alphabet ? "буквы" : "слова"} и попробуйте ещё раз.
+              {general ? "Викторина в этот раз не сдана" : "Урок в этот раз не сдан"}. Результат не сохранён: всё так, как будто
+              викторина не начиналась. Повторите {alphabet ? "буквы" : "слова"} и попробуйте ещё раз.
             </p>
             <div className="grid w-full gap-2">
               <Button block onClick={onRestart} data-testid="quiz-restart">
                 Начать заново
               </Button>
-              <Button variant="secondary" block onClick={onBack}>
-                {alphabet ? "Повторить буквы урока" : "Повторить слова урока"}
-              </Button>
+              {!general && (
+                <Button variant="secondary" block onClick={onBack}>
+                  {alphabet ? "Повторить буквы урока" : "Повторить слова урока"}
+                </Button>
+              )}
               <Button variant="ghost" block onClick={onHome}>
                 К урокам
               </Button>
@@ -336,7 +344,7 @@ function QuizPlay({
       <>
         <Header title="Итоги викторины" onBack={() => void guardedBack()} />
         <main className="mx-auto flex max-w-md flex-col gap-block p-block">
-          {result ? <Result result={result} rules={rules} onHome={onHome} /> : <Notice title="Подводим итог…" />}
+          {result ? <Result result={result} rules={rules} general={general} onHome={onHome} /> : <Notice title="Подводим итог…" />}
         </main>
       </>
     );
@@ -393,9 +401,16 @@ function QuizPlay({
             <Feedback outcome={outcome} item={item} showItem={question!.type === "speak"} />
           )}
           {outcome && !isWriteQuestion(question!) && (
-            <Button onClick={next} data-testid="quiz-next">
+            // Верный ответ: «Дальше» заливается и сама срабатывает через 2 секунды. После ошибки обычная кнопка:
+            // верный ответ показан выше, и его нужно успеть прочитать.
+            <AutoNextButton
+              running={outcome.correct}
+              tone={outcome.correct ? "success" : "primary"}
+              onNext={next}
+              testId="quiz-next"
+            >
               {index === questions.length - 1 ? "Завершить" : "Дальше"}
-            </Button>
+            </AutoNextButton>
           )}
         </Card>
       </main>
@@ -542,7 +557,7 @@ function QuestionBody({
           <div data-testid="prompt" className="text-center text-3xl font-semibold">
             {word.ru}
           </div>
-          <WriteWord word={word} mode="quiz" doneLabel="Дальше" onDone={onWriteDone} />
+          <WriteWord word={word} mode="quiz" doneLabel="Дальше" autoNext onDone={onWriteDone} />
         </>
       );
     default:
@@ -636,7 +651,7 @@ function LetterQuestionBody({
           <div data-testid="prompt" className="text-center text-3xl font-semibold">
             {letter.name.ru}
           </div>
-          <WriteWord word={letter} mode="quiz" doneLabel="Дальше" onDone={onWriteDone} />
+          <WriteWord word={letter} mode="quiz" doneLabel="Дальше" autoNext onDone={onWriteDone} />
         </>
       );
     case "name-type":
@@ -691,7 +706,17 @@ function TypeGeresh({ busy, onSubmit }: { busy: boolean; onSubmit: (typed: strin
 }
 
 /** Итог дошедшей до конца викторины: ошибок не больше допустимого, значит урок сдан и уже записан сервером. */
-function Result({ result, rules, onHome }: { result: QuizResult; rules: QuizRules; onHome: () => void }) {
+function Result({
+  result,
+  rules,
+  general,
+  onHome,
+}: {
+  result: QuizResult;
+  rules: QuizRules;
+  general: boolean;
+  onHome: () => void;
+}) {
   // Старый ответ сервера мог прийти без блока `play`: тогда праздничного листа просто нет.
   const play = result.play;
   const news = !!play && (play.newBadges.length > 0 || play.goalMet || !!result.statusChanged);
@@ -713,11 +738,13 @@ function Result({ result, rules, onHome }: { result: QuizResult; rules: QuizRule
       <h2 className="text-2xl font-bold" data-testid="quiz-result">
         {result.correct} из {result.total}
       </h2>
-      <p className="text-ink-soft">Нужно было {rules.pass}. Урок сдан!</p>
+      <p className="text-ink-soft">Нужно было {rules.pass}. {general ? "Все буквы пройдены!" : "Урок сдан!"}</p>
       <p className="font-semibold text-success" data-testid="quiz-saved">
-        {result.firstTimePassed
-          ? `Новый сданный урок! Всего сдано: ${result.passedLessons}. Статус: ${result.status.symbol} ${result.status.name}`
-          : "Результат сохранён. Этот урок уже был сдан раньше, в статус он не добавляется."}
+        {general
+          ? "Результат сохранён. Общая викторина проверяет все буквы сразу, в статус она не добавляется."
+          : result.firstTimePassed
+            ? `Новый сданный урок! Всего сдано: ${result.passedLessons}. Статус: ${result.status.symbol} ${result.status.name}`
+            : "Результат сохранён. Этот урок уже был сдан раньше, в статус он не добавляется."}
       </p>
       <Button variant="ghost" block onClick={onHome} data-testid="quiz-home">
         К урокам
