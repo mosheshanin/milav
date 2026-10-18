@@ -153,7 +153,8 @@ function byTopic(lessons: Lesson[]): Map<string, Lesson[]> {
 export type VerbSlot = "infinitive" | "present" | "past" | "future" | "imperative";
 
 /**
- * Номера букв корня (с 0), которые в этой форме можно не писать. У сильного корня (нет `gizra`) таких нет.
+ * Номера букв корня (с 0), которые в этой форме можно не писать, у глагола пааль. У сильного корня (нет `gizra`) таких нет.
+ * Это прежнее правило частей 1–3, оно не менялось с 18.10 (тест `verbWeak.test.ts` сверяет его с общей функцией на всех глаголах).
  * - פ״נ: первая נ не пишется в будущем, повелительном и инфинитиве (יפול, תן, ליפול); у נתנ последняя נ выпадает в инфинитиве (לתת) и в прошедшем перед ת (נתתי).
  * - פ״י: первая י (у הלכ первая ה) не пишется в будущем, повелительном и инфинитиве (ישב, שב, לשבת); в настоящем и прошедшем есть.
  * - פ״א: א выпадает только в инфинитиве לומר.
@@ -163,7 +164,7 @@ export type VerbSlot = "infinitive" | "present" | "past" | "future" | "imperativ
  * - ל״ה: последняя ה заменяется окончанием (רציתי, רצו, לרצות), поэтому в любой форме может отсутствовать.
  * - ל״א: א всегда пишется, как у сильного корня.
  */
-export function gizraOptionalPositions(verb: Pick<VerbData, "root" | "gizra">, slot: VerbSlot, key?: string): Set<number> {
+export function paalOptionalPositions(verb: Pick<VerbData, "root" | "gizra">, slot: VerbSlot, key?: string): Set<number> {
   const optional = new Set<number>();
   const future = slot === "future" || slot === "imperative" || slot === "infinitive";
   for (const g of verb.gizra ?? []) {
@@ -184,6 +185,71 @@ export function gizraOptionalPositions(verb: Pick<VerbData, "root" | "gizra">, s
       optional.add(2);
     }
   }
+  return optional;
+}
+
+/** Книжные формы на -נה: будущее 2fp и 3fp, повелительное fp. */
+function isBookKey(slot: VerbSlot, key?: string): boolean {
+  return (slot === "future" && (key === "2fp" || key === "3fp")) || (slot === "imperative" && key === "fp");
+}
+
+/** Прошедшее с окончанием на согласную (הבנתי, הבנת, הבנו): 1s, 2ms, 2fs, 1p, 2mp, 2fp. */
+const PAST_CONSONANT_ENDING: ReadonlySet<string> = new Set(["1s", "2ms", "2fs", "1p", "2mp", "2fp"]);
+
+/** Прошедшее с окончанием на ת (נתתי, נתת, נתתם, נתתן): 1s, 2ms, 2fs, 2mp, 2fp. */
+const PAST_T_ENDING: ReadonlySet<string> = new Set(["1s", "2ms", "2fs", "2mp", "2fp"]);
+
+/** Где буква корня может не писаться: в любой форме или только в части форм. */
+type OptionalWhere = (slot: VerbSlot, key?: string) => boolean;
+const EVERYWHERE: OptionalWhere = () => true;
+
+/**
+ * Хифъиль, пиэль и нифъаль (часть 2 слабых корней, 18.10): буквы выпадают не так, как в пааль, поэтому правила по бинъянам.
+ * Номера букв корня с 0, значение это «где можно не писать». Чего в таблице нет, то пишется всегда.
+ * - Хифъиль: первая נ сливается со второй буквой (הגיד, מגיד, יגיד, הגד, להגיד), первая י становится ו (הוריד, יוריד, הורד),
+ *   средняя ו становится י или не пишется (הקים, הקמתי), средняя י не пишется в прошедшем перед согласной (הבנתי), в
+ *   повелительном м.р. (הבן) и в книжных формах на -נה, последняя ה заменяется окончанием (הראיתי, הראו), א всегда пишется.
+ * - Пиэль: средняя י и ו остаются (סיים, קיים, כיוון), נ в начале остаётся (ניסה, ניקה); выпадает только последняя ה.
+ * - Нифъаль: первая נ совпадает с приставкой (נצל, נתן: одна נ в написании покрывает корень, пропуск не нужен; у נתנ последняя נ
+ *   сливается с ת в прошедшем перед ת, см. ниже),
+ *   первая י становится ו (נולד, נוצר), последняя ה заменяется окончанием, средняя ו остаётся (נסוג).
+ */
+const BINYAN_OPTIONAL: Partial<Record<string, Partial<Record<string, readonly { position: number; where: OptionalWhere }[]>>>> = {
+  hifil: {
+    pe_nun: [{ position: 0, where: EVERYWHERE }],
+    pe_yod: [{ position: 0, where: EVERYWHERE }],
+    ayin_vav: [{ position: 1, where: EVERYWHERE }],
+    ayin_yod: [
+      {
+        position: 1,
+        where: (slot, key) => (slot === "past" && key !== undefined && PAST_CONSONANT_ENDING.has(key)) || (slot === "imperative" && key === "ms") || isBookKey(slot, key),
+      },
+    ],
+    lamed_he: [{ position: 2, where: EVERYWHERE }],
+  },
+  piel: {
+    lamed_he: [{ position: 2, where: EVERYWHERE }],
+  },
+  nifal: {
+    pe_yod: [{ position: 0, where: EVERYWHERE }],
+    lamed_he: [{ position: 2, where: EVERYWHERE }],
+  },
+};
+
+/**
+ * Номера букв корня (с 0), которые в этой форме можно не писать. У сильного корня (нет `gizra`) таких нет.
+ * Пааль (и глагол без бинъяна) идёт по прежнему правилу `paalOptionalPositions`, хифъиль, пиэль и нифъаль по таблице
+ * `BINYAN_OPTIONAL`, у остальных бинъянов пропусков нет.
+ */
+export function gizraOptionalPositions(verb: Pick<VerbData, "root" | "gizra"> & { binyan?: VerbData["binyan"] }, slot: VerbSlot, key?: string): Set<number> {
+  if (verb.binyan === undefined || verb.binyan === "paal") return paalOptionalPositions(verb, slot, key);
+  const optional = new Set<number>();
+  const table = BINYAN_OPTIONAL[verb.binyan];
+  for (const g of verb.gizra ?? []) {
+    for (const rule of table?.[g] ?? []) if (rule.where(slot, key)) optional.add(rule.position);
+  }
+  // נתנ в нифъаль: последняя נ сливается с ת перед окончанием на ת (ניתתי, ניתת, ניתתם, ניתתן), как в пааль (נתתי).
+  if (verb.binyan === "nifal" && verb.root === "נתנ" && slot === "past" && key !== undefined && PAST_T_ENDING.has(key)) optional.add(2);
   return optional;
 }
 
