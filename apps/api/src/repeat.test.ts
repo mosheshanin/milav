@@ -293,6 +293,36 @@ describe("повторение: формы глаголов", () => {
     expect(wrong.body).toMatchObject({ correct: false });
   });
 
+  it("хитпаэль: прошедшее 3ms и повелительное ms (а также 3p и mp) совпадают целиком, любой выбор из них верен", async () => {
+    const hitpael = lessons.find((l) => l.id === "hitpael-1")!;
+    const word = hitpael.words[0]!;
+    const word2 = hitpael.words[1]!;
+    const word3 = hitpael.words[2]!;
+    for (const w of [word, word2, word3]) {
+      await ctx.env.DB.prepare(
+        "INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES (?, ?, ?, 1, 1, 1, 1, '2026-10-10 08:00:00')",
+      )
+        .bind(STUDENT, w.id, hitpael.id)
+        .run();
+    }
+    const v = verbForms(word.verb!);
+    const past3ms = v.find((f) => f.tense === "past" && f.key === "3ms")!;
+    const imp = v.find((f) => f.tense === "imperative" && f.key === "ms")!;
+    expect(past3ms.form.niqqud).toBe(imp.form.niqqud);
+    const same = await answer(STUDENT, { wordId: word.id, type: "form-name", form: id(past3ms), choice: id(imp) });
+    expect(same.body).toMatchObject({ correct: true });
+    const v2 = verbForms(word2.verb!);
+    const past3p = v2.find((f) => f.tense === "past" && f.key === "3p")!;
+    const impMp = v2.find((f) => f.tense === "imperative" && f.key === "mp")!;
+    const same2 = await answer(STUDENT, { wordId: word2.id, type: "form-name", form: id(past3p), choice: id(impMp) });
+    expect(same2.body).toMatchObject({ correct: true });
+    const v3 = verbForms(word3.verb!);
+    const asked = v3.find((f) => f.tense === "past" && f.key === "3ms")!;
+    const notSame = v3.find((f) => formSound(f.form) !== formSound(asked.form))!;
+    const wrong = await answer(STUDENT, { wordId: word3.id, type: "form-name", form: id(asked), choice: id(notSame) });
+    expect(wrong.body).toMatchObject({ correct: false });
+  });
+
   it("ответ о форме проверяет сервер и двигает коробку глагола", async () => {
     expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: "past:zz", choice: id(past3ms) })).status).toBe(400);
     expect((await answer(STUDENT, { wordId: verb.id, type: "form-pick", form: id(past3ms), choice: "nope" })).status).toBe(400);

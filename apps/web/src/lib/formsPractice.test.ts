@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { KATAV, NIKHTAV, katavWord } from "../../../../content/verbFixture";
+import { HITLABESH, KATAV, NIKHTAV, katavWord } from "../../../../content/verbFixture";
 import { verbForms, type Word, type WordForm } from "@milav/shared";
 import {
   PRACTICE_OPTIONS,
@@ -264,5 +264,44 @@ describe("практика форм: формы, звучащие одинако
       }
     }
     expect(seen).toBeGreaterThan(0);
+  });
+});
+
+describe("практика форм: формы, совпадающие целиком (хитпаэль)", () => {
+  const hitpaelWord = (): Word => ({ ...katavWord(), id: "hitpael-1-dress", he: "להתלבש", verb: structuredClone(HITLABESH) }) as unknown as Word;
+  const entries = verbForms(HITLABESH);
+  /** Формы, у которых есть полный двойник по огласовке: прошедшее 3ms и повелительное ms, 3p и повелительное mp, будущее 2ms и 3fs. */
+  const TWINS = ["past:3ms", "imperative:ms", "past:3p", "imperative:mp", "future:2ms", "future:3fs"];
+  const soundOf = (id: string) => formSound(entries.find((e) => slotId(e.tense, e.key) === id)!.form);
+
+  it("прошедшее 3ms и повелительное ms, 3p и повелительное mp, будущее 2ms и 3fs совпадают и по звуку, и по огласовке", () => {
+    expect(HITLABESH.past["3ms"].niqqud).toBe(HITLABESH.imperative!.ms.niqqud);
+    expect(HITLABESH.past["3p"].niqqud).toBe(HITLABESH.imperative!.mp.niqqud);
+    expect(HITLABESH.future["2ms"].niqqud).toBe(HITLABESH.future["3fs"].niqqud);
+    expect(formSound(HITLABESH.past["3ms"])).toBe(formSound(HITLABESH.imperative!.ms));
+  });
+
+  it("«определи форму»: такие формы не спрашиваются", () => {
+    let seen = 0;
+    for (const seed of ALL_SEEDS) {
+      for (const q of buildPractice([hitpaelWord()], seeded(seed)).filter((x) => x.kind === "identify")) {
+        seen++;
+        expect(TWINS).not.toContain(q.correctId);
+        const same = entries.filter((e) => formSound(e.form) === formSound(q.form));
+        expect(same.map((e) => slotId(e.tense, e.key)), q.slot).toEqual([q.correctId]);
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
+  });
+
+  it("в вариантах нет формы, звучащей или записанной так же, как верная, и нет двух одинаковых вариантов", () => {
+    for (const seed of ALL_SEEDS) {
+      for (const q of buildPractice([hitpaelWord()], seeded(seed), 40)) {
+        for (const o of q.options.filter((x) => x.id !== q.correctId)) {
+          expect(soundOf(o.id), `${q.slot}: ${o.id}`).not.toBe(formSound(q.form));
+        }
+        if (q.kind === "pick") expect(new Set(q.options.map((o) => o.text)).size, q.slot).toBe(q.options.length);
+      }
+    }
   });
 });

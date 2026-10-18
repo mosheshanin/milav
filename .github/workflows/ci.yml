@@ -112,6 +112,9 @@ jobs:
       - name: Сквозной тест, урок глаголов нифъаль (nifal-1)
         run: E2E_LESSON=nifal-1 node tools/e2e-lesson.mjs e2e-shots/nifal-1
 
+      - name: Сквозной тест, урок глаголов хитпаэль (hitpael-1)
+        run: E2E_LESSON=hitpael-1 node tools/e2e-lesson.mjs e2e-shots/hitpael-1
+
       # Алфавит: урок из букв (слушай, пиши, печатай), викторина из 20 вопросов, прерывание на 5-й ошибке, защита от подделки.
       - name: Сквозной тест алфавита (alphabet-1)
         run: node tools/e2e-alphabet.mjs e2e-shots/alphabet-1
