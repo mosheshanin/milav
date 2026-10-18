@@ -229,6 +229,18 @@ describe("проверка речи", () => {
     expect(((await (await speak(1, "family-2-grandma")).json()) as any).match).toBe(true);
   });
 
+  it("иврит, записанный латиницей, засчитывается: «мышь» akhbar", async () => {
+    ctx.heard = "akhbar";
+    const body = (await (await speak(1, "animals-1-mouse")).json()) as any;
+    expect(body.heard).toBe("akhbar");
+    expect(body.match).toBe(true);
+  });
+
+  it("латинский мусор не засчитывается", async () => {
+    ctx.heard = "thank you";
+    expect(((await (await speak(1, "animals-1-mouse")).json()) as any).match).toBe(false);
+  });
+
   it("без Workers AI отвечает 503, пустую и слишком большую запись отклоняет", async () => {
     expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...ctx.env, AI: undefined })).status).toBe(503);
     expect((await speak(1, word.id, 0)).status).toBe(400);

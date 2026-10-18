@@ -57,6 +57,7 @@ export function speechLogFields(he: string, detail: SpeechMatchDetail): LogField
     budget: detail.budget,
     closest: detail.closest || undefined,
     rival: detail.rival,
+    latin: detail.latin,
   };
 }
 

@@ -3,12 +3,14 @@
 // по прежнему правилу (скелет из букв, допуск в одну ошибку от 4 букв) и по новому (сравнение по звучанию, `soundDistance`).
 // По умолчанию пары берутся внутри одной темы: именно такие слова ученик видит рядом и легче всего перепутает.
 // --all: все пары слов всех тем (дольше, список обычно шире).
+//   --latin: что будет, если Whisper запишет слово латиницей (как «akhbar» вместо עכבר): транскрипция слова из урока переводится
+//     в латиницу, и считается, у скольких слов проверка сработает, а у скольких откажет из-за соседа или промахнётся.
 // Код возврата всегда 0: это отчёт для решения владельца, а не проверка.
 import { parseArgs } from "node:util";
-import { consonantSkeleton, isSpeechMatch, levenshtein, normalizeHebrew } from "@milav/shared";
+import { consonantSkeleton, isSpeechMatch, levenshtein, normalizeHebrew, speechMatchDetail } from "@milav/shared";
 import { lessons } from "../content";
 
-const { values } = parseArgs({ options: { all: { type: "boolean", default: false } } });
+const { values } = parseArgs({ options: { all: { type: "boolean", default: false }, latin: { type: "boolean", default: false } } });
 
 /** Прежнее правило, как было до сравнения по звучанию (оставлено здесь только для сравнения). */
 function legacyToken(heard: string, expected: string): boolean {
@@ -31,6 +33,7 @@ function legacyMatch(heard: string, expected: string): boolean {
 
 interface Item {
   id: string;
+  translit: string;
   he: string;
   ru: string;
   topic: string;
@@ -41,7 +44,7 @@ for (const lesson of lessons) {
   for (const word of lesson.words) {
     if (seen.has(word.id)) continue;
     seen.add(word.id);
-    items.push({ id: word.id, he: word.he, ru: word.ru, topic: lesson.topicId });
+    items.push({ id: word.id, he: word.he, ru: word.ru, topic: lesson.topicId, translit: word.translit });
   }
 }
 
@@ -55,6 +58,42 @@ const withRivals = (heard: string, expected: string): boolean => {
   const topic = items.find((i) => i.he === expected)?.topic ?? "";
   return isSpeechMatch(heard, expected, (byTopic.get(topic) ?? []).filter((he) => he !== expected));
 };
+
+if (values.latin) {
+  const CYR: Record<string, string> = {
+    а: "a", б: "b", в: "v", г: "g", д: "d", е: "e", ё: "yo", ж: "zh", з: "z", и: "i", й: "y", к: "k", л: "l", м: "m", н: "n", о: "o",
+    п: "p", р: "r", с: "s", т: "t", у: "u", ф: "f", х: "kh", ц: "ts", ч: "ch", ш: "sh", щ: "sh", ы: "i", э: "e", ю: "yu", я: "ya",
+  };
+  // Кириллическая «х» передаёт и ה, и ח, и כ: Whisper напишет «h» или «kh», поэтому пробуем оба варианта и считаем успехом любой.
+  const toLatin = (cyr: string, khaAs: string): string =>
+    [...cyr.normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC").toLowerCase()]
+      .map((ch) => (ch === "х" ? khaAs : (CYR[ch] ?? (/[a-z\s]/.test(ch) ? ch : ""))))
+      .join("");
+  let ok = 0;
+  const blocked: string[] = [];
+  const missed: string[] = [];
+  const skipped: string[] = [];
+  for (const item of items) {
+    const rivals = (byTopic.get(item.topic) ?? []).filter((he) => he !== item.he);
+    const variants = ["kh", "h"].map((kha) => toLatin(item.translit, kha));
+    const results = variants.map((v) => speechMatchDetail(v, item.he, rivals));
+    const best = results.findIndex((r) => r.match);
+    const d = results[best >= 0 ? best : 0]!;
+    const latin = variants[best >= 0 ? best : 0]!;
+    if (d.match) ok++;
+    else if (d.rival) blocked.push(`  ${item.he} (${item.ru}): «${latin}» ближе к ${d.rival}`);
+    else if (d.cost === null) skipped.push(`  ${item.he} (${item.ru})`);
+    else missed.push(`  ${item.he} (${item.ru}): «${latin}», расстояние ${d.cost}, допуск ${d.budget}`);
+  }
+  console.log(`Латиницей (из транскрипции): слов ${items.length}, пройдут ${ok}, отказ из-за соседа ${blocked.length}, не проверяются (одна опорная согласная) ${skipped.length}, мимо ${missed.length}.`);
+  console.log("Отказ из-за соседа:");
+  for (const line of blocked.slice(0, 40)) console.log(line);
+  console.log("Не проверяются латиницей (одна опорная согласная, нужен ответ ивритом):");
+  for (const line of skipped.slice(0, 40)) console.log(line);
+  console.log("Мимо (расстояние больше допуска):");
+  for (const line of missed.slice(0, 40)) console.log(line);
+  process.exit(0);
+}
 
 let pairs = 0;
 const gained: [Item, Item][] = [];

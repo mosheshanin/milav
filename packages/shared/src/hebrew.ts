@@ -108,6 +108,93 @@ export function speechBudget(expected: string): number {
   return consonantSkeleton(expected).length >= 4 ? SPEECH_BUDGET_LONG : SPEECH_BUDGET_ANY;
 }
 
+// ---- Латиница ----
+// Whisper иногда пишет иврит латиницей (слово «мышь» вернулось как «akhbar», то есть עכבר). Слово при этом услышано верно, поэтому
+// латиницу не выбрасываем, а переводим в согласные звуки: каждый звук это набор ивритских букв, которыми его можно записать.
+// Гласные латиницы отбрасываем: в иврите их почти нет в написании, а знать гласные мы не можем. «h» это ה или ח, «kh», «ch» и «x» это
+// כ без точки или ח, а «k» это כ или ק (так, чтобы כלב и חלב оставались разными словами).
+
+const LATIN_DIGRAPHS: Record<string, string> = {
+  sh: "ש",
+  kh: "כח",
+  ch: "כח",
+  ts: "צ",
+  tz: "צ",
+  zh: "ז",
+  th: "ת",
+  ph: "פ",
+};
+const LATIN_SINGLE: Record<string, string> = {
+  b: "ב", v: "בו", g: "ג", d: "ד", h: "הח", z: "ז", x: "כח", k: "כק", q: "ק", c: "כק", t: "תט", y: "י", j: "גזי",
+  l: "ל", m: "מ", n: "נ", p: "פ", f: "פ", r: "ר", s: "סש", w: "ו",
+};
+
+/** Латинский текст как последовательность звуков (каждый: ивритские буквы, которыми его можно записать). Гласные и знаки отбрасываются. */
+export function latinSounds(text: string): string[] {
+  const letters = text.normalize("NFKD").toLowerCase().replace(/[^a-z]/g, "");
+  const sounds: string[] = [];
+  let previous: string | undefined;
+  for (let i = 0; i < letters.length; i++) {
+    const pair = LATIN_DIGRAPHS[letters.slice(i, i + 2)];
+    const sound = pair ?? LATIN_SINGLE[letters[i] ?? ""];
+    if (pair) i++;
+    // Удвоенная согласная подряд («mm», «bb») это один звук; через гласную («dod», «gag») это два.
+    if (sound && sound !== previous) sounds.push(sound);
+    previous = sound;
+  }
+  return sounds;
+}
+
+/** Цена пропустить букву ожидаемого слова, когда услышанное записано латиницей: тихие א ע י ו и ה на конце слова бесплатны. */
+function latinSkipCosts(letters: string[]): number[] {
+  return letters.map((ch, i) => {
+    if (ch === "ו" || ch === "י" || ch === "א" || ch === "ע") return 0;
+    if (ch === "ה" && i === letters.length - 1) return 0;
+    return FULL;
+  });
+}
+
+/** Сколько опорных согласных в ожидаемом слове для сравнения с латиницей. */
+function latinAnchors(expected: string): number {
+  return latinSkipCosts([...expected]).filter((cost) => cost === FULL).length;
+}
+
+/** Чем кончается латинская запись: гласной (`v`, также «ah», «eh»), согласной (`c`) или неясно (`undefined`, например «y»). */
+export function latinEnding(text: string): "v" | "c" | undefined {
+  const letters = text.toLowerCase().replace(/[^a-z]/g, "");
+  if (/[aeiou]h?$/.test(letters)) return "v";
+  return /[bcdfgjklmnpqrstvwxz]$/.test(letters) ? "c" : undefined;
+}
+
+/**
+ * Расстояние между латинской записью и ивритским словом (нормализованным), в единицах FULL. `ending` (`latinEnding`) различает
+ * слова, которые без гласных совпадают: ילד кончается согласной, ילדה (ה на конце это «а») гласной.
+ */
+export function latinDistance(sounds: readonly string[], expected: string, ending?: "v" | "c"): number {
+  const b = [...expected];
+  const skipB = latinSkipCosts(b);
+  // Звук, которым можно записать י или ו, мог быть и тихой буквой, поэтому его пропуск бесплатен.
+  const skipA = sounds.map((sound) => (/[וי]/.test(sound) ? 0 : FULL));
+  let prev: number[] = [0];
+  for (let j = 1; j <= b.length; j++) prev[j] = (prev[j - 1] ?? 0) + (skipB[j - 1] ?? FULL);
+  for (let i = 1; i <= sounds.length; i++) {
+    const cur: number[] = [(prev[0] ?? 0) + (skipA[i - 1] ?? FULL)];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(
+        (prev[j] ?? 0) + (skipA[i - 1] ?? FULL),
+        (cur[j - 1] ?? 0) + (skipB[j - 1] ?? FULL),
+        (prev[j - 1] ?? 0) + ((sounds[i - 1] ?? "").includes(b[j - 1] ?? "?") ? 0 : FULL),
+      );
+    }
+    prev = cur;
+  }
+  let result = prev[b.length] ?? 0;
+  const last = b[b.length - 1] ?? "";
+  if (ending === "v" && skipB[b.length - 1] === FULL) result += FULL; // услышана гласная на конце, а слово кончается согласной
+  if (ending === "c" && (last === "ה" || last === "א") && skipB[b.length - 1] === 0) result += FULL; // слово кончается на «а», а услышана согласная
+  return result;
+}
+
 export interface SpeechMatchDetail {
   match: boolean;
   /** Расстояние до ожидаемого слова (3 = одна обычная ошибка, 2 = одна правка, не меняющая звук); по лучшему из вариантов, null если сравнивать нечего. */
@@ -118,6 +205,8 @@ export interface SpeechMatchDetail {
   expected: string;
   /** Нормализованный вариант услышанного, который оказался ближе всего (вся фраза или одно слово). */
   closest: string;
+  /** Лучший вариант услышанного был записан латиницей (Whisper написал иврит латинскими буквами). */
+  latin?: true;
   /** Соседнее слово, из-за которого отказано: услышанное ближе к нему, чем к ожидаемому слову (нормализованное). Иначе не задано. */
   rival?: string;
 }
@@ -134,26 +223,44 @@ export function speechMatchDetail(heard: string, expected: string, rivals: reado
   const e = normalizeHebrew(expected);
   const budget = e ? speechBudget(e) : 0;
   const rivalKeys = [...new Set(rivals.map(normalizeHebrew))].filter((r) => r && r !== e);
-  const candidates = [heard, ...heard.split(/\s+/).filter(Boolean)].map(normalizeHebrew).filter(Boolean);
+  const raws = [heard, ...heard.split(/\s+/).filter(Boolean)];
   let cost: number | null = null;
   let closest = "";
+  let latin = false;
   let match = false;
   let rival: string | undefined;
   if (e) {
-    for (const candidate of candidates) {
-      const c = soundDistance(candidate, e);
+    for (const raw of raws) {
+      const candidate = normalizeHebrew(raw);
+      let c: number;
+      let blocker: string | undefined;
+      let isLatin = false;
+      if (candidate) {
+        c = soundDistance(candidate, e);
+        if (c <= budget) blocker = rivalKeys.find((r) => r === candidate || soundDistance(candidate, r) < c);
+      } else {
+        // Ивритских букв нет: возможно, иврит записан латиницей. Короткие слова (одна опорная согласная) так не проверяем:
+        // по одной согласной без гласных подойдёт случайный звук.
+        const sounds = latinSounds(raw);
+        if (sounds.length === 0 || latinAnchors(e) < 2) continue;
+        isLatin = true;
+        const ending = latinEnding(raw);
+        c = latinDistance(sounds, e, ending);
+        // Гласных в латинской записи нет. Сосед мешает, если он ближе, а при точном совпадении звуков (c = 0) мешает и сосед с тем же
+        // набором согласных (קר и יקר) не различить, отказываем. Соседи с одной опорной согласной не считаются: им подходит почти любая запись.
+        if (c <= budget) blocker = rivalKeys.filter((r) => latinAnchors(r) >= 2).find((r) => { const d = latinDistance(sounds, r, ending); return d < c || (c === 0 && d === 0); });
+      }
       if (cost === null || c < cost) {
         cost = c;
-        closest = candidate;
+        closest = candidate || raw.trim().toLowerCase();
+        latin = isLatin;
       }
       if (c > budget) continue;
-      // Сосед мешает, если услышано ровно его написание (עוגה вместо עוגייה: расстояние до обоих 0) или он ближе ожидаемого.
-      const blocker = rivalKeys.find((r) => r === candidate || soundDistance(candidate, r) < c);
       if (blocker === undefined) match = true;
       else rival ??= blocker;
     }
   }
-  return { match, cost, budget, expected: e, closest, ...(!match && rival !== undefined ? { rival } : {}) };
+  return { match, cost, budget, expected: e, closest, ...(latin ? { latin: true as const } : {}), ...(!match && rival !== undefined ? { rival } : {}) };
 }
 
 /**

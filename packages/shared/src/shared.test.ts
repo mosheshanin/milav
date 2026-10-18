@@ -3,6 +3,7 @@ import {
   HEBREW_LETTERS,
   consonantSkeleton,
   isSpeechMatch,
+  latinSounds,
   normalizeHebrew,
   speechMatchDetail,
   statusForPassedLessons,
@@ -180,5 +181,69 @@ describe("соседние слова темы", () => {
     expect(speechMatchDetail("סבא", "סבתא", family)).toMatchObject({ match: false, rival: "סבא" });
     expect(speechMatchDetail("סבא", "סבא", family).rival).toBeUndefined();
     expect(speechMatchDetail("כלב", "סבא", family).rival).toBeUndefined(); // далеко от всех: это просто ошибка
+  });
+});
+
+describe("иврит, записанный латиницей", () => {
+  it("раскладывает латиницу на согласные звуки без гласных", () => {
+    expect(latinSounds("akhbar")).toEqual(["כח", "ב", "ר"]);
+    expect(latinSounds("Akh-bar.")).toEqual(["כח", "ב", "ר"]);
+    expect(latinSounds("shalom")).toEqual(["ש", "ל", "מ"]);
+    expect(latinSounds("kelev")).toEqual(["כק", "ל", "בו"]);
+    expect(latinSounds("mamma")).toEqual(["מ", "מ"]); // через гласную это два звука
+    expect(latinSounds("bba")).toEqual(["ב"]); // удвоенная согласная подряд один звук
+    expect(latinSounds("dod")).toEqual(["ד", "ד"]);
+    expect(latinSounds("עכבר")).toEqual([]);
+  });
+
+  it("засчитывает слово, которое Whisper услышал верно, но записал латиницей: «мышь» akhbar", () => {
+    expect(isSpeechMatch("akhbar", "עכבר")).toBe(true);
+    expect(isSpeechMatch("Akhbar.", "עכבר")).toBe(true);
+    expect(isSpeechMatch("achbar", "עכבר")).toBe(true);
+    expect(isSpeechMatch("kelev", "כלב")).toBe(true);
+    expect(isSpeechMatch("halav", "חלב")).toBe(true);
+    expect(isSpeechMatch("para", "פרה")).toBe(true);
+    expect(speechMatchDetail("akhbar", "עכבר")).toMatchObject({ match: true, cost: 0, latin: true });
+  });
+
+  it("не путает слова с похожим набором согласных и не принимает мусор", () => {
+    expect(isSpeechMatch("kelev", "חלב")).toBe(false);
+    expect(isSpeechMatch("halav", "כלב")).toBe(false);
+    expect(isSpeechMatch("hello", "ציפור")).toBe(false);
+    expect(isSpeechMatch("thank you", "ציפור")).toBe(false);
+    expect(isSpeechMatch("bye", "דג")).toBe(false);
+    expect(isSpeechMatch("you", "עכבר")).toBe(false);
+  });
+
+  it("слова с одной опорной согласной латиницей не проверяются", () => {
+    expect(isSpeechMatch("ma", "מה")).toBe(false);
+    expect(isSpeechMatch("my name", "מה")).toBe(false);
+  });
+
+  it("при точном совпадении звуков с соседним словом отказывает: без гласных קר и יקר не различить", () => {
+    expect(speechMatchDetail("kar", "קר", ["יקר"])).toMatchObject({ match: false, rival: "יקר" });
+    expect(isSpeechMatch("kar", "קר")).toBe(true);
+    expect(isSpeechMatch("tov", "טוב", ["איטי"])).toBe(true); // сосед с одной опорной согласной не мешает
+  });
+
+  it("окончание различает слова без гласных: ילד кончается согласной, ילדה гласной", () => {
+    expect(isSpeechMatch("yeled", "ילד", ["ילדה"])).toBe(true);
+    expect(isSpeechMatch("yalda", "ילדה", ["ילד"])).toBe(true);
+    expect(isSpeechMatch("kos", "כוס", ["כיסא"])).toBe(true);
+    expect(isSpeechMatch("kise", "כיסא", ["כוס"])).toBe(true);
+    expect(isSpeechMatch("yalda", "ילד", ["ילדה"])).toBe(false); // гласная на конце, а слово кончается согласной
+    expect(isSpeechMatch("yeled", "ילדה", ["ילד"])).toBe(false);
+  });
+
+  it("одинаковые согласные через гласную это два звука: dod, gag, sus", () => {
+    expect(isSpeechMatch("dod", "דוד")).toBe(true);
+    expect(isSpeechMatch("gag", "גג")).toBe(true);
+    expect(isSpeechMatch("sus", "סוס")).toBe(true);
+    expect(isSpeechMatch("mayim", "מים")).toBe(true);
+  });
+
+  it("ивритский ответ по-прежнему главный: при ивритских буквах латиница не нужна", () => {
+    expect(speechMatchDetail("עכבר", "עכבר").latin).toBeUndefined();
+    expect(isSpeechMatch("akhbar עכבר", "עכבר")).toBe(true);
   });
 });
