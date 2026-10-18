@@ -17,7 +17,8 @@
       "example": {
         "he": "אני יורד במעלית",
         "translit": "ани йоред бемаалит",
-        "ru": "Я спускаюсь на лифте"
+        "ru": "Я спускаюсь на лифте",
+        "audio": "/audio/weak-3-descend-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -29,147 +30,175 @@
           "ms": {
             "he": "יורד",
             "niqqud": "יוֹרֵד",
-            "translit": "йоре́д"
+            "translit": "йоре́д",
+            "audio": "/audio/weak-3-descend-form-present-ms.mp3"
           },
           "fs": {
             "he": "יורדת",
             "niqqud": "יוֹרֶדֶת",
-            "translit": "йоре́дет"
+            "translit": "йоре́дет",
+            "audio": "/audio/weak-3-descend-form-present-fs.mp3"
           },
           "mp": {
             "he": "יורדים",
             "niqqud": "יוֹרְדִים",
-            "translit": "йорди́м"
+            "translit": "йорди́м",
+            "audio": "/audio/weak-3-descend-form-present-mp.mp3"
           },
           "fp": {
             "he": "יורדות",
             "niqqud": "יוֹרְדוֹת",
-            "translit": "йордо́т"
+            "translit": "йордо́т",
+            "audio": "/audio/weak-3-descend-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "ירדתי",
             "niqqud": "יָרַדְתִּי",
-            "translit": "яра́дти"
+            "translit": "яра́дти",
+            "audio": "/audio/weak-3-descend-form-past-1s.mp3"
           },
           "2ms": {
             "he": "ירדת",
             "niqqud": "יָרַדְתָּ",
-            "translit": "яра́дта"
+            "translit": "яра́дта",
+            "audio": "/audio/weak-3-descend-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "ירדת",
             "niqqud": "יָרַדְתְּ",
-            "translit": "яра́дт"
+            "translit": "яра́дт",
+            "audio": "/audio/weak-3-descend-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "ירד",
             "niqqud": "יָרַד",
-            "translit": "яра́д"
+            "translit": "яра́д",
+            "audio": "/audio/weak-3-descend-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "ירדה",
             "niqqud": "יָרְדָה",
-            "translit": "ярда́"
+            "translit": "ярда́",
+            "audio": "/audio/weak-3-descend-form-past-3fs.mp3"
           },
           "1p": {
             "he": "ירדנו",
             "niqqud": "יָרַדְנוּ",
-            "translit": "яра́дну"
+            "translit": "яра́дну",
+            "audio": "/audio/weak-3-descend-form-past-1p.mp3"
           },
           "2mp": {
             "he": "ירדתם",
             "niqqud": "יְרַדְתֶּם",
-            "translit": "ерадте́м"
+            "translit": "ерадте́м",
+            "audio": "/audio/weak-3-descend-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "ירדתן",
             "niqqud": "יְרַדְתֶּן",
-            "translit": "ерадте́н"
+            "translit": "ерадте́н",
+            "audio": "/audio/weak-3-descend-form-past-2fp.mp3"
           },
           "3p": {
             "he": "ירדו",
             "niqqud": "יָרְדוּ",
-            "translit": "ярду́"
+            "translit": "ярду́",
+            "audio": "/audio/weak-3-descend-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "ארד",
             "niqqud": "אֵרֵד",
-            "translit": "эре́д"
+            "translit": "эре́д",
+            "audio": "/audio/weak-3-descend-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תרד",
             "niqqud": "תֵּרֵד",
-            "translit": "тере́д"
+            "translit": "тере́д",
+            "audio": "/audio/weak-3-descend-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תרדי",
             "niqqud": "תֵּרְדִי",
-            "translit": "терди́"
+            "translit": "терди́",
+            "audio": "/audio/weak-3-descend-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ירד",
             "niqqud": "יֵרֵד",
-            "translit": "ере́д"
+            "translit": "ере́д",
+            "audio": "/audio/weak-3-descend-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תרד",
             "niqqud": "תֵּרֵד",
-            "translit": "тере́д"
+            "translit": "тере́д",
+            "audio": "/audio/weak-3-descend-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נרד",
             "niqqud": "נֵרֵד",
-            "translit": "нере́д"
+            "translit": "нере́д",
+            "audio": "/audio/weak-3-descend-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תרדו",
             "niqqud": "תֵּרְדוּ",
-            "translit": "терду́"
+            "translit": "терду́",
+            "audio": "/audio/weak-3-descend-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תרדנה",
             "niqqud": "תֵּרַדְנָה",
-            "translit": "тера́дна"
+            "translit": "тера́дна",
+            "audio": "/audio/weak-3-descend-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ירדו",
             "niqqud": "יֵרְדוּ",
-            "translit": "ерду́"
+            "translit": "ерду́",
+            "audio": "/audio/weak-3-descend-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ירדנה",
             "niqqud": "יֵרַדְנָה",
-            "translit": "ера́дна"
+            "translit": "ера́дна",
+            "audio": "/audio/weak-3-descend-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "רד",
             "niqqud": "רֵד",
-            "translit": "ред"
+            "translit": "ред",
+            "audio": "/audio/weak-3-descend-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "רדי",
             "niqqud": "רְדִי",
-            "translit": "рди"
+            "translit": "рди",
+            "audio": "/audio/weak-3-descend-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "רדו",
             "niqqud": "רְדוּ",
-            "translit": "рду"
+            "translit": "рду",
+            "audio": "/audio/weak-3-descend-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "רדנה",
             "niqqud": "רֵדְנָה",
-            "translit": "ре́дна"
+            "translit": "ре́дна",
+            "audio": "/audio/weak-3-descend-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-descend.mp3"
     },
     {
       "id": "weak-3-ascend",
@@ -180,7 +209,8 @@
       "example": {
         "he": "אני עולה במדרגות",
         "translit": "ани оле бемадрегот",
-        "ru": "Я поднимаюсь по лестнице"
+        "ru": "Я поднимаюсь по лестнице",
+        "audio": "/audio/weak-3-ascend-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -192,147 +222,175 @@
           "ms": {
             "he": "עולה",
             "niqqud": "עוֹלֶה",
-            "translit": "оле́"
+            "translit": "оле́",
+            "audio": "/audio/weak-3-ascend-form-present-ms.mp3"
           },
           "fs": {
             "he": "עולה",
             "niqqud": "עוֹלָה",
-            "translit": "ола́"
+            "translit": "ола́",
+            "audio": "/audio/weak-3-ascend-form-present-fs.mp3"
           },
           "mp": {
             "he": "עולים",
             "niqqud": "עוֹלִים",
-            "translit": "оли́м"
+            "translit": "оли́м",
+            "audio": "/audio/weak-3-ascend-form-present-mp.mp3"
           },
           "fp": {
             "he": "עולות",
             "niqqud": "עוֹלוֹת",
-            "translit": "оло́т"
+            "translit": "оло́т",
+            "audio": "/audio/weak-3-ascend-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "עליתי",
             "niqqud": "עָלִיתִי",
-            "translit": "али́ти"
+            "translit": "али́ти",
+            "audio": "/audio/weak-3-ascend-form-past-1s.mp3"
           },
           "2ms": {
             "he": "עלית",
             "niqqud": "עָלִיתָ",
-            "translit": "али́та"
+            "translit": "али́та",
+            "audio": "/audio/weak-3-ascend-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "עלית",
             "niqqud": "עָלִית",
-            "translit": "али́т"
+            "translit": "али́т",
+            "audio": "/audio/weak-3-ascend-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "עלה",
             "niqqud": "עָלָה",
-            "translit": "ала́"
+            "translit": "ала́",
+            "audio": "/audio/weak-3-ascend-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "עלתה",
             "niqqud": "עָלְתָה",
-            "translit": "алта́"
+            "translit": "алта́",
+            "audio": "/audio/weak-3-ascend-form-past-3fs.mp3"
           },
           "1p": {
             "he": "עלינו",
             "niqqud": "עָלִינוּ",
-            "translit": "али́ну"
+            "translit": "али́ну",
+            "audio": "/audio/weak-3-ascend-form-past-1p.mp3"
           },
           "2mp": {
             "he": "עליתם",
             "niqqud": "עֲלִיתֶם",
-            "translit": "алите́м"
+            "translit": "алите́м",
+            "audio": "/audio/weak-3-ascend-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "עליתן",
             "niqqud": "עֲלִיתֶן",
-            "translit": "алите́н"
+            "translit": "алите́н",
+            "audio": "/audio/weak-3-ascend-form-past-2fp.mp3"
           },
           "3p": {
             "he": "עלו",
             "niqqud": "עָלוּ",
-            "translit": "алу́"
+            "translit": "алу́",
+            "audio": "/audio/weak-3-ascend-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אעלה",
             "niqqud": "אֶעֱלֶה",
-            "translit": "эеле́"
+            "translit": "эеле́",
+            "audio": "/audio/weak-3-ascend-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תעלה",
             "niqqud": "תַּעֲלֶה",
-            "translit": "таале́"
+            "translit": "таале́",
+            "audio": "/audio/weak-3-ascend-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תעלי",
             "niqqud": "תַּעֲלִי",
-            "translit": "таали́"
+            "translit": "таали́",
+            "audio": "/audio/weak-3-ascend-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יעלה",
             "niqqud": "יַעֲלֶה",
-            "translit": "яале́"
+            "translit": "яале́",
+            "audio": "/audio/weak-3-ascend-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תעלה",
             "niqqud": "תַּעֲלֶה",
-            "translit": "таале́"
+            "translit": "таале́",
+            "audio": "/audio/weak-3-ascend-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נעלה",
             "niqqud": "נַעֲלֶה",
-            "translit": "наале́"
+            "translit": "наале́",
+            "audio": "/audio/weak-3-ascend-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תעלו",
             "niqqud": "תַּעֲלוּ",
-            "translit": "таалу́"
+            "translit": "таалу́",
+            "audio": "/audio/weak-3-ascend-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תעלינה",
             "niqqud": "תַּעֲלֶינָה",
-            "translit": "таале́на"
+            "translit": "таале́на",
+            "audio": "/audio/weak-3-ascend-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יעלו",
             "niqqud": "יַעֲלוּ",
-            "translit": "яалу́"
+            "translit": "яалу́",
+            "audio": "/audio/weak-3-ascend-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יעלינה",
             "niqqud": "יַעֲלֶינָה",
-            "translit": "яале́на"
+            "translit": "яале́на",
+            "audio": "/audio/weak-3-ascend-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "עלה",
             "niqqud": "עֲלֵה",
-            "translit": "але́"
+            "translit": "але́",
+            "audio": "/audio/weak-3-ascend-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "עלי",
             "niqqud": "עֲלִי",
-            "translit": "али́"
+            "translit": "али́",
+            "audio": "/audio/weak-3-ascend-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "עלו",
             "niqqud": "עֲלוּ",
-            "translit": "алу́"
+            "translit": "алу́",
+            "audio": "/audio/weak-3-ascend-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "עלינה",
             "niqqud": "עֲלֶינָה",
-            "translit": "але́на"
+            "translit": "але́на",
+            "audio": "/audio/weak-3-ascend-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-ascend.mp3"
     },
     {
       "id": "weak-3-reside",
@@ -343,7 +401,8 @@
       "example": {
         "he": "אני גר בתל אביב",
         "translit": "ани гар бетель авив",
-        "ru": "Я живу в Тель-Авиве"
+        "ru": "Я живу в Тель-Авиве",
+        "audio": "/audio/weak-3-reside-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -355,147 +414,175 @@
           "ms": {
             "he": "גר",
             "niqqud": "גָּר",
-            "translit": "гар"
+            "translit": "гар",
+            "audio": "/audio/weak-3-reside-form-present-ms.mp3"
           },
           "fs": {
             "he": "גרה",
             "niqqud": "גָּרָה",
-            "translit": "гара́"
+            "translit": "гара́",
+            "audio": "/audio/weak-3-reside-form-present-fs.mp3"
           },
           "mp": {
             "he": "גרים",
             "niqqud": "גָּרִים",
-            "translit": "гари́м"
+            "translit": "гари́м",
+            "audio": "/audio/weak-3-reside-form-present-mp.mp3"
           },
           "fp": {
             "he": "גרות",
             "niqqud": "גָּרוֹת",
-            "translit": "гаро́т"
+            "translit": "гаро́т",
+            "audio": "/audio/weak-3-reside-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "גרתי",
             "niqqud": "גַּרְתִּי",
-            "translit": "га́рти"
+            "translit": "га́рти",
+            "audio": "/audio/weak-3-reside-form-past-1s.mp3"
           },
           "2ms": {
             "he": "גרת",
             "niqqud": "גַּרְתָּ",
-            "translit": "га́рта"
+            "translit": "га́рта",
+            "audio": "/audio/weak-3-reside-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "גרת",
             "niqqud": "גַּרְתְּ",
-            "translit": "гарт"
+            "translit": "гарт",
+            "audio": "/audio/weak-3-reside-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "גר",
             "niqqud": "גָּר",
-            "translit": "гар"
+            "translit": "гар",
+            "audio": "/audio/weak-3-reside-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "גרה",
             "niqqud": "גָּרָה",
-            "translit": "гара́"
+            "translit": "гара́",
+            "audio": "/audio/weak-3-reside-form-past-3fs.mp3"
           },
           "1p": {
             "he": "גרנו",
             "niqqud": "גַּרְנוּ",
-            "translit": "га́рну"
+            "translit": "га́рну",
+            "audio": "/audio/weak-3-reside-form-past-1p.mp3"
           },
           "2mp": {
             "he": "גרתם",
             "niqqud": "גַּרְתֶּם",
-            "translit": "гарте́м"
+            "translit": "гарте́м",
+            "audio": "/audio/weak-3-reside-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "גרתן",
             "niqqud": "גַּרְתֶּן",
-            "translit": "гарте́н"
+            "translit": "гарте́н",
+            "audio": "/audio/weak-3-reside-form-past-2fp.mp3"
           },
           "3p": {
             "he": "גרו",
             "niqqud": "גָּרוּ",
-            "translit": "гару́"
+            "translit": "гару́",
+            "audio": "/audio/weak-3-reside-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אגור",
             "niqqud": "אָגוּר",
-            "translit": "агу́р"
+            "translit": "агу́р",
+            "audio": "/audio/weak-3-reside-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תגור",
             "niqqud": "תָּגוּר",
-            "translit": "тагу́р"
+            "translit": "тагу́р",
+            "audio": "/audio/weak-3-reside-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תגורי",
             "niqqud": "תָּגוּרִי",
-            "translit": "тагури́"
+            "translit": "тагури́",
+            "audio": "/audio/weak-3-reside-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יגור",
             "niqqud": "יָגוּר",
-            "translit": "ягу́р"
+            "translit": "ягу́р",
+            "audio": "/audio/weak-3-reside-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תגור",
             "niqqud": "תָּגוּר",
-            "translit": "тагу́р"
+            "translit": "тагу́р",
+            "audio": "/audio/weak-3-reside-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נגור",
             "niqqud": "נָגוּר",
-            "translit": "нагу́р"
+            "translit": "нагу́р",
+            "audio": "/audio/weak-3-reside-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תגורו",
             "niqqud": "תָּגוּרוּ",
-            "translit": "тагуру́"
+            "translit": "тагуру́",
+            "audio": "/audio/weak-3-reside-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תגרנה",
             "niqqud": "תָּגֹרְנָה",
-            "translit": "таго́рна"
+            "translit": "таго́рна",
+            "audio": "/audio/weak-3-reside-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יגורו",
             "niqqud": "יָגוּרוּ",
-            "translit": "ягуру́"
+            "translit": "ягуру́",
+            "audio": "/audio/weak-3-reside-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יגרנה",
             "niqqud": "יָגֹרְנָה",
-            "translit": "яго́рна"
+            "translit": "яго́рна",
+            "audio": "/audio/weak-3-reside-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "גור",
             "niqqud": "גּוּר",
-            "translit": "гур"
+            "translit": "гур",
+            "audio": "/audio/weak-3-reside-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "גורי",
             "niqqud": "גּוּרִי",
-            "translit": "гури́"
+            "translit": "гури́",
+            "audio": "/audio/weak-3-reside-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "גורו",
             "niqqud": "גּוּרוּ",
-            "translit": "гуру́"
+            "translit": "гуру́",
+            "audio": "/audio/weak-3-reside-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "גרנה",
             "niqqud": "גֹּרְנָה",
-            "translit": "го́рна"
+            "translit": "го́рна",
+            "audio": "/audio/weak-3-reside-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-reside.mp3"
     },
     {
       "id": "weak-3-live",
@@ -506,7 +593,8 @@
       "example": {
         "he": "אני חי חיים טובים",
         "translit": "ани хай хаим товим",
-        "ru": "Я живу хорошей жизнью"
+        "ru": "Я живу хорошей жизнью",
+        "audio": "/audio/weak-3-live-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -518,125 +606,149 @@
           "ms": {
             "he": "חי",
             "niqqud": "חַי",
-            "translit": "хай"
+            "translit": "хай",
+            "audio": "/audio/weak-3-live-form-present-ms.mp3"
           },
           "fs": {
             "he": "חיה",
             "niqqud": "חַיָּה",
-            "translit": "хайя́"
+            "translit": "хайя́",
+            "audio": "/audio/weak-3-live-form-present-fs.mp3"
           },
           "mp": {
             "he": "חיים",
             "niqqud": "חַיִּים",
-            "translit": "хаи́м"
+            "translit": "хаи́м",
+            "audio": "/audio/weak-3-live-form-present-mp.mp3"
           },
           "fp": {
             "he": "חיות",
             "niqqud": "חַיּוֹת",
-            "translit": "хайо́т"
+            "translit": "хайо́т",
+            "audio": "/audio/weak-3-live-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "חייתי",
             "niqqud": "חָיִיתִי",
-            "translit": "хайи́ти"
+            "translit": "хайи́ти",
+            "audio": "/audio/weak-3-live-form-past-1s.mp3"
           },
           "2ms": {
             "he": "חיית",
             "niqqud": "חָיִיתָ",
-            "translit": "хайи́та"
+            "translit": "хайи́та",
+            "audio": "/audio/weak-3-live-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "חיית",
             "niqqud": "חָיִית",
-            "translit": "хайи́т"
+            "translit": "хайи́т",
+            "audio": "/audio/weak-3-live-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "חיה",
             "niqqud": "חָיָה",
-            "translit": "хайа́"
+            "translit": "хайа́",
+            "audio": "/audio/weak-3-live-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "חיתה",
             "niqqud": "חָיְתָה",
-            "translit": "хайта́"
+            "translit": "хайта́",
+            "audio": "/audio/weak-3-live-form-past-3fs.mp3"
           },
           "1p": {
             "he": "חיינו",
             "niqqud": "חָיִינוּ",
-            "translit": "хайи́ну"
+            "translit": "хайи́ну",
+            "audio": "/audio/weak-3-live-form-past-1p.mp3"
           },
           "2mp": {
             "he": "חייתם",
             "niqqud": "חֲיִיתֶם",
-            "translit": "хайите́м"
+            "translit": "хайите́м",
+            "audio": "/audio/weak-3-live-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "חייתן",
             "niqqud": "חֲיִיתֶן",
-            "translit": "хайите́н"
+            "translit": "хайите́н",
+            "audio": "/audio/weak-3-live-form-past-2fp.mp3"
           },
           "3p": {
             "he": "חיו",
             "niqqud": "חָיוּ",
-            "translit": "хайу́"
+            "translit": "хайу́",
+            "audio": "/audio/weak-3-live-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אחיה",
             "niqqud": "אֶחְיֶה",
-            "translit": "эхье́"
+            "translit": "эхье́",
+            "audio": "/audio/weak-3-live-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תחיה",
             "niqqud": "תִּחְיֶה",
-            "translit": "тихье́"
+            "translit": "тихье́",
+            "audio": "/audio/weak-3-live-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תחיי",
             "niqqud": "תִּחְיִי",
-            "translit": "тихьи́"
+            "translit": "тихьи́",
+            "audio": "/audio/weak-3-live-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יחיה",
             "niqqud": "יִחְיֶה",
-            "translit": "ихье́"
+            "translit": "ихье́",
+            "audio": "/audio/weak-3-live-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תחיה",
             "niqqud": "תִּחְיֶה",
-            "translit": "тихье́"
+            "translit": "тихье́",
+            "audio": "/audio/weak-3-live-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נחיה",
             "niqqud": "נִחְיֶה",
-            "translit": "нихье́"
+            "translit": "нихье́",
+            "audio": "/audio/weak-3-live-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תחיו",
             "niqqud": "תִּחְיוּ",
-            "translit": "тихьу́"
+            "translit": "тихьу́",
+            "audio": "/audio/weak-3-live-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תחיינה",
             "niqqud": "תִּחְיֶינָה",
-            "translit": "тихье́на"
+            "translit": "тихье́на",
+            "audio": "/audio/weak-3-live-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יחיו",
             "niqqud": "יִחְיוּ",
-            "translit": "ихьу́"
+            "translit": "ихьу́",
+            "audio": "/audio/weak-3-live-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יחיינה",
             "niqqud": "יִחְיֶינָה",
-            "translit": "ихье́на"
+            "translit": "ихье́на",
+            "audio": "/audio/weak-3-live-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-live.mp3"
     },
     {
       "id": "weak-3-run",
@@ -647,7 +759,8 @@
       "example": {
         "he": "אני רץ בפארק",
         "translit": "ани рац бепарк",
-        "ru": "Я бегу в парке"
+        "ru": "Я бегу в парке",
+        "audio": "/audio/weak-3-run-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -659,147 +772,175 @@
           "ms": {
             "he": "רץ",
             "niqqud": "רָץ",
-            "translit": "рац"
+            "translit": "рац",
+            "audio": "/audio/weak-3-run-form-present-ms.mp3"
           },
           "fs": {
             "he": "רצה",
             "niqqud": "רָצָה",
-            "translit": "раца́"
+            "translit": "раца́",
+            "audio": "/audio/weak-3-run-form-present-fs.mp3"
           },
           "mp": {
             "he": "רצים",
             "niqqud": "רָצִים",
-            "translit": "раци́м"
+            "translit": "раци́м",
+            "audio": "/audio/weak-3-run-form-present-mp.mp3"
           },
           "fp": {
             "he": "רצות",
             "niqqud": "רָצוֹת",
-            "translit": "рацо́т"
+            "translit": "рацо́т",
+            "audio": "/audio/weak-3-run-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "רצתי",
             "niqqud": "רַצְתִּי",
-            "translit": "ра́цти"
+            "translit": "ра́цти",
+            "audio": "/audio/weak-3-run-form-past-1s.mp3"
           },
           "2ms": {
             "he": "רצת",
             "niqqud": "רַצְתָּ",
-            "translit": "ра́цта"
+            "translit": "ра́цта",
+            "audio": "/audio/weak-3-run-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "רצת",
             "niqqud": "רַצְתְּ",
-            "translit": "рацт"
+            "translit": "рацт",
+            "audio": "/audio/weak-3-run-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "רץ",
             "niqqud": "רָץ",
-            "translit": "рац"
+            "translit": "рац",
+            "audio": "/audio/weak-3-run-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "רצה",
             "niqqud": "רָצָה",
-            "translit": "раца́"
+            "translit": "раца́",
+            "audio": "/audio/weak-3-run-form-past-3fs.mp3"
           },
           "1p": {
             "he": "רצנו",
             "niqqud": "רַצְנוּ",
-            "translit": "ра́цну"
+            "translit": "ра́цну",
+            "audio": "/audio/weak-3-run-form-past-1p.mp3"
           },
           "2mp": {
             "he": "רצתם",
             "niqqud": "רַצְתֶּם",
-            "translit": "рацте́м"
+            "translit": "рацте́м",
+            "audio": "/audio/weak-3-run-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "רצתן",
             "niqqud": "רַצְתֶּן",
-            "translit": "рацте́н"
+            "translit": "рацте́н",
+            "audio": "/audio/weak-3-run-form-past-2fp.mp3"
           },
           "3p": {
             "he": "רצו",
             "niqqud": "רָצוּ",
-            "translit": "рацу́"
+            "translit": "рацу́",
+            "audio": "/audio/weak-3-run-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "ארוץ",
             "niqqud": "אָרוּץ",
-            "translit": "ару́ц"
+            "translit": "ару́ц",
+            "audio": "/audio/weak-3-run-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תרוץ",
             "niqqud": "תָּרוּץ",
-            "translit": "тару́ц"
+            "translit": "тару́ц",
+            "audio": "/audio/weak-3-run-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תרוצי",
             "niqqud": "תָּרוּצִי",
-            "translit": "таруци́"
+            "translit": "таруци́",
+            "audio": "/audio/weak-3-run-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ירוץ",
             "niqqud": "יָרוּץ",
-            "translit": "яру́ц"
+            "translit": "яру́ц",
+            "audio": "/audio/weak-3-run-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תרוץ",
             "niqqud": "תָּרוּץ",
-            "translit": "тару́ц"
+            "translit": "тару́ц",
+            "audio": "/audio/weak-3-run-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נרוץ",
             "niqqud": "נָרוּץ",
-            "translit": "нару́ц"
+            "translit": "нару́ц",
+            "audio": "/audio/weak-3-run-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תרוצו",
             "niqqud": "תָּרוּצוּ",
-            "translit": "таруцу́"
+            "translit": "таруцу́",
+            "audio": "/audio/weak-3-run-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תרצנה",
             "niqqud": "תָּרֹצְנָה",
-            "translit": "таро́цна"
+            "translit": "таро́цна",
+            "audio": "/audio/weak-3-run-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ירוצו",
             "niqqud": "יָרוּצוּ",
-            "translit": "яруцу́"
+            "translit": "яруцу́",
+            "audio": "/audio/weak-3-run-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ירצנה",
             "niqqud": "יָרֹצְנָה",
-            "translit": "яро́цна"
+            "translit": "яро́цна",
+            "audio": "/audio/weak-3-run-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "רוץ",
             "niqqud": "רוּץ",
-            "translit": "руц"
+            "translit": "руц",
+            "audio": "/audio/weak-3-run-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "רוצי",
             "niqqud": "רוּצִי",
-            "translit": "руци́"
+            "translit": "руци́",
+            "audio": "/audio/weak-3-run-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "רוצו",
             "niqqud": "רוּצוּ",
-            "translit": "руцу́"
+            "translit": "руцу́",
+            "audio": "/audio/weak-3-run-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "רצנה",
             "niqqud": "רֹצְנָה",
-            "translit": "ро́цна"
+            "translit": "ро́цна",
+            "audio": "/audio/weak-3-run-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-run.mp3"
     },
     {
       "id": "weak-3-travel",
@@ -810,7 +951,8 @@
       "example": {
         "he": "אני נוסע לירושלים",
         "translit": "ани носеа лирушалаим",
-        "ru": "Я еду в Иерусалим"
+        "ru": "Я еду в Иерусалим",
+        "audio": "/audio/weak-3-travel-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -822,147 +964,175 @@
           "ms": {
             "he": "נוסע",
             "niqqud": "נוֹסֵעַ",
-            "translit": "носе́а"
+            "translit": "носе́а",
+            "audio": "/audio/weak-3-travel-form-present-ms.mp3"
           },
           "fs": {
             "he": "נוסעת",
             "niqqud": "נוֹסַעַת",
-            "translit": "носа́ат"
+            "translit": "носа́ат",
+            "audio": "/audio/weak-3-travel-form-present-fs.mp3"
           },
           "mp": {
             "he": "נוסעים",
             "niqqud": "נוֹסְעִים",
-            "translit": "носьи́м"
+            "translit": "носьи́м",
+            "audio": "/audio/weak-3-travel-form-present-mp.mp3"
           },
           "fp": {
             "he": "נוסעות",
             "niqqud": "נוֹסְעוֹת",
-            "translit": "носьо́т"
+            "translit": "носьо́т",
+            "audio": "/audio/weak-3-travel-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נסעתי",
             "niqqud": "נָסַעְתִּי",
-            "translit": "наса́ти"
+            "translit": "наса́ти",
+            "audio": "/audio/weak-3-travel-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נסעת",
             "niqqud": "נָסַעְתָּ",
-            "translit": "наса́та"
+            "translit": "наса́та",
+            "audio": "/audio/weak-3-travel-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נסעת",
             "niqqud": "נָסַעְתְּ",
-            "translit": "наса́т"
+            "translit": "наса́т",
+            "audio": "/audio/weak-3-travel-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נסע",
             "niqqud": "נָסַע",
-            "translit": "наса́"
+            "translit": "наса́",
+            "audio": "/audio/weak-3-travel-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נסעה",
             "niqqud": "נָסְעָה",
-            "translit": "насьа́"
+            "translit": "насьа́",
+            "audio": "/audio/weak-3-travel-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נסענו",
             "niqqud": "נָסַעְנוּ",
-            "translit": "наса́ну"
+            "translit": "наса́ну",
+            "audio": "/audio/weak-3-travel-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נסעתם",
             "niqqud": "נְסַעְתֶּם",
-            "translit": "несате́м"
+            "translit": "несате́м",
+            "audio": "/audio/weak-3-travel-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נסעתן",
             "niqqud": "נְסַעְתֶּן",
-            "translit": "несате́н"
+            "translit": "несате́н",
+            "audio": "/audio/weak-3-travel-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נסעו",
             "niqqud": "נָסְעוּ",
-            "translit": "насьу́"
+            "translit": "насьу́",
+            "audio": "/audio/weak-3-travel-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אסע",
             "niqqud": "אֶסַּע",
-            "translit": "эса́"
+            "translit": "эса́",
+            "audio": "/audio/weak-3-travel-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תסע",
             "niqqud": "תִּסַּע",
-            "translit": "тиса́"
+            "translit": "тиса́",
+            "audio": "/audio/weak-3-travel-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תסעי",
             "niqqud": "תִּסְעִי",
-            "translit": "тисьи́"
+            "translit": "тисьи́",
+            "audio": "/audio/weak-3-travel-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יסע",
             "niqqud": "יִסַּע",
-            "translit": "иса́"
+            "translit": "иса́",
+            "audio": "/audio/weak-3-travel-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תסע",
             "niqqud": "תִּסַּע",
-            "translit": "тиса́"
+            "translit": "тиса́",
+            "audio": "/audio/weak-3-travel-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נסע",
             "niqqud": "נִסַּע",
-            "translit": "ниса́"
+            "translit": "ниса́",
+            "audio": "/audio/weak-3-travel-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תסעו",
             "niqqud": "תִּסְעוּ",
-            "translit": "тисьу́"
+            "translit": "тисьу́",
+            "audio": "/audio/weak-3-travel-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תסענה",
             "niqqud": "תִּסַּעְנָה",
-            "translit": "тиса́на"
+            "translit": "тиса́на",
+            "audio": "/audio/weak-3-travel-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יסעו",
             "niqqud": "יִסְעוּ",
-            "translit": "исьу́"
+            "translit": "исьу́",
+            "audio": "/audio/weak-3-travel-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יסענה",
             "niqqud": "יִסַּעְנָה",
-            "translit": "иса́на"
+            "translit": "иса́на",
+            "audio": "/audio/weak-3-travel-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "סע",
             "niqqud": "סַע",
-            "translit": "са"
+            "translit": "са",
+            "audio": "/audio/weak-3-travel-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "סעי",
             "niqqud": "סְעִי",
-            "translit": "сьи"
+            "translit": "сьи",
+            "audio": "/audio/weak-3-travel-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "סעו",
             "niqqud": "סְעוּ",
-            "translit": "сьу"
+            "translit": "сьу",
+            "audio": "/audio/weak-3-travel-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "סענה",
             "niqqud": "סַעְנָה",
-            "translit": "са́на"
+            "translit": "са́на",
+            "audio": "/audio/weak-3-travel-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-travel.mp3"
     },
     {
       "id": "weak-3-fall",
@@ -973,7 +1143,8 @@
       "example": {
         "he": "אני נופל בשלג",
         "translit": "ани нофел бешелег",
-        "ru": "Я падаю на снегу"
+        "ru": "Я падаю на снегу",
+        "audio": "/audio/weak-3-fall-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -985,125 +1156,149 @@
           "ms": {
             "he": "נופל",
             "niqqud": "נוֹפֵל",
-            "translit": "нофе́л"
+            "translit": "нофе́л",
+            "audio": "/audio/weak-3-fall-form-present-ms.mp3"
           },
           "fs": {
             "he": "נופלת",
             "niqqud": "נוֹפֶלֶת",
-            "translit": "нофе́лет"
+            "translit": "нофе́лет",
+            "audio": "/audio/weak-3-fall-form-present-fs.mp3"
           },
           "mp": {
             "he": "נופלים",
             "niqqud": "נוֹפְלִים",
-            "translit": "нофли́м"
+            "translit": "нофли́м",
+            "audio": "/audio/weak-3-fall-form-present-mp.mp3"
           },
           "fp": {
             "he": "נופלות",
             "niqqud": "נוֹפְלוֹת",
-            "translit": "нофло́т"
+            "translit": "нофло́т",
+            "audio": "/audio/weak-3-fall-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נפלתי",
             "niqqud": "נָפַלְתִּי",
-            "translit": "нафа́лти"
+            "translit": "нафа́лти",
+            "audio": "/audio/weak-3-fall-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נפלת",
             "niqqud": "נָפַלְתָּ",
-            "translit": "нафа́лта"
+            "translit": "нафа́лта",
+            "audio": "/audio/weak-3-fall-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נפלת",
             "niqqud": "נָפַלְתְּ",
-            "translit": "нафа́лт"
+            "translit": "нафа́лт",
+            "audio": "/audio/weak-3-fall-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נפל",
             "niqqud": "נָפַל",
-            "translit": "нафа́л"
+            "translit": "нафа́л",
+            "audio": "/audio/weak-3-fall-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נפלה",
             "niqqud": "נָפְלָה",
-            "translit": "нафла́"
+            "translit": "нафла́",
+            "audio": "/audio/weak-3-fall-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נפלנו",
             "niqqud": "נָפַלְנוּ",
-            "translit": "нафа́лну"
+            "translit": "нафа́лну",
+            "audio": "/audio/weak-3-fall-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נפלתם",
             "niqqud": "נְפַלְתֶּם",
-            "translit": "нефалте́м"
+            "translit": "нефалте́м",
+            "audio": "/audio/weak-3-fall-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נפלתן",
             "niqqud": "נְפַלְתֶּן",
-            "translit": "нефалте́н"
+            "translit": "нефалте́н",
+            "audio": "/audio/weak-3-fall-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נפלו",
             "niqqud": "נָפְלוּ",
-            "translit": "нафлу́"
+            "translit": "нафлу́",
+            "audio": "/audio/weak-3-fall-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אפול",
             "niqqud": "אֶפּוֹל",
-            "translit": "эпо́л"
+            "translit": "эпо́л",
+            "audio": "/audio/weak-3-fall-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תפול",
             "niqqud": "תִּפּוֹל",
-            "translit": "типо́л"
+            "translit": "типо́л",
+            "audio": "/audio/weak-3-fall-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תפלי",
             "niqqud": "תִּפְּלִי",
-            "translit": "типли́"
+            "translit": "типли́",
+            "audio": "/audio/weak-3-fall-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יפול",
             "niqqud": "יִפּוֹל",
-            "translit": "ипо́л"
+            "translit": "ипо́л",
+            "audio": "/audio/weak-3-fall-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תפול",
             "niqqud": "תִּפּוֹל",
-            "translit": "типо́л"
+            "translit": "типо́л",
+            "audio": "/audio/weak-3-fall-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נפול",
             "niqqud": "נִפּוֹל",
-            "translit": "нипо́л"
+            "translit": "нипо́л",
+            "audio": "/audio/weak-3-fall-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תפלו",
             "niqqud": "תִּפְּלוּ",
-            "translit": "типлу́"
+            "translit": "типлу́",
+            "audio": "/audio/weak-3-fall-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תפלנה",
             "niqqud": "תִּפֹּלְנָה",
-            "translit": "типо́лна"
+            "translit": "типо́лна",
+            "audio": "/audio/weak-3-fall-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יפלו",
             "niqqud": "יִפְּלוּ",
-            "translit": "иплу́"
+            "translit": "иплу́",
+            "audio": "/audio/weak-3-fall-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יפלנה",
             "niqqud": "יִפֹּלְנָה",
-            "translit": "ипо́лна"
+            "translit": "ипо́лна",
+            "audio": "/audio/weak-3-fall-form-future-3fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-fall.mp3"
     },
     {
       "id": "weak-3-build",
@@ -1114,7 +1309,8 @@
       "example": {
         "he": "אני בונה בית",
         "translit": "ани боне байт",
-        "ru": "Я строю дом"
+        "ru": "Я строю дом",
+        "audio": "/audio/weak-3-build-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1126,147 +1322,175 @@
           "ms": {
             "he": "בונה",
             "niqqud": "בּוֹנֶה",
-            "translit": "боне́"
+            "translit": "боне́",
+            "audio": "/audio/weak-3-build-form-present-ms.mp3"
           },
           "fs": {
             "he": "בונה",
             "niqqud": "בּוֹנָה",
-            "translit": "бона́"
+            "translit": "бона́",
+            "audio": "/audio/weak-3-build-form-present-fs.mp3"
           },
           "mp": {
             "he": "בונים",
             "niqqud": "בּוֹנִים",
-            "translit": "бони́м"
+            "translit": "бони́м",
+            "audio": "/audio/weak-3-build-form-present-mp.mp3"
           },
           "fp": {
             "he": "בונות",
             "niqqud": "בּוֹנוֹת",
-            "translit": "боно́т"
+            "translit": "боно́т",
+            "audio": "/audio/weak-3-build-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "בניתי",
             "niqqud": "בָּנִיתִי",
-            "translit": "бани́ти"
+            "translit": "бани́ти",
+            "audio": "/audio/weak-3-build-form-past-1s.mp3"
           },
           "2ms": {
             "he": "בנית",
             "niqqud": "בָּנִיתָ",
-            "translit": "бани́та"
+            "translit": "бани́та",
+            "audio": "/audio/weak-3-build-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "בנית",
             "niqqud": "בָּנִית",
-            "translit": "бани́т"
+            "translit": "бани́т",
+            "audio": "/audio/weak-3-build-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "בנה",
             "niqqud": "בָּנָה",
-            "translit": "бана́"
+            "translit": "бана́",
+            "audio": "/audio/weak-3-build-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "בנתה",
             "niqqud": "בָּנְתָה",
-            "translit": "банта́"
+            "translit": "банта́",
+            "audio": "/audio/weak-3-build-form-past-3fs.mp3"
           },
           "1p": {
             "he": "בנינו",
             "niqqud": "בָּנִינוּ",
-            "translit": "бани́ну"
+            "translit": "бани́ну",
+            "audio": "/audio/weak-3-build-form-past-1p.mp3"
           },
           "2mp": {
             "he": "בניתם",
             "niqqud": "בְּנִיתֶם",
-            "translit": "бните́м"
+            "translit": "бните́м",
+            "audio": "/audio/weak-3-build-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "בניתן",
             "niqqud": "בְּנִיתֶן",
-            "translit": "бните́н"
+            "translit": "бните́н",
+            "audio": "/audio/weak-3-build-form-past-2fp.mp3"
           },
           "3p": {
             "he": "בנו",
             "niqqud": "בָּנוּ",
-            "translit": "бану́"
+            "translit": "бану́",
+            "audio": "/audio/weak-3-build-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אבנה",
             "niqqud": "אֶבְנֶה",
-            "translit": "эвне́"
+            "translit": "эвне́",
+            "audio": "/audio/weak-3-build-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תבנה",
             "niqqud": "תִּבְנֶה",
-            "translit": "тивне́"
+            "translit": "тивне́",
+            "audio": "/audio/weak-3-build-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תבני",
             "niqqud": "תִּבְנִי",
-            "translit": "тивни́"
+            "translit": "тивни́",
+            "audio": "/audio/weak-3-build-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יבנה",
             "niqqud": "יִבְנֶה",
-            "translit": "ивне́"
+            "translit": "ивне́",
+            "audio": "/audio/weak-3-build-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תבנה",
             "niqqud": "תִּבְנֶה",
-            "translit": "тивне́"
+            "translit": "тивне́",
+            "audio": "/audio/weak-3-build-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נבנה",
             "niqqud": "נִבְנֶה",
-            "translit": "нивне́"
+            "translit": "нивне́",
+            "audio": "/audio/weak-3-build-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תבנו",
             "niqqud": "תִּבְנוּ",
-            "translit": "тивну́"
+            "translit": "тивну́",
+            "audio": "/audio/weak-3-build-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תבנינה",
             "niqqud": "תִּבְנֶינָה",
-            "translit": "тивне́на"
+            "translit": "тивне́на",
+            "audio": "/audio/weak-3-build-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יבנו",
             "niqqud": "יִבְנוּ",
-            "translit": "ивну́"
+            "translit": "ивну́",
+            "audio": "/audio/weak-3-build-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יבנינה",
             "niqqud": "יִבְנֶינָה",
-            "translit": "ивне́на"
+            "translit": "ивне́на",
+            "audio": "/audio/weak-3-build-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "בנה",
             "niqqud": "בְּנֵה",
-            "translit": "бне"
+            "translit": "бне",
+            "audio": "/audio/weak-3-build-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "בני",
             "niqqud": "בְּנִי",
-            "translit": "бни"
+            "translit": "бни",
+            "audio": "/audio/weak-3-build-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "בנו",
             "niqqud": "בְּנוּ",
-            "translit": "бну"
+            "translit": "бну",
+            "audio": "/audio/weak-3-build-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "בנינה",
             "niqqud": "בְּנֶינָה",
-            "translit": "бне́на"
+            "translit": "бне́на",
+            "audio": "/audio/weak-3-build-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-build.mp3"
     },
     {
       "id": "weak-3-sing",
@@ -1277,7 +1501,8 @@
       "example": {
         "he": "אני שר שיר",
         "translit": "ани шар шир",
-        "ru": "Я пою песню"
+        "ru": "Я пою песню",
+        "audio": "/audio/weak-3-sing-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1289,147 +1514,175 @@
           "ms": {
             "he": "שר",
             "niqqud": "שָׁר",
-            "translit": "шар"
+            "translit": "шар",
+            "audio": "/audio/weak-3-sing-form-present-ms.mp3"
           },
           "fs": {
             "he": "שרה",
             "niqqud": "שָׁרָה",
-            "translit": "шара́"
+            "translit": "шара́",
+            "audio": "/audio/weak-3-sing-form-present-fs.mp3"
           },
           "mp": {
             "he": "שרים",
             "niqqud": "שָׁרִים",
-            "translit": "шари́м"
+            "translit": "шари́м",
+            "audio": "/audio/weak-3-sing-form-present-mp.mp3"
           },
           "fp": {
             "he": "שרות",
             "niqqud": "שָׁרוֹת",
-            "translit": "шаро́т"
+            "translit": "шаро́т",
+            "audio": "/audio/weak-3-sing-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "שרתי",
             "niqqud": "שַׁרְתִּי",
-            "translit": "ша́рти"
+            "translit": "ша́рти",
+            "audio": "/audio/weak-3-sing-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שרת",
             "niqqud": "שַׁרְתָּ",
-            "translit": "ша́рта"
+            "translit": "ша́рта",
+            "audio": "/audio/weak-3-sing-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "שרת",
             "niqqud": "שַׁרְתְּ",
-            "translit": "шарт"
+            "translit": "шарт",
+            "audio": "/audio/weak-3-sing-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "שר",
             "niqqud": "שָׁר",
-            "translit": "шар"
+            "translit": "шар",
+            "audio": "/audio/weak-3-sing-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "שרה",
             "niqqud": "שָׁרָה",
-            "translit": "шара́"
+            "translit": "шара́",
+            "audio": "/audio/weak-3-sing-form-past-3fs.mp3"
           },
           "1p": {
             "he": "שרנו",
             "niqqud": "שַׁרְנוּ",
-            "translit": "ша́рну"
+            "translit": "ша́рну",
+            "audio": "/audio/weak-3-sing-form-past-1p.mp3"
           },
           "2mp": {
             "he": "שרתם",
             "niqqud": "שַׁרְתֶּם",
-            "translit": "шарте́м"
+            "translit": "шарте́м",
+            "audio": "/audio/weak-3-sing-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "שרתן",
             "niqqud": "שַׁרְתֶּן",
-            "translit": "шарте́н"
+            "translit": "шарте́н",
+            "audio": "/audio/weak-3-sing-form-past-2fp.mp3"
           },
           "3p": {
             "he": "שרו",
             "niqqud": "שָׁרוּ",
-            "translit": "шару́"
+            "translit": "шару́",
+            "audio": "/audio/weak-3-sing-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אשיר",
             "niqqud": "אָשִׁיר",
-            "translit": "аши́р"
+            "translit": "аши́р",
+            "audio": "/audio/weak-3-sing-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תשיר",
             "niqqud": "תָּשִׁיר",
-            "translit": "таши́р"
+            "translit": "таши́р",
+            "audio": "/audio/weak-3-sing-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תשירי",
             "niqqud": "תָּשִׁירִי",
-            "translit": "ташири́"
+            "translit": "ташири́",
+            "audio": "/audio/weak-3-sing-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ישיר",
             "niqqud": "יָשִׁיר",
-            "translit": "яши́р"
+            "translit": "яши́р",
+            "audio": "/audio/weak-3-sing-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תשיר",
             "niqqud": "תָּשִׁיר",
-            "translit": "таши́р"
+            "translit": "таши́р",
+            "audio": "/audio/weak-3-sing-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נשיר",
             "niqqud": "נָשִׁיר",
-            "translit": "наши́р"
+            "translit": "наши́р",
+            "audio": "/audio/weak-3-sing-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תשירו",
             "niqqud": "תָּשִׁירוּ",
-            "translit": "таширу́"
+            "translit": "таширу́",
+            "audio": "/audio/weak-3-sing-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תשרנה",
             "niqqud": "תָּשֵׁרְנָה",
-            "translit": "таше́рна"
+            "translit": "таше́рна",
+            "audio": "/audio/weak-3-sing-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ישירו",
             "niqqud": "יָשִׁירוּ",
-            "translit": "яширу́"
+            "translit": "яширу́",
+            "audio": "/audio/weak-3-sing-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ישרנה",
             "niqqud": "יָשֵׁרְנָה",
-            "translit": "яше́рна"
+            "translit": "яше́рна",
+            "audio": "/audio/weak-3-sing-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "שיר",
             "niqqud": "שִׁיר",
-            "translit": "шир"
+            "translit": "шир",
+            "audio": "/audio/weak-3-sing-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "שירי",
             "niqqud": "שִׁירִי",
-            "translit": "шири́"
+            "translit": "шири́",
+            "audio": "/audio/weak-3-sing-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "שירו",
             "niqqud": "שִׁירוּ",
-            "translit": "ширу́"
+            "translit": "ширу́",
+            "audio": "/audio/weak-3-sing-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "שרנה",
             "niqqud": "שֵׁרְנָה",
-            "translit": "ше́рна"
+            "translit": "ше́рна",
+            "audio": "/audio/weak-3-sing-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-sing.mp3"
     },
     {
       "id": "weak-3-rest",
@@ -1440,7 +1693,8 @@
       "example": {
         "he": "אני נח אחרי עבודה",
         "translit": "ани нах ахарей авода",
-        "ru": "Я отдыхаю после работы"
+        "ru": "Я отдыхаю после работы",
+        "audio": "/audio/weak-3-rest-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1452,147 +1706,175 @@
           "ms": {
             "he": "נח",
             "niqqud": "נָח",
-            "translit": "нах"
+            "translit": "нах",
+            "audio": "/audio/weak-3-rest-form-present-ms.mp3"
           },
           "fs": {
             "he": "נחה",
             "niqqud": "נָחָה",
-            "translit": "наха́"
+            "translit": "наха́",
+            "audio": "/audio/weak-3-rest-form-present-fs.mp3"
           },
           "mp": {
             "he": "נחים",
             "niqqud": "נָחִים",
-            "translit": "нахи́м"
+            "translit": "нахи́м",
+            "audio": "/audio/weak-3-rest-form-present-mp.mp3"
           },
           "fp": {
             "he": "נחות",
             "niqqud": "נָחוֹת",
-            "translit": "нахо́т"
+            "translit": "нахо́т",
+            "audio": "/audio/weak-3-rest-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "נחתי",
             "niqqud": "נַחְתִּי",
-            "translit": "на́хти"
+            "translit": "на́хти",
+            "audio": "/audio/weak-3-rest-form-past-1s.mp3"
           },
           "2ms": {
             "he": "נחת",
             "niqqud": "נַחְתָּ",
-            "translit": "на́хта"
+            "translit": "на́хта",
+            "audio": "/audio/weak-3-rest-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "נחת",
             "niqqud": "נַחְתְּ",
-            "translit": "нахт"
+            "translit": "нахт",
+            "audio": "/audio/weak-3-rest-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "נח",
             "niqqud": "נָח",
-            "translit": "нах"
+            "translit": "нах",
+            "audio": "/audio/weak-3-rest-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "נחה",
             "niqqud": "נָחָה",
-            "translit": "наха́"
+            "translit": "наха́",
+            "audio": "/audio/weak-3-rest-form-past-3fs.mp3"
           },
           "1p": {
             "he": "נחנו",
             "niqqud": "נַחְנוּ",
-            "translit": "на́хну"
+            "translit": "на́хну",
+            "audio": "/audio/weak-3-rest-form-past-1p.mp3"
           },
           "2mp": {
             "he": "נחתם",
             "niqqud": "נַחְתֶּם",
-            "translit": "нахте́м"
+            "translit": "нахте́м",
+            "audio": "/audio/weak-3-rest-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "נחתן",
             "niqqud": "נַחְתֶּן",
-            "translit": "нахте́н"
+            "translit": "нахте́н",
+            "audio": "/audio/weak-3-rest-form-past-2fp.mp3"
           },
           "3p": {
             "he": "נחו",
             "niqqud": "נָחוּ",
-            "translit": "наху́"
+            "translit": "наху́",
+            "audio": "/audio/weak-3-rest-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אנוח",
             "niqqud": "אָנוּחַ",
-            "translit": "ану́ах"
+            "translit": "ану́ах",
+            "audio": "/audio/weak-3-rest-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תנוח",
             "niqqud": "תָּנוּחַ",
-            "translit": "тану́ах"
+            "translit": "тану́ах",
+            "audio": "/audio/weak-3-rest-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תנוחי",
             "niqqud": "תָּנוּחִי",
-            "translit": "танухи́"
+            "translit": "танухи́",
+            "audio": "/audio/weak-3-rest-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ינוח",
             "niqqud": "יָנוּחַ",
-            "translit": "яну́ах"
+            "translit": "яну́ах",
+            "audio": "/audio/weak-3-rest-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תנוח",
             "niqqud": "תָּנוּחַ",
-            "translit": "тану́ах"
+            "translit": "тану́ах",
+            "audio": "/audio/weak-3-rest-form-future-3fs.mp3"
           },
           "1p": {
             "he": "ננוח",
             "niqqud": "נָנוּחַ",
-            "translit": "нану́ах"
+            "translit": "нану́ах",
+            "audio": "/audio/weak-3-rest-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תנוחו",
             "niqqud": "תָּנוּחוּ",
-            "translit": "тануху́"
+            "translit": "тануху́",
+            "audio": "/audio/weak-3-rest-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תנחנה",
             "niqqud": "תָּנֹחְנָה",
-            "translit": "тано́хна"
+            "translit": "тано́хна",
+            "audio": "/audio/weak-3-rest-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ינוחו",
             "niqqud": "יָנוּחוּ",
-            "translit": "януху́"
+            "translit": "януху́",
+            "audio": "/audio/weak-3-rest-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ינחנה",
             "niqqud": "יָנֹחְנָה",
-            "translit": "яно́хна"
+            "translit": "яно́хна",
+            "audio": "/audio/weak-3-rest-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "נוח",
             "niqqud": "נוּחַ",
-            "translit": "ну́ах"
+            "translit": "ну́ах",
+            "audio": "/audio/weak-3-rest-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "נוחי",
             "niqqud": "נוּחִי",
-            "translit": "нухи́"
+            "translit": "нухи́",
+            "audio": "/audio/weak-3-rest-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "נוחו",
             "niqqud": "נוּחוּ",
-            "translit": "нуху́"
+            "translit": "нуху́",
+            "audio": "/audio/weak-3-rest-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "נחנה",
             "niqqud": "נֹחְנָה",
-            "translit": "но́хна"
+            "translit": "но́хна",
+            "audio": "/audio/weak-3-rest-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/weak-3-rest.mp3"
     }
   ]
 }
