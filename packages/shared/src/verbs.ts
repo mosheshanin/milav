@@ -30,6 +30,43 @@ export const BINYANIM: Readonly<Record<Binyan, BinyanInfo>> = {
   hitpael: { ru: "Хитпаэль", he: "הִתְפַּעֵל", infinitivePrefix: "לה", presentPrefix: "מ" },
 };
 
+/**
+ * Типы слабых корней (гзары, «גזרות»). Поле `gizra` у глагола необязательно: у сильных корней его нет. Составной случай
+ * записывается двумя кодами, основной первым (יצא: pe_yod + lamed_alef; בוא: ayin_vav + lamed_alef). Для глаголов с `gizra`
+ * проверка корня допускает отсутствие букв корня только там, где это положено типу (`gizraRootProblems` в content/rules.ts).
+ * Формы таких глаголов вписываются вручную по учебной таблице (вопрос 54, 17.10).
+ */
+export const GIZRA_KEYS = ["pe_nun", "pe_yod", "pe_alef", "pe_lamed", "ayin_vav", "ayin_yod", "lamed_he", "lamed_alef"] as const;
+export type Gizra = (typeof GIZRA_KEYS)[number];
+
+export interface GizraInfo {
+  /** Название на иврите (פ״נ). */
+  he: string;
+  /** Короткое пояснение по-русски. */
+  ru: string;
+  /** Номер буквы корня (с 0), которая должна быть у этого типа: проверяет, что тип указан верно. `letters`: какие буквы подходят. */
+  position: number;
+  letters: readonly string[];
+}
+
+export const GIZRA_INFO: Readonly<Record<Gizra, GizraInfo>> = {
+  pe_nun: { he: "פ״נ", ru: "первая נ", position: 0, letters: ["נ"] },
+  pe_yod: { he: "פ״י", ru: "первая י", position: 0, letters: ["י", "ה"] },
+  pe_alef: { he: "פ״א", ru: "первая א", position: 0, letters: ["א"] },
+  pe_lamed: { he: "פ״ל", ru: "первая ל (לקח)", position: 0, letters: ["ל"] },
+  ayin_vav: { he: "ע״ו", ru: "средняя ו", position: 1, letters: ["ו"] },
+  ayin_yod: { he: "ע״י", ru: "средняя י", position: 1, letters: ["י"] },
+  lamed_he: { he: "ל״ה", ru: "последняя ה", position: 2, letters: ["ה"] },
+  lamed_alef: { he: "ל״א", ru: "последняя א", position: 2, letters: ["א"] },
+};
+
+/** Тема со слабыми корнями (смешанные бинъяны, у каждого глагола есть `gizra`). */
+export const WEAK_ROOTS_TOPIC_ID = "weak";
+
+export function isGizra(value: string): value is Gizra {
+  return (GIZRA_KEYS as readonly string[]).includes(value);
+}
+
 export const VERB_TENSES = ["present", "past", "future", "imperative"] as const;
 export type VerbTense = (typeof VERB_TENSES)[number];
 
@@ -113,6 +150,8 @@ export interface VerbData {
   binyan: Binyan;
   /** Корень: 3–4 буквы иврита без конечных форм, например «כתב». */
   root: string;
+  /** Тип слабого корня (1–2 кода). У сильных корней нет. */
+  gizra?: Gizra[];
   present: Record<PresentKey, WordForm>;
   past: Record<PastKey, WordForm>;
   future: Record<FutureKey, WordForm>;

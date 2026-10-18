@@ -85,14 +85,18 @@ export function skeletonProblems(he: string, translit: string): string[] {
   const plain = stripStress(translit).replace(/[ -]/g, "");
   const problems: string[] = [];
   let pos = 0;
+  let previous = "";
   for (const letter of [...he]) {
     const variants = CONSONANTS[letter];
     if (!variants) continue;
+    const doubled = letter === previous;
+    previous = letter;
     let best: { end: number } | undefined;
     for (const variant of variants) {
       const at = plain.indexOf(variant, pos);
       if (at >= 0 && (!best || at + variant.length < best.end)) best = { end: at + variant.length };
     }
+    if (!best && doubled) continue; // удвоение не передаётся: שָׁתְתָה звучит «шата́»
     if (!best) {
       problems.push(`«${translit}»: для буквы ${letter} нет подходящей (${variants.join(" или ")}) после позиции ${pos}`);
       break; // дальше позиции уже не определены
@@ -113,11 +117,15 @@ import {
   BINYAN_KEYS,
   FINAL_LETTERS,
   FREE_LESSONS_PER_TOPIC,
+  GIZRA_INFO,
+  GIZRA_KEYS,
   LETTER_KEYS,
   GERESH,
   VERB_FORM_KEYS,
   VERB_TENSES,
+  WEAK_ROOTS_TOPIC_ID,
   isFinalForm,
+  isGizra,
   isGereshForm,
   letterRuName,
   normalizeHebrew,
@@ -137,19 +145,85 @@ function byTopic(lessons: Lesson[]): Map<string, Lesson[]> {
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
-// Глаголы (решения владельца, 14.10: CLAUDE.md, docs/CONTENT.md). Сейчас только сильные корни: слабые (гзары) теряют или
-// меняют буквы корня в формах, для них понадобится отдельное поле и своя проверка.
+// Глаголы (решения владельца, 14.10: CLAUDE.md, docs/CONTENT.md). У сильных корней все буквы корня стоят в каждой форме.
+// Слабые корни (гзары) теряют или меняют буквы корня: у такого глагола есть поле `gizra`, и проверка допускает отсутствие
+// буквы только там, где это положено типу (`gizraOptionalPositions`).
 
-/** Буквы стоят в тексте в том же порядке (между ними могут быть другие). Огласовки и конечные формы не мешают. */
-function hasLettersInOrder(text: string, letters: string): boolean {
-  const word = normalizeHebrew(text);
-  let pos = 0;
-  for (const ch of normalizeHebrew(letters)) {
-    const at = word.indexOf(ch, pos);
-    if (at < 0) return false;
-    pos = at + 1;
+/** Форма, о которой идёт речь: инфинитив (он лежит в `he` слова) или время из блока `verb`. */
+export type VerbSlot = "infinitive" | "present" | "past" | "future" | "imperative";
+
+/**
+ * Номера букв корня (с 0), которые в этой форме можно не писать. У сильного корня (нет `gizra`) таких нет.
+ * - פ״נ: первая נ не пишется в будущем, повелительном и инфинитиве (יפול, תן, ליפול); у נתנ последняя נ выпадает в инфинитиве (לתת) и в прошедшем перед ת (נתתי).
+ * - פ״י: первая י (у הלכ первая ה) не пишется в будущем, повелительном и инфинитиве (ישב, שב, לשבת); в настоящем и прошедшем есть.
+ * - פ״א: א выпадает только в инфинитиве לומר.
+ * - פ״ל (לקח): ל не пишется в будущем и повелительном (יקח, קח).
+ * - ע״ו и ע״י: средняя ו или י не пишется в настоящем и прошедшем (קם, קמתי, שם, שמתי) и в книжных формах на -נה (будущее
+ *   2fp, 3fp и повелительное fp: תקמנה, שמנה), в остальных формах есть.
+ * - ל״ה: последняя ה заменяется окончанием (רציתי, רצו, לרצות), поэтому в любой форме может отсутствовать.
+ * - ל״א: א всегда пишется, как у сильного корня.
+ */
+export function gizraOptionalPositions(verb: Pick<VerbData, "root" | "gizra">, slot: VerbSlot, key?: string): Set<number> {
+  const optional = new Set<number>();
+  const future = slot === "future" || slot === "imperative" || slot === "infinitive";
+  for (const g of verb.gizra ?? []) {
+    if (g === "pe_nun") {
+      if (future) optional.add(0);
+      // נתנ: последняя נ сливается с ת и в инфинитиве (לתת), и в прошедшем перед окончанием на ת (נתתי, נתתם).
+      if (verb.root === "נתנ" && (slot === "infinitive" || slot === "past")) optional.add(2);
+    } else if (g === "pe_yod") {
+      if (future) optional.add(0);
+    } else if (g === "pe_alef") {
+      if (slot === "infinitive") optional.add(0);
+    } else if (g === "pe_lamed") {
+      if (slot === "future" || slot === "imperative") optional.add(0);
+    } else if (g === "ayin_vav" || g === "ayin_yod") {
+      const book = (slot === "future" && (key === "2fp" || key === "3fp")) || (slot === "imperative" && key === "fp");
+      if (slot === "present" || slot === "past" || book) optional.add(1);
+    } else if (g === "lamed_he") {
+      optional.add(2);
+    }
   }
-  return true;
+  return optional;
+}
+
+/** Буквы корня стоят в тексте в том же порядке (между ними могут быть другие); буквы из `optional` (номера с 0) можно пропустить. Огласовки и конечные формы не мешают. */
+function hasLettersInOrder(text: string, letters: string, optional: ReadonlySet<number> = new Set()): boolean {
+  const word = normalizeHebrew(text);
+  const root = [...normalizeHebrew(letters)];
+  // Необязательная буква может совпасть с чужой буквой дальше в слове (גרות: ו корня גור стоит после ר), поэтому
+  // перебираем оба варианта: буква есть на этом месте или пропущена.
+  const match = (index: number, from: number): boolean => {
+    if (index === root.length) return true;
+    const at = word.indexOf(root[index]!, from);
+    if (at >= 0 && match(index + 1, at + 1)) return true;
+    return optional.has(index) && match(index + 1, from);
+  };
+  return match(0, 0);
+}
+
+/** Нарушения в поле `gizra`: коды, количество и то, что буква корня на нужном месте подходит к типу. */
+export function gizraProblems(verb: Pick<VerbData, "root" | "gizra">): string[] {
+  const g = verb.gizra;
+  if (g === undefined) return [];
+  if (!Array.isArray(g) || g.length < 1 || g.length > 2) return ["gizra: нужен список из 1–2 кодов"];
+  const problems: string[] = [];
+  if (new Set(g).size !== g.length) problems.push("gizra: коды повторяются");
+  const root = [...verb.root];
+  for (const code of g) {
+    if (!isGizra(code)) {
+      problems.push(`gizra: код «${String(code)}» неизвестен, допустимы ${GIZRA_KEYS.join(", ")}`);
+      continue;
+    }
+    const info = GIZRA_INFO[code];
+    const letter = root[info.position];
+    if (letter === undefined || !info.letters.includes(letter)) {
+      problems.push(`gizra ${code} (${info.he}): в корне ${verb.root} на месте ${info.position + 1} должна быть ${info.letters.join(" или ")}`);
+    } else if (code === "pe_yod" && letter === "ה" && verb.root !== "הלכ") {
+      problems.push(`gizra pe_yod: корень ${verb.root} начинается с ה, исключение сделано только для הלכ`);
+    }
+  }
+  return problems;
 }
 
 /**
@@ -165,7 +239,8 @@ export function verbProblems(he: string, verb: VerbData): string[] {
   if (!/^[אבגדהוזחטיכלמנסעפצקרשת]{3,4}$/.test(verb.root)) problems.push(`корень «${verb.root}»: нужны 3–4 буквы без конечных форм`);
 
   if (!he.startsWith(info.infinitivePrefix)) problems.push(`инфинитив ${he}: в бинъяне ${info.ru} он начинается с ${info.infinitivePrefix}`);
-  if (!hasLettersInOrder(he, verb.root)) problems.push(`инфинитив ${he}: нет букв корня ${verb.root} по порядку`);
+  problems.push(...gizraProblems(verb));
+  if (!hasLettersInOrder(he, verb.root, gizraOptionalPositions(verb, "infinitive"))) problems.push(`инфинитив ${he}: нет букв корня ${verb.root} по порядку`);
 
   for (const tense of VERB_TENSES) {
     const set = verb[tense] as Record<string, unknown> | undefined;
@@ -185,7 +260,7 @@ export function verbProblems(he: string, verb: VerbData): string[] {
   for (const { tense, key, form } of verbForms(verb)) {
     const where = `${tense}.${key}`;
     if (normalizeHebrew(form.niqqud) !== normalizeHebrew(form.he)) problems.push(`${where}: огласовки ${form.niqqud} не совпадают с ${form.he}`);
-    if (!hasLettersInOrder(form.he, verb.root)) problems.push(`${where}: в ${form.he} нет букв корня ${verb.root} по порядку`);
+    if (!hasLettersInOrder(form.he, verb.root, gizraOptionalPositions(verb, tense, key))) problems.push(`${where}: в ${form.he} нет букв корня ${verb.root} по порядку`);
     problems.push(...stressProblems(form.translit).map((p) => `${where}: ${p}`));
     problems.push(...skeletonProblems(form.he, form.translit).map((p) => `${where}: ${p}`));
   }
@@ -282,6 +357,16 @@ export const SET_RULES: SetRule[] = [
         .flatMap((l) => [
           ...(l.section !== "verbs" ? [`${l.id}: тема ${l.topicId} это бинъян, раздел должен быть verbs`] : []),
           ...l.words.filter((w) => w.verb && w.verb.binyan !== l.topicId).map((w) => `${w.id}: бинъян ${w.verb!.binyan} в теме ${l.topicId}`),
+        ]),
+  },
+  {
+    name: "в теме слабых корней (weak) раздел verbs и у каждого глагола есть gizra",
+    check: (lessons) =>
+      lessons
+        .filter((l) => l.topicId === WEAK_ROOTS_TOPIC_ID)
+        .flatMap((l) => [
+          ...(l.section !== "verbs" ? [`${l.id}: тема ${l.topicId} должна быть в разделе verbs`] : []),
+          ...l.words.filter((w) => !w.verb?.gizra?.length).map((w) => `${w.id}: у глагола темы ${l.topicId} нет поля gizra`),
         ]),
   },
   {

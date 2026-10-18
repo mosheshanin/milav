@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { BINYAN_KEYS, FREE_LESSONS_PER_TOPIC, VERB_FORM_KEYS, WORDS_PER_LESSON } from "@milav/shared";
+import { BINYAN_KEYS, FREE_LESSONS_PER_TOPIC, GIZRA_KEYS, VERB_FORM_KEYS, WORDS_PER_LESSON } from "@milav/shared";
 import { schema, schemaProblems } from "./validate";
 import { katavWord } from "./verbFixture";
 
@@ -101,6 +101,7 @@ describe("schema.json: согласованность с правилами пр
     }
     expect(defs.verb.properties.binyan.enum).toEqual([...BINYAN_KEYS]);
     expect(defs.verb.required).toEqual(["binyan", "root", "present", "past", "future"]);
+    expect(defs.verb.properties.gizra.items.enum).toEqual([...GIZRA_KEYS]);
   });
 });
 

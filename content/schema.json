@@ -269,6 +269,14 @@
           "pattern": "^[אבגדהוזחטיכלמנסעפצקרשת]{3,4}$",
           "description": "Корень: 3–4 буквы иврита без конечных форм, например כתב."
         },
+        "gizra": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["pe_nun", "pe_yod", "pe_alef", "pe_lamed", "ayin_vav", "ayin_yod", "lamed_he", "lamed_alef"] },
+          "description": "Тип слабого корня (GIZRA_KEYS в packages/shared): 1–2 кода, основной первым. У сильных корней поля нет."
+        },
         "present": { "$ref": "#/definitions/presentForms" },
         "past": { "$ref": "#/definitions/pastForms" },
         "future": { "$ref": "#/definitions/futureForms" },
