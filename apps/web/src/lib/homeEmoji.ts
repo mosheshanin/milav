@@ -21,6 +21,7 @@ export const TOPIC_EMOJI: Record<string, string> = {
   hifil: "🚀",
   nifal: "🔄",
   hitpael: "👔",
+  weak: "🍃",
 };
 
 /** По id урока. */
@@ -66,6 +67,9 @@ export const LESSON_EMOJI: Record<string, string> = {
   "hitpael-1": "👕",
   "hitpael-2": "😍",
   "hitpael-3": "💌",
+  "weak-1": "🧭",
+  "weak-2": "🌅",
+  "weak-3": "🏃",
 };
 
 export function topicEmoji(topicId: string): string {

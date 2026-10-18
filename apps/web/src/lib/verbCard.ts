@@ -1,5 +1,6 @@
 import {
   BINYANIM,
+  GIZRA_INFO,
   VERB_FORM_KEYS,
   VERB_FORM_LABELS,
   VERB_PRONOUNS_HE,
@@ -62,7 +63,15 @@ export function verbRootLabel(root: string): string {
   return [...root].join("‑");
 }
 
-/** Плашка над таблицей форм: название бинъяна по-русски и корень. */
-export function verbBadge(verb: VerbData): { binyan: string; root: string } {
-  return { binyan: BINYANIM[verb.binyan]?.ru ?? verb.binyan, root: verbRootLabel(verb.root) };
+/** Плашка над таблицей форм: название бинъяна по-русски, корень и (у слабого корня) тип гзары: «פ״נ» и «первая נ». */
+export interface VerbBadge {
+  binyan: string;
+  root: string;
+  gizra?: { he: string; ru: string }[];
+}
+
+export function verbBadge(verb: VerbData): VerbBadge {
+  const badge: VerbBadge = { binyan: BINYANIM[verb.binyan]?.ru ?? verb.binyan, root: verbRootLabel(verb.root) };
+  if (verb.gizra?.length) badge.gizra = verb.gizra.map((g) => ({ he: GIZRA_INFO[g]?.he ?? g, ru: GIZRA_INFO[g]?.ru ?? "" }));
+  return badge;
 }

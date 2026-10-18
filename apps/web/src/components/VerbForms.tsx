@@ -19,6 +19,16 @@ export function VerbForms({ verb }: { verb: VerbData }) {
     <div className="w-full border-t border-line pt-2" data-testid="verb-forms">
       <div className="flex flex-wrap items-center gap-2" data-testid="verb-badge">
         <Chip tone="accent">{badge.binyan}</Chip>
+        {badge.gizra?.map((g) => (
+          <span key={g.he} data-testid="verb-gizra">
+            <Chip>
+              <span dir="rtl" lang="he" className="font-hebrew">
+                {g.he}
+              </span>
+              {g.ru}
+            </Chip>
+          </span>
+        ))}
         <span className="text-xs text-ink-soft">корень</span>
         <span dir="rtl" lang="he" className="font-hebrew text-lg font-semibold">
           {badge.root}

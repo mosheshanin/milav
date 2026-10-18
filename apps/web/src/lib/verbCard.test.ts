@@ -76,6 +76,11 @@ describe("карточка глагола: плашка бинъяна и кор
   it("название бинъяна по-русски", () => {
     expect(verbBadge(verb())).toEqual({ binyan: "Хитпаэль", root: "ל‑ב‑ש" });
     expect(verbBadge({ ...verb(), binyan: "paal" })).toMatchObject({ binyan: "Пааль" });
+    expect(verbBadge(verb()).gizra).toBeUndefined();
+    expect(verbBadge({ ...verb(), binyan: "paal", gizra: ["pe_yod", "lamed_alef"] }).gizra).toEqual([
+      { he: "פ״י", ru: "первая י" },
+      { he: "ל״א", ru: "последняя א" },
+    ]);
   });
 
   it("неизвестный бинъян не ломает плашку", () => {
