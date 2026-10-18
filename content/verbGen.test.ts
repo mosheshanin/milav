@@ -166,10 +166,10 @@ describe("уроки пааль: составлены генератором", (
     expect(dance.example.he).toContain(dance.verb.present.fs.he);
   });
 
-  it("урок 1–3 бесплатный, id paal-<номер>, тема «Пааль» раздел verbs", () => {
+  it("урок 1 бесплатный, 2–3 платные, id paal-<номер>, тема «Пааль» раздел verbs", () => {
     for (let n = 1; n <= 3; n++) {
       const lesson = buildPaalLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string };
-      expect(lesson).toMatchObject({ id: `paal-${n}`, free: true, topicId: "paal", section: "verbs", topic: "Пааль" });
+      expect(lesson).toMatchObject({ id: `paal-${n}`, free: n === 1, topicId: "paal", section: "verbs", topic: "Пааль" });
     }
     expect(() => buildPaalLesson(4)).toThrow();
   });
@@ -308,10 +308,10 @@ describe("уроки пиэль: составлены генератором", (
     }
   });
 
-  it("урок 1–3 бесплатный, id piel-<номер>, тема «Пиэль» раздел verbs; фраза с настоящим временем", () => {
+  it("урок 1 бесплатный, 2–3 платные, id piel-<номер>, тема «Пиэль» раздел verbs; фраза с настоящим временем", () => {
     for (let n = 1; n <= 3; n++) {
       const lesson = buildPielLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
-      expect(lesson).toMatchObject({ id: `piel-${n}`, free: true, topicId: "piel", section: "verbs", topic: "Пиэль" });
+      expect(lesson).toMatchObject({ id: `piel-${n}`, free: n === 1, topicId: "piel", section: "verbs", topic: "Пиэль" });
       for (const w of lesson.words) {
         expect(w.id.startsWith(`piel-${n}-`)).toBe(true);
         expect(w.example.he).not.toContain("{");
@@ -460,10 +460,10 @@ describe("уроки хифъиль: составлены генератором
     }
   });
 
-  it("урок 1–3 бесплатный, id hifil-<номер>, тема «Хифъиль» раздел verbs; фраза с настоящим временем", () => {
+  it("урок 1 бесплатный, 2–3 платные, id hifil-<номер>, тема «Хифъиль» раздел verbs; фраза с настоящим временем", () => {
     for (let n = 1; n <= 3; n++) {
       const lesson = buildHifilLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
-      expect(lesson).toMatchObject({ id: `hifil-${n}`, free: true, topicId: "hifil", section: "verbs", topic: "Хифъиль" });
+      expect(lesson).toMatchObject({ id: `hifil-${n}`, free: n === 1, topicId: "hifil", section: "verbs", topic: "Хифъиль" });
       for (const w of lesson.words) {
         expect(w.id.startsWith(`hifil-${n}-`)).toBe(true);
         expect(w.example.he).not.toContain("{");
@@ -667,10 +667,10 @@ describe("уроки нифъаль: составлены генератором
     }
   });
 
-  it("урок 1–3 бесплатный, id nifal-<номер>, тема «Нифъаль» раздел verbs; фраза с настоящим временем", () => {
+  it("урок 1 бесплатный, 2–3 платные, id nifal-<номер>, тема «Нифъаль» раздел verbs; фраза с настоящим временем", () => {
     for (let n = 1; n <= 3; n++) {
       const lesson = buildNifalLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
-      expect(lesson).toMatchObject({ id: `nifal-${n}`, free: true, topicId: "nifal", section: "verbs", topic: "Нифъаль" });
+      expect(lesson).toMatchObject({ id: `nifal-${n}`, free: n === 1, topicId: "nifal", section: "verbs", topic: "Нифъаль" });
       for (const w of lesson.words) {
         expect(w.id.startsWith(`nifal-${n}-`)).toBe(true);
         expect(w.example.he).not.toContain("{");
@@ -919,10 +919,10 @@ describe("уроки хитпаэль: составлены генераторо
     expect(has((r) => r[2] === "נ")).toEqual(["חתנ"]);
   });
 
-  it("урок 1–3 бесплатный, id hitpael-<номер>, тема «Хитпаэль» раздел verbs; фраза с настоящим временем", () => {
+  it("урок 1 бесплатный, 2–3 платные, id hitpael-<номер>, тема «Хитпаэль» раздел verbs; фраза с настоящим временем", () => {
     for (let n = 1; n <= 3; n++) {
       const lesson = buildHitpaelLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
-      expect(lesson).toMatchObject({ id: `hitpael-${n}`, free: true, topicId: "hitpael", section: "verbs", topic: "Хитпаэль" });
+      expect(lesson).toMatchObject({ id: `hitpael-${n}`, free: n === 1, topicId: "hitpael", section: "verbs", topic: "Хитпаэль" });
       for (const w of lesson.words) {
         expect(w.id.startsWith(`hitpael-${n}-`)).toBe(true);
         expect(w.example.he).not.toContain("{");

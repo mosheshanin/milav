@@ -29,7 +29,7 @@ function lesson(over: Partial<Lesson> & { he?: string[] } = {}): Lesson {
 }
 
 describe("правила набора ловят нарушения", () => {
-  const ok = [lesson({ id: "animals-1", number: 1 }), lesson({ id: "animals-2", number: 2, he: ["בבב"] })];
+  const ok = [lesson({ id: "animals-1", number: 1 }), lesson({ id: "animals-2", number: 2, free: false, he: ["בבב"] })];
 
   it("корректный набор без замечаний", () => {
     expect(setProblems(ok)).toEqual([]);
@@ -64,10 +64,10 @@ describe("правила набора ловят нарушения", () => {
     expect(text).toContain("ожидались подряд с 1");
   });
 
-  it("неверные free: платный первый урок и бесплатный четвёртый", () => {
+  it("неверные free: платный первый урок и бесплатный второй", () => {
     expect(setProblems([lesson({ free: false })]).join("\n")).toContain("animals-1: free=false, а должно быть true");
-    const four = [1, 2, 3, 4].map((n) => lesson({ id: `animals-${n}`, number: n, free: true, he: [`א${"ב".repeat(n)}`] }));
-    expect(setProblems(four).join("\n")).toContain("animals-4: free=true, а должно быть false");
+    const four = [1, 2].map((n) => lesson({ id: `animals-${n}`, number: n, free: true, he: [`א${"ב".repeat(n)}`] }));
+    expect(setProblems(four).join("\n")).toContain("animals-2: free=true, а должно быть false");
   });
 
   it("то же слово иврита в двух уроках темы", () => {

@@ -177,7 +177,7 @@
       "section": "nouns",
       "topic": "Тело",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Руки, ноги и сердце",
       "count": 10,
       "stages": [
@@ -186,7 +186,7 @@
         "write",
         "type"
       ],
-      "v": "c178bdefc5"
+      "v": "2a65157bb5"
     },
     {
       "id": "body-3",
@@ -194,7 +194,7 @@
       "section": "nouns",
       "topic": "Тело",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Здоровье и болезни",
       "count": 10,
       "stages": [
@@ -203,7 +203,7 @@
         "write",
         "type"
       ],
-      "v": "c93a1fc8a9"
+      "v": "e821773e4e"
     },
     {
       "id": "colors-1",
@@ -245,7 +245,7 @@
       "section": "nouns",
       "topic": "Семья",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Родственники",
       "count": 10,
       "stages": [
@@ -254,7 +254,7 @@
         "write",
         "type"
       ],
-      "v": "59b7030523"
+      "v": "40c7291e06"
     },
     {
       "id": "family-3",
@@ -262,7 +262,7 @@
       "section": "nouns",
       "topic": "Семья",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Люди вокруг",
       "count": 10,
       "stages": [
@@ -271,7 +271,7 @@
         "write",
         "type"
       ],
-      "v": "a4813986d2"
+      "v": "ba93e7d35a"
     },
     {
       "id": "family-4",
@@ -313,7 +313,7 @@
       "section": "nouns",
       "topic": "Еда",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Фрукты и овощи",
       "count": 10,
       "stages": [
@@ -322,7 +322,7 @@
         "write",
         "type"
       ],
-      "v": "8dd96d7727"
+      "v": "7d92fac19a"
     },
     {
       "id": "food-3",
@@ -330,7 +330,7 @@
       "section": "nouns",
       "topic": "Еда",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Напитки и блюда",
       "count": 10,
       "stages": [
@@ -339,7 +339,7 @@
         "write",
         "type"
       ],
-      "v": "318f892ca6"
+      "v": "9f09491ece"
     },
     {
       "id": "food-4",
@@ -381,7 +381,7 @@
       "section": "verbs",
       "topic": "Хифъиль",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Дела и события",
       "count": 10,
       "stages": [
@@ -390,7 +390,7 @@
         "write",
         "type"
       ],
-      "v": "262006a091"
+      "v": "ae42d5a648"
     },
     {
       "id": "hifil-3",
@@ -398,7 +398,7 @@
       "section": "verbs",
       "topic": "Хифъиль",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Ещё десять глаголов",
       "count": 10,
       "stages": [
@@ -407,7 +407,7 @@
         "write",
         "type"
       ],
-      "v": "226c0c93ab"
+      "v": "d7d5533ae5"
     },
     {
       "id": "hitpael-1",
@@ -432,7 +432,7 @@
       "section": "verbs",
       "topic": "Хитпаэль",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Люди и чувства",
       "count": 10,
       "stages": [
@@ -441,7 +441,7 @@
         "write",
         "type"
       ],
-      "v": "7a8d555131"
+      "v": "7ad94bbecd"
     },
     {
       "id": "hitpael-3",
@@ -449,7 +449,7 @@
       "section": "verbs",
       "topic": "Хитпаэль",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Дела и общение",
       "count": 10,
       "stages": [
@@ -458,7 +458,7 @@
         "write",
         "type"
       ],
-      "v": "31032c1d84"
+      "v": "72febd2282"
     },
     {
       "id": "home-1",
@@ -483,7 +483,7 @@
       "section": "nouns",
       "topic": "Дом и мебель",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Мебель",
       "count": 10,
       "stages": [
@@ -492,7 +492,7 @@
         "write",
         "type"
       ],
-      "v": "71ed69ef7f"
+      "v": "16b3380b10"
     },
     {
       "id": "home-3",
@@ -500,7 +500,7 @@
       "section": "nouns",
       "topic": "Дом и мебель",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Вещи в доме",
       "count": 10,
       "stages": [
@@ -509,7 +509,7 @@
         "write",
         "type"
       ],
-      "v": "f05151fa86"
+      "v": "ff4d63ea8d"
     },
     {
       "id": "home-4",
@@ -551,7 +551,7 @@
       "section": "verbs",
       "topic": "Нифъаль",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Люди и чувства",
       "count": 10,
       "stages": [
@@ -560,7 +560,7 @@
         "write",
         "type"
       ],
-      "v": "90c68dfd12"
+      "v": "52a2ce0e47"
     },
     {
       "id": "nifal-3",
@@ -568,7 +568,7 @@
       "section": "verbs",
       "topic": "Нифъаль",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Дела и вещи",
       "count": 10,
       "stages": [
@@ -577,7 +577,7 @@
         "write",
         "type"
       ],
-      "v": "45035ff4c3"
+      "v": "df5123f259"
     },
     {
       "id": "paal-1",
@@ -602,7 +602,7 @@
       "section": "verbs",
       "topic": "Пааль",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Действия руками",
       "count": 10,
       "stages": [
@@ -611,7 +611,7 @@
         "write",
         "type"
       ],
-      "v": "569b2e413f"
+      "v": "5fd681803a"
     },
     {
       "id": "paal-3",
@@ -619,7 +619,7 @@
       "section": "verbs",
       "topic": "Пааль",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Ещё десять глаголов",
       "count": 10,
       "stages": [
@@ -628,7 +628,7 @@
         "write",
         "type"
       ],
-      "v": "ac4579b3cf"
+      "v": "d0a736a4cf"
     },
     {
       "id": "piel-1",
@@ -653,7 +653,7 @@
       "section": "verbs",
       "topic": "Пиэль",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Дела и работа",
       "count": 10,
       "stages": [
@@ -662,7 +662,7 @@
         "write",
         "type"
       ],
-      "v": "26cf5e75f8"
+      "v": "4cc97e5e50"
     },
     {
       "id": "piel-3",
@@ -670,7 +670,7 @@
       "section": "verbs",
       "topic": "Пиэль",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Ещё десять глаголов",
       "count": 10,
       "stages": [
@@ -679,7 +679,7 @@
         "write",
         "type"
       ],
-      "v": "f255802e2a"
+      "v": "c3fa87caec"
     },
     {
       "id": "qualities-1",
@@ -704,7 +704,7 @@
       "section": "adjectives",
       "topic": "Главные качества",
       "number": 2,
-      "free": true,
+      "free": false,
       "title": "Дорогой и дешёвый",
       "count": 10,
       "stages": [
@@ -713,7 +713,7 @@
         "write",
         "type"
       ],
-      "v": "7b39cd9a42"
+      "v": "ac05d826e1"
     },
     {
       "id": "qualities-3",
@@ -721,7 +721,7 @@
       "section": "adjectives",
       "topic": "Главные качества",
       "number": 3,
-      "free": true,
+      "free": false,
       "title": "Сильный и слабый",
       "count": 10,
       "stages": [
@@ -730,7 +730,7 @@
         "write",
         "type"
       ],
-      "v": "9f0694cc85"
+      "v": "a9bd3fc5f9"
     }
   ],
   "info": {

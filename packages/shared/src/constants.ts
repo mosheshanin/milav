@@ -4,11 +4,11 @@
 export const WORDS_PER_LESSON = 10;
 
 /** Сколько первых уроков каждой темы бесплатны, остальные платные (решение владельца). */
-export const FREE_LESSONS_PER_TOPIC = 3;
+export const FREE_LESSONS_PER_TOPIC = 1;
 
 /**
  * Платные уроки временно открыты всем, пока нет оплаты Stars (решение владельца 16.10.2026, задача 7).
- * В уроках `free` остаётся по правилу (false с 4-го урока), меняется только доступ. В задаче Stars вернуть false.
+ * В уроках `free` остаётся по правилу (false со 2-го урока), меняется только доступ. В задаче Stars вернуть false.
  */
 export const PAID_LESSONS_OPEN = true;
 

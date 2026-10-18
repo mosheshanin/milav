@@ -36,7 +36,7 @@ describe("уроки", () => {
         expect(lesson.words.length).toBe(WORDS_PER_LESSON);
       });
 
-      it("бесплатны только первые 3 урока темы", () => {
+      it("бесплатен только первый урок темы", () => {
         expect(lesson.free).toBe(lesson.number <= FREE_LESSONS_PER_TOPIC);
       });
 

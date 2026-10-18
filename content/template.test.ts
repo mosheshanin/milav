@@ -37,13 +37,13 @@ function fill(node: any, path: string[] = []): any {
 describe("шаблон нового урока", () => {
   it("поля урока и id слов", () => {
     const t = buildLessonTemplate(base) as any;
-    expect(t).toMatchObject({ $schema: "../schema.json", id: "animals-2", topicId: "animals", section: "nouns", number: 2, free: true });
+    expect(t).toMatchObject({ $schema: "../schema.json", id: "animals-2", topicId: "animals", section: "nouns", number: 2, free: false });
     expect(t.words.map((w: any) => w.id)).toEqual(keys.map((k) => `animals-2-${k}`));
   });
 
-  it("бесплатность по номеру: 3 бесплатный, 4 платный", () => {
-    expect((buildLessonTemplate({ ...base, number: 3 }) as any).free).toBe(true);
-    expect((buildLessonTemplate({ ...base, number: 4 }) as any).free).toBe(false);
+  it("бесплатность по номеру: 1 бесплатный, 2 платный", () => {
+    expect((buildLessonTemplate({ ...base, number: 1 }) as any).free).toBe(true);
+    expect((buildLessonTemplate({ ...base, number: 2 }) as any).free).toBe(false);
   });
 
   it("существительное: род и фраза; без forms", () => {

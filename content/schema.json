@@ -32,7 +32,7 @@
     },
     "free": {
       "type": "boolean",
-      "description": "Бесплатный ли урок: true у первых 3 уроков темы, у остальных false. Уроки алфавита всегда бесплатные."
+      "description": "Бесплатный ли урок: true у первого урока темы, у остальных false. Уроки алфавита всегда бесплатные."
     },
     "title": { "$ref": "#/definitions/text", "description": "Название урока, например «Знакомые животные»." },
     "words": {
@@ -52,7 +52,7 @@
   },
   "allOf": [
     {
-      "if": { "required": ["number"], "properties": { "number": { "type": "integer", "maximum": 3 } } },
+      "if": { "required": ["number"], "properties": { "number": { "type": "integer", "maximum": 1 } } },
       "then": { "properties": { "free": { "const": true } } },
       "else": {
         "if": { "required": ["section"], "properties": { "section": { "const": "alphabet" } } },
