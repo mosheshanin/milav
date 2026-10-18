@@ -22,6 +22,9 @@ import lesson_food_4 from "./lessons/food-4.json";
 import lesson_hifil_1 from "./lessons/hifil-1.json";
 import lesson_hifil_2 from "./lessons/hifil-2.json";
 import lesson_hifil_3 from "./lessons/hifil-3.json";
+import lesson_hitpael_1 from "./lessons/hitpael-1.json";
+import lesson_hitpael_2 from "./lessons/hitpael-2.json";
+import lesson_hitpael_3 from "./lessons/hitpael-3.json";
 import lesson_home_1 from "./lessons/home-1.json";
 import lesson_home_2 from "./lessons/home-2.json";
 import lesson_home_3 from "./lessons/home-3.json";
@@ -62,6 +65,9 @@ export const lessonFiles: unknown[] = [
   lesson_hifil_1,
   lesson_hifil_2,
   lesson_hifil_3,
+  lesson_hitpael_1,
+  lesson_hitpael_2,
+  lesson_hitpael_3,
   lesson_home_1,
   lesson_home_2,
   lesson_home_3,

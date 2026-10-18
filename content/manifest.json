@@ -410,6 +410,57 @@
       "v": "226c0c93ab"
     },
     {
+      "id": "hitpael-1",
+      "topicId": "hitpael",
+      "section": "verbs",
+      "topic": "Хитпаэль",
+      "number": 1,
+      "free": true,
+      "title": "Самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "82c3aca948"
+    },
+    {
+      "id": "hitpael-2",
+      "topicId": "hitpael",
+      "section": "verbs",
+      "topic": "Хитпаэль",
+      "number": 2,
+      "free": true,
+      "title": "Люди и чувства",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "cf154dbe8d"
+    },
+    {
+      "id": "hitpael-3",
+      "topicId": "hitpael",
+      "section": "verbs",
+      "topic": "Хитпаэль",
+      "number": 3,
+      "free": true,
+      "title": "Дела и общение",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "3a40d607a9"
+    },
+    {
       "id": "home-1",
       "topicId": "home",
       "section": "nouns",
@@ -683,8 +734,8 @@
     }
   ],
   "info": {
-    "totalWords": 320,
-    "totalLessons": 38,
+    "totalWords": 350,
+    "totalLessons": 41,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -744,6 +795,15 @@
           "hifil-1",
           "hifil-2",
           "hifil-3"
+        ]
+      },
+      {
+        "id": "hitpael",
+        "title": "Хитпаэль",
+        "lessonIds": [
+          "hitpael-1",
+          "hitpael-2",
+          "hitpael-3"
         ]
       },
       {
