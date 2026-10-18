@@ -731,11 +731,62 @@
         "type"
       ],
       "v": "a9bd3fc5f9"
+    },
+    {
+      "id": "weak-1",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 1,
+      "free": true,
+      "title": "Самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "0189524c72"
+    },
+    {
+      "id": "weak-2",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 2,
+      "free": false,
+      "title": "Каждый день",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "5b8a72d630"
+    },
+    {
+      "id": "weak-3",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 3,
+      "free": false,
+      "title": "Движение и жизнь",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "405c292618"
     }
   ],
   "info": {
-    "totalWords": 350,
-    "totalLessons": 41,
+    "totalWords": 380,
+    "totalLessons": 44,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -850,6 +901,15 @@
           "qualities-1",
           "qualities-2",
           "qualities-3"
+        ]
+      },
+      {
+        "id": "weak",
+        "title": "Слабые корни",
+        "lessonIds": [
+          "weak-1",
+          "weak-2",
+          "weak-3"
         ]
       }
     ]
