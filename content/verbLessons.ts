@@ -1,6 +1,6 @@
 import { FREE_LESSONS_PER_TOPIC, type Binyan } from "@milav/shared";
 import { stripStress } from "./rules";
-import { conjugateHifil, conjugateNifal, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
+import { conjugateHifil, conjugateHitpael, conjugateNifal, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
 
 /**
  * Состав уроков глаголов с сильными корнями: корень, перевод и фраза-пример для каждого глагола, по темам-бинъянам.
@@ -228,12 +228,66 @@ export const NIFAL_LESSONS: VerbLessonSpec[] = [
   },
 ];
 
+/**
+ * Хитпаэль 1–3 (18.10): сильные корни; первая ס ש צ ז (перестановка приставки), вторая ר и гортанная, третья נ входят, первая
+ * ד ט ת, третья ח ע, слабые и удвоенные корни (התפלל) отложены в «Хитпаэль 4». Повелительное оставлено у всех (решение владельца).
+ * Фразы без артикля ה-, глагол в настоящем времени.
+ */
+export const HITPAEL_LESSONS: VerbLessonSpec[] = [
+  {
+    title: "Самые нужные",
+    verbs: [
+      { key: "dress", root: "לבש", ru: "одеваться", phrase: p("אני {ms} מהר", "ани {ms} махер", "Я быстро одеваюсь") },
+      { key: "call", root: "קשר", ru: "звонить, связываться", phrase: p("אני {ms} לאמא", "ани {ms} леима", "Я звоню маме") },
+      { key: "look", root: "סכל", ru: "смотреть", phrase: p("אני {ms} בטלפון", "ани {ms} бетелефон", "Я смотрю в телефон") },
+      { key: "use", root: "שמש", ru: "пользоваться", phrase: p("אני {ms} במחשב", "ани {ms} бемахшев", "Я пользуюсь компьютером") },
+      { key: "manage", root: "סדר", ru: "справляться, устраиваться", phrase: p("אני {ms} לבד", "ани {ms} левад", "Я справляюсь сам") },
+      { key: "getused", root: "רגל", ru: "привыкать", phrase: p("אני {ms} לעבודה חדשה", "ани {ms} леавода хадаша", "Я привыкаю к новой работе") },
+      { key: "regret", root: "צער", ru: "сожалеть", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я очень сожалею") },
+      { key: "marry", root: "חתנ", ru: "жениться, выходить замуж", phrase: p("הוא {ms} בקרוב", "ху {ms} бекаров", "Он скоро женится") },
+      { key: "behave", root: "נהג", ru: "вести себя", phrase: p("הוא {ms} יפה", "ху {ms} яфе", "Он хорошо себя ведёт") },
+      { key: "approach", root: "קרב", ru: "приближаться", phrase: p("אני {ms} אליך", "ани {ms} элеха", "Я приближаюсь к тебе") },
+    ],
+  },
+  {
+    title: "Люди и чувства",
+    verbs: [
+      { key: "excite", root: "רגש", ru: "волноваться, растрогаться", phrase: p("אני {ms} לפני מבחן", "ани {ms} лифней мивхан", "Я волнуюсь перед экзаменом") },
+      { key: "enthuse", root: "להב", ru: "восторгаться, увлекаться", phrase: p("אני {ms} מרעיון", "ани {ms} мераайон", "Я в восторге от идеи") },
+      { key: "fallinlove", root: "אהב", ru: "влюбляться", phrase: p("הוא {ms} בה", "ху {ms} ба", "Он влюбляется в неё") },
+      { key: "doubt", root: "לבט", ru: "сомневаться, колебаться", phrase: p("אני {ms} הרבה", "ани {ms} харбе", "Я много сомневаюсь") },
+      { key: "apologize", root: "נצל", ru: "извиняться", phrase: p("אני {ms} על איחור", "ани {ms} аль ихур", "Я извиняюсь за опоздание") },
+      { key: "impressed", root: "רשמ", ru: "впечатляться", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я под большим впечатлением") },
+      { key: "admire", root: "פעל", ru: "восхищаться", phrase: p("אני {ms} ממנו", "ани {ms} мимено", "Я восхищаюсь им") },
+      { key: "restrain", root: "אפק", ru: "сдерживаться", phrase: p("הוא {ms} בקושי", "ху {ms} бекоши", "Он с трудом сдерживается") },
+      { key: "ignore", root: "עלמ", ru: "игнорировать", phrase: p("היא {fs} ממני", "хи {fs} мимени", "Она игнорирует меня") },
+      { key: "outsmart", root: "חכמ", ru: "умничать, хитрить", phrase: p("אתה {ms} איתי", "ата {ms} ити", "Ты умничаешь со мной") },
+    ],
+  },
+  {
+    title: "Дела и общение",
+    verbs: [
+      { key: "correspond", root: "כתב", ru: "переписываться", phrase: p("אני {ms} עם חבר", "ани {ms} им хавер", "Я переписываюсь с другом") },
+      { key: "kiss", root: "נשק", ru: "целоваться", phrase: p("היא {fs} עם בעלה", "хи {fs} им баала", "Она целуется с мужем") },
+      { key: "hug", root: "חבק", ru: "обниматься", phrase: p("אני {ms} עם אמא", "ани {ms} им има", "Я обнимаюсь с мамой") },
+      { key: "gather", root: "כנס", ru: "собираться", phrase: p("משפחה {fs} בערב", "мишпаха {fs} баэрев", "Семья собирается вечером") },
+      { key: "deal", root: "עסק", ru: "заниматься, возиться", phrase: p("אני {ms} בספורט", "ани {ms} биспорт", "Я занимаюсь спортом") },
+      { key: "advance", root: "קדמ", ru: "продвигаться", phrase: p("אני {ms} לאט", "ани {ms} леат", "Я продвигаюсь медленно") },
+      { key: "participate", root: "שתפ", ru: "участвовать", phrase: p("אני {ms} בשיעור", "ани {ms} бешиур", "Я участвую в уроке") },
+      { key: "join", root: "צרפ", ru: "присоединяться", phrase: p("אני {ms} לקבוצה", "ани {ms} ликвуца", "Я присоединяюсь к группе") },
+      { key: "distance", root: "רחק", ru: "отдаляться", phrase: p("הוא {ms} ממני", "ху {ms} мимени", "Он отдаляется от меня") },
+      { key: "hurry", root: "זרז", ru: "торопиться", phrase: p("אני {ms} כי מאוחר", "ани {ms} ки меухар", "Я тороплюсь, потому что поздно") },
+    ],
+  },
+];
+
 /** Темы глаголов, которые умеет строить `npm run content:verbs`: название темы, состав уроков и генератор форм. */
 export const VERB_TOPICS: Partial<Record<Binyan, { topic: string; lessons: VerbLessonSpec[]; conjugate: (root: string) => ConjugatedVerb }>> = {
   paal: { topic: "Пааль", lessons: PAAL_LESSONS, conjugate: conjugatePaal },
   piel: { topic: "Пиэль", lessons: PIEL_LESSONS, conjugate: conjugatePiel },
   hifil: { topic: "Хифъиль", lessons: HIFIL_LESSONS, conjugate: conjugateHifil },
   nifal: { topic: "Нифъаль", lessons: NIFAL_LESSONS, conjugate: conjugateNifal },
+  hitpael: { topic: "Хитпаэль", lessons: HITPAEL_LESSONS, conjugate: conjugateHitpael },
 };
 
 /** Объект урока темы-бинъяна в порядке полей, как в остальных файлах. */
@@ -290,4 +344,9 @@ export function buildHifilLesson(number: number): Record<string, unknown> {
 /** Урок нифъаль. */
 export function buildNifalLesson(number: number): Record<string, unknown> {
   return buildVerbLesson("nifal", number);
+}
+
+/** Урок хитпаэль. */
+export function buildHitpaelLesson(number: number): Record<string, unknown> {
+  return buildVerbLesson("hitpael", number);
 }

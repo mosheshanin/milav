@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { VERB_FORMS_TOTAL, normalizeHebrew, verbForms } from "@milav/shared";
-import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, KATAV, KATAV_INFINITIVE, NIKHTAV, NIKHTAV_INFINITIVE } from "./verbFixture";
+import { VERB_FORMS_TOTAL, formSound, normalizeHebrew, verbForms } from "@milav/shared";
+import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, HITLABESH, HITLABESH_INFINITIVE, KATAV, KATAV_INFINITIVE, NIKHTAV, NIKHTAV_INFINITIVE } from "./verbFixture";
 import { stressProblems, skeletonProblems, stripStress, syllables, verbProblems } from "./rules";
-import { SIN_ROOTS, conjugateHifil, conjugateNifal, conjugatePaal, conjugatePiel, hifilRootProblems, nifalRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
-import { HIFIL_LESSONS, NIFAL_LESSONS, PAAL_LESSONS, PIEL_LESSONS, buildHifilLesson, buildNifalLesson, buildPaalLesson, buildPielLesson } from "./verbLessons";
+import { SIN_ROOTS, conjugateHifil, conjugateHitpael, conjugateNifal, conjugatePaal, conjugatePiel, hifilRootProblems, hitpaelRootProblems, nifalRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
+import { HIFIL_LESSONS, HITPAEL_LESSONS, NIFAL_LESSONS, PAAL_LESSONS, PIEL_LESSONS, buildHifilLesson, buildHitpaelLesson, buildNifalLesson, buildPaalLesson, buildPielLesson } from "./verbLessons";
 
 const ROOTS = PAAL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
 
@@ -679,5 +679,257 @@ describe("уроки нифъаль: составлены генератором
     const enter = (buildNifalLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[0]!;
     expect(enter.example).toMatchObject({ he: "אני נכנס פנימה", translit: "ани нихнас пнима" });
     expect(() => buildNifalLesson(4)).toThrow();
+  });
+});
+
+const nf = (text: string): string => text.normalize("NFD");
+
+const HITPAEL_ROOTS = HITPAEL_LESSONS.flatMap((l) => l.verbs.map((v) => v.root));
+
+describe("генератор форм хитпаэль: образец «одеваться»", () => {
+  /** Огласовки сравниваем в нормальной форме Unicode: образец набран вручную, порядок знаков может отличаться. */
+  const nfd = (f: { he: string; niqqud: string; translit: string }) => ({ ...f, niqqud: f.niqqud.normalize("NFD") });
+
+  it("для корня לבש получает те же 27 форм и инфинитив, что набраны в образце вручную", () => {
+    const { infinitive, verb } = conjugateHitpael("לבש");
+    expect(nfd(infinitive)).toEqual(nfd(HITLABESH_INFINITIVE));
+    expect(verb.binyan).toBe("hitpael");
+    expect(verb.root).toBe("לבש");
+    for (const { tense, key, form } of verbForms(HITLABESH)) {
+      const got = (verb[tense] as Record<string, typeof form>)[key]!;
+      expect(nfd(got), `${tense}.${key}`).toEqual(nfd(form));
+    }
+    expect(verbForms(verb)).toHaveLength(VERB_FORMS_TOTAL);
+    expect(verbProblems(HITLABESH_INFINITIVE.he, HITLABESH)).toEqual([]);
+  });
+
+  it("всегда 27 форм, приставки бинъяна на месте (לה, מ в настоящем, ה в прошедшем и повелительном)", () => {
+    for (const root of HITPAEL_ROOTS) {
+      const { infinitive, verb } = conjugateHitpael(root);
+      expect(verbForms(verb), root).toHaveLength(VERB_FORMS_TOTAL);
+      expect(infinitive.he.startsWith("לה"), root).toBe(true);
+      expect(verb.present.ms.he.startsWith("מ"), root).toBe(true);
+      for (const f of Object.values(verb.past)) expect(f.he.startsWith("ה"), f.he).toBe(true);
+      for (const f of Object.values(verb.imperative!)) expect(f.he.startsWith("ה"), f.he).toBe(true);
+    }
+  });
+});
+
+describe("генератор форм хитпаэль: правила", () => {
+  const forms = (root: string) => conjugateHitpael(root).verb;
+
+  it("приставки: הִתְ в прошедшем и повелительном, מִתְ в настоящем, אֶתְ תִּתְ יִתְ נִתְ в будущем, לְהִתְ в инфинитиве", () => {
+    const v = forms("לבש");
+    expect(nf(conjugateHitpael("לבש").infinitive.niqqud)).toBe(nf("לְהִתְלַבֵּשׁ"));
+    expect(v.present.ms.niqqud.startsWith("מִתְ")).toBe(true);
+    expect(v.past["3ms"].niqqud.startsWith("הִתְ")).toBe(true);
+    expect(v.imperative!.ms.niqqud.startsWith("הִתְ")).toBe(true);
+    expect(v.future["1s"].niqqud.startsWith("אֶתְ")).toBe(true);
+    expect(v.future["2ms"].niqqud.startsWith("תִּתְ")).toBe(true);
+    expect(v.future["3ms"].niqqud.startsWith("יִתְ")).toBe(true);
+    expect(v.future["1p"].niqqud.startsWith("נִתְ")).toBe(true);
+    expect(v.future["1s"].translit).toBe("этлабе́ш");
+    expect(v.future["3ms"].translit).toBe("итлабе́ш");
+  });
+
+  it("вторая буква корня удвоена во всех формах, а ב כ פ в ней твёрдые (хабе́к, не хаве́к)", () => {
+    const v = forms("חבק");
+    for (const { tense, key, form } of verbForms(v)) {
+      expect(form.niqqud, `${tense}.${key}`).toMatch(/ב[\u05B0-\u05BB\u05C1\u05C2]*\u05BC/);
+      expect(form.translit, `${tense}.${key}`).toContain("хаб");
+    }
+  });
+
+  it("первая буква ב כ פ после немой шва приставки получает дагеш: הִתְכַּתֵּב, אֶתְפַּעֵל", () => {
+    expect(nf(conjugateHitpael("כתב").infinitive.niqqud)).toBe(nf("לְהִתְכַּתֵּב"));
+    expect(forms("כתב").past["3ms"].translit).toBe("хиткате́в");
+    expect(nf(forms("פעל").future["1s"].niqqud)).toBe(nf("אֶתְפַּעֵל"));
+  });
+
+  it("у первой ס ש перестановка: ת после неё (הִסְתַּדֵּר, הִשְׁתַּמֵּשׁ), ת получает дагеш", () => {
+    expect(nf(forms("סדר").past["3ms"].niqqud)).toBe(nf("הִסְתַּדֵּר"));
+    expect(forms("סדר").past["3ms"].he).toBe("הסתדר");
+    expect(nf(forms("סדר").present.ms.niqqud)).toBe(nf("מִסְתַּדֵּר"));
+    expect(nf(forms("שמש").past["3ms"].niqqud)).toBe(nf("הִשְׁתַּמֵּשׁ"));
+    expect(forms("שמש").future["3fs"].he).toBe("תשתמש");
+    expect(forms("שמש").past["3ms"].translit).toBe("хиштаме́ш");
+  });
+
+  it("у первой צ приставка становится ט (הִצְטַלֵּם), у ז становится ד с дагешем (הִזְדַּקֵּן)", () => {
+    expect(nf(forms("צלמ").past["3ms"].niqqud)).toBe(nf("הִצְטַלֵּם"));
+    expect(forms("צלמ").past["3ms"].he).toBe("הצטלם");
+    expect(forms("צלמ").past["3ms"].translit).toBe("хицтале́м");
+    expect(nf(forms("זקנ").past["3ms"].niqqud)).toBe(nf("הִזְדַּקֵּן"));
+  });
+
+  it("первая гортанная или נ не меняет приставку: הִתְעַלֵּם, הִתְאַפֵּק, הִתְנַצֵּל; ה тоже", () => {
+    expect(nf(forms("עלמ").past["3ms"].niqqud)).toBe(nf("הִתְעַלֵּם"));
+    expect(nf(forms("אפק").past["3ms"].niqqud)).toBe(nf("הִתְאַפֵּק"));
+    expect(nf(forms("נצל").past["3ms"].niqqud)).toBe(nf("הִתְנַצֵּל"));
+    expect(nf(forms("הפכ").past["3ms"].niqqud)).toBe(nf("הִתְהַפֵּךְ"));
+  });
+
+  it("вторая буква ר не удваивается, под первой камац: הִתְקָרֵב, הִתְקָרְבָה, הִצְטָרֵף", () => {
+    const v = forms("קרב");
+    expect(nf(v.past["3ms"].niqqud)).toBe(nf("הִתְקָרֵב"));
+    expect(nf(v.past["3fs"].niqqud)).toBe(nf("הִתְקָרְבָה"));
+    expect(nf(v.past["1s"].niqqud)).toBe(nf("הִתְקָרַבְתִּי"));
+    expect(nf(v.present.mp.niqqud)).toBe(nf("מִתְקָרְבִים"));
+    expect(v.past["3ms"].translit).toBe("хиткаре́в");
+    expect(nf(forms("צרפ").past["3ms"].niqqud)).toBe(nf("הִצְטָרֵף"));
+    expect(nf(forms("זרז").past["3ms"].niqqud)).toBe(nf("הִזְדָּרֵז"));
+  });
+
+  it("вторая гортанная не удваивается, шва заменяет хатаф-патах: הִתְנַהֲגָה, מִתְרַחֲקִים, הִצְטַעֲרוּ", () => {
+    const v = forms("נהג");
+    expect(nf(v.past["3ms"].niqqud)).toBe(nf("הִתְנַהֵג"));
+    expect(nf(v.past["3fs"].niqqud)).toBe(nf("הִתְנַהֲגָה"));
+    expect(v.past["3fs"].translit).toBe("хитнахага́");
+    expect(nf(v.present.mp.niqqud)).toBe(nf("מִתְנַהֲגִים"));
+    expect(nf(forms("רחק").present.mp.niqqud)).toBe(nf("מִתְרַחֲקִים"));
+    expect(nf(forms("צער").past["3p"].niqqud)).toBe(nf("הִצְטַעֲרוּ"));
+    expect(nf(forms("צער").past["1s"].niqqud)).toBe(nf("הִצְטַעַרְתִּי"));
+    expect(nf(forms("אהב").present.fp.niqqud)).toBe(nf("מִתְאַהֲבוֹת"));
+    expect(nf(forms("פעל").present.ms.niqqud)).toBe(nf("מִתְפַּעֵל"));
+  });
+
+  it("третья נ сливается с окончаниями -נוּ и -נָה: הִתְחַתַּנּוּ, תִּתְחַתֵּנָּה", () => {
+    const v = forms("חתנ");
+    expect(nf(v.past["1p"].niqqud)).toBe(nf("הִתְחַתַּנּוּ"));
+    expect(v.past["1p"].he).toBe("התחתנו");
+    expect(v.past["1p"].translit).toBe("хитхата́ну");
+    expect(nf(v.future["2fp"].niqqud)).toBe(nf("תִּתְחַתֵּנָּה"));
+    expect(nf(v.imperative!.fp.niqqud)).toBe(nf("הִתְחַתֵּנָּה"));
+    expect(nf(v.past["1s"].niqqud)).toBe(nf("הִתְחַתַּנְתִּי"));
+    // Обычные корни: נ окончания отдельная буква (תִּתְלַבֵּשְׁנָה).
+    expect(nf(forms("לבש").future["2fp"].niqqud)).toBe(nf("תִּתְלַבֵּשְׁנָה"));
+  });
+
+  it("первая и третья буквы могут совпадать (שמש, זרז), конечные формы и ךְ на месте", () => {
+    expect(hitpaelRootProblems("שמש")).toEqual([]);
+    expect(hitpaelRootProblems("זרז")).toEqual([]);
+    expect(forms("רחצ").past["3ms"].he).toBe("התרחץ");
+    expect(forms("הפכ").past["3ms"].he).toBe("התהפך");
+    expect(nf(forms("הפכ").past["3ms"].niqqud)).toBe(nf("הִתְהַפֵּךְ"));
+  });
+
+  it("ударение: -ти, -та, -ну безударные, 3-е лицо на конце, ж.р. настоящего и формы на -на на предпоследнем", () => {
+    const v = forms("לבש");
+    expect(v.past["1s"].translit).toBe("хитлаба́шти");
+    expect(v.past["2ms"].translit).toBe("хитлаба́шта");
+    expect(v.past["2fs"].translit).toBe("хитлаба́шт");
+    expect(v.past["1p"].translit).toBe("хитлаба́шну");
+    expect(v.past["2mp"].translit).toBe("хитлабаште́м");
+    expect(v.past["3fs"].translit).toBe("хитлабша́");
+    expect(v.past["3p"].translit).toBe("хитлабшу́");
+    expect(v.present.fs.translit).toBe("митлабе́шет");
+    expect(v.present.mp.translit).toBe("митлабши́м");
+    expect(v.future["3fp"].translit).toBe("итлабе́шна");
+    expect(v.imperative!.fp.translit).toBe("хитлабе́шна");
+  });
+
+  it("совпадающие формы: прошедшее 3ms = повелительное ms, 3p = повелительное mp, будущее 2ms = 3fs; больше совпадений нет", () => {
+    const allowed = new Set(["past.3ms|imperative.ms", "past.3p|imperative.mp", "future.2ms|future.3fs"]);
+    for (const root of HITPAEL_ROOTS) {
+      const entries = verbForms(forms(root));
+      const seen = new Set<string>();
+      for (let i = 0; i < entries.length; i++) {
+        for (let j = i + 1; j < entries.length; j++) {
+          const a = entries[i]!;
+          const b = entries[j]!;
+          if (formSound(a.form) !== formSound(b.form) && a.form.niqqud !== b.form.niqqud) continue;
+          seen.add(`${a.tense}.${a.key}|${b.tense}.${b.key}`);
+        }
+      }
+      expect([...seen].sort(), root).toEqual([...allowed].sort());
+      const v = forms(root);
+      expect(v.past["3ms"].niqqud, root).toBe(v.imperative!.ms.niqqud);
+      expect(v.past["3p"].niqqud, root).toBe(v.imperative!.mp.niqqud);
+    }
+  });
+});
+
+describe("генератор форм хитпаэль: отказ на неподходящих корнях", () => {
+  const bad: [string, string][] = [
+    ["דבר", "первая ד растворяет приставку"],
+    ["טהר", "первая ט растворяет приставку"],
+    ["תקנ", "первая ת растворяет приставку"],
+    ["קלח", "третья ח (патах-гануб)"],
+    ["שגע", "третья ע (патах-гануб)"],
+    ["חבא", "третья א (слабый корень)"],
+    ["בנה", "третья ה (слабый корень)"],
+    ["כונ", "ו в корне"],
+    ["ילד", "י в начале"],
+    ["פלל", "удвоенный корень"],
+    ["ממש", "первая и вторая одинаковые"],
+    ["נפת", "третья ת"],
+    ["שחק", "пишется с син"],
+    ["סב", "две буквы"],
+    ["סכלל", "четыре буквы"],
+  ];
+  for (const [root, why] of bad) {
+    it(`корень ${root} (${why}) отклоняется`, () => {
+      expect(hitpaelRootProblems(root).length).toBeGreaterThan(0);
+      expect(() => conjugateHitpael(root)).toThrow();
+    });
+  }
+});
+
+describe("уроки хитпаэль: составлены генератором", () => {
+  it("3 урока по 10 глаголов, все корни разные, ключи и переводы уникальны, корни не с син", () => {
+    expect(HITPAEL_LESSONS).toHaveLength(3);
+    for (const lesson of HITPAEL_LESSONS) expect(lesson.verbs).toHaveLength(10);
+    expect(new Set(HITPAEL_ROOTS).size).toBe(30);
+    const keys = HITPAEL_LESSONS.flatMap((l) => l.verbs.map((v) => v.key));
+    expect(new Set(keys).size).toBe(30);
+    for (const root of HITPAEL_ROOTS) expect(SIN_ROOTS).not.toContain(root);
+  });
+
+  it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
+    for (const root of HITPAEL_ROOTS) expect(hitpaelRootProblems(root), root).toEqual([]);
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildHitpaelLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
+      for (const word of lesson.words) {
+        expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
+        for (const { form } of verbForms(word.verb)) {
+          expect(stressProblems(form.translit), form.translit).toEqual([]);
+          expect(skeletonProblems(form.he, form.translit), form.translit).toEqual([]);
+          expect(normalizeHebrew(form.niqqud)).toBe(normalizeHebrew(form.he));
+        }
+      }
+    }
+  });
+
+  it("повелительное оставлено у всех 30 глаголов (решение владельца 18.10): 27 форм", () => {
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildHitpaelLesson(n) as { words: { verb: { imperative?: unknown } }[] };
+      for (const w of lesson.words) {
+        expect(w.verb.imperative).toBeDefined();
+        expect(verbForms(w.verb as Parameters<typeof verbForms>[0])).toHaveLength(VERB_FORMS_TOTAL);
+      }
+    }
+    expect(HITPAEL_LESSONS.flatMap((l) => l.verbs).some((v) => v.noImperative)).toBe(false);
+  });
+
+  it("классы корней: перестановка у ס ש צ ז, вторая ר и гортанная, третья נ", () => {
+    const has = (pred: (root: string) => boolean) => HITPAEL_ROOTS.filter(pred);
+    expect(has((r) => "סשצז".includes(r[0]!)).sort()).toEqual(["זרז", "סדר", "סכל", "צער", "צרפ", "שמש", "שתפ"].sort());
+    expect(has((r) => r[1] === "ר")).toEqual(["קרב", "צרפ", "זרז"]);
+    expect(has((r) => "אהחע".includes(r[1]!)).sort()).toEqual(["אהב", "להב", "נהג", "פעל", "צער", "רחק"].sort());
+    expect(has((r) => r[2] === "נ")).toEqual(["חתנ"]);
+  });
+
+  it("урок 1–3 бесплатный, id hitpael-<номер>, тема «Хитпаэль» раздел verbs; фраза с настоящим временем", () => {
+    for (let n = 1; n <= 3; n++) {
+      const lesson = buildHitpaelLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string; words: { id: string; example: { he: string } }[] };
+      expect(lesson).toMatchObject({ id: `hitpael-${n}`, free: true, topicId: "hitpael", section: "verbs", topic: "Хитпаэль" });
+      for (const w of lesson.words) {
+        expect(w.id.startsWith(`hitpael-${n}-`)).toBe(true);
+        expect(w.example.he).not.toContain("{");
+      }
+    }
+    const dress = (buildHitpaelLesson(1) as { words: { example: { he: string; translit: string } }[] }).words[0]!;
+    expect(dress.example).toMatchObject({ he: "אני מתלבש מהר", translit: "ани митлабеш махер" });
+    expect(() => buildHitpaelLesson(4)).toThrow();
   });
 });

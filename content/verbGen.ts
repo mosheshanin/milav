@@ -29,8 +29,16 @@ import { ACUTE } from "./rules";
  * звучат одинаково (нихта́в). Первая буква корня не гортанная и не ר, נ (נֶחְשָׁב, יֵחָשֵׁב строятся иначе); вторая может быть
  * א ה ח ע (под ней вместо шва хатаф-патах: נִשְׁאֲרָה), третья может быть ח ע (патах вместо цере и сеголя: יִפָּתַח, נִפְתַּחַת).
  *
+ * Хитпаэль (`conjugateHitpael`, 18.10): устроен как пиэль с приставкой: вторая буква корня удвоена (הִתְלַבֵּשׁ, מִתְלַבֵּשׁ),
+ * приставки הִתְ (прошедшее, повелительное), לְהִתְ, מִתְ, אֶתְ תִּתְ יִתְ נִתְ. Первая буква корня после немой шва приставки получает
+ * дагеш бегадкефат (הִתְכַּתֵּב). У первой ס ש צ ז приставка ת переставляется после неё, у צ она становится ט, у ז становится ד
+ * (הִסְתַּדֵּר, הִשְׁתַּמֵּשׁ, הִצְטַעֵר, הִזְדָּרֵז). Вторая буква ר не удваивается, а под первой камац (הִתְקָרֵב); вторая א ה ח ע тоже
+ * не удваивается, шва под ней заменяет хатаф-патах (הִתְנַהֲגָה). Третья נ сливается с -נוּ и -נָה (הִתְחַתַּנּוּ, תִּתְחַתֵּנָּה).
+ * Прошедшее 3ms совпадает с повелительным ms, а 3p с повелительным mp (הִתְלַבֵּשׁ, הִתְלַבְּשׁוּ). Первая ד ט ת (приставка
+ * растворяется), третья ח ע (патах-гануб), слабые, четырёхбуквенные и удвоенные корни генератор не строит.
+ *
  * Каждый генератор отклоняет корень, который ему не подходит (`paalRootProblems`, `pielRootProblems`, `hifilRootProblems`,
- * `nifalRootProblems`).
+ * `nifalRootProblems`, `hitpaelRootProblems`).
  */
 
 /**
@@ -257,7 +265,30 @@ export function nifalRootProblems(root: string): string[] {
   return problems;
 }
 
-/** Корни, которые пишутся с «син» (שׂ): генераторы ставят «шин», поэтому такие глаголы они не строят (שרף, שכר, שלט, שפט и др.). */
+/**
+ * Проблемы корня: подходит ли он генератору хитпаэль. Первая буква: любая сильная и א ה ח ע (נ тоже: в хитпаэле она не
+ * меняется), без ד ט ת (приставка ת растворяется в них) и без י ו. Вторая: любая сильная, ר или א ה ח ע. Третья: сильная
+ * (без ת, гортанных, י ו). Первая и третья буквы могут совпадать (שמש, זרז), вторая не может совпадать ни с первой, ни с третьей
+ * (удвоенные корни вроде פלל позже).
+ */
+export function hitpaelRootProblems(root: string): string[] {
+  const problems: string[] = [];
+  const letters = [...root];
+  const [c1, c2, c3] = letters;
+  const has = (set: string, letter: string | undefined) => letter !== undefined && set.includes(letter);
+  if (letters.length !== 3) problems.push(`корень «${root}»: нужны ровно 3 буквы`);
+  if (!has("בגזכלמנספצקרשאהחע", c1)) {
+    problems.push(`корень «${root}»: первая буква должна быть из בגזכלמנספצקרש или א ה ח ע (ד ט ת растворяют приставку, י ו слабые)`);
+  }
+  if (!has("בגדזטכלמנספצקרשתאהחע", c2)) problems.push(`корень «${root}»: вторая буква должна быть из בגדזטכלמנספצקרשת или א ה ח ע`);
+  if (!has("בגדזטכלמנספצקרש", c3)) problems.push(`корень «${root}»: третья буква должна быть из בגדזטכלמנספצקרש (без ת, гортанных א ה ח ע, י ו)`);
+  if (c1 !== undefined && c1 === c2) problems.push(`корень «${root}»: первая и вторая буквы одинаковые`);
+  if (c2 !== undefined && c2 === c3) problems.push(`корень «${root}»: вторая и третья буквы одинаковые (удвоенный корень)`);
+  if (SIN_ROOTS.includes(root)) problems.push(`корень «${root}» пишется с «син» (שׂ), а генератор ставит «шин» (ש)`);
+  return problems;
+}
+
+/** Корни, которые пишутся с «син» (שׂ): генераторы ставят «шин»,поэтому такие глаголы они не строят (שרף, שכר, שלט, שפט и др.). */
 export const SIN_ROOTS: readonly string[] = ["שרפ", "שכר", "שלט", "שפט", "שמח", "שחק", "שבע", "שער", "בשר"];
 
 type FormSpec = [units: Unit[], stress: Stress];
@@ -585,6 +616,99 @@ function nifalSpecs(root: string): Specs {
   };
 }
 
+/** Хитпаэль: буква, которой заменяется приставка ת после первой ס ש צ ז корня (הִסְתַּדֵּר, הִצְטַלֵּם, הִזְדַּקֵּן). */
+const SIBILANT_SWAP: Record<string, string> = { ס: "ת", ש: "ת", צ: "ט", ז: "ד" };
+
+/**
+ * Хитпаэль (הִתְפַּעֵל). Основа как у пиэль (вторая буква удвоена, те же окончания), перед ней приставка. Прошедшее 3ms и
+ * повелительное ms совпадают (הִתְלַבֵּשׁ), как 3p и повелительное mp (הִתְלַבְּשׁוּ): различий в огласовках и звучании нет.
+ * Вторая буква ר или гортанная не удваивается: у ר под первой буквой камац (הִתְקָרֵב), у א ה ח ע патах и хатаф-патах вместо шва
+ * (הִתְרַחֲקוּ). У первой ס ש צ ז приставка ת стоит после неё и получает гласную первой буквы (הִסְתַּדֵּר).
+ */
+function hitpaelSpecs(root: string): Specs {
+  const [c1, c2, c3] = [...root] as [string, string, string];
+  const nun = c3 === "נ";
+  const guttural2 = "אהחע".includes(c2);
+  const resh2 = c2 === "ר";
+  const c1v: Vowel = resh2 ? "A" : "a";
+  const swap = SIBILANT_SWAP[c1];
+  /** Вторая буква корня: удвоена, кроме ר и гортанных; подвижная шва у гортанной это хатаф-патах. */
+  const C2 = (v: Vowel): Unit => u(c2, v === "V" && guttural2 ? "H" : v, guttural2 || resh2 ? {} : { forte: true });
+  /** Приставка (без ת бинъяна) и начало корня: …ת + C1, а у сибилянтов C1 с немой шва и затем ת (ט, ד) с гласной C1. */
+  const open = (pre: Unit[]): Unit[] => (swap ? [...pre, u(c1, "S"), u(swap, c1v)] : [...pre, u("ת", "S"), u(c1, c1v)]);
+  const stem = (pre: Unit[], tail: "e" | "V-i" | "V-u" | "V-im" | "V-ot" | "E-et" | "en"): FormSpec => {
+    const head = open(pre);
+    switch (tail) {
+      case "e":
+        return [[...head, C2("e"), u(c3)], "last"];
+      case "V-i":
+        return [[...head, C2("V"), u(c3, "i", { tail: "י" })], "last"];
+      case "V-u":
+        return [[...head, C2("V"), u(c3, undefined, { mater: VAV_SHURUK })], "last"];
+      case "V-im":
+        return [[...head, C2("V"), u(c3, "i", { tail: "י" }), u("ם")], "last"];
+      case "V-ot":
+        return [[...head, C2("V"), u(c3, undefined, { mater: VAV_HOLAM }), u("ת")], "last"];
+      case "E-et":
+        return [[...head, C2("E"), u(c3, "E"), u("ת")], "penult"];
+      case "en":
+        // Книжные формы на -на; третья נ сливается с окончанием (תִּתְחַתֵּנָּה).
+        return nun
+          ? [[...head, C2("e"), u(c3, "A", { forte: true, tail: "ה" })], "penult"]
+          : [[...head, C2("e"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"];
+    }
+  };
+  /** Прошедшее: הִתְ + основа, гласная второй буквы и окончание. */
+  const past = (c2v: Vowel, c3v: Vowel | undefined, c3extra: Partial<Unit>, ...ending: Unit[]): Unit[] => [
+    ...open([u("ה", "i")]),
+    C2(c2v),
+    u(c3, c3v, c3extra),
+    ...ending,
+  ];
+  const pre = (letter: string): Unit[] => [u(letter, letter === "א" ? "E" : "i")];
+  const hi = (): Unit[] => [u("ה", "i")];
+
+  return {
+    infinitive: stem([u("ל", "W"), ...hi()], "e"),
+    present: {
+      ms: stem(pre("מ"), "e"),
+      fs: stem(pre("מ"), "E-et"),
+      mp: stem(pre("מ"), "V-im"),
+      fp: stem(pre("מ"), "V-ot"),
+    },
+    // Ударение как в пиэль: -ти, -та, -ну безударные (хитлаба́шти), -тем, -тен и 3-е лицо ударные.
+    past: {
+      "1s": [past("a", "S", {}, u("ת", "i", { tail: "י" })), "penult"],
+      "2ms": [past("a", "S", {}, u("ת", "A")), "penult"],
+      "2fs": [past("a", "S", {}, u("ת", "S")), "last"],
+      "3ms": [past("e", undefined, {}), "last"],
+      "3fs": [past("V", "A", { tail: "ה" }), "last"],
+      "1p": [nun ? past("a", undefined, { forte: true, mater: VAV_SHURUK }) : past("a", "S", {}, u("נ", undefined, { mater: VAV_SHURUK })), "penult"],
+      "2mp": [past("a", "S", {}, u("ת", "E"), u("ם")), "last"],
+      "2fp": [past("a", "S", {}, u("ת", "E"), u("ן")), "last"],
+      "3p": [past("V", undefined, { mater: VAV_SHURUK }), "last"],
+    },
+    future: {
+      "1s": stem(pre("א"), "e"),
+      "2ms": stem(pre("ת"), "e"),
+      "2fs": stem(pre("ת"), "V-i"),
+      "3ms": stem(pre("י"), "e"),
+      "3fs": stem(pre("ת"), "e"),
+      "1p": stem(pre("נ"), "e"),
+      "2mp": stem(pre("ת"), "V-u"),
+      "2fp": stem(pre("ת"), "en"),
+      "3mp": stem(pre("י"), "V-u"),
+      "3fp": stem(pre("י"), "en"),
+    },
+    imperative: {
+      ms: stem(hi(), "e"),
+      fs: stem(hi(), "V-i"),
+      mp: stem(hi(), "V-u"),
+      fp: stem(hi(), "en"),
+    },
+  };
+}
+
 const toForm = ([units, stress]: FormSpec): WordForm => render(units, stress);
 
 export interface ConjugatedVerb {
@@ -634,4 +758,11 @@ export function conjugateNifal(root: string): ConjugatedVerb {
   const problems = nifalRootProblems(root);
   if (problems.length) throw new Error(problems.join("\n"));
   return conjugate("nifal", root, nifalSpecs(root));
+}
+
+/** Все 27 форм глагола хитпаэль с сильным корнем (повелительное строится всегда: лишнее убирает состав урока). */
+export function conjugateHitpael(root: string): ConjugatedVerb {
+  const problems = hitpaelRootProblems(root);
+  if (problems.length) throw new Error(problems.join("\n"));
+  return conjugate("hitpael", root, hitpaelSpecs(root));
 }
