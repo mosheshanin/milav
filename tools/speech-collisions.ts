@@ -48,10 +48,19 @@ for (const lesson of lessons) {
 const accepted = (a: Item, b: Item, rule: (heard: string, expected: string) => boolean): boolean =>
   rule(a.he, b.he) || rule(b.he, a.he);
 
+// Слова темы, как их видит сервер при проверке (apps/api/src/speech.ts, rivalsOf).
+const byTopic = new Map<string, string[]>();
+for (const item of items) byTopic.set(item.topic, [...(byTopic.get(item.topic) ?? []), item.he]);
+const withRivals = (heard: string, expected: string): boolean => {
+  const topic = items.find((i) => i.he === expected)?.topic ?? "";
+  return isSpeechMatch(heard, expected, (byTopic.get(topic) ?? []).filter((he) => he !== expected));
+};
+
 let pairs = 0;
 const gained: [Item, Item][] = [];
 const lost: [Item, Item][] = [];
 let bothAccept = 0;
+let stillAccepted = 0;
 for (let i = 0; i < items.length; i++) {
   for (let j = i + 1; j < items.length; j++) {
     const a = items[i]!;
@@ -62,6 +71,7 @@ for (let i = 0; i < items.length; i++) {
     const before = accepted(a, b, legacyMatch);
     const after = accepted(a, b, isSpeechMatch);
     if (before && after) bothAccept++;
+    if (accepted(a, b, withRivals)) stillAccepted++;
     if (!before && after) gained.push([a, b]);
     if (before && !after) lost.push([a, b]);
   }
@@ -70,7 +80,8 @@ for (let i = 0; i < items.length; i++) {
 const show = ([a, b]: [Item, Item]): string => `  ${a.he} (${a.ru}) ~ ${b.he} (${b.ru})   [${a.topic}${a.topic === b.topic ? "" : ` / ${b.topic}`}]`;
 
 console.log(`Слов: ${items.length}. Пар проверено: ${pairs} (${values.all ? "все темы" : "внутри одной темы"}).`);
-console.log(`Принимались друг за друга и раньше, и теперь: ${bothAccept}`);
+console.log(`Принимались друг за друга и раньше, и теперь (без проверки соседних слов): ${bothAccept}`);
+console.log(`Принимаются друг за друга с проверкой соседних слов темы (так работает сервер): ${stillAccepted}`);
 console.log(`Стали приниматься друг за друга теперь: ${gained.length}`);
 for (const pair of gained.slice(0, 80)) console.log(show(pair));
 if (gained.length > 80) console.log(`  … и ещё ${gained.length - 80}`);

@@ -139,3 +139,46 @@ describe("сравнение по звучанию", () => {
     expect(speechMatchDetail("", "פרה")).toMatchObject({ match: false, cost: null });
   });
 });
+
+describe("соседние слова темы", () => {
+  const family = ["סבא", "סבתא", "נכד", "נכדה"];
+
+  it("не засчитывает другое слово темы, даже близкое по звучанию", () => {
+    expect(isSpeechMatch("סבתא", "סבא", family)).toBe(false);
+    expect(isSpeechMatch("סבא", "סבתא", family)).toBe(false); // допуск слова от 4 букв прощал бы одну ошибку
+    expect(isSpeechMatch("נכדה", "נכד", family)).toBe(false);
+    expect(isSpeechMatch("להסתיר", "להסביר", ["להסביר", "להסתיר", "להפסיק"])).toBe(false);
+  });
+
+  it("отказывает и при равном расстоянии, если услышано ровно соседнее слово (י и ו бесплатны)", () => {
+    expect(isSpeechMatch("עוגה", "עוגייה", ["עוגה", "עוגייה"])).toBe(false);
+    expect(isSpeechMatch("עוגייה", "עוגה", ["עוגה", "עוגייה"])).toBe(false);
+    expect(isSpeechMatch("יקר", "קר", ["קר", "יקר"])).toBe(false);
+    expect(isSpeechMatch("להראות", "להיראות", ["להראות", "להיראות"])).toBe(false);
+    expect(isSpeechMatch("עוגה", "עוגה", ["עוגה", "עוגייה"])).toBe(true);
+    expect(isSpeechMatch("קר", "קר", ["קר", "יקר"])).toBe(true);
+  });
+
+  it("слово по-прежнему засчитывается, если сказано верно или с допустимой правкой", () => {
+    expect(isSpeechMatch("סבא", "סבא", family)).toBe(true);
+    expect(isSpeechMatch("סבתא", "סבתא", family)).toBe(true);
+    expect(isSpeechMatch("זה סבא", "סבא", family)).toBe(true);
+    expect(isSpeechMatch("סבא סבתא", "סבא", family)).toBe(true); // сказал и нужное слово тоже
+    expect(isSpeechMatch("פארה", "פרה", ["פרה", "כלב", "סוס"])).toBe(true);
+  });
+
+  it("без списка соседей поведение прежнее", () => {
+    expect(isSpeechMatch("סבא", "סבתא")).toBe(true);
+    expect(isSpeechMatch("סבא", "סבתא", [])).toBe(true);
+  });
+
+  it("то же написание в списке соседей и само ожидаемое слово не мешают", () => {
+    expect(isSpeechMatch("כלב", "כלב", ["כלב", "חתול"])).toBe(true);
+  });
+
+  it("разбор называет слово, из-за которого отказано", () => {
+    expect(speechMatchDetail("סבא", "סבתא", family)).toMatchObject({ match: false, rival: "סבא" });
+    expect(speechMatchDetail("סבא", "סבא", family).rival).toBeUndefined();
+    expect(speechMatchDetail("כלב", "סבא", family).rival).toBeUndefined(); // далеко от всех: это просто ошибка
+  });
+});

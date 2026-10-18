@@ -118,18 +118,27 @@ export interface SpeechMatchDetail {
   expected: string;
   /** Нормализованный вариант услышанного, который оказался ближе всего (вся фраза или одно слово). */
   closest: string;
+  /** Соседнее слово, из-за которого отказано: услышанное ближе к нему, чем к ожидаемому слову (нормализованное). Иначе не задано. */
+  rival?: string;
 }
 
 /**
  * Разбор сравнения: совпало ли и насколько близко. Проверяем и всю фразу, и каждое слово по отдельности
  * (человек мог сказать лишнее). Журнал отказов речи пишет этот разбор, чтобы допуски настраивались по фактам.
+ *
+ * `rivals`: другие слова той же темы. Если услышанное ближе к одному из них, чем к ожидаемому слову, оно не засчитывается
+ * (решение владельца 18.10, вопрос 71): иначе סבא сошло бы за סבתא, а להסתיר за להסביר. Если услышанное совпало с соседом дословно,
+ * отказ и при равном расстоянии (עוגה и עוגייה, קר и יקר: י и ו бесплатны, и слова иначе не различить).
  */
-export function speechMatchDetail(heard: string, expected: string): SpeechMatchDetail {
+export function speechMatchDetail(heard: string, expected: string, rivals: readonly string[] = []): SpeechMatchDetail {
   const e = normalizeHebrew(expected);
   const budget = e ? speechBudget(e) : 0;
+  const rivalKeys = [...new Set(rivals.map(normalizeHebrew))].filter((r) => r && r !== e);
   const candidates = [heard, ...heard.split(/\s+/).filter(Boolean)].map(normalizeHebrew).filter(Boolean);
   let cost: number | null = null;
   let closest = "";
+  let match = false;
+  let rival: string | undefined;
   if (e) {
     for (const candidate of candidates) {
       const c = soundDistance(candidate, e);
@@ -137,17 +146,22 @@ export function speechMatchDetail(heard: string, expected: string): SpeechMatchD
         cost = c;
         closest = candidate;
       }
+      if (c > budget) continue;
+      // Сосед мешает, если услышано ровно его написание (עוגה вместо עוגייה: расстояние до обоих 0) или он ближе ожидаемого.
+      const blocker = rivalKeys.find((r) => r === candidate || soundDistance(candidate, r) < c);
+      if (blocker === undefined) match = true;
+      else rival ??= blocker;
     }
   }
-  return { match: cost !== null && cost <= budget, cost, budget, expected: e, closest };
+  return { match, cost, budget, expected: e, closest, ...(!match && rival !== undefined ? { rival } : {}) };
 }
 
 /**
  * Совпало ли распознанное слово с ожидаемым. Сравнение мягкое: распознавание иврита теряет огласовки и буквы ו/י,
  * путает א с ה и пишет по-разному одинаково звучащие буквы (см. `soundDistance`).
  */
-export function isSpeechMatch(heard: string, expected: string): boolean {
-  return speechMatchDetail(heard, expected).match;
+export function isSpeechMatch(heard: string, expected: string, rivals: readonly string[] = []): boolean {
+  return speechMatchDetail(heard, expected, rivals).match;
 }
 
 const HEBREW_LETTER = /[א-ת]/;

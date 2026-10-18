@@ -1,4 +1,5 @@
 import { readBodyLimited } from "./body";
+import { lessons } from "@milav/content";
 import type { SpeechMatchDetail } from "@milav/shared";
 import { describeError, logError, type LogFields } from "./telemetry";
 
@@ -29,9 +30,24 @@ export async function readAudio(
   return { ok: true, audio };
 }
 
+const topicWords = new Map<string, { id: string; he: string }[]>();
+
+/**
+ * Другие слова той же темы (всех её уроков): с ними сравниваем услышанное, чтобы близкое слово не засчитывалось
+ * (סבתא вместо סבא, вопрос 71). Список темы строится один раз на изолят.
+ */
+export function rivalsOf(topicId: string, wordId: string): string[] {
+  let words = topicWords.get(topicId);
+  if (!words) {
+    words = lessons.filter((l) => l.topicId === topicId).flatMap((l) => l.words.map((w) => ({ id: w.id, he: w.he })));
+    topicWords.set(topicId, words);
+  }
+  return words.filter((w) => w.id !== wordId).map((w) => w.he);
+}
+
 /**
  * Поля записи `speech` для журнала, кроме `heard`: ожидаемое слово, расстояние до него (`cost`), допуск (`budget`) и ближайший
- * вариант услышанного (`closest`). По ним видно, не слишком ли строги или мягки допуски (docs/DEPLOY.md, «Речь»).
+ * вариант услышанного (`closest`), а при отказе из-за соседнего слова это слово (`rival`). По ним видно, не слишком ли строги или мягки допуски (docs/DEPLOY.md, «Речь»).
  * Пустые значения не пишем: запись короче, а в Workers Logs записи хранятся недолго.
  */
 export function speechLogFields(he: string, detail: SpeechMatchDetail): LogFields {
@@ -40,6 +56,7 @@ export function speechLogFields(he: string, detail: SpeechMatchDetail): LogField
     cost: detail.cost,
     budget: detail.budget,
     closest: detail.closest || undefined,
+    rival: detail.rival,
   };
 }
 

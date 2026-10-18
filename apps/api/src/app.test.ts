@@ -220,6 +220,15 @@ describe("проверка речи", () => {
     expect(body.match).toBe(true);
   });
 
+  it("близкое слово той же темы не засчитывается: סבא вместо סבתא", async () => {
+    ctx.heard = "סבא";
+    const body = (await (await speak(1, "family-2-grandma")).json()) as any;
+    expect(body.match).toBe(false);
+    expect(body.progress).toBeUndefined();
+    ctx.heard = "סבתא";
+    expect(((await (await speak(1, "family-2-grandma")).json()) as any).match).toBe(true);
+  });
+
   it("без Workers AI отвечает 503, пустую и слишком большую запись отклоняет", async () => {
     expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...ctx.env, AI: undefined })).status).toBe(503);
     expect((await speak(1, word.id, 0)).status).toBe(400);
@@ -409,6 +418,13 @@ describe("наблюдаемость", () => {
     expect(miss).toMatchObject({ word: word.id, where: "study", match: false, heard: "כלב", he: word.he, closest: "כלב" });
     expect(typeof miss?.cost).toBe("number");
     expect(typeof miss?.budget).toBe("number");
+  });
+
+  it("отказ из-за соседнего слова пишет это слово в журнал", async () => {
+    const logs = captured("log");
+    ctx.heard = "סבא";
+    await speak(84, "family-2-grandma");
+    expect(logs().find((e) => e.evt === "speech" && e.uid === 84)).toMatchObject({ match: false, he: "סבתא", rival: "סבא" });
   });
 
   it("пишет отклонённый этап и превышение лимита как предупреждения", async () => {

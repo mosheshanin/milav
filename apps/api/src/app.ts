@@ -35,7 +35,7 @@ import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
-import { readAudio, speechLogFields, transcribeHebrew } from "./speech";
+import { readAudio, rivalsOf, speechLogFields, transcribeHebrew } from "./speech";
 import { ensureStats, loadStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 import { createThrottle, describeError, logClientReport, logError, logEvent, logWarn, parseClientReport } from "./telemetry";
@@ -334,7 +334,7 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
     return c.json({ error: "speech_failed" }, 502);
   }
 
-  const detail = speechMatchDetail(heard, found.word.he);
+  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id));
   const match = detail.match;
   // Что услышал распознаватель: по несовпадениям видно, какие слова Whisper слышит плохо (и не слишком ли строг допуск).
   logEvent("speech", { uid: user.id, word: found.word.id, where: "study", match, heard, ...speechLogFields(found.word.he, detail) });
@@ -463,7 +463,7 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
     return c.json({ error: "speech_failed" }, 502);
   }
 
-  const detail = speechMatchDetail(heard, found.word.he);
+  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id));
   const match = detail.match;
   logEvent("speech", { uid: user.id, word: found.word.id, where: "quiz", match, heard, ...speechLogFields(found.word.he, detail) });
   const step = speechStep(session, match, heard);
