@@ -1,5 +1,6 @@
 import { readBodyLimited } from "./body";
-import { describeError, logError } from "./telemetry";
+import type { SpeechMatchDetail } from "@milav/shared";
+import { describeError, logError, type LogFields } from "./telemetry";
 
 const WHISPER_MODEL = "@cf/openai/whisper-large-v3-turbo";
 /** Запись слова длится несколько секунд; всё, что больше, это не слово. */
@@ -26,6 +27,20 @@ export async function readAudio(
   if (!audio) return { ok: false, status: 413, error: "audio_too_large" };
   if (audio.byteLength === 0) return { ok: false, status: 400, error: "empty_audio" };
   return { ok: true, audio };
+}
+
+/**
+ * Поля записи `speech` для журнала, кроме `heard`: ожидаемое слово, расстояние до него (`cost`), допуск (`budget`) и ближайший
+ * вариант услышанного (`closest`). По ним видно, не слишком ли строги или мягки допуски (docs/DEPLOY.md, «Речь»).
+ * Пустые значения не пишем: запись короче, а в Workers Logs записи хранятся недолго.
+ */
+export function speechLogFields(he: string, detail: SpeechMatchDetail): LogFields {
+  return {
+    he,
+    cost: detail.cost,
+    budget: detail.budget,
+    closest: detail.closest || undefined,
+  };
 }
 
 /** Распознаёт речь на иврите (Whisper в Workers AI). null, если распознаватель не отработал. */

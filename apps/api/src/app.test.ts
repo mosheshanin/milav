@@ -212,6 +212,14 @@ describe("проверка речи", () => {
     expect(progress.words[0].speak).toBe(false);
   });
 
+  it("слово с лишней тихой א внутри (פארה вместо פרה) засчитывается", async () => {
+    const letters = [...word.he];
+    ctx.heard = letters[0] + "א" + letters.slice(1).join("");
+    const body = (await (await speak(1, word.id)).json()) as any;
+    expect(body.heard).toBe(ctx.heard);
+    expect(body.match).toBe(true);
+  });
+
   it("без Workers AI отвечает 503, пустую и слишком большую запись отклоняет", async () => {
     expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...ctx.env, AI: undefined })).status).toBe(503);
     expect((await speak(1, word.id, 0)).status).toBe(400);
@@ -391,6 +399,16 @@ describe("наблюдаемость", () => {
     expect(events.find((e) => e.evt === "quiz_end")).toMatchObject({ uid: 81, lesson: lesson.id, outcome: "passed", correct: 25 });
     // Что услышал распознаватель на этапе «говори»: по этим записям видно, какие слова Whisper слышит плохо.
     expect(events.some((e) => e.evt === "speech" && e.where === "study" && e.match === true)).toBe(true);
+  });
+
+  it("несовпадение речи пишется с ожидаемым словом, расстоянием и ближайшим вариантом", async () => {
+    const logs = captured("log");
+    ctx.heard = "כלב";
+    await speak(83, word.id);
+    const miss = logs().find((e) => e.evt === "speech" && e.uid === 83);
+    expect(miss).toMatchObject({ word: word.id, where: "study", match: false, heard: "כלב", he: word.he, closest: "כלב" });
+    expect(typeof miss?.cost).toBe("number");
+    expect(typeof miss?.budget).toBe("number");
   });
 
   it("пишет отклонённый этап и превышение лимита как предупреждения", async () => {

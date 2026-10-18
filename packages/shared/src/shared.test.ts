@@ -4,6 +4,7 @@ import {
   consonantSkeleton,
   isSpeechMatch,
   normalizeHebrew,
+  speechMatchDetail,
   statusForPassedLessons,
 } from "./index";
 
@@ -65,5 +66,76 @@ describe("сравнение произнесённого слова", () => {
     expect(isSpeechMatch("", "ציפור")).toBe(false);
     expect(isSpeechMatch("hello", "ציפור")).toBe(false);
     expect(isSpeechMatch("חתול", "ציפור")).toBe(false);
+  });
+});
+
+describe("сравнение по звучанию", () => {
+  it("принимает א как гласный: פארה это «пара» (корова)", () => {
+    expect(isSpeechMatch("פארה", "פרה")).toBe(true);
+    expect(isSpeechMatch("פרה", "פארה")).toBe(true);
+    expect(isSpeechMatch("פרא", "פרה")).toBe(true);
+    expect(isSpeechMatch("פארה.", "פרה")).toBe(true);
+    expect(isSpeechMatch("זאת פארה", "פרה")).toBe(true);
+  });
+
+  it("принимает одинаково звучащие буквы в коротких словах", () => {
+    expect(isSpeechMatch("טה", "תה")).toBe(true); // ת и ט: «т»
+    expect(isSpeechMatch("קר", "כר")).toBe(true); // ק и כ: «к»
+    expect(isSpeechMatch("עם", "אם")).toBe(true); // ע и א тихие
+  });
+
+  it("ח не равна ни כ, ни ק: собака не молоко", () => {
+    expect(isSpeechMatch("חר", "קר")).toBe(false);
+    expect(isSpeechMatch("כלב", "חלב")).toBe(false);
+    expect(isSpeechMatch("חלב", "כלב")).toBe(false);
+  });
+
+  it("ס, ש, ב и פ остаются разными звуками", () => {
+    expect(isSpeechMatch("שר", "סר")).toBe(false);
+    expect(isSpeechMatch("בר", "פר")).toBe(false);
+  });
+
+  it("не принимает другое слово из-за тихих букв", () => {
+    expect(isSpeechMatch("אמא", "מה")).toBe(false);
+    expect(isSpeechMatch("מה", "אמא")).toBe(false);
+    expect(isSpeechMatch("דה", "דג")).toBe(false);
+    expect(isSpeechMatch("בית", "אבא")).toBe(false);
+    expect(isSpeechMatch("כלב", "סוס")).toBe(false);
+  });
+
+  it("слова без опорных согласных принимает только при точном совпадении", () => {
+    expect(isSpeechMatch("או", "או")).toBe(true);
+    expect(isSpeechMatch("אי", "או")).toBe(true); // י и ו бесплатны, как и раньше
+    expect(isSpeechMatch("ב", "או")).toBe(false);
+    expect(isSpeechMatch("אבא", "או")).toBe(false);
+  });
+
+  it("не склеивает слова, которые различаются настоящими буквами на конце или двумя мягкими правками", () => {
+    // Род важен в уроках: ילד и ילדה, דוד и דודה, איש и אשה не равны.
+    expect(isSpeechMatch("ילד", "ילדה")).toBe(false);
+    expect(isSpeechMatch("ילדה", "ילד")).toBe(false);
+    expect(isSpeechMatch("דוד", "דודה")).toBe(false);
+    expect(isSpeechMatch("איש", "אשה")).toBe(false);
+    expect(isSpeechMatch("אף", "פה")).toBe(false);
+    expect(isSpeechMatch("דם", "אדם")).toBe(false); // א в начале слова настоящая
+    expect(isSpeechMatch("שן", "שעון")).toBe(false); // ע настоящая
+    expect(isSpeechMatch("כיסא", "כוס")).toBe(false);
+    expect(isSpeechMatch("ריק", "ארוך")).toBe(false); // тихая א и כ/ק вместе: две правки
+    expect(isSpeechMatch("לאהוב", "להביא")).toBe(false); // два лишних א: другое слово
+  });
+
+  it("слово из трёх букв с одной настоящей ошибкой не принимает", () => {
+    expect(isSpeechMatch("פלה", "פרה")).toBe(false);
+    expect(isSpeechMatch("דק", "דג")).toBe(false);
+  });
+
+  it("разбор сравнения показывает расстояние и ближайший вариант", () => {
+    const d = speechMatchDetail("זאת פארה", "פרה");
+    expect(d).toMatchObject({ match: true, expected: "פרה", closest: "פארה" });
+    expect(d.cost).toBeLessThanOrEqual(d.budget);
+    const far = speechMatchDetail("כלב", "פרה");
+    expect(far).toMatchObject({ match: false, closest: "כלב" });
+    expect(far.cost).toBeGreaterThan(far.budget);
+    expect(speechMatchDetail("", "פרה")).toMatchObject({ match: false, cost: null });
   });
 });

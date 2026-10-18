@@ -38,28 +38,116 @@ export function levenshtein(a: string, b: string): number {
   return prev[b.length] ?? 0;
 }
 
-function tokenMatches(heard: string, expected: string): boolean {
-  const h = normalizeHebrew(heard);
-  const e = normalizeHebrew(expected);
-  if (!h || !e) return false;
-  if (h === e) return true;
-  const hs = consonantSkeleton(h);
-  const es = consonantSkeleton(e);
-  if (hs && hs === es) return true;
-  // Одну ошибку распознавания прощаем только в словах от 4 согласных.
-  return es.length >= 4 && levenshtein(hs, es) <= 1;
+// ---- Сравнение по звучанию ----
+// Whisper пишет слово по орфографии, а не по звуку: פרה («пара») он может записать как פארה, а ת и ט, ק и כ, ח и כ звучат одинаково.
+// Поэтому слова сравниваются взвешенным расстоянием: правка, не меняющая звук, дешевле обычной ошибки.
+// Цены целые, без дробей: FULL = обычная ошибка, SOFT = правка, не меняющая звук. Две мягкие правки дороже одной обычной
+// (2 * SOFT > FULL), поэтому прощаем в слове не больше одной правки: две подряд уже дают другое слово (לאהוב ≠ להביא).
+
+const FULL = 3;
+const SOFT = 2;
+/** Допуск в слове короче 4 букв (без י и ו): одна правка, не меняющая звук (в предельном случае פרה ~ פארה). */
+export const SPEECH_BUDGET_ANY = SOFT;
+/** Допуск в слове от 4 букв (без י и ו): одна правка любого рода, как и раньше. */
+export const SPEECH_BUDGET_LONG = FULL;
+
+/**
+ * Пары букв с одним звуком (в обе стороны): ת и ט («т»), ק и כ («к»), א и ע (обе тихие). Не пары: ח и כ (в слове כלב «к»,
+ * в חלב «х»: так легко принять собаку за молоко), ס и ש (ש даёт «ш»), ב и פ.
+ */
+const SAME_SOUND = new Set(["תט", "טת", "כק", "קכ", "אע", "עא"]);
+
+/**
+ * Цена убрать или добавить букву. י и ו бесплатны (полное и неполное написание, как и раньше). Буква א в середине слова
+ * мягкая: Whisper дописывает её как гласный (פארה вместо פרה). В начале и на конце слова א, а также ע и ה настоящие:
+ * דם и אדם, שן и שעון, ילד и ילדה, כיסא и כיס это разные слова, поэтому там цена обычная.
+ */
+function skipCosts(letters: string[]): number[] {
+  return letters.map((ch, i) => {
+    if (ch === "ו" || ch === "י") return 0;
+    if (ch === "א" && i > 0 && i < letters.length - 1) return SOFT;
+    return FULL;
+  });
+}
+
+/** Замена буквы на другую; `atEnd`: обе буквы последние в своих словах (פרה и פרא звучат одинаково). */
+function substituteCost(a: string, b: string, atEnd: boolean): number {
+  if (a === b) return 0;
+  if (SAME_SOUND.has(a + b)) return SOFT;
+  if (atEnd && (a + b === "הא" || a + b === "אה")) return SOFT;
+  return FULL;
+}
+
+/** Расстояние между словами (оба уже нормализованы `normalizeHebrew`), в единицах FULL и SOFT. */
+export function soundDistance(heard: string, expected: string): number {
+  const a = [...heard];
+  const b = [...expected];
+  const skipA = skipCosts(a);
+  const skipB = skipCosts(b);
+  let prev: number[] = [0];
+  for (let j = 1; j <= b.length; j++) prev[j] = (prev[j - 1] ?? 0) + (skipB[j - 1] ?? FULL);
+  for (let i = 1; i <= a.length; i++) {
+    const cur: number[] = [(prev[0] ?? 0) + (skipA[i - 1] ?? FULL)];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(
+        (prev[j] ?? 0) + (skipA[i - 1] ?? FULL),
+        (cur[j - 1] ?? 0) + (skipB[j - 1] ?? FULL),
+        (prev[j - 1] ?? 0) + substituteCost(a[i - 1] ?? "", b[j - 1] ?? "", i === a.length && j === b.length),
+      );
+    }
+    prev = cur;
+  }
+  return prev[b.length] ?? 0;
+}
+
+/** Сколько прощаем для ожидаемого слова (нормализованного). */
+export function speechBudget(expected: string): number {
+  // Слово без опорных согласных (או, אי): только точное совпадение, иначе подойдёт почти любая тихая буква.
+  if (!skipCosts([...expected]).some((cost) => cost === FULL)) return 0;
+  // Допуск в одну ошибку, как и раньше, только от 4 букв без י и ו.
+  return consonantSkeleton(expected).length >= 4 ? SPEECH_BUDGET_LONG : SPEECH_BUDGET_ANY;
+}
+
+export interface SpeechMatchDetail {
+  match: boolean;
+  /** Расстояние до ожидаемого слова (3 = одна обычная ошибка, 2 = одна правка, не меняющая звук); по лучшему из вариантов, null если сравнивать нечего. */
+  cost: number | null;
+  /** Сколько прощаем для этого слова. */
+  budget: number;
+  /** Нормализованное ожидаемое слово. */
+  expected: string;
+  /** Нормализованный вариант услышанного, который оказался ближе всего (вся фраза или одно слово). */
+  closest: string;
 }
 
 /**
- * Совпало ли распознанное слово с ожидаемым. Сравнение мягкое: распознавание иврита
- * часто теряет огласовки и буквы ו/י. Проверяем и всю фразу, и каждое слово по отдельности.
+ * Разбор сравнения: совпало ли и насколько близко. Проверяем и всю фразу, и каждое слово по отдельности
+ * (человек мог сказать лишнее). Журнал отказов речи пишет этот разбор, чтобы допуски настраивались по фактам.
+ */
+export function speechMatchDetail(heard: string, expected: string): SpeechMatchDetail {
+  const e = normalizeHebrew(expected);
+  const budget = e ? speechBudget(e) : 0;
+  const candidates = [heard, ...heard.split(/\s+/).filter(Boolean)].map(normalizeHebrew).filter(Boolean);
+  let cost: number | null = null;
+  let closest = "";
+  if (e) {
+    for (const candidate of candidates) {
+      const c = soundDistance(candidate, e);
+      if (cost === null || c < cost) {
+        cost = c;
+        closest = candidate;
+      }
+    }
+  }
+  return { match: cost !== null && cost <= budget, cost, budget, expected: e, closest };
+}
+
+/**
+ * Совпало ли распознанное слово с ожидаемым. Сравнение мягкое: распознавание иврита теряет огласовки и буквы ו/י,
+ * путает א с ה и пишет по-разному одинаково звучащие буквы (см. `soundDistance`).
  */
 export function isSpeechMatch(heard: string, expected: string): boolean {
-  if (tokenMatches(heard, expected)) return true;
-  return heard
-    .split(/\s+/)
-    .filter(Boolean)
-    .some((token) => tokenMatches(token, expected));
+  return speechMatchDetail(heard, expected).match;
 }
 
 const HEBREW_LETTER = /[א-ת]/;

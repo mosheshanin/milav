@@ -186,7 +186,7 @@ node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты по�
 | `health_db_error` | error | `/api/health` не достучался до базы | `message` |
 | `app_open` | info | запуск приложения (запрос профиля) | `uid`, `tz`, `points` |
 | `word_done` | info | слово или буква пройдены по всем этапам | `uid`, `lesson`, `item`, `points` |
-| `speech` | info | проверка произношения | `uid`, `word`, `where` (`study` / `quiz`), `match`, `heard` (что услышал Whisper) |
+| `speech` | info | проверка произношения | `uid`, `word`, `where` (`study` / `quiz`), `match`, `heard` (что услышал Whisper), `he` (ожидаемое слово), `cost` (расстояние до него: 0 точно, 2 одна правка, не меняющая звук, 3 одна обычная ошибка), `budget` (допуск: 0, 2 или 3), `closest` (ближайший вариант: вся фраза или одно слово из неё) |
 | `speech_failed` | warn | распознаватель не ответил | `uid`, `word`, `where`, `bytes` |
 | `quiz_start` / `quiz_end` | info | начало и конец викторины | `uid`, `lesson`; у конца `outcome` (`passed` / `failed` / `aborted`), `correct`, `mistakes` |
 | `stage_rejected` | warn | сервер не принял этап «пиши» или «печатай» | `uid`, `lesson`, `item`, `stage`, `error`, `failed` (номера букв) |
@@ -203,6 +203,7 @@ node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты по�
 - Сколько людей занималось сегодня: `evt = app_open`, Count Distinct по `uid`.
 - Где бросают: число `app_open`, `word_done`, `quiz_start`, `quiz_end` за день.
 - Какие слова Whisper слышит плохо: `evt = speech`, `match = false`, группировка по `word` (поле `heard` показывает, что он услышал).
+- Правильно ли настроен допуск речи: `evt = speech`, `match = false`, смотреть `he` рядом с `heard`. Если `cost` чуть больше `budget` (например, `cost = 4` при `budget = 2`) и по буквам видно, что звучит так же, допуск надо расширить; если принято `match = true` с `cost` равным `budget`, а слово другое, ужесточить. Записи хранятся 3 дня, поэтому смотрим после каждой пробной раздачи ученикам. Отчёт по самим словам уроков (какие пары слов правило считает одинаковыми): `npm run speech:collisions` (`-- --all` для всех тем).
 - У кого не работает микрофон: `evt = client_mic_problem`, группировка по `platform` и `detail`.
 - Что сломалось у учеников: `evt = client_error`, группировка по `message`; поле `app` говорит, в какой сборке.
 
