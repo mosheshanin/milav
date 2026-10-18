@@ -1,5 +1,6 @@
-import { FREE_LESSONS_PER_TOPIC, FUTURE_KEYS, IMPERATIVE_KEYS, PAST_KEYS, PRESENT_KEYS, WEAK_ROOTS_TOPIC_ID, type Gizra, type WordForm } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC, FUTURE_KEYS, IMPERATIVE_KEYS, PAST_KEYS, PRESENT_KEYS, WEAK_ROOTS_TOPIC_ID, type Binyan, type Gizra, type WordForm } from "@milav/shared";
 import { ACUTE } from "./rules";
+import { WEAK_LESSONS_PART2 } from "./verbWeak2";
 
 /**
  * Уроки «Слабые корни» (тема `weak`, раздел «Глаголы», задача 9, часть «Слабые корни, часть 1», 18.10): 30 самых частых
@@ -19,6 +20,8 @@ type F = readonly [niqqud: string, translit: string];
 export interface WeakVerbSpec {
   /** Латинский ключ слова: id будет `weak-<урок>-<ключ>`. */
   key: string;
+  /** Бинъян; если не указан, пааль (уроки 1–3). Уроки 4–6 (часть 2, 18.10): хифъиль, пиэль, нифъаль, в каждом уроке один. */
+  binyan?: Binyan;
   root: string;
   gizra: Gizra[];
   /** Перевод инфинитива. */
@@ -52,7 +55,8 @@ function formSet<K extends string>(keys: readonly K[], forms: readonly F[]): Rec
   return Object.fromEntries(keys.map((k, i) => [k, toForm(forms[i]!)])) as Record<K, WordForm>;
 }
 
-export const WEAK_LESSONS: WeakLessonSpec[] = [
+/** Уроки 1–3: слабые корни в пааль (часть 1). */
+const WEAK_LESSONS_PART1: WeakLessonSpec[] = [
   {
     title: "Самые нужные",
     verbs: [
@@ -1324,6 +1328,9 @@ export const WEAK_LESSONS: WeakLessonSpec[] = [
   },
 ];
 
+/** Все уроки темы `weak` по порядку: 1–3 пааль (часть 1), 4–6 хифъиль, пиэль, нифъаль (часть 2, `verbWeak2.ts`). */
+export const WEAK_LESSONS: WeakLessonSpec[] = [...WEAK_LESSONS_PART1, ...WEAK_LESSONS_PART2];
+
 /** Объект урока темы `weak` в порядке полей, как в остальных файлах глаголов. */
 export function buildWeakLesson(number: number): Record<string, unknown> {
   const spec = WEAK_LESSONS[number - 1];
@@ -1341,7 +1348,7 @@ export function buildWeakLesson(number: number): Record<string, unknown> {
     words: spec.verbs.map((v) => {
       const inf = toForm(v.inf);
       const verb: Record<string, unknown> = {
-        binyan: "paal",
+        binyan: v.binyan ?? "paal",
         root: v.root,
         gizra: v.gizra,
         present: formSet(PRESENT_KEYS, v.present),

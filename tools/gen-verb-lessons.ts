@@ -3,7 +3,7 @@
 //   npm run content:verbs                              создать все недостающие уроки (paal-1 … paal-3, piel-1 … piel-3)
 //   npm run content:verbs -- --binyan piel             только тема «Пиэль»
 //   npm run content:verbs -- --binyan piel --lesson 2  только урок piel-2 (без --binyan --lesson относится к пааль)
-//   npm run content:verbs -- --topic weak              уроки «Слабые корни» (weak-1 … weak-3): формы набраны вручную, content/verbWeak.ts
+//   npm run content:verbs -- --topic weak              уроки «Слабые корни» (weak-1 … weak-6): формы набраны вручную, content/verbWeak.ts и verbWeak2.ts
 //   npm run content:verbs -- --dry-run                 только проверить генерацию, ничего не записывать
 //
 // Существующий файл урока НЕ перезаписывается: после проверки носителем формы правят в самих файлах, а генератор
