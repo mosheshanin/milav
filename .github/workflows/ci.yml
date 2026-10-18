@@ -45,8 +45,9 @@ jobs:
   e2e:
     name: Сквозной тест (Chromium)
     runs-on: ubuntu-24.04
-    # Около 18 минут сценариев плюс проверка вёрстки всех уроков (e2e-overflow, 2–4 минуты).
-    timeout-minutes: 35
+    # Около 20 минут сценариев плюс проверка вёрстки всех уроков (e2e-overflow, 3–4 минуты); весь прогон 33–36 минут.
+    # 18.10 после «Слабые корни 4–6» прежние 35 минут оборвали прогон на последнем шаге, лимит поднят до 50.
+    timeout-minutes: 50
     env:
       # Куда ставится Chromium; tools/e2e-lesson.mjs ищет его по этой переменной.
       PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.pw-browsers
