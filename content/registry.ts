@@ -44,6 +44,9 @@ import lesson_qualities_3 from "./lessons/qualities-3.json";
 import lesson_weak_1 from "./lessons/weak-1.json";
 import lesson_weak_2 from "./lessons/weak-2.json";
 import lesson_weak_3 from "./lessons/weak-3.json";
+import lesson_weak_4 from "./lessons/weak-4.json";
+import lesson_weak_5 from "./lessons/weak-5.json";
+import lesson_weak_6 from "./lessons/weak-6.json";
 
 export const lessonFiles: unknown[] = [
   lesson_alphabet_1,
@@ -90,4 +93,7 @@ export const lessonFiles: unknown[] = [
   lesson_weak_1,
   lesson_weak_2,
   lesson_weak_3,
+  lesson_weak_4,
+  lesson_weak_5,
+  lesson_weak_6,
 ];

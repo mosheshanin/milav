@@ -70,6 +70,9 @@ export const LESSON_EMOJI: Record<string, string> = {
   "weak-1": "🧭",
   "weak-2": "🌅",
   "weak-3": "🏃",
+  "weak-4": "🎁",
+  "weak-5": "⏳",
+  "weak-6": "👀",
 };
 
 export function topicEmoji(topicId: string): string {

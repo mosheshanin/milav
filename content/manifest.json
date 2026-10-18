@@ -782,11 +782,62 @@
         "type"
       ],
       "v": "9f6f3c30a2"
+    },
+    {
+      "id": "weak-4",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 4,
+      "free": false,
+      "title": "Хифъиль: самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "7b30f9bd47"
+    },
+    {
+      "id": "weak-5",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 5,
+      "free": false,
+      "title": "Пиэль: самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1003142784"
+    },
+    {
+      "id": "weak-6",
+      "topicId": "weak",
+      "section": "verbs",
+      "topic": "Слабые корни",
+      "number": 6,
+      "free": false,
+      "title": "Нифъаль: самые нужные",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1e8cb48a47"
     }
   ],
   "info": {
-    "totalWords": 380,
-    "totalLessons": 44,
+    "totalWords": 410,
+    "totalLessons": 47,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -909,7 +960,10 @@
         "lessonIds": [
           "weak-1",
           "weak-2",
-          "weak-3"
+          "weak-3",
+          "weak-4",
+          "weak-5",
+          "weak-6"
         ]
       }
     ]
