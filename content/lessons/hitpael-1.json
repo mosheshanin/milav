@@ -17,7 +17,8 @@
       "example": {
         "he": "אני מתלבש מהר",
         "translit": "ани митлабеш махер",
-        "ru": "Я быстро одеваюсь"
+        "ru": "Я быстро одеваюсь",
+        "audio": "/audio/hitpael-1-dress-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -26,147 +27,175 @@
           "ms": {
             "he": "מתלבש",
             "niqqud": "מִתְלַבֵּשׁ",
-            "translit": "митлабе́ш"
+            "translit": "митлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתלבשת",
             "niqqud": "מִתְלַבֶּשֶׁת",
-            "translit": "митлабе́шет"
+            "translit": "митлабе́шет",
+            "audio": "/audio/hitpael-1-dress-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתלבשים",
             "niqqud": "מִתְלַבְּשִׁים",
-            "translit": "митлабши́м"
+            "translit": "митлабши́м",
+            "audio": "/audio/hitpael-1-dress-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתלבשות",
             "niqqud": "מִתְלַבְּשׁוֹת",
-            "translit": "митлабшо́т"
+            "translit": "митлабшо́т",
+            "audio": "/audio/hitpael-1-dress-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התלבשתי",
             "niqqud": "הִתְלַבַּשְׁתִּי",
-            "translit": "хитлаба́шти"
+            "translit": "хитлаба́шти",
+            "audio": "/audio/hitpael-1-dress-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התלבשת",
             "niqqud": "הִתְלַבַּשְׁתָּ",
-            "translit": "хитлаба́шта"
+            "translit": "хитлаба́шта",
+            "audio": "/audio/hitpael-1-dress-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התלבשת",
             "niqqud": "הִתְלַבַּשְׁתְּ",
-            "translit": "хитлаба́шт"
+            "translit": "хитлаба́шт",
+            "audio": "/audio/hitpael-1-dress-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התלבש",
             "niqqud": "הִתְלַבֵּשׁ",
-            "translit": "хитлабе́ш"
+            "translit": "хитлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התלבשה",
             "niqqud": "הִתְלַבְּשָׁה",
-            "translit": "хитлабша́"
+            "translit": "хитлабша́",
+            "audio": "/audio/hitpael-1-dress-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התלבשנו",
             "niqqud": "הִתְלַבַּשְׁנוּ",
-            "translit": "хитлаба́шну"
+            "translit": "хитлаба́шну",
+            "audio": "/audio/hitpael-1-dress-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התלבשתם",
             "niqqud": "הִתְלַבַּשְׁתֶּם",
-            "translit": "хитлабаште́м"
+            "translit": "хитлабаште́м",
+            "audio": "/audio/hitpael-1-dress-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התלבשתן",
             "niqqud": "הִתְלַבַּשְׁתֶּן",
-            "translit": "хитлабаште́н"
+            "translit": "хитлабаште́н",
+            "audio": "/audio/hitpael-1-dress-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התלבשו",
             "niqqud": "הִתְלַבְּשׁוּ",
-            "translit": "хитлабшу́"
+            "translit": "хитлабшу́",
+            "audio": "/audio/hitpael-1-dress-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתלבש",
             "niqqud": "אֶתְלַבֵּשׁ",
-            "translit": "этлабе́ш"
+            "translit": "этлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתלבש",
             "niqqud": "תִּתְלַבֵּשׁ",
-            "translit": "титлабе́ш"
+            "translit": "титлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתלבשי",
             "niqqud": "תִּתְלַבְּשִׁי",
-            "translit": "титлабши́"
+            "translit": "титлабши́",
+            "audio": "/audio/hitpael-1-dress-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתלבש",
             "niqqud": "יִתְלַבֵּשׁ",
-            "translit": "итлабе́ш"
+            "translit": "итлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתלבש",
             "niqqud": "תִּתְלַבֵּשׁ",
-            "translit": "титлабе́ш"
+            "translit": "титлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתלבש",
             "niqqud": "נִתְלַבֵּשׁ",
-            "translit": "нитлабе́ш"
+            "translit": "нитлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתלבשו",
             "niqqud": "תִּתְלַבְּשׁוּ",
-            "translit": "титлабшу́"
+            "translit": "титлабшу́",
+            "audio": "/audio/hitpael-1-dress-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתלבשנה",
             "niqqud": "תִּתְלַבֵּשְׁנָה",
-            "translit": "титлабе́шна"
+            "translit": "титлабе́шна",
+            "audio": "/audio/hitpael-1-dress-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתלבשו",
             "niqqud": "יִתְלַבְּשׁוּ",
-            "translit": "итлабшу́"
+            "translit": "итлабшу́",
+            "audio": "/audio/hitpael-1-dress-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתלבשנה",
             "niqqud": "יִתְלַבֵּשְׁנָה",
-            "translit": "итлабе́шна"
+            "translit": "итлабе́шна",
+            "audio": "/audio/hitpael-1-dress-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התלבש",
             "niqqud": "הִתְלַבֵּשׁ",
-            "translit": "хитлабе́ш"
+            "translit": "хитлабе́ш",
+            "audio": "/audio/hitpael-1-dress-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התלבשי",
             "niqqud": "הִתְלַבְּשִׁי",
-            "translit": "хитлабши́"
+            "translit": "хитлабши́",
+            "audio": "/audio/hitpael-1-dress-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התלבשו",
             "niqqud": "הִתְלַבְּשׁוּ",
-            "translit": "хитлабшу́"
+            "translit": "хитлабшу́",
+            "audio": "/audio/hitpael-1-dress-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התלבשנה",
             "niqqud": "הִתְלַבֵּשְׁנָה",
-            "translit": "хитлабе́шна"
+            "translit": "хитлабе́шна",
+            "audio": "/audio/hitpael-1-dress-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-dress.mp3"
     },
     {
       "id": "hitpael-1-call",
@@ -177,7 +206,8 @@
       "example": {
         "he": "אני מתקשר לאמא",
         "translit": "ани миткашер леима",
-        "ru": "Я звоню маме"
+        "ru": "Я звоню маме",
+        "audio": "/audio/hitpael-1-call-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -186,147 +216,175 @@
           "ms": {
             "he": "מתקשר",
             "niqqud": "מִתְקַשֵּׁר",
-            "translit": "миткаше́р"
+            "translit": "миткаше́р",
+            "audio": "/audio/hitpael-1-call-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתקשרת",
             "niqqud": "מִתְקַשֶּׁרֶת",
-            "translit": "миткаше́рет"
+            "translit": "миткаше́рет",
+            "audio": "/audio/hitpael-1-call-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתקשרים",
             "niqqud": "מִתְקַשְּׁרִים",
-            "translit": "миткашри́м"
+            "translit": "миткашри́м",
+            "audio": "/audio/hitpael-1-call-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתקשרות",
             "niqqud": "מִתְקַשְּׁרוֹת",
-            "translit": "миткашро́т"
+            "translit": "миткашро́т",
+            "audio": "/audio/hitpael-1-call-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התקשרתי",
             "niqqud": "הִתְקַשַּׁרְתִּי",
-            "translit": "хиткаша́рти"
+            "translit": "хиткаша́рти",
+            "audio": "/audio/hitpael-1-call-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התקשרת",
             "niqqud": "הִתְקַשַּׁרְתָּ",
-            "translit": "хиткаша́рта"
+            "translit": "хиткаша́рта",
+            "audio": "/audio/hitpael-1-call-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התקשרת",
             "niqqud": "הִתְקַשַּׁרְתְּ",
-            "translit": "хиткаша́рт"
+            "translit": "хиткаша́рт",
+            "audio": "/audio/hitpael-1-call-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התקשר",
             "niqqud": "הִתְקַשֵּׁר",
-            "translit": "хиткаше́р"
+            "translit": "хиткаше́р",
+            "audio": "/audio/hitpael-1-call-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התקשרה",
             "niqqud": "הִתְקַשְּׁרָה",
-            "translit": "хиткашра́"
+            "translit": "хиткашра́",
+            "audio": "/audio/hitpael-1-call-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התקשרנו",
             "niqqud": "הִתְקַשַּׁרְנוּ",
-            "translit": "хиткаша́рну"
+            "translit": "хиткаша́рну",
+            "audio": "/audio/hitpael-1-call-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התקשרתם",
             "niqqud": "הִתְקַשַּׁרְתֶּם",
-            "translit": "хиткашарте́м"
+            "translit": "хиткашарте́м",
+            "audio": "/audio/hitpael-1-call-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התקשרתן",
             "niqqud": "הִתְקַשַּׁרְתֶּן",
-            "translit": "хиткашарте́н"
+            "translit": "хиткашарте́н",
+            "audio": "/audio/hitpael-1-call-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התקשרו",
             "niqqud": "הִתְקַשְּׁרוּ",
-            "translit": "хиткашру́"
+            "translit": "хиткашру́",
+            "audio": "/audio/hitpael-1-call-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתקשר",
             "niqqud": "אֶתְקַשֵּׁר",
-            "translit": "эткаше́р"
+            "translit": "эткаше́р",
+            "audio": "/audio/hitpael-1-call-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתקשר",
             "niqqud": "תִּתְקַשֵּׁר",
-            "translit": "титкаше́р"
+            "translit": "титкаше́р",
+            "audio": "/audio/hitpael-1-call-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתקשרי",
             "niqqud": "תִּתְקַשְּׁרִי",
-            "translit": "титкашри́"
+            "translit": "титкашри́",
+            "audio": "/audio/hitpael-1-call-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתקשר",
             "niqqud": "יִתְקַשֵּׁר",
-            "translit": "иткаше́р"
+            "translit": "иткаше́р",
+            "audio": "/audio/hitpael-1-call-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתקשר",
             "niqqud": "תִּתְקַשֵּׁר",
-            "translit": "титкаше́р"
+            "translit": "титкаше́р",
+            "audio": "/audio/hitpael-1-call-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתקשר",
             "niqqud": "נִתְקַשֵּׁר",
-            "translit": "ниткаше́р"
+            "translit": "ниткаше́р",
+            "audio": "/audio/hitpael-1-call-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתקשרו",
             "niqqud": "תִּתְקַשְּׁרוּ",
-            "translit": "титкашру́"
+            "translit": "титкашру́",
+            "audio": "/audio/hitpael-1-call-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתקשרנה",
             "niqqud": "תִּתְקַשֵּׁרְנָה",
-            "translit": "титкаше́рна"
+            "translit": "титкаше́рна",
+            "audio": "/audio/hitpael-1-call-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתקשרו",
             "niqqud": "יִתְקַשְּׁרוּ",
-            "translit": "иткашру́"
+            "translit": "иткашру́",
+            "audio": "/audio/hitpael-1-call-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתקשרנה",
             "niqqud": "יִתְקַשֵּׁרְנָה",
-            "translit": "иткаше́рна"
+            "translit": "иткаше́рна",
+            "audio": "/audio/hitpael-1-call-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התקשר",
             "niqqud": "הִתְקַשֵּׁר",
-            "translit": "хиткаше́р"
+            "translit": "хиткаше́р",
+            "audio": "/audio/hitpael-1-call-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התקשרי",
             "niqqud": "הִתְקַשְּׁרִי",
-            "translit": "хиткашри́"
+            "translit": "хиткашри́",
+            "audio": "/audio/hitpael-1-call-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התקשרו",
             "niqqud": "הִתְקַשְּׁרוּ",
-            "translit": "хиткашру́"
+            "translit": "хиткашру́",
+            "audio": "/audio/hitpael-1-call-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התקשרנה",
             "niqqud": "הִתְקַשֵּׁרְנָה",
-            "translit": "хиткаше́рна"
+            "translit": "хиткаше́рна",
+            "audio": "/audio/hitpael-1-call-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-call.mp3"
     },
     {
       "id": "hitpael-1-look",
@@ -337,7 +395,8 @@
       "example": {
         "he": "אני מסתכל בטלפון",
         "translit": "ани мистакел бетелефон",
-        "ru": "Я смотрю в телефон"
+        "ru": "Я смотрю в телефон",
+        "audio": "/audio/hitpael-1-look-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -346,147 +405,175 @@
           "ms": {
             "he": "מסתכל",
             "niqqud": "מִסְתַּכֵּל",
-            "translit": "мистаке́л"
+            "translit": "мистаке́л",
+            "audio": "/audio/hitpael-1-look-form-present-ms.mp3"
           },
           "fs": {
             "he": "מסתכלת",
             "niqqud": "מִסְתַּכֶּלֶת",
-            "translit": "мистаке́лет"
+            "translit": "мистаке́лет",
+            "audio": "/audio/hitpael-1-look-form-present-fs.mp3"
           },
           "mp": {
             "he": "מסתכלים",
             "niqqud": "מִסְתַּכְּלִים",
-            "translit": "мистакли́м"
+            "translit": "мистакли́м",
+            "audio": "/audio/hitpael-1-look-form-present-mp.mp3"
           },
           "fp": {
             "he": "מסתכלות",
             "niqqud": "מִסְתַּכְּלוֹת",
-            "translit": "мистакло́т"
+            "translit": "мистакло́т",
+            "audio": "/audio/hitpael-1-look-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "הסתכלתי",
             "niqqud": "הִסְתַּכַּלְתִּי",
-            "translit": "хистака́лти"
+            "translit": "хистака́лти",
+            "audio": "/audio/hitpael-1-look-form-past-1s.mp3"
           },
           "2ms": {
             "he": "הסתכלת",
             "niqqud": "הִסְתַּכַּלְתָּ",
-            "translit": "хистака́лта"
+            "translit": "хистака́лта",
+            "audio": "/audio/hitpael-1-look-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "הסתכלת",
             "niqqud": "הִסְתַּכַּלְתְּ",
-            "translit": "хистака́лт"
+            "translit": "хистака́лт",
+            "audio": "/audio/hitpael-1-look-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "הסתכל",
             "niqqud": "הִסְתַּכֵּל",
-            "translit": "хистаке́л"
+            "translit": "хистаке́л",
+            "audio": "/audio/hitpael-1-look-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "הסתכלה",
             "niqqud": "הִסְתַּכְּלָה",
-            "translit": "хистакла́"
+            "translit": "хистакла́",
+            "audio": "/audio/hitpael-1-look-form-past-3fs.mp3"
           },
           "1p": {
             "he": "הסתכלנו",
             "niqqud": "הִסְתַּכַּלְנוּ",
-            "translit": "хистака́лну"
+            "translit": "хистака́лну",
+            "audio": "/audio/hitpael-1-look-form-past-1p.mp3"
           },
           "2mp": {
             "he": "הסתכלתם",
             "niqqud": "הִסְתַּכַּלְתֶּם",
-            "translit": "хистакалте́м"
+            "translit": "хистакалте́м",
+            "audio": "/audio/hitpael-1-look-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "הסתכלתן",
             "niqqud": "הִסְתַּכַּלְתֶּן",
-            "translit": "хистакалте́н"
+            "translit": "хистакалте́н",
+            "audio": "/audio/hitpael-1-look-form-past-2fp.mp3"
           },
           "3p": {
             "he": "הסתכלו",
             "niqqud": "הִסְתַּכְּלוּ",
-            "translit": "хистаклу́"
+            "translit": "хистаклу́",
+            "audio": "/audio/hitpael-1-look-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אסתכל",
             "niqqud": "אֶסְתַּכֵּל",
-            "translit": "эстаке́л"
+            "translit": "эстаке́л",
+            "audio": "/audio/hitpael-1-look-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תסתכל",
             "niqqud": "תִּסְתַּכֵּל",
-            "translit": "тистаке́л"
+            "translit": "тистаке́л",
+            "audio": "/audio/hitpael-1-look-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תסתכלי",
             "niqqud": "תִּסְתַּכְּלִי",
-            "translit": "тистакли́"
+            "translit": "тистакли́",
+            "audio": "/audio/hitpael-1-look-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יסתכל",
             "niqqud": "יִסְתַּכֵּל",
-            "translit": "истаке́л"
+            "translit": "истаке́л",
+            "audio": "/audio/hitpael-1-look-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תסתכל",
             "niqqud": "תִּסְתַּכֵּל",
-            "translit": "тистаке́л"
+            "translit": "тистаке́л",
+            "audio": "/audio/hitpael-1-look-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נסתכל",
             "niqqud": "נִסְתַּכֵּל",
-            "translit": "нистаке́л"
+            "translit": "нистаке́л",
+            "audio": "/audio/hitpael-1-look-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תסתכלו",
             "niqqud": "תִּסְתַּכְּלוּ",
-            "translit": "тистаклу́"
+            "translit": "тистаклу́",
+            "audio": "/audio/hitpael-1-look-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תסתכלנה",
             "niqqud": "תִּסְתַּכֵּלְנָה",
-            "translit": "тистаке́лна"
+            "translit": "тистаке́лна",
+            "audio": "/audio/hitpael-1-look-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יסתכלו",
             "niqqud": "יִסְתַּכְּלוּ",
-            "translit": "истаклу́"
+            "translit": "истаклу́",
+            "audio": "/audio/hitpael-1-look-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יסתכלנה",
             "niqqud": "יִסְתַּכֵּלְנָה",
-            "translit": "истаке́лна"
+            "translit": "истаке́лна",
+            "audio": "/audio/hitpael-1-look-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "הסתכל",
             "niqqud": "הִסְתַּכֵּל",
-            "translit": "хистаке́л"
+            "translit": "хистаке́л",
+            "audio": "/audio/hitpael-1-look-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "הסתכלי",
             "niqqud": "הִסְתַּכְּלִי",
-            "translit": "хистакли́"
+            "translit": "хистакли́",
+            "audio": "/audio/hitpael-1-look-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "הסתכלו",
             "niqqud": "הִסְתַּכְּלוּ",
-            "translit": "хистаклу́"
+            "translit": "хистаклу́",
+            "audio": "/audio/hitpael-1-look-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "הסתכלנה",
             "niqqud": "הִסְתַּכֵּלְנָה",
-            "translit": "хистаке́лна"
+            "translit": "хистаке́лна",
+            "audio": "/audio/hitpael-1-look-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-look.mp3"
     },
     {
       "id": "hitpael-1-use",
@@ -497,7 +584,8 @@
       "example": {
         "he": "אני משתמש במחשב",
         "translit": "ани миштамеш бемахшев",
-        "ru": "Я пользуюсь компьютером"
+        "ru": "Я пользуюсь компьютером",
+        "audio": "/audio/hitpael-1-use-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -506,147 +594,175 @@
           "ms": {
             "he": "משתמש",
             "niqqud": "מִשְׁתַּמֵּשׁ",
-            "translit": "миштаме́ш"
+            "translit": "миштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-present-ms.mp3"
           },
           "fs": {
             "he": "משתמשת",
             "niqqud": "מִשְׁתַּמֶּשֶׁת",
-            "translit": "миштаме́шет"
+            "translit": "миштаме́шет",
+            "audio": "/audio/hitpael-1-use-form-present-fs.mp3"
           },
           "mp": {
             "he": "משתמשים",
             "niqqud": "מִשְׁתַּמְּשִׁים",
-            "translit": "миштамши́м"
+            "translit": "миштамши́м",
+            "audio": "/audio/hitpael-1-use-form-present-mp.mp3"
           },
           "fp": {
             "he": "משתמשות",
             "niqqud": "מִשְׁתַּמְּשׁוֹת",
-            "translit": "миштамшо́т"
+            "translit": "миштамшо́т",
+            "audio": "/audio/hitpael-1-use-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "השתמשתי",
             "niqqud": "הִשְׁתַּמַּשְׁתִּי",
-            "translit": "хиштама́шти"
+            "translit": "хиштама́шти",
+            "audio": "/audio/hitpael-1-use-form-past-1s.mp3"
           },
           "2ms": {
             "he": "השתמשת",
             "niqqud": "הִשְׁתַּמַּשְׁתָּ",
-            "translit": "хиштама́шта"
+            "translit": "хиштама́шта",
+            "audio": "/audio/hitpael-1-use-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "השתמשת",
             "niqqud": "הִשְׁתַּמַּשְׁתְּ",
-            "translit": "хиштама́шт"
+            "translit": "хиштама́шт",
+            "audio": "/audio/hitpael-1-use-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "השתמש",
             "niqqud": "הִשְׁתַּמֵּשׁ",
-            "translit": "хиштаме́ш"
+            "translit": "хиштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "השתמשה",
             "niqqud": "הִשְׁתַּמְּשָׁה",
-            "translit": "хиштамша́"
+            "translit": "хиштамша́",
+            "audio": "/audio/hitpael-1-use-form-past-3fs.mp3"
           },
           "1p": {
             "he": "השתמשנו",
             "niqqud": "הִשְׁתַּמַּשְׁנוּ",
-            "translit": "хиштама́шну"
+            "translit": "хиштама́шну",
+            "audio": "/audio/hitpael-1-use-form-past-1p.mp3"
           },
           "2mp": {
             "he": "השתמשתם",
             "niqqud": "הִשְׁתַּמַּשְׁתֶּם",
-            "translit": "хиштамаште́м"
+            "translit": "хиштамаште́м",
+            "audio": "/audio/hitpael-1-use-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "השתמשתן",
             "niqqud": "הִשְׁתַּמַּשְׁתֶּן",
-            "translit": "хиштамаште́н"
+            "translit": "хиштамаште́н",
+            "audio": "/audio/hitpael-1-use-form-past-2fp.mp3"
           },
           "3p": {
             "he": "השתמשו",
             "niqqud": "הִשְׁתַּמְּשׁוּ",
-            "translit": "хиштамшу́"
+            "translit": "хиштамшу́",
+            "audio": "/audio/hitpael-1-use-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אשתמש",
             "niqqud": "אֶשְׁתַּמֵּשׁ",
-            "translit": "эштаме́ш"
+            "translit": "эштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תשתמש",
             "niqqud": "תִּשְׁתַּמֵּשׁ",
-            "translit": "тиштаме́ш"
+            "translit": "тиштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תשתמשי",
             "niqqud": "תִּשְׁתַּמְּשִׁי",
-            "translit": "тиштамши́"
+            "translit": "тиштамши́",
+            "audio": "/audio/hitpael-1-use-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ישתמש",
             "niqqud": "יִשְׁתַּמֵּשׁ",
-            "translit": "иштаме́ш"
+            "translit": "иштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תשתמש",
             "niqqud": "תִּשְׁתַּמֵּשׁ",
-            "translit": "тиштаме́ш"
+            "translit": "тиштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נשתמש",
             "niqqud": "נִשְׁתַּמֵּשׁ",
-            "translit": "ништаме́ш"
+            "translit": "ништаме́ш",
+            "audio": "/audio/hitpael-1-use-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תשתמשו",
             "niqqud": "תִּשְׁתַּמְּשׁוּ",
-            "translit": "тиштамшу́"
+            "translit": "тиштамшу́",
+            "audio": "/audio/hitpael-1-use-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תשתמשנה",
             "niqqud": "תִּשְׁתַּמֵּשְׁנָה",
-            "translit": "тиштаме́шна"
+            "translit": "тиштаме́шна",
+            "audio": "/audio/hitpael-1-use-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ישתמשו",
             "niqqud": "יִשְׁתַּמְּשׁוּ",
-            "translit": "иштамшу́"
+            "translit": "иштамшу́",
+            "audio": "/audio/hitpael-1-use-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ישתמשנה",
             "niqqud": "יִשְׁתַּמֵּשְׁנָה",
-            "translit": "иштаме́шна"
+            "translit": "иштаме́шна",
+            "audio": "/audio/hitpael-1-use-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "השתמש",
             "niqqud": "הִשְׁתַּמֵּשׁ",
-            "translit": "хиштаме́ш"
+            "translit": "хиштаме́ш",
+            "audio": "/audio/hitpael-1-use-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "השתמשי",
             "niqqud": "הִשְׁתַּמְּשִׁי",
-            "translit": "хиштамши́"
+            "translit": "хиштамши́",
+            "audio": "/audio/hitpael-1-use-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "השתמשו",
             "niqqud": "הִשְׁתַּמְּשׁוּ",
-            "translit": "хиштамшу́"
+            "translit": "хиштамшу́",
+            "audio": "/audio/hitpael-1-use-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "השתמשנה",
             "niqqud": "הִשְׁתַּמֵּשְׁנָה",
-            "translit": "хиштаме́шна"
+            "translit": "хиштаме́шна",
+            "audio": "/audio/hitpael-1-use-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-use.mp3"
     },
     {
       "id": "hitpael-1-manage",
@@ -657,7 +773,8 @@
       "example": {
         "he": "אני מסתדר לבד",
         "translit": "ани мистадер левад",
-        "ru": "Я справляюсь сам"
+        "ru": "Я справляюсь сам",
+        "audio": "/audio/hitpael-1-manage-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -666,147 +783,175 @@
           "ms": {
             "he": "מסתדר",
             "niqqud": "מִסְתַּדֵּר",
-            "translit": "мистаде́р"
+            "translit": "мистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-present-ms.mp3"
           },
           "fs": {
             "he": "מסתדרת",
             "niqqud": "מִסְתַּדֶּרֶת",
-            "translit": "мистаде́рет"
+            "translit": "мистаде́рет",
+            "audio": "/audio/hitpael-1-manage-form-present-fs.mp3"
           },
           "mp": {
             "he": "מסתדרים",
             "niqqud": "מִסְתַּדְּרִים",
-            "translit": "мистадри́м"
+            "translit": "мистадри́м",
+            "audio": "/audio/hitpael-1-manage-form-present-mp.mp3"
           },
           "fp": {
             "he": "מסתדרות",
             "niqqud": "מִסְתַּדְּרוֹת",
-            "translit": "мистадро́т"
+            "translit": "мистадро́т",
+            "audio": "/audio/hitpael-1-manage-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "הסתדרתי",
             "niqqud": "הִסְתַּדַּרְתִּי",
-            "translit": "хистада́рти"
+            "translit": "хистада́рти",
+            "audio": "/audio/hitpael-1-manage-form-past-1s.mp3"
           },
           "2ms": {
             "he": "הסתדרת",
             "niqqud": "הִסְתַּדַּרְתָּ",
-            "translit": "хистада́рта"
+            "translit": "хистада́рта",
+            "audio": "/audio/hitpael-1-manage-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "הסתדרת",
             "niqqud": "הִסְתַּדַּרְתְּ",
-            "translit": "хистада́рт"
+            "translit": "хистада́рт",
+            "audio": "/audio/hitpael-1-manage-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "הסתדר",
             "niqqud": "הִסְתַּדֵּר",
-            "translit": "хистаде́р"
+            "translit": "хистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "הסתדרה",
             "niqqud": "הִסְתַּדְּרָה",
-            "translit": "хистадра́"
+            "translit": "хистадра́",
+            "audio": "/audio/hitpael-1-manage-form-past-3fs.mp3"
           },
           "1p": {
             "he": "הסתדרנו",
             "niqqud": "הִסְתַּדַּרְנוּ",
-            "translit": "хистада́рну"
+            "translit": "хистада́рну",
+            "audio": "/audio/hitpael-1-manage-form-past-1p.mp3"
           },
           "2mp": {
             "he": "הסתדרתם",
             "niqqud": "הִסְתַּדַּרְתֶּם",
-            "translit": "хистадарте́м"
+            "translit": "хистадарте́м",
+            "audio": "/audio/hitpael-1-manage-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "הסתדרתן",
             "niqqud": "הִסְתַּדַּרְתֶּן",
-            "translit": "хистадарте́н"
+            "translit": "хистадарте́н",
+            "audio": "/audio/hitpael-1-manage-form-past-2fp.mp3"
           },
           "3p": {
             "he": "הסתדרו",
             "niqqud": "הִסְתַּדְּרוּ",
-            "translit": "хистадру́"
+            "translit": "хистадру́",
+            "audio": "/audio/hitpael-1-manage-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אסתדר",
             "niqqud": "אֶסְתַּדֵּר",
-            "translit": "эстаде́р"
+            "translit": "эстаде́р",
+            "audio": "/audio/hitpael-1-manage-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תסתדר",
             "niqqud": "תִּסְתַּדֵּר",
-            "translit": "тистаде́р"
+            "translit": "тистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תסתדרי",
             "niqqud": "תִּסְתַּדְּרִי",
-            "translit": "тистадри́"
+            "translit": "тистадри́",
+            "audio": "/audio/hitpael-1-manage-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יסתדר",
             "niqqud": "יִסְתַּדֵּר",
-            "translit": "истаде́р"
+            "translit": "истаде́р",
+            "audio": "/audio/hitpael-1-manage-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תסתדר",
             "niqqud": "תִּסְתַּדֵּר",
-            "translit": "тистаде́р"
+            "translit": "тистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נסתדר",
             "niqqud": "נִסְתַּדֵּר",
-            "translit": "нистаде́р"
+            "translit": "нистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תסתדרו",
             "niqqud": "תִּסְתַּדְּרוּ",
-            "translit": "тистадру́"
+            "translit": "тистадру́",
+            "audio": "/audio/hitpael-1-manage-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תסתדרנה",
             "niqqud": "תִּסְתַּדֵּרְנָה",
-            "translit": "тистаде́рна"
+            "translit": "тистаде́рна",
+            "audio": "/audio/hitpael-1-manage-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יסתדרו",
             "niqqud": "יִסְתַּדְּרוּ",
-            "translit": "истадру́"
+            "translit": "истадру́",
+            "audio": "/audio/hitpael-1-manage-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יסתדרנה",
             "niqqud": "יִסְתַּדֵּרְנָה",
-            "translit": "истаде́рна"
+            "translit": "истаде́рна",
+            "audio": "/audio/hitpael-1-manage-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "הסתדר",
             "niqqud": "הִסְתַּדֵּר",
-            "translit": "хистаде́р"
+            "translit": "хистаде́р",
+            "audio": "/audio/hitpael-1-manage-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "הסתדרי",
             "niqqud": "הִסְתַּדְּרִי",
-            "translit": "хистадри́"
+            "translit": "хистадри́",
+            "audio": "/audio/hitpael-1-manage-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "הסתדרו",
             "niqqud": "הִסְתַּדְּרוּ",
-            "translit": "хистадру́"
+            "translit": "хистадру́",
+            "audio": "/audio/hitpael-1-manage-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "הסתדרנה",
             "niqqud": "הִסְתַּדֵּרְנָה",
-            "translit": "хистаде́рна"
+            "translit": "хистаде́рна",
+            "audio": "/audio/hitpael-1-manage-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-manage.mp3"
     },
     {
       "id": "hitpael-1-getused",
@@ -817,7 +962,8 @@
       "example": {
         "he": "אני מתרגל לעבודה חדשה",
         "translit": "ани митрагел леавода хадаша",
-        "ru": "Я привыкаю к новой работе"
+        "ru": "Я привыкаю к новой работе",
+        "audio": "/audio/hitpael-1-getused-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -826,147 +972,175 @@
           "ms": {
             "he": "מתרגל",
             "niqqud": "מִתְרַגֵּל",
-            "translit": "митраге́л"
+            "translit": "митраге́л",
+            "audio": "/audio/hitpael-1-getused-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתרגלת",
             "niqqud": "מִתְרַגֶּלֶת",
-            "translit": "митраге́лет"
+            "translit": "митраге́лет",
+            "audio": "/audio/hitpael-1-getused-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתרגלים",
             "niqqud": "מִתְרַגְּלִים",
-            "translit": "митрагли́м"
+            "translit": "митрагли́м",
+            "audio": "/audio/hitpael-1-getused-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתרגלות",
             "niqqud": "מִתְרַגְּלוֹת",
-            "translit": "митрагло́т"
+            "translit": "митрагло́т",
+            "audio": "/audio/hitpael-1-getused-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התרגלתי",
             "niqqud": "הִתְרַגַּלְתִּי",
-            "translit": "хитрага́лти"
+            "translit": "хитрага́лти",
+            "audio": "/audio/hitpael-1-getused-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התרגלת",
             "niqqud": "הִתְרַגַּלְתָּ",
-            "translit": "хитрага́лта"
+            "translit": "хитрага́лта",
+            "audio": "/audio/hitpael-1-getused-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התרגלת",
             "niqqud": "הִתְרַגַּלְתְּ",
-            "translit": "хитрага́лт"
+            "translit": "хитрага́лт",
+            "audio": "/audio/hitpael-1-getused-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התרגל",
             "niqqud": "הִתְרַגֵּל",
-            "translit": "хитраге́л"
+            "translit": "хитраге́л",
+            "audio": "/audio/hitpael-1-getused-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התרגלה",
             "niqqud": "הִתְרַגְּלָה",
-            "translit": "хитрагла́"
+            "translit": "хитрагла́",
+            "audio": "/audio/hitpael-1-getused-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התרגלנו",
             "niqqud": "הִתְרַגַּלְנוּ",
-            "translit": "хитрага́лну"
+            "translit": "хитрага́лну",
+            "audio": "/audio/hitpael-1-getused-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התרגלתם",
             "niqqud": "הִתְרַגַּלְתֶּם",
-            "translit": "хитрагалте́м"
+            "translit": "хитрагалте́м",
+            "audio": "/audio/hitpael-1-getused-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התרגלתן",
             "niqqud": "הִתְרַגַּלְתֶּן",
-            "translit": "хитрагалте́н"
+            "translit": "хитрагалте́н",
+            "audio": "/audio/hitpael-1-getused-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התרגלו",
             "niqqud": "הִתְרַגְּלוּ",
-            "translit": "хитраглу́"
+            "translit": "хитраглу́",
+            "audio": "/audio/hitpael-1-getused-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתרגל",
             "niqqud": "אֶתְרַגֵּל",
-            "translit": "этраге́л"
+            "translit": "этраге́л",
+            "audio": "/audio/hitpael-1-getused-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתרגל",
             "niqqud": "תִּתְרַגֵּל",
-            "translit": "титраге́л"
+            "translit": "титраге́л",
+            "audio": "/audio/hitpael-1-getused-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתרגלי",
             "niqqud": "תִּתְרַגְּלִי",
-            "translit": "титрагли́"
+            "translit": "титрагли́",
+            "audio": "/audio/hitpael-1-getused-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתרגל",
             "niqqud": "יִתְרַגֵּל",
-            "translit": "итраге́л"
+            "translit": "итраге́л",
+            "audio": "/audio/hitpael-1-getused-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתרגל",
             "niqqud": "תִּתְרַגֵּל",
-            "translit": "титраге́л"
+            "translit": "титраге́л",
+            "audio": "/audio/hitpael-1-getused-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתרגל",
             "niqqud": "נִתְרַגֵּל",
-            "translit": "нитраге́л"
+            "translit": "нитраге́л",
+            "audio": "/audio/hitpael-1-getused-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתרגלו",
             "niqqud": "תִּתְרַגְּלוּ",
-            "translit": "титраглу́"
+            "translit": "титраглу́",
+            "audio": "/audio/hitpael-1-getused-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתרגלנה",
             "niqqud": "תִּתְרַגֵּלְנָה",
-            "translit": "титраге́лна"
+            "translit": "титраге́лна",
+            "audio": "/audio/hitpael-1-getused-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתרגלו",
             "niqqud": "יִתְרַגְּלוּ",
-            "translit": "итраглу́"
+            "translit": "итраглу́",
+            "audio": "/audio/hitpael-1-getused-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתרגלנה",
             "niqqud": "יִתְרַגֵּלְנָה",
-            "translit": "итраге́лна"
+            "translit": "итраге́лна",
+            "audio": "/audio/hitpael-1-getused-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התרגל",
             "niqqud": "הִתְרַגֵּל",
-            "translit": "хитраге́л"
+            "translit": "хитраге́л",
+            "audio": "/audio/hitpael-1-getused-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התרגלי",
             "niqqud": "הִתְרַגְּלִי",
-            "translit": "хитрагли́"
+            "translit": "хитрагли́",
+            "audio": "/audio/hitpael-1-getused-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התרגלו",
             "niqqud": "הִתְרַגְּלוּ",
-            "translit": "хитраглу́"
+            "translit": "хитраглу́",
+            "audio": "/audio/hitpael-1-getused-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התרגלנה",
             "niqqud": "הִתְרַגֵּלְנָה",
-            "translit": "хитраге́лна"
+            "translit": "хитраге́лна",
+            "audio": "/audio/hitpael-1-getused-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-getused.mp3"
     },
     {
       "id": "hitpael-1-regret",
@@ -977,7 +1151,8 @@
       "example": {
         "he": "אני מצטער מאוד",
         "translit": "ани мицтаер меод",
-        "ru": "Я очень сожалею"
+        "ru": "Я очень сожалею",
+        "audio": "/audio/hitpael-1-regret-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -986,147 +1161,175 @@
           "ms": {
             "he": "מצטער",
             "niqqud": "מִצְטַעֵר",
-            "translit": "мицтае́р"
+            "translit": "мицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-present-ms.mp3"
           },
           "fs": {
             "he": "מצטערת",
             "niqqud": "מִצְטַעֶרֶת",
-            "translit": "мицтае́рет"
+            "translit": "мицтае́рет",
+            "audio": "/audio/hitpael-1-regret-form-present-fs.mp3"
           },
           "mp": {
             "he": "מצטערים",
             "niqqud": "מִצְטַעֲרִים",
-            "translit": "мицтаари́м"
+            "translit": "мицтаари́м",
+            "audio": "/audio/hitpael-1-regret-form-present-mp.mp3"
           },
           "fp": {
             "he": "מצטערות",
             "niqqud": "מִצְטַעֲרוֹת",
-            "translit": "мицтааро́т"
+            "translit": "мицтааро́т",
+            "audio": "/audio/hitpael-1-regret-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "הצטערתי",
             "niqqud": "הִצְטַעַרְתִּי",
-            "translit": "хицтаа́рти"
+            "translit": "хицтаа́рти",
+            "audio": "/audio/hitpael-1-regret-form-past-1s.mp3"
           },
           "2ms": {
             "he": "הצטערת",
             "niqqud": "הִצְטַעַרְתָּ",
-            "translit": "хицтаа́рта"
+            "translit": "хицтаа́рта",
+            "audio": "/audio/hitpael-1-regret-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "הצטערת",
             "niqqud": "הִצְטַעַרְתְּ",
-            "translit": "хицтаа́рт"
+            "translit": "хицтаа́рт",
+            "audio": "/audio/hitpael-1-regret-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "הצטער",
             "niqqud": "הִצְטַעֵר",
-            "translit": "хицтае́р"
+            "translit": "хицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "הצטערה",
             "niqqud": "הִצְטַעֲרָה",
-            "translit": "хицтаара́"
+            "translit": "хицтаара́",
+            "audio": "/audio/hitpael-1-regret-form-past-3fs.mp3"
           },
           "1p": {
             "he": "הצטערנו",
             "niqqud": "הִצְטַעַרְנוּ",
-            "translit": "хицтаа́рну"
+            "translit": "хицтаа́рну",
+            "audio": "/audio/hitpael-1-regret-form-past-1p.mp3"
           },
           "2mp": {
             "he": "הצטערתם",
             "niqqud": "הִצְטַעַרְתֶּם",
-            "translit": "хицтаарте́м"
+            "translit": "хицтаарте́м",
+            "audio": "/audio/hitpael-1-regret-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "הצטערתן",
             "niqqud": "הִצְטַעַרְתֶּן",
-            "translit": "хицтаарте́н"
+            "translit": "хицтаарте́н",
+            "audio": "/audio/hitpael-1-regret-form-past-2fp.mp3"
           },
           "3p": {
             "he": "הצטערו",
             "niqqud": "הִצְטַעֲרוּ",
-            "translit": "хицтаару́"
+            "translit": "хицтаару́",
+            "audio": "/audio/hitpael-1-regret-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אצטער",
             "niqqud": "אֶצְטַעֵר",
-            "translit": "эцтае́р"
+            "translit": "эцтае́р",
+            "audio": "/audio/hitpael-1-regret-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תצטער",
             "niqqud": "תִּצְטַעֵר",
-            "translit": "тицтае́р"
+            "translit": "тицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תצטערי",
             "niqqud": "תִּצְטַעֲרִי",
-            "translit": "тицтаари́"
+            "translit": "тицтаари́",
+            "audio": "/audio/hitpael-1-regret-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יצטער",
             "niqqud": "יִצְטַעֵר",
-            "translit": "ицтае́р"
+            "translit": "ицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תצטער",
             "niqqud": "תִּצְטַעֵר",
-            "translit": "тицтае́р"
+            "translit": "тицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נצטער",
             "niqqud": "נִצְטַעֵר",
-            "translit": "ництае́р"
+            "translit": "ництае́р",
+            "audio": "/audio/hitpael-1-regret-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תצטערו",
             "niqqud": "תִּצְטַעֲרוּ",
-            "translit": "тицтаару́"
+            "translit": "тицтаару́",
+            "audio": "/audio/hitpael-1-regret-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תצטערנה",
             "niqqud": "תִּצְטַעֵרְנָה",
-            "translit": "тицтае́рна"
+            "translit": "тицтае́рна",
+            "audio": "/audio/hitpael-1-regret-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יצטערו",
             "niqqud": "יִצְטַעֲרוּ",
-            "translit": "ицтаару́"
+            "translit": "ицтаару́",
+            "audio": "/audio/hitpael-1-regret-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יצטערנה",
             "niqqud": "יִצְטַעֵרְנָה",
-            "translit": "ицтае́рна"
+            "translit": "ицтае́рна",
+            "audio": "/audio/hitpael-1-regret-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "הצטער",
             "niqqud": "הִצְטַעֵר",
-            "translit": "хицтае́р"
+            "translit": "хицтае́р",
+            "audio": "/audio/hitpael-1-regret-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "הצטערי",
             "niqqud": "הִצְטַעֲרִי",
-            "translit": "хицтаари́"
+            "translit": "хицтаари́",
+            "audio": "/audio/hitpael-1-regret-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "הצטערו",
             "niqqud": "הִצְטַעֲרוּ",
-            "translit": "хицтаару́"
+            "translit": "хицтаару́",
+            "audio": "/audio/hitpael-1-regret-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "הצטערנה",
             "niqqud": "הִצְטַעֵרְנָה",
-            "translit": "хицтае́рна"
+            "translit": "хицтае́рна",
+            "audio": "/audio/hitpael-1-regret-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-regret.mp3"
     },
     {
       "id": "hitpael-1-marry",
@@ -1137,7 +1340,8 @@
       "example": {
         "he": "הוא מתחתן בקרוב",
         "translit": "ху митхатен бекаров",
-        "ru": "Он скоро женится"
+        "ru": "Он скоро женится",
+        "audio": "/audio/hitpael-1-marry-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1146,147 +1350,175 @@
           "ms": {
             "he": "מתחתן",
             "niqqud": "מִתְחַתֵּן",
-            "translit": "митхате́н"
+            "translit": "митхате́н",
+            "audio": "/audio/hitpael-1-marry-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתחתנת",
             "niqqud": "מִתְחַתֶּנֶת",
-            "translit": "митхате́нет"
+            "translit": "митхате́нет",
+            "audio": "/audio/hitpael-1-marry-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתחתנים",
             "niqqud": "מִתְחַתְּנִים",
-            "translit": "митхатни́м"
+            "translit": "митхатни́м",
+            "audio": "/audio/hitpael-1-marry-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתחתנות",
             "niqqud": "מִתְחַתְּנוֹת",
-            "translit": "митхатно́т"
+            "translit": "митхатно́т",
+            "audio": "/audio/hitpael-1-marry-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התחתנתי",
             "niqqud": "הִתְחַתַּנְתִּי",
-            "translit": "хитхата́нти"
+            "translit": "хитхата́нти",
+            "audio": "/audio/hitpael-1-marry-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התחתנת",
             "niqqud": "הִתְחַתַּנְתָּ",
-            "translit": "хитхата́нта"
+            "translit": "хитхата́нта",
+            "audio": "/audio/hitpael-1-marry-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התחתנת",
             "niqqud": "הִתְחַתַּנְתְּ",
-            "translit": "хитхата́нт"
+            "translit": "хитхата́нт",
+            "audio": "/audio/hitpael-1-marry-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התחתן",
             "niqqud": "הִתְחַתֵּן",
-            "translit": "хитхате́н"
+            "translit": "хитхате́н",
+            "audio": "/audio/hitpael-1-marry-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התחתנה",
             "niqqud": "הִתְחַתְּנָה",
-            "translit": "хитхатна́"
+            "translit": "хитхатна́",
+            "audio": "/audio/hitpael-1-marry-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התחתנו",
             "niqqud": "הִתְחַתַּנּוּ",
-            "translit": "хитхата́ну"
+            "translit": "хитхата́ну",
+            "audio": "/audio/hitpael-1-marry-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התחתנתם",
             "niqqud": "הִתְחַתַּנְתֶּם",
-            "translit": "хитхатанте́м"
+            "translit": "хитхатанте́м",
+            "audio": "/audio/hitpael-1-marry-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התחתנתן",
             "niqqud": "הִתְחַתַּנְתֶּן",
-            "translit": "хитхатанте́н"
+            "translit": "хитхатанте́н",
+            "audio": "/audio/hitpael-1-marry-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התחתנו",
             "niqqud": "הִתְחַתְּנוּ",
-            "translit": "хитхатну́"
+            "translit": "хитхатну́",
+            "audio": "/audio/hitpael-1-marry-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתחתן",
             "niqqud": "אֶתְחַתֵּן",
-            "translit": "этхате́н"
+            "translit": "этхате́н",
+            "audio": "/audio/hitpael-1-marry-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתחתן",
             "niqqud": "תִּתְחַתֵּן",
-            "translit": "титхате́н"
+            "translit": "титхате́н",
+            "audio": "/audio/hitpael-1-marry-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתחתני",
             "niqqud": "תִּתְחַתְּנִי",
-            "translit": "титхатни́"
+            "translit": "титхатни́",
+            "audio": "/audio/hitpael-1-marry-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתחתן",
             "niqqud": "יִתְחַתֵּן",
-            "translit": "итхате́н"
+            "translit": "итхате́н",
+            "audio": "/audio/hitpael-1-marry-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתחתן",
             "niqqud": "תִּתְחַתֵּן",
-            "translit": "титхате́н"
+            "translit": "титхате́н",
+            "audio": "/audio/hitpael-1-marry-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתחתן",
             "niqqud": "נִתְחַתֵּן",
-            "translit": "нитхате́н"
+            "translit": "нитхате́н",
+            "audio": "/audio/hitpael-1-marry-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתחתנו",
             "niqqud": "תִּתְחַתְּנוּ",
-            "translit": "титхатну́"
+            "translit": "титхатну́",
+            "audio": "/audio/hitpael-1-marry-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתחתנה",
             "niqqud": "תִּתְחַתֵּנָּה",
-            "translit": "титхате́на"
+            "translit": "титхате́на",
+            "audio": "/audio/hitpael-1-marry-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתחתנו",
             "niqqud": "יִתְחַתְּנוּ",
-            "translit": "итхатну́"
+            "translit": "итхатну́",
+            "audio": "/audio/hitpael-1-marry-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתחתנה",
             "niqqud": "יִתְחַתֵּנָּה",
-            "translit": "итхате́на"
+            "translit": "итхате́на",
+            "audio": "/audio/hitpael-1-marry-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התחתן",
             "niqqud": "הִתְחַתֵּן",
-            "translit": "хитхате́н"
+            "translit": "хитхате́н",
+            "audio": "/audio/hitpael-1-marry-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התחתני",
             "niqqud": "הִתְחַתְּנִי",
-            "translit": "хитхатни́"
+            "translit": "хитхатни́",
+            "audio": "/audio/hitpael-1-marry-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התחתנו",
             "niqqud": "הִתְחַתְּנוּ",
-            "translit": "хитхатну́"
+            "translit": "хитхатну́",
+            "audio": "/audio/hitpael-1-marry-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התחתנה",
             "niqqud": "הִתְחַתֵּנָּה",
-            "translit": "хитхате́на"
+            "translit": "хитхате́на",
+            "audio": "/audio/hitpael-1-marry-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-marry.mp3"
     },
     {
       "id": "hitpael-1-behave",
@@ -1297,7 +1529,8 @@
       "example": {
         "he": "הוא מתנהג יפה",
         "translit": "ху митнахег яфе",
-        "ru": "Он хорошо себя ведёт"
+        "ru": "Он хорошо себя ведёт",
+        "audio": "/audio/hitpael-1-behave-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1306,147 +1539,175 @@
           "ms": {
             "he": "מתנהג",
             "niqqud": "מִתְנַהֵג",
-            "translit": "митнахе́г"
+            "translit": "митнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתנהגת",
             "niqqud": "מִתְנַהֶגֶת",
-            "translit": "митнахе́гет"
+            "translit": "митнахе́гет",
+            "audio": "/audio/hitpael-1-behave-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתנהגים",
             "niqqud": "מִתְנַהֲגִים",
-            "translit": "митнахаги́м"
+            "translit": "митнахаги́м",
+            "audio": "/audio/hitpael-1-behave-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתנהגות",
             "niqqud": "מִתְנַהֲגוֹת",
-            "translit": "митнахаго́т"
+            "translit": "митнахаго́т",
+            "audio": "/audio/hitpael-1-behave-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התנהגתי",
             "niqqud": "הִתְנַהַגְתִּי",
-            "translit": "хитнаха́гти"
+            "translit": "хитнаха́гти",
+            "audio": "/audio/hitpael-1-behave-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התנהגת",
             "niqqud": "הִתְנַהַגְתָּ",
-            "translit": "хитнаха́гта"
+            "translit": "хитнаха́гта",
+            "audio": "/audio/hitpael-1-behave-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התנהגת",
             "niqqud": "הִתְנַהַגְתְּ",
-            "translit": "хитнаха́гт"
+            "translit": "хитнаха́гт",
+            "audio": "/audio/hitpael-1-behave-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התנהג",
             "niqqud": "הִתְנַהֵג",
-            "translit": "хитнахе́г"
+            "translit": "хитнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התנהגה",
             "niqqud": "הִתְנַהֲגָה",
-            "translit": "хитнахага́"
+            "translit": "хитнахага́",
+            "audio": "/audio/hitpael-1-behave-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התנהגנו",
             "niqqud": "הִתְנַהַגְנוּ",
-            "translit": "хитнаха́гну"
+            "translit": "хитнаха́гну",
+            "audio": "/audio/hitpael-1-behave-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התנהגתם",
             "niqqud": "הִתְנַהַגְתֶּם",
-            "translit": "хитнахагте́м"
+            "translit": "хитнахагте́м",
+            "audio": "/audio/hitpael-1-behave-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התנהגתן",
             "niqqud": "הִתְנַהַגְתֶּן",
-            "translit": "хитнахагте́н"
+            "translit": "хитнахагте́н",
+            "audio": "/audio/hitpael-1-behave-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התנהגו",
             "niqqud": "הִתְנַהֲגוּ",
-            "translit": "хитнахагу́"
+            "translit": "хитнахагу́",
+            "audio": "/audio/hitpael-1-behave-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתנהג",
             "niqqud": "אֶתְנַהֵג",
-            "translit": "этнахе́г"
+            "translit": "этнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתנהג",
             "niqqud": "תִּתְנַהֵג",
-            "translit": "титнахе́г"
+            "translit": "титнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתנהגי",
             "niqqud": "תִּתְנַהֲגִי",
-            "translit": "титнахаги́"
+            "translit": "титнахаги́",
+            "audio": "/audio/hitpael-1-behave-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתנהג",
             "niqqud": "יִתְנַהֵג",
-            "translit": "итнахе́г"
+            "translit": "итнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתנהג",
             "niqqud": "תִּתְנַהֵג",
-            "translit": "титнахе́г"
+            "translit": "титнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתנהג",
             "niqqud": "נִתְנַהֵג",
-            "translit": "нитнахе́г"
+            "translit": "нитнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתנהגו",
             "niqqud": "תִּתְנַהֲגוּ",
-            "translit": "титнахагу́"
+            "translit": "титнахагу́",
+            "audio": "/audio/hitpael-1-behave-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתנהגנה",
             "niqqud": "תִּתְנַהֵגְנָה",
-            "translit": "титнахе́гна"
+            "translit": "титнахе́гна",
+            "audio": "/audio/hitpael-1-behave-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתנהגו",
             "niqqud": "יִתְנַהֲגוּ",
-            "translit": "итнахагу́"
+            "translit": "итнахагу́",
+            "audio": "/audio/hitpael-1-behave-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתנהגנה",
             "niqqud": "יִתְנַהֵגְנָה",
-            "translit": "итнахе́гна"
+            "translit": "итнахе́гна",
+            "audio": "/audio/hitpael-1-behave-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התנהג",
             "niqqud": "הִתְנַהֵג",
-            "translit": "хитнахе́г"
+            "translit": "хитнахе́г",
+            "audio": "/audio/hitpael-1-behave-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התנהגי",
             "niqqud": "הִתְנַהֲגִי",
-            "translit": "хитнахаги́"
+            "translit": "хитнахаги́",
+            "audio": "/audio/hitpael-1-behave-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התנהגו",
             "niqqud": "הִתְנַהֲגוּ",
-            "translit": "хитнахагу́"
+            "translit": "хитнахагу́",
+            "audio": "/audio/hitpael-1-behave-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התנהגנה",
             "niqqud": "הִתְנַהֵגְנָה",
-            "translit": "хитнахе́гна"
+            "translit": "хитнахе́гна",
+            "audio": "/audio/hitpael-1-behave-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-behave.mp3"
     },
     {
       "id": "hitpael-1-approach",
@@ -1457,7 +1718,8 @@
       "example": {
         "he": "אני מתקרב אליך",
         "translit": "ани миткарев элеха",
-        "ru": "Я приближаюсь к тебе"
+        "ru": "Я приближаюсь к тебе",
+        "audio": "/audio/hitpael-1-approach-phrase.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1466,147 +1728,175 @@
           "ms": {
             "he": "מתקרב",
             "niqqud": "מִתְקָרֵב",
-            "translit": "миткаре́в"
+            "translit": "миткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-present-ms.mp3"
           },
           "fs": {
             "he": "מתקרבת",
             "niqqud": "מִתְקָרֶבֶת",
-            "translit": "миткаре́вет"
+            "translit": "миткаре́вет",
+            "audio": "/audio/hitpael-1-approach-form-present-fs.mp3"
           },
           "mp": {
             "he": "מתקרבים",
             "niqqud": "מִתְקָרְבִים",
-            "translit": "миткарви́м"
+            "translit": "миткарви́м",
+            "audio": "/audio/hitpael-1-approach-form-present-mp.mp3"
           },
           "fp": {
             "he": "מתקרבות",
             "niqqud": "מִתְקָרְבוֹת",
-            "translit": "миткарво́т"
+            "translit": "миткарво́т",
+            "audio": "/audio/hitpael-1-approach-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "התקרבתי",
             "niqqud": "הִתְקָרַבְתִּי",
-            "translit": "хиткара́вти"
+            "translit": "хиткара́вти",
+            "audio": "/audio/hitpael-1-approach-form-past-1s.mp3"
           },
           "2ms": {
             "he": "התקרבת",
             "niqqud": "הִתְקָרַבְתָּ",
-            "translit": "хиткара́вта"
+            "translit": "хиткара́вта",
+            "audio": "/audio/hitpael-1-approach-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "התקרבת",
             "niqqud": "הִתְקָרַבְתְּ",
-            "translit": "хиткара́вт"
+            "translit": "хиткара́вт",
+            "audio": "/audio/hitpael-1-approach-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "התקרב",
             "niqqud": "הִתְקָרֵב",
-            "translit": "хиткаре́в"
+            "translit": "хиткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "התקרבה",
             "niqqud": "הִתְקָרְבָה",
-            "translit": "хиткарва́"
+            "translit": "хиткарва́",
+            "audio": "/audio/hitpael-1-approach-form-past-3fs.mp3"
           },
           "1p": {
             "he": "התקרבנו",
             "niqqud": "הִתְקָרַבְנוּ",
-            "translit": "хиткара́вну"
+            "translit": "хиткара́вну",
+            "audio": "/audio/hitpael-1-approach-form-past-1p.mp3"
           },
           "2mp": {
             "he": "התקרבתם",
             "niqqud": "הִתְקָרַבְתֶּם",
-            "translit": "хиткаравте́м"
+            "translit": "хиткаравте́м",
+            "audio": "/audio/hitpael-1-approach-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "התקרבתן",
             "niqqud": "הִתְקָרַבְתֶּן",
-            "translit": "хиткаравте́н"
+            "translit": "хиткаравте́н",
+            "audio": "/audio/hitpael-1-approach-form-past-2fp.mp3"
           },
           "3p": {
             "he": "התקרבו",
             "niqqud": "הִתְקָרְבוּ",
-            "translit": "хиткарву́"
+            "translit": "хиткарву́",
+            "audio": "/audio/hitpael-1-approach-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אתקרב",
             "niqqud": "אֶתְקָרֵב",
-            "translit": "эткаре́в"
+            "translit": "эткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תתקרב",
             "niqqud": "תִּתְקָרֵב",
-            "translit": "титкаре́в"
+            "translit": "титкаре́в",
+            "audio": "/audio/hitpael-1-approach-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תתקרבי",
             "niqqud": "תִּתְקָרְבִי",
-            "translit": "титкарви́"
+            "translit": "титкарви́",
+            "audio": "/audio/hitpael-1-approach-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יתקרב",
             "niqqud": "יִתְקָרֵב",
-            "translit": "иткаре́в"
+            "translit": "иткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תתקרב",
             "niqqud": "תִּתְקָרֵב",
-            "translit": "титкаре́в"
+            "translit": "титкаре́в",
+            "audio": "/audio/hitpael-1-approach-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נתקרב",
             "niqqud": "נִתְקָרֵב",
-            "translit": "ниткаре́в"
+            "translit": "ниткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תתקרבו",
             "niqqud": "תִּתְקָרְבוּ",
-            "translit": "титкарву́"
+            "translit": "титкарву́",
+            "audio": "/audio/hitpael-1-approach-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תתקרבנה",
             "niqqud": "תִּתְקָרֵבְנָה",
-            "translit": "титкаре́вна"
+            "translit": "титкаре́вна",
+            "audio": "/audio/hitpael-1-approach-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יתקרבו",
             "niqqud": "יִתְקָרְבוּ",
-            "translit": "иткарву́"
+            "translit": "иткарву́",
+            "audio": "/audio/hitpael-1-approach-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יתקרבנה",
             "niqqud": "יִתְקָרֵבְנָה",
-            "translit": "иткаре́вна"
+            "translit": "иткаре́вна",
+            "audio": "/audio/hitpael-1-approach-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "התקרב",
             "niqqud": "הִתְקָרֵב",
-            "translit": "хиткаре́в"
+            "translit": "хиткаре́в",
+            "audio": "/audio/hitpael-1-approach-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "התקרבי",
             "niqqud": "הִתְקָרְבִי",
-            "translit": "хиткарви́"
+            "translit": "хиткарви́",
+            "audio": "/audio/hitpael-1-approach-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "התקרבו",
             "niqqud": "הִתְקָרְבוּ",
-            "translit": "хиткарву́"
+            "translit": "хиткарву́",
+            "audio": "/audio/hitpael-1-approach-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "התקרבנה",
             "niqqud": "הִתְקָרֵבְנָה",
-            "translit": "хиткаре́вна"
+            "translit": "хиткаре́вна",
+            "audio": "/audio/hitpael-1-approach-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/hitpael-1-approach.mp3"
     }
   ]
 }
