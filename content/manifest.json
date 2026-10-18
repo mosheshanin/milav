@@ -631,6 +631,23 @@
       "v": "d0a736a4cf"
     },
     {
+      "id": "paal-4",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 4,
+      "free": false,
+      "title": "Гортанные корни",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a6577a55af"
+    },
+    {
       "id": "piel-1",
       "topicId": "piel",
       "section": "verbs",
@@ -836,8 +853,8 @@
     }
   ],
   "info": {
-    "totalWords": 410,
-    "totalLessons": 47,
+    "totalWords": 420,
+    "totalLessons": 48,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -933,7 +950,8 @@
         "lessonIds": [
           "paal-1",
           "paal-2",
-          "paal-3"
+          "paal-3",
+          "paal-4"
         ]
       },
       {

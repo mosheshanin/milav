@@ -1,6 +1,6 @@
 // Создаёт файлы уроков глаголов с сильными корнями по спискам из content/verbLessons.ts: формы строит content/verbGen.ts.
 //
-//   npm run content:verbs                              создать все недостающие уроки (paal-1 … paal-3, piel-1 … piel-3)
+//   npm run content:verbs                              создать все недостающие уроки (paal-1 … paal-4, piel-1 … piel-3 и т.д.)
 //   npm run content:verbs -- --binyan piel             только тема «Пиэль»
 //   npm run content:verbs -- --binyan piel --lesson 2  только урок piel-2 (без --binyan --lesson относится к пааль)
 //   npm run content:verbs -- --topic weak              уроки «Слабые корни» (weak-1 … weak-6): формы набраны вручную, content/verbWeak.ts и verbWeak2.ts

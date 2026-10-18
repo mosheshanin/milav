@@ -10,9 +10,10 @@ import { ACUTE } from "./rules";
  * (810 форм в трёх уроках). Генератор даёт единообразные формы, а ошибки носитель исправляет уже в готовых данных:
  * после этого генератор для этого глагола больше не запускают (см. docs/CONTENT.md, «Генератор форм»).
  *
- * Пааль (`conjugatePaal`): только сильные корни с холамом в будущем (יִכְתֹּב, יִשְׁבֹּר): без гортанных (א ה ח ע), без י ו
- * в корне, без נ в начале, без одинаковых букв, без ש с точкой «син» (שׂ). Глаголы с патахом в будущем (ללמוד, יִלְמַד)
- * и слабые корни он не строит: для них нужны свои схемы.
+ * Пааль (`conjugatePaal`): сильные корни с холамом в будущем (יִכְתֹּב, יִשְׁבֹּר) и корни с гортанной ע или ח в начале (לַעֲבֹד,
+ * תַּעֲבֹד, אֶעֱבֹד, לַחְשֹׁב) или в конце (לִשְׁלֹחַ, שׁוֹלֵחַ, יִשְׁלַח, патах-гануб). Без гортанных א ה в начале, гортанной
+ * посередине, י ו в корне, נ в начале, одинаковых букв и ש с точкой «син» (שׂ). Глаголы с патахом в будущем у негортанных
+ * корней (ללמוד, יִלְמַד) и слабые корни он не строит: для них нужны свои схемы.
  *
  * Пиэль (`conjugatePiel`): те же ограничения и ещё два: вторая буква корня не ר (ר не удваивается, гласная перед ней
  * меняется: בֵּרֵךְ) и третья не נ и не ת (они сливаются с окончаниями: סִמַּנּוּ, שִׁכַּתְּ).
@@ -43,9 +44,11 @@ import { ACUTE } from "./rules";
 
 /**
  * Гласный знак при букве. S: немая шва (закрывает слог), V: подвижная шва без звука в транскрипции (קָתְבָה → «катва»),
- * W: подвижная шва, которая читается «е» (после приставок пиэль: לְדַבֵּר «ледабер»), H: хатаф-патах (אֲ, «а»).
+ * W: подвижная шва, которая читается «е» (после приставок пиэль: לְדַבֵּר «ледабер»), H: хатаф-патах (אֲ, «а»),
+ * X: хатаф-сеголь (אֶעֱבֹד, «э»), F: патах-гануб, патах под конечной ח или ע после долгой гласной (שׁוֹלֵחַ):
+ * читается «а» ПЕРЕД согласной («шоле́ах») и своего слога не образует.
  */
-type Vowel = "a" | "A" | "i" | "e" | "E" | "o" | "H" | "W" | "S" | "V";
+type Vowel = "a" | "A" | "i" | "e" | "E" | "o" | "H" | "W" | "S" | "V" | "X" | "F";
 
 const MARK: Record<Vowel, string> = {
   a: "ַ", // патах
@@ -58,9 +61,11 @@ const MARK: Record<Vowel, string> = {
   W: "ְ", // шва, читается «е»
   S: "ְ", // шва немая
   V: "ְ", // шва подвижная, без звука
+  X: "ֱ", // хатаф-сеголь
+  F: "ַ", // патах-гануб
 };
 
-const SOUND: Record<Exclude<Vowel, "S" | "V">, string> = { a: "а", A: "а", i: "и", e: "е", E: "е", o: "о", H: "а", W: "е" };
+const SOUND: Record<Exclude<Vowel, "S" | "V" | "F">, string> = { a: "а", A: "а", i: "и", e: "е", E: "е", o: "о", H: "а", W: "е", X: "э" };
 
 const DAGESH = "ּ";
 const SHIN_DOT = "ׁ";
@@ -185,6 +190,9 @@ function render(units: Unit[], stress: Stress): Rendered {
     if (unit.mater) {
       sound += unit.mater.sound;
       syllable = true;
+    } else if (unit.v === "F") {
+      // Патах-гануб читается перед согласной (шоле́ах, шоме́а) и слога не образует: ударение остаётся на предыдущем.
+      sound = "а" + sound;
     } else if (unit.v && unit.v !== "S" && unit.v !== "V") {
       // Сеголь в начале слова под א читается «э» (эхтов), в остальных местах «е».
       // Приставка יַ в хифъиле читается «я» (ясби́р).
@@ -216,10 +224,34 @@ function strongRootProblems(root: string): string[] {
   return problems;
 }
 
-/** Проблемы корня: подходит ли он генератору пааль (сильный корень с холамом в будущем). */
+/**
+ * Проблемы корня: подходит ли он генератору пааль. Сильный корень с холамом в будущем (יִכְתֹּב) и два вида гортанных
+ * (19.10, «Пааль 4»): первая ע или ח (לַעֲבֹד, לַחְשֹׁב: приставка с патахом, хатаф-патах или немая шва) и последняя ח или ע
+ * (לִשְׁמֹעַ, יִשְׁמַע: патах-гануб в инфинитиве и настоящем, патах в будущем). Первая א ה, вторая гортанная, обе крайние
+ * гортанные сразу, י ו, первая נ и удвоенные корни генератор не строит.
+ */
 export function paalRootProblems(root: string): string[] {
-  return strongRootProblems(root);
+  const problems: string[] = [];
+  const letters = [...root];
+  const [c1, c2, c3] = letters;
+  const strong = (l: string | undefined) => l !== undefined && /^[בגדזטכלמנספצקרשת]$/.test(l);
+  if (letters.length !== 3) problems.push(`корень «${root}»: нужны ровно 3 буквы`);
+  if (!(strong(c1) && c1 !== "נ") && c1 !== "ע" && c1 !== "ח") {
+    problems.push(`корень «${root}»: первая буква должна быть из בגדזטכלמספצקרשת или ע ח (без א ה, י ו и נ: это слабые корни)`);
+  }
+  if (!strong(c2)) problems.push(`корень «${root}»: вторая буква должна быть из בגדזטכלמנספצקרשת (без гортанных א ה ח ע, י ו и конечных форм)`);
+  if (!strong(c3) && c3 !== "ח" && c3 !== "ע") problems.push(`корень «${root}»: третья буква должна быть из בגדזטכלמנספצקרשת или ח ע (без א ה, י ו и конечных форм)`);
+  if ((c1 === "ע" || c1 === "ח") && (c3 === "ח" || c3 === "ע")) problems.push(`корень «${root}»: гортанные в начале и в конце сразу`);
+  if (new Set(letters).size !== letters.length) problems.push(`корень «${root}»: есть одинаковые буквы (удвоенный корень)`);
+  if (SIN_ROOTS.includes(root)) problems.push(`корень «${root}» пишется с «син» (שׂ), а генератор ставит «шин» (ש)`);
+  return problems;
 }
+
+/**
+ * Корни пааль с первой ח, у которых в формах с приставкой шва немая (לַחְשֹׁב, אֶחְשֹׁב, תַּחְשְׁבִי), а не хатаф-патах
+ * (לַחֲזֹר, אֶחֱזֹר, תַּחַזְרִי). Это свойство слова, правилом оно не выводится (pealim.com). У первой ע всегда хатаф.
+ */
+export const KHET_SILENT_SHVA: readonly string[] = ["חשב"];
 
 /** Проблемы корня: подходит ли он генератору пиэль (сильный корень, вторая буква удваивается). */
 export function pielRootProblems(root: string): string[] {
@@ -305,6 +337,16 @@ const u = (c: string, v?: Vowel, extra: Partial<Unit> = {}): Unit => ({ c, ...(v
 
 function paalSpecs(root: string): Specs {
   const [c1, c2, c3] = [...root] as [string, string, string];
+  /** Первая ע или ח: приставки с патахом (תַּעֲבֹד), хатаф-патах в прошедшем 2mp и 2fp и в повелительном. */
+  const guttural1 = c1 === "ע" || c1 === "ח";
+  /** Последняя ח или ע: патах-гануб в инфинитиве и настоящем (שׁוֹלֵחַ), патах вместо холама в будущем (יִשְׁלַח). */
+  const guttural3 = c3 === "ח" || c3 === "ע";
+  /** Под первой гортанной в формах с приставкой хатаф-патах (לַעֲבֹד), а у ח из списка `KHET_SILENT_SHVA` немая шва (לַחְשֹׁב). */
+  const hataf1 = guttural1 && !KHET_SILENT_SHVA.includes(root);
+  /** Гласная первой буквы корня после приставки: хатаф-патах, после אֶ хатаф-сеголь (אֶעֱבֹד), иначе немая шва. */
+  const firstVowel = (prefix: string): Vowel => (hataf1 ? (prefix === "א" ? "X" : "H") : "S");
+  /** Третья буква: патах-гануб, если она ח или ע и стоит после долгой гласной. */
+  const last = (): Unit => (guttural3 ? u(c3, "F") : u(c3));
   /** Прошедшее: гласные при C1 и C2, затем C3 (со своей гласной или буквой-носителем) и окончание. */
   const past = (c1v: Vowel, c2v: Vowel, c3v: Vowel | undefined, c3extra: Partial<Unit>, ...ending: Unit[]): Unit[] => [
     u(c1, c1v),
@@ -312,27 +354,35 @@ function paalSpecs(root: string): Specs {
     u(c3, c3v, c3extra),
     ...ending,
   ];
+  /** Прошедшее 2mp и 2fp: у первой гортанной хатаф-патах (עֲבַדְתֶּם), у остальных подвижная шва (כְּתַבְתֶּם). */
+  const pluralFirst: Vowel = guttural1 ? "H" : "V";
 
-  /** Будущее с холамом: приставка + корень. */
+  /** Будущее: приставка + корень. */
   const future = (prefix: string, tail: "o" | "V-i" | "V-u" | "on"): FormSpec => {
-    const pre = u(prefix, prefix === "א" ? "E" : "i");
+    const pre = u(prefix, prefix === "א" ? "E" : guttural1 ? "a" : "i");
+    // Основа с шва: первая гортанная с хатаф-патахом даёт תַּעַבְדִי (патах под ע, подвижная шва под второй), с немой шва תַּחְשְׁבִי.
+    const open: Vowel = hataf1 ? "a" : "S";
     switch (tail) {
       case "o":
-        return [[pre, u(c1, "S"), u(c2, undefined, { mater: VAV_HOLAM }), u(c3)], "last"];
+        return guttural3
+          ? [[pre, u(c1, "S"), u(c2, "a"), u(c3)], "last"]
+          : [[pre, u(c1, firstVowel(prefix)), u(c2, undefined, { mater: VAV_HOLAM }), u(c3)], "last"];
       case "V-i":
-        return [[pre, u(c1, "S"), u(c2, "V"), u(c3, "i", { tail: "י" })], "last"];
+        return [[pre, u(c1, open), u(c2, "V"), u(c3, "i", { tail: "י" })], "last"];
       case "V-u":
-        return [[pre, u(c1, "S"), u(c2, "V"), u(c3, undefined, { mater: VAV_SHURUK })], "last"];
+        return [[pre, u(c1, open), u(c2, "V"), u(c3, undefined, { mater: VAV_SHURUK })], "last"];
       case "on":
-        return [[pre, u(c1, "S"), u(c2, "o"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"];
+        return guttural3
+          ? [[pre, u(c1, "S"), u(c2, "a"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"]
+          : [[pre, u(c1, firstVowel(prefix)), u(c2, "o"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"];
     }
   };
 
   return {
-    infinitive: [[u("ל", "i"), u(c1, "S"), u(c2, undefined, { mater: VAV_HOLAM }), u(c3)], "last"],
+    infinitive: [[u("ל", guttural1 ? "a" : "i"), u(c1, firstVowel("ל")), u(c2, undefined, { mater: VAV_HOLAM }), last()], "last"],
     present: {
-      ms: [[u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "e"), u(c3)], "last"],
-      fs: [[u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "E"), u(c3, "E"), u("ת")], "penult"],
+      ms: [[u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "e"), last()], "last"],
+      fs: [guttural3 ? [u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "a"), u(c3, "a"), u("ת")] : [u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "E"), u(c3, "E"), u("ת")], "penult"],
       mp: [[u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "V"), u(c3, "i", { tail: "י" }), u("ם")], "last"],
       fp: [[u(c1, undefined, { mater: VAV_HOLAM }), u(c2, "V"), u(c3, undefined, { mater: VAV_HOLAM }), u("ת")], "last"],
     },
@@ -344,8 +394,8 @@ function paalSpecs(root: string): Specs {
       "3ms": [past("A", "a", undefined, {}), "last"],
       "3fs": [past("A", "V", "A", { tail: "ה" }), "last"],
       "1p": [past("A", "a", "S", {}, u("נ", undefined, { mater: VAV_SHURUK })), "penult"],
-      "2mp": [past("V", "a", "S", {}, u("ת", "E"), u("ם")), "last"],
-      "2fp": [past("V", "a", "S", {}, u("ת", "E"), u("ן")), "last"],
+      "2mp": [past(pluralFirst, "a", "S", {}, u("ת", "E"), u("ם")), "last"],
+      "2fp": [past(pluralFirst, "a", "S", {}, u("ת", "E"), u("ן")), "last"],
       "3p": [past("A", "V", undefined, { mater: VAV_SHURUK }), "last"],
     },
     future: {
@@ -361,10 +411,20 @@ function paalSpecs(root: string): Specs {
       "3fp": future("י", "on"),
     },
     imperative: {
-      ms: [[u(c1, "V"), u(c2, undefined, { mater: VAV_HOLAM }), u(c3)], "last"],
+      ms: [
+        guttural3
+          ? [u(c1, "V"), u(c2, "a"), u(c3)]
+          : [u(c1, guttural1 ? "H" : "V"), u(c2, undefined, { mater: VAV_HOLAM }), u(c3)],
+        "last",
+      ],
       fs: [[u(c1, "i"), u(c2, "V"), u(c3, "i", { tail: "י" })], "last"],
       mp: [[u(c1, "i"), u(c2, "V"), u(c3, undefined, { mater: VAV_SHURUK })], "last"],
-      fp: [[u(c1, "V"), u(c2, "o"), u(c3, "S"), u("נ", "A", { tail: "ה" })], "penult"],
+      fp: [
+        guttural3
+          ? [u(c1, "V"), u(c2, "a"), u(c3, "S"), u("נ", "A", { tail: "ה" })]
+          : [u(c1, guttural1 ? "H" : "V"), u(c2, "o"), u(c3, "S"), u("נ", "A", { tail: "ה" })],
+        "penult",
+      ],
     },
   };
 }
