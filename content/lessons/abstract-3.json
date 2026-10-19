@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "abstract-3",
+  "topicId": "abstract",
+  "section": "nouns",
+  "topic": "Частые абстрактные слова",
+  "number": 3,
+  "free": false,
+  "title": "Ход событий",
+  "words": [
+    {
+      "id": "abstract-3-end",
+      "he": "סוף",
+      "niqqud": "סוֹף",
+      "translit": "соф",
+      "ru": "конец",
+      "gender": "m",
+      "example": {
+        "he": "זה סוף טוב",
+        "translit": "зэ соф тов",
+        "ru": "Это хороший конец"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-end.svg"
+    },
+    {
+      "id": "abstract-3-start",
+      "he": "התחלה",
+      "niqqud": "הַתְחָלָה",
+      "translit": "хатхала́",
+      "ru": "начало",
+      "gender": "f",
+      "example": {
+        "he": "זו התחלה חדשה",
+        "translit": "зо хатхала хадаша",
+        "ru": "Это новое начало"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-start.svg"
+    },
+    {
+      "id": "abstract-3-part",
+      "he": "חלק",
+      "niqqud": "חֵלֶק",
+      "translit": "хе́лек",
+      "ru": "часть",
+      "gender": "m",
+      "example": {
+        "he": "זה חלק קטן",
+        "translit": "зэ хелек катан",
+        "ru": "Это маленькая часть"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-part.svg"
+    },
+    {
+      "id": "abstract-3-case",
+      "he": "מקרה",
+      "niqqud": "מִקְרֶה",
+      "translit": "микре́",
+      "ru": "случай",
+      "gender": "m",
+      "example": {
+        "he": "זה מקרה מיוחד",
+        "translit": "зэ микре меюхад",
+        "ru": "Это особый случай"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-case.svg"
+    },
+    {
+      "id": "abstract-3-moment",
+      "he": "רגע",
+      "niqqud": "רֶגַע",
+      "translit": "ре́га",
+      "ru": "момент",
+      "gender": "m",
+      "example": {
+        "he": "זה רגע יפה",
+        "translit": "зэ рега яфэ",
+        "ru": "Это красивый момент"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-moment.svg"
+    },
+    {
+      "id": "abstract-3-change",
+      "he": "שינוי",
+      "niqqud": "שִׁינּוּי",
+      "translit": "шину́й",
+      "ru": "изменение",
+      "gender": "m",
+      "example": {
+        "he": "זה שינוי גדול",
+        "translit": "зэ шинуй гадоль",
+        "ru": "Это большое изменение"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-change.svg"
+    },
+    {
+      "id": "abstract-3-result",
+      "he": "תוצאה",
+      "niqqud": "תּוֹצָאָה",
+      "translit": "тоца́а",
+      "ru": "результат",
+      "gender": "f",
+      "example": {
+        "he": "זו תוצאה טובה",
+        "translit": "зо тоцаа това",
+        "ru": "Это хороший результат"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-result.svg"
+    },
+    {
+      "id": "abstract-3-option",
+      "he": "אפשרות",
+      "niqqud": "אֶפְשָׁרוּת",
+      "translit": "эфшару́т",
+      "ru": "возможность",
+      "gender": "f",
+      "example": {
+        "he": "זו אפשרות אחרת",
+        "translit": "зо эфшарут ахерет",
+        "ru": "Это другая возможность"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-option.svg"
+    },
+    {
+      "id": "abstract-3-opinion",
+      "he": "דעה",
+      "niqqud": "דֵּעָה",
+      "translit": "деа́",
+      "ru": "мнение",
+      "gender": "f",
+      "example": {
+        "he": "זו דעה חשובה",
+        "translit": "зо деа хашува",
+        "ru": "Это важное мнение"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-opinion.svg"
+    },
+    {
+      "id": "abstract-3-chance",
+      "he": "הזדמנות",
+      "niqqud": "הִזְדַּמְּנוּת",
+      "translit": "хиздамну́т",
+      "ru": "шанс",
+      "gender": "f",
+      "example": {
+        "he": "זו הזדמנות אחרונה",
+        "translit": "зо хиздамнут ахарона",
+        "ru": "Это последний шанс"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-3-chance.svg"
+    }
+  ]
+}

@@ -172,6 +172,23 @@
       "v": "c3cdea92aa"
     },
     {
+      "id": "abstract-3",
+      "topicId": "abstract",
+      "section": "nouns",
+      "topic": "Частые абстрактные слова",
+      "number": 3,
+      "free": false,
+      "title": "Ход событий",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "61f367c32b"
+    },
+    {
       "id": "animals-1",
       "topicId": "animals",
       "section": "nouns",
@@ -955,8 +972,8 @@
     }
   ],
   "info": {
-    "totalWords": 480,
-    "totalLessons": 54,
+    "totalWords": 490,
+    "totalLessons": 55,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -971,7 +988,8 @@
         "title": "Частые абстрактные слова",
         "lessonIds": [
           "abstract-1",
-          "abstract-2"
+          "abstract-2",
+          "abstract-3"
         ]
       },
       {
