@@ -18,10 +18,12 @@
       "example": {
         "he": "זו מכונית חדשה",
         "translit": "зо мехонит хадаша",
-        "ru": "Это новая машина"
+        "ru": "Это новая машина",
+        "audio": "/audio/city-4-car-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-car.svg"
+      "image": "/words/city-4-car.svg",
+      "audio": "/audio/city-4-car.mp3"
     },
     {
       "id": "city-4-jam",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה פקק ארוך",
         "translit": "зэ пкак арох",
-        "ru": "Это длинная пробка"
+        "ru": "Это длинная пробка",
+        "audio": "/audio/city-4-jam-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-jam.svg"
+      "image": "/words/city-4-jam.svg",
+      "audio": "/audio/city-4-jam.mp3"
     },
     {
       "id": "city-4-parking",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זו חניה קטנה",
         "translit": "зо ханая катана",
-        "ru": "Это маленькая парковка"
+        "ru": "Это маленькая парковка",
+        "audio": "/audio/city-4-parking-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-parking.svg"
+      "image": "/words/city-4-parking.svg",
+      "audio": "/audio/city-4-parking.mp3"
     },
     {
       "id": "city-4-fuel",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה דלק יקר",
         "translit": "зэ делек якар",
-        "ru": "Это дорогое топливо"
+        "ru": "Это дорогое топливо",
+        "audio": "/audio/city-4-fuel-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-fuel.svg"
+      "image": "/words/city-4-fuel.svg",
+      "audio": "/audio/city-4-fuel.mp3"
     },
     {
       "id": "city-4-engine",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה מנוע חזק",
         "translit": "зэ маноа хазак",
-        "ru": "Это мощный двигатель"
+        "ru": "Это мощный двигатель",
+        "audio": "/audio/city-4-engine-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-engine.svg"
+      "image": "/words/city-4-engine.svg",
+      "audio": "/audio/city-4-engine.mp3"
     },
     {
       "id": "city-4-wheel",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה גלגל גדול",
         "translit": "зэ галгаль гадоль",
-        "ru": "Это большое колесо"
+        "ru": "Это большое колесо",
+        "audio": "/audio/city-4-wheel-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-wheel.svg"
+      "image": "/words/city-4-wheel.svg",
+      "audio": "/audio/city-4-wheel.mp3"
     },
     {
       "id": "city-4-steering",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זה הגה חדש",
         "translit": "зэ хеге хадаш",
-        "ru": "Это новый руль"
+        "ru": "Это новый руль",
+        "audio": "/audio/city-4-steering-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-steering.svg"
+      "image": "/words/city-4-steering.svg",
+      "audio": "/audio/city-4-steering.mp3"
     },
     {
       "id": "city-4-driver",
@@ -123,9 +137,11 @@
       "example": {
         "he": "זה נהג זהיר",
         "translit": "зэ нахаг захир",
-        "ru": "Это осторожный водитель"
+        "ru": "Это осторожный водитель",
+        "audio": "/audio/city-4-driver-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-4-driver.mp3"
     },
     {
       "id": "city-4-accident",
@@ -137,10 +153,12 @@
       "example": {
         "he": "זו תאונה קשה",
         "translit": "зо теуна каша",
-        "ru": "Это тяжёлая авария"
+        "ru": "Это тяжёлая авария",
+        "audio": "/audio/city-4-accident-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-accident.svg"
+      "image": "/words/city-4-accident.svg",
+      "audio": "/audio/city-4-accident.mp3"
     },
     {
       "id": "city-4-brake",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה בלם טוב",
         "translit": "зэ белем тов",
-        "ru": "Это хороший тормоз"
+        "ru": "Это хороший тормоз",
+        "audio": "/audio/city-4-brake-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/city-4-brake.svg"
+      "image": "/words/city-4-brake.svg",
+      "audio": "/audio/city-4-brake.mp3"
     }
   ]
 }
