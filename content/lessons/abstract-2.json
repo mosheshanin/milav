@@ -18,9 +18,11 @@
       "example": {
         "he": "זו פעם ראשונה",
         "translit": "зо паам ришона",
-        "ru": "Это первый раз"
+        "ru": "Это первый раз",
+        "audio": "/audio/abstract-2-once-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-2-once.mp3"
     },
     {
       "id": "abstract-2-reason",
@@ -32,9 +34,11 @@
       "example": {
         "he": "זו סיבה טובה",
         "translit": "зо сиба това",
-        "ru": "Это хорошая причина"
+        "ru": "Это хорошая причина",
+        "audio": "/audio/abstract-2-reason-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-2-reason.mp3"
     },
     {
       "id": "abstract-2-idea",
@@ -46,10 +50,12 @@
       "example": {
         "he": "זה רעיון טוב",
         "translit": "зэ раайон тов",
-        "ru": "Это хорошая идея"
+        "ru": "Это хорошая идея",
+        "audio": "/audio/abstract-2-idea-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-idea.svg"
+      "image": "/words/abstract-2-idea.svg",
+      "audio": "/audio/abstract-2-idea.mp3"
     },
     {
       "id": "abstract-2-truth",
@@ -61,9 +67,11 @@
       "example": {
         "he": "זו אמת קשה",
         "translit": "зо эмет каша",
-        "ru": "Это тяжёлая правда"
+        "ru": "Это тяжёлая правда",
+        "audio": "/audio/abstract-2-truth-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-2-truth.mp3"
     },
     {
       "id": "abstract-2-help",
@@ -75,10 +83,12 @@
       "example": {
         "he": "זו עזרה גדולה",
         "translit": "зо эзра гдола",
-        "ru": "Это большая помощь"
+        "ru": "Это большая помощь",
+        "audio": "/audio/abstract-2-help-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-help.svg"
+      "image": "/words/abstract-2-help.svg",
+      "audio": "/audio/abstract-2-help.mp3"
     },
     {
       "id": "abstract-2-decision",
@@ -90,10 +100,12 @@
       "example": {
         "he": "זו החלטה טובה",
         "translit": "зо хахлата това",
-        "ru": "Это хорошее решение"
+        "ru": "Это хорошее решение",
+        "audio": "/audio/abstract-2-decision-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-decision.svg"
+      "image": "/words/abstract-2-decision.svg",
+      "audio": "/audio/abstract-2-decision.mp3"
     },
     {
       "id": "abstract-2-mistake",
@@ -105,10 +117,12 @@
       "example": {
         "he": "זו טעות קטנה",
         "translit": "зо таут катана",
-        "ru": "Это маленькая ошибка"
+        "ru": "Это маленькая ошибка",
+        "audio": "/audio/abstract-2-mistake-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-mistake.svg"
+      "image": "/words/abstract-2-mistake.svg",
+      "audio": "/audio/abstract-2-mistake.mp3"
     },
     {
       "id": "abstract-2-answer",
@@ -120,9 +134,11 @@
       "example": {
         "he": "זו תשובה נכונה",
         "translit": "зо тшува нехона",
-        "ru": "Это правильный ответ"
+        "ru": "Это правильный ответ",
+        "audio": "/audio/abstract-2-answer-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-2-answer.mp3"
     },
     {
       "id": "abstract-2-story",
@@ -134,10 +150,12 @@
       "example": {
         "he": "זה סיפור ארוך",
         "translit": "зэ сипур арох",
-        "ru": "Это длинная история"
+        "ru": "Это длинная история",
+        "audio": "/audio/abstract-2-story-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-story.svg"
+      "image": "/words/abstract-2-story.svg",
+      "audio": "/audio/abstract-2-story.mp3"
     },
     {
       "id": "abstract-2-goal",
@@ -149,10 +167,12 @@
       "example": {
         "he": "זו מטרה חשובה",
         "translit": "зо матара хашува",
-        "ru": "Это важная цель"
+        "ru": "Это важная цель",
+        "audio": "/audio/abstract-2-goal-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-2-goal.svg"
+      "image": "/words/abstract-2-goal.svg",
+      "audio": "/audio/abstract-2-goal.mp3"
     }
   ]
 }
