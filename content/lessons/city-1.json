@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "city-1",
+  "topicId": "city",
+  "section": "nouns",
+  "topic": "Город и транспорт",
+  "number": 1,
+  "free": true,
+  "title": "Места в городе",
+  "words": [
+    {
+      "id": "city-1-city",
+      "he": "עיר",
+      "niqqud": "עִיר",
+      "translit": "ир",
+      "ru": "город",
+      "gender": "f",
+      "example": {
+        "he": "זאת עיר גדולה",
+        "translit": "зот ир гдола",
+        "ru": "Это большой город"
+      },
+      "image": "/words/city-1-city.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-street",
+      "he": "רחוב",
+      "niqqud": "רְחוֹב",
+      "translit": "рехо́в",
+      "ru": "улица",
+      "gender": "m",
+      "example": {
+        "he": "זה רחוב ארוך",
+        "translit": "зэ рехов арох",
+        "ru": "Это длинная улица"
+      },
+      "image": "/words/city-1-street.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-road",
+      "he": "כביש",
+      "niqqud": "כְּבִישׁ",
+      "translit": "квиш",
+      "ru": "дорога, шоссе",
+      "gender": "m",
+      "example": {
+        "he": "זה כביש חדש",
+        "translit": "зэ квиш хадаш",
+        "ru": "Это новая дорога"
+      },
+      "image": "/words/city-1-road.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-shop",
+      "he": "חנות",
+      "niqqud": "חֲנוּת",
+      "translit": "хану́т",
+      "ru": "магазин",
+      "gender": "f",
+      "example": {
+        "he": "זאת חנות טובה",
+        "translit": "зот ханут това",
+        "ru": "Это хороший магазин"
+      },
+      "image": "/words/city-1-shop.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-restaurant",
+      "he": "מסעדה",
+      "niqqud": "מִסְעָדָה",
+      "translit": "мисада́",
+      "ru": "ресторан",
+      "gender": "f",
+      "example": {
+        "he": "זאת מסעדה יקרה",
+        "translit": "зот мисада йекара",
+        "ru": "Это дорогой ресторан"
+      },
+      "image": "/words/city-1-restaurant.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-stop",
+      "he": "תחנה",
+      "niqqud": "תַּחֲנָה",
+      "translit": "тахана́",
+      "ru": "остановка, станция",
+      "gender": "f",
+      "example": {
+        "he": "זאת תחנה קטנה",
+        "translit": "зот тахана ктана",
+        "ru": "Это маленькая остановка"
+      },
+      "image": "/words/city-1-stop.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-neighborhood",
+      "he": "שכונה",
+      "niqqud": "שְׁכוּנָה",
+      "translit": "шхуна́",
+      "ru": "район",
+      "gender": "f",
+      "example": {
+        "he": "זאת שכונה שקטה",
+        "translit": "зот шхуна шкета",
+        "ru": "Это тихий район"
+      },
+      "image": "/words/city-1-neighborhood.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-square",
+      "he": "כיכר",
+      "niqqud": "כִּיכָּר",
+      "translit": "кика́р",
+      "ru": "площадь",
+      "gender": "f",
+      "example": {
+        "he": "זאת כיכר נקייה",
+        "translit": "зот кикар нкия",
+        "ru": "Это чистая площадь"
+      },
+      "image": "/words/city-1-square.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-park",
+      "he": "פארק",
+      "niqqud": "פַּארְק",
+      "translit": "парк",
+      "ru": "парк",
+      "gender": "m",
+      "example": {
+        "he": "זה פארק יפה",
+        "translit": "зэ парк яфе",
+        "ru": "Это красивый парк"
+      },
+      "image": "/words/city-1-park.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-1-bridge",
+      "he": "גשר",
+      "niqqud": "גֶּשֶׁר",
+      "translit": "ге́шер",
+      "ru": "мост",
+      "gender": "m",
+      "example": {
+        "he": "זה גשר ישן",
+        "translit": "зэ гешер яшан",
+        "ru": "Это старый мост"
+      },
+      "image": "/words/city-1-bridge.svg",
+      "reviewed": false
+    }
+  ]
+}

@@ -206,6 +206,23 @@
       "v": "e821773e4e"
     },
     {
+      "id": "city-1",
+      "topicId": "city",
+      "section": "nouns",
+      "topic": "Город и транспорт",
+      "number": 1,
+      "free": true,
+      "title": "Места в городе",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "dcf1e67499"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -870,8 +887,8 @@
     }
   ],
   "info": {
-    "totalWords": 430,
-    "totalLessons": 49,
+    "totalWords": 440,
+    "totalLessons": 50,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -895,6 +912,13 @@
           "body-1",
           "body-2",
           "body-3"
+        ]
+      },
+      {
+        "id": "city",
+        "title": "Город и транспорт",
+        "lessonIds": [
+          "city-1"
         ]
       },
       {
