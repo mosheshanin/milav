@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "city-4",
+  "topicId": "city",
+  "section": "nouns",
+  "topic": "Город и транспорт",
+  "number": 4,
+  "free": false,
+  "title": "Машина",
+  "words": [
+    {
+      "id": "city-4-car",
+      "he": "מכונית",
+      "niqqud": "מְכוֹנִית",
+      "translit": "мехони́т",
+      "ru": "машина",
+      "gender": "f",
+      "example": {
+        "he": "זו מכונית חדשה",
+        "translit": "зо мехонит хадаша",
+        "ru": "Это новая машина"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-car.svg"
+    },
+    {
+      "id": "city-4-jam",
+      "he": "פקק",
+      "niqqud": "פְּקָק",
+      "translit": "пкак",
+      "ru": "пробка",
+      "gender": "m",
+      "example": {
+        "he": "זה פקק ארוך",
+        "translit": "зэ пкак арох",
+        "ru": "Это длинная пробка"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-jam.svg"
+    },
+    {
+      "id": "city-4-parking",
+      "he": "חניה",
+      "niqqud": "חֲנָיָה",
+      "translit": "ханая́",
+      "ru": "парковка",
+      "gender": "f",
+      "example": {
+        "he": "זו חניה קטנה",
+        "translit": "зо ханая катана",
+        "ru": "Это маленькая парковка"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-parking.svg"
+    },
+    {
+      "id": "city-4-fuel",
+      "he": "דלק",
+      "niqqud": "דֶּלֶק",
+      "translit": "де́лек",
+      "ru": "топливо",
+      "gender": "m",
+      "example": {
+        "he": "זה דלק יקר",
+        "translit": "зэ делек якар",
+        "ru": "Это дорогое топливо"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-fuel.svg"
+    },
+    {
+      "id": "city-4-engine",
+      "he": "מנוע",
+      "niqqud": "מָנוֹעַ",
+      "translit": "мано́а",
+      "ru": "двигатель",
+      "gender": "m",
+      "example": {
+        "he": "זה מנוע חזק",
+        "translit": "зэ маноа хазак",
+        "ru": "Это мощный двигатель"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-engine.svg"
+    },
+    {
+      "id": "city-4-wheel",
+      "he": "גלגל",
+      "niqqud": "גַּלְגַּל",
+      "translit": "галга́ль",
+      "ru": "колесо",
+      "gender": "m",
+      "example": {
+        "he": "זה גלגל גדול",
+        "translit": "зэ галгаль гадоль",
+        "ru": "Это большое колесо"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-wheel.svg"
+    },
+    {
+      "id": "city-4-steering",
+      "he": "הגה",
+      "niqqud": "הֶגֶה",
+      "translit": "хе́ге",
+      "ru": "руль",
+      "gender": "m",
+      "example": {
+        "he": "זה הגה חדש",
+        "translit": "зэ хеге хадаш",
+        "ru": "Это новый руль"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-steering.svg"
+    },
+    {
+      "id": "city-4-driver",
+      "he": "נהג",
+      "niqqud": "נַהָג",
+      "translit": "наха́г",
+      "ru": "водитель",
+      "gender": "m",
+      "example": {
+        "he": "זה נהג זהיר",
+        "translit": "зэ нахаг захир",
+        "ru": "Это осторожный водитель"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "city-4-accident",
+      "he": "תאונה",
+      "niqqud": "תְּאוּנָה",
+      "translit": "теуна́",
+      "ru": "авария",
+      "gender": "f",
+      "example": {
+        "he": "זו תאונה קשה",
+        "translit": "зо теуна каша",
+        "ru": "Это тяжёлая авария"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-accident.svg"
+    },
+    {
+      "id": "city-4-brake",
+      "he": "בלם",
+      "niqqud": "בֶּלֶם",
+      "translit": "бе́лем",
+      "ru": "тормоз",
+      "gender": "m",
+      "example": {
+        "he": "זה בלם טוב",
+        "translit": "зэ белем тов",
+        "ru": "Это хороший тормоз"
+      },
+      "reviewed": false,
+      "image": "/words/city-4-brake.svg"
+    }
+  ]
+}

@@ -325,6 +325,23 @@
       "v": "03f941b85c"
     },
     {
+      "id": "city-4",
+      "topicId": "city",
+      "section": "nouns",
+      "topic": "Город и транспорт",
+      "number": 4,
+      "free": false,
+      "title": "Машина",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1aed5ec874"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -989,8 +1006,8 @@
     }
   ],
   "info": {
-    "totalWords": 500,
-    "totalLessons": 56,
+    "totalWords": 510,
+    "totalLessons": 57,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1032,7 +1049,8 @@
         "lessonIds": [
           "city-1",
           "city-2",
-          "city-3"
+          "city-3",
+          "city-4"
         ]
       },
       {
