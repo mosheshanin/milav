@@ -18,10 +18,12 @@
       "example": {
         "he": "זאת עיר גדולה",
         "translit": "зот ир гдола",
-        "ru": "Это большой город"
+        "ru": "Это большой город",
+        "audio": "/audio/city-1-city-phrase.mp3"
       },
       "image": "/words/city-1-city.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-city.mp3"
     },
     {
       "id": "city-1-street",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה רחוב ארוך",
         "translit": "зэ рехов арох",
-        "ru": "Это длинная улица"
+        "ru": "Это длинная улица",
+        "audio": "/audio/city-1-street-phrase.mp3"
       },
       "image": "/words/city-1-street.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-street.mp3"
     },
     {
       "id": "city-1-road",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה כביש חדש",
         "translit": "зэ квиш хадаш",
-        "ru": "Это новая дорога"
+        "ru": "Это новая дорога",
+        "audio": "/audio/city-1-road-phrase.mp3"
       },
       "image": "/words/city-1-road.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-road.mp3"
     },
     {
       "id": "city-1-shop",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זאת חנות טובה",
         "translit": "зот ханут това",
-        "ru": "Это хороший магазин"
+        "ru": "Это хороший магазин",
+        "audio": "/audio/city-1-shop-phrase.mp3"
       },
       "image": "/words/city-1-shop.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-shop.mp3"
     },
     {
       "id": "city-1-restaurant",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זאת מסעדה יקרה",
         "translit": "зот мисада йекара",
-        "ru": "Это дорогой ресторан"
+        "ru": "Это дорогой ресторан",
+        "audio": "/audio/city-1-restaurant-phrase.mp3"
       },
       "image": "/words/city-1-restaurant.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-restaurant.mp3"
     },
     {
       "id": "city-1-stop",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זאת תחנה קטנה",
         "translit": "зот тахана ктана",
-        "ru": "Это маленькая остановка"
+        "ru": "Это маленькая остановка",
+        "audio": "/audio/city-1-stop-phrase.mp3"
       },
       "image": "/words/city-1-stop.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-stop.mp3"
     },
     {
       "id": "city-1-neighborhood",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זאת שכונה שקטה",
         "translit": "зот шхуна шкета",
-        "ru": "Это тихий район"
+        "ru": "Это тихий район",
+        "audio": "/audio/city-1-neighborhood-phrase.mp3"
       },
       "image": "/words/city-1-neighborhood.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-neighborhood.mp3"
     },
     {
       "id": "city-1-square",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זאת כיכר נקייה",
         "translit": "зот кикар нкия",
-        "ru": "Это чистая площадь"
+        "ru": "Это чистая площадь",
+        "audio": "/audio/city-1-square-phrase.mp3"
       },
       "image": "/words/city-1-square.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-square.mp3"
     },
     {
       "id": "city-1-park",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זה פארק יפה",
         "translit": "зэ парк яфе",
-        "ru": "Это красивый парк"
+        "ru": "Это красивый парк",
+        "audio": "/audio/city-1-park-phrase.mp3"
       },
       "image": "/words/city-1-park.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-park.mp3"
     },
     {
       "id": "city-1-bridge",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה גשר ישן",
         "translit": "зэ гешер яшан",
-        "ru": "Это старый мост"
+        "ru": "Это старый мост",
+        "audio": "/audio/city-1-bridge-phrase.mp3"
       },
       "image": "/words/city-1-bridge.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-1-bridge.mp3"
     }
   ]
 }
