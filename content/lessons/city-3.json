@@ -18,10 +18,12 @@
       "example": {
         "he": "זה צומת גדול",
         "translit": "зэ цомет гадоль",
-        "ru": "Это большой перекрёсток"
+        "ru": "Это большой перекрёсток",
+        "audio": "/audio/city-3-junction-phrase.mp3"
       },
       "image": "/words/city-3-junction.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-junction.mp3"
     },
     {
       "id": "city-3-light",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה רמזור חדש",
         "translit": "зэ рамзор хадаш",
-        "ru": "Это новый светофор"
+        "ru": "Это новый светофор",
+        "audio": "/audio/city-3-light-phrase.mp3"
       },
       "image": "/words/city-3-light.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-light.mp3"
     },
     {
       "id": "city-3-sidewalk",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זאת מדרכה נקייה",
         "translit": "зот мидраха нкия",
-        "ru": "Это чистый тротуар"
+        "ru": "Это чистый тротуар",
+        "audio": "/audio/city-3-sidewalk-phrase.mp3"
       },
       "image": "/words/city-3-sidewalk.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-sidewalk.mp3"
     },
     {
       "id": "city-3-corner",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זאת פינה קטנה",
         "translit": "зот пина ктана",
-        "ru": "Это маленький угол"
+        "ru": "Это маленький угол",
+        "audio": "/audio/city-3-corner-phrase.mp3"
       },
       "image": "/words/city-3-corner.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-corner.mp3"
     },
     {
       "id": "city-3-direction",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה כיוון טוב",
         "translit": "зэ кивун тов",
-        "ru": "Это хорошее направление"
+        "ru": "Это хорошее направление",
+        "audio": "/audio/city-3-direction-phrase.mp3"
       },
       "image": "/words/city-3-direction.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-direction.mp3"
     },
     {
       "id": "city-3-map",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זאת מפה ישנה",
         "translit": "зот мапа йешана",
-        "ru": "Это старая карта"
+        "ru": "Это старая карта",
+        "audio": "/audio/city-3-map-phrase.mp3"
       },
       "image": "/words/city-3-map.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-map.mp3"
     },
     {
       "id": "city-3-address",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זאת כתובת חשובה",
         "translit": "зот ктовет хашува",
-        "ru": "Это важный адрес"
+        "ru": "Это важный адрес",
+        "audio": "/audio/city-3-address-phrase.mp3"
       },
       "image": "/words/city-3-address.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-address.mp3"
     },
     {
       "id": "city-3-way",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זאת דרך ארוכה",
         "translit": "зот дерех арука",
-        "ru": "Это длинная дорога"
+        "ru": "Это длинная дорога",
+        "audio": "/audio/city-3-way-phrase.mp3"
       },
       "image": "/words/city-3-way.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-way.mp3"
     },
     {
       "id": "city-3-right",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זה צד ימין",
         "translit": "зэ цад ямин",
-        "ru": "Это правая сторона"
+        "ru": "Это правая сторона",
+        "audio": "/audio/city-3-right-phrase.mp3"
       },
       "image": "/words/city-3-right.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-right.mp3"
     },
     {
       "id": "city-3-left",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה צד שמאל",
         "translit": "зэ цад смоль",
-        "ru": "Это левая сторона"
+        "ru": "Это левая сторона",
+        "audio": "/audio/city-3-left-phrase.mp3"
       },
       "image": "/words/city-3-left.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-3-left.mp3"
     }
   ]
 }
