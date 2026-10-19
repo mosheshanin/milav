@@ -50,6 +50,7 @@ export const LESSON_EMOJI: Record<string, string> = {
   "city-1": "🏪",
   "city-2": "🚌",
   "city-3": "🚦",
+  "city-4": "🚗",
   "abstract-1": "🔑",
   "abstract-2": "🧩",
   "abstract-3": "🔭",
