@@ -18,10 +18,12 @@
       "example": {
         "he": "זה נושא חשוב",
         "translit": "зэ носэ хашув",
-        "ru": "Это важная тема"
+        "ru": "Это важная тема",
+        "audio": "/audio/abstract-4-topic-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-topic.svg"
+      "image": "/words/abstract-4-topic.svg",
+      "audio": "/audio/abstract-4-topic.mp3"
     },
     {
       "id": "abstract-4-kind",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה סוג אחר",
         "translit": "зэ суг ахер",
-        "ru": "Это другой вид"
+        "ru": "Это другой вид",
+        "audio": "/audio/abstract-4-kind-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-kind.svg"
+      "image": "/words/abstract-4-kind.svg",
+      "audio": "/audio/abstract-4-kind.mp3"
     },
     {
       "id": "abstract-4-situation",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה מצב קשה",
         "translit": "зэ мацав каше",
-        "ru": "Это тяжёлая ситуация"
+        "ru": "Это тяжёлая ситуация",
+        "audio": "/audio/abstract-4-situation-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-situation.svg"
+      "image": "/words/abstract-4-situation.svg",
+      "audio": "/audio/abstract-4-situation.mp3"
     },
     {
       "id": "abstract-4-difference",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה הבדל גדול",
         "translit": "зэ хевдель гадоль",
-        "ru": "Это большая разница"
+        "ru": "Это большая разница",
+        "audio": "/audio/abstract-4-difference-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-difference.svg"
+      "image": "/words/abstract-4-difference.svg",
+      "audio": "/audio/abstract-4-difference.mp3"
     },
     {
       "id": "abstract-4-example",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זו דוגמה טובה",
         "translit": "зо дугма това",
-        "ru": "Это хороший пример"
+        "ru": "Это хороший пример",
+        "audio": "/audio/abstract-4-example-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-example.svg"
+      "image": "/words/abstract-4-example.svg",
+      "audio": "/audio/abstract-4-example.mp3"
     },
     {
       "id": "abstract-4-order",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה סדר טוב",
         "translit": "зэ седер тов",
-        "ru": "Это хороший порядок"
+        "ru": "Это хороший порядок",
+        "audio": "/audio/abstract-4-order-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-order.svg"
+      "image": "/words/abstract-4-order.svg",
+      "audio": "/audio/abstract-4-order.mp3"
     },
     {
       "id": "abstract-4-experience",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זה ניסיון חדש",
         "translit": "зэ нисайон хадаш",
-        "ru": "Это новый опыт"
+        "ru": "Это новый опыт",
+        "audio": "/audio/abstract-4-experience-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-experience.svg"
+      "image": "/words/abstract-4-experience.svg",
+      "audio": "/audio/abstract-4-experience.mp3"
     },
     {
       "id": "abstract-4-strength",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זה כוח גדול",
         "translit": "зэ коах гадоль",
-        "ru": "Это большая сила"
+        "ru": "Это большая сила",
+        "audio": "/audio/abstract-4-strength-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-strength.svg"
+      "image": "/words/abstract-4-strength.svg",
+      "audio": "/audio/abstract-4-strength.mp3"
     },
     {
       "id": "abstract-4-dream",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זה חלום יפה",
         "translit": "зэ халом яфэ",
-        "ru": "Это красивая мечта"
+        "ru": "Это красивая мечта",
+        "audio": "/audio/abstract-4-dream-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-dream.svg"
+      "image": "/words/abstract-4-dream.svg",
+      "audio": "/audio/abstract-4-dream.mp3"
     },
     {
       "id": "abstract-4-freedom",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה חופש גדול",
         "translit": "зэ хофеш гадоль",
-        "ru": "Это большая свобода"
+        "ru": "Это большая свобода",
+        "audio": "/audio/abstract-4-freedom-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-4-freedom.svg"
+      "image": "/words/abstract-4-freedom.svg",
+      "audio": "/audio/abstract-4-freedom.mp3"
     }
   ]
 }
