@@ -648,6 +648,23 @@
       "v": "461bf18e6e"
     },
     {
+      "id": "paal-5",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 5,
+      "free": false,
+      "title": "Патах в будущем",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "b6cb87d263"
+    },
+    {
       "id": "piel-1",
       "topicId": "piel",
       "section": "verbs",
@@ -853,8 +870,8 @@
     }
   ],
   "info": {
-    "totalWords": 420,
-    "totalLessons": 48,
+    "totalWords": 430,
+    "totalLessons": 49,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -951,7 +968,8 @@
           "paal-1",
           "paal-2",
           "paal-3",
-          "paal-4"
+          "paal-4",
+          "paal-5"
         ]
       },
       {

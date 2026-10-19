@@ -56,6 +56,7 @@ export const LESSON_EMOJI: Record<string, string> = {
   "paal-2": "🙌",
   "paal-3": "🔟",
   "paal-4": "🗝️",
+  "paal-5": "🔮",
   "piel-1": "🗣️",
   "piel-2": "💼",
   "piel-3": "✨",
