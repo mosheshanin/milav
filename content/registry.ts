@@ -3,6 +3,7 @@
 import lesson_abstract_1 from "./lessons/abstract-1.json";
 import lesson_abstract_2 from "./lessons/abstract-2.json";
 import lesson_abstract_3 from "./lessons/abstract-3.json";
+import lesson_abstract_4 from "./lessons/abstract-4.json";
 import lesson_alphabet_1 from "./lessons/alphabet-1.json";
 import lesson_alphabet_2 from "./lessons/alphabet-2.json";
 import lesson_alphabet_3 from "./lessons/alphabet-3.json";
@@ -60,6 +61,7 @@ export const lessonFiles: unknown[] = [
   lesson_abstract_1,
   lesson_abstract_2,
   lesson_abstract_3,
+  lesson_abstract_4,
   lesson_alphabet_1,
   lesson_alphabet_2,
   lesson_alphabet_3,

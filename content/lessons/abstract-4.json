@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "abstract-4",
+  "topicId": "abstract",
+  "section": "nouns",
+  "topic": "Частые абстрактные слова",
+  "number": 4,
+  "free": false,
+  "title": "Общие понятия",
+  "words": [
+    {
+      "id": "abstract-4-topic",
+      "he": "נושא",
+      "niqqud": "נוֹשֵׂא",
+      "translit": "носэ́",
+      "ru": "тема",
+      "gender": "m",
+      "example": {
+        "he": "זה נושא חשוב",
+        "translit": "зэ носэ хашув",
+        "ru": "Это важная тема"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-topic.svg"
+    },
+    {
+      "id": "abstract-4-kind",
+      "he": "סוג",
+      "niqqud": "סוּג",
+      "translit": "суг",
+      "ru": "вид",
+      "gender": "m",
+      "example": {
+        "he": "זה סוג אחר",
+        "translit": "зэ суг ахер",
+        "ru": "Это другой вид"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-kind.svg"
+    },
+    {
+      "id": "abstract-4-situation",
+      "he": "מצב",
+      "niqqud": "מַצָּב",
+      "translit": "маца́в",
+      "ru": "ситуация",
+      "gender": "m",
+      "example": {
+        "he": "זה מצב קשה",
+        "translit": "зэ мацав каше",
+        "ru": "Это тяжёлая ситуация"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-situation.svg"
+    },
+    {
+      "id": "abstract-4-difference",
+      "he": "הבדל",
+      "niqqud": "הֶבְדֵּל",
+      "translit": "хевде́ль",
+      "ru": "разница",
+      "gender": "m",
+      "example": {
+        "he": "זה הבדל גדול",
+        "translit": "зэ хевдель гадоль",
+        "ru": "Это большая разница"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-difference.svg"
+    },
+    {
+      "id": "abstract-4-example",
+      "he": "דוגמה",
+      "niqqud": "דּוּגְמָה",
+      "translit": "дугма́",
+      "ru": "пример",
+      "gender": "f",
+      "example": {
+        "he": "זו דוגמה טובה",
+        "translit": "зо дугма това",
+        "ru": "Это хороший пример"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-example.svg"
+    },
+    {
+      "id": "abstract-4-order",
+      "he": "סדר",
+      "niqqud": "סֵדֶר",
+      "translit": "се́дер",
+      "ru": "порядок",
+      "gender": "m",
+      "example": {
+        "he": "זה סדר טוב",
+        "translit": "зэ седер тов",
+        "ru": "Это хороший порядок"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-order.svg"
+    },
+    {
+      "id": "abstract-4-experience",
+      "he": "ניסיון",
+      "niqqud": "נִיסָּיוֹן",
+      "translit": "нисайо́н",
+      "ru": "опыт",
+      "gender": "m",
+      "example": {
+        "he": "זה ניסיון חדש",
+        "translit": "зэ нисайон хадаш",
+        "ru": "Это новый опыт"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-experience.svg"
+    },
+    {
+      "id": "abstract-4-strength",
+      "he": "כוח",
+      "niqqud": "כּוֹחַ",
+      "translit": "ко́ах",
+      "ru": "сила",
+      "gender": "m",
+      "example": {
+        "he": "זה כוח גדול",
+        "translit": "зэ коах гадоль",
+        "ru": "Это большая сила"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-strength.svg"
+    },
+    {
+      "id": "abstract-4-dream",
+      "he": "חלום",
+      "niqqud": "חֲלוֹם",
+      "translit": "хало́м",
+      "ru": "мечта",
+      "gender": "m",
+      "example": {
+        "he": "זה חלום יפה",
+        "translit": "зэ халом яфэ",
+        "ru": "Это красивая мечта"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-dream.svg"
+    },
+    {
+      "id": "abstract-4-freedom",
+      "he": "חופש",
+      "niqqud": "חוֹפֶשׁ",
+      "translit": "хо́феш",
+      "ru": "свобода",
+      "gender": "m",
+      "example": {
+        "he": "זה חופש גדול",
+        "translit": "зэ хофеш гадоль",
+        "ru": "Это большая свобода"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-4-freedom.svg"
+    }
+  ]
+}
