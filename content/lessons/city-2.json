@@ -18,10 +18,12 @@
       "example": {
         "he": "זה אוטובוס מלא",
         "translit": "зэ отобус мале",
-        "ru": "Это полный автобус"
+        "ru": "Это полный автобус",
+        "audio": "/audio/city-2-bus-phrase.mp3"
       },
       "image": "/words/city-2-bus.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-bus.mp3"
     },
     {
       "id": "city-2-taxi",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זאת מונית יקרה",
         "translit": "зот монит йекара",
-        "ru": "Это дорогое такси"
+        "ru": "Это дорогое такси",
+        "audio": "/audio/city-2-taxi-phrase.mp3"
       },
       "image": "/words/city-2-taxi.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-taxi.mp3"
     },
     {
       "id": "city-2-train",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זאת רכבת איטית",
         "translit": "зот ракевет итит",
-        "ru": "Это медленный поезд"
+        "ru": "Это медленный поезд",
+        "audio": "/audio/city-2-train-phrase.mp3"
       },
       "image": "/words/city-2-train.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-train.mp3"
     },
     {
       "id": "city-2-plane",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה מטוס מהיר",
         "translit": "зэ матос махир",
-        "ru": "Это быстрый самолёт"
+        "ru": "Это быстрый самолёт",
+        "audio": "/audio/city-2-plane-phrase.mp3"
       },
       "image": "/words/city-2-plane.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-plane.mp3"
     },
     {
       "id": "city-2-bike",
@@ -78,10 +86,12 @@
       "example": {
         "he": "אלה אופניים ישנים",
         "translit": "эле офанаим йешаним",
-        "ru": "Это старый велосипед"
+        "ru": "Это старый велосипед",
+        "audio": "/audio/city-2-bike-phrase.mp3"
       },
       "image": "/words/city-2-bike.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-bike.mp3"
     },
     {
       "id": "city-2-motorcycle",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה אופנוע שחור",
         "translit": "зэ офаноа шахор",
-        "ru": "Это чёрный мотоцикл"
+        "ru": "Это чёрный мотоцикл",
+        "audio": "/audio/city-2-motorcycle-phrase.mp3"
       },
       "image": "/words/city-2-motorcycle.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-motorcycle.mp3"
     },
     {
       "id": "city-2-truck",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זאת משאית כבדה",
         "translit": "зот масаит кведа",
-        "ru": "Это тяжёлый грузовик"
+        "ru": "Это тяжёлый грузовик",
+        "audio": "/audio/city-2-truck-phrase.mp3"
       },
       "image": "/words/city-2-truck.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-truck.mp3"
     },
     {
       "id": "city-2-ship",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זאת ספינה גדולה",
         "translit": "зот сфина гдола",
-        "ru": "Это большой корабль"
+        "ru": "Это большой корабль",
+        "audio": "/audio/city-2-ship-phrase.mp3"
       },
       "image": "/words/city-2-ship.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-ship.mp3"
     },
     {
       "id": "city-2-tram",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זאת חשמלית חדשה",
         "translit": "зот хашмалит хадаша",
-        "ru": "Это новый трамвай"
+        "ru": "Это новый трамвай",
+        "audio": "/audio/city-2-tram-phrase.mp3"
       },
       "image": "/words/city-2-tram.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-tram.mp3"
     },
     {
       "id": "city-2-scooter",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה קורקינט קטן",
         "translit": "зэ коркинет катан",
-        "ru": "Это маленький самокат"
+        "ru": "Это маленький самокат",
+        "audio": "/audio/city-2-scooter-phrase.mp3"
       },
       "image": "/words/city-2-scooter.svg",
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/city-2-scooter.mp3"
     }
   ]
 }
