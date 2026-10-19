@@ -72,6 +72,12 @@ export function statusPathText(path: StatusPath): { title: string; progress: str
   return { title: `${path.name} → ${path.next.name}`, progress: `${path.passed} из ${path.to}` };
 }
 
+/** Границы статуса в сданных уроках для легенды: «0–5 уроков», «6–20 уроков», «301 и больше». */
+export function statusRangeText(row: { from: number; to: number | null }): string {
+  if (row.to === null) return `${row.from} и больше`;
+  return `${row.from}–${row.to} ${plural(row.to, "урок", "урока", "уроков")}`;
+}
+
 /** Русское склонение: 1 неделя, 2 недели, 5 недель. */
 export function plural(n: number, one: string, few: string, many: string): string {
   const mod100 = Math.abs(n) % 100;

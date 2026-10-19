@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { ZERO_METRICS, type AchievementsResponse } from "@milav/shared";
 import { catalog } from "@milav/content";
-import { cohortText, groupBadges, plural, statusPathText, weekdayLabels } from "./play";
+import { cohortText, groupBadges, plural, statusPathText, statusRangeText, weekdayLabels } from "./play";
 
 const first = catalog.badges[0]!;
 
@@ -50,6 +50,13 @@ describe("подписи", () => {
       progress: "7 из 20",
     });
     expect(statusPathText({ ...base, name: "Король", to: null, next: null }).title).toContain("высший");
+  });
+
+  it("границы статуса для легенды: с правильным склонением и «и больше» у Короля", () => {
+    expect(statusRangeText({ from: 0, to: 5 })).toBe("0–5 уроков");
+    expect(statusRangeText({ from: 6, to: 20 })).toBe("6–20 уроков");
+    expect(statusRangeText({ from: 101, to: 300 })).toBe("101–300 уроков");
+    expect(statusRangeText({ from: 301, to: null })).toBe("301 и больше");
   });
 
   it("сравнение: нет данных, нет текста", () => {

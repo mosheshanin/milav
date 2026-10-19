@@ -8,7 +8,7 @@ import {
 } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
-import { BadgeDetails, BadgeTile, GoalRing, StatusPathBar, WeekCard } from "../components/play";
+import { BadgeDetails, BadgeTile, GoalRing, StatusLegend, StatusPathBar, WeekCard } from "../components/play";
 import { Header } from "../components/Header";
 import { Button, Card, Chip } from "../components/ui";
 import { catalog } from "../lib/lessons";
@@ -64,6 +64,7 @@ export function Achievements({
       <main className="mx-auto flex max-w-md flex-col gap-section p-block pb-section" data-testid="achievements">
         <Card className="flex flex-col gap-3">
           <StatusPathBar path={play.statusPath} />
+          <StatusLegend currentKey={play.statusPath.key} />
         </Card>
 
         {play.goal && (

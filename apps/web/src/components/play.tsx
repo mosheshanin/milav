@@ -8,13 +8,14 @@ import {
   type BadgeDef,
   type PlayEvent,
   type PlayInfo,
+  statusLegend,
   type StatusPath,
 } from "@milav/shared";
 import { api } from "../api";
 import { BADGE_ICON_COMPONENTS } from "../lib/badgeIcons";
 import { haptic } from "../lib/haptic";
 import { catalog } from "../lib/lessons";
-import { RARITY_CLASSES, formatEarnedDate, statusPathText, weekdayLabels, type BadgeView } from "../lib/play";
+import { RARITY_CLASSES, formatEarnedDate, statusPathText, statusRangeText, weekdayLabels, type BadgeView } from "../lib/play";
 import { shareText } from "../lib/share";
 import { Button, Card } from "./ui";
 
@@ -175,6 +176,35 @@ export function StatusPathBar({ path }: { path: StatusPath }) {
         <rect width={Math.max(path.fraction, path.fraction > 0 ? 0.04 : 0) * 100} height="4" rx="2" className="fill-accent" />
       </svg>
       <div className="text-sm text-ink-soft">{text.progress}</div>
+    </div>
+  );
+}
+
+/** Легенда статусов: сколько сданных уроков нужно для каждой фигуры, от Пешки до Короля; текущий статус выделен. */
+export function StatusLegend({ currentKey }: { currentKey: StatusPath["key"] }) {
+  return (
+    <div className="flex flex-col gap-1" data-testid="status-legend">
+      <h2 className="text-sm font-semibold text-ink-soft">Статусы по числу сданных уроков</h2>
+      <ul className="flex flex-col gap-1">
+        {statusLegend().map((row) => {
+          const current = row.key === currentKey;
+          return (
+            <li
+              key={row.key}
+              data-testid={`status-legend-${row.key}`}
+              aria-current={current ? "true" : undefined}
+              className={`flex items-center gap-2 rounded-lg px-2 py-1 ${current ? "bg-accent-soft font-semibold" : ""}`}
+            >
+              <span className="w-7 text-center text-xl" aria-hidden>
+                {row.symbol}
+              </span>
+              <span className="flex-1">{row.name}</span>
+              <span className={current ? "" : "text-ink-soft"}>{statusRangeText(row)}</span>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="text-xs text-ink-soft">Считаются разные сданные уроки, повторные прохождения не добавляют.</p>
     </div>
   );
 }

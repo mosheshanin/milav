@@ -14,6 +14,26 @@ const LADDER: { upTo: number; key: StatusInfo["key"]; name: string; symbol: stri
   { upTo: Infinity, key: "king", name: "Король", symbol: "♚" },
 ];
 
+/** Одна строка легенды статусов: сколько сданных уроков нужно. `to` равно null у высшего статуса («301 и больше»). */
+export interface StatusLegendRow {
+  key: StatusInfo["key"];
+  name: string;
+  symbol: string;
+  from: number;
+  to: number | null;
+}
+
+/** Все статусы от Пешки до Короля с границами в сданных уроках (для легенды на экране «Достижения»); границы те же, что у `statusPath`. */
+export function statusLegend(): StatusLegendRow[] {
+  return LADDER.map((s, i) => ({
+    key: s.key,
+    name: s.name,
+    symbol: s.symbol,
+    from: i === 0 ? 0 : LADDER[i - 1]!.upTo + 1,
+    to: Number.isFinite(s.upTo) ? s.upTo : null,
+  }));
+}
+
 export function statusForPassedLessons(passed: number): StatusInfo {
   const n = Math.max(0, Math.floor(passed));
   const step = LADDER.find((s) => n <= s.upTo) ?? LADDER[LADDER.length - 1]!;

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { cleanDisplayName } from "./names";
 import { quantile, quartiles, ranksOf, sortBoard } from "./ranking";
-import { statusPath } from "../status";
+import { statusLegend, statusPath } from "../status";
 
 describe("имя в таблице", () => {
   it("обычное имя остаётся как есть", () => {
@@ -47,6 +47,30 @@ describe("места в таблице", () => {
     expect(quartiles([40, 10, 20, 30])).toEqual({ p25: 10, p50: 20, p75: 30 });
     expect(quartiles([7])).toEqual({ p25: 7, p50: 7, p75: 7 });
     expect(quartiles(Array.from({ length: 100 }, (_, i) => i + 1))).toEqual({ p25: 25, p50: 50, p75: 75 });
+  });
+});
+
+describe("легенда статусов", () => {
+  it("шесть фигур от Пешки до Короля, границы в сданных уроках без пропусков", () => {
+    const rows = statusLegend();
+    expect(rows.map((r) => [r.key, r.from, r.to])).toEqual([
+      ["pawn", 0, 5],
+      ["knight", 6, 20],
+      ["bishop", 21, 50],
+      ["rook", 51, 100],
+      ["queen", 101, 300],
+      ["king", 301, null],
+    ]);
+  });
+
+  it("границы легенды совпадают с путём к статусу: на нижней и верхней границе фигура та же", () => {
+    for (const row of statusLegend()) {
+      expect(statusPath(row.from).key).toBe(row.key);
+      if (row.to !== null) {
+        expect(statusPath(row.to).key).toBe(row.key);
+        expect(statusPath(row.to + 1).key).not.toBe(row.key);
+      }
+    }
   });
 });
 
