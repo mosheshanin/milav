@@ -240,6 +240,23 @@
       "v": "172c26497f"
     },
     {
+      "id": "city-3",
+      "topicId": "city",
+      "section": "nouns",
+      "topic": "Город и транспорт",
+      "number": 3,
+      "free": false,
+      "title": "Дорога и направления",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a88b1f0fa5"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -904,8 +921,8 @@
     }
   ],
   "info": {
-    "totalWords": 450,
-    "totalLessons": 51,
+    "totalWords": 460,
+    "totalLessons": 52,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -936,7 +953,8 @@
         "title": "Город и транспорт",
         "lessonIds": [
           "city-1",
-          "city-2"
+          "city-2",
+          "city-3"
         ]
       },
       {

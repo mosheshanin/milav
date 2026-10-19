@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "city-3",
+  "topicId": "city",
+  "section": "nouns",
+  "topic": "Город и транспорт",
+  "number": 3,
+  "free": false,
+  "title": "Дорога и направления",
+  "words": [
+    {
+      "id": "city-3-junction",
+      "he": "צומת",
+      "niqqud": "צוֹמֶת",
+      "translit": "цо́мет",
+      "ru": "перекрёсток",
+      "gender": "m",
+      "example": {
+        "he": "זה צומת גדול",
+        "translit": "зэ цомет гадоль",
+        "ru": "Это большой перекрёсток"
+      },
+      "image": "/words/city-3-junction.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-light",
+      "he": "רמזור",
+      "niqqud": "רַמְזוֹר",
+      "translit": "рамзо́р",
+      "ru": "светофор",
+      "gender": "m",
+      "example": {
+        "he": "זה רמזור חדש",
+        "translit": "зэ рамзор хадаш",
+        "ru": "Это новый светофор"
+      },
+      "image": "/words/city-3-light.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-sidewalk",
+      "he": "מדרכה",
+      "niqqud": "מִדְרָכָה",
+      "translit": "мидраха́",
+      "ru": "тротуар",
+      "gender": "f",
+      "example": {
+        "he": "זאת מדרכה נקייה",
+        "translit": "зот мидраха нкия",
+        "ru": "Это чистый тротуар"
+      },
+      "image": "/words/city-3-sidewalk.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-corner",
+      "he": "פינה",
+      "niqqud": "פִּינָה",
+      "translit": "пина́",
+      "ru": "угол",
+      "gender": "f",
+      "example": {
+        "he": "זאת פינה קטנה",
+        "translit": "зот пина ктана",
+        "ru": "Это маленький угол"
+      },
+      "image": "/words/city-3-corner.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-direction",
+      "he": "כיוון",
+      "niqqud": "כִּיווּן",
+      "translit": "киву́н",
+      "ru": "направление",
+      "gender": "m",
+      "example": {
+        "he": "זה כיוון טוב",
+        "translit": "зэ кивун тов",
+        "ru": "Это хорошее направление"
+      },
+      "image": "/words/city-3-direction.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-map",
+      "he": "מפה",
+      "niqqud": "מַפָּה",
+      "translit": "мапа́",
+      "ru": "карта",
+      "gender": "f",
+      "example": {
+        "he": "זאת מפה ישנה",
+        "translit": "зот мапа йешана",
+        "ru": "Это старая карта"
+      },
+      "image": "/words/city-3-map.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-address",
+      "he": "כתובת",
+      "niqqud": "כְּתוֹבֶת",
+      "translit": "кто́вет",
+      "ru": "адрес",
+      "gender": "f",
+      "example": {
+        "he": "זאת כתובת חשובה",
+        "translit": "зот ктовет хашува",
+        "ru": "Это важный адрес"
+      },
+      "image": "/words/city-3-address.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-way",
+      "he": "דרך",
+      "niqqud": "דֶּרֶךְ",
+      "translit": "де́рех",
+      "ru": "дорога, путь",
+      "gender": "f",
+      "example": {
+        "he": "זאת דרך ארוכה",
+        "translit": "зот дерех арука",
+        "ru": "Это длинная дорога"
+      },
+      "image": "/words/city-3-way.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-right",
+      "he": "ימין",
+      "niqqud": "יָמִין",
+      "translit": "ями́н",
+      "ru": "право, правая сторона",
+      "gender": "m",
+      "example": {
+        "he": "זה צד ימין",
+        "translit": "зэ цад ямин",
+        "ru": "Это правая сторона"
+      },
+      "image": "/words/city-3-right.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-3-left",
+      "he": "שמאל",
+      "niqqud": "שְׂמֹאל",
+      "translit": "смоль",
+      "ru": "лево, левая сторона",
+      "gender": "m",
+      "example": {
+        "he": "זה צד שמאל",
+        "translit": "зэ цад смоль",
+        "ru": "Это левая сторона"
+      },
+      "image": "/words/city-3-left.svg",
+      "reviewed": false
+    }
+  ]
+}
