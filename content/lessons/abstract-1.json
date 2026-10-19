@@ -18,10 +18,12 @@
       "example": {
         "he": "זה יום יפה",
         "translit": "зэ йом яфэ",
-        "ru": "Это красивый день"
+        "ru": "Это красивый день",
+        "audio": "/audio/abstract-1-day-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-day.svg"
+      "image": "/words/abstract-1-day.svg",
+      "audio": "/audio/abstract-1-day.mp3"
     },
     {
       "id": "abstract-1-year",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו שנה טובה",
         "translit": "зо шана това",
-        "ru": "Это хороший год"
+        "ru": "Это хороший год",
+        "audio": "/audio/abstract-1-year-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-year.svg"
+      "image": "/words/abstract-1-year.svg",
+      "audio": "/audio/abstract-1-year.mp3"
     },
     {
       "id": "abstract-1-time",
@@ -48,9 +52,11 @@
       "example": {
         "he": "זה זמן טוב",
         "translit": "зэ зман тов",
-        "ru": "Это хорошее время"
+        "ru": "Это хорошее время",
+        "audio": "/audio/abstract-1-time-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-1-time.mp3"
     },
     {
       "id": "abstract-1-place",
@@ -62,9 +68,11 @@
       "example": {
         "he": "זה מקום יפה",
         "translit": "зэ маком яфэ",
-        "ru": "Это красивое место"
+        "ru": "Это красивое место",
+        "audio": "/audio/abstract-1-place-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/abstract-1-place.mp3"
     },
     {
       "id": "abstract-1-thing",
@@ -76,10 +84,12 @@
       "example": {
         "he": "זה דבר חשוב",
         "translit": "зэ давар хашув",
-        "ru": "Это важная вещь"
+        "ru": "Это важная вещь",
+        "audio": "/audio/abstract-1-thing-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-thing.svg"
+      "image": "/words/abstract-1-thing.svg",
+      "audio": "/audio/abstract-1-thing.mp3"
     },
     {
       "id": "abstract-1-word",
@@ -91,10 +101,12 @@
       "example": {
         "he": "זו מילה חדשה",
         "translit": "зо мила хадаша",
-        "ru": "Это новое слово"
+        "ru": "Это новое слово",
+        "audio": "/audio/abstract-1-word-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-word.svg"
+      "image": "/words/abstract-1-word.svg",
+      "audio": "/audio/abstract-1-word.mp3"
     },
     {
       "id": "abstract-1-question",
@@ -106,10 +118,12 @@
       "example": {
         "he": "זו שאלה קשה",
         "translit": "зо шээла каша",
-        "ru": "Это трудный вопрос"
+        "ru": "Это трудный вопрос",
+        "audio": "/audio/abstract-1-question-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-question.svg"
+      "image": "/words/abstract-1-question.svg",
+      "audio": "/audio/abstract-1-question.mp3"
     },
     {
       "id": "abstract-1-life",
@@ -121,10 +135,12 @@
       "example": {
         "he": "אלה חיים טובים",
         "translit": "эле хаим товим",
-        "ru": "Это хорошая жизнь"
+        "ru": "Это хорошая жизнь",
+        "audio": "/audio/abstract-1-life-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-life.svg"
+      "image": "/words/abstract-1-life.svg",
+      "audio": "/audio/abstract-1-life.mp3"
     },
     {
       "id": "abstract-1-problem",
@@ -136,10 +152,12 @@
       "example": {
         "he": "זו בעיה גדולה",
         "translit": "зо беайя гдола",
-        "ru": "Это большая проблема"
+        "ru": "Это большая проблема",
+        "audio": "/audio/abstract-1-problem-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-problem.svg"
+      "image": "/words/abstract-1-problem.svg",
+      "audio": "/audio/abstract-1-problem.mp3"
     },
     {
       "id": "abstract-1-world",
@@ -151,10 +169,12 @@
       "example": {
         "he": "זה עולם גדול",
         "translit": "зэ олам гадоль",
-        "ru": "Это большой мир"
+        "ru": "Это большой мир",
+        "audio": "/audio/abstract-1-world-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-1-world.svg"
+      "image": "/words/abstract-1-world.svg",
+      "audio": "/audio/abstract-1-world.mp3"
     }
   ]
 }
