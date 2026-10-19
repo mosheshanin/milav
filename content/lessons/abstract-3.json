@@ -18,10 +18,12 @@
       "example": {
         "he": "זה סוף טוב",
         "translit": "зэ соф тов",
-        "ru": "Это хороший конец"
+        "ru": "Это хороший конец",
+        "audio": "/audio/abstract-3-end-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-end.svg"
+      "image": "/words/abstract-3-end.svg",
+      "audio": "/audio/abstract-3-end.mp3"
     },
     {
       "id": "abstract-3-start",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו התחלה חדשה",
         "translit": "зо хатхала хадаша",
-        "ru": "Это новое начало"
+        "ru": "Это новое начало",
+        "audio": "/audio/abstract-3-start-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-start.svg"
+      "image": "/words/abstract-3-start.svg",
+      "audio": "/audio/abstract-3-start.mp3"
     },
     {
       "id": "abstract-3-part",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה חלק קטן",
         "translit": "зэ хелек катан",
-        "ru": "Это маленькая часть"
+        "ru": "Это маленькая часть",
+        "audio": "/audio/abstract-3-part-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-part.svg"
+      "image": "/words/abstract-3-part.svg",
+      "audio": "/audio/abstract-3-part.mp3"
     },
     {
       "id": "abstract-3-case",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה מקרה מיוחד",
         "translit": "зэ микре меюхад",
-        "ru": "Это особый случай"
+        "ru": "Это особый случай",
+        "audio": "/audio/abstract-3-case-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-case.svg"
+      "image": "/words/abstract-3-case.svg",
+      "audio": "/audio/abstract-3-case.mp3"
     },
     {
       "id": "abstract-3-moment",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה רגע יפה",
         "translit": "зэ рега яфэ",
-        "ru": "Это красивый момент"
+        "ru": "Это красивый момент",
+        "audio": "/audio/abstract-3-moment-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-moment.svg"
+      "image": "/words/abstract-3-moment.svg",
+      "audio": "/audio/abstract-3-moment.mp3"
     },
     {
       "id": "abstract-3-change",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה שינוי גדול",
         "translit": "зэ шинуй гадоль",
-        "ru": "Это большое изменение"
+        "ru": "Это большое изменение",
+        "audio": "/audio/abstract-3-change-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-change.svg"
+      "image": "/words/abstract-3-change.svg",
+      "audio": "/audio/abstract-3-change.mp3"
     },
     {
       "id": "abstract-3-result",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זו תוצאה טובה",
         "translit": "зо тоцаа това",
-        "ru": "Это хороший результат"
+        "ru": "Это хороший результат",
+        "audio": "/audio/abstract-3-result-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-result.svg"
+      "image": "/words/abstract-3-result.svg",
+      "audio": "/audio/abstract-3-result.mp3"
     },
     {
       "id": "abstract-3-option",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זו אפשרות אחרת",
         "translit": "зо эфшарут ахерет",
-        "ru": "Это другая возможность"
+        "ru": "Это другая возможность",
+        "audio": "/audio/abstract-3-option-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-option.svg"
+      "image": "/words/abstract-3-option.svg",
+      "audio": "/audio/abstract-3-option.mp3"
     },
     {
       "id": "abstract-3-opinion",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זו דעה חשובה",
         "translit": "зо деа хашува",
-        "ru": "Это важное мнение"
+        "ru": "Это важное мнение",
+        "audio": "/audio/abstract-3-opinion-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-opinion.svg"
+      "image": "/words/abstract-3-opinion.svg",
+      "audio": "/audio/abstract-3-opinion.mp3"
     },
     {
       "id": "abstract-3-chance",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זו הזדמנות אחרונה",
         "translit": "зо хиздамнут ахарона",
-        "ru": "Это последний шанс"
+        "ru": "Это последний шанс",
+        "audio": "/audio/abstract-3-chance-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/abstract-3-chance.svg"
+      "image": "/words/abstract-3-chance.svg",
+      "audio": "/audio/abstract-3-chance.mp3"
     }
   ]
 }
