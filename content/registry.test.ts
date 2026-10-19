@@ -16,8 +16,12 @@ describe("реестр уроков (content/registry.ts)", () => {
     expect(allLessons.length).toBe(files.length);
   });
 
-  it("порядок: по ключу темы, затем по номеру урока", () => {
-    const keys = allLessons.map((l) => `${l.topicId}:${String(l.number).padStart(4, "0")}`);
-    expect(keys).toEqual([...keys].sort());
+  it("порядок: сначала алфавит, затем по ключу темы и по номеру урока", () => {
+    const keyOf = (l: (typeof allLessons)[number]) => `${l.topicId}:${String(l.number).padStart(4, "0")}`;
+    const alphabet = allLessons.filter((l) => l.topicId === "alphabet").map(keyOf);
+    const rest = allLessons.filter((l) => l.topicId !== "alphabet").map(keyOf);
+    expect(allLessons.slice(0, alphabet.length).map(keyOf)).toEqual(alphabet);
+    expect(alphabet).toEqual([...alphabet].sort());
+    expect(rest).toEqual([...rest].sort());
   });
 });
