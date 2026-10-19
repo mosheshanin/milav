@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "city-2",
+  "topicId": "city",
+  "section": "nouns",
+  "topic": "Город и транспорт",
+  "number": 2,
+  "free": false,
+  "title": "Транспорт",
+  "words": [
+    {
+      "id": "city-2-bus",
+      "he": "אוטובוס",
+      "niqqud": "אוֹטוֹבּוּס",
+      "translit": "отобу́с",
+      "ru": "автобус",
+      "gender": "m",
+      "example": {
+        "he": "זה אוטובוס מלא",
+        "translit": "зэ отобус мале",
+        "ru": "Это полный автобус"
+      },
+      "image": "/words/city-2-bus.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-taxi",
+      "he": "מונית",
+      "niqqud": "מוֹנִית",
+      "translit": "мони́т",
+      "ru": "такси",
+      "gender": "f",
+      "example": {
+        "he": "זאת מונית יקרה",
+        "translit": "зот монит йекара",
+        "ru": "Это дорогое такси"
+      },
+      "image": "/words/city-2-taxi.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-train",
+      "he": "רכבת",
+      "niqqud": "רַכֶּבֶת",
+      "translit": "раке́вет",
+      "ru": "поезд",
+      "gender": "f",
+      "example": {
+        "he": "זאת רכבת איטית",
+        "translit": "зот ракевет итит",
+        "ru": "Это медленный поезд"
+      },
+      "image": "/words/city-2-train.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-plane",
+      "he": "מטוס",
+      "niqqud": "מָטוֹס",
+      "translit": "мато́с",
+      "ru": "самолёт",
+      "gender": "m",
+      "example": {
+        "he": "זה מטוס מהיר",
+        "translit": "зэ матос махир",
+        "ru": "Это быстрый самолёт"
+      },
+      "image": "/words/city-2-plane.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-bike",
+      "he": "אופניים",
+      "niqqud": "אוֹפַנַּייִם",
+      "translit": "офана́им",
+      "ru": "велосипед",
+      "gender": "m",
+      "example": {
+        "he": "אלה אופניים ישנים",
+        "translit": "эле офанаим йешаним",
+        "ru": "Это старый велосипед"
+      },
+      "image": "/words/city-2-bike.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-motorcycle",
+      "he": "אופנוע",
+      "niqqud": "אוֹפַנּוֹעַ",
+      "translit": "офано́а",
+      "ru": "мотоцикл",
+      "gender": "m",
+      "example": {
+        "he": "זה אופנוע שחור",
+        "translit": "зэ офаноа шахор",
+        "ru": "Это чёрный мотоцикл"
+      },
+      "image": "/words/city-2-motorcycle.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-truck",
+      "he": "משאית",
+      "niqqud": "מַשָּׂאִית",
+      "translit": "маса́ит",
+      "ru": "грузовик",
+      "gender": "f",
+      "example": {
+        "he": "זאת משאית כבדה",
+        "translit": "зот масаит кведа",
+        "ru": "Это тяжёлый грузовик"
+      },
+      "image": "/words/city-2-truck.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-ship",
+      "he": "ספינה",
+      "niqqud": "סְפִינָה",
+      "translit": "сфина́",
+      "ru": "корабль",
+      "gender": "f",
+      "example": {
+        "he": "זאת ספינה גדולה",
+        "translit": "зот сфина гдола",
+        "ru": "Это большой корабль"
+      },
+      "image": "/words/city-2-ship.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-tram",
+      "he": "חשמלית",
+      "niqqud": "חַשְׁמַלִּית",
+      "translit": "хашмали́т",
+      "ru": "трамвай",
+      "gender": "f",
+      "example": {
+        "he": "זאת חשמלית חדשה",
+        "translit": "зот хашмалит хадаша",
+        "ru": "Это новый трамвай"
+      },
+      "image": "/words/city-2-tram.svg",
+      "reviewed": false
+    },
+    {
+      "id": "city-2-scooter",
+      "he": "קורקינט",
+      "niqqud": "קוֹרְקִינֵט",
+      "translit": "коркине́т",
+      "ru": "самокат",
+      "gender": "m",
+      "example": {
+        "he": "זה קורקינט קטן",
+        "translit": "зэ коркинет катан",
+        "ru": "Это маленький самокат"
+      },
+      "image": "/words/city-2-scooter.svg",
+      "reviewed": false
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import lesson_body_1 from "./lessons/body-1.json";
 import lesson_body_2 from "./lessons/body-2.json";
 import lesson_body_3 from "./lessons/body-3.json";
 import lesson_city_1 from "./lessons/city-1.json";
+import lesson_city_2 from "./lessons/city-2.json";
 import lesson_colors_1 from "./lessons/colors-1.json";
 import lesson_family_1 from "./lessons/family-1.json";
 import lesson_family_2 from "./lessons/family-2.json";
@@ -63,6 +64,7 @@ export const lessonFiles: unknown[] = [
   lesson_body_2,
   lesson_body_3,
   lesson_city_1,
+  lesson_city_2,
   lesson_colors_1,
   lesson_family_1,
   lesson_family_2,

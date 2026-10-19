@@ -223,6 +223,23 @@
       "v": "e425cadd93"
     },
     {
+      "id": "city-2",
+      "topicId": "city",
+      "section": "nouns",
+      "topic": "Город и транспорт",
+      "number": 2,
+      "free": false,
+      "title": "Транспорт",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "09cd519b86"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -887,8 +904,8 @@
     }
   ],
   "info": {
-    "totalWords": 440,
-    "totalLessons": 50,
+    "totalWords": 450,
+    "totalLessons": 51,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -918,7 +935,8 @@
         "id": "city",
         "title": "Город и транспорт",
         "lessonIds": [
-          "city-1"
+          "city-1",
+          "city-2"
         ]
       },
       {
