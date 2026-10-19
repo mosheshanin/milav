@@ -101,7 +101,9 @@ describe("генератор форм пааль: отказ на неподхо
     ["הרג", "гортанная ה в начале"],
     ["אמר", "слабая א в начале"],
     ["עבח", "гортанные в начале и в конце"],
-    ["שעב", "гортанная посередине"],
+    ["בחע", "гортанные посередине и в конце сразу"],
+    ["עחר", "гортанные в начале и посередине сразу"],
+    ["אחר", "א в начале (слабый корень)"],
     ["נסע", "נ в начале и ע"],
     ["שמח", "пишется с син"],
     ["בנה", "слабая ה"],
@@ -125,10 +127,10 @@ describe("генератор форм пааль: отказ на неподхо
 });
 
 describe("уроки пааль: составлены генератором", () => {
-  it("4 урока по 10 глаголов, все корни разные, все ключи и ru заданы", () => {
-    expect(PAAL_LESSONS).toHaveLength(4);
+  it("5 уроков по 10 глаголов, все корни разные, все ключи и ru заданы", () => {
+    expect(PAAL_LESSONS).toHaveLength(5);
     for (const lesson of PAAL_LESSONS) expect(lesson.verbs).toHaveLength(10);
-    expect(new Set(ROOTS).size).toBe(40);
+    expect(new Set(ROOTS).size).toBe(50);
     for (const lesson of PAAL_LESSONS) {
       const keys = lesson.verbs.map((v) => v.key);
       expect(new Set(keys).size).toBe(10);
@@ -137,7 +139,7 @@ describe("уроки пааль: составлены генератором", (
 
   it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
     for (const root of ROOTS) expect(paalRootProblems(root), root).toEqual([]);
-    for (let n = 1; n <= 4; n++) {
+    for (let n = 1; n <= 5; n++) {
       const lesson = buildPaalLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
       for (const word of lesson.words) {
         expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
@@ -169,12 +171,12 @@ describe("уроки пааль: составлены генератором", (
     expect(dance.example.he).toContain(dance.verb.present.fs.he);
   });
 
-  it("урок 1 бесплатный, 2–4 платные, id paal-<номер>, тема «Пааль» раздел verbs", () => {
-    for (let n = 1; n <= 4; n++) {
+  it("урок 1 бесплатный, 2–5 платные, id paal-<номер>, тема «Пааль» раздел verbs", () => {
+    for (let n = 1; n <= 5; n++) {
       const lesson = buildPaalLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string };
       expect(lesson).toMatchObject({ id: `paal-${n}`, free: n === 1, topicId: "paal", section: "verbs", topic: "Пааль" });
     }
-    expect(() => buildPaalLesson(5)).toThrow();
+    expect(() => buildPaalLesson(6)).toThrow();
   });
 });
 
@@ -232,6 +234,124 @@ describe("генератор форм пааль: гортанные корни 
 
   it("корень стоит в каждой форме, проверки глаголов проходят (в том числе у עזב, עזר, עמד, сверенных по pealim.com только частично)", () => {
     for (const root of Object.keys(TABLES).concat(["עזב", "עזר", "עמד"])) {
+      const { infinitive, verb } = conjugatePaal(root);
+      expect(verbProblems(infinitive.he, verb), root).toEqual([]);
+    }
+  });
+});
+
+describe("генератор форм пааль: патах в будущем и гортанная посередине (19.10, «Пааль 5»)", () => {
+  /**
+   * Таблицы сверены с pealim.com форма в форму скриптом-сравнением (11 корней по 28 форм, 308 сверок: инфинитив и повелительное ms записаны
+   * с буквой ו, как везде в уроках; в будущем 3fp у нас יִ-, у pealim תִּ-). У מחק и דחפ pealim даёт холам основным вариантом (יִמְחֹק),
+   * патах запасным; у остальных пяти корней со второй гортанной патах (יִבְחַר). Порядок форм как в блоке «Пааль 4».
+   */
+  const TABLES: Record<string, string> = {
+    למד: "לִלְמוֹד לוֹמֵד לוֹמֶדֶת לוֹמְדִים לוֹמְדוֹת לָמַדְתִּי לָמַדְתָּ לָמַדְתְּ לָמַד לָמְדָה לָמַדְנוּ לְמַדְתֶּם לְמַדְתֶּן לָמְדוּ אֶלְמַד תִּלְמַד תִּלְמְדִי יִלְמַד תִּלְמַד נִלְמַד תִּלְמְדוּ תִּלְמַדְנָה יִלְמְדוּ יִלְמַדְנָה לְמַד לִמְדִי לִמְדוּ לְמַדְנָה",
+    לבש: "לִלְבּוֹשׁ לוֹבֵשׁ לוֹבֶשֶׁת לוֹבְשִׁים לוֹבְשׁוֹת לָבַשְׁתִּי לָבַשְׁתָּ לָבַשְׁתְּ לָבַשׁ לָבְשָׁה לָבַשְׁנוּ לְבַשְׁתֶּם לְבַשְׁתֶּן לָבְשׁוּ אֶלְבַּשׁ תִּלְבַּשׁ תִּלְבְּשִׁי יִלְבַּשׁ תִּלְבַּשׁ נִלְבַּשׁ תִּלְבְּשׁוּ תִּלְבַּשְׁנָה יִלְבְּשׁוּ יִלְבַּשְׁנָה לְבַשׁ לִבְשִׁי לִבְשׁוּ לְבַשְׁנָה",
+    שכב: "לִשְׁכַּב שׁוֹכֵב שׁוֹכֶבֶת שׁוֹכְבִים שׁוֹכְבוֹת שָׁכַבְתִּי שָׁכַבְתָּ שָׁכַבְתְּ שָׁכַב שָׁכְבָה שָׁכַבְנוּ שְׁכַבְתֶּם שְׁכַבְתֶּן שָׁכְבוּ אֶשְׁכַּב תִּשְׁכַּב תִּשְׁכְּבִי יִשְׁכַּב תִּשְׁכַּב נִשְׁכַּב תִּשְׁכְּבוּ תִּשְׁכַּבְנָה יִשְׁכְּבוּ יִשְׁכַּבְנָה שְׁכַב שִׁכְבִי שִׁכְבוּ שְׁכַבְנָה",
+    בחר: "לִבְחוֹר בּוֹחֵר בּוֹחֶרֶת בּוֹחֲרִים בּוֹחֲרוֹת בָּחַרְתִּי בָּחַרְתָּ בָּחַרְתְּ בָּחַר בָּחֲרָה בָּחַרְנוּ בְּחַרְתֶּם בְּחַרְתֶּן בָּחֲרוּ אֶבְחַר תִּבְחַר תִּבְחֲרִי יִבְחַר תִּבְחַר נִבְחַר תִּבְחֲרוּ תִּבְחַרְנָה יִבְחֲרוּ יִבְחַרְנָה בְּחַר בַּחֲרִי בַּחֲרוּ בְּחַרְנָה",
+    פחד: "לִפְחוֹד פּוֹחֵד פּוֹחֶדֶת פּוֹחֲדִים פּוֹחֲדוֹת פָּחַדְתִּי פָּחַדְתָּ פָּחַדְתְּ פָּחַד פָּחֲדָה פָּחַדְנוּ פְּחַדְתֶּם פְּחַדְתֶּן פָּחֲדוּ אֶפְחַד תִּפְחַד תִּפְחֲדִי יִפְחַד תִּפְחַד נִפְחַד תִּפְחֲדוּ תִּפְחַדְנָה יִפְחֲדוּ יִפְחַדְנָה פְּחַד פַּחֲדִי פַּחֲדוּ פְּחַדְנָה",
+    מחק: "לִמְחוֹק מוֹחֵק מוֹחֶקֶת מוֹחֲקִים מוֹחֲקוֹת מָחַקְתִּי מָחַקְתָּ מָחַקְתְּ מָחַק מָחֲקָה מָחַקְנוּ מְחַקְתֶּם מְחַקְתֶּן מָחֲקוּ אֶמְחוֹק תִּמְחוֹק תִּמְחֲקִי יִמְחוֹק תִּמְחוֹק נִמְחוֹק תִּמְחֲקוּ תִּמְחֹקְנָה יִמְחֲקוּ יִמְחֹקְנָה מְחוֹק מַחֲקִי מַחֲקוּ מְחֹקְנָה",
+    צחק: "לִצְחוֹק צוֹחֵק צוֹחֶקֶת צוֹחֲקִים צוֹחֲקוֹת צָחַקְתִּי צָחַקְתָּ צָחַקְתְּ צָחַק צָחֲקָה צָחַקְנוּ צְחַקְתֶּם צְחַקְתֶּן צָחֲקוּ אֶצְחַק תִּצְחַק תִּצְחֲקִי יִצְחַק תִּצְחַק נִצְחַק תִּצְחֲקוּ תִּצְחַקְנָה יִצְחֲקוּ יִצְחַקְנָה צְחַק צַחֲקִי צַחֲקוּ צְחַקְנָה",
+    רחצ: "לִרְחוֹץ רוֹחֵץ רוֹחֶצֶת רוֹחֲצִים רוֹחֲצוֹת רָחַצְתִּי רָחַצְתָּ רָחַצְתְּ רָחַץ רָחֲצָה רָחַצְנוּ רְחַצְתֶּם רְחַצְתֶּן רָחֲצוּ אֶרְחַץ תִּרְחַץ תִּרְחֲצִי יִרְחַץ תִּרְחַץ נִרְחַץ תִּרְחֲצוּ תִּרְחַצְנָה יִרְחֲצוּ יִרְחַצְנָה רְחַץ רַחֲצִי רַחֲצוּ רְחַצְנָה",
+    בעט: "לִבְעוֹט בּוֹעֵט בּוֹעֶטֶת בּוֹעֲטִים בּוֹעֲטוֹת בָּעַטְתִּי בָּעַטְתָּ בָּעַטְתְּ בָּעַט בָּעֲטָה בָּעַטְנוּ בְּעַטְתֶּם בְּעַטְתֶּן בָּעֲטוּ אֶבְעַט תִּבְעַט תִּבְעֲטִי יִבְעַט תִּבְעַט נִבְעַט תִּבְעֲטוּ תִּבְעַטְנָה יִבְעֲטוּ יִבְעַטְנָה בְּעַט בַּעֲטִי בַּעֲטוּ בְּעַטְנָה",
+    צעק: "לִצְעוֹק צוֹעֵק צוֹעֶקֶת צוֹעֲקִים צוֹעֲקוֹת צָעַקְתִּי צָעַקְתָּ צָעַקְתְּ צָעַק צָעֲקָה צָעַקְנוּ צְעַקְתֶּם צְעַקְתֶּן צָעֲקוּ אֶצְעַק תִּצְעַק תִּצְעֲקִי יִצְעַק תִּצְעַק נִצְעַק תִּצְעֲקוּ תִּצְעַקְנָה יִצְעֲקוּ יִצְעַקְנָה צְעַק צַעֲקִי צַעֲקוּ צְעַקְנָה",
+    דחפ: "לִדְחוֹף דּוֹחֵף דּוֹחֶפֶת דּוֹחֲפִים דּוֹחֲפוֹת דָּחַפְתִּי דָּחַפְתָּ דָּחַפְתְּ דָּחַף דָּחֲפָה דָּחַפְנוּ דְּחַפְתֶּם דְּחַפְתֶּן דָּחֲפוּ אֶדְחוֹף תִּדְחוֹף תִּדְחֲפִי יִדְחוֹף תִּדְחוֹף נִדְחוֹף תִּדְחֲפוּ תִּדְחֹפְנָה יִדְחֲפוּ יִדְחֹפְנָה דְּחוֹף דַּחֲפִי דַּחֲפוּ דְּחֹפְנָה",
+  };
+  const niqquds = (root: string): string[] => {
+    const { infinitive, verb } = conjugatePaal(root);
+    return [infinitive.niqqud, ...(["present", "past", "future", "imperative"] as const).flatMap((t) => Object.values(verb[t]!).map((f) => f.niqqud))];
+  };
+  const form = (root: string, tense: "present" | "past" | "future" | "imperative", key: string) => {
+    const set = conjugatePaal(root).verb[tense] as Record<string, { he: string; niqqud: string; translit: string }>;
+    return set[key]!;
+  };
+  const same = (actual: string, expected: string) => expect(actual.normalize("NFD")).toBe(expected.normalize("NFD"));
+
+  for (const [root, table] of Object.entries(TABLES)) {
+    it(`корень ${root}: все 27 форм и инфинитив совпадают с таблицей pealim.com`, () => {
+      expect(niqquds(root).map((x) => x.normalize("NFD"))).toEqual(table.split(" ").map((x) => x.normalize("NFD")));
+    });
+  }
+
+  it("негортанные корни с патахом в будущем: יִלְמַד, повелительное לְמַד, 2fs תִּלְמְדִי, fp תִּלְמַדְנָה; инфинитив с холамом", () => {
+    same(form("למד", "future", "3ms").niqqud, "יִלְמַד");
+    same(form("למד", "future", "2fs").niqqud, "תִּלְמְדִי");
+    same(form("למד", "future", "2fp").niqqud, "תִּלְמַדְנָה");
+    same(form("למד", "imperative", "ms").niqqud, "לְמַד");
+    same(form("למד", "imperative", "fp").niqqud, "לְמַדְנָה");
+    same(conjugatePaal("למד").infinitive.niqqud, "לִלְמוֹד");
+    same(conjugatePaal("לבש").infinitive.niqqud, "לִלְבּוֹשׁ");
+    // ב после немой шва с дагешем (תִּלְבְּשִׁי, אֶלְבַּשׁ), в повелительном ms после подвижной шва без дагеша (לְבַשׁ)
+    same(form("לבש", "future", "2fs").niqqud, "תִּלְבְּשִׁי");
+    same(form("לבש", "future", "1s").niqqud, "אֶלְבַּשׁ");
+    same(form("לבש", "imperative", "ms").niqqud, "לְבַשׁ");
+    expect(form("למד", "future", "3ms").translit).toBe("илма́д");
+    expect(form("למד", "future", "2fs").translit).toBe("тилмди́");
+    expect(form("למד", "future", "2fp").translit).toBe("тилма́дна");
+    expect(form("למד", "imperative", "fp").translit).toBe("лма́дна");
+    expect(conjugatePaal("למד").infinitive.translit).toBe("лилмо́д");
+  });
+
+  it("у לשכב инфинитив с патахом: לִשְׁכַּב, а не לִשְׁכֹּב (исключение из списка PATAH_INFINITIVE)", () => {
+    same(conjugatePaal("שכב").infinitive.niqqud, "לִשְׁכַּב");
+    expect(conjugatePaal("שכב").infinitive.he).toBe("לשכב");
+    expect(conjugatePaal("שכב").infinitive.translit).toBe("лишка́в");
+    same(form("שכב", "future", "3ms").niqqud, "יִשְׁכַּב");
+    same(form("שכב", "imperative", "ms").niqqud, "שְׁכַב");
+    expect(conjugatePaal("שכב").verb.imperative!.ms.translit).toBe("шхав");
+  });
+
+  it("вторая ח или ע: хатаф-патах там, где у других подвижная шва; в повелительном fs и mp патах под первой буквой", () => {
+    same(form("בחר", "present", "mp").niqqud, "בּוֹחֲרִים");
+    same(form("בחר", "past", "3fs").niqqud, "בָּחֲרָה");
+    same(form("בחר", "past", "3p").niqqud, "בָּחֲרוּ");
+    same(form("בחר", "future", "2fs").niqqud, "תִּבְחֲרִי");
+    same(form("בחר", "imperative", "fs").niqqud, "בַּחֲרִי");
+    same(form("בחר", "imperative", "ms").niqqud, "בְּחַר");
+    same(form("בחר", "imperative", "fp").niqqud, "בְּחַרְנָה");
+    expect(form("בחר", "present", "mp").translit).toBe("бохари́м");
+    expect(form("בחר", "past", "3fs").translit).toBe("бахара́");
+    expect(form("בחר", "future", "2fs").translit).toBe("тивхари́");
+    expect(form("בעט", "present", "mp").translit).toBe("боати́м");
+    expect(form("בעט", "future", "2fs").translit).toBe("тивати́");
+    // у остальных форм со шва ничего не меняется: בָּחַרְתִּי, בְּחַרְתֶּם
+    same(form("בחר", "past", "1s").niqqud, "בָּחַרְתִּי");
+    same(form("בחר", "past", "2mp").niqqud, "בְּחַרְתֶּם");
+  });
+
+  it("со второй гортанной патах в будущем (יִבְחַר, יִצְחַק), а у מחק и דחף холам (יִמְחֹק, יִדְחֹף), как основной вариант pealim.com", () => {
+    for (const root of ["בחר", "פחד", "צחק", "רחצ", "בעט", "צעק"]) {
+      const niqqud = form(root, "future", "3ms").niqqud.normalize("NFD");
+      expect(niqqud.endsWith("\u05B7" + niqqud.at(-1)), root).toBe(true); // патах перед последней буквой
+    }
+    same(form("מחק", "future", "3ms").niqqud, "יִמְחוֹק");
+    same(form("מחק", "future", "2fp").niqqud, "תִּמְחֹקְנָה");
+    same(form("מחק", "imperative", "ms").niqqud, "מְחוֹק");
+    same(form("דחפ", "future", "1s").niqqud, "אֶדְחוֹף");
+    expect(form("מחק", "future", "3ms").translit).toBe("имхо́к");
+    expect(form("מחק", "future", "2fs").translit).toBe("тимхаки́");
+  });
+
+  it("ט и ת подряд читаются одним «т»: בָּעַטְתִּי «баа́ти», בָּעַטְתְּ «баа́т», а написание остаётся полным", () => {
+    expect(form("בעט", "past", "1s").translit).toBe("баа́ти");
+    expect(form("בעט", "past", "2ms").translit).toBe("баа́та");
+    expect(form("בעט", "past", "2fs").translit).toBe("баа́т");
+    expect(form("בעט", "past", "2mp").translit).toBe("бате́м");
+    expect(form("בעט", "past", "1p").translit).toBe("баа́тну");
+    expect(form("בעט", "past", "1s").he).toBe("בעטתי");
+    // у корня без такого стыка ничего не меняется
+    expect(form("צעק", "past", "1s").translit).toBe("цаа́кти");
+  });
+
+  it("новые корни проходят проверку генератора, а плохие отклоняются", () => {
+    for (const root of Object.keys(TABLES)) expect(paalRootProblems(root), root).toEqual([]);
+    for (const root of ["בחע", "עחר", "אחר", "נחר", "חחר"]) expect(paalRootProblems(root).length, root).toBeGreaterThan(0);
+  });
+
+  it("корень стоит в каждой форме, проверки глаголов проходят у всех корней урока", () => {
+    for (const root of Object.keys(TABLES)) {
       const { infinitive, verb } = conjugatePaal(root);
       expect(verbProblems(infinitive.he, verb), root).toEqual([]);
     }

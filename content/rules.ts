@@ -89,7 +89,8 @@ export function skeletonProblems(he: string, translit: string): string[] {
   for (const letter of [...he]) {
     const variants = CONSONANTS[letter];
     if (!variants) continue;
-    const doubled = letter === previous;
+    // Удвоение и соседние буквы с одним звуком (ט и ת в בָּעַטְתִּי «баа́ти») в транскрипции пишутся один раз.
+    const doubled = letter === previous || (previous !== "" && CONSONANTS[previous]?.join() === variants.join());
     previous = letter;
     let best: { end: number } | undefined;
     for (const variant of variants) {
