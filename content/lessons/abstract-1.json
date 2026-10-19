@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "id": "abstract-1",
+  "topicId": "abstract",
+  "section": "nouns",
+  "topic": "Частые абстрактные слова",
+  "number": 1,
+  "free": true,
+  "title": "Самые нужные",
+  "words": [
+    {
+      "id": "abstract-1-day",
+      "he": "יום",
+      "niqqud": "יוֹם",
+      "translit": "йом",
+      "ru": "день",
+      "gender": "m",
+      "example": {
+        "he": "זה יום יפה",
+        "translit": "зэ йом яфэ",
+        "ru": "Это красивый день"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-day.svg"
+    },
+    {
+      "id": "abstract-1-year",
+      "he": "שנה",
+      "niqqud": "שָׁנָה",
+      "translit": "шана́",
+      "ru": "год",
+      "gender": "f",
+      "example": {
+        "he": "זו שנה טובה",
+        "translit": "зо шана това",
+        "ru": "Это хороший год"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-year.svg"
+    },
+    {
+      "id": "abstract-1-time",
+      "he": "זמן",
+      "niqqud": "זְמַן",
+      "translit": "зман",
+      "ru": "время",
+      "gender": "m",
+      "example": {
+        "he": "זה זמן טוב",
+        "translit": "зэ зман тов",
+        "ru": "Это хорошее время"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-1-place",
+      "he": "מקום",
+      "niqqud": "מָקוֹם",
+      "translit": "мако́м",
+      "ru": "место",
+      "gender": "m",
+      "example": {
+        "he": "זה מקום יפה",
+        "translit": "зэ маком яфэ",
+        "ru": "Это красивое место"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-1-thing",
+      "he": "דבר",
+      "niqqud": "דָּבָר",
+      "translit": "дава́р",
+      "ru": "вещь",
+      "gender": "m",
+      "example": {
+        "he": "זה דבר חשוב",
+        "translit": "зэ давар хашув",
+        "ru": "Это важная вещь"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-thing.svg"
+    },
+    {
+      "id": "abstract-1-word",
+      "he": "מילה",
+      "niqqud": "מִילָּה",
+      "translit": "мила́",
+      "ru": "слово",
+      "gender": "f",
+      "example": {
+        "he": "זו מילה חדשה",
+        "translit": "зо мила хадаша",
+        "ru": "Это новое слово"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-word.svg"
+    },
+    {
+      "id": "abstract-1-question",
+      "he": "שאלה",
+      "niqqud": "שְׁאֵלָה",
+      "translit": "шээла́",
+      "ru": "вопрос",
+      "gender": "f",
+      "example": {
+        "he": "זו שאלה קשה",
+        "translit": "зо шээла каша",
+        "ru": "Это трудный вопрос"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-question.svg"
+    },
+    {
+      "id": "abstract-1-life",
+      "he": "חיים",
+      "niqqud": "חַיִּים",
+      "translit": "хаи́м",
+      "ru": "жизнь",
+      "gender": "m",
+      "example": {
+        "he": "אלה חיים טובים",
+        "translit": "эле хаим товим",
+        "ru": "Это хорошая жизнь"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-life.svg"
+    },
+    {
+      "id": "abstract-1-problem",
+      "he": "בעיה",
+      "niqqud": "בְּעָיָה",
+      "translit": "беайя́",
+      "ru": "проблема",
+      "gender": "f",
+      "example": {
+        "he": "זו בעיה גדולה",
+        "translit": "зо беайя гдола",
+        "ru": "Это большая проблема"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-problem.svg"
+    },
+    {
+      "id": "abstract-1-world",
+      "he": "עולם",
+      "niqqud": "עוֹלָם",
+      "translit": "ола́м",
+      "ru": "мир",
+      "gender": "m",
+      "example": {
+        "he": "זה עולם גדול",
+        "translit": "зэ олам гадоль",
+        "ru": "Это большой мир"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-1-world.svg"
+    }
+  ]
+}
