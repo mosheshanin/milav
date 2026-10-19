@@ -1,0 +1,158 @@
+{
+  "$schema": "../schema.json",
+  "id": "abstract-2",
+  "topicId": "abstract",
+  "section": "nouns",
+  "topic": "Частые абстрактные слова",
+  "number": 2,
+  "free": false,
+  "title": "Ещё нужнее",
+  "words": [
+    {
+      "id": "abstract-2-once",
+      "he": "פעם",
+      "niqqud": "פַּעַם",
+      "translit": "па́ам",
+      "ru": "раз",
+      "gender": "f",
+      "example": {
+        "he": "זו פעם ראשונה",
+        "translit": "зо паам ришона",
+        "ru": "Это первый раз"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-2-reason",
+      "he": "סיבה",
+      "niqqud": "סִיבָּה",
+      "translit": "сиба́",
+      "ru": "причина",
+      "gender": "f",
+      "example": {
+        "he": "זו סיבה טובה",
+        "translit": "зо сиба това",
+        "ru": "Это хорошая причина"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-2-idea",
+      "he": "רעיון",
+      "niqqud": "רַעְיוֹן",
+      "translit": "раайо́н",
+      "ru": "идея",
+      "gender": "m",
+      "example": {
+        "he": "זה רעיון טוב",
+        "translit": "зэ раайон тов",
+        "ru": "Это хорошая идея"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-idea.svg"
+    },
+    {
+      "id": "abstract-2-truth",
+      "he": "אמת",
+      "niqqud": "אֱמֶת",
+      "translit": "э́мет",
+      "ru": "правда",
+      "gender": "f",
+      "example": {
+        "he": "זו אמת קשה",
+        "translit": "зо эмет каша",
+        "ru": "Это тяжёлая правда"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-2-help",
+      "he": "עזרה",
+      "niqqud": "עֶזְרָה",
+      "translit": "эзра́",
+      "ru": "помощь",
+      "gender": "f",
+      "example": {
+        "he": "זו עזרה גדולה",
+        "translit": "зо эзра гдола",
+        "ru": "Это большая помощь"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-help.svg"
+    },
+    {
+      "id": "abstract-2-decision",
+      "he": "החלטה",
+      "niqqud": "הַחְלָטָה",
+      "translit": "хахлата́",
+      "ru": "решение",
+      "gender": "f",
+      "example": {
+        "he": "זו החלטה טובה",
+        "translit": "зо хахлата това",
+        "ru": "Это хорошее решение"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-decision.svg"
+    },
+    {
+      "id": "abstract-2-mistake",
+      "he": "טעות",
+      "niqqud": "טָעוּת",
+      "translit": "тау́т",
+      "ru": "ошибка",
+      "gender": "f",
+      "example": {
+        "he": "זו טעות קטנה",
+        "translit": "зо таут катана",
+        "ru": "Это маленькая ошибка"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-mistake.svg"
+    },
+    {
+      "id": "abstract-2-answer",
+      "he": "תשובה",
+      "niqqud": "תְּשׁוּבָה",
+      "translit": "тшува́",
+      "ru": "ответ",
+      "gender": "f",
+      "example": {
+        "he": "זו תשובה נכונה",
+        "translit": "зо тшува нехона",
+        "ru": "Это правильный ответ"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "abstract-2-story",
+      "he": "סיפור",
+      "niqqud": "סִיפּוּר",
+      "translit": "сипу́р",
+      "ru": "история",
+      "gender": "m",
+      "example": {
+        "he": "זה סיפור ארוך",
+        "translit": "зэ сипур арох",
+        "ru": "Это длинная история"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-story.svg"
+    },
+    {
+      "id": "abstract-2-goal",
+      "he": "מטרה",
+      "niqqud": "מַטָּרָה",
+      "translit": "матара́",
+      "ru": "цель",
+      "gender": "f",
+      "example": {
+        "he": "זו מטרה חשובה",
+        "translit": "зо матара хашува",
+        "ru": "Это важная цель"
+      },
+      "reviewed": false,
+      "image": "/words/abstract-2-goal.svg"
+    }
+  ]
+}

@@ -155,6 +155,23 @@
       "v": "e2f157365e"
     },
     {
+      "id": "abstract-2",
+      "topicId": "abstract",
+      "section": "nouns",
+      "topic": "Частые абстрактные слова",
+      "number": 2,
+      "free": false,
+      "title": "Ещё нужнее",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "6c32070189"
+    },
+    {
       "id": "animals-1",
       "topicId": "animals",
       "section": "nouns",
@@ -938,8 +955,8 @@
     }
   ],
   "info": {
-    "totalWords": 470,
-    "totalLessons": 53,
+    "totalWords": 480,
+    "totalLessons": 54,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -953,7 +970,8 @@
         "id": "abstract",
         "title": "Частые абстрактные слова",
         "lessonIds": [
-          "abstract-1"
+          "abstract-1",
+          "abstract-2"
         ]
       },
       {
