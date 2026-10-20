@@ -6,7 +6,7 @@
 // Урок алфавита: --topic-id alphabet --number N --title "Название" (буквы урока заданы ALPHABET_GROUPS, --keys не нужен).
 import { existsSync, writeFileSync } from "node:fs";
 import { parseArgs } from "node:util";
-import { ALPHABET_GROUPS, ALPHABET_SECTION, ALPHABET_TOPIC_ID, type Section } from "@milav/shared";
+import { ALPHABET_GROUPS, ALPHABET_SECTION, ALPHABET_TOPIC_ID, FREE_LESSONS_PER_TOPIC, type Section } from "@milav/shared";
 import { alphabetLessons, lessons } from "../content";
 import {
   alphabetTemplateProblems,
@@ -88,7 +88,7 @@ if (existsSync(file)) {
 writeFileSync(file, JSON.stringify(buildLessonTemplate(options), null, 2) + "\n");
 writeContentIndex();
 
-console.log(`Создано: content/lessons/${id}.json (бесплатный: ${options.number <= 3 ? "да" : "нет"}), реестр обновлён.`);
+console.log(`Создано: content/lessons/${id}.json (бесплатный: ${options.number <= FREE_LESSONS_PER_TOPIC ? "да" : "нет"}), реестр обновлён.`);
 console.log("Дальше: заполнить пустые поля (he, niqqud, translit, ru, пример), добавить image при наличии,");
 console.log("проверить `npm run validate:content`, озвучить через workflow «Озвучка слов» (docs/AUDIO.md).");
 if (options.section === "verbs") {

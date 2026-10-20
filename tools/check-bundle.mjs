@@ -32,7 +32,8 @@ for (const file of readdirSync(lessonsDir).filter((f) => f.endsWith(".json"))) {
   if (lesson.section === "alphabet") continue;
   for (const word of lesson.words ?? []) {
     markers.push({ lesson: lesson.id, what: `id ${word.id}`, needle: `"${word.id}"` });
-    if (word.niqqud && word.niqqud.length >= 3) markers.push({ lesson: lesson.id, what: `слово ${word.niqqud}`, needle: word.niqqud });
+    // Короткие написания (עַל, אֵם) встречаются в служебных текстах приложения (נִפְעַל), поэтому их не берём: утечку урока всё равно выдаёт id слова.
+    if (word.niqqud && word.niqqud.length >= 5) markers.push({ lesson: lesson.id, what: `слово ${word.niqqud}`, needle: word.niqqud });
   }
 }
 
