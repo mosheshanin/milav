@@ -18,10 +18,12 @@
       "example": {
         "he": "זו נעל חדשה",
         "translit": "зо нааль хадаша",
-        "ru": "Это новая туфля"
+        "ru": "Это новая туфля",
+        "audio": "/audio/clothes-2-shoe-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-shoe.svg"
+      "image": "/words/clothes-2-shoe.svg",
+      "audio": "/audio/clothes-2-shoe.mp3"
     },
     {
       "id": "clothes-2-sandal",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה סנדל נוח",
         "translit": "зэ сандаль ноах",
-        "ru": "Это удобная сандалия"
+        "ru": "Это удобная сандалия",
+        "audio": "/audio/clothes-2-sandal-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-sandal.svg"
+      "image": "/words/clothes-2-sandal.svg",
+      "audio": "/audio/clothes-2-sandal.mp3"
     },
     {
       "id": "clothes-2-boot",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה מגף גבוה",
         "translit": "зэ магаф гавоах",
-        "ru": "Это высокий сапог"
+        "ru": "Это высокий сапог",
+        "audio": "/audio/clothes-2-boot-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-boot.svg"
+      "image": "/words/clothes-2-boot.svg",
+      "audio": "/audio/clothes-2-boot.mp3"
     },
     {
       "id": "clothes-2-hat",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה כובע חם",
         "translit": "зэ кова хам",
-        "ru": "Это тёплая шапка"
+        "ru": "Это тёплая шапка",
+        "audio": "/audio/clothes-2-hat-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-hat.svg"
+      "image": "/words/clothes-2-hat.svg",
+      "audio": "/audio/clothes-2-hat.mp3"
     },
     {
       "id": "clothes-2-scarf",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה צעיף ארוך",
         "translit": "зэ цаиф арох",
-        "ru": "Это длинный шарф"
+        "ru": "Это длинный шарф",
+        "audio": "/audio/clothes-2-scarf-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-scarf.svg"
+      "image": "/words/clothes-2-scarf.svg",
+      "audio": "/audio/clothes-2-scarf.mp3"
     },
     {
       "id": "clothes-2-glove",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זו כפפה שחורה",
         "translit": "зо кфафа шхора",
-        "ru": "Это чёрная перчатка"
+        "ru": "Это чёрная перчатка",
+        "audio": "/audio/clothes-2-glove-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-glove.svg"
+      "image": "/words/clothes-2-glove.svg",
+      "audio": "/audio/clothes-2-glove.mp3"
     },
     {
       "id": "clothes-2-belt",
@@ -108,9 +120,11 @@
       "example": {
         "he": "זו חגורה חדשה",
         "translit": "зо хагора хадаша",
-        "ru": "Это новый ремень"
+        "ru": "Это новый ремень",
+        "audio": "/audio/clothes-2-belt-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-2-belt.mp3"
     },
     {
       "id": "clothes-2-bag",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זה תיק כבד",
         "translit": "зэ тик кавед",
-        "ru": "Это тяжёлая сумка"
+        "ru": "Это тяжёлая сумка",
+        "audio": "/audio/clothes-2-bag-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-bag.svg"
+      "image": "/words/clothes-2-bag.svg",
+      "audio": "/audio/clothes-2-bag.mp3"
     },
     {
       "id": "clothes-2-wallet",
@@ -137,10 +153,12 @@
       "example": {
         "he": "זה ארנק קטן",
         "translit": "зэ арнак катан",
-        "ru": "Это маленький кошелёк"
+        "ru": "Это маленький кошелёк",
+        "audio": "/audio/clothes-2-wallet-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-wallet.svg"
+      "image": "/words/clothes-2-wallet.svg",
+      "audio": "/audio/clothes-2-wallet.mp3"
     },
     {
       "id": "clothes-2-ring",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זו טבעת יפה",
         "translit": "зо табаат яфа",
-        "ru": "Это красивое кольцо"
+        "ru": "Это красивое кольцо",
+        "audio": "/audio/clothes-2-ring-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-2-ring.svg"
+      "image": "/words/clothes-2-ring.svg",
+      "audio": "/audio/clothes-2-ring.mp3"
     }
   ]
 }

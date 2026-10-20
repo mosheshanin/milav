@@ -18,10 +18,12 @@
       "example": {
         "he": "זו חולצה חדשה",
         "translit": "зо хульца хадаша",
-        "ru": "Это новая рубашка"
+        "ru": "Это новая рубашка",
+        "audio": "/audio/clothes-1-shirt-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-shirt.svg"
+      "image": "/words/clothes-1-shirt.svg",
+      "audio": "/audio/clothes-1-shirt.mp3"
     },
     {
       "id": "clothes-1-dress",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו שמלה יפה",
         "translit": "зо симла яфа",
-        "ru": "Это красивое платье"
+        "ru": "Это красивое платье",
+        "audio": "/audio/clothes-1-dress-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-dress.svg"
+      "image": "/words/clothes-1-dress.svg",
+      "audio": "/audio/clothes-1-dress.mp3"
     },
     {
       "id": "clothes-1-skirt",
@@ -48,9 +52,11 @@
       "example": {
         "he": "זו חצאית קצרה",
         "translit": "зо хацаит кцара",
-        "ru": "Это короткая юбка"
+        "ru": "Это короткая юбка",
+        "audio": "/audio/clothes-1-skirt-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-1-skirt.mp3"
     },
     {
       "id": "clothes-1-coat",
@@ -62,10 +68,12 @@
       "example": {
         "he": "זה מעיל חם",
         "translit": "зэ меиль хам",
-        "ru": "Это тёплое пальто"
+        "ru": "Это тёплое пальто",
+        "audio": "/audio/clothes-1-coat-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-coat.svg"
+      "image": "/words/clothes-1-coat.svg",
+      "audio": "/audio/clothes-1-coat.mp3"
     },
     {
       "id": "clothes-1-sweater",
@@ -77,10 +85,12 @@
       "example": {
         "he": "זה סוודר כחול",
         "translit": "зэ сведер кахоль",
-        "ru": "Это синий свитер"
+        "ru": "Это синий свитер",
+        "audio": "/audio/clothes-1-sweater-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-sweater.svg"
+      "image": "/words/clothes-1-sweater.svg",
+      "audio": "/audio/clothes-1-sweater.mp3"
     },
     {
       "id": "clothes-1-suit",
@@ -92,10 +102,12 @@
       "example": {
         "he": "זו חליפה שחורה",
         "translit": "зо халифа шхора",
-        "ru": "Это чёрный костюм"
+        "ru": "Это чёрный костюм",
+        "audio": "/audio/clothes-1-suit-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-suit.svg"
+      "image": "/words/clothes-1-suit.svg",
+      "audio": "/audio/clothes-1-suit.mp3"
     },
     {
       "id": "clothes-1-tank",
@@ -107,10 +119,12 @@
       "example": {
         "he": "זו גופיה לבנה",
         "translit": "зо гуфия лавана",
-        "ru": "Это белая майка"
+        "ru": "Это белая майка",
+        "audio": "/audio/clothes-1-tank-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-tank.svg"
+      "image": "/words/clothes-1-tank.svg",
+      "audio": "/audio/clothes-1-tank.mp3"
     },
     {
       "id": "clothes-1-garment",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זה בגד חדש",
         "translit": "зэ бегед хадаш",
-        "ru": "Это новый предмет одежды"
+        "ru": "Это новый предмет одежды",
+        "audio": "/audio/clothes-1-garment-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-garment.svg"
+      "image": "/words/clothes-1-garment.svg",
+      "audio": "/audio/clothes-1-garment.mp3"
     },
     {
       "id": "clothes-1-pants",
@@ -137,10 +153,12 @@
       "example": {
         "he": "אלה מכנסיים חדשים",
         "translit": "эле михнасаим хадашим",
-        "ru": "Это новые брюки"
+        "ru": "Это новые брюки",
+        "audio": "/audio/clothes-1-pants-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-pants.svg"
+      "image": "/words/clothes-1-pants.svg",
+      "audio": "/audio/clothes-1-pants.mp3"
     },
     {
       "id": "clothes-1-button",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה כפתור קטן",
         "translit": "зэ кафтор катан",
-        "ru": "Это маленькая пуговица"
+        "ru": "Это маленькая пуговица",
+        "audio": "/audio/clothes-1-button-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-1-button.svg"
+      "image": "/words/clothes-1-button.svg",
+      "audio": "/audio/clothes-1-button.mp3"
     }
   ]
 }
