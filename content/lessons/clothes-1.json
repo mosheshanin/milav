@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "clothes-1",
+  "topicId": "clothes",
+  "section": "nouns",
+  "topic": "Одежда",
+  "number": 1,
+  "free": true,
+  "title": "Что носят",
+  "words": [
+    {
+      "id": "clothes-1-shirt",
+      "he": "חולצה",
+      "niqqud": "חוּלְצָה",
+      "translit": "хульца́",
+      "ru": "рубашка",
+      "gender": "f",
+      "example": {
+        "he": "זו חולצה חדשה",
+        "translit": "зо хульца хадаша",
+        "ru": "Это новая рубашка"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-shirt.svg"
+    },
+    {
+      "id": "clothes-1-dress",
+      "he": "שמלה",
+      "niqqud": "שִׂמְלָה",
+      "translit": "симла́",
+      "ru": "платье",
+      "gender": "f",
+      "example": {
+        "he": "זו שמלה יפה",
+        "translit": "зо симла яфа",
+        "ru": "Это красивое платье"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-dress.svg"
+    },
+    {
+      "id": "clothes-1-skirt",
+      "he": "חצאית",
+      "niqqud": "חֲצָאִית",
+      "translit": "хацаи́т",
+      "ru": "юбка",
+      "gender": "f",
+      "example": {
+        "he": "זו חצאית קצרה",
+        "translit": "зо хацаит кцара",
+        "ru": "Это короткая юбка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-1-coat",
+      "he": "מעיל",
+      "niqqud": "מְעִיל",
+      "translit": "меи́ль",
+      "ru": "пальто",
+      "gender": "m",
+      "example": {
+        "he": "זה מעיל חם",
+        "translit": "зэ меиль хам",
+        "ru": "Это тёплое пальто"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-coat.svg"
+    },
+    {
+      "id": "clothes-1-sweater",
+      "he": "סוודר",
+      "niqqud": "סְווֶדֶר",
+      "translit": "све́дер",
+      "ru": "свитер",
+      "gender": "m",
+      "example": {
+        "he": "זה סוודר כחול",
+        "translit": "зэ сведер кахоль",
+        "ru": "Это синий свитер"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-sweater.svg"
+    },
+    {
+      "id": "clothes-1-suit",
+      "he": "חליפה",
+      "niqqud": "חֲלִיפָה",
+      "translit": "хали́фа",
+      "ru": "костюм",
+      "gender": "f",
+      "example": {
+        "he": "זו חליפה שחורה",
+        "translit": "зо халифа шхора",
+        "ru": "Это чёрный костюм"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-suit.svg"
+    },
+    {
+      "id": "clothes-1-tank",
+      "he": "גופיה",
+      "niqqud": "גּוּפִיָּה",
+      "translit": "гуфия́",
+      "ru": "майка",
+      "gender": "f",
+      "example": {
+        "he": "זו גופיה לבנה",
+        "translit": "зо гуфия лавана",
+        "ru": "Это белая майка"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-tank.svg"
+    },
+    {
+      "id": "clothes-1-garment",
+      "he": "בגד",
+      "niqqud": "בֶּגֶד",
+      "translit": "бе́гед",
+      "ru": "предмет одежды",
+      "gender": "m",
+      "example": {
+        "he": "זה בגד חדש",
+        "translit": "зэ бегед хадаш",
+        "ru": "Это новый предмет одежды"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-garment.svg"
+    },
+    {
+      "id": "clothes-1-pants",
+      "he": "מכנסיים",
+      "niqqud": "מִכְנָסַיִים",
+      "translit": "михнаса́им",
+      "ru": "брюки",
+      "gender": "m",
+      "example": {
+        "he": "אלה מכנסיים חדשים",
+        "translit": "эле михнасаим хадашим",
+        "ru": "Это новые брюки"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-pants.svg"
+    },
+    {
+      "id": "clothes-1-button",
+      "he": "כפתור",
+      "niqqud": "כַּפְתּוֹר",
+      "translit": "кафто́р",
+      "ru": "пуговица",
+      "gender": "m",
+      "example": {
+        "he": "זה כפתור קטן",
+        "translit": "зэ кафтор катан",
+        "ru": "Это маленькая пуговица"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-1-button.svg"
+    }
+  ]
+}

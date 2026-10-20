@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "clothes-2",
+  "topicId": "clothes",
+  "section": "nouns",
+  "topic": "Одежда",
+  "number": 2,
+  "free": false,
+  "title": "Обувь и аксессуары",
+  "words": [
+    {
+      "id": "clothes-2-shoe",
+      "he": "נעל",
+      "niqqud": "נַעַל",
+      "translit": "на́аль",
+      "ru": "туфля",
+      "gender": "f",
+      "example": {
+        "he": "זו נעל חדשה",
+        "translit": "зо нааль хадаша",
+        "ru": "Это новая туфля"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-shoe.svg"
+    },
+    {
+      "id": "clothes-2-sandal",
+      "he": "סנדל",
+      "niqqud": "סַנְדָּל",
+      "translit": "санда́ль",
+      "ru": "сандалия",
+      "gender": "m",
+      "example": {
+        "he": "זה סנדל נוח",
+        "translit": "зэ сандаль ноах",
+        "ru": "Это удобная сандалия"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-sandal.svg"
+    },
+    {
+      "id": "clothes-2-boot",
+      "he": "מגף",
+      "niqqud": "מַגָּף",
+      "translit": "мага́ф",
+      "ru": "сапог",
+      "gender": "m",
+      "example": {
+        "he": "זה מגף גבוה",
+        "translit": "зэ магаф гавоах",
+        "ru": "Это высокий сапог"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-boot.svg"
+    },
+    {
+      "id": "clothes-2-hat",
+      "he": "כובע",
+      "niqqud": "כּוֹבַע",
+      "translit": "ко́ва",
+      "ru": "шапка",
+      "gender": "m",
+      "example": {
+        "he": "זה כובע חם",
+        "translit": "зэ кова хам",
+        "ru": "Это тёплая шапка"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-hat.svg"
+    },
+    {
+      "id": "clothes-2-scarf",
+      "he": "צעיף",
+      "niqqud": "צָעִיף",
+      "translit": "цаи́ф",
+      "ru": "шарф",
+      "gender": "m",
+      "example": {
+        "he": "זה צעיף ארוך",
+        "translit": "зэ цаиф арох",
+        "ru": "Это длинный шарф"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-scarf.svg"
+    },
+    {
+      "id": "clothes-2-glove",
+      "he": "כפפה",
+      "niqqud": "כְּפָפָה",
+      "translit": "кфафа́",
+      "ru": "перчатка",
+      "gender": "f",
+      "example": {
+        "he": "זו כפפה שחורה",
+        "translit": "зо кфафа шхора",
+        "ru": "Это чёрная перчатка"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-glove.svg"
+    },
+    {
+      "id": "clothes-2-belt",
+      "he": "חגורה",
+      "niqqud": "חֲגוֹרָה",
+      "translit": "хагора́",
+      "ru": "ремень",
+      "gender": "f",
+      "example": {
+        "he": "זו חגורה חדשה",
+        "translit": "зо хагора хадаша",
+        "ru": "Это новый ремень"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-2-bag",
+      "he": "תיק",
+      "niqqud": "תִּיק",
+      "translit": "тик",
+      "ru": "сумка",
+      "gender": "m",
+      "example": {
+        "he": "זה תיק כבד",
+        "translit": "зэ тик кавед",
+        "ru": "Это тяжёлая сумка"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-bag.svg"
+    },
+    {
+      "id": "clothes-2-wallet",
+      "he": "ארנק",
+      "niqqud": "אַרְנָק",
+      "translit": "арна́к",
+      "ru": "кошелёк",
+      "gender": "m",
+      "example": {
+        "he": "זה ארנק קטן",
+        "translit": "зэ арнак катан",
+        "ru": "Это маленький кошелёк"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-wallet.svg"
+    },
+    {
+      "id": "clothes-2-ring",
+      "he": "טבעת",
+      "niqqud": "טַבַּעַת",
+      "translit": "таба́ат",
+      "ru": "кольцо",
+      "gender": "f",
+      "example": {
+        "he": "זו טבעת יפה",
+        "translit": "зо табаат яфа",
+        "ru": "Это красивое кольцо"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-2-ring.svg"
+    }
+  ]
+}

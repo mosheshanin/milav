@@ -342,6 +342,40 @@
       "v": "4f906bbc1a"
     },
     {
+      "id": "clothes-1",
+      "topicId": "clothes",
+      "section": "nouns",
+      "topic": "Одежда",
+      "number": 1,
+      "free": true,
+      "title": "Что носят",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "542e7f3280"
+    },
+    {
+      "id": "clothes-2",
+      "topicId": "clothes",
+      "section": "nouns",
+      "topic": "Одежда",
+      "number": 2,
+      "free": false,
+      "title": "Обувь и аксессуары",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1005ad6f2b"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -1040,8 +1074,8 @@
     }
   ],
   "info": {
-    "totalWords": 530,
-    "totalLessons": 59,
+    "totalWords": 550,
+    "totalLessons": 61,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1085,6 +1119,14 @@
           "city-2",
           "city-3",
           "city-4"
+        ]
+      },
+      {
+        "id": "clothes",
+        "title": "Одежда",
+        "lessonIds": [
+          "clothes-1",
+          "clothes-2"
         ]
       },
       {
