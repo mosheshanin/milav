@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "shops-1",
+  "topicId": "shops",
+  "section": "nouns",
+  "topic": "Магазины и деньги",
+  "number": 1,
+  "free": true,
+  "title": "Где покупают",
+  "words": [
+    {
+      "id": "shops-1-supermarket",
+      "he": "סופר",
+      "niqqud": "סוּפֶּר",
+      "translit": "су́пер",
+      "ru": "супермаркет",
+      "gender": "m",
+      "example": {
+        "he": "זה סופר גדול",
+        "translit": "зэ супер гадоль",
+        "ru": "Это большой супермаркет"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-supermarket.svg"
+    },
+    {
+      "id": "shops-1-market",
+      "he": "שוק",
+      "niqqud": "שׁוּק",
+      "translit": "шук",
+      "ru": "рынок",
+      "gender": "m",
+      "example": {
+        "he": "זה שוק ישן",
+        "translit": "зэ шук яшан",
+        "ru": "Это старый рынок"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-market.svg"
+    },
+    {
+      "id": "shops-1-bakery",
+      "he": "מאפיה",
+      "niqqud": "מַאֲפִיָּה",
+      "translit": "маафия́",
+      "ru": "пекарня",
+      "gender": "f",
+      "example": {
+        "he": "זו מאפיה טובה",
+        "translit": "зо маафия това",
+        "ru": "Это хорошая пекарня"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-bakery.svg"
+    },
+    {
+      "id": "shops-1-mall",
+      "he": "קניון",
+      "niqqud": "קָנְיוֹן",
+      "translit": "каньо́н",
+      "ru": "торговый центр",
+      "gender": "m",
+      "example": {
+        "he": "זה קניון חדש",
+        "translit": "зэ каньон хадаш",
+        "ru": "Это новый торговый центр"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-mall.svg"
+    },
+    {
+      "id": "shops-1-grocery",
+      "he": "מכולת",
+      "niqqud": "מַכּוֹלֶת",
+      "translit": "мако́лет",
+      "ru": "лавка",
+      "gender": "f",
+      "example": {
+        "he": "זו מכולת קטנה",
+        "translit": "зо маколет катана",
+        "ru": "Это маленькая лавка"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "shops-1-register",
+      "he": "קופה",
+      "niqqud": "קוּפָּה",
+      "translit": "купа́",
+      "ru": "касса",
+      "gender": "f",
+      "example": {
+        "he": "זו קופה פתוחה",
+        "translit": "зо купа птуха",
+        "ru": "Это открытая касса"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-register.svg"
+    },
+    {
+      "id": "shops-1-cart",
+      "he": "עגלה",
+      "niqqud": "עֲגָלָה",
+      "translit": "агала́",
+      "ru": "тележка",
+      "gender": "f",
+      "example": {
+        "he": "זו עגלה גדולה",
+        "translit": "зо агала гдола",
+        "ru": "Это большая тележка"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-cart.svg"
+    },
+    {
+      "id": "shops-1-customer",
+      "he": "לקוח",
+      "niqqud": "לָקוֹחַ",
+      "translit": "лако́ах",
+      "ru": "клиент",
+      "gender": "m",
+      "example": {
+        "he": "זה לקוח טוב",
+        "translit": "зэ лакоах тов",
+        "ru": "Это хороший клиент"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-customer.svg"
+    },
+    {
+      "id": "shops-1-seller",
+      "he": "מוכר",
+      "niqqud": "מוֹכֵר",
+      "translit": "мохе́р",
+      "ru": "продавец",
+      "gender": "m",
+      "example": {
+        "he": "זה מוכר צעיר",
+        "translit": "зэ мохер цаир",
+        "ru": "Это молодой продавец"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-seller.svg"
+    },
+    {
+      "id": "shops-1-basket",
+      "he": "סל",
+      "niqqud": "סַל",
+      "translit": "саль",
+      "ru": "корзина",
+      "gender": "m",
+      "example": {
+        "he": "זה סל מלא",
+        "translit": "зэ саль малэ",
+        "ru": "Это полная корзина"
+      },
+      "reviewed": false,
+      "image": "/words/shops-1-basket.svg"
+    }
+  ]
+}

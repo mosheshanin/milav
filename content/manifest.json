@@ -903,6 +903,40 @@
       "v": "a9bd3fc5f9"
     },
     {
+      "id": "shops-1",
+      "topicId": "shops",
+      "section": "nouns",
+      "topic": "Магазины и деньги",
+      "number": 1,
+      "free": true,
+      "title": "Где покупают",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "645e6bfb9c"
+    },
+    {
+      "id": "shops-2",
+      "topicId": "shops",
+      "section": "nouns",
+      "topic": "Магазины и деньги",
+      "number": 2,
+      "free": false,
+      "title": "Покупки",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "fc97777710"
+    },
+    {
       "id": "weak-1",
       "topicId": "weak",
       "section": "verbs",
@@ -1006,8 +1040,8 @@
     }
   ],
   "info": {
-    "totalWords": 510,
-    "totalLessons": 57,
+    "totalWords": 530,
+    "totalLessons": 59,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1144,6 +1178,14 @@
           "qualities-1",
           "qualities-2",
           "qualities-3"
+        ]
+      },
+      {
+        "id": "shops",
+        "title": "Магазины и деньги",
+        "lessonIds": [
+          "shops-1",
+          "shops-2"
         ]
       },
       {

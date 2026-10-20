@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "shops-2",
+  "topicId": "shops",
+  "section": "nouns",
+  "topic": "Магазины и деньги",
+  "number": 2,
+  "free": false,
+  "title": "Покупки",
+  "words": [
+    {
+      "id": "shops-2-price",
+      "he": "מחיר",
+      "niqqud": "מְחִיר",
+      "translit": "мехи́р",
+      "ru": "цена",
+      "gender": "m",
+      "example": {
+        "he": "זה מחיר טוב",
+        "translit": "зэ мехир тов",
+        "ru": "Это хорошая цена"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-price.svg"
+    },
+    {
+      "id": "shops-2-discount",
+      "he": "הנחה",
+      "niqqud": "הַנָּחָה",
+      "translit": "ханаха́",
+      "ru": "скидка",
+      "gender": "f",
+      "example": {
+        "he": "זו הנחה גדולה",
+        "translit": "зо ханаха гдола",
+        "ru": "Это большая скидка"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-discount.svg"
+    },
+    {
+      "id": "shops-2-sale",
+      "he": "מבצע",
+      "niqqud": "מִבְצָע",
+      "translit": "мивца́",
+      "ru": "акция",
+      "gender": "m",
+      "example": {
+        "he": "זה מבצע מיוחד",
+        "translit": "зэ мивца меюхад",
+        "ru": "Это специальная акция"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-sale.svg"
+    },
+    {
+      "id": "shops-2-receipt",
+      "he": "קבלה",
+      "niqqud": "קַבָּלָה",
+      "translit": "кабала́",
+      "ru": "чек",
+      "gender": "f",
+      "example": {
+        "he": "זו קבלה חשובה",
+        "translit": "зо кабала хашува",
+        "ru": "Это важный чек"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-receipt.svg"
+    },
+    {
+      "id": "shops-2-bag",
+      "he": "שקית",
+      "niqqud": "שַׂקִּית",
+      "translit": "саки́т",
+      "ru": "пакет",
+      "gender": "f",
+      "example": {
+        "he": "זו שקית קטנה",
+        "translit": "зо сакит катана",
+        "ru": "Это маленький пакет"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-bag.svg"
+    },
+    {
+      "id": "shops-2-purchase",
+      "he": "קניה",
+      "niqqud": "קְנִיָּה",
+      "translit": "кния́",
+      "ru": "покупка",
+      "gender": "f",
+      "example": {
+        "he": "זו קניה טובה",
+        "translit": "зо кния това",
+        "ru": "Это хорошая покупка"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-purchase.svg"
+    },
+    {
+      "id": "shops-2-gift",
+      "he": "מתנה",
+      "niqqud": "מַתָּנָה",
+      "translit": "матана́",
+      "ru": "подарок",
+      "gender": "f",
+      "example": {
+        "he": "זו מתנה יפה",
+        "translit": "зо матана яфа",
+        "ru": "Это красивый подарок"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-gift.svg"
+    },
+    {
+      "id": "shops-2-list",
+      "he": "רשימה",
+      "niqqud": "רְשִׁימָה",
+      "translit": "реши́ма",
+      "ru": "список",
+      "gender": "f",
+      "example": {
+        "he": "זו רשימה ארוכה",
+        "translit": "зо решима аруха",
+        "ru": "Это длинный список"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-list.svg"
+    },
+    {
+      "id": "shops-2-product",
+      "he": "מוצר",
+      "niqqud": "מוּצָר",
+      "translit": "муца́р",
+      "ru": "товар",
+      "gender": "m",
+      "example": {
+        "he": "זה מוצר חדש",
+        "translit": "зэ муцар хадаш",
+        "ru": "Это новый товар"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "shops-2-queue",
+      "he": "תור",
+      "niqqud": "תּוֹר",
+      "translit": "тор",
+      "ru": "очередь",
+      "gender": "m",
+      "example": {
+        "he": "זה תור ארוך",
+        "translit": "зэ тор арох",
+        "ru": "Это длинная очередь"
+      },
+      "reviewed": false,
+      "image": "/words/shops-2-queue.svg"
+    }
+  ]
+}

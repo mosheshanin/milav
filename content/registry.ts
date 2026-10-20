@@ -51,6 +51,8 @@ import lesson_piel_3 from "./lessons/piel-3.json";
 import lesson_qualities_1 from "./lessons/qualities-1.json";
 import lesson_qualities_2 from "./lessons/qualities-2.json";
 import lesson_qualities_3 from "./lessons/qualities-3.json";
+import lesson_shops_1 from "./lessons/shops-1.json";
+import lesson_shops_2 from "./lessons/shops-2.json";
 import lesson_weak_1 from "./lessons/weak-1.json";
 import lesson_weak_2 from "./lessons/weak-2.json";
 import lesson_weak_3 from "./lessons/weak-3.json";
@@ -110,6 +112,8 @@ export const lessonFiles: unknown[] = [
   lesson_qualities_1,
   lesson_qualities_2,
   lesson_qualities_3,
+  lesson_shops_1,
+  lesson_shops_2,
   lesson_weak_1,
   lesson_weak_2,
   lesson_weak_3,
