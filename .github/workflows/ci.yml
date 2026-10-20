@@ -1,10 +1,18 @@
-# Проверки на каждый пуш и pull request: типы, тесты, сборка, сквозной тест в Chromium.
+# Проверки на каждый пуш и pull request: типы, тесты, сборка и сквозной тест в Chromium.
+# Минуты GitHub Actions ограничены (2000 в месяц в закрытом репозитории), поэтому долгий сквозной тест (34 минуты) идёт
+# не на каждый пуш. Что запускать, решает задание «Что изменилось» (docs/DEPLOY.md, «Минуты GitHub Actions»):
+#   full     изменился код, тесты, настройки или урок алфавита: полный сквозной тест;
+#   lessons  изменились только уроки (JSON), картинки, озвучка, документы: сквозной тест только по изменённым урокам;
+#   none     изменились только картинки, озвучка и документы: сквозной тест не нужен.
+# Сравнение идёт с последним успешным прогоном CI в этой ветке, поэтому отменённый или упавший прогон ничего не теряет.
 # Деплой на Cloudflare от этого workflow не зависит: там свои проверки в команде сборки (docs/DEPLOY.md).
 name: CI
 
 on:
   push:
   pull_request:
+  # Полный сквозной тест по кнопке (вкладка Actions → CI → Run workflow).
+  workflow_dispatch:
 
 # Новый пуш в ту же ветку отменяет ещё идущий прогон предыдущего.
 concurrency:
@@ -13,8 +21,60 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
+  changes:
+    name: Что изменилось
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      scope: ${{ steps.scope.outputs.scope }}
+      lessons: ${{ steps.scope.outputs.lessons }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          scope=full
+          lessons=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Последний успешный прогон CI в этой ветке: всё, что менялось после него, ещё не проверено сквозным тестом.
+            base=$(gh api "repos/${{ github.repository }}/actions/workflows/ci.yml/runs?branch=${{ github.ref_name }}&status=success&per_page=1" --jq '.workflow_runs[0].head_sha // empty' || true)
+            if [ -n "$base" ] && git cat-file -e "$base^{commit}" 2>/dev/null && files=$(git diff --name-only "$base" "${{ github.sha }}"); then
+              code=false
+              ids=""
+              while IFS= read -r f; do
+                [ -z "$f" ] && continue
+                case "$f" in
+                  content/lessons/alphabet-*) code=true ;;
+                  content/lessons/*.json)
+                    # Удалённый урок проверять нечем; достаточно быстрых тестов.
+                    [ -f "$f" ] && ids="$ids $(basename "$f" .json)"
+                    ;;
+                  content/registry.ts|content/manifest.json|apps/web/public/audio/*|apps/web/public/words/*|apps/web/src/lib/homeEmoji.ts|docs/*|*.md) ;;
+                  *) code=true ;;
+                esac
+              done <<< "$files"
+              ids=$(echo $ids | tr ' ' '\n' | sort -u | tr '\n' ' ')
+              count=$(echo $ids | wc -w)
+              if [ "$code" = true ] || [ "$count" -gt 8 ]; then
+                scope=full
+              elif [ "$count" -gt 0 ]; then
+                scope=lessons
+                lessons=$(echo $ids | tr ' ' ',')
+              else
+                scope=none
+              fi
+            fi
+          fi
+          echo "Что запускать: $scope ${lessons:+(уроки: $lessons)}"
+          echo "scope=$scope" >> "$GITHUB_OUTPUT"
+          echo "lessons=$lessons" >> "$GITHUB_OUTPUT"
+
   checks:
     name: Типы, тесты, сборка
     runs-on: ubuntu-24.04
@@ -44,6 +104,8 @@ jobs:
 
   e2e:
     name: Сквозной тест (Chromium)
+    needs: changes
+    if: needs.changes.outputs.scope != 'none'
     runs-on: ubuntu-24.04
     # Около 20 минут сценариев плюс проверка вёрстки всех уроков (e2e-overflow, 3–4 минуты); весь прогон 33–36 минут.
     # 18.10 после «Слабые корни 4–6» прежние 35 минут оборвали прогон на последнем шаге, лимит поднят до 50.
@@ -92,94 +154,130 @@ jobs:
           exit 1
 
       - name: Сквозной тест
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-lesson.mjs e2e-shots
 
       # Те же сценарии на уроках другого вида: прилагательные с формами (colors-1) и слова без картинок (family-2).
       - name: Сквозной тест, урок прилагательных (colors-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=colors-1 node tools/e2e-lesson.mjs e2e-shots/colors-1
 
       - name: Сквозной тест, урок без картинок (family-2)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=family-2 node tools/e2e-lesson.mjs e2e-shots/family-2
 
       - name: Сквозной тест, урок глаголов (paal-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=paal-1 node tools/e2e-lesson.mjs e2e-shots/paal-1
 
       - name: Сквозной тест, урок глаголов пиэль (piel-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=piel-1 node tools/e2e-lesson.mjs e2e-shots/piel-1
 
       - name: Сквозной тест, урок глаголов хифъиль (hifil-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=hifil-1 node tools/e2e-lesson.mjs e2e-shots/hifil-1
 
       - name: Сквозной тест, урок глаголов нифъаль (nifal-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=nifal-1 node tools/e2e-lesson.mjs e2e-shots/nifal-1
 
       - name: Сквозной тест, урок глаголов хитпаэль (hitpael-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=hitpael-1 node tools/e2e-lesson.mjs e2e-shots/hitpael-1
 
       # Слабые корни: формы с пропавшими буквами (קם, אתן), плашка гзары и много совпадающих по звучанию форм в практике.
       - name: Сквозной тест, урок глаголов со слабыми корнями (weak-1)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=weak-1 node tools/e2e-lesson.mjs e2e-shots/weak-1
 
       # Слабые корни, часть 2: хифъиль с двойными ו и י в написании (двойные буквы в формах, плашка «хифъиль · гзара»).
       - name: Сквозной тест, урок глаголов хифъиль со слабыми корнями (weak-4)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_LESSON=weak-4 node tools/e2e-lesson.mjs e2e-shots/weak-4
 
       # Алфавит: урок из букв (слушай, пиши, печатай), викторина из 20 вопросов, прерывание на 5-й ошибке, защита от подделки.
       - name: Сквозной тест алфавита (alphabet-1)
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-alphabet.mjs e2e-shots/alphabet-1
 
       # Остальные уроки алфавита: в 3, 4 и 5 конечные формы (ך ם ן ף ץ), в 2 буквы ו и י, которые легко спутать при письме.
       - name: Сквозной тест алфавита (alphabet-2)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_ALPHABET=alphabet-2 node tools/e2e-alphabet.mjs e2e-shots/alphabet-2
 
       - name: Сквозной тест алфавита (alphabet-3, конечные ך ם)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_ALPHABET=alphabet-3 node tools/e2e-alphabet.mjs e2e-shots/alphabet-3
 
       - name: Сквозной тест алфавита (alphabet-4, конечные ן ף)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_ALPHABET=alphabet-4 node tools/e2e-alphabet.mjs e2e-shots/alphabet-4
 
       - name: Сквозной тест алфавита (alphabet-5, конечная ץ)
+        if: needs.changes.outputs.scope == 'full'
         run: E2E_ALPHABET=alphabet-5 node tools/e2e-alphabet.mjs e2e-shots/alphabet-5
 
       # Урок со звуками дж, ж, ч (формы с гереш): без этапа «пиши», клавиша гереш, викторина из 9 вопросов.
       - name: Сквозной тест алфавита (alphabet-6, звуки дж, ж, ч)
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-geresh.mjs e2e-shots/alphabet-6
 
       # Общая викторина по всем буквам (28 вопросов) и автопереход в викторине: верный ответ сам ведёт дальше, ошибка нет.
       - name: Сквозной тест общей викторины алфавита
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-alphabet-all.mjs e2e-shots/alphabet-all
 
       - name: Сквозной тест записи шаблонов букв
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-record.mjs e2e-shots
 
       # Панель администратора: доступ (ученик 403, код панели ему не загружается), обзор, настройки приложения
       # (таблица лидеров «только команда», цель дня новичков), команда (добавить, роль, убрать), журнал, шаблоны букв.
       - name: Сквозной тест панели администратора
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-admin.mjs e2e-shots/admin
 
       # Проверка слов носителем: доступ (ученику 403 и код не загружается), «Проверка слов» у проверяющего,
       # исправление поля, «верно», отзыв назад, глагол и буква, выгрузка для Claude и журнал у владельца.
       - name: Сквозной тест проверки слов
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-review.mjs e2e-shots/review
 
       # Напоминания: выключатель в панели, предложение после выученного слова, «Настройки» → «Напоминания», тексты в панели.
       - name: Сквозной тест напоминаний
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-reminders.mjs e2e-shots/reminders
 
       # Геймификация: блок «Мой путь», бейдж в уроке, «Достижения», цель дня, «Поделиться», таблица лидеров (вступить, выйти,
       # приватность), лист «Мы нашли ваши достижения», экран 360 px. В локальной среде таблица включена (LEADERBOARD_ENABLED=1).
       - name: Сквозной тест геймификации
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-gamification.mjs e2e-shots/gamification
 
       # Повторение слов: карточка на главной, подход из 10 слов (выбор, набор, «Не помню»), итог, «Мои слова»,
       # тёмная тема, выключатель в панели.
       - name: Сквозной тест повторения слов
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-repeat.mjs e2e-shots/repeat
 
       # Вёрстка на экране 360 px: все уроки, все слова и буквы на каждом этапе, вкладки времён глаголов, главная.
       # Падает при горизонтальной прокрутке и называет элемент за краем (так ловятся длинные слова и формы).
       - name: Сквозной тест вёрстки (нет горизонтальной прокрутки на 360 px)
+        if: needs.changes.outputs.scope == 'full'
         run: node tools/e2e-overflow.mjs e2e-shots/overflow
+
+      # Только изменённые уроки: прохождение каждого и проверка вёрстки на 360 px.
+      - name: Сквозной тест изменённых уроков
+        if: needs.changes.outputs.scope == 'lessons'
+        env:
+          LESSONS: ${{ needs.changes.outputs.lessons }}
+        run: |
+          for id in $(echo "$LESSONS" | tr ',' ' '); do
+            echo "== $id"
+            E2E_LESSON=$id node tools/e2e-lesson.mjs "e2e-shots/$id"
+          done
+          E2E_LESSON="$LESSONS" node tools/e2e-overflow.mjs e2e-shots/overflow
 
       - name: Скриншоты и лог Worker
         if: always()

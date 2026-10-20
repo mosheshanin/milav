@@ -2,7 +2,7 @@
 // Проходит главную (все разделы и темы развёрнуты) и каждый урок: каждое слово или букву на каждом этапе,
 // у глаголов ещё и каждую вкладку времени. Длинные слова и формы (כחלחלות, מפוספסים) раньше вылезали за край.
 // Нужен запущенный локальный Worker со свежей сборкой фронтенда (как для tools/e2e-lesson.mjs).
-// Запуск: node tools/e2e-overflow.mjs [каталог для скриншотов]. Только один урок: E2E_LESSON=colors-3.
+// Запуск: node tools/e2e-overflow.mjs [каталог для скриншотов]. Только некоторые уроки: E2E_LESSON=colors-3 или E2E_LESSON=colors-3,city-1.
 import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright-core";
@@ -15,7 +15,7 @@ const WIDTH = 360;
 const USER = 2401;
 
 const lessonsDir = new URL("../content/lessons/", import.meta.url);
-const only = process.env.E2E_LESSON;
+const only = process.env.E2E_LESSON ? process.env.E2E_LESSON.split(",").map((x) => x.trim()).filter(Boolean) : null;
 // Пока платные уроки открыты всем до Stars (PAID_LESSONS_OPEN в packages/shared/src/constants.ts), проверяем и их.
 const paidOpen = /PAID_LESSONS_OPEN = true/.test(
   readFileSync(new URL("../packages/shared/src/constants.ts", import.meta.url), "utf8"),
@@ -23,9 +23,9 @@ const paidOpen = /PAID_LESSONS_OPEN = true/.test(
 const lessons = readdirSync(lessonsDir)
   .filter((f) => f.endsWith(".json"))
   .map((f) => JSON.parse(readFileSync(new URL(f, lessonsDir), "utf8")))
-  .filter((l) => (l.free || paidOpen) && (!only || l.id === only))
+  .filter((l) => (l.free || paidOpen) && (!only || only.includes(l.id)))
   .sort((a, b) => (a.section === "alphabet" ? -1 : 0) - (b.section === "alphabet" ? -1 : 0) || a.id.localeCompare(b.id));
-if (lessons.length === 0) throw new Error(`Нет уроков для проверки${only ? ` (E2E_LESSON=${only})` : ""}`);
+if (lessons.length === 0) throw new Error(`Нет уроков для проверки${only ? ` (E2E_LESSON=${only.join(",")})` : ""}`);
 const itemsOf = (l) => l.words ?? l.letters;
 
 function findChromium() {
