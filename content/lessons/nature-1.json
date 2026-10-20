@@ -18,10 +18,12 @@
       "example": {
         "he": "זה גשם חזק",
         "translit": "зэ гешем хазак",
-        "ru": "Это сильный дождь"
+        "ru": "Это сильный дождь",
+        "audio": "/audio/nature-1-rain-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-rain.svg"
+      "image": "/words/nature-1-rain.svg",
+      "audio": "/audio/nature-1-rain.mp3"
     },
     {
       "id": "nature-1-wind",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו רוח קרה",
         "translit": "зо руах кара",
-        "ru": "Это холодный ветер"
+        "ru": "Это холодный ветер",
+        "audio": "/audio/nature-1-wind-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-wind.svg"
+      "image": "/words/nature-1-wind.svg",
+      "audio": "/audio/nature-1-wind.mp3"
     },
     {
       "id": "nature-1-sun",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זו שמש חמה",
         "translit": "зо шемеш хама",
-        "ru": "Это тёплое солнце"
+        "ru": "Это тёплое солнце",
+        "audio": "/audio/nature-1-sun-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-sun.svg"
+      "image": "/words/nature-1-sun.svg",
+      "audio": "/audio/nature-1-sun.mp3"
     },
     {
       "id": "nature-1-cloud",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה ענן לבן",
         "translit": "зэ анан лаван",
-        "ru": "Это белое облако"
+        "ru": "Это белое облако",
+        "audio": "/audio/nature-1-cloud-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-cloud.svg"
+      "image": "/words/nature-1-cloud.svg",
+      "audio": "/audio/nature-1-cloud.mp3"
     },
     {
       "id": "nature-1-snow",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה שלג קר",
         "translit": "зэ шелег кар",
-        "ru": "Это холодный снег"
+        "ru": "Это холодный снег",
+        "audio": "/audio/nature-1-snow-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-snow.svg"
+      "image": "/words/nature-1-snow.svg",
+      "audio": "/audio/nature-1-snow.mp3"
     },
     {
       "id": "nature-1-storm",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זו סערה גדולה",
         "translit": "зо сеара гдола",
-        "ru": "Это большая буря"
+        "ru": "Это большая буря",
+        "audio": "/audio/nature-1-storm-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-storm.svg"
+      "image": "/words/nature-1-storm.svg",
+      "audio": "/audio/nature-1-storm.mp3"
     },
     {
       "id": "nature-1-lightning",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זה ברק חזק",
         "translit": "зэ барак хазак",
-        "ru": "Это сильная молния"
+        "ru": "Это сильная молния",
+        "audio": "/audio/nature-1-lightning-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-lightning.svg"
+      "image": "/words/nature-1-lightning.svg",
+      "audio": "/audio/nature-1-lightning.mp3"
     },
     {
       "id": "nature-1-cold",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זה קור גדול",
         "translit": "зэ кор гадоль",
-        "ru": "Это сильный холод"
+        "ru": "Это сильный холод",
+        "audio": "/audio/nature-1-cold-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-cold.svg"
+      "image": "/words/nature-1-cold.svg",
+      "audio": "/audio/nature-1-cold.mp3"
     },
     {
       "id": "nature-1-sky",
@@ -138,10 +154,12 @@
       "example": {
         "he": "אלה שמיים כחולים",
         "translit": "эле шамаим клулим",
-        "ru": "Это синее небо"
+        "ru": "Это синее небо",
+        "audio": "/audio/nature-1-sky-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-sky.svg"
+      "image": "/words/nature-1-sky.svg",
+      "audio": "/audio/nature-1-sky.mp3"
     },
     {
       "id": "nature-1-khamsin",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה חמסין חזק",
         "translit": "зэ хамсин хазак",
-        "ru": "Это сильный хамсин"
+        "ru": "Это сильный хамсин",
+        "audio": "/audio/nature-1-khamsin-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/nature-1-khamsin.svg"
+      "image": "/words/nature-1-khamsin.svg",
+      "audio": "/audio/nature-1-khamsin.mp3"
     }
   ]
 }

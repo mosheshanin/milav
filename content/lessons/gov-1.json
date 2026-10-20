@@ -18,10 +18,12 @@
       "example": {
         "he": "זה דרכון חדש",
         "translit": "зэ даркон хадаш",
-        "ru": "Это новый паспорт"
+        "ru": "Это новый паспорт",
+        "audio": "/audio/gov-1-passport-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-passport.svg"
+      "image": "/words/gov-1-passport.svg",
+      "audio": "/audio/gov-1-passport.mp3"
     },
     {
       "id": "gov-1-visa",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו ויזה חדשה",
         "translit": "зо виза хадаша",
-        "ru": "Это новая виза"
+        "ru": "Это новая виза",
+        "audio": "/audio/gov-1-visa-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-visa.svg"
+      "image": "/words/gov-1-visa.svg",
+      "audio": "/audio/gov-1-visa.mp3"
     },
     {
       "id": "gov-1-license",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה רישיון חדש",
         "translit": "зэ ришайон хадаш",
-        "ru": "Это новая лицензия"
+        "ru": "Это новая лицензия",
+        "audio": "/audio/gov-1-license-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-license.svg"
+      "image": "/words/gov-1-license.svg",
+      "audio": "/audio/gov-1-license.mp3"
     },
     {
       "id": "gov-1-form",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה טופס קצר",
         "translit": "зэ тофес кацар",
-        "ru": "Это короткий бланк"
+        "ru": "Это короткий бланк",
+        "audio": "/audio/gov-1-form-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-form.svg"
+      "image": "/words/gov-1-form.svg",
+      "audio": "/audio/gov-1-form.mp3"
     },
     {
       "id": "gov-1-signature",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זו חתימה יפה",
         "translit": "зо хатима яфа",
-        "ru": "Это красивая подпись"
+        "ru": "Это красивая подпись",
+        "audio": "/audio/gov-1-signature-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-signature.svg"
+      "image": "/words/gov-1-signature.svg",
+      "audio": "/audio/gov-1-signature.mp3"
     },
     {
       "id": "gov-1-approval",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה אישור חשוב",
         "translit": "зэ ишур хашув",
-        "ru": "Это важная справка"
+        "ru": "Это важная справка",
+        "audio": "/audio/gov-1-approval-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-approval.svg"
+      "image": "/words/gov-1-approval.svg",
+      "audio": "/audio/gov-1-approval.mp3"
     },
     {
       "id": "gov-1-request",
@@ -108,9 +120,11 @@
       "example": {
         "he": "זו בקשה חדשה",
         "translit": "зо бакаша хадаша",
-        "ru": "Это новое заявление"
+        "ru": "Это новое заявление",
+        "audio": "/audio/gov-1-request-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/gov-1-request.mp3"
     },
     {
       "id": "gov-1-certificate",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זו תעודה חשובה",
         "translit": "зо теуда хашува",
-        "ru": "Это важное удостоверение"
+        "ru": "Это важное удостоверение",
+        "audio": "/audio/gov-1-certificate-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-certificate.svg"
+      "image": "/words/gov-1-certificate.svg",
+      "audio": "/audio/gov-1-certificate.mp3"
     },
     {
       "id": "gov-1-date",
@@ -137,10 +153,12 @@
       "example": {
         "he": "זה תאריך חדש",
         "translit": "зэ таарих хадаш",
-        "ru": "Это новая дата"
+        "ru": "Это новая дата",
+        "audio": "/audio/gov-1-date-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-date.svg"
+      "image": "/words/gov-1-date.svg",
+      "audio": "/audio/gov-1-date.mp3"
     },
     {
       "id": "gov-1-document",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה מסמך חשוב",
         "translit": "зэ мисмах хашув",
-        "ru": "Это важный документ"
+        "ru": "Это важный документ",
+        "audio": "/audio/gov-1-document-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-1-document.svg"
+      "image": "/words/gov-1-document.svg",
+      "audio": "/audio/gov-1-document.mp3"
     }
   ]
 }

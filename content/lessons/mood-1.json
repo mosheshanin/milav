@@ -17,27 +17,32 @@
       "example": {
         "he": "הוא שמח",
         "translit": "ху самеах",
-        "ru": "Он весёлый"
+        "ru": "Он весёлый",
+        "audio": "/audio/mood-1-happy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "שמחה",
           "niqqud": "שְׂמֵחָה",
-          "translit": "смеха́"
+          "translit": "смеха́",
+          "audio": "/audio/mood-1-happy-form-f.mp3"
         },
         "mp": {
           "he": "שמחים",
           "niqqud": "שְׂמֵחִים",
-          "translit": "смехи́м"
+          "translit": "смехи́м",
+          "audio": "/audio/mood-1-happy-form-mp.mp3"
         },
         "fp": {
           "he": "שמחות",
           "niqqud": "שְׂמֵחוֹת",
-          "translit": "смехо́т"
+          "translit": "смехо́т",
+          "audio": "/audio/mood-1-happy-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-happy.svg"
+      "image": "/words/mood-1-happy.svg",
+      "audio": "/audio/mood-1-happy.mp3"
     },
     {
       "id": "mood-1-sad",
@@ -48,27 +53,32 @@
       "example": {
         "he": "היא עצובה",
         "translit": "хи ацува",
-        "ru": "Она грустная"
+        "ru": "Она грустная",
+        "audio": "/audio/mood-1-sad-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "עצובה",
           "niqqud": "עֲצוּבָה",
-          "translit": "ацува́"
+          "translit": "ацува́",
+          "audio": "/audio/mood-1-sad-form-f.mp3"
         },
         "mp": {
           "he": "עצובים",
           "niqqud": "עֲצוּבִים",
-          "translit": "ацуви́м"
+          "translit": "ацуви́м",
+          "audio": "/audio/mood-1-sad-form-mp.mp3"
         },
         "fp": {
           "he": "עצובות",
           "niqqud": "עֲצוּבוֹת",
-          "translit": "ацуво́т"
+          "translit": "ацуво́т",
+          "audio": "/audio/mood-1-sad-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-sad.svg"
+      "image": "/words/mood-1-sad.svg",
+      "audio": "/audio/mood-1-sad.mp3"
     },
     {
       "id": "mood-1-tired",
@@ -79,27 +89,32 @@
       "example": {
         "he": "אני עייף",
         "translit": "ани айеф",
-        "ru": "Я устал"
+        "ru": "Я устал",
+        "audio": "/audio/mood-1-tired-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "עייפה",
           "niqqud": "עֲיֵיפָה",
-          "translit": "айефа́"
+          "translit": "айефа́",
+          "audio": "/audio/mood-1-tired-form-f.mp3"
         },
         "mp": {
           "he": "עייפים",
           "niqqud": "עֲיֵיפִים",
-          "translit": "айефи́м"
+          "translit": "айефи́м",
+          "audio": "/audio/mood-1-tired-form-mp.mp3"
         },
         "fp": {
           "he": "עייפות",
           "niqqud": "עֲיֵיפוֹת",
-          "translit": "айефо́т"
+          "translit": "айефо́т",
+          "audio": "/audio/mood-1-tired-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-tired.svg"
+      "image": "/words/mood-1-tired.svg",
+      "audio": "/audio/mood-1-tired.mp3"
     },
     {
       "id": "mood-1-hungry",
@@ -110,27 +125,32 @@
       "example": {
         "he": "הוא רעב",
         "translit": "ху раев",
-        "ru": "Он голодный"
+        "ru": "Он голодный",
+        "audio": "/audio/mood-1-hungry-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רעבה",
           "niqqud": "רְעֵבָה",
-          "translit": "реева́"
+          "translit": "реева́",
+          "audio": "/audio/mood-1-hungry-form-f.mp3"
         },
         "mp": {
           "he": "רעבים",
           "niqqud": "רְעֵבִים",
-          "translit": "реиви́м"
+          "translit": "реиви́м",
+          "audio": "/audio/mood-1-hungry-form-mp.mp3"
         },
         "fp": {
           "he": "רעבות",
           "niqqud": "רְעֵבוֹת",
-          "translit": "реево́т"
+          "translit": "реево́т",
+          "audio": "/audio/mood-1-hungry-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-hungry.svg"
+      "image": "/words/mood-1-hungry.svg",
+      "audio": "/audio/mood-1-hungry.mp3"
     },
     {
       "id": "mood-1-thirsty",
@@ -141,27 +161,32 @@
       "example": {
         "he": "היא צמאה",
         "translit": "хи цмеа",
-        "ru": "Она хочет пить"
+        "ru": "Она хочет пить",
+        "audio": "/audio/mood-1-thirsty-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "צמאה",
           "niqqud": "צְמֵאָה",
-          "translit": "цмеа́"
+          "translit": "цмеа́",
+          "audio": "/audio/mood-1-thirsty-form-f.mp3"
         },
         "mp": {
           "he": "צמאים",
           "niqqud": "צְמֵאִים",
-          "translit": "цмеи́м"
+          "translit": "цмеи́м",
+          "audio": "/audio/mood-1-thirsty-form-mp.mp3"
         },
         "fp": {
           "he": "צמאות",
           "niqqud": "צְמֵאוֹת",
-          "translit": "цмео́т"
+          "translit": "цмео́т",
+          "audio": "/audio/mood-1-thirsty-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-thirsty.svg"
+      "image": "/words/mood-1-thirsty.svg",
+      "audio": "/audio/mood-1-thirsty.mp3"
     },
     {
       "id": "mood-1-angry",
@@ -172,27 +197,32 @@
       "example": {
         "he": "הוא כועס",
         "translit": "ху коэс",
-        "ru": "Он сердится"
+        "ru": "Он сердится",
+        "audio": "/audio/mood-1-angry-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "כועסת",
           "niqqud": "כּוֹעֶסֶת",
-          "translit": "ко́эсет"
+          "translit": "ко́эсет",
+          "audio": "/audio/mood-1-angry-form-f.mp3"
         },
         "mp": {
           "he": "כועסים",
           "niqqud": "כּוֹעֲסִים",
-          "translit": "коаси́м"
+          "translit": "коаси́м",
+          "audio": "/audio/mood-1-angry-form-mp.mp3"
         },
         "fp": {
           "he": "כועסות",
           "niqqud": "כּוֹעֲסוֹת",
-          "translit": "коасо́т"
+          "translit": "коасо́т",
+          "audio": "/audio/mood-1-angry-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-angry.svg"
+      "image": "/words/mood-1-angry.svg",
+      "audio": "/audio/mood-1-angry.mp3"
     },
     {
       "id": "mood-1-nervous",
@@ -203,27 +233,32 @@
       "example": {
         "he": "הוא עצבני",
         "translit": "ху ацбани",
-        "ru": "Он нервный"
+        "ru": "Он нервный",
+        "audio": "/audio/mood-1-nervous-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "עצבנית",
           "niqqud": "עַצְבָּנִית",
-          "translit": "ацбани́т"
+          "translit": "ацбани́т",
+          "audio": "/audio/mood-1-nervous-form-f.mp3"
         },
         "mp": {
           "he": "עצבניים",
           "niqqud": "עַצְבָּנִיִּים",
-          "translit": "ацбани́им"
+          "translit": "ацбани́им",
+          "audio": "/audio/mood-1-nervous-form-mp.mp3"
         },
         "fp": {
           "he": "עצבניות",
           "niqqud": "עַצְבָּנִיּוֹת",
-          "translit": "ацбанио́т"
+          "translit": "ацбанио́т",
+          "audio": "/audio/mood-1-nervous-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-nervous.svg"
+      "image": "/words/mood-1-nervous.svg",
+      "audio": "/audio/mood-1-nervous.mp3"
     },
     {
       "id": "mood-1-surprised",
@@ -234,27 +269,32 @@
       "example": {
         "he": "היא מופתעת",
         "translit": "хи муфтаат",
-        "ru": "Она удивлена"
+        "ru": "Она удивлена",
+        "audio": "/audio/mood-1-surprised-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מופתעת",
           "niqqud": "מוּפְתַּעַת",
-          "translit": "муфта́ат"
+          "translit": "муфта́ат",
+          "audio": "/audio/mood-1-surprised-form-f.mp3"
         },
         "mp": {
           "he": "מופתעים",
           "niqqud": "מוּפְתָּעִים",
-          "translit": "муфтаи́м"
+          "translit": "муфтаи́м",
+          "audio": "/audio/mood-1-surprised-form-mp.mp3"
         },
         "fp": {
           "he": "מופתעות",
           "niqqud": "מוּפְתָּעוֹת",
-          "translit": "муфтао́т"
+          "translit": "муфтао́т",
+          "audio": "/audio/mood-1-surprised-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-surprised.svg"
+      "image": "/words/mood-1-surprised.svg",
+      "audio": "/audio/mood-1-surprised.mp3"
     },
     {
       "id": "mood-1-scared",
@@ -265,27 +305,32 @@
       "example": {
         "he": "הוא מפוחד",
         "translit": "ху мефухад",
-        "ru": "Он испуган"
+        "ru": "Он испуган",
+        "audio": "/audio/mood-1-scared-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מפוחדת",
           "niqqud": "מְפוּחֶדֶת",
-          "translit": "мефухе́дет"
+          "translit": "мефухе́дет",
+          "audio": "/audio/mood-1-scared-form-f.mp3"
         },
         "mp": {
           "he": "מפוחדים",
           "niqqud": "מְפוּחָדִים",
-          "translit": "мефухади́м"
+          "translit": "мефухади́м",
+          "audio": "/audio/mood-1-scared-form-mp.mp3"
         },
         "fp": {
           "he": "מפוחדות",
           "niqqud": "מְפוּחָדוֹת",
-          "translit": "мефухадо́т"
+          "translit": "мефухадо́т",
+          "audio": "/audio/mood-1-scared-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-scared.svg"
+      "image": "/words/mood-1-scared.svg",
+      "audio": "/audio/mood-1-scared.mp3"
     },
     {
       "id": "mood-1-bored",
@@ -296,27 +341,32 @@
       "example": {
         "he": "הוא משועמם",
         "translit": "ху мешуамам",
-        "ru": "Ему скучно"
+        "ru": "Ему скучно",
+        "audio": "/audio/mood-1-bored-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "משועממת",
           "niqqud": "מְשׁוּעֶמֶמֶת",
-          "translit": "мешуаме́мет"
+          "translit": "мешуаме́мет",
+          "audio": "/audio/mood-1-bored-form-f.mp3"
         },
         "mp": {
           "he": "משועממים",
           "niqqud": "מְשׁוּעֲמָמִים",
-          "translit": "мешуамами́м"
+          "translit": "мешуамами́м",
+          "audio": "/audio/mood-1-bored-form-mp.mp3"
         },
         "fp": {
           "he": "משועממות",
           "niqqud": "מְשׁוּעֲמָמוֹת",
-          "translit": "мешуамамо́т"
+          "translit": "мешуамамо́т",
+          "audio": "/audio/mood-1-bored-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-1-bored.svg"
+      "image": "/words/mood-1-bored.svg",
+      "audio": "/audio/mood-1-bored.mp3"
     }
   ]
 }

@@ -18,10 +18,12 @@
       "example": {
         "he": "זה חום גבוה",
         "translit": "зэ хом гавоах",
-        "ru": "Это высокая температура"
+        "ru": "Это высокая температура",
+        "audio": "/audio/body-4-fever-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-fever.svg"
+      "image": "/words/body-4-fever.svg",
+      "audio": "/audio/body-4-fever.mp3"
     },
     {
       "id": "body-4-dizzy",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו סחרחורת חזקה",
         "translit": "зо схархорет хазака",
-        "ru": "Это сильное головокружение"
+        "ru": "Это сильное головокружение",
+        "audio": "/audio/body-4-dizzy-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-dizzy.svg"
+      "image": "/words/body-4-dizzy.svg",
+      "audio": "/audio/body-4-dizzy.mp3"
     },
     {
       "id": "body-4-nausea",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זו בחילה חזקה",
         "translit": "зо бхила хазака",
-        "ru": "Это сильная тошнота"
+        "ru": "Это сильная тошнота",
+        "audio": "/audio/body-4-nausea-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-nausea.svg"
+      "image": "/words/body-4-nausea.svg",
+      "audio": "/audio/body-4-nausea.mp3"
     },
     {
       "id": "body-4-rash",
@@ -63,9 +69,11 @@
       "example": {
         "he": "זו פריחה אדומה",
         "translit": "зо приха адума",
-        "ru": "Это красная сыпь"
+        "ru": "Это красная сыпь",
+        "audio": "/audio/body-4-rash-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-4-rash.mp3"
     },
     {
       "id": "body-4-inflammation",
@@ -77,9 +85,11 @@
       "example": {
         "he": "זו דלקת קשה",
         "translit": "зо далекет каша",
-        "ru": "Это тяжёлое воспаление"
+        "ru": "Это тяжёлое воспаление",
+        "audio": "/audio/body-4-inflammation-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/body-4-inflammation.mp3"
     },
     {
       "id": "body-4-infection",
@@ -91,10 +101,12 @@
       "example": {
         "he": "זה זיהום קשה",
         "translit": "зэ зихум каше",
-        "ru": "Это тяжёлая инфекция"
+        "ru": "Это тяжёлая инфекция",
+        "audio": "/audio/body-4-infection-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-infection.svg"
+      "image": "/words/body-4-infection.svg",
+      "audio": "/audio/body-4-infection.mp3"
     },
     {
       "id": "body-4-allergy",
@@ -106,10 +118,12 @@
       "example": {
         "he": "זו אלרגיה חזקה",
         "translit": "зо алергия хазака",
-        "ru": "Это сильная аллергия"
+        "ru": "Это сильная аллергия",
+        "audio": "/audio/body-4-allergy-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-allergy.svg"
+      "image": "/words/body-4-allergy.svg",
+      "audio": "/audio/body-4-allergy.mp3"
     },
     {
       "id": "body-4-vaccine",
@@ -121,10 +135,12 @@
       "example": {
         "he": "זה חיסון חשוב",
         "translit": "зэ хисун хашув",
-        "ru": "Это важная прививка"
+        "ru": "Это важная прививка",
+        "audio": "/audio/body-4-vaccine-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-vaccine.svg"
+      "image": "/words/body-4-vaccine.svg",
+      "audio": "/audio/body-4-vaccine.mp3"
     },
     {
       "id": "body-4-pill",
@@ -136,10 +152,12 @@
       "example": {
         "he": "זה כדור קטן",
         "translit": "зэ кадур катан",
-        "ru": "Это маленькая таблетка"
+        "ru": "Это маленькая таблетка",
+        "audio": "/audio/body-4-pill-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-pill.svg"
+      "image": "/words/body-4-pill.svg",
+      "audio": "/audio/body-4-pill.mp3"
     },
     {
       "id": "body-4-prescription",
@@ -151,10 +169,12 @@
       "example": {
         "he": "זה מרשם חדש",
         "translit": "зэ миршам хадаш",
-        "ru": "Это новый рецепт"
+        "ru": "Это новый рецепт",
+        "audio": "/audio/body-4-prescription-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-4-prescription.svg"
+      "image": "/words/body-4-prescription.svg",
+      "audio": "/audio/body-4-prescription.mp3"
     }
   ]
 }
