@@ -17,10 +17,12 @@
       "example": {
         "he": "יש לי בת אחת",
         "translit": "еш ли бат ахат",
-        "ru": "У меня одна дочь"
+        "ru": "У меня одна дочь",
+        "audio": "/audio/numbers-1-one-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-one.svg"
+      "image": "/words/numbers-1-one.svg",
+      "audio": "/audio/numbers-1-one.mp3"
     },
     {
       "id": "numbers-1-two",
@@ -31,10 +33,12 @@
       "example": {
         "he": "אני רוצה שתיים",
         "translit": "ани роцэ штаим",
-        "ru": "Я хочу две"
+        "ru": "Я хочу две",
+        "audio": "/audio/numbers-1-two-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-two.svg"
+      "image": "/words/numbers-1-two.svg",
+      "audio": "/audio/numbers-1-two.mp3"
     },
     {
       "id": "numbers-1-three",
@@ -45,10 +49,12 @@
       "example": {
         "he": "אלה שלוש בנות",
         "translit": "эле шалош бнот",
-        "ru": "Это три девочки"
+        "ru": "Это три девочки",
+        "audio": "/audio/numbers-1-three-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-three.svg"
+      "image": "/words/numbers-1-three.svg",
+      "audio": "/audio/numbers-1-three.mp3"
     },
     {
       "id": "numbers-1-four",
@@ -59,10 +65,12 @@
       "example": {
         "he": "יש ארבע מכוניות",
         "translit": "еш арба мехонийот",
-        "ru": "Есть четыре машины"
+        "ru": "Есть четыре машины",
+        "audio": "/audio/numbers-1-four-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-four.svg"
+      "image": "/words/numbers-1-four.svg",
+      "audio": "/audio/numbers-1-four.mp3"
     },
     {
       "id": "numbers-1-five",
@@ -73,10 +81,12 @@
       "example": {
         "he": "יש לי חמש אצבעות",
         "translit": "еш ли хамеш эцбаот",
-        "ru": "У меня пять пальцев"
+        "ru": "У меня пять пальцев",
+        "audio": "/audio/numbers-1-five-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-five.svg"
+      "image": "/words/numbers-1-five.svg",
+      "audio": "/audio/numbers-1-five.mp3"
     },
     {
       "id": "numbers-1-six",
@@ -87,10 +97,12 @@
       "example": {
         "he": "עכשיו שש",
         "translit": "ахшав шеш",
-        "ru": "Сейчас шесть часов"
+        "ru": "Сейчас шесть часов",
+        "audio": "/audio/numbers-1-six-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-six.svg"
+      "image": "/words/numbers-1-six.svg",
+      "audio": "/audio/numbers-1-six.mp3"
     },
     {
       "id": "numbers-1-seven",
@@ -101,10 +113,12 @@
       "example": {
         "he": "היא בת שבע",
         "translit": "хи бат шева",
-        "ru": "Ей семь лет"
+        "ru": "Ей семь лет",
+        "audio": "/audio/numbers-1-seven-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-seven.svg"
+      "image": "/words/numbers-1-seven.svg",
+      "audio": "/audio/numbers-1-seven.mp3"
     },
     {
       "id": "numbers-1-eight",
@@ -115,10 +129,12 @@
       "example": {
         "he": "אלה שמונה כוסות",
         "translit": "эле шмонэ косот",
-        "ru": "Это восемь стаканов"
+        "ru": "Это восемь стаканов",
+        "audio": "/audio/numbers-1-eight-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-eight.svg"
+      "image": "/words/numbers-1-eight.svg",
+      "audio": "/audio/numbers-1-eight.mp3"
     },
     {
       "id": "numbers-1-nine",
@@ -129,10 +145,12 @@
       "example": {
         "he": "עכשיו תשע",
         "translit": "ахшав теша",
-        "ru": "Сейчас девять часов"
+        "ru": "Сейчас девять часов",
+        "audio": "/audio/numbers-1-nine-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-nine.svg"
+      "image": "/words/numbers-1-nine.svg",
+      "audio": "/audio/numbers-1-nine.mp3"
     },
     {
       "id": "numbers-1-ten",
@@ -143,10 +161,12 @@
       "example": {
         "he": "יש לי עשר אצבעות",
         "translit": "еш ли эсер эцбаот",
-        "ru": "У меня десять пальцев"
+        "ru": "У меня десять пальцев",
+        "audio": "/audio/numbers-1-ten-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-1-ten.svg"
+      "image": "/words/numbers-1-ten.svg",
+      "audio": "/audio/numbers-1-ten.mp3"
     }
   ]
 }

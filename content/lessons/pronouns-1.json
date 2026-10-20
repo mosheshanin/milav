@@ -17,10 +17,12 @@
       "example": {
         "he": "אני בבית",
         "translit": "ани бабайит",
-        "ru": "Я дома"
+        "ru": "Я дома",
+        "audio": "/audio/pronouns-1-i-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/pronouns-1-i.svg"
+      "image": "/words/pronouns-1-i.svg",
+      "audio": "/audio/pronouns-1-i.mp3"
     },
     {
       "id": "pronouns-1-you-m",
@@ -31,9 +33,11 @@
       "example": {
         "he": "אתה בבית",
         "translit": "ата бабайит",
-        "ru": "Ты дома (к мужчине)"
+        "ru": "Ты дома (к мужчине)",
+        "audio": "/audio/pronouns-1-you-m-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-you-m.mp3"
     },
     {
       "id": "pronouns-1-you-f",
@@ -44,9 +48,11 @@
       "example": {
         "he": "את בבית",
         "translit": "ат бабайит",
-        "ru": "Ты дома (к женщине)"
+        "ru": "Ты дома (к женщине)",
+        "audio": "/audio/pronouns-1-you-f-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-you-f.mp3"
     },
     {
       "id": "pronouns-1-he",
@@ -57,10 +63,12 @@
       "example": {
         "he": "הוא בבית",
         "translit": "ху бабайит",
-        "ru": "Он дома"
+        "ru": "Он дома",
+        "audio": "/audio/pronouns-1-he-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/pronouns-1-he.svg"
+      "image": "/words/pronouns-1-he.svg",
+      "audio": "/audio/pronouns-1-he.mp3"
     },
     {
       "id": "pronouns-1-she",
@@ -71,10 +79,12 @@
       "example": {
         "he": "היא בבית",
         "translit": "хи бабайит",
-        "ru": "Она дома"
+        "ru": "Она дома",
+        "audio": "/audio/pronouns-1-she-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/pronouns-1-she.svg"
+      "image": "/words/pronouns-1-she.svg",
+      "audio": "/audio/pronouns-1-she.mp3"
     },
     {
       "id": "pronouns-1-we",
@@ -85,10 +95,12 @@
       "example": {
         "he": "אנחנו בבית",
         "translit": "анахну бабайит",
-        "ru": "Мы дома"
+        "ru": "Мы дома",
+        "audio": "/audio/pronouns-1-we-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/pronouns-1-we.svg"
+      "image": "/words/pronouns-1-we.svg",
+      "audio": "/audio/pronouns-1-we.mp3"
     },
     {
       "id": "pronouns-1-you-mp",
@@ -99,9 +111,11 @@
       "example": {
         "he": "אתם בבית",
         "translit": "атем бабайит",
-        "ru": "Вы дома (к мужчинам)"
+        "ru": "Вы дома (к мужчинам)",
+        "audio": "/audio/pronouns-1-you-mp-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-you-mp.mp3"
     },
     {
       "id": "pronouns-1-you-fp",
@@ -112,9 +126,11 @@
       "example": {
         "he": "אתן בבית",
         "translit": "атен бабайит",
-        "ru": "Вы дома (к женщинам)"
+        "ru": "Вы дома (к женщинам)",
+        "audio": "/audio/pronouns-1-you-fp-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-you-fp.mp3"
     },
     {
       "id": "pronouns-1-they-m",
@@ -125,9 +141,11 @@
       "example": {
         "he": "הם בבית",
         "translit": "хем бабайит",
-        "ru": "Они дома (мужчины)"
+        "ru": "Они дома (мужчины)",
+        "audio": "/audio/pronouns-1-they-m-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-they-m.mp3"
     },
     {
       "id": "pronouns-1-they-f",
@@ -138,9 +156,11 @@
       "example": {
         "he": "הן בבית",
         "translit": "хен бабайит",
-        "ru": "Они дома (женщины)"
+        "ru": "Они дома (женщины)",
+        "audio": "/audio/pronouns-1-they-f-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-1-they-f.mp3"
     }
   ]
 }
