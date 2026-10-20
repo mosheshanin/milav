@@ -47,6 +47,7 @@ import lesson_nature_1 from "./lessons/nature-1.json";
 import lesson_nifal_1 from "./lessons/nifal-1.json";
 import lesson_nifal_2 from "./lessons/nifal-2.json";
 import lesson_nifal_3 from "./lessons/nifal-3.json";
+import lesson_numbers_1 from "./lessons/numbers-1.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
@@ -55,6 +56,7 @@ import lesson_paal_5 from "./lessons/paal-5.json";
 import lesson_piel_1 from "./lessons/piel-1.json";
 import lesson_piel_2 from "./lessons/piel-2.json";
 import lesson_piel_3 from "./lessons/piel-3.json";
+import lesson_pronouns_1 from "./lessons/pronouns-1.json";
 import lesson_qualities_1 from "./lessons/qualities-1.json";
 import lesson_qualities_2 from "./lessons/qualities-2.json";
 import lesson_qualities_3 from "./lessons/qualities-3.json";
@@ -115,6 +117,7 @@ export const lessonFiles: unknown[] = [
   lesson_nifal_1,
   lesson_nifal_2,
   lesson_nifal_3,
+  lesson_numbers_1,
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
@@ -123,6 +126,7 @@ export const lessonFiles: unknown[] = [
   lesson_piel_1,
   lesson_piel_2,
   lesson_piel_3,
+  lesson_pronouns_1,
   lesson_qualities_1,
   lesson_qualities_2,
   lesson_qualities_3,

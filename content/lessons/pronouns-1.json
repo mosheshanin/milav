@@ -1,0 +1,146 @@
+{
+  "$schema": "../schema.json",
+  "id": "pronouns-1",
+  "topicId": "pronouns",
+  "section": "basics",
+  "topic": "Местоимения",
+  "number": 1,
+  "free": true,
+  "title": "Я, ты, он, она",
+  "words": [
+    {
+      "id": "pronouns-1-i",
+      "he": "אני",
+      "niqqud": "אֲנִי",
+      "translit": "ани́",
+      "ru": "я",
+      "example": {
+        "he": "אני בבית",
+        "translit": "ани бабайит",
+        "ru": "Я дома"
+      },
+      "reviewed": false,
+      "image": "/words/pronouns-1-i.svg"
+    },
+    {
+      "id": "pronouns-1-you-m",
+      "he": "אתה",
+      "niqqud": "אַתָּה",
+      "translit": "ата́",
+      "ru": "ты (м.)",
+      "example": {
+        "he": "אתה בבית",
+        "translit": "ата бабайит",
+        "ru": "Ты дома (к мужчине)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-1-you-f",
+      "he": "את",
+      "niqqud": "אַתְּ",
+      "translit": "ат",
+      "ru": "ты (ж.)",
+      "example": {
+        "he": "את בבית",
+        "translit": "ат бабайит",
+        "ru": "Ты дома (к женщине)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-1-he",
+      "he": "הוא",
+      "niqqud": "הוּא",
+      "translit": "ху",
+      "ru": "он",
+      "example": {
+        "he": "הוא בבית",
+        "translit": "ху бабайит",
+        "ru": "Он дома"
+      },
+      "reviewed": false,
+      "image": "/words/pronouns-1-he.svg"
+    },
+    {
+      "id": "pronouns-1-she",
+      "he": "היא",
+      "niqqud": "הִיא",
+      "translit": "хи",
+      "ru": "она",
+      "example": {
+        "he": "היא בבית",
+        "translit": "хи бабайит",
+        "ru": "Она дома"
+      },
+      "reviewed": false,
+      "image": "/words/pronouns-1-she.svg"
+    },
+    {
+      "id": "pronouns-1-we",
+      "he": "אנחנו",
+      "niqqud": "אֲנַחְנוּ",
+      "translit": "ана́хну",
+      "ru": "мы",
+      "example": {
+        "he": "אנחנו בבית",
+        "translit": "анахну бабайит",
+        "ru": "Мы дома"
+      },
+      "reviewed": false,
+      "image": "/words/pronouns-1-we.svg"
+    },
+    {
+      "id": "pronouns-1-you-mp",
+      "he": "אתם",
+      "niqqud": "אַתֶּם",
+      "translit": "ате́м",
+      "ru": "вы (м.)",
+      "example": {
+        "he": "אתם בבית",
+        "translit": "атем бабайит",
+        "ru": "Вы дома (к мужчинам)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-1-you-fp",
+      "he": "אתן",
+      "niqqud": "אַתֶּן",
+      "translit": "ате́н",
+      "ru": "вы (ж.)",
+      "example": {
+        "he": "אתן בבית",
+        "translit": "атен бабайит",
+        "ru": "Вы дома (к женщинам)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-1-they-m",
+      "he": "הם",
+      "niqqud": "הֵם",
+      "translit": "хем",
+      "ru": "они (м.)",
+      "example": {
+        "he": "הם בבית",
+        "translit": "хем бабайит",
+        "ru": "Они дома (мужчины)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-1-they-f",
+      "he": "הן",
+      "niqqud": "הֵן",
+      "translit": "хен",
+      "ru": "они (ж.)",
+      "example": {
+        "he": "הן בבית",
+        "translit": "хен бабайит",
+        "ru": "Они дома (женщины)"
+      },
+      "reviewed": false
+    }
+  ]
+}

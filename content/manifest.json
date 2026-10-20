@@ -835,6 +835,23 @@
       "v": "df5123f259"
     },
     {
+      "id": "numbers-1",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 1,
+      "free": true,
+      "title": "Счёт от одного до десяти",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "107062874b"
+    },
+    {
       "id": "paal-1",
       "topicId": "paal",
       "section": "verbs",
@@ -969,6 +986,23 @@
         "type"
       ],
       "v": "c3fa87caec"
+    },
+    {
+      "id": "pronouns-1",
+      "topicId": "pronouns",
+      "section": "basics",
+      "topic": "Местоимения",
+      "number": 1,
+      "free": true,
+      "title": "Я, ты, он, она",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "8dfd65d64a"
     },
     {
       "id": "qualities-1",
@@ -1159,15 +1193,17 @@
     }
   ],
   "info": {
-    "totalWords": 600,
-    "totalLessons": 66,
+    "totalWords": 620,
+    "totalLessons": 68,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
       "alphabet",
       "nouns",
       "adjectives",
-      "verbs"
+      "verbs",
+      "numbers",
+      "basics"
     ],
     "topics": [
       {
@@ -1302,6 +1338,13 @@
         ]
       },
       {
+        "id": "numbers",
+        "title": "Числа",
+        "lessonIds": [
+          "numbers-1"
+        ]
+      },
+      {
         "id": "paal",
         "title": "Пааль",
         "lessonIds": [
@@ -1319,6 +1362,13 @@
           "piel-1",
           "piel-2",
           "piel-3"
+        ]
+      },
+      {
+        "id": "pronouns",
+        "title": "Местоимения",
+        "lessonIds": [
+          "pronouns-1"
         ]
       },
       {

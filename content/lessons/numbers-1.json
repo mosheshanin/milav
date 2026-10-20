@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-1",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 1,
+  "free": true,
+  "title": "Счёт от одного до десяти",
+  "words": [
+    {
+      "id": "numbers-1-one",
+      "he": "אחת",
+      "niqqud": "אַחַת",
+      "translit": "аха́т",
+      "ru": "один",
+      "example": {
+        "he": "יש לי בת אחת",
+        "translit": "еш ли бат ахат",
+        "ru": "У меня одна дочь"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-one.svg"
+    },
+    {
+      "id": "numbers-1-two",
+      "he": "שתיים",
+      "niqqud": "שְׁתַּיִים",
+      "translit": "штаи́м",
+      "ru": "два",
+      "example": {
+        "he": "אני רוצה שתיים",
+        "translit": "ани роцэ штаим",
+        "ru": "Я хочу две"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-two.svg"
+    },
+    {
+      "id": "numbers-1-three",
+      "he": "שלוש",
+      "niqqud": "שָׁלוֹשׁ",
+      "translit": "шало́ш",
+      "ru": "три",
+      "example": {
+        "he": "אלה שלוש בנות",
+        "translit": "эле шалош бнот",
+        "ru": "Это три девочки"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-three.svg"
+    },
+    {
+      "id": "numbers-1-four",
+      "he": "ארבע",
+      "niqqud": "אַרְבַּע",
+      "translit": "а́рба",
+      "ru": "четыре",
+      "example": {
+        "he": "יש ארבע מכוניות",
+        "translit": "еш арба мехонийот",
+        "ru": "Есть четыре машины"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-four.svg"
+    },
+    {
+      "id": "numbers-1-five",
+      "he": "חמש",
+      "niqqud": "חָמֵשׁ",
+      "translit": "хаме́ш",
+      "ru": "пять",
+      "example": {
+        "he": "יש לי חמש אצבעות",
+        "translit": "еш ли хамеш эцбаот",
+        "ru": "У меня пять пальцев"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-five.svg"
+    },
+    {
+      "id": "numbers-1-six",
+      "he": "שש",
+      "niqqud": "שֵׁשׁ",
+      "translit": "шеш",
+      "ru": "шесть",
+      "example": {
+        "he": "עכשיו שש",
+        "translit": "ахшав шеш",
+        "ru": "Сейчас шесть часов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-six.svg"
+    },
+    {
+      "id": "numbers-1-seven",
+      "he": "שבע",
+      "niqqud": "שֶׁבַע",
+      "translit": "ше́ва",
+      "ru": "семь",
+      "example": {
+        "he": "היא בת שבע",
+        "translit": "хи бат шева",
+        "ru": "Ей семь лет"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-seven.svg"
+    },
+    {
+      "id": "numbers-1-eight",
+      "he": "שמונה",
+      "niqqud": "שְׁמוֹנֶה",
+      "translit": "шмонэ́",
+      "ru": "восемь",
+      "example": {
+        "he": "אלה שמונה כוסות",
+        "translit": "эле шмонэ косот",
+        "ru": "Это восемь стаканов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-eight.svg"
+    },
+    {
+      "id": "numbers-1-nine",
+      "he": "תשע",
+      "niqqud": "תֵּשַׁע",
+      "translit": "те́ша",
+      "ru": "девять",
+      "example": {
+        "he": "עכשיו תשע",
+        "translit": "ахшав теша",
+        "ru": "Сейчас девять часов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-nine.svg"
+    },
+    {
+      "id": "numbers-1-ten",
+      "he": "עשר",
+      "niqqud": "עֶשֶׂר",
+      "translit": "э́сер",
+      "ru": "десять",
+      "example": {
+        "he": "יש לי עשר אצבעות",
+        "translit": "еш ли эсер эцбаот",
+        "ru": "У меня десять пальцев"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-1-ten.svg"
+    }
+  ]
+}
