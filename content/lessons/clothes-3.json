@@ -1,0 +1,156 @@
+{
+  "$schema": "../schema.json",
+  "id": "clothes-3",
+  "topicId": "clothes",
+  "section": "nouns",
+  "topic": "Одежда",
+  "number": 3,
+  "free": false,
+  "title": "Размеры и ткани",
+  "words": [
+    {
+      "id": "clothes-3-size",
+      "he": "מידה",
+      "niqqud": "מִידָּה",
+      "translit": "мида́",
+      "ru": "размер",
+      "gender": "f",
+      "example": {
+        "he": "זו מידה קטנה",
+        "translit": "зо мида катана",
+        "ru": "Это маленький размер"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-3-size.svg"
+    },
+    {
+      "id": "clothes-3-fabric",
+      "he": "בד",
+      "niqqud": "בַּד",
+      "translit": "бад",
+      "ru": "ткань",
+      "gender": "m",
+      "example": {
+        "he": "זה בד רך",
+        "translit": "зэ бад рах",
+        "ru": "Это мягкая ткань"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-3-fabric.svg"
+    },
+    {
+      "id": "clothes-3-cotton",
+      "he": "כותנה",
+      "niqqud": "כּוּתְנָה",
+      "translit": "кутна́",
+      "ru": "хлопок",
+      "gender": "f",
+      "example": {
+        "he": "זו כותנה רכה",
+        "translit": "зо кутна рака",
+        "ru": "Это мягкий хлопок"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-3-wool",
+      "he": "צמר",
+      "niqqud": "צֶמֶר",
+      "translit": "це́мер",
+      "ru": "шерсть",
+      "gender": "m",
+      "example": {
+        "he": "זה צמר חם",
+        "translit": "зэ цемер хам",
+        "ru": "Это тёплая шерсть"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-3-wool.svg"
+    },
+    {
+      "id": "clothes-3-leather",
+      "he": "עור",
+      "niqqud": "עוֹר",
+      "translit": "ор",
+      "ru": "кожа",
+      "gender": "m",
+      "example": {
+        "he": "זה עור אמיתי",
+        "translit": "зэ ор амити",
+        "ru": "Это настоящая кожа"
+      },
+      "reviewed": false,
+      "image": "/words/clothes-3-leather.svg"
+    },
+    {
+      "id": "clothes-3-silk",
+      "he": "משי",
+      "niqqud": "מֶשִׁי",
+      "translit": "ме́ши",
+      "ru": "шёлк",
+      "gender": "m",
+      "example": {
+        "he": "זה משי יקר",
+        "translit": "зэ меши якар",
+        "ru": "Это дорогой шёлк"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-3-pocket",
+      "he": "כיס",
+      "niqqud": "כִּיס",
+      "translit": "кис",
+      "ru": "карман",
+      "gender": "m",
+      "example": {
+        "he": "זה כיס קטן",
+        "translit": "зэ кис катан",
+        "ru": "Это маленький карман"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-3-sleeve",
+      "he": "שרוול",
+      "niqqud": "שַׁרְווּל",
+      "translit": "шарву́ль",
+      "ru": "рукав",
+      "gender": "m",
+      "example": {
+        "he": "זה שרוול ארוך",
+        "translit": "зэ шарвуль арох",
+        "ru": "Это длинный рукав"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-3-zipper",
+      "he": "רוכסן",
+      "niqqud": "רוֹכְסָן",
+      "translit": "рохса́н",
+      "ru": "молния (застёжка)",
+      "gender": "m",
+      "example": {
+        "he": "זה רוכסן חדש",
+        "translit": "зэ рохсан хадаш",
+        "ru": "Это новая молния"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "clothes-3-collar",
+      "he": "צווארון",
+      "niqqud": "צַוְוָארוֹן",
+      "translit": "цавваро́н",
+      "ru": "воротник",
+      "gender": "m",
+      "example": {
+        "he": "זה צווארון לבן",
+        "translit": "зэ цавварон лаван",
+        "ru": "Это белый воротник"
+      },
+      "reviewed": false
+    }
+  ]
+}

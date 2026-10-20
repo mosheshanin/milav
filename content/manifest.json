@@ -376,6 +376,23 @@
       "v": "3b9bc3b6e1"
     },
     {
+      "id": "clothes-3",
+      "topicId": "clothes",
+      "section": "nouns",
+      "topic": "Одежда",
+      "number": 3,
+      "free": false,
+      "title": "Размеры и ткани",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "47b627067a"
+    },
+    {
       "id": "colors-1",
       "topicId": "colors",
       "section": "adjectives",
@@ -1074,8 +1091,8 @@
     }
   ],
   "info": {
-    "totalWords": 550,
-    "totalLessons": 61,
+    "totalWords": 560,
+    "totalLessons": 62,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1126,7 +1143,8 @@
         "title": "Одежда",
         "lessonIds": [
           "clothes-1",
-          "clothes-2"
+          "clothes-2",
+          "clothes-3"
         ]
       },
       {
