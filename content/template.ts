@@ -29,7 +29,7 @@ export interface NewLessonOptions {
   keys: string[];
 }
 
-const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
+const SECTIONS: Section[] = ["basics", "numbers", "nouns", "verbs", "adjectives"];
 const KEY = /^[a-z][a-z0-9]*(-[a-z0-9]+)*$/;
 
 export function templateProblems(o: NewLessonOptions): string[] {

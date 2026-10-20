@@ -27,7 +27,7 @@ import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { repeatCardText } from "../lib/repeat";
 import { findResume } from "../lib/resume";
 
-const SECTIONS: Section[] = ["nouns", "verbs", "adjectives"];
+const SECTIONS: Section[] = ["basics", "numbers", "nouns", "verbs", "adjectives"];
 
 type Progress = Record<string, LessonProgressResponse>;
 

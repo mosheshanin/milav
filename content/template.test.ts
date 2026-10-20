@@ -83,7 +83,7 @@ describe("шаблон нового урока", () => {
     expect(schemaProblems(buildLessonTemplate(base)).length).toBeGreaterThan(0);
   });
 
-  for (const section of ["nouns", "verbs", "adjectives"] as const) {
+  for (const section of ["basics", "numbers", "nouns", "verbs", "adjectives"] as const) {
     it(`заполненный шаблон раздела ${section} проходит схему`, () => {
       expect(schemaProblems(fill(buildLessonTemplate({ ...base, section })))).toEqual([]);
     });

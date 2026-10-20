@@ -1,7 +1,7 @@
 // Создаёт заготовку урока и обновляет реестр. Запуск (пример):
 //   npm run content:new -- --topic-id animals --number 2 --title "Дикие животные" \
 //     --keys wolf,fox,bear,deer,monkey,camel,giraffe,zebra,tiger,crocodile
-// Для новой темы нужны ещё --section (nouns, verbs или adjectives) и --topic (название темы на экране);
+// Для новой темы нужны ещё --section (basics, numbers, nouns, verbs или adjectives) и --topic (название темы на экране);
 // у существующей темы они берутся из её первого урока.
 // Урок алфавита: --topic-id alphabet --number N --title "Название" (буквы урока заданы ALPHABET_GROUPS, --keys не нужен).
 import { existsSync, writeFileSync } from "node:fs";

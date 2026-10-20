@@ -1,7 +1,7 @@
 import { ALPHABET_SECTION, PAID_LESSONS_OPEN, lessonOpenWithoutPurchase, type LessonMeta, type Stage, type WordProgress } from "@milav/shared";
 
 /** Порядок разделов на главной: алфавит первым, это стартовая точка новичка. */
-export const SECTION_ORDER = [ALPHABET_SECTION, "nouns", "verbs", "adjectives"] as const;
+export const SECTION_ORDER = [ALPHABET_SECTION, "basics", "numbers", "nouns", "verbs", "adjectives"] as const;
 
 /** Прогресс по уроку, как его отдаёт сервер (нужна только часть полей). */
 export interface LessonState {

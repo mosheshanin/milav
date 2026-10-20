@@ -110,6 +110,28 @@ describe("schema.json: образцы допустимых уроков", () => 
     expect(schemaProblems(lessonOf("nouns", noun))).toEqual([]);
   });
 
+  it("основа и числа: слова без рода, с фразой-примером", () => {
+    const word = (i: number) => {
+      const { gender, ...rest } = noun(i);
+      return rest;
+    };
+    expect(schemaProblems(lessonOf("basics", word))).toEqual([]);
+    expect(schemaProblems(lessonOf("numbers", word))).toEqual([]);
+  });
+
+  it("основа и числа: род, формы и глагол запрещены, фраза обязательна", () => {
+    const word = (i: number) => {
+      const { gender, ...rest } = noun(i);
+      return rest;
+    };
+    for (const section of ["basics", "numbers"] as const) {
+      expect(schemaProblems(lessonOf(section, noun)).length, `${section}: род`).toBeGreaterThan(0);
+      expect(schemaProblems(lessonOf(section, (i) => ({ ...word(i), forms: adjective().forms }))).length, `${section}: формы`).toBeGreaterThan(0);
+      expect(schemaProblems(lessonOf(section, (i) => ({ ...word(i), verb: verb().verb }))).length, `${section}: verb`).toBeGreaterThan(0);
+      expect(schemaProblems(lessonOf(section, (i) => ({ ...word(i), example: undefined }))).length, `${section}: фраза`).toBeGreaterThan(0);
+    }
+  });
+
   it("прилагательные с четырьмя формами", () => {
     expect(schemaProblems(lessonOf("adjectives", adjective))).toEqual([]);
   });

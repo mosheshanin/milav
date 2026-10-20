@@ -21,8 +21,8 @@
       "description": "Постоянный латинский ключ темы, например animals."
     },
     "section": {
-      "enum": ["nouns", "verbs", "adjectives", "alphabet"],
-      "description": "Раздел: nouns (существительные), verbs (глаголы), adjectives (прилагательные), alphabet (алфавит: в уроке letters вместо words)."
+      "enum": ["basics", "numbers", "nouns", "verbs", "adjectives", "alphabet"],
+      "description": "Раздел: basics (основа: местоимения, вопросы, служебные слова), numbers (числа и время), nouns (существительные), verbs (глаголы), adjectives (прилагательные), alphabet (алфавит: в уроке letters вместо words)."
     },
     "topic": { "$ref": "#/definitions/text", "description": "Название темы на экране, например «Животные»." },
     "number": {
@@ -73,6 +73,24 @@
       "else": {
         "required": ["words"],
         "not": { "required": ["letters"] }
+      }
+    },
+    {
+      "if": { "required": ["section"], "properties": { "section": { "enum": ["basics", "numbers"] } } },
+      "then": {
+        "properties": {
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["example"],
+              "not": {
+                "type": "object",
+                "anyOf": [{ "required": ["gender"] }, { "required": ["forms"] }, { "required": ["verb"] }]
+              }
+            }
+          }
+        }
       }
     },
     {

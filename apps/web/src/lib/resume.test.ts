@@ -44,9 +44,11 @@ describe("порядок уроков", () => {
       lesson("food-1", { topic: "Еда", number: 1 }),
       lesson("verbs-1", { section: "verbs", topic: "Движение" }),
       lesson("animals-2", { topic: "Животные", number: 2 }),
+      lesson("num-1", { section: "numbers", topic: "Числа" }),
+      lesson("pron-1", { section: "basics", topic: "Местоимения" }),
     ]);
-    // Существительные: тема «Еда» появилась первой, потом «Животные»; глаголы; прилагательные.
-    expect(ordered.map((l) => l.id)).toEqual(["food-1", "food-2", "animals-1", "animals-2", "verbs-1", "adj-1"]);
+    // Сначала основа и числа, потом существительные: тема «Еда» появилась первой, потом «Животные»; глаголы; прилагательные.
+    expect(ordered.map((l) => l.id)).toEqual(["pron-1", "num-1", "food-1", "food-2", "animals-1", "animals-2", "verbs-1", "adj-1"]);
   });
 });
 

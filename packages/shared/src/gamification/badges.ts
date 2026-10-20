@@ -92,7 +92,7 @@ export interface ContentInfo {
   alphabetLessons: number;
   /** Форм букв в алфавите (27). */
   alphabetLetters: number;
-  /** Разделы, в которых есть хотя бы один урок: alphabet, nouns, verbs, adjectives. */
+  /** Разделы, в которых есть хотя бы один урок: alphabet, basics, numbers, nouns, verbs, adjectives. */
   sections: string[];
   /** Темы обычных разделов (алфавит бейджа темы не получает: его закрытие даёт `alphabet-passed`). */
   topics: { id: string; title: string; lessonIds: string[] }[];
@@ -106,7 +106,7 @@ export interface Catalog {
 }
 
 /** Разделы для маски `sections_mask` (бит = раздел). */
-export const SECTION_BITS: Record<string, number> = { alphabet: 1, nouns: 2, verbs: 4, adjectives: 8 };
+export const SECTION_BITS: Record<string, number> = { alphabet: 1, nouns: 2, verbs: 4, adjectives: 8, basics: 16, numbers: 32 };
 
 type Spec = Omit<BadgeDef, "threshold" | "metric"> & { metric: Metric; threshold: number; need?: (info: ContentInfo) => boolean };
 
@@ -170,7 +170,7 @@ export function buildCatalog(info: ContentInfo): Catalog {
     // Разнообразие
     spec("variety-2", "variety", "common", "Shuffle", "Два фронта", "Сдайте уроки в 2 разных разделах", "sections", 2, sectionsAtLeast(2)),
     spec("variety-3", "variety", "rare", "Network", "Три направления", "Сдайте уроки в 3 разных разделах", "sections", 3, sectionsAtLeast(3)),
-    spec("variety-4", "variety", "epic", "LayoutGrid", "Вся доска", "Сдайте уроки во всех 4 разделах", "sections", 4, sectionsAtLeast(4)),
+    spec("variety-4", "variety", "epic", "LayoutGrid", "Вся доска", "Сдайте уроки в 4 разных разделах", "sections", 4, sectionsAtLeast(4)),
     // Возвращение
     spec("return-14", "return", "common", "Handshake", "С возвращением", "Вернитесь после перерыва от 14 дней и позанимайтесь", "returns", 1),
   ];

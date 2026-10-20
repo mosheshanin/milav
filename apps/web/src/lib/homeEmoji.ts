@@ -9,6 +9,8 @@ export const DEFAULT_EMOJI = "📘";
 /** По `topicId`. */
 export const TOPIC_EMOJI: Record<string, string> = {
   alphabet: "🔤",
+  pronouns: "🙋",
+  numbers: "🔢",
   animals: "🐾",
   food: "🍽️",
   family: "👨‍👩‍👧",
@@ -39,6 +41,8 @@ export const LESSON_EMOJI: Record<string, string> = {
   "alphabet-4": "👁️",
   "alphabet-5": "🏁",
   "alphabet-6": "👖",
+  "pronouns-1": "👋",
+  "numbers-1": "🔟",
   "animals-1": "🐶",
   "food-1": "🥖",
   "food-2": "🍎",

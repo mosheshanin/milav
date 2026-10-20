@@ -81,9 +81,11 @@ export interface Word {
   reviewed: false | Reviewed;
 }
 
-export type Section = "nouns" | "verbs" | "adjectives";
+export type Section = "basics" | "numbers" | "nouns" | "verbs" | "adjectives";
 
 export const SECTION_TITLES: Record<Section, string> = {
+  basics: "Основа",
+  numbers: "Числа и время",
   nouns: "Существительные",
   verbs: "Глаголы",
   adjectives: "Прилагательные",
