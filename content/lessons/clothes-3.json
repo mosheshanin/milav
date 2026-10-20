@@ -18,10 +18,12 @@
       "example": {
         "he": "זו מידה קטנה",
         "translit": "зо мида катана",
-        "ru": "Это маленький размер"
+        "ru": "Это маленький размер",
+        "audio": "/audio/clothes-3-size-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-3-size.svg"
+      "image": "/words/clothes-3-size.svg",
+      "audio": "/audio/clothes-3-size.mp3"
     },
     {
       "id": "clothes-3-fabric",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה בד רך",
         "translit": "зэ бад рах",
-        "ru": "Это мягкая ткань"
+        "ru": "Это мягкая ткань",
+        "audio": "/audio/clothes-3-fabric-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-3-fabric.svg"
+      "image": "/words/clothes-3-fabric.svg",
+      "audio": "/audio/clothes-3-fabric.mp3"
     },
     {
       "id": "clothes-3-cotton",
@@ -48,9 +52,11 @@
       "example": {
         "he": "זו כותנה רכה",
         "translit": "зо кутна рака",
-        "ru": "Это мягкий хлопок"
+        "ru": "Это мягкий хлопок",
+        "audio": "/audio/clothes-3-cotton-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-cotton.mp3"
     },
     {
       "id": "clothes-3-wool",
@@ -62,10 +68,12 @@
       "example": {
         "he": "זה צמר חם",
         "translit": "зэ цемер хам",
-        "ru": "Это тёплая шерсть"
+        "ru": "Это тёплая шерсть",
+        "audio": "/audio/clothes-3-wool-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-3-wool.svg"
+      "image": "/words/clothes-3-wool.svg",
+      "audio": "/audio/clothes-3-wool.mp3"
     },
     {
       "id": "clothes-3-leather",
@@ -77,10 +85,12 @@
       "example": {
         "he": "זה עור אמיתי",
         "translit": "зэ ор амити",
-        "ru": "Это настоящая кожа"
+        "ru": "Это настоящая кожа",
+        "audio": "/audio/clothes-3-leather-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/clothes-3-leather.svg"
+      "image": "/words/clothes-3-leather.svg",
+      "audio": "/audio/clothes-3-leather.mp3"
     },
     {
       "id": "clothes-3-silk",
@@ -92,9 +102,11 @@
       "example": {
         "he": "זה משי יקר",
         "translit": "зэ меши якар",
-        "ru": "Это дорогой шёлк"
+        "ru": "Это дорогой шёлк",
+        "audio": "/audio/clothes-3-silk-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-silk.mp3"
     },
     {
       "id": "clothes-3-pocket",
@@ -106,9 +118,11 @@
       "example": {
         "he": "זה כיס קטן",
         "translit": "зэ кис катан",
-        "ru": "Это маленький карман"
+        "ru": "Это маленький карман",
+        "audio": "/audio/clothes-3-pocket-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-pocket.mp3"
     },
     {
       "id": "clothes-3-sleeve",
@@ -120,9 +134,11 @@
       "example": {
         "he": "זה שרוול ארוך",
         "translit": "зэ шарвуль арох",
-        "ru": "Это длинный рукав"
+        "ru": "Это длинный рукав",
+        "audio": "/audio/clothes-3-sleeve-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-sleeve.mp3"
     },
     {
       "id": "clothes-3-zipper",
@@ -134,9 +150,11 @@
       "example": {
         "he": "זה רוכסן חדש",
         "translit": "зэ рохсан хадаш",
-        "ru": "Это новая молния"
+        "ru": "Это новая молния",
+        "audio": "/audio/clothes-3-zipper-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-zipper.mp3"
     },
     {
       "id": "clothes-3-collar",
@@ -148,9 +166,11 @@
       "example": {
         "he": "זה צווארון לבן",
         "translit": "зэ цавварон лаван",
-        "ru": "Это белый воротник"
+        "ru": "Это белый воротник",
+        "audio": "/audio/clothes-3-collar-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/clothes-3-collar.mp3"
     }
   ]
 }
