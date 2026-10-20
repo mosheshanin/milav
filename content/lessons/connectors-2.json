@@ -17,9 +17,11 @@
       "example": {
         "he": "אני עם אבא",
         "translit": "ани им аба",
-        "ru": "Я с папой"
+        "ru": "Я с папой",
+        "audio": "/audio/connectors-2-with-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-with.mp3"
     },
     {
       "id": "connectors-2-on",
@@ -30,9 +32,11 @@
       "example": {
         "he": "יש ספר על שולחן",
         "translit": "йеш сефер аль шульхан",
-        "ru": "На столе книга"
+        "ru": "На столе книга",
+        "audio": "/audio/connectors-2-on-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-on.mp3"
     },
     {
       "id": "connectors-2-at",
@@ -43,9 +47,11 @@
       "example": {
         "he": "אני אצל אבא",
         "translit": "ани эцель аба",
-        "ru": "Я у папы"
+        "ru": "Я у папы",
+        "audio": "/audio/connectors-2-at-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-at.mp3"
     },
     {
       "id": "connectors-2-between",
@@ -56,9 +62,11 @@
       "example": {
         "he": "בין אבא ואמא",
         "translit": "бейн аба веима",
-        "ru": "Между папой и мамой"
+        "ru": "Между папой и мамой",
+        "audio": "/audio/connectors-2-between-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-between.mp3"
     },
     {
       "id": "connectors-2-before",
@@ -69,9 +77,11 @@
       "example": {
         "he": "לפני שעה",
         "translit": "лифней шаа",
-        "ru": "Час назад"
+        "ru": "Час назад",
+        "audio": "/audio/connectors-2-before-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-before.mp3"
     },
     {
       "id": "connectors-2-after",
@@ -82,9 +92,11 @@
       "example": {
         "he": "אחרי שעה",
         "translit": "ахарей шаа",
-        "ru": "Через час"
+        "ru": "Через час",
+        "audio": "/audio/connectors-2-after-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-after.mp3"
     },
     {
       "id": "connectors-2-near",
@@ -95,9 +107,11 @@
       "example": {
         "he": "אני ליד בית",
         "translit": "ани леяд байт",
-        "ru": "Я возле дома"
+        "ru": "Я возле дома",
+        "audio": "/audio/connectors-2-near-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-near.mp3"
     },
     {
       "id": "connectors-2-without",
@@ -108,9 +122,11 @@
       "example": {
         "he": "קפה בלי סוכר",
         "translit": "кафэ бли сукар",
-        "ru": "Кофе без сахара"
+        "ru": "Кофе без сахара",
+        "audio": "/audio/connectors-2-without-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-without.mp3"
     },
     {
       "id": "connectors-2-for",
@@ -121,9 +137,11 @@
       "example": {
         "he": "זה בשביל אבא",
         "translit": "зэ бишвиль аба",
-        "ru": "Это для папы"
+        "ru": "Это для папы",
+        "audio": "/audio/connectors-2-for-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-for.mp3"
     },
     {
       "id": "connectors-2-against",
@@ -134,9 +152,11 @@
       "example": {
         "he": "אני נגד",
         "translit": "ани негед",
-        "ru": "Я против"
+        "ru": "Я против",
+        "audio": "/audio/connectors-2-against-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-2-against.mp3"
     }
   ]
 }

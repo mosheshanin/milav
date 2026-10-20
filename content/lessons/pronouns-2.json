@@ -17,9 +17,11 @@
       "example": {
         "he": "מה זה",
         "translit": "ма зэ",
-        "ru": "Что это"
+        "ru": "Что это",
+        "audio": "/audio/pronouns-2-what-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-what.mp3"
     },
     {
       "id": "pronouns-2-who",
@@ -30,9 +32,11 @@
       "example": {
         "he": "מי הוא",
         "translit": "ми ху",
-        "ru": "Кто он"
+        "ru": "Кто он",
+        "audio": "/audio/pronouns-2-who-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-who.mp3"
     },
     {
       "id": "pronouns-2-where",
@@ -43,9 +47,11 @@
       "example": {
         "he": "איפה אתה",
         "translit": "эйфо ата",
-        "ru": "Где ты (м.)"
+        "ru": "Где ты (м.)",
+        "audio": "/audio/pronouns-2-where-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-where.mp3"
     },
     {
       "id": "pronouns-2-whereto",
@@ -56,9 +62,11 @@
       "example": {
         "he": "לאן אתה הולך",
         "translit": "леан ата холех",
-        "ru": "Куда ты идёшь"
+        "ru": "Куда ты идёшь",
+        "audio": "/audio/pronouns-2-whereto-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-whereto.mp3"
     },
     {
       "id": "pronouns-2-whence",
@@ -69,9 +77,11 @@
       "example": {
         "he": "מאיפה אתה",
         "translit": "меэйфо ата",
-        "ru": "Откуда ты (м.)"
+        "ru": "Откуда ты (м.)",
+        "audio": "/audio/pronouns-2-whence-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-whence.mp3"
     },
     {
       "id": "pronouns-2-when",
@@ -82,9 +92,11 @@
       "example": {
         "he": "מתי אתה בא",
         "translit": "матай ата ба",
-        "ru": "Когда ты придёшь"
+        "ru": "Когда ты придёшь",
+        "audio": "/audio/pronouns-2-when-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-when.mp3"
     },
     {
       "id": "pronouns-2-why",
@@ -95,9 +107,11 @@
       "example": {
         "he": "למה אתה עצוב",
         "translit": "лама ата ацув",
-        "ru": "Почему ты грустный"
+        "ru": "Почему ты грустный",
+        "audio": "/audio/pronouns-2-why-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-why.mp3"
     },
     {
       "id": "pronouns-2-how",
@@ -108,9 +122,11 @@
       "example": {
         "he": "איך אתה",
         "translit": "эйх ата",
-        "ru": "Как ты (м.)"
+        "ru": "Как ты (м.)",
+        "audio": "/audio/pronouns-2-how-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-how.mp3"
     },
     {
       "id": "pronouns-2-howmuch",
@@ -121,9 +137,11 @@
       "example": {
         "he": "כמה זה עולה",
         "translit": "кама зэ олэ",
-        "ru": "Сколько это стоит"
+        "ru": "Сколько это стоит",
+        "audio": "/audio/pronouns-2-howmuch-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-howmuch.mp3"
     },
     {
       "id": "pronouns-2-which",
@@ -134,9 +152,11 @@
       "example": {
         "he": "איזה צבע",
         "translit": "эйзэ цева",
-        "ru": "Какой цвет"
+        "ru": "Какой цвет",
+        "audio": "/audio/pronouns-2-which-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/pronouns-2-which.mp3"
     }
   ]
 }

@@ -17,10 +17,12 @@
       "example": {
         "he": "זה אפס",
         "translit": "зэ эфес",
-        "ru": "Это ноль"
+        "ru": "Это ноль",
+        "audio": "/audio/numbers-3-zero-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-zero.svg"
+      "image": "/words/numbers-3-zero.svg",
+      "audio": "/audio/numbers-3-zero.mp3"
     },
     {
       "id": "numbers-3-twenty",
@@ -31,10 +33,12 @@
       "example": {
         "he": "עשרים שקלים",
         "translit": "эсрим шкалим",
-        "ru": "Двадцать шекелей"
+        "ru": "Двадцать шекелей",
+        "audio": "/audio/numbers-3-twenty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-twenty.svg"
+      "image": "/words/numbers-3-twenty.svg",
+      "audio": "/audio/numbers-3-twenty.mp3"
     },
     {
       "id": "numbers-3-thirty",
@@ -45,10 +49,12 @@
       "example": {
         "he": "שלושים ילדים",
         "translit": "шлошим йеладим",
-        "ru": "Тридцать детей"
+        "ru": "Тридцать детей",
+        "audio": "/audio/numbers-3-thirty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-thirty.svg"
+      "image": "/words/numbers-3-thirty.svg",
+      "audio": "/audio/numbers-3-thirty.mp3"
     },
     {
       "id": "numbers-3-forty",
@@ -59,10 +65,12 @@
       "example": {
         "he": "ארבעים יום",
         "translit": "арбаим йом",
-        "ru": "Сорок дней"
+        "ru": "Сорок дней",
+        "audio": "/audio/numbers-3-forty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-forty.svg"
+      "image": "/words/numbers-3-forty.svg",
+      "audio": "/audio/numbers-3-forty.mp3"
     },
     {
       "id": "numbers-3-fifty",
@@ -73,10 +81,12 @@
       "example": {
         "he": "חמישים אחוז",
         "translit": "хамишим ахуз",
-        "ru": "Пятьдесят процентов"
+        "ru": "Пятьдесят процентов",
+        "audio": "/audio/numbers-3-fifty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-fifty.svg"
+      "image": "/words/numbers-3-fifty.svg",
+      "audio": "/audio/numbers-3-fifty.mp3"
     },
     {
       "id": "numbers-3-sixty",
@@ -87,10 +97,12 @@
       "example": {
         "he": "שישים דקות",
         "translit": "шишим дакот",
-        "ru": "Шестьдесят минут"
+        "ru": "Шестьдесят минут",
+        "audio": "/audio/numbers-3-sixty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-sixty.svg"
+      "image": "/words/numbers-3-sixty.svg",
+      "audio": "/audio/numbers-3-sixty.mp3"
     },
     {
       "id": "numbers-3-seventy",
@@ -101,10 +113,12 @@
       "example": {
         "he": "שבעים שנה",
         "translit": "шивим шана",
-        "ru": "Семьдесят лет"
+        "ru": "Семьдесят лет",
+        "audio": "/audio/numbers-3-seventy-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-seventy.svg"
+      "image": "/words/numbers-3-seventy.svg",
+      "audio": "/audio/numbers-3-seventy.mp3"
     },
     {
       "id": "numbers-3-eighty",
@@ -115,10 +129,12 @@
       "example": {
         "he": "שמונים קילומטר",
         "translit": "шмоним километр",
-        "ru": "Восемьдесят километров"
+        "ru": "Восемьдесят километров",
+        "audio": "/audio/numbers-3-eighty-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-eighty.svg"
+      "image": "/words/numbers-3-eighty.svg",
+      "audio": "/audio/numbers-3-eighty.mp3"
     },
     {
       "id": "numbers-3-ninety",
@@ -129,10 +145,12 @@
       "example": {
         "he": "תשעים תלמידים",
         "translit": "тишим тальмидим",
-        "ru": "Девяносто учеников"
+        "ru": "Девяносто учеников",
+        "audio": "/audio/numbers-3-ninety-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-ninety.svg"
+      "image": "/words/numbers-3-ninety.svg",
+      "audio": "/audio/numbers-3-ninety.mp3"
     },
     {
       "id": "numbers-3-hundred",
@@ -143,10 +161,12 @@
       "example": {
         "he": "מאה שקלים",
         "translit": "меа шкалим",
-        "ru": "Сто шекелей"
+        "ru": "Сто шекелей",
+        "audio": "/audio/numbers-3-hundred-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-3-hundred.svg"
+      "image": "/words/numbers-3-hundred.svg",
+      "audio": "/audio/numbers-3-hundred.mp3"
     }
   ]
 }

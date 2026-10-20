@@ -17,9 +17,11 @@
       "example": {
         "he": "זה קטן אבל טוב",
         "translit": "зэ катан аваль тов",
-        "ru": "Маленькое, но хорошее"
+        "ru": "Маленькое, но хорошее",
+        "audio": "/audio/connectors-1-but-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-but.mp3"
     },
     {
       "id": "connectors-1-or",
@@ -30,9 +32,11 @@
       "example": {
         "he": "תה או קפה",
         "translit": "тэ о кафэ",
-        "ru": "Чай или кофе"
+        "ru": "Чай или кофе",
+        "audio": "/audio/connectors-1-or-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-or.mp3"
     },
     {
       "id": "connectors-1-also",
@@ -43,9 +47,11 @@
       "example": {
         "he": "גם אני",
         "translit": "гам ани",
-        "ru": "Я тоже"
+        "ru": "Я тоже",
+        "audio": "/audio/connectors-1-also-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-also.mp3"
     },
     {
       "id": "connectors-1-because",
@@ -56,9 +62,11 @@
       "example": {
         "he": "אני בבית כי קר",
         "translit": "ани бабайит ки кар",
-        "ru": "Я дома, потому что холодно"
+        "ru": "Я дома, потому что холодно",
+        "audio": "/audio/connectors-1-because-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-because.mp3"
     },
     {
       "id": "connectors-1-if",
@@ -69,9 +77,11 @@
       "example": {
         "he": "אם אתה רוצה",
         "translit": "им ата роцэ",
-        "ru": "Если ты хочешь"
+        "ru": "Если ты хочешь",
+        "audio": "/audio/connectors-1-if-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-if.mp3"
     },
     {
       "id": "connectors-1-then",
@@ -82,9 +92,11 @@
       "example": {
         "he": "אז אני בא",
         "translit": "аз ани ба",
-        "ru": "Тогда я приду"
+        "ru": "Тогда я приду",
+        "audio": "/audio/connectors-1-then-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-then.mp3"
     },
     {
       "id": "connectors-1-inorder",
@@ -95,9 +107,11 @@
       "example": {
         "he": "כדי לדעת",
         "translit": "кедей ладаат",
-        "ru": "Чтобы знать"
+        "ru": "Чтобы знать",
+        "audio": "/audio/connectors-1-inorder-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-inorder.mp3"
     },
     {
       "id": "connectors-1-therefore",
@@ -108,9 +122,11 @@
       "example": {
         "he": "קר לכן אני בבית",
         "translit": "кар лахен ани бабайит",
-        "ru": "Холодно, поэтому я дома"
+        "ru": "Холодно, поэтому я дома",
+        "audio": "/audio/connectors-1-therefore-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-therefore.mp3"
     },
     {
       "id": "connectors-1-despite",
@@ -121,9 +137,11 @@
       "example": {
         "he": "למרות זה אני בבית",
         "translit": "ламарот зэ ани бабайит",
-        "ru": "Несмотря на это, я дома"
+        "ru": "Несмотря на это, я дома",
+        "audio": "/audio/connectors-1-despite-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-despite.mp3"
     },
     {
       "id": "connectors-1-even",
@@ -134,9 +152,11 @@
       "example": {
         "he": "אפילו אני",
         "translit": "афилу ани",
-        "ru": "Даже я"
+        "ru": "Даже я",
+        "audio": "/audio/connectors-1-even-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-1-even.mp3"
     }
   ]
 }

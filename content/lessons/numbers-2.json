@@ -17,10 +17,12 @@
       "example": {
         "he": "ילד אחד",
         "translit": "йелед эхад",
-        "ru": "Один мальчик"
+        "ru": "Один мальчик",
+        "audio": "/audio/numbers-2-one-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-one.svg"
+      "image": "/words/numbers-2-one.svg",
+      "audio": "/audio/numbers-2-one.mp3"
     },
     {
       "id": "numbers-2-two",
@@ -31,10 +33,12 @@
       "example": {
         "he": "הם שניים",
         "translit": "хем шнаим",
-        "ru": "Их двое"
+        "ru": "Их двое",
+        "audio": "/audio/numbers-2-two-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-two.svg"
+      "image": "/words/numbers-2-two.svg",
+      "audio": "/audio/numbers-2-two.mp3"
     },
     {
       "id": "numbers-2-two-before",
@@ -45,10 +49,12 @@
       "example": {
         "he": "שני ילדים",
         "translit": "шней йеладим",
-        "ru": "Два мальчика"
+        "ru": "Два мальчика",
+        "audio": "/audio/numbers-2-two-before-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-two-before.svg"
+      "image": "/words/numbers-2-two-before.svg",
+      "audio": "/audio/numbers-2-two-before.mp3"
     },
     {
       "id": "numbers-2-three",
@@ -59,10 +65,12 @@
       "example": {
         "he": "שלושה ילדים",
         "translit": "шлоша йеладим",
-        "ru": "Три мальчика"
+        "ru": "Три мальчика",
+        "audio": "/audio/numbers-2-three-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-three.svg"
+      "image": "/words/numbers-2-three.svg",
+      "audio": "/audio/numbers-2-three.mp3"
     },
     {
       "id": "numbers-2-four",
@@ -73,10 +81,12 @@
       "example": {
         "he": "ארבעה ימים",
         "translit": "арбаа ямим",
-        "ru": "Четыре дня"
+        "ru": "Четыре дня",
+        "audio": "/audio/numbers-2-four-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-four.svg"
+      "image": "/words/numbers-2-four.svg",
+      "audio": "/audio/numbers-2-four.mp3"
     },
     {
       "id": "numbers-2-five",
@@ -87,10 +97,12 @@
       "example": {
         "he": "חמישה שקלים",
         "translit": "хамиша шкалим",
-        "ru": "Пять шекелей"
+        "ru": "Пять шекелей",
+        "audio": "/audio/numbers-2-five-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-five.svg"
+      "image": "/words/numbers-2-five.svg",
+      "audio": "/audio/numbers-2-five.mp3"
     },
     {
       "id": "numbers-2-six",
@@ -101,10 +113,12 @@
       "example": {
         "he": "שישה חודשים",
         "translit": "шиша ходашим",
-        "ru": "Шесть месяцев"
+        "ru": "Шесть месяцев",
+        "audio": "/audio/numbers-2-six-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-six.svg"
+      "image": "/words/numbers-2-six.svg",
+      "audio": "/audio/numbers-2-six.mp3"
     },
     {
       "id": "numbers-2-seven",
@@ -115,10 +129,12 @@
       "example": {
         "he": "שבעה אנשים",
         "translit": "шива анашим",
-        "ru": "Семь человек"
+        "ru": "Семь человек",
+        "audio": "/audio/numbers-2-seven-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-seven.svg"
+      "image": "/words/numbers-2-seven.svg",
+      "audio": "/audio/numbers-2-seven.mp3"
     },
     {
       "id": "numbers-2-nine",
@@ -129,10 +145,12 @@
       "example": {
         "he": "תשעה ספרים",
         "translit": "тиша сфарим",
-        "ru": "Девять книг"
+        "ru": "Девять книг",
+        "audio": "/audio/numbers-2-nine-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-nine.svg"
+      "image": "/words/numbers-2-nine.svg",
+      "audio": "/audio/numbers-2-nine.mp3"
     },
     {
       "id": "numbers-2-ten",
@@ -143,10 +161,12 @@
       "example": {
         "he": "עשרה ילדים",
         "translit": "асара йеладим",
-        "ru": "Десять мальчиков"
+        "ru": "Десять мальчиков",
+        "audio": "/audio/numbers-2-ten-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-2-ten.svg"
+      "image": "/words/numbers-2-ten.svg",
+      "audio": "/audio/numbers-2-ten.mp3"
     }
   ]
 }
