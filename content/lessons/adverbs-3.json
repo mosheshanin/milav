@@ -1,0 +1,146 @@
+{
+  "$schema": "../schema.json",
+  "id": "adverbs-3",
+  "topicId": "adverbs",
+  "section": "basics",
+  "topic": "Время, место, количество",
+  "number": 3,
+  "free": false,
+  "title": "Количество",
+  "words": [
+    {
+      "id": "adverbs-3-much",
+      "he": "הרבה",
+      "niqqud": "הַרְבֵּה",
+      "translit": "харбэ́",
+      "ru": "много",
+      "example": {
+        "he": "יש הרבה אנשים",
+        "translit": "йеш харбэ анашим",
+        "ru": "Много людей"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-3-little-bit",
+      "he": "קצת",
+      "niqqud": "קְצָת",
+      "translit": "кцат",
+      "ru": "немного",
+      "example": {
+        "he": "קצת קפה",
+        "translit": "кцат кафэ",
+        "ru": "Немного кофе"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-3-little-bit.svg"
+    },
+    {
+      "id": "adverbs-3-few",
+      "he": "מעט",
+      "niqqud": "מְעַט",
+      "translit": "меа́т",
+      "ru": "мало",
+      "example": {
+        "he": "יש מעט זמן",
+        "translit": "йеш меат зман",
+        "ru": "Мало времени"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-3-everyone",
+      "he": "כולם",
+      "niqqud": "כּוּלָּם",
+      "translit": "кула́м",
+      "ru": "все",
+      "example": {
+        "he": "כולם בבית",
+        "translit": "кулам бабайит",
+        "ru": "Все дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-3-everyone.svg"
+    },
+    {
+      "id": "adverbs-3-every",
+      "he": "כל",
+      "niqqud": "כֹּל",
+      "translit": "коль",
+      "ru": "каждый",
+      "example": {
+        "he": "כל יום",
+        "translit": "коль йом",
+        "ru": "Каждый день"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-3-more-than",
+      "he": "יותר",
+      "niqqud": "יוֹתֵר",
+      "translit": "йоте́р",
+      "ru": "больше",
+      "example": {
+        "he": "אני רוצה יותר",
+        "translit": "ани роцэ йотер",
+        "ru": "Я хочу больше"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-3-more-than.svg"
+    },
+    {
+      "id": "adverbs-3-less",
+      "he": "פחות",
+      "niqqud": "פָּחוֹת",
+      "translit": "пахо́т",
+      "ru": "меньше",
+      "example": {
+        "he": "אני רוצה פחות",
+        "translit": "ани роцэ пахот",
+        "ru": "Я хочу меньше"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-3-less.svg"
+    },
+    {
+      "id": "adverbs-3-very",
+      "he": "מאוד",
+      "niqqud": "מְאוֹד",
+      "translit": "мео́д",
+      "ru": "очень",
+      "example": {
+        "he": "זה טוב מאוד",
+        "translit": "зэ тов меод",
+        "ru": "Это очень хорошо"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-3-only",
+      "he": "רק",
+      "niqqud": "רַק",
+      "translit": "рак",
+      "ru": "только",
+      "example": {
+        "he": "רק אני",
+        "translit": "рак ани",
+        "ru": "Только я"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-3-enough",
+      "he": "מספיק",
+      "niqqud": "מַסְפִּיק",
+      "translit": "маспи́к",
+      "ru": "достаточно",
+      "example": {
+        "he": "זה מספיק",
+        "translit": "зэ маспик",
+        "ru": "Этого достаточно"
+      },
+      "reviewed": false
+    }
+  ]
+}

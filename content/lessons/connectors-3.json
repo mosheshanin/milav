@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema.json",
+  "id": "connectors-3",
+  "topicId": "connectors",
+  "section": "basics",
+  "topic": "Связки и предлоги",
+  "number": 3,
+  "free": false,
+  "title": "Предлоги 2",
+  "words": [
+    {
+      "id": "connectors-3-under",
+      "he": "מתחת",
+      "niqqud": "מִתַּחַת",
+      "translit": "мита́хат",
+      "ru": "под",
+      "example": {
+        "he": "אני מתחת לעץ",
+        "translit": "ани митахат леэц",
+        "ru": "Я под деревом"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-above",
+      "he": "מעל",
+      "niqqud": "מֵעַל",
+      "translit": "меа́ль",
+      "ru": "над",
+      "example": {
+        "he": "ציפור מעל עץ",
+        "translit": "ципор меаль эц",
+        "ru": "Птица над деревом"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-inside",
+      "he": "בתוך",
+      "niqqud": "בְּתוֹךְ",
+      "translit": "бето́х",
+      "ru": "внутри",
+      "example": {
+        "he": "אני בתוך בית",
+        "translit": "ани бетох байт",
+        "ru": "Я внутри дома"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-outside",
+      "he": "בחוץ",
+      "niqqud": "בַּחוּץ",
+      "translit": "баху́ц",
+      "ru": "снаружи",
+      "example": {
+        "he": "אני בחוץ",
+        "translit": "ани бахуц",
+        "ru": "Я снаружи"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-instead",
+      "he": "במקום",
+      "niqqud": "בִּמְקוֹם",
+      "translit": "бимко́м",
+      "ru": "вместо",
+      "example": {
+        "he": "תה במקום קפה",
+        "translit": "тэ бимком кафэ",
+        "ru": "Чай вместо кофе"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-except",
+      "he": "מלבד",
+      "niqqud": "מִלְּבַד",
+      "translit": "мильва́д",
+      "ru": "кроме",
+      "example": {
+        "he": "כולם מלבד אבא",
+        "translit": "кулам мильвад аба",
+        "ru": "Все, кроме папы"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-until",
+      "he": "עד",
+      "niqqud": "עַד",
+      "translit": "ад",
+      "ru": "до",
+      "example": {
+        "he": "עד מחר",
+        "translit": "ад махар",
+        "ru": "До завтра"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-through",
+      "he": "דרך",
+      "niqqud": "דֶּרֶךְ",
+      "translit": "де́рех",
+      "ru": "через",
+      "example": {
+        "he": "דרך חלון",
+        "translit": "дерех халон",
+        "ru": "Через окно"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-around",
+      "he": "סביב",
+      "niqqud": "סָבִיב",
+      "translit": "сави́в",
+      "ru": "вокруг",
+      "example": {
+        "he": "סביב שולחן",
+        "translit": "савив шульхан",
+        "ru": "Вокруг стола"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-3-along",
+      "he": "לאורך",
+      "niqqud": "לְאוֹרֶךְ",
+      "translit": "лео́рех",
+      "ru": "вдоль",
+      "example": {
+        "he": "לאורך חוף",
+        "translit": "леорех хоф",
+        "ru": "Вдоль берега"
+      },
+      "reviewed": false
+    }
+  ]
+}

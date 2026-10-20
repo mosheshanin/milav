@@ -1,0 +1,146 @@
+{
+  "$schema": "../schema.json",
+  "id": "yesno-1",
+  "topicId": "yesno",
+  "section": "basics",
+  "topic": "Да, нет, нужно, можно",
+  "number": 1,
+  "free": true,
+  "title": "Да, нет, есть",
+  "words": [
+    {
+      "id": "yesno-1-yes",
+      "he": "כן",
+      "niqqud": "כֵּן",
+      "translit": "кен",
+      "ru": "да",
+      "example": {
+        "he": "כן אני רוצה",
+        "translit": "кен ани роцэ",
+        "ru": "Да, я хочу"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-1-yes.svg"
+    },
+    {
+      "id": "yesno-1-no",
+      "he": "לא",
+      "niqqud": "לֹא",
+      "translit": "ло",
+      "ru": "не, нет",
+      "example": {
+        "he": "אני לא רוצה",
+        "translit": "ани ло роцэ",
+        "ru": "Я не хочу"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-1-no.svg"
+    },
+    {
+      "id": "yesno-1-there-is",
+      "he": "יש",
+      "niqqud": "יֵשׁ",
+      "translit": "йеш",
+      "ru": "есть",
+      "example": {
+        "he": "יש לי קפה",
+        "translit": "йеш ли кафэ",
+        "ru": "У меня есть кофе"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-there-isnt",
+      "he": "אין",
+      "niqqud": "אֵין",
+      "translit": "эйн",
+      "ru": "нет (чего-то нет)",
+      "example": {
+        "he": "אין לי זמן",
+        "translit": "эйн ли зман",
+        "ru": "У меня нет времени"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-maybe",
+      "he": "אולי",
+      "niqqud": "אוּלַי",
+      "translit": "ула́й",
+      "ru": "может быть",
+      "example": {
+        "he": "אולי אני בא",
+        "translit": "улай ани ба",
+        "ru": "Может быть, я приду"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-1-maybe.svg"
+    },
+    {
+      "id": "yesno-1-of-course",
+      "he": "כמובן",
+      "niqqud": "כַּמּוּבָן",
+      "translit": "камува́н",
+      "ru": "конечно",
+      "example": {
+        "he": "כמובן אני בא",
+        "translit": "камуван ани ба",
+        "ru": "Конечно, я приду"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-really",
+      "he": "באמת",
+      "niqqud": "בֶּאֱמֶת",
+      "translit": "беэ́мет",
+      "ru": "правда, на самом деле",
+      "example": {
+        "he": "באמת קר",
+        "translit": "беэмет кар",
+        "ru": "Правда холодно"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-okay",
+      "he": "בסדר",
+      "niqqud": "בְּסֵדֶר",
+      "translit": "бесе́дер",
+      "ru": "ладно, в порядке",
+      "example": {
+        "he": "זה בסדר",
+        "translit": "зэ беседер",
+        "ru": "Это нормально"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-here-is",
+      "he": "הנה",
+      "niqqud": "הִנֵּה",
+      "translit": "хинэ́",
+      "ru": "вот",
+      "example": {
+        "he": "הנה קפה",
+        "translit": "хинэ кафэ",
+        "ru": "Вот кофе"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "yesno-1-thanks",
+      "he": "תודה",
+      "niqqud": "תּוֹדָה",
+      "translit": "тода́",
+      "ru": "спасибо",
+      "example": {
+        "he": "תודה על קפה",
+        "translit": "тода аль кафэ",
+        "ru": "Спасибо за кофе"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-1-thanks.svg"
+    }
+  ]
+}

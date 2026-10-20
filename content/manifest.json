@@ -206,6 +206,57 @@
       "v": "c4fe562fa3"
     },
     {
+      "id": "adverbs-1",
+      "topicId": "adverbs",
+      "section": "basics",
+      "topic": "Время, место, количество",
+      "number": 1,
+      "free": true,
+      "title": "Время",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "f6591d342d"
+    },
+    {
+      "id": "adverbs-2",
+      "topicId": "adverbs",
+      "section": "basics",
+      "topic": "Время, место, количество",
+      "number": 2,
+      "free": false,
+      "title": "Место и образ",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "9e50fd7607"
+    },
+    {
+      "id": "adverbs-3",
+      "topicId": "adverbs",
+      "section": "basics",
+      "topic": "Время, место, количество",
+      "number": 3,
+      "free": false,
+      "title": "Количество",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "69b38ce045"
+    },
+    {
       "id": "animals-1",
       "topicId": "animals",
       "section": "nouns",
@@ -459,6 +510,23 @@
         "type"
       ],
       "v": "9f5ce711fe"
+    },
+    {
+      "id": "connectors-3",
+      "topicId": "connectors",
+      "section": "basics",
+      "topic": "Связки и предлоги",
+      "number": 3,
+      "free": false,
+      "title": "Предлоги 2",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "74a50e1e83"
     },
     {
       "id": "family-1",
@@ -1275,18 +1343,35 @@
         "type"
       ],
       "v": "61b6a5d1c2"
+    },
+    {
+      "id": "yesno-1",
+      "topicId": "yesno",
+      "section": "basics",
+      "topic": "Да, нет, нужно, можно",
+      "number": 1,
+      "free": true,
+      "title": "Да, нет, есть",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "c44dd7b4f9"
     }
   ],
   "info": {
-    "totalWords": 670,
-    "totalLessons": 73,
+    "totalWords": 720,
+    "totalLessons": 78,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
       "alphabet",
       "nouns",
-      "adjectives",
       "basics",
+      "adjectives",
       "verbs",
       "numbers"
     ],
@@ -1299,6 +1384,15 @@
           "abstract-2",
           "abstract-3",
           "abstract-4"
+        ]
+      },
+      {
+        "id": "adverbs",
+        "title": "Время, место, количество",
+        "lessonIds": [
+          "adverbs-1",
+          "adverbs-2",
+          "adverbs-3"
         ]
       },
       {
@@ -1349,7 +1443,8 @@
         "title": "Связки и предлоги",
         "lessonIds": [
           "connectors-1",
-          "connectors-2"
+          "connectors-2",
+          "connectors-3"
         ]
       },
       {
@@ -1494,6 +1589,13 @@
           "weak-4",
           "weak-5",
           "weak-6"
+        ]
+      },
+      {
+        "id": "yesno",
+        "title": "Да, нет, нужно, можно",
+        "lessonIds": [
+          "yesno-1"
         ]
       }
     ]

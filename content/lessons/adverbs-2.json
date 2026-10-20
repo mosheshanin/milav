@@ -1,0 +1,151 @@
+{
+  "$schema": "../schema.json",
+  "id": "adverbs-2",
+  "topicId": "adverbs",
+  "section": "basics",
+  "topic": "Время, место, количество",
+  "number": 2,
+  "free": false,
+  "title": "Место и образ",
+  "words": [
+    {
+      "id": "adverbs-2-here",
+      "he": "פה",
+      "niqqud": "פֹּה",
+      "translit": "по",
+      "ru": "здесь",
+      "example": {
+        "he": "אני פה",
+        "translit": "ани по",
+        "ru": "Я здесь"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-here.svg"
+    },
+    {
+      "id": "adverbs-2-there",
+      "he": "שם",
+      "niqqud": "שָׁם",
+      "translit": "шам",
+      "ru": "там",
+      "example": {
+        "he": "הוא שם",
+        "translit": "ху шам",
+        "ru": "Он там"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-there.svg"
+    },
+    {
+      "id": "adverbs-2-up",
+      "he": "למעלה",
+      "niqqud": "לְמַעְלָה",
+      "translit": "лемала́",
+      "ru": "вверху",
+      "example": {
+        "he": "הוא למעלה",
+        "translit": "ху лемала",
+        "ru": "Он наверху"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-up.svg"
+    },
+    {
+      "id": "adverbs-2-down",
+      "he": "למטה",
+      "niqqud": "לְמַטָּה",
+      "translit": "лемата́",
+      "ru": "внизу",
+      "example": {
+        "he": "הוא למטה",
+        "translit": "ху лемата",
+        "ru": "Он внизу"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-down.svg"
+    },
+    {
+      "id": "adverbs-2-fast",
+      "he": "מהר",
+      "niqqud": "מַהֵר",
+      "translit": "махе́р",
+      "ru": "быстро",
+      "example": {
+        "he": "אני הולך מהר",
+        "translit": "ани холех махер",
+        "ru": "Я иду быстро"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-fast.svg"
+    },
+    {
+      "id": "adverbs-2-slow",
+      "he": "לאט",
+      "niqqud": "לְאַט",
+      "translit": "леа́т",
+      "ru": "медленно",
+      "example": {
+        "he": "אני הולך לאט",
+        "translit": "ани холех леат",
+        "ru": "Я иду медленно"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-slow.svg"
+    },
+    {
+      "id": "adverbs-2-good",
+      "he": "טוב",
+      "niqqud": "טוֹב",
+      "translit": "тов",
+      "ru": "хорошо",
+      "example": {
+        "he": "אני מרגיש טוב",
+        "translit": "ани маргиш тов",
+        "ru": "Я чувствую себя хорошо"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-good.svg"
+    },
+    {
+      "id": "adverbs-2-bad",
+      "he": "רע",
+      "niqqud": "רַע",
+      "translit": "ра",
+      "ru": "плохо",
+      "example": {
+        "he": "אני מרגיש רע",
+        "translit": "ани маргиш ра",
+        "ru": "Я чувствую себя плохо"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-bad.svg"
+    },
+    {
+      "id": "adverbs-2-thus",
+      "he": "ככה",
+      "niqqud": "כָּכָה",
+      "translit": "каха́",
+      "ru": "так",
+      "example": {
+        "he": "עושים ככה",
+        "translit": "осим каха",
+        "ru": "Делают так"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-2-together",
+      "he": "ביחד",
+      "niqqud": "בְּיַחַד",
+      "translit": "бея́хад",
+      "ru": "вместе",
+      "example": {
+        "he": "אנחנו ביחד",
+        "translit": "анахну беяхад",
+        "ru": "Мы вместе"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-2-together.svg"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "$schema": "../schema.json",
+  "id": "adverbs-1",
+  "topicId": "adverbs",
+  "section": "basics",
+  "topic": "Время, место, количество",
+  "number": 1,
+  "free": true,
+  "title": "Время",
+  "words": [
+    {
+      "id": "adverbs-1-today",
+      "he": "היום",
+      "niqqud": "הַיּוֹם",
+      "translit": "хайо́м",
+      "ru": "сегодня",
+      "example": {
+        "he": "היום קר",
+        "translit": "хайом кар",
+        "ru": "Сегодня холодно"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-today.svg"
+    },
+    {
+      "id": "adverbs-1-tomorrow",
+      "he": "מחר",
+      "niqqud": "מָחָר",
+      "translit": "маха́р",
+      "ru": "завтра",
+      "example": {
+        "he": "מחר אני בא",
+        "translit": "махар ани ба",
+        "ru": "Завтра я приду"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-tomorrow.svg"
+    },
+    {
+      "id": "adverbs-1-yesterday",
+      "he": "אתמול",
+      "niqqud": "אֶתְמוֹל",
+      "translit": "этмо́ль",
+      "ru": "вчера",
+      "example": {
+        "he": "אתמול הייתי בבית",
+        "translit": "этмоль хайити бабайит",
+        "ru": "Вчера я был дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-yesterday.svg"
+    },
+    {
+      "id": "adverbs-1-now",
+      "he": "עכשיו",
+      "niqqud": "עַכְשָׁיו",
+      "translit": "ахша́в",
+      "ru": "сейчас",
+      "example": {
+        "he": "אני בבית עכשיו",
+        "translit": "ани бабайит ахшав",
+        "ru": "Я сейчас дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-now.svg"
+    },
+    {
+      "id": "adverbs-1-soon",
+      "he": "בקרוב",
+      "niqqud": "בְּקָרוֹב",
+      "translit": "бекаро́в",
+      "ru": "скоро",
+      "example": {
+        "he": "נתראה בקרוב",
+        "translit": "нитраэ бекаров",
+        "ru": "До скорой встречи"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-soon.svg"
+    },
+    {
+      "id": "adverbs-1-already",
+      "he": "כבר",
+      "niqqud": "כְּבָר",
+      "translit": "квар",
+      "ru": "уже",
+      "example": {
+        "he": "אני כבר בבית",
+        "translit": "ани квар бабайит",
+        "ru": "Я уже дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-already.svg"
+    },
+    {
+      "id": "adverbs-1-more",
+      "he": "עוד",
+      "niqqud": "עוֹד",
+      "translit": "од",
+      "ru": "ещё",
+      "example": {
+        "he": "עוד קפה",
+        "translit": "од кафэ",
+        "ru": "Ещё кофе"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-more.svg"
+    },
+    {
+      "id": "adverbs-1-always",
+      "he": "תמיד",
+      "niqqud": "תָּמִיד",
+      "translit": "тами́д",
+      "ru": "всегда",
+      "example": {
+        "he": "אני תמיד בבית",
+        "translit": "ани тамид бабайит",
+        "ru": "Я всегда дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-always.svg"
+    },
+    {
+      "id": "adverbs-1-sometimes",
+      "he": "לפעמים",
+      "niqqud": "לִפְעָמִים",
+      "translit": "лифами́м",
+      "ru": "иногда",
+      "example": {
+        "he": "לפעמים קר",
+        "translit": "лифамим кар",
+        "ru": "Иногда холодно"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "adverbs-1-immediately",
+      "he": "מיד",
+      "niqqud": "מִיָּד",
+      "translit": "мия́д",
+      "ru": "сразу",
+      "example": {
+        "he": "אני בא מיד",
+        "translit": "ани ба мияд",
+        "ru": "Я сейчас приду"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-1-immediately.svg"
+    }
+  ]
+}
