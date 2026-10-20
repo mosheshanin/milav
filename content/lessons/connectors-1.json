@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema.json",
+  "id": "connectors-1",
+  "topicId": "connectors",
+  "section": "basics",
+  "topic": "Связки и предлоги",
+  "number": 1,
+  "free": true,
+  "title": "Связки",
+  "words": [
+    {
+      "id": "connectors-1-but",
+      "he": "אבל",
+      "niqqud": "אֲבָל",
+      "translit": "ава́ль",
+      "ru": "но",
+      "example": {
+        "he": "זה קטן אבל טוב",
+        "translit": "зэ катан аваль тов",
+        "ru": "Маленькое, но хорошее"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-or",
+      "he": "או",
+      "niqqud": "אוֹ",
+      "translit": "о",
+      "ru": "или",
+      "example": {
+        "he": "תה או קפה",
+        "translit": "тэ о кафэ",
+        "ru": "Чай или кофе"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-also",
+      "he": "גם",
+      "niqqud": "גַּם",
+      "translit": "гам",
+      "ru": "тоже",
+      "example": {
+        "he": "גם אני",
+        "translit": "гам ани",
+        "ru": "Я тоже"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-because",
+      "he": "כי",
+      "niqqud": "כִּי",
+      "translit": "ки",
+      "ru": "потому что",
+      "example": {
+        "he": "אני בבית כי קר",
+        "translit": "ани бабайит ки кар",
+        "ru": "Я дома, потому что холодно"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-if",
+      "he": "אם",
+      "niqqud": "אִם",
+      "translit": "им",
+      "ru": "если",
+      "example": {
+        "he": "אם אתה רוצה",
+        "translit": "им ата роцэ",
+        "ru": "Если ты хочешь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-then",
+      "he": "אז",
+      "niqqud": "אָז",
+      "translit": "аз",
+      "ru": "тогда",
+      "example": {
+        "he": "אז אני בא",
+        "translit": "аз ани ба",
+        "ru": "Тогда я приду"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-inorder",
+      "he": "כדי",
+      "niqqud": "כְּדֵי",
+      "translit": "кеде́й",
+      "ru": "чтобы",
+      "example": {
+        "he": "כדי לדעת",
+        "translit": "кедей ладаат",
+        "ru": "Чтобы знать"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-therefore",
+      "he": "לכן",
+      "niqqud": "לָכֵן",
+      "translit": "лахе́н",
+      "ru": "поэтому",
+      "example": {
+        "he": "קר לכן אני בבית",
+        "translit": "кар лахен ани бабайит",
+        "ru": "Холодно, поэтому я дома"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-despite",
+      "he": "למרות",
+      "niqqud": "לַמְרוֹת",
+      "translit": "ламаро́т",
+      "ru": "несмотря на",
+      "example": {
+        "he": "למרות זה אני בבית",
+        "translit": "ламарот зэ ани бабайит",
+        "ru": "Несмотря на это, я дома"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-1-even",
+      "he": "אפילו",
+      "niqqud": "אֲפִילוּ",
+      "translit": "афилу́",
+      "ru": "даже",
+      "example": {
+        "he": "אפילו אני",
+        "translit": "афилу ани",
+        "ru": "Даже я"
+      },
+      "reviewed": false
+    }
+  ]
+}

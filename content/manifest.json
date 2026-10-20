@@ -427,6 +427,40 @@
       "v": "26bec89ef2"
     },
     {
+      "id": "connectors-1",
+      "topicId": "connectors",
+      "section": "basics",
+      "topic": "Связки и предлоги",
+      "number": 1,
+      "free": true,
+      "title": "Связки",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "5998179f5f"
+    },
+    {
+      "id": "connectors-2",
+      "topicId": "connectors",
+      "section": "basics",
+      "topic": "Связки и предлоги",
+      "number": 2,
+      "free": false,
+      "title": "Предлоги 1",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "237bc76dab"
+    },
+    {
       "id": "family-1",
       "topicId": "family",
       "section": "nouns",
@@ -849,7 +883,41 @@
         "write",
         "type"
       ],
-      "v": "328dc1f903"
+      "v": "a245ba4a86"
+    },
+    {
+      "id": "numbers-2",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 2,
+      "free": false,
+      "title": "Числа с мужскими словами",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "6721734a00"
+    },
+    {
+      "id": "numbers-3",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 3,
+      "free": false,
+      "title": "Ноль, десятки и сто",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "d217a92d07"
     },
     {
       "id": "paal-1",
@@ -991,7 +1059,7 @@
       "id": "pronouns-1",
       "topicId": "pronouns",
       "section": "basics",
-      "topic": "Местоимения",
+      "topic": "Местоимения и вопросы",
       "number": 1,
       "free": true,
       "title": "Я, ты, он, она",
@@ -1002,7 +1070,24 @@
         "write",
         "type"
       ],
-      "v": "a8c76ef234"
+      "v": "a12f59e132"
+    },
+    {
+      "id": "pronouns-2",
+      "topicId": "pronouns",
+      "section": "basics",
+      "topic": "Местоимения и вопросы",
+      "number": 2,
+      "free": false,
+      "title": "Вопросы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "270dfd1f1b"
     },
     {
       "id": "qualities-1",
@@ -1193,17 +1278,17 @@
     }
   ],
   "info": {
-    "totalWords": 620,
-    "totalLessons": 68,
+    "totalWords": 670,
+    "totalLessons": 73,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
       "alphabet",
       "nouns",
       "adjectives",
+      "basics",
       "verbs",
-      "numbers",
-      "basics"
+      "numbers"
     ],
     "topics": [
       {
@@ -1257,6 +1342,14 @@
         "title": "Цвета",
         "lessonIds": [
           "colors-1"
+        ]
+      },
+      {
+        "id": "connectors",
+        "title": "Связки и предлоги",
+        "lessonIds": [
+          "connectors-1",
+          "connectors-2"
         ]
       },
       {
@@ -1341,7 +1434,9 @@
         "id": "numbers",
         "title": "Числа",
         "lessonIds": [
-          "numbers-1"
+          "numbers-1",
+          "numbers-2",
+          "numbers-3"
         ]
       },
       {
@@ -1366,9 +1461,10 @@
       },
       {
         "id": "pronouns",
-        "title": "Местоимения",
+        "title": "Местоимения и вопросы",
         "lessonIds": [
-          "pronouns-1"
+          "pronouns-1",
+          "pronouns-2"
         ]
       },
       {

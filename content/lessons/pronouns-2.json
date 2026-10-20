@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema.json",
+  "id": "pronouns-2",
+  "topicId": "pronouns",
+  "section": "basics",
+  "topic": "Местоимения и вопросы",
+  "number": 2,
+  "free": false,
+  "title": "Вопросы",
+  "words": [
+    {
+      "id": "pronouns-2-what",
+      "he": "מה",
+      "niqqud": "מָה",
+      "translit": "ма",
+      "ru": "что",
+      "example": {
+        "he": "מה זה",
+        "translit": "ма зэ",
+        "ru": "Что это"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-who",
+      "he": "מי",
+      "niqqud": "מִי",
+      "translit": "ми",
+      "ru": "кто",
+      "example": {
+        "he": "מי הוא",
+        "translit": "ми ху",
+        "ru": "Кто он"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-where",
+      "he": "איפה",
+      "niqqud": "אֵיפֹה",
+      "translit": "э́йфо",
+      "ru": "где",
+      "example": {
+        "he": "איפה אתה",
+        "translit": "эйфо ата",
+        "ru": "Где ты (м.)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-whereto",
+      "he": "לאן",
+      "niqqud": "לְאָן",
+      "translit": "леа́н",
+      "ru": "куда",
+      "example": {
+        "he": "לאן אתה הולך",
+        "translit": "леан ата холех",
+        "ru": "Куда ты идёшь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-whence",
+      "he": "מאיפה",
+      "niqqud": "מֵאֵיפֹה",
+      "translit": "меэ́йфо",
+      "ru": "откуда",
+      "example": {
+        "he": "מאיפה אתה",
+        "translit": "меэйфо ата",
+        "ru": "Откуда ты (м.)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-when",
+      "he": "מתי",
+      "niqqud": "מָתַי",
+      "translit": "мата́й",
+      "ru": "когда",
+      "example": {
+        "he": "מתי אתה בא",
+        "translit": "матай ата ба",
+        "ru": "Когда ты придёшь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-why",
+      "he": "למה",
+      "niqqud": "לָמָּה",
+      "translit": "лама́",
+      "ru": "почему",
+      "example": {
+        "he": "למה אתה עצוב",
+        "translit": "лама ата ацув",
+        "ru": "Почему ты грустный"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-how",
+      "he": "איך",
+      "niqqud": "אֵיךְ",
+      "translit": "эйх",
+      "ru": "как",
+      "example": {
+        "he": "איך אתה",
+        "translit": "эйх ата",
+        "ru": "Как ты (м.)"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-howmuch",
+      "he": "כמה",
+      "niqqud": "כַּמָּה",
+      "translit": "ка́ма",
+      "ru": "сколько",
+      "example": {
+        "he": "כמה זה עולה",
+        "translit": "кама зэ олэ",
+        "ru": "Сколько это стоит"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "pronouns-2-which",
+      "he": "איזה",
+      "niqqud": "אֵיזֶה",
+      "translit": "э́йзэ",
+      "ru": "какой",
+      "example": {
+        "he": "איזה צבע",
+        "translit": "эйзэ цева",
+        "ru": "Какой цвет"
+      },
+      "reviewed": false
+    }
+  ]
+}

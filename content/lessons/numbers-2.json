@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-2",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 2,
+  "free": false,
+  "title": "Числа с мужскими словами",
+  "words": [
+    {
+      "id": "numbers-2-one",
+      "he": "אחד",
+      "niqqud": "אֶחָד",
+      "translit": "эха́д",
+      "ru": "один (м.)",
+      "example": {
+        "he": "ילד אחד",
+        "translit": "йелед эхад",
+        "ru": "Один мальчик"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-one.svg"
+    },
+    {
+      "id": "numbers-2-two",
+      "he": "שניים",
+      "niqqud": "שְׁנַיִים",
+      "translit": "шна́им",
+      "ru": "два (м.)",
+      "example": {
+        "he": "הם שניים",
+        "translit": "хем шнаим",
+        "ru": "Их двое"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-two.svg"
+    },
+    {
+      "id": "numbers-2-two-before",
+      "he": "שני",
+      "niqqud": "שְׁנֵי",
+      "translit": "шней",
+      "ru": "два (перед сущ.)",
+      "example": {
+        "he": "שני ילדים",
+        "translit": "шней йеладим",
+        "ru": "Два мальчика"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-two-before.svg"
+    },
+    {
+      "id": "numbers-2-three",
+      "he": "שלושה",
+      "niqqud": "שְׁלוֹשָׁה",
+      "translit": "шлоша́",
+      "ru": "три (м.)",
+      "example": {
+        "he": "שלושה ילדים",
+        "translit": "шлоша йеладим",
+        "ru": "Три мальчика"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-three.svg"
+    },
+    {
+      "id": "numbers-2-four",
+      "he": "ארבעה",
+      "niqqud": "אַרְבָּעָה",
+      "translit": "арбаа́",
+      "ru": "четыре (м.)",
+      "example": {
+        "he": "ארבעה ימים",
+        "translit": "арбаа ямим",
+        "ru": "Четыре дня"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-four.svg"
+    },
+    {
+      "id": "numbers-2-five",
+      "he": "חמישה",
+      "niqqud": "חֲמִישָּׁה",
+      "translit": "хамиша́",
+      "ru": "пять (м.)",
+      "example": {
+        "he": "חמישה שקלים",
+        "translit": "хамиша шкалим",
+        "ru": "Пять шекелей"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-five.svg"
+    },
+    {
+      "id": "numbers-2-six",
+      "he": "שישה",
+      "niqqud": "שִׁישָּׁה",
+      "translit": "шиша́",
+      "ru": "шесть (м.)",
+      "example": {
+        "he": "שישה חודשים",
+        "translit": "шиша ходашим",
+        "ru": "Шесть месяцев"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-six.svg"
+    },
+    {
+      "id": "numbers-2-seven",
+      "he": "שבעה",
+      "niqqud": "שִׁבְעָה",
+      "translit": "шива́",
+      "ru": "семь (м.)",
+      "example": {
+        "he": "שבעה אנשים",
+        "translit": "шива анашим",
+        "ru": "Семь человек"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-seven.svg"
+    },
+    {
+      "id": "numbers-2-nine",
+      "he": "תשעה",
+      "niqqud": "תִּשְׁעָה",
+      "translit": "тиша́",
+      "ru": "девять (м.)",
+      "example": {
+        "he": "תשעה ספרים",
+        "translit": "тиша сфарим",
+        "ru": "Девять книг"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-nine.svg"
+    },
+    {
+      "id": "numbers-2-ten",
+      "he": "עשרה",
+      "niqqud": "עֲשָׂרָה",
+      "translit": "асара́",
+      "ru": "десять (м.)",
+      "example": {
+        "he": "עשרה ילדים",
+        "translit": "асара йеладим",
+        "ru": "Десять мальчиков"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-2-ten.svg"
+    }
+  ]
+}

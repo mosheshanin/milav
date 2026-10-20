@@ -1,0 +1,142 @@
+{
+  "$schema": "../schema.json",
+  "id": "connectors-2",
+  "topicId": "connectors",
+  "section": "basics",
+  "topic": "Связки и предлоги",
+  "number": 2,
+  "free": false,
+  "title": "Предлоги 1",
+  "words": [
+    {
+      "id": "connectors-2-with",
+      "he": "עם",
+      "niqqud": "עִם",
+      "translit": "им",
+      "ru": "с",
+      "example": {
+        "he": "אני עם אבא",
+        "translit": "ани им аба",
+        "ru": "Я с папой"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-on",
+      "he": "על",
+      "niqqud": "עַל",
+      "translit": "аль",
+      "ru": "на",
+      "example": {
+        "he": "יש ספר על שולחן",
+        "translit": "йеш сефер аль шульхан",
+        "ru": "На столе книга"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-at",
+      "he": "אצל",
+      "niqqud": "אֵצֶל",
+      "translit": "э́цель",
+      "ru": "у",
+      "example": {
+        "he": "אני אצל אבא",
+        "translit": "ани эцель аба",
+        "ru": "Я у папы"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-between",
+      "he": "בין",
+      "niqqud": "בֵּין",
+      "translit": "бейн",
+      "ru": "между",
+      "example": {
+        "he": "בין אבא ואמא",
+        "translit": "бейн аба веима",
+        "ru": "Между папой и мамой"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-before",
+      "he": "לפני",
+      "niqqud": "לִפְנֵי",
+      "translit": "лифне́й",
+      "ru": "перед",
+      "example": {
+        "he": "לפני שעה",
+        "translit": "лифней шаа",
+        "ru": "Час назад"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-after",
+      "he": "אחרי",
+      "niqqud": "אַחֲרֵי",
+      "translit": "ахаре́й",
+      "ru": "после",
+      "example": {
+        "he": "אחרי שעה",
+        "translit": "ахарей шаа",
+        "ru": "Через час"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-near",
+      "he": "ליד",
+      "niqqud": "לְיַד",
+      "translit": "лея́д",
+      "ru": "рядом",
+      "example": {
+        "he": "אני ליד בית",
+        "translit": "ани леяд байт",
+        "ru": "Я возле дома"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-without",
+      "he": "בלי",
+      "niqqud": "בְּלִי",
+      "translit": "бли",
+      "ru": "без",
+      "example": {
+        "he": "קפה בלי סוכר",
+        "translit": "кафэ бли сукар",
+        "ru": "Кофе без сахара"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-for",
+      "he": "בשביל",
+      "niqqud": "בִּשְׁבִיל",
+      "translit": "бишви́ль",
+      "ru": "для",
+      "example": {
+        "he": "זה בשביל אבא",
+        "translit": "зэ бишвиль аба",
+        "ru": "Это для папы"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "connectors-2-against",
+      "he": "נגד",
+      "niqqud": "נֶגֶד",
+      "translit": "не́гед",
+      "ru": "против",
+      "example": {
+        "he": "אני נגד",
+        "translit": "ани негед",
+        "ru": "Я против"
+      },
+      "reviewed": false
+    }
+  ]
+}

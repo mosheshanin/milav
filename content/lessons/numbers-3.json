@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-3",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 3,
+  "free": false,
+  "title": "Ноль, десятки и сто",
+  "words": [
+    {
+      "id": "numbers-3-zero",
+      "he": "אפס",
+      "niqqud": "אֶפֶס",
+      "translit": "э́фес",
+      "ru": "ноль",
+      "example": {
+        "he": "זה אפס",
+        "translit": "зэ эфес",
+        "ru": "Это ноль"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-zero.svg"
+    },
+    {
+      "id": "numbers-3-twenty",
+      "he": "עשרים",
+      "niqqud": "עֶשְׂרִים",
+      "translit": "эсри́м",
+      "ru": "двадцать",
+      "example": {
+        "he": "עשרים שקלים",
+        "translit": "эсрим шкалим",
+        "ru": "Двадцать шекелей"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-twenty.svg"
+    },
+    {
+      "id": "numbers-3-thirty",
+      "he": "שלושים",
+      "niqqud": "שְׁלוֹשִׁים",
+      "translit": "шлоши́м",
+      "ru": "тридцать",
+      "example": {
+        "he": "שלושים ילדים",
+        "translit": "шлошим йеладим",
+        "ru": "Тридцать детей"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-thirty.svg"
+    },
+    {
+      "id": "numbers-3-forty",
+      "he": "ארבעים",
+      "niqqud": "אַרְבָּעִים",
+      "translit": "арбаи́м",
+      "ru": "сорок",
+      "example": {
+        "he": "ארבעים יום",
+        "translit": "арбаим йом",
+        "ru": "Сорок дней"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-forty.svg"
+    },
+    {
+      "id": "numbers-3-fifty",
+      "he": "חמישים",
+      "niqqud": "חֲמִישִּׁים",
+      "translit": "хамиши́м",
+      "ru": "пятьдесят",
+      "example": {
+        "he": "חמישים אחוז",
+        "translit": "хамишим ахуз",
+        "ru": "Пятьдесят процентов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-fifty.svg"
+    },
+    {
+      "id": "numbers-3-sixty",
+      "he": "שישים",
+      "niqqud": "שִׁישִּׁים",
+      "translit": "шиши́м",
+      "ru": "шестьдесят",
+      "example": {
+        "he": "שישים דקות",
+        "translit": "шишим дакот",
+        "ru": "Шестьдесят минут"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-sixty.svg"
+    },
+    {
+      "id": "numbers-3-seventy",
+      "he": "שבעים",
+      "niqqud": "שִׁבְעִים",
+      "translit": "шиви́м",
+      "ru": "семьдесят",
+      "example": {
+        "he": "שבעים שנה",
+        "translit": "шивим шана",
+        "ru": "Семьдесят лет"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-seventy.svg"
+    },
+    {
+      "id": "numbers-3-eighty",
+      "he": "שמונים",
+      "niqqud": "שְׁמוֹנִים",
+      "translit": "шмони́м",
+      "ru": "восемьдесят",
+      "example": {
+        "he": "שמונים קילומטר",
+        "translit": "шмоним километр",
+        "ru": "Восемьдесят километров"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-eighty.svg"
+    },
+    {
+      "id": "numbers-3-ninety",
+      "he": "תשעים",
+      "niqqud": "תִּשְׁעִים",
+      "translit": "тиши́м",
+      "ru": "девяносто",
+      "example": {
+        "he": "תשעים תלמידים",
+        "translit": "тишим тальмидим",
+        "ru": "Девяносто учеников"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-ninety.svg"
+    },
+    {
+      "id": "numbers-3-hundred",
+      "he": "מאה",
+      "niqqud": "מֵאָה",
+      "translit": "меа́",
+      "ru": "сто",
+      "example": {
+        "he": "מאה שקלים",
+        "translit": "меа шкалим",
+        "ru": "Сто шекелей"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-3-hundred.svg"
+    }
+  ]
+}

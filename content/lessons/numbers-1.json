@@ -16,7 +16,7 @@
       "ru": "один",
       "example": {
         "he": "יש לי בת אחת",
-        "translit": "еш ли бат ахат",
+        "translit": "йеш ли бат ахат",
         "ru": "У меня одна дочь",
         "audio": "/audio/numbers-1-one-phrase.mp3"
       },
@@ -64,7 +64,7 @@
       "ru": "четыре",
       "example": {
         "he": "יש ארבע מכוניות",
-        "translit": "еш арба мехонийот",
+        "translit": "йеш арба мехонийот",
         "ru": "Есть четыре машины",
         "audio": "/audio/numbers-1-four-phrase.mp3"
       },
@@ -80,7 +80,7 @@
       "ru": "пять",
       "example": {
         "he": "יש לי חמש אצבעות",
-        "translit": "еш ли хамеш эцбаот",
+        "translit": "йеш ли хамеш эцбаот",
         "ru": "У меня пять пальцев",
         "audio": "/audio/numbers-1-five-phrase.mp3"
       },
@@ -160,7 +160,7 @@
       "ru": "десять",
       "example": {
         "he": "יש לי עשר אצבעות",
-        "translit": "еш ли эсер эцбаот",
+        "translit": "йеш ли эсер эцбаот",
         "ru": "У меня десять пальцев",
         "audio": "/audio/numbers-1-ten-phrase.mp3"
       },
