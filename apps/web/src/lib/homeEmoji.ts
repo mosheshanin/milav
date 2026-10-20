@@ -57,6 +57,7 @@ export const LESSON_EMOJI: Record<string, string> = {
   "shops-2": "🛍️",
   "clothes-1": "👗",
   "clothes-2": "👟",
+  "clothes-3": "📏",
   "abstract-1": "🔑",
   "abstract-2": "🧩",
   "abstract-3": "🔭",
