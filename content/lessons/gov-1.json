@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "gov-1",
+  "topicId": "gov",
+  "section": "nouns",
+  "topic": "Учреждения Израиля",
+  "number": 1,
+  "free": true,
+  "title": "Документы",
+  "words": [
+    {
+      "id": "gov-1-passport",
+      "he": "דרכון",
+      "niqqud": "דַּרְכּוֹן",
+      "translit": "дарко́н",
+      "ru": "паспорт",
+      "gender": "m",
+      "example": {
+        "he": "זה דרכון חדש",
+        "translit": "зэ даркон хадаш",
+        "ru": "Это новый паспорт"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-passport.svg"
+    },
+    {
+      "id": "gov-1-visa",
+      "he": "ויזה",
+      "niqqud": "וִיזָה",
+      "translit": "ви́за",
+      "ru": "виза",
+      "gender": "f",
+      "example": {
+        "he": "זו ויזה חדשה",
+        "translit": "зо виза хадаша",
+        "ru": "Это новая виза"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-visa.svg"
+    },
+    {
+      "id": "gov-1-license",
+      "he": "רישיון",
+      "niqqud": "רִישָּׁיוֹן",
+      "translit": "ришайо́н",
+      "ru": "права, лицензия",
+      "gender": "m",
+      "example": {
+        "he": "זה רישיון חדש",
+        "translit": "зэ ришайон хадаш",
+        "ru": "Это новая лицензия"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-license.svg"
+    },
+    {
+      "id": "gov-1-form",
+      "he": "טופס",
+      "niqqud": "טוֹפֶס",
+      "translit": "то́фес",
+      "ru": "бланк, форма",
+      "gender": "m",
+      "example": {
+        "he": "זה טופס קצר",
+        "translit": "зэ тофес кацар",
+        "ru": "Это короткий бланк"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-form.svg"
+    },
+    {
+      "id": "gov-1-signature",
+      "he": "חתימה",
+      "niqqud": "חֲתִימָה",
+      "translit": "хатима́",
+      "ru": "подпись",
+      "gender": "f",
+      "example": {
+        "he": "זו חתימה יפה",
+        "translit": "зо хатима яфа",
+        "ru": "Это красивая подпись"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-signature.svg"
+    },
+    {
+      "id": "gov-1-approval",
+      "he": "אישור",
+      "niqqud": "אִישׁוּר",
+      "translit": "ишу́р",
+      "ru": "справка, подтверждение",
+      "gender": "m",
+      "example": {
+        "he": "זה אישור חשוב",
+        "translit": "зэ ишур хашув",
+        "ru": "Это важная справка"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-approval.svg"
+    },
+    {
+      "id": "gov-1-request",
+      "he": "בקשה",
+      "niqqud": "בַּקָּשָׁה",
+      "translit": "бакаша́",
+      "ru": "заявление, просьба",
+      "gender": "f",
+      "example": {
+        "he": "זו בקשה חדשה",
+        "translit": "зо бакаша хадаша",
+        "ru": "Это новое заявление"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "gov-1-certificate",
+      "he": "תעודה",
+      "niqqud": "תְּעוּדָה",
+      "translit": "теуда́",
+      "ru": "удостоверение, свидетельство",
+      "gender": "f",
+      "example": {
+        "he": "זו תעודה חשובה",
+        "translit": "зо теуда хашува",
+        "ru": "Это важное удостоверение"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-certificate.svg"
+    },
+    {
+      "id": "gov-1-date",
+      "he": "תאריך",
+      "niqqud": "תַּאֲרִיךְ",
+      "translit": "таари́х",
+      "ru": "дата",
+      "gender": "m",
+      "example": {
+        "he": "זה תאריך חדש",
+        "translit": "зэ таарих хадаш",
+        "ru": "Это новая дата"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-date.svg"
+    },
+    {
+      "id": "gov-1-document",
+      "he": "מסמך",
+      "niqqud": "מִסְמָךְ",
+      "translit": "мисма́х",
+      "ru": "документ",
+      "gender": "m",
+      "example": {
+        "he": "זה מסמך חשוב",
+        "translit": "зэ мисмах хашув",
+        "ru": "Это важный документ"
+      },
+      "reviewed": false,
+      "image": "/words/gov-1-document.svg"
+    }
+  ]
+}

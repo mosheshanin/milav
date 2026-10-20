@@ -14,6 +14,7 @@ import lesson_animals_1 from "./lessons/animals-1.json";
 import lesson_body_1 from "./lessons/body-1.json";
 import lesson_body_2 from "./lessons/body-2.json";
 import lesson_body_3 from "./lessons/body-3.json";
+import lesson_body_4 from "./lessons/body-4.json";
 import lesson_city_1 from "./lessons/city-1.json";
 import lesson_city_2 from "./lessons/city-2.json";
 import lesson_city_3 from "./lessons/city-3.json";
@@ -30,6 +31,7 @@ import lesson_food_1 from "./lessons/food-1.json";
 import lesson_food_2 from "./lessons/food-2.json";
 import lesson_food_3 from "./lessons/food-3.json";
 import lesson_food_4 from "./lessons/food-4.json";
+import lesson_gov_1 from "./lessons/gov-1.json";
 import lesson_hifil_1 from "./lessons/hifil-1.json";
 import lesson_hifil_2 from "./lessons/hifil-2.json";
 import lesson_hifil_3 from "./lessons/hifil-3.json";
@@ -40,6 +42,8 @@ import lesson_home_1 from "./lessons/home-1.json";
 import lesson_home_2 from "./lessons/home-2.json";
 import lesson_home_3 from "./lessons/home-3.json";
 import lesson_home_4 from "./lessons/home-4.json";
+import lesson_mood_1 from "./lessons/mood-1.json";
+import lesson_nature_1 from "./lessons/nature-1.json";
 import lesson_nifal_1 from "./lessons/nifal-1.json";
 import lesson_nifal_2 from "./lessons/nifal-2.json";
 import lesson_nifal_3 from "./lessons/nifal-3.json";
@@ -78,6 +82,7 @@ export const lessonFiles: unknown[] = [
   lesson_body_1,
   lesson_body_2,
   lesson_body_3,
+  lesson_body_4,
   lesson_city_1,
   lesson_city_2,
   lesson_city_3,
@@ -94,6 +99,7 @@ export const lessonFiles: unknown[] = [
   lesson_food_2,
   lesson_food_3,
   lesson_food_4,
+  lesson_gov_1,
   lesson_hifil_1,
   lesson_hifil_2,
   lesson_hifil_3,
@@ -104,6 +110,8 @@ export const lessonFiles: unknown[] = [
   lesson_home_2,
   lesson_home_3,
   lesson_home_4,
+  lesson_mood_1,
+  lesson_nature_1,
   lesson_nifal_1,
   lesson_nifal_2,
   lesson_nifal_3,

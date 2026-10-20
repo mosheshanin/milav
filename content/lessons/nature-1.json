@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "nature-1",
+  "topicId": "nature",
+  "section": "nouns",
+  "topic": "Природа и погода",
+  "number": 1,
+  "free": true,
+  "title": "Погода",
+  "words": [
+    {
+      "id": "nature-1-rain",
+      "he": "גשם",
+      "niqqud": "גֶּשֶׁם",
+      "translit": "ге́шем",
+      "ru": "дождь",
+      "gender": "m",
+      "example": {
+        "he": "זה גשם חזק",
+        "translit": "зэ гешем хазак",
+        "ru": "Это сильный дождь"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-rain.svg"
+    },
+    {
+      "id": "nature-1-wind",
+      "he": "רוח",
+      "niqqud": "רוּחַ",
+      "translit": "ру́ах",
+      "ru": "ветер",
+      "gender": "f",
+      "example": {
+        "he": "זו רוח קרה",
+        "translit": "зо руах кара",
+        "ru": "Это холодный ветер"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-wind.svg"
+    },
+    {
+      "id": "nature-1-sun",
+      "he": "שמש",
+      "niqqud": "שֶׁמֶשׁ",
+      "translit": "ше́меш",
+      "ru": "солнце",
+      "gender": "f",
+      "example": {
+        "he": "זו שמש חמה",
+        "translit": "зо шемеш хама",
+        "ru": "Это тёплое солнце"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-sun.svg"
+    },
+    {
+      "id": "nature-1-cloud",
+      "he": "ענן",
+      "niqqud": "עָנָן",
+      "translit": "ана́н",
+      "ru": "облако",
+      "gender": "m",
+      "example": {
+        "he": "זה ענן לבן",
+        "translit": "зэ анан лаван",
+        "ru": "Это белое облако"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-cloud.svg"
+    },
+    {
+      "id": "nature-1-snow",
+      "he": "שלג",
+      "niqqud": "שֶׁלֶג",
+      "translit": "ше́лег",
+      "ru": "снег",
+      "gender": "m",
+      "example": {
+        "he": "זה שלג קר",
+        "translit": "зэ шелег кар",
+        "ru": "Это холодный снег"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-snow.svg"
+    },
+    {
+      "id": "nature-1-storm",
+      "he": "סערה",
+      "niqqud": "סְעָרָה",
+      "translit": "сеа́ра",
+      "ru": "буря",
+      "gender": "f",
+      "example": {
+        "he": "זו סערה גדולה",
+        "translit": "зо сеара гдола",
+        "ru": "Это большая буря"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-storm.svg"
+    },
+    {
+      "id": "nature-1-lightning",
+      "he": "ברק",
+      "niqqud": "בָּרָק",
+      "translit": "бара́к",
+      "ru": "молния",
+      "gender": "m",
+      "example": {
+        "he": "זה ברק חזק",
+        "translit": "зэ барак хазак",
+        "ru": "Это сильная молния"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-lightning.svg"
+    },
+    {
+      "id": "nature-1-cold",
+      "he": "קור",
+      "niqqud": "קוֹר",
+      "translit": "кор",
+      "ru": "холод",
+      "gender": "m",
+      "example": {
+        "he": "זה קור גדול",
+        "translit": "зэ кор гадоль",
+        "ru": "Это сильный холод"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-cold.svg"
+    },
+    {
+      "id": "nature-1-sky",
+      "he": "שמיים",
+      "niqqud": "שָׁמַיִים",
+      "translit": "шама́им",
+      "ru": "небо",
+      "gender": "m",
+      "example": {
+        "he": "אלה שמיים כחולים",
+        "translit": "эле шамаим клулим",
+        "ru": "Это синее небо"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-sky.svg"
+    },
+    {
+      "id": "nature-1-khamsin",
+      "he": "חמסין",
+      "niqqud": "חַמְסִין",
+      "translit": "хамси́н",
+      "ru": "хамсин (жаркий сухой ветер)",
+      "gender": "m",
+      "example": {
+        "he": "זה חמסין חזק",
+        "translit": "зэ хамсин хазак",
+        "ru": "Это сильный хамсин"
+      },
+      "reviewed": false,
+      "image": "/words/nature-1-khamsin.svg"
+    }
+  ]
+}

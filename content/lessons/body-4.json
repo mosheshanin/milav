@@ -1,0 +1,160 @@
+{
+  "$schema": "../schema.json",
+  "id": "body-4",
+  "topicId": "body",
+  "section": "nouns",
+  "topic": "Тело",
+  "number": 4,
+  "free": false,
+  "title": "Симптомы и лечение",
+  "words": [
+    {
+      "id": "body-4-fever",
+      "he": "חום",
+      "niqqud": "חוֹם",
+      "translit": "хом",
+      "ru": "температура (жар)",
+      "gender": "m",
+      "example": {
+        "he": "זה חום גבוה",
+        "translit": "зэ хом гавоах",
+        "ru": "Это высокая температура"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-fever.svg"
+    },
+    {
+      "id": "body-4-dizzy",
+      "he": "סחרחורת",
+      "niqqud": "סְחַרְחוֹרֶת",
+      "translit": "схархо́рет",
+      "ru": "головокружение",
+      "gender": "f",
+      "example": {
+        "he": "זו סחרחורת חזקה",
+        "translit": "зо схархорет хазака",
+        "ru": "Это сильное головокружение"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-dizzy.svg"
+    },
+    {
+      "id": "body-4-nausea",
+      "he": "בחילה",
+      "niqqud": "בְּחִילָה",
+      "translit": "бхила́",
+      "ru": "тошнота",
+      "gender": "f",
+      "example": {
+        "he": "זו בחילה חזקה",
+        "translit": "зо бхила хазака",
+        "ru": "Это сильная тошнота"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-nausea.svg"
+    },
+    {
+      "id": "body-4-rash",
+      "he": "פריחה",
+      "niqqud": "פְּרִיחָה",
+      "translit": "приха́",
+      "ru": "сыпь",
+      "gender": "f",
+      "example": {
+        "he": "זו פריחה אדומה",
+        "translit": "зо приха адума",
+        "ru": "Это красная сыпь"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-4-inflammation",
+      "he": "דלקת",
+      "niqqud": "דַּלֶּקֶת",
+      "translit": "дале́кет",
+      "ru": "воспаление",
+      "gender": "f",
+      "example": {
+        "he": "זו דלקת קשה",
+        "translit": "зо далекет каша",
+        "ru": "Это тяжёлое воспаление"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "body-4-infection",
+      "he": "זיהום",
+      "niqqud": "זִיהוּם",
+      "translit": "зиху́м",
+      "ru": "инфекция",
+      "gender": "m",
+      "example": {
+        "he": "זה זיהום קשה",
+        "translit": "зэ зихум каше",
+        "ru": "Это тяжёлая инфекция"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-infection.svg"
+    },
+    {
+      "id": "body-4-allergy",
+      "he": "אלרגיה",
+      "niqqud": "אַלֶרְגִּיָּה",
+      "translit": "алерги́я",
+      "ru": "аллергия",
+      "gender": "f",
+      "example": {
+        "he": "זו אלרגיה חזקה",
+        "translit": "зо алергия хазака",
+        "ru": "Это сильная аллергия"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-allergy.svg"
+    },
+    {
+      "id": "body-4-vaccine",
+      "he": "חיסון",
+      "niqqud": "חִיסּוּן",
+      "translit": "хису́н",
+      "ru": "прививка",
+      "gender": "m",
+      "example": {
+        "he": "זה חיסון חשוב",
+        "translit": "зэ хисун хашув",
+        "ru": "Это важная прививка"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-vaccine.svg"
+    },
+    {
+      "id": "body-4-pill",
+      "he": "כדור",
+      "niqqud": "כַּדּוּר",
+      "translit": "каду́р",
+      "ru": "таблетка",
+      "gender": "m",
+      "example": {
+        "he": "זה כדור קטן",
+        "translit": "зэ кадур катан",
+        "ru": "Это маленькая таблетка"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-pill.svg"
+    },
+    {
+      "id": "body-4-prescription",
+      "he": "מרשם",
+      "niqqud": "מִרְשָׁם",
+      "translit": "мирша́м",
+      "ru": "рецепт (врача)",
+      "gender": "m",
+      "example": {
+        "he": "זה מרשם חדש",
+        "translit": "зэ миршам хадаш",
+        "ru": "Это новый рецепт"
+      },
+      "reviewed": false,
+      "image": "/words/body-4-prescription.svg"
+    }
+  ]
+}

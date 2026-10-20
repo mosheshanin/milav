@@ -1,0 +1,322 @@
+{
+  "$schema": "../schema.json",
+  "id": "mood-1",
+  "topicId": "mood",
+  "section": "adjectives",
+  "topic": "Люди: характер и чувства",
+  "number": 1,
+  "free": true,
+  "title": "Настроение и состояние",
+  "words": [
+    {
+      "id": "mood-1-happy",
+      "he": "שמח",
+      "niqqud": "שָׂמֵחַ",
+      "translit": "саме́ах",
+      "ru": "весёлый",
+      "example": {
+        "he": "הוא שמח",
+        "translit": "ху самеах",
+        "ru": "Он весёлый"
+      },
+      "forms": {
+        "f": {
+          "he": "שמחה",
+          "niqqud": "שְׂמֵחָה",
+          "translit": "смеха́"
+        },
+        "mp": {
+          "he": "שמחים",
+          "niqqud": "שְׂמֵחִים",
+          "translit": "смехи́м"
+        },
+        "fp": {
+          "he": "שמחות",
+          "niqqud": "שְׂמֵחוֹת",
+          "translit": "смехо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-happy.svg"
+    },
+    {
+      "id": "mood-1-sad",
+      "he": "עצוב",
+      "niqqud": "עָצוּב",
+      "translit": "ацу́в",
+      "ru": "грустный",
+      "example": {
+        "he": "היא עצובה",
+        "translit": "хи ацува",
+        "ru": "Она грустная"
+      },
+      "forms": {
+        "f": {
+          "he": "עצובה",
+          "niqqud": "עֲצוּבָה",
+          "translit": "ацува́"
+        },
+        "mp": {
+          "he": "עצובים",
+          "niqqud": "עֲצוּבִים",
+          "translit": "ацуви́м"
+        },
+        "fp": {
+          "he": "עצובות",
+          "niqqud": "עֲצוּבוֹת",
+          "translit": "ацуво́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-sad.svg"
+    },
+    {
+      "id": "mood-1-tired",
+      "he": "עייף",
+      "niqqud": "עָיֵיף",
+      "translit": "айе́ф",
+      "ru": "уставший",
+      "example": {
+        "he": "אני עייף",
+        "translit": "ани айеф",
+        "ru": "Я устал"
+      },
+      "forms": {
+        "f": {
+          "he": "עייפה",
+          "niqqud": "עֲיֵיפָה",
+          "translit": "айефа́"
+        },
+        "mp": {
+          "he": "עייפים",
+          "niqqud": "עֲיֵיפִים",
+          "translit": "айефи́м"
+        },
+        "fp": {
+          "he": "עייפות",
+          "niqqud": "עֲיֵיפוֹת",
+          "translit": "айефо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-tired.svg"
+    },
+    {
+      "id": "mood-1-hungry",
+      "he": "רעב",
+      "niqqud": "רָעֵב",
+      "translit": "рае́в",
+      "ru": "голодный",
+      "example": {
+        "he": "הוא רעב",
+        "translit": "ху раев",
+        "ru": "Он голодный"
+      },
+      "forms": {
+        "f": {
+          "he": "רעבה",
+          "niqqud": "רְעֵבָה",
+          "translit": "реева́"
+        },
+        "mp": {
+          "he": "רעבים",
+          "niqqud": "רְעֵבִים",
+          "translit": "реиви́м"
+        },
+        "fp": {
+          "he": "רעבות",
+          "niqqud": "רְעֵבוֹת",
+          "translit": "реево́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-hungry.svg"
+    },
+    {
+      "id": "mood-1-thirsty",
+      "he": "צמא",
+      "niqqud": "צָמֵא",
+      "translit": "цаме́",
+      "ru": "жаждущий",
+      "example": {
+        "he": "היא צמאה",
+        "translit": "хи цмеа",
+        "ru": "Она хочет пить"
+      },
+      "forms": {
+        "f": {
+          "he": "צמאה",
+          "niqqud": "צְמֵאָה",
+          "translit": "цмеа́"
+        },
+        "mp": {
+          "he": "צמאים",
+          "niqqud": "צְמֵאִים",
+          "translit": "цмеи́м"
+        },
+        "fp": {
+          "he": "צמאות",
+          "niqqud": "צְמֵאוֹת",
+          "translit": "цмео́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-thirsty.svg"
+    },
+    {
+      "id": "mood-1-angry",
+      "he": "כועס",
+      "niqqud": "כּוֹעֵס",
+      "translit": "ко́эс",
+      "ru": "сердитый",
+      "example": {
+        "he": "הוא כועס",
+        "translit": "ху коэс",
+        "ru": "Он сердится"
+      },
+      "forms": {
+        "f": {
+          "he": "כועסת",
+          "niqqud": "כּוֹעֶסֶת",
+          "translit": "ко́эсет"
+        },
+        "mp": {
+          "he": "כועסים",
+          "niqqud": "כּוֹעֲסִים",
+          "translit": "коаси́м"
+        },
+        "fp": {
+          "he": "כועסות",
+          "niqqud": "כּוֹעֲסוֹת",
+          "translit": "коасо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-angry.svg"
+    },
+    {
+      "id": "mood-1-nervous",
+      "he": "עצבני",
+      "niqqud": "עַצְבָּנִי",
+      "translit": "ацбани́",
+      "ru": "нервный",
+      "example": {
+        "he": "הוא עצבני",
+        "translit": "ху ацбани",
+        "ru": "Он нервный"
+      },
+      "forms": {
+        "f": {
+          "he": "עצבנית",
+          "niqqud": "עַצְבָּנִית",
+          "translit": "ацбани́т"
+        },
+        "mp": {
+          "he": "עצבניים",
+          "niqqud": "עַצְבָּנִיִּים",
+          "translit": "ацбани́им"
+        },
+        "fp": {
+          "he": "עצבניות",
+          "niqqud": "עַצְבָּנִיּוֹת",
+          "translit": "ацбанио́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-nervous.svg"
+    },
+    {
+      "id": "mood-1-surprised",
+      "he": "מופתע",
+      "niqqud": "מוּפְתָּע",
+      "translit": "муфта́",
+      "ru": "удивлённый",
+      "example": {
+        "he": "היא מופתעת",
+        "translit": "хи муфтаат",
+        "ru": "Она удивлена"
+      },
+      "forms": {
+        "f": {
+          "he": "מופתעת",
+          "niqqud": "מוּפְתַּעַת",
+          "translit": "муфта́ат"
+        },
+        "mp": {
+          "he": "מופתעים",
+          "niqqud": "מוּפְתָּעִים",
+          "translit": "муфтаи́м"
+        },
+        "fp": {
+          "he": "מופתעות",
+          "niqqud": "מוּפְתָּעוֹת",
+          "translit": "муфтао́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-surprised.svg"
+    },
+    {
+      "id": "mood-1-scared",
+      "he": "מפוחד",
+      "niqqud": "מְפוּחָד",
+      "translit": "мефуха́д",
+      "ru": "испуганный",
+      "example": {
+        "he": "הוא מפוחד",
+        "translit": "ху мефухад",
+        "ru": "Он испуган"
+      },
+      "forms": {
+        "f": {
+          "he": "מפוחדת",
+          "niqqud": "מְפוּחֶדֶת",
+          "translit": "мефухе́дет"
+        },
+        "mp": {
+          "he": "מפוחדים",
+          "niqqud": "מְפוּחָדִים",
+          "translit": "мефухади́м"
+        },
+        "fp": {
+          "he": "מפוחדות",
+          "niqqud": "מְפוּחָדוֹת",
+          "translit": "мефухадо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-scared.svg"
+    },
+    {
+      "id": "mood-1-bored",
+      "he": "משועמם",
+      "niqqud": "מְשׁוּעֲמָם",
+      "translit": "мешуама́м",
+      "ru": "скучающий",
+      "example": {
+        "he": "הוא משועמם",
+        "translit": "ху мешуамам",
+        "ru": "Ему скучно"
+      },
+      "forms": {
+        "f": {
+          "he": "משועממת",
+          "niqqud": "מְשׁוּעֶמֶמֶת",
+          "translit": "мешуаме́мет"
+        },
+        "mp": {
+          "he": "משועממים",
+          "niqqud": "מְשׁוּעֲמָמִים",
+          "translit": "мешуамами́м"
+        },
+        "fp": {
+          "he": "משועממות",
+          "niqqud": "מְשׁוּעֲמָמוֹת",
+          "translit": "мешуамамо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-1-bored.svg"
+    }
+  ]
+}

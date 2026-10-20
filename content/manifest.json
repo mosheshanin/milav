@@ -274,6 +274,23 @@
       "v": "e821773e4e"
     },
     {
+      "id": "body-4",
+      "topicId": "body",
+      "section": "nouns",
+      "topic": "Тело",
+      "number": 4,
+      "free": false,
+      "title": "Симптомы и лечение",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "a66b002f2c"
+    },
+    {
       "id": "city-1",
       "topicId": "city",
       "section": "nouns",
@@ -546,6 +563,23 @@
       "v": "24be2f2400"
     },
     {
+      "id": "gov-1",
+      "topicId": "gov",
+      "section": "nouns",
+      "topic": "Учреждения Израиля",
+      "number": 1,
+      "free": true,
+      "title": "Документы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "bc893d109c"
+    },
+    {
       "id": "hifil-1",
       "topicId": "hifil",
       "section": "verbs",
@@ -714,6 +748,40 @@
         "type"
       ],
       "v": "b9269ef3c2"
+    },
+    {
+      "id": "mood-1",
+      "topicId": "mood",
+      "section": "adjectives",
+      "topic": "Люди: характер и чувства",
+      "number": 1,
+      "free": true,
+      "title": "Настроение и состояние",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "f52b530848"
+    },
+    {
+      "id": "nature-1",
+      "topicId": "nature",
+      "section": "nouns",
+      "topic": "Природа и погода",
+      "number": 1,
+      "free": true,
+      "title": "Погода",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "cabdb4596c"
     },
     {
       "id": "nifal-1",
@@ -1091,8 +1159,8 @@
     }
   ],
   "info": {
-    "totalWords": 560,
-    "totalLessons": 62,
+    "totalWords": 600,
+    "totalLessons": 66,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1125,7 +1193,8 @@
         "lessonIds": [
           "body-1",
           "body-2",
-          "body-3"
+          "body-3",
+          "body-4"
         ]
       },
       {
@@ -1175,6 +1244,13 @@
         ]
       },
       {
+        "id": "gov",
+        "title": "Учреждения Израиля",
+        "lessonIds": [
+          "gov-1"
+        ]
+      },
+      {
         "id": "hifil",
         "title": "Хифъиль",
         "lessonIds": [
@@ -1200,6 +1276,20 @@
           "home-2",
           "home-3",
           "home-4"
+        ]
+      },
+      {
+        "id": "mood",
+        "title": "Люди: характер и чувства",
+        "lessonIds": [
+          "mood-1"
+        ]
+      },
+      {
+        "id": "nature",
+        "title": "Природа и погода",
+        "lessonIds": [
+          "nature-1"
         ]
       },
       {
