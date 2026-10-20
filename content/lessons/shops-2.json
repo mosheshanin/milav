@@ -18,10 +18,12 @@
       "example": {
         "he": "זה מחיר טוב",
         "translit": "зэ мехир тов",
-        "ru": "Это хорошая цена"
+        "ru": "Это хорошая цена",
+        "audio": "/audio/shops-2-price-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-price.svg"
+      "image": "/words/shops-2-price.svg",
+      "audio": "/audio/shops-2-price.mp3"
     },
     {
       "id": "shops-2-discount",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו הנחה גדולה",
         "translit": "зо ханаха гдола",
-        "ru": "Это большая скидка"
+        "ru": "Это большая скидка",
+        "audio": "/audio/shops-2-discount-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-discount.svg"
+      "image": "/words/shops-2-discount.svg",
+      "audio": "/audio/shops-2-discount.mp3"
     },
     {
       "id": "shops-2-sale",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה מבצע מיוחד",
         "translit": "зэ мивца меюхад",
-        "ru": "Это специальная акция"
+        "ru": "Это специальная акция",
+        "audio": "/audio/shops-2-sale-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-sale.svg"
+      "image": "/words/shops-2-sale.svg",
+      "audio": "/audio/shops-2-sale.mp3"
     },
     {
       "id": "shops-2-receipt",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זו קבלה חשובה",
         "translit": "зо кабала хашува",
-        "ru": "Это важный чек"
+        "ru": "Это важный чек",
+        "audio": "/audio/shops-2-receipt-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-receipt.svg"
+      "image": "/words/shops-2-receipt.svg",
+      "audio": "/audio/shops-2-receipt.mp3"
     },
     {
       "id": "shops-2-bag",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זו שקית קטנה",
         "translit": "зо сакит катана",
-        "ru": "Это маленький пакет"
+        "ru": "Это маленький пакет",
+        "audio": "/audio/shops-2-bag-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-bag.svg"
+      "image": "/words/shops-2-bag.svg",
+      "audio": "/audio/shops-2-bag.mp3"
     },
     {
       "id": "shops-2-purchase",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זו קניה טובה",
         "translit": "зо кния това",
-        "ru": "Это хорошая покупка"
+        "ru": "Это хорошая покупка",
+        "audio": "/audio/shops-2-purchase-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-purchase.svg"
+      "image": "/words/shops-2-purchase.svg",
+      "audio": "/audio/shops-2-purchase.mp3"
     },
     {
       "id": "shops-2-gift",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זו מתנה יפה",
         "translit": "зо матана яфа",
-        "ru": "Это красивый подарок"
+        "ru": "Это красивый подарок",
+        "audio": "/audio/shops-2-gift-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-gift.svg"
+      "image": "/words/shops-2-gift.svg",
+      "audio": "/audio/shops-2-gift.mp3"
     },
     {
       "id": "shops-2-list",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זו רשימה ארוכה",
         "translit": "зо решима аруха",
-        "ru": "Это длинный список"
+        "ru": "Это длинный список",
+        "audio": "/audio/shops-2-list-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-list.svg"
+      "image": "/words/shops-2-list.svg",
+      "audio": "/audio/shops-2-list.mp3"
     },
     {
       "id": "shops-2-product",
@@ -138,9 +154,11 @@
       "example": {
         "he": "זה מוצר חדש",
         "translit": "зэ муцар хадаш",
-        "ru": "Это новый товар"
+        "ru": "Это новый товар",
+        "audio": "/audio/shops-2-product-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/shops-2-product.mp3"
     },
     {
       "id": "shops-2-queue",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה תור ארוך",
         "translit": "зэ тор арох",
-        "ru": "Это длинная очередь"
+        "ru": "Это длинная очередь",
+        "audio": "/audio/shops-2-queue-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-2-queue.svg"
+      "image": "/words/shops-2-queue.svg",
+      "audio": "/audio/shops-2-queue.mp3"
     }
   ]
 }

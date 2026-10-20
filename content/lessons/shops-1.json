@@ -18,10 +18,12 @@
       "example": {
         "he": "זה סופר גדול",
         "translit": "зэ супер гадоль",
-        "ru": "Это большой супермаркет"
+        "ru": "Это большой супермаркет",
+        "audio": "/audio/shops-1-supermarket-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-supermarket.svg"
+      "image": "/words/shops-1-supermarket.svg",
+      "audio": "/audio/shops-1-supermarket.mp3"
     },
     {
       "id": "shops-1-market",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה שוק ישן",
         "translit": "зэ шук яшан",
-        "ru": "Это старый рынок"
+        "ru": "Это старый рынок",
+        "audio": "/audio/shops-1-market-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-market.svg"
+      "image": "/words/shops-1-market.svg",
+      "audio": "/audio/shops-1-market.mp3"
     },
     {
       "id": "shops-1-bakery",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זו מאפיה טובה",
         "translit": "зо маафия това",
-        "ru": "Это хорошая пекарня"
+        "ru": "Это хорошая пекарня",
+        "audio": "/audio/shops-1-bakery-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-bakery.svg"
+      "image": "/words/shops-1-bakery.svg",
+      "audio": "/audio/shops-1-bakery.mp3"
     },
     {
       "id": "shops-1-mall",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה קניון חדש",
         "translit": "зэ каньон хадаш",
-        "ru": "Это новый торговый центр"
+        "ru": "Это новый торговый центр",
+        "audio": "/audio/shops-1-mall-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-mall.svg"
+      "image": "/words/shops-1-mall.svg",
+      "audio": "/audio/shops-1-mall.mp3"
     },
     {
       "id": "shops-1-grocery",
@@ -78,9 +86,11 @@
       "example": {
         "he": "זו מכולת קטנה",
         "translit": "зо маколет катана",
-        "ru": "Это маленькая лавка"
+        "ru": "Это маленькая лавка",
+        "audio": "/audio/shops-1-grocery-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/shops-1-grocery.mp3"
     },
     {
       "id": "shops-1-register",
@@ -92,10 +102,12 @@
       "example": {
         "he": "זו קופה פתוחה",
         "translit": "зо купа птуха",
-        "ru": "Это открытая касса"
+        "ru": "Это открытая касса",
+        "audio": "/audio/shops-1-register-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-register.svg"
+      "image": "/words/shops-1-register.svg",
+      "audio": "/audio/shops-1-register.mp3"
     },
     {
       "id": "shops-1-cart",
@@ -107,10 +119,12 @@
       "example": {
         "he": "זו עגלה גדולה",
         "translit": "зо агала гдола",
-        "ru": "Это большая тележка"
+        "ru": "Это большая тележка",
+        "audio": "/audio/shops-1-cart-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-cart.svg"
+      "image": "/words/shops-1-cart.svg",
+      "audio": "/audio/shops-1-cart.mp3"
     },
     {
       "id": "shops-1-customer",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זה לקוח טוב",
         "translit": "зэ лакоах тов",
-        "ru": "Это хороший клиент"
+        "ru": "Это хороший клиент",
+        "audio": "/audio/shops-1-customer-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-customer.svg"
+      "image": "/words/shops-1-customer.svg",
+      "audio": "/audio/shops-1-customer.mp3"
     },
     {
       "id": "shops-1-seller",
@@ -137,10 +153,12 @@
       "example": {
         "he": "זה מוכר צעיר",
         "translit": "зэ мохер цаир",
-        "ru": "Это молодой продавец"
+        "ru": "Это молодой продавец",
+        "audio": "/audio/shops-1-seller-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-seller.svg"
+      "image": "/words/shops-1-seller.svg",
+      "audio": "/audio/shops-1-seller.mp3"
     },
     {
       "id": "shops-1-basket",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה סל מלא",
         "translit": "зэ саль малэ",
-        "ru": "Это полная корзина"
+        "ru": "Это полная корзина",
+        "audio": "/audio/shops-1-basket-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/shops-1-basket.svg"
+      "image": "/words/shops-1-basket.svg",
+      "audio": "/audio/shops-1-basket.mp3"
     }
   ]
 }
