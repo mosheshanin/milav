@@ -17,9 +17,11 @@
       "example": {
         "he": "יש הרבה אנשים",
         "translit": "йеш харбэ анашим",
-        "ru": "Много людей"
+        "ru": "Много людей",
+        "audio": "/audio/adverbs-3-much-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-much.mp3"
     },
     {
       "id": "adverbs-3-little-bit",
@@ -30,10 +32,12 @@
       "example": {
         "he": "קצת קפה",
         "translit": "кцат кафэ",
-        "ru": "Немного кофе"
+        "ru": "Немного кофе",
+        "audio": "/audio/adverbs-3-little-bit-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-3-little-bit.svg"
+      "image": "/words/adverbs-3-little-bit.svg",
+      "audio": "/audio/adverbs-3-little-bit.mp3"
     },
     {
       "id": "adverbs-3-few",
@@ -44,9 +48,11 @@
       "example": {
         "he": "יש מעט זמן",
         "translit": "йеш меат зман",
-        "ru": "Мало времени"
+        "ru": "Мало времени",
+        "audio": "/audio/adverbs-3-few-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-few.mp3"
     },
     {
       "id": "adverbs-3-everyone",
@@ -57,10 +63,12 @@
       "example": {
         "he": "כולם בבית",
         "translit": "кулам бабайит",
-        "ru": "Все дома"
+        "ru": "Все дома",
+        "audio": "/audio/adverbs-3-everyone-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-3-everyone.svg"
+      "image": "/words/adverbs-3-everyone.svg",
+      "audio": "/audio/adverbs-3-everyone.mp3"
     },
     {
       "id": "adverbs-3-every",
@@ -71,9 +79,11 @@
       "example": {
         "he": "כל יום",
         "translit": "коль йом",
-        "ru": "Каждый день"
+        "ru": "Каждый день",
+        "audio": "/audio/adverbs-3-every-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-every.mp3"
     },
     {
       "id": "adverbs-3-more-than",
@@ -84,10 +94,12 @@
       "example": {
         "he": "אני רוצה יותר",
         "translit": "ани роцэ йотер",
-        "ru": "Я хочу больше"
+        "ru": "Я хочу больше",
+        "audio": "/audio/adverbs-3-more-than-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-3-more-than.svg"
+      "image": "/words/adverbs-3-more-than.svg",
+      "audio": "/audio/adverbs-3-more-than.mp3"
     },
     {
       "id": "adverbs-3-less",
@@ -98,10 +110,12 @@
       "example": {
         "he": "אני רוצה פחות",
         "translit": "ани роцэ пахот",
-        "ru": "Я хочу меньше"
+        "ru": "Я хочу меньше",
+        "audio": "/audio/adverbs-3-less-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-3-less.svg"
+      "image": "/words/adverbs-3-less.svg",
+      "audio": "/audio/adverbs-3-less.mp3"
     },
     {
       "id": "adverbs-3-very",
@@ -112,9 +126,11 @@
       "example": {
         "he": "זה טוב מאוד",
         "translit": "зэ тов меод",
-        "ru": "Это очень хорошо"
+        "ru": "Это очень хорошо",
+        "audio": "/audio/adverbs-3-very-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-very.mp3"
     },
     {
       "id": "adverbs-3-only",
@@ -125,9 +141,11 @@
       "example": {
         "he": "רק אני",
         "translit": "рак ани",
-        "ru": "Только я"
+        "ru": "Только я",
+        "audio": "/audio/adverbs-3-only-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-only.mp3"
     },
     {
       "id": "adverbs-3-enough",
@@ -138,9 +156,11 @@
       "example": {
         "he": "זה מספיק",
         "translit": "зэ маспик",
-        "ru": "Этого достаточно"
+        "ru": "Этого достаточно",
+        "audio": "/audio/adverbs-3-enough-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-3-enough.mp3"
     }
   ]
 }

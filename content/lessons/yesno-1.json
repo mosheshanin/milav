@@ -17,10 +17,12 @@
       "example": {
         "he": "כן אני רוצה",
         "translit": "кен ани роцэ",
-        "ru": "Да, я хочу"
+        "ru": "Да, я хочу",
+        "audio": "/audio/yesno-1-yes-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-1-yes.svg"
+      "image": "/words/yesno-1-yes.svg",
+      "audio": "/audio/yesno-1-yes.mp3"
     },
     {
       "id": "yesno-1-no",
@@ -31,10 +33,12 @@
       "example": {
         "he": "אני לא רוצה",
         "translit": "ани ло роцэ",
-        "ru": "Я не хочу"
+        "ru": "Я не хочу",
+        "audio": "/audio/yesno-1-no-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-1-no.svg"
+      "image": "/words/yesno-1-no.svg",
+      "audio": "/audio/yesno-1-no.mp3"
     },
     {
       "id": "yesno-1-there-is",
@@ -45,9 +49,11 @@
       "example": {
         "he": "יש לי קפה",
         "translit": "йеш ли кафэ",
-        "ru": "У меня есть кофе"
+        "ru": "У меня есть кофе",
+        "audio": "/audio/yesno-1-there-is-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-there-is.mp3"
     },
     {
       "id": "yesno-1-there-isnt",
@@ -58,9 +64,11 @@
       "example": {
         "he": "אין לי זמן",
         "translit": "эйн ли зман",
-        "ru": "У меня нет времени"
+        "ru": "У меня нет времени",
+        "audio": "/audio/yesno-1-there-isnt-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-there-isnt.mp3"
     },
     {
       "id": "yesno-1-maybe",
@@ -71,10 +79,12 @@
       "example": {
         "he": "אולי אני בא",
         "translit": "улай ани ба",
-        "ru": "Может быть, я приду"
+        "ru": "Может быть, я приду",
+        "audio": "/audio/yesno-1-maybe-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-1-maybe.svg"
+      "image": "/words/yesno-1-maybe.svg",
+      "audio": "/audio/yesno-1-maybe.mp3"
     },
     {
       "id": "yesno-1-of-course",
@@ -85,9 +95,11 @@
       "example": {
         "he": "כמובן אני בא",
         "translit": "камуван ани ба",
-        "ru": "Конечно, я приду"
+        "ru": "Конечно, я приду",
+        "audio": "/audio/yesno-1-of-course-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-of-course.mp3"
     },
     {
       "id": "yesno-1-really",
@@ -98,9 +110,11 @@
       "example": {
         "he": "באמת קר",
         "translit": "беэмет кар",
-        "ru": "Правда холодно"
+        "ru": "Правда холодно",
+        "audio": "/audio/yesno-1-really-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-really.mp3"
     },
     {
       "id": "yesno-1-okay",
@@ -111,9 +125,11 @@
       "example": {
         "he": "זה בסדר",
         "translit": "зэ беседер",
-        "ru": "Это нормально"
+        "ru": "Это нормально",
+        "audio": "/audio/yesno-1-okay-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-okay.mp3"
     },
     {
       "id": "yesno-1-here-is",
@@ -124,9 +140,11 @@
       "example": {
         "he": "הנה קפה",
         "translit": "хинэ кафэ",
-        "ru": "Вот кофе"
+        "ru": "Вот кофе",
+        "audio": "/audio/yesno-1-here-is-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/yesno-1-here-is.mp3"
     },
     {
       "id": "yesno-1-thanks",
@@ -137,10 +155,12 @@
       "example": {
         "he": "תודה על קפה",
         "translit": "тода аль кафэ",
-        "ru": "Спасибо за кофе"
+        "ru": "Спасибо за кофе",
+        "audio": "/audio/yesno-1-thanks-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-1-thanks.svg"
+      "image": "/words/yesno-1-thanks.svg",
+      "audio": "/audio/yesno-1-thanks.mp3"
     }
   ]
 }

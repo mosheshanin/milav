@@ -17,10 +17,12 @@
       "example": {
         "he": "אני פה",
         "translit": "ани по",
-        "ru": "Я здесь"
+        "ru": "Я здесь",
+        "audio": "/audio/adverbs-2-here-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-here.svg"
+      "image": "/words/adverbs-2-here.svg",
+      "audio": "/audio/adverbs-2-here.mp3"
     },
     {
       "id": "adverbs-2-there",
@@ -31,10 +33,12 @@
       "example": {
         "he": "הוא שם",
         "translit": "ху шам",
-        "ru": "Он там"
+        "ru": "Он там",
+        "audio": "/audio/adverbs-2-there-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-there.svg"
+      "image": "/words/adverbs-2-there.svg",
+      "audio": "/audio/adverbs-2-there.mp3"
     },
     {
       "id": "adverbs-2-up",
@@ -45,10 +49,12 @@
       "example": {
         "he": "הוא למעלה",
         "translit": "ху лемала",
-        "ru": "Он наверху"
+        "ru": "Он наверху",
+        "audio": "/audio/adverbs-2-up-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-up.svg"
+      "image": "/words/adverbs-2-up.svg",
+      "audio": "/audio/adverbs-2-up.mp3"
     },
     {
       "id": "adverbs-2-down",
@@ -59,10 +65,12 @@
       "example": {
         "he": "הוא למטה",
         "translit": "ху лемата",
-        "ru": "Он внизу"
+        "ru": "Он внизу",
+        "audio": "/audio/adverbs-2-down-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-down.svg"
+      "image": "/words/adverbs-2-down.svg",
+      "audio": "/audio/adverbs-2-down.mp3"
     },
     {
       "id": "adverbs-2-fast",
@@ -73,10 +81,12 @@
       "example": {
         "he": "אני הולך מהר",
         "translit": "ани холех махер",
-        "ru": "Я иду быстро"
+        "ru": "Я иду быстро",
+        "audio": "/audio/adverbs-2-fast-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-fast.svg"
+      "image": "/words/adverbs-2-fast.svg",
+      "audio": "/audio/adverbs-2-fast.mp3"
     },
     {
       "id": "adverbs-2-slow",
@@ -87,10 +97,12 @@
       "example": {
         "he": "אני הולך לאט",
         "translit": "ани холех леат",
-        "ru": "Я иду медленно"
+        "ru": "Я иду медленно",
+        "audio": "/audio/adverbs-2-slow-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-slow.svg"
+      "image": "/words/adverbs-2-slow.svg",
+      "audio": "/audio/adverbs-2-slow.mp3"
     },
     {
       "id": "adverbs-2-good",
@@ -101,10 +113,12 @@
       "example": {
         "he": "אני מרגיש טוב",
         "translit": "ани маргиш тов",
-        "ru": "Я чувствую себя хорошо"
+        "ru": "Я чувствую себя хорошо",
+        "audio": "/audio/adverbs-2-good-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-good.svg"
+      "image": "/words/adverbs-2-good.svg",
+      "audio": "/audio/adverbs-2-good.mp3"
     },
     {
       "id": "adverbs-2-bad",
@@ -115,10 +129,12 @@
       "example": {
         "he": "אני מרגיש רע",
         "translit": "ани маргиш ра",
-        "ru": "Я чувствую себя плохо"
+        "ru": "Я чувствую себя плохо",
+        "audio": "/audio/adverbs-2-bad-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-bad.svg"
+      "image": "/words/adverbs-2-bad.svg",
+      "audio": "/audio/adverbs-2-bad.mp3"
     },
     {
       "id": "adverbs-2-thus",
@@ -129,9 +145,11 @@
       "example": {
         "he": "עושים ככה",
         "translit": "осим каха",
-        "ru": "Делают так"
+        "ru": "Делают так",
+        "audio": "/audio/adverbs-2-thus-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-2-thus.mp3"
     },
     {
       "id": "adverbs-2-together",
@@ -142,10 +160,12 @@
       "example": {
         "he": "אנחנו ביחד",
         "translit": "анахну беяхад",
-        "ru": "Мы вместе"
+        "ru": "Мы вместе",
+        "audio": "/audio/adverbs-2-together-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-2-together.svg"
+      "image": "/words/adverbs-2-together.svg",
+      "audio": "/audio/adverbs-2-together.mp3"
     }
   ]
 }

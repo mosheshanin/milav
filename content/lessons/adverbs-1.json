@@ -17,10 +17,12 @@
       "example": {
         "he": "היום קר",
         "translit": "хайом кар",
-        "ru": "Сегодня холодно"
+        "ru": "Сегодня холодно",
+        "audio": "/audio/adverbs-1-today-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-today.svg"
+      "image": "/words/adverbs-1-today.svg",
+      "audio": "/audio/adverbs-1-today.mp3"
     },
     {
       "id": "adverbs-1-tomorrow",
@@ -31,10 +33,12 @@
       "example": {
         "he": "מחר אני בא",
         "translit": "махар ани ба",
-        "ru": "Завтра я приду"
+        "ru": "Завтра я приду",
+        "audio": "/audio/adverbs-1-tomorrow-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-tomorrow.svg"
+      "image": "/words/adverbs-1-tomorrow.svg",
+      "audio": "/audio/adverbs-1-tomorrow.mp3"
     },
     {
       "id": "adverbs-1-yesterday",
@@ -45,10 +49,12 @@
       "example": {
         "he": "אתמול הייתי בבית",
         "translit": "этмоль хайити бабайит",
-        "ru": "Вчера я был дома"
+        "ru": "Вчера я был дома",
+        "audio": "/audio/adverbs-1-yesterday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-yesterday.svg"
+      "image": "/words/adverbs-1-yesterday.svg",
+      "audio": "/audio/adverbs-1-yesterday.mp3"
     },
     {
       "id": "adverbs-1-now",
@@ -59,10 +65,12 @@
       "example": {
         "he": "אני בבית עכשיו",
         "translit": "ани бабайит ахшав",
-        "ru": "Я сейчас дома"
+        "ru": "Я сейчас дома",
+        "audio": "/audio/adverbs-1-now-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-now.svg"
+      "image": "/words/adverbs-1-now.svg",
+      "audio": "/audio/adverbs-1-now.mp3"
     },
     {
       "id": "adverbs-1-soon",
@@ -73,10 +81,12 @@
       "example": {
         "he": "נתראה בקרוב",
         "translit": "нитраэ бекаров",
-        "ru": "До скорой встречи"
+        "ru": "До скорой встречи",
+        "audio": "/audio/adverbs-1-soon-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-soon.svg"
+      "image": "/words/adverbs-1-soon.svg",
+      "audio": "/audio/adverbs-1-soon.mp3"
     },
     {
       "id": "adverbs-1-already",
@@ -87,10 +97,12 @@
       "example": {
         "he": "אני כבר בבית",
         "translit": "ани квар бабайит",
-        "ru": "Я уже дома"
+        "ru": "Я уже дома",
+        "audio": "/audio/adverbs-1-already-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-already.svg"
+      "image": "/words/adverbs-1-already.svg",
+      "audio": "/audio/adverbs-1-already.mp3"
     },
     {
       "id": "adverbs-1-more",
@@ -101,10 +113,12 @@
       "example": {
         "he": "עוד קפה",
         "translit": "од кафэ",
-        "ru": "Ещё кофе"
+        "ru": "Ещё кофе",
+        "audio": "/audio/adverbs-1-more-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-more.svg"
+      "image": "/words/adverbs-1-more.svg",
+      "audio": "/audio/adverbs-1-more.mp3"
     },
     {
       "id": "adverbs-1-always",
@@ -115,10 +129,12 @@
       "example": {
         "he": "אני תמיד בבית",
         "translit": "ани тамид бабайит",
-        "ru": "Я всегда дома"
+        "ru": "Я всегда дома",
+        "audio": "/audio/adverbs-1-always-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-always.svg"
+      "image": "/words/adverbs-1-always.svg",
+      "audio": "/audio/adverbs-1-always.mp3"
     },
     {
       "id": "adverbs-1-sometimes",
@@ -129,9 +145,11 @@
       "example": {
         "he": "לפעמים קר",
         "translit": "лифамим кар",
-        "ru": "Иногда холодно"
+        "ru": "Иногда холодно",
+        "audio": "/audio/adverbs-1-sometimes-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/adverbs-1-sometimes.mp3"
     },
     {
       "id": "adverbs-1-immediately",
@@ -142,10 +160,12 @@
       "example": {
         "he": "אני בא מיד",
         "translit": "ани ба мияд",
-        "ru": "Я сейчас приду"
+        "ru": "Я сейчас приду",
+        "audio": "/audio/adverbs-1-immediately-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-1-immediately.svg"
+      "image": "/words/adverbs-1-immediately.svg",
+      "audio": "/audio/adverbs-1-immediately.mp3"
     }
   ]
 }

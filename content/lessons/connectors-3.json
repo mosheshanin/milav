@@ -17,9 +17,11 @@
       "example": {
         "he": "אני מתחת לעץ",
         "translit": "ани митахат леэц",
-        "ru": "Я под деревом"
+        "ru": "Я под деревом",
+        "audio": "/audio/connectors-3-under-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-under.mp3"
     },
     {
       "id": "connectors-3-above",
@@ -30,9 +32,11 @@
       "example": {
         "he": "ציפור מעל עץ",
         "translit": "ципор меаль эц",
-        "ru": "Птица над деревом"
+        "ru": "Птица над деревом",
+        "audio": "/audio/connectors-3-above-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-above.mp3"
     },
     {
       "id": "connectors-3-inside",
@@ -43,9 +47,11 @@
       "example": {
         "he": "אני בתוך בית",
         "translit": "ани бетох байт",
-        "ru": "Я внутри дома"
+        "ru": "Я внутри дома",
+        "audio": "/audio/connectors-3-inside-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-inside.mp3"
     },
     {
       "id": "connectors-3-outside",
@@ -56,9 +62,11 @@
       "example": {
         "he": "אני בחוץ",
         "translit": "ани бахуц",
-        "ru": "Я снаружи"
+        "ru": "Я снаружи",
+        "audio": "/audio/connectors-3-outside-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-outside.mp3"
     },
     {
       "id": "connectors-3-instead",
@@ -69,9 +77,11 @@
       "example": {
         "he": "תה במקום קפה",
         "translit": "тэ бимком кафэ",
-        "ru": "Чай вместо кофе"
+        "ru": "Чай вместо кофе",
+        "audio": "/audio/connectors-3-instead-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-instead.mp3"
     },
     {
       "id": "connectors-3-except",
@@ -82,9 +92,11 @@
       "example": {
         "he": "כולם מלבד אבא",
         "translit": "кулам мильвад аба",
-        "ru": "Все, кроме папы"
+        "ru": "Все, кроме папы",
+        "audio": "/audio/connectors-3-except-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-except.mp3"
     },
     {
       "id": "connectors-3-until",
@@ -95,9 +107,11 @@
       "example": {
         "he": "עד מחר",
         "translit": "ад махар",
-        "ru": "До завтра"
+        "ru": "До завтра",
+        "audio": "/audio/connectors-3-until-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-until.mp3"
     },
     {
       "id": "connectors-3-through",
@@ -108,9 +122,11 @@
       "example": {
         "he": "דרך חלון",
         "translit": "дерех халон",
-        "ru": "Через окно"
+        "ru": "Через окно",
+        "audio": "/audio/connectors-3-through-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-through.mp3"
     },
     {
       "id": "connectors-3-around",
@@ -121,9 +137,11 @@
       "example": {
         "he": "סביב שולחן",
         "translit": "савив шульхан",
-        "ru": "Вокруг стола"
+        "ru": "Вокруг стола",
+        "audio": "/audio/connectors-3-around-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-around.mp3"
     },
     {
       "id": "connectors-3-along",
@@ -134,9 +152,11 @@
       "example": {
         "he": "לאורך חוף",
         "translit": "леорех хоф",
-        "ru": "Вдоль берега"
+        "ru": "Вдоль берега",
+        "audio": "/audio/connectors-3-along-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/connectors-3-along.mp3"
     }
   ]
 }
