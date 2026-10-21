@@ -18,10 +18,12 @@
       "example": {
         "he": "עכשיו אחת עשרה",
         "translit": "ахшав ахат эсре",
-        "ru": "Сейчас одиннадцать часов"
+        "ru": "Сейчас одиннадцать часов",
+        "audio": "/audio/numbers-4-eleven-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-eleven.svg"
+      "image": "/words/numbers-4-eleven.svg",
+      "audio": "/audio/numbers-4-eleven.mp3"
     },
     {
       "id": "numbers-4-twelve",
@@ -33,10 +35,12 @@
       "example": {
         "he": "היא בת שתים עשרה",
         "translit": "хи бат штейм эсре",
-        "ru": "Ей двенадцать лет"
+        "ru": "Ей двенадцать лет",
+        "audio": "/audio/numbers-4-twelve-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-twelve.svg"
+      "image": "/words/numbers-4-twelve.svg",
+      "audio": "/audio/numbers-4-twelve.mp3"
     },
     {
       "id": "numbers-4-thirteen",
@@ -48,10 +52,12 @@
       "example": {
         "he": "שלוש עשרה בנות",
         "translit": "шлош эсре бнот",
-        "ru": "Тринадцать девочек"
+        "ru": "Тринадцать девочек",
+        "audio": "/audio/numbers-4-thirteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-thirteen.svg"
+      "image": "/words/numbers-4-thirteen.svg",
+      "audio": "/audio/numbers-4-thirteen.mp3"
     },
     {
       "id": "numbers-4-fourteen",
@@ -63,10 +69,12 @@
       "example": {
         "he": "ארבע עשרה שנים",
         "translit": "арба эсре шаним",
-        "ru": "Четырнадцать лет"
+        "ru": "Четырнадцать лет",
+        "audio": "/audio/numbers-4-fourteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-fourteen.svg"
+      "image": "/words/numbers-4-fourteen.svg",
+      "audio": "/audio/numbers-4-fourteen.mp3"
     },
     {
       "id": "numbers-4-fifteen",
@@ -78,10 +86,12 @@
       "example": {
         "he": "חמש עשרה דקות",
         "translit": "хамеш эсре дакот",
-        "ru": "Пятнадцать минут"
+        "ru": "Пятнадцать минут",
+        "audio": "/audio/numbers-4-fifteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-fifteen.svg"
+      "image": "/words/numbers-4-fifteen.svg",
+      "audio": "/audio/numbers-4-fifteen.mp3"
     },
     {
       "id": "numbers-4-sixteen",
@@ -93,10 +103,12 @@
       "example": {
         "he": "הוא בן שש עשרה",
         "translit": "ху бен шеш эсре",
-        "ru": "Ему шестнадцать лет"
+        "ru": "Ему шестнадцать лет",
+        "audio": "/audio/numbers-4-sixteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-sixteen.svg"
+      "image": "/words/numbers-4-sixteen.svg",
+      "audio": "/audio/numbers-4-sixteen.mp3"
     },
     {
       "id": "numbers-4-seventeen",
@@ -108,10 +120,12 @@
       "example": {
         "he": "שבע עשרה מכוניות",
         "translit": "шва эсре мехонийот",
-        "ru": "Семнадцать машин"
+        "ru": "Семнадцать машин",
+        "audio": "/audio/numbers-4-seventeen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-seventeen.svg"
+      "image": "/words/numbers-4-seventeen.svg",
+      "audio": "/audio/numbers-4-seventeen.mp3"
     },
     {
       "id": "numbers-4-eighteen",
@@ -123,10 +137,12 @@
       "example": {
         "he": "שמונה עשרה שאלות",
         "translit": "шмонэ эсре шеэлот",
-        "ru": "Восемнадцать вопросов"
+        "ru": "Восемнадцать вопросов",
+        "audio": "/audio/numbers-4-eighteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-eighteen.svg"
+      "image": "/words/numbers-4-eighteen.svg",
+      "audio": "/audio/numbers-4-eighteen.mp3"
     },
     {
       "id": "numbers-4-nineteen",
@@ -138,10 +154,12 @@
       "example": {
         "he": "תשע עשרה תחנות",
         "translit": "тша эсре таханот",
-        "ru": "Девятнадцать остановок"
+        "ru": "Девятнадцать остановок",
+        "audio": "/audio/numbers-4-nineteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-nineteen.svg"
+      "image": "/words/numbers-4-nineteen.svg",
+      "audio": "/audio/numbers-4-nineteen.mp3"
     },
     {
       "id": "numbers-4-number",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה מספר טלפון",
         "translit": "зэ миспар телефон",
-        "ru": "Это номер телефона"
+        "ru": "Это номер телефона",
+        "audio": "/audio/numbers-4-number-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-4-number.svg"
+      "image": "/words/numbers-4-number.svg",
+      "audio": "/audio/numbers-4-number.mp3"
     }
   ]
 }

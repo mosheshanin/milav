@@ -18,10 +18,12 @@
       "example": {
         "he": "אחד עשר ילדים",
         "translit": "ахад асар йеладим",
-        "ru": "Одиннадцать мальчиков"
+        "ru": "Одиннадцать мальчиков",
+        "audio": "/audio/numbers-5-eleven-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-eleven.svg"
+      "image": "/words/numbers-5-eleven.svg",
+      "audio": "/audio/numbers-5-eleven.mp3"
     },
     {
       "id": "numbers-5-twelve",
@@ -33,10 +35,12 @@
       "example": {
         "he": "שנים עשר חודשים",
         "translit": "шнейм асар ходашим",
-        "ru": "Двенадцать месяцев"
+        "ru": "Двенадцать месяцев",
+        "audio": "/audio/numbers-5-twelve-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-twelve.svg"
+      "image": "/words/numbers-5-twelve.svg",
+      "audio": "/audio/numbers-5-twelve.mp3"
     },
     {
       "id": "numbers-5-thirteen",
@@ -48,10 +52,12 @@
       "example": {
         "he": "שלושה עשר ספרים",
         "translit": "шлоша асар сфарим",
-        "ru": "Тринадцать книг"
+        "ru": "Тринадцать книг",
+        "audio": "/audio/numbers-5-thirteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-thirteen.svg"
+      "image": "/words/numbers-5-thirteen.svg",
+      "audio": "/audio/numbers-5-thirteen.mp3"
     },
     {
       "id": "numbers-5-fourteen",
@@ -63,10 +69,12 @@
       "example": {
         "he": "ארבעה עשר ימים",
         "translit": "арбаа асар ямим",
-        "ru": "Четырнадцать дней"
+        "ru": "Четырнадцать дней",
+        "audio": "/audio/numbers-5-fourteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-fourteen.svg"
+      "image": "/words/numbers-5-fourteen.svg",
+      "audio": "/audio/numbers-5-fourteen.mp3"
     },
     {
       "id": "numbers-5-fifteen",
@@ -78,10 +86,12 @@
       "example": {
         "he": "חמישה עשר שקלים",
         "translit": "хамиша асар шкалим",
-        "ru": "Пятнадцать шекелей"
+        "ru": "Пятнадцать шекелей",
+        "audio": "/audio/numbers-5-fifteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-fifteen.svg"
+      "image": "/words/numbers-5-fifteen.svg",
+      "audio": "/audio/numbers-5-fifteen.mp3"
     },
     {
       "id": "numbers-5-sixteen",
@@ -93,10 +103,12 @@
       "example": {
         "he": "שישה עשר תלמידים",
         "translit": "шиша асар тальмидим",
-        "ru": "Шестнадцать учеников"
+        "ru": "Шестнадцать учеников",
+        "audio": "/audio/numbers-5-sixteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-sixteen.svg"
+      "image": "/words/numbers-5-sixteen.svg",
+      "audio": "/audio/numbers-5-sixteen.mp3"
     },
     {
       "id": "numbers-5-seventeen",
@@ -108,10 +120,12 @@
       "example": {
         "he": "שבעה עשר אנשים",
         "translit": "шива асар анашим",
-        "ru": "Семнадцать человек"
+        "ru": "Семнадцать человек",
+        "audio": "/audio/numbers-5-seventeen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-seventeen.svg"
+      "image": "/words/numbers-5-seventeen.svg",
+      "audio": "/audio/numbers-5-seventeen.mp3"
     },
     {
       "id": "numbers-5-eighteen",
@@ -123,10 +137,12 @@
       "example": {
         "he": "שמונה עשר חדרים",
         "translit": "шмона асар хадарим",
-        "ru": "Восемнадцать комнат"
+        "ru": "Восемнадцать комнат",
+        "audio": "/audio/numbers-5-eighteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-eighteen.svg"
+      "image": "/words/numbers-5-eighteen.svg",
+      "audio": "/audio/numbers-5-eighteen.mp3"
     },
     {
       "id": "numbers-5-nineteen",
@@ -138,10 +154,12 @@
       "example": {
         "he": "תשעה עשר קילומטר",
         "translit": "тиша асар километр",
-        "ru": "Девятнадцать километров"
+        "ru": "Девятнадцать километров",
+        "audio": "/audio/numbers-5-nineteen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-nineteen.svg"
+      "image": "/words/numbers-5-nineteen.svg",
+      "audio": "/audio/numbers-5-nineteen.mp3"
     },
     {
       "id": "numbers-5-twenty-one",
@@ -153,10 +171,12 @@
       "example": {
         "he": "עשרים ואחד שקלים",
         "translit": "эсрим вэ-эхад шкалим",
-        "ru": "Двадцать один шекель"
+        "ru": "Двадцать один шекель",
+        "audio": "/audio/numbers-5-twenty-one-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-5-twenty-one.svg"
+      "image": "/words/numbers-5-twenty-one.svg",
+      "audio": "/audio/numbers-5-twenty-one.mp3"
     }
   ]
 }

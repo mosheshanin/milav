@@ -18,10 +18,12 @@
       "example": {
         "he": "זו תעודת זהות חדשה",
         "translit": "зо теудат зеут хадаша",
-        "ru": "Это новое удостоверение личности"
+        "ru": "Это новое удостоверение личности",
+        "audio": "/audio/gov-2-id-card-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-id-card.svg"
+      "image": "/words/gov-2-id-card.svg",
+      "audio": "/audio/gov-2-id-card.mp3"
     },
     {
       "id": "gov-2-health-fund",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זו קופת חולים גדולה",
         "translit": "зо купат холим гдола",
-        "ru": "Это большая больничная касса"
+        "ru": "Это большая больничная касса",
+        "audio": "/audio/gov-2-health-fund-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-health-fund.svg"
+      "image": "/words/gov-2-health-fund.svg",
+      "audio": "/audio/gov-2-health-fund.mp3"
     },
     {
       "id": "gov-2-national-insurance",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה סניף של ביטוח לאומי",
         "translit": "зэ сниф шель битуах леуми",
-        "ru": "Это отделение Битуах леуми"
+        "ru": "Это отделение Битуах леуми",
+        "audio": "/audio/gov-2-national-insurance-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-national-insurance.svg"
+      "image": "/words/gov-2-national-insurance.svg",
+      "audio": "/audio/gov-2-national-insurance.mp3"
     },
     {
       "id": "gov-2-income-tax",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה טופס של מס הכנסה",
         "translit": "зэ тофес шель мас хахнаса",
-        "ru": "Это бланк налоговой"
+        "ru": "Это бланк налоговой",
+        "audio": "/audio/gov-2-income-tax-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-income-tax.svg"
+      "image": "/words/gov-2-income-tax.svg",
+      "audio": "/audio/gov-2-income-tax.mp3"
     },
     {
       "id": "gov-2-hospital",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה בית חולים גדול",
         "translit": "зэ бейт холим гадоль",
-        "ru": "Это большая больница"
+        "ru": "Это большая больница",
+        "audio": "/audio/gov-2-hospital-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-hospital.svg"
+      "image": "/words/gov-2-hospital.svg",
+      "audio": "/audio/gov-2-hospital.mp3"
     },
     {
       "id": "gov-2-school",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זה בית ספר חדש",
         "translit": "зэ бейт сефер хадаш",
-        "ru": "Это новая школа"
+        "ru": "Это новая школа",
+        "audio": "/audio/gov-2-school-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-school.svg"
+      "image": "/words/gov-2-school.svg",
+      "audio": "/audio/gov-2-school.mp3"
     },
     {
       "id": "gov-2-court",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זה בית משפט ישן",
         "translit": "зэ бейт мишпат яшан",
-        "ru": "Это старый суд"
+        "ru": "Это старый суд",
+        "audio": "/audio/gov-2-court-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-court.svg"
+      "image": "/words/gov-2-court.svg",
+      "audio": "/audio/gov-2-court.mp3"
     },
     {
       "id": "gov-2-kindergarten",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זה גן ילדים קטן",
         "translit": "зэ ган йеладим катан",
-        "ru": "Это маленький детский сад"
+        "ru": "Это маленький детский сад",
+        "audio": "/audio/gov-2-kindergarten-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-kindergarten.svg"
+      "image": "/words/gov-2-kindergarten.svg",
+      "audio": "/audio/gov-2-kindergarten.mp3"
     },
     {
       "id": "gov-2-municipality",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זו עירייה גדולה",
         "translit": "зо ирия гдола",
-        "ru": "Это большая мэрия"
+        "ru": "Это большая мэрия",
+        "audio": "/audio/gov-2-municipality-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-municipality.svg"
+      "image": "/words/gov-2-municipality.svg",
+      "audio": "/audio/gov-2-municipality.mp3"
     },
     {
       "id": "gov-2-office",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זה משרד חדש",
         "translit": "зэ мисрад хадаш",
-        "ru": "Это новая контора"
+        "ru": "Это новая контора",
+        "audio": "/audio/gov-2-office-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/gov-2-office.svg"
+      "image": "/words/gov-2-office.svg",
+      "audio": "/audio/gov-2-office.mp3"
     }
   ]
 }

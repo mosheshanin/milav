@@ -17,10 +17,12 @@
       "example": {
         "he": "נדבר אחר כך",
         "translit": "недабер ахар ках",
-        "ru": "Поговорим потом"
+        "ru": "Поговорим потом",
+        "audio": "/audio/adverbs-4-later-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-later.svg"
+      "image": "/words/adverbs-4-later.svg",
+      "audio": "/audio/adverbs-4-later.mp3"
     },
     {
       "id": "adverbs-4-never",
@@ -31,10 +33,12 @@
       "example": {
         "he": "הוא אף פעם לא בבית",
         "translit": "ху аф паам ло бабайит",
-        "ru": "Его никогда нет дома"
+        "ru": "Его никогда нет дома",
+        "audio": "/audio/adverbs-4-never-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-never.svg"
+      "image": "/words/adverbs-4-never.svg",
+      "audio": "/audio/adverbs-4-never.mp3"
     },
     {
       "id": "adverbs-4-in-a-moment",
@@ -45,10 +49,12 @@
       "example": {
         "he": "אני בא עוד מעט",
         "translit": "ани ба од меат",
-        "ru": "Я скоро приду"
+        "ru": "Я скоро приду",
+        "audio": "/audio/adverbs-4-in-a-moment-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-in-a-moment.svg"
+      "image": "/words/adverbs-4-in-a-moment.svg",
+      "audio": "/audio/adverbs-4-in-a-moment.mp3"
     },
     {
       "id": "adverbs-4-until-now",
@@ -59,10 +65,12 @@
       "example": {
         "he": "הוא בעבודה עד עכשיו",
         "translit": "ху баавода ад ахшав",
-        "ru": "Он до сих пор на работе"
+        "ru": "Он до сих пор на работе",
+        "audio": "/audio/adverbs-4-until-now-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-until-now.svg"
+      "image": "/words/adverbs-4-until-now.svg",
+      "audio": "/audio/adverbs-4-until-now.mp3"
     },
     {
       "id": "adverbs-4-every-day",
@@ -73,10 +81,12 @@
       "example": {
         "he": "אני קורא כל יום",
         "translit": "ани коре коль йом",
-        "ru": "Я читаю каждый день"
+        "ru": "Я читаю каждый день",
+        "audio": "/audio/adverbs-4-every-day-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-every-day.svg"
+      "image": "/words/adverbs-4-every-day.svg",
+      "audio": "/audio/adverbs-4-every-day.mp3"
     },
     {
       "id": "adverbs-4-in-the-end",
@@ -87,10 +97,12 @@
       "example": {
         "he": "בסוף הוא בא",
         "translit": "басоф ху ба",
-        "ru": "В итоге он пришёл"
+        "ru": "В итоге он пришёл",
+        "audio": "/audio/adverbs-4-in-the-end-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-in-the-end.svg"
+      "image": "/words/adverbs-4-in-the-end.svg",
+      "audio": "/audio/adverbs-4-in-the-end.mp3"
     },
     {
       "id": "adverbs-4-suddenly",
@@ -101,10 +113,12 @@
       "example": {
         "he": "פתאום יורד גשם",
         "translit": "питом йоред гешем",
-        "ru": "Вдруг пошёл дождь"
+        "ru": "Вдруг пошёл дождь",
+        "audio": "/audio/adverbs-4-suddenly-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-suddenly.svg"
+      "image": "/words/adverbs-4-suddenly.svg",
+      "audio": "/audio/adverbs-4-suddenly.mp3"
     },
     {
       "id": "adverbs-4-again",
@@ -115,10 +129,12 @@
       "example": {
         "he": "הוא שוב פה",
         "translit": "ху шув по",
-        "ru": "Он снова здесь"
+        "ru": "Он снова здесь",
+        "audio": "/audio/adverbs-4-again-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-again.svg"
+      "image": "/words/adverbs-4-again.svg",
+      "audio": "/audio/adverbs-4-again.mp3"
     },
     {
       "id": "adverbs-4-early",
@@ -129,10 +145,12 @@
       "example": {
         "he": "אני קם מוקדם",
         "translit": "ани кам мукдам",
-        "ru": "Я встаю рано"
+        "ru": "Я встаю рано",
+        "audio": "/audio/adverbs-4-early-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-early.svg"
+      "image": "/words/adverbs-4-early.svg",
+      "audio": "/audio/adverbs-4-early.mp3"
     },
     {
       "id": "adverbs-4-late",
@@ -143,10 +161,12 @@
       "example": {
         "he": "כבר מאוחר",
         "translit": "квар меухар",
-        "ru": "Уже поздно"
+        "ru": "Уже поздно",
+        "audio": "/audio/adverbs-4-late-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/adverbs-4-late.svg"
+      "image": "/words/adverbs-4-late.svg",
+      "audio": "/audio/adverbs-4-late.mp3"
     }
   ]
 }
