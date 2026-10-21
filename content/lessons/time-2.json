@@ -17,10 +17,12 @@
       "example": {
         "he": "חודש טוב",
         "translit": "ходеш тов",
-        "ru": "Хорошего месяца"
+        "ru": "Хорошего месяца",
+        "audio": "/audio/time-2-month-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-month.svg"
+      "image": "/words/time-2-month.svg",
+      "audio": "/audio/time-2-month.mp3"
     },
     {
       "id": "time-2-season",
@@ -31,10 +33,12 @@
       "example": {
         "he": "זאת עונה יפה",
         "translit": "зот она яфа",
-        "ru": "Это красивое время года"
+        "ru": "Это красивое время года",
+        "audio": "/audio/time-2-season-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-season.svg"
+      "image": "/words/time-2-season.svg",
+      "audio": "/audio/time-2-season.mp3"
     },
     {
       "id": "time-2-spring",
@@ -45,10 +49,12 @@
       "example": {
         "he": "באביב נעים",
         "translit": "ба-авив наим",
-        "ru": "Весной приятно"
+        "ru": "Весной приятно",
+        "audio": "/audio/time-2-spring-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-spring.svg"
+      "image": "/words/time-2-spring.svg",
+      "audio": "/audio/time-2-spring.mp3"
     },
     {
       "id": "time-2-summer",
@@ -59,10 +65,12 @@
       "example": {
         "he": "בקיץ חם מאוד",
         "translit": "ба-каиц хам меод",
-        "ru": "Летом очень жарко"
+        "ru": "Летом очень жарко",
+        "audio": "/audio/time-2-summer-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-summer.svg"
+      "image": "/words/time-2-summer.svg",
+      "audio": "/audio/time-2-summer.mp3"
     },
     {
       "id": "time-2-autumn",
@@ -73,10 +81,12 @@
       "example": {
         "he": "בסתיו יורד גשם",
         "translit": "ба-став йоред гешем",
-        "ru": "Осенью идёт дождь"
+        "ru": "Осенью идёт дождь",
+        "audio": "/audio/time-2-autumn-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-autumn.svg"
+      "image": "/words/time-2-autumn.svg",
+      "audio": "/audio/time-2-autumn.mp3"
     },
     {
       "id": "time-2-winter",
@@ -87,10 +97,12 @@
       "example": {
         "he": "בחורף קר",
         "translit": "ба-хореф кар",
-        "ru": "Зимой холодно"
+        "ru": "Зимой холодно",
+        "audio": "/audio/time-2-winter-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-winter.svg"
+      "image": "/words/time-2-winter.svg",
+      "audio": "/audio/time-2-winter.mp3"
     },
     {
       "id": "time-2-calendar",
@@ -101,10 +113,12 @@
       "example": {
         "he": "יש לי לוח שנה חדש",
         "translit": "йеш ли луах шана хадаш",
-        "ru": "У меня новый календарь"
+        "ru": "У меня новый календарь",
+        "audio": "/audio/time-2-calendar-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-calendar.svg"
+      "image": "/words/time-2-calendar.svg",
+      "audio": "/audio/time-2-calendar.mp3"
     },
     {
       "id": "time-2-next-week",
@@ -115,10 +129,12 @@
       "example": {
         "he": "נתראה בשבוע הבא",
         "translit": "нитраэ ба-шавуа хаба",
-        "ru": "Увидимся на следующей неделе"
+        "ru": "Увидимся на следующей неделе",
+        "audio": "/audio/time-2-next-week-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-next-week.svg"
+      "image": "/words/time-2-next-week.svg",
+      "audio": "/audio/time-2-next-week.mp3"
     },
     {
       "id": "time-2-last-year",
@@ -129,10 +145,12 @@
       "example": {
         "he": "עליתי לארץ בשנה שעברה",
         "translit": "алити ла-арец ба-шана ше-авра",
-        "ru": "Я репатриировался в прошлом году"
+        "ru": "Я репатриировался в прошлом году",
+        "audio": "/audio/time-2-last-year-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-last-year.svg"
+      "image": "/words/time-2-last-year.svg",
+      "audio": "/audio/time-2-last-year.mp3"
     },
     {
       "id": "time-2-once-a-week",
@@ -143,10 +161,12 @@
       "example": {
         "he": "אני בא לאולפן פעם בשבוע",
         "translit": "ани ба ла-ульпан паам бе-шавуа",
-        "ru": "Я хожу в ульпан раз в неделю"
+        "ru": "Я хожу в ульпан раз в неделю",
+        "audio": "/audio/time-2-once-a-week-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-2-once-a-week.svg"
+      "image": "/words/time-2-once-a-week.svg",
+      "audio": "/audio/time-2-once-a-week.mp3"
     }
   ]
 }

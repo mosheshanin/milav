@@ -18,10 +18,12 @@
       "example": {
         "he": "זה בית מרקחת גדול",
         "translit": "зэ бейт миркахат гадоль",
-        "ru": "Это большая аптека"
+        "ru": "Это большая аптека",
+        "audio": "/audio/body-5-pharmacy-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-pharmacy.svg"
+      "image": "/words/body-5-pharmacy.svg",
+      "audio": "/audio/body-5-pharmacy.mp3"
     },
     {
       "id": "body-5-pharmacist",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה רוקח טוב",
         "translit": "зэ рокеах тов",
-        "ru": "Это хороший фармацевт"
+        "ru": "Это хороший фармацевт",
+        "audio": "/audio/body-5-pharmacist-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-pharmacist.svg"
+      "image": "/words/body-5-pharmacist.svg",
+      "audio": "/audio/body-5-pharmacist.mp3"
     },
     {
       "id": "body-5-clinic",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זאת מרפאה חדשה",
         "translit": "зот мирпаа хадаша",
-        "ru": "Это новая поликлиника"
+        "ru": "Это новая поликлиника",
+        "audio": "/audio/body-5-clinic-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-clinic.svg"
+      "image": "/words/body-5-clinic.svg",
+      "audio": "/audio/body-5-clinic.mp3"
     },
     {
       "id": "body-5-family-doctor",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זה רופא משפחה טוב",
         "translit": "зэ рофе мишпаха тов",
-        "ru": "Это хороший семейный врач"
+        "ru": "Это хороший семейный врач",
+        "audio": "/audio/body-5-family-doctor-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-family-doctor.svg"
+      "image": "/words/body-5-family-doctor.svg",
+      "audio": "/audio/body-5-family-doctor.mp3"
     },
     {
       "id": "body-5-appointment",
@@ -78,10 +86,12 @@
       "example": {
         "he": "קבעתי תור לרופא",
         "translit": "кавати тор ла-рофе",
-        "ru": "Я записался к врачу"
+        "ru": "Я записался к врачу",
+        "audio": "/audio/body-5-appointment-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-appointment.svg"
+      "image": "/words/body-5-appointment.svg",
+      "audio": "/audio/body-5-appointment.mp3"
     },
     {
       "id": "body-5-referral",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זאת הפניה לבדיקה",
         "translit": "зот хафная ле-бдика",
-        "ru": "Это направление на анализ"
+        "ru": "Это направление на анализ",
+        "audio": "/audio/body-5-referral-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-referral.svg"
+      "image": "/words/body-5-referral.svg",
+      "audio": "/audio/body-5-referral.mp3"
     },
     {
       "id": "body-5-er",
@@ -108,10 +120,12 @@
       "example": {
         "he": "נסענו לחדר מיון",
         "translit": "насану ле-хадар миюн",
-        "ru": "Мы поехали в приёмный покой"
+        "ru": "Мы поехали в приёмный покой",
+        "audio": "/audio/body-5-er-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-er.svg"
+      "image": "/words/body-5-er.svg",
+      "audio": "/audio/body-5-er.mp3"
     },
     {
       "id": "body-5-ambulance",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זה אמבולנס חדש",
         "translit": "зэ амбуланс хадаш",
-        "ru": "Это новая машина скорой"
+        "ru": "Это новая машина скорой",
+        "audio": "/audio/body-5-ambulance-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-ambulance.svg"
+      "image": "/words/body-5-ambulance.svg",
+      "audio": "/audio/body-5-ambulance.mp3"
     },
     {
       "id": "body-5-injection",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זאת זריקה נגד שפעת",
         "translit": "зот зрика негед шапаат",
-        "ru": "Это укол от гриппа"
+        "ru": "Это укол от гриппа",
+        "audio": "/audio/body-5-injection-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-injection.svg"
+      "image": "/words/body-5-injection.svg",
+      "audio": "/audio/body-5-injection.mp3"
     },
     {
       "id": "body-5-ointment",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זאת משחה טובה",
         "translit": "зот мишха това",
-        "ru": "Это хорошая мазь"
+        "ru": "Это хорошая мазь",
+        "audio": "/audio/body-5-ointment-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/body-5-ointment.svg"
+      "image": "/words/body-5-ointment.svg",
+      "audio": "/audio/body-5-ointment.mp3"
     }
   ]
 }

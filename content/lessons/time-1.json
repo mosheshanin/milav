@@ -17,10 +17,12 @@
       "example": {
         "he": "עברה שעה",
         "translit": "авра шаа",
-        "ru": "Прошёл час"
+        "ru": "Прошёл час",
+        "audio": "/audio/time-1-hour-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-hour.svg"
+      "image": "/words/time-1-hour.svg",
+      "audio": "/audio/time-1-hour.mp3"
     },
     {
       "id": "time-1-minute",
@@ -31,10 +33,12 @@
       "example": {
         "he": "רק דקה",
         "translit": "рак дака",
-        "ru": "Всего минуту"
+        "ru": "Всего минуту",
+        "audio": "/audio/time-1-minute-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-minute.svg"
+      "image": "/words/time-1-minute.svg",
+      "audio": "/audio/time-1-minute.mp3"
     },
     {
       "id": "time-1-half",
@@ -45,10 +49,12 @@
       "example": {
         "he": "שלוש וחצי",
         "translit": "шалош ва-хеци",
-        "ru": "Три тридцать (полчетвёртого)"
+        "ru": "Три тридцать (полчетвёртого)",
+        "audio": "/audio/time-1-half-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-half.svg"
+      "image": "/words/time-1-half.svg",
+      "audio": "/audio/time-1-half.mp3"
     },
     {
       "id": "time-1-quarter",
@@ -59,10 +65,12 @@
       "example": {
         "he": "רבע לשמונה",
         "translit": "рева ле-шмонэ",
-        "ru": "Без четверти восемь"
+        "ru": "Без четверти восемь",
+        "audio": "/audio/time-1-quarter-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-quarter.svg"
+      "image": "/words/time-1-quarter.svg",
+      "audio": "/audio/time-1-quarter.mp3"
     },
     {
       "id": "time-1-what-time",
@@ -73,10 +81,12 @@
       "example": {
         "he": "סליחה מה השעה",
         "translit": "слиха ма хашаа",
-        "ru": "Извините, который час?"
+        "ru": "Извините, который час?",
+        "audio": "/audio/time-1-what-time-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-what-time.svg"
+      "image": "/words/time-1-what-time.svg",
+      "audio": "/audio/time-1-what-time.mp3"
     },
     {
       "id": "time-1-morning",
@@ -87,10 +97,12 @@
       "example": {
         "he": "בשמונה בבוקר",
         "translit": "бе-шмонэ ба-бокер",
-        "ru": "В восемь утра"
+        "ru": "В восемь утра",
+        "audio": "/audio/time-1-morning-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-morning.svg"
+      "image": "/words/time-1-morning.svg",
+      "audio": "/audio/time-1-morning.mp3"
     },
     {
       "id": "time-1-noon",
@@ -101,10 +113,12 @@
       "example": {
         "he": "בצהריים אני אוכל",
         "translit": "ба-цохораим ани охель",
-        "ru": "Днём я обедаю"
+        "ru": "Днём я обедаю",
+        "audio": "/audio/time-1-noon-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-noon.svg"
+      "image": "/words/time-1-noon.svg",
+      "audio": "/audio/time-1-noon.mp3"
     },
     {
       "id": "time-1-afternoon",
@@ -115,10 +129,12 @@
       "example": {
         "he": "נתראה אחר הצהריים",
         "translit": "нитраэ ахар хацохораим",
-        "ru": "Увидимся после обеда"
+        "ru": "Увидимся после обеда",
+        "audio": "/audio/time-1-afternoon-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-afternoon.svg"
+      "image": "/words/time-1-afternoon.svg",
+      "audio": "/audio/time-1-afternoon.mp3"
     },
     {
       "id": "time-1-evening",
@@ -129,10 +145,12 @@
       "example": {
         "he": "בשבע בערב",
         "translit": "бе-шева ба-эрев",
-        "ru": "В семь вечера"
+        "ru": "В семь вечера",
+        "audio": "/audio/time-1-evening-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-evening.svg"
+      "image": "/words/time-1-evening.svg",
+      "audio": "/audio/time-1-evening.mp3"
     },
     {
       "id": "time-1-night",
@@ -143,10 +161,12 @@
       "example": {
         "he": "בעשר בלילה",
         "translit": "бе-эсер ба-лайла",
-        "ru": "В десять вечера (ночи)"
+        "ru": "В десять вечера (ночи)",
+        "audio": "/audio/time-1-night-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-1-night.svg"
+      "image": "/words/time-1-night.svg",
+      "audio": "/audio/time-1-night.mp3"
     }
   ]
 }
