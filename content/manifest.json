@@ -359,6 +359,23 @@
       "v": "762728acda"
     },
     {
+      "id": "body-5",
+      "topicId": "body",
+      "section": "nouns",
+      "topic": "Тело",
+      "number": 5,
+      "free": false,
+      "title": "У врача и в аптеке",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "8b4680d24f"
+    },
+    {
       "id": "city-1",
       "topicId": "city",
       "section": "nouns",
@@ -1379,6 +1396,40 @@
       "v": "8302911e0a"
     },
     {
+      "id": "time-1",
+      "topicId": "time",
+      "section": "numbers",
+      "topic": "Время и календарь",
+      "number": 1,
+      "free": true,
+      "title": "Который час",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "10af773a00"
+    },
+    {
+      "id": "time-2",
+      "topicId": "time",
+      "section": "numbers",
+      "topic": "Время и календарь",
+      "number": 2,
+      "free": false,
+      "title": "Времена года и календарь",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "3892f15940"
+    },
+    {
       "id": "weak-1",
       "topicId": "weak",
       "section": "verbs",
@@ -1516,8 +1567,8 @@
     }
   ],
   "info": {
-    "totalWords": 810,
-    "totalLessons": 87,
+    "totalWords": 840,
+    "totalLessons": 90,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1563,7 +1614,8 @@
           "body-1",
           "body-2",
           "body-3",
-          "body-4"
+          "body-4",
+          "body-5"
         ]
       },
       {
@@ -1744,6 +1796,14 @@
         "lessonIds": [
           "shops-1",
           "shops-2"
+        ]
+      },
+      {
+        "id": "time",
+        "title": "Время и календарь",
+        "lessonIds": [
+          "time-1",
+          "time-2"
         ]
       },
       {

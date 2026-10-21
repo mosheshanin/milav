@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "body-5",
+  "topicId": "body",
+  "section": "nouns",
+  "topic": "Тело",
+  "number": 5,
+  "free": false,
+  "title": "У врача и в аптеке",
+  "words": [
+    {
+      "id": "body-5-pharmacy",
+      "he": "בית מרקחת",
+      "niqqud": "בֵּית מִרְקַחַת",
+      "translit": "бейт мирка́хат",
+      "ru": "аптека",
+      "gender": "m",
+      "example": {
+        "he": "זה בית מרקחת גדול",
+        "translit": "зэ бейт миркахат гадоль",
+        "ru": "Это большая аптека"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-pharmacy.svg"
+    },
+    {
+      "id": "body-5-pharmacist",
+      "he": "רוקח",
+      "niqqud": "רוֹקֵחַ",
+      "translit": "роке́ах",
+      "ru": "фармацевт",
+      "gender": "m",
+      "example": {
+        "he": "זה רוקח טוב",
+        "translit": "зэ рокеах тов",
+        "ru": "Это хороший фармацевт"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-pharmacist.svg"
+    },
+    {
+      "id": "body-5-clinic",
+      "he": "מרפאה",
+      "niqqud": "מִרְפָּאָה",
+      "translit": "мирпаа́",
+      "ru": "поликлиника, клиника",
+      "gender": "f",
+      "example": {
+        "he": "זאת מרפאה חדשה",
+        "translit": "зот мирпаа хадаша",
+        "ru": "Это новая поликлиника"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-clinic.svg"
+    },
+    {
+      "id": "body-5-family-doctor",
+      "he": "רופא משפחה",
+      "niqqud": "רוֹפֵא מִשְׁפָּחָה",
+      "translit": "рофе́ мишпаха́",
+      "ru": "семейный врач",
+      "gender": "m",
+      "example": {
+        "he": "זה רופא משפחה טוב",
+        "translit": "зэ рофе мишпаха тов",
+        "ru": "Это хороший семейный врач"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-family-doctor.svg"
+    },
+    {
+      "id": "body-5-appointment",
+      "he": "תור לרופא",
+      "niqqud": "תּוֹר לָרוֹפֵא",
+      "translit": "тор ла-рофе́",
+      "ru": "запись к врачу (очередь)",
+      "gender": "m",
+      "example": {
+        "he": "קבעתי תור לרופא",
+        "translit": "кавати тор ла-рофе",
+        "ru": "Я записался к врачу"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-appointment.svg"
+    },
+    {
+      "id": "body-5-referral",
+      "he": "הפניה",
+      "niqqud": "הַפְנָיָה",
+      "translit": "хафная́",
+      "ru": "направление (к врачу)",
+      "gender": "f",
+      "example": {
+        "he": "זאת הפניה לבדיקה",
+        "translit": "зот хафная ле-бдика",
+        "ru": "Это направление на анализ"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-referral.svg"
+    },
+    {
+      "id": "body-5-er",
+      "he": "חדר מיון",
+      "niqqud": "חֲדַר מִיּוּן",
+      "translit": "хада́р мию́н",
+      "ru": "приёмный покой (мийун)",
+      "gender": "m",
+      "example": {
+        "he": "נסענו לחדר מיון",
+        "translit": "насану ле-хадар миюн",
+        "ru": "Мы поехали в приёмный покой"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-er.svg"
+    },
+    {
+      "id": "body-5-ambulance",
+      "he": "אמבולנס",
+      "niqqud": "אַמְבּוּלַנְס",
+      "translit": "амбула́нс",
+      "ru": "скорая помощь",
+      "gender": "m",
+      "example": {
+        "he": "זה אמבולנס חדש",
+        "translit": "зэ амбуланс хадаш",
+        "ru": "Это новая машина скорой"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-ambulance.svg"
+    },
+    {
+      "id": "body-5-injection",
+      "he": "זריקה",
+      "niqqud": "זְרִיקָה",
+      "translit": "зрика́",
+      "ru": "укол",
+      "gender": "f",
+      "example": {
+        "he": "זאת זריקה נגד שפעת",
+        "translit": "зот зрика негед шапаат",
+        "ru": "Это укол от гриппа"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-injection.svg"
+    },
+    {
+      "id": "body-5-ointment",
+      "he": "משחה",
+      "niqqud": "מִשְׁחָה",
+      "translit": "мишха́",
+      "ru": "мазь",
+      "gender": "f",
+      "example": {
+        "he": "זאת משחה טובה",
+        "translit": "зот мишха това",
+        "ru": "Это хорошая мазь"
+      },
+      "reviewed": false,
+      "image": "/words/body-5-ointment.svg"
+    }
+  ]
+}

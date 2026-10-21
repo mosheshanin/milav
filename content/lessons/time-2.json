@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "time-2",
+  "topicId": "time",
+  "section": "numbers",
+  "topic": "Время и календарь",
+  "number": 2,
+  "free": false,
+  "title": "Времена года и календарь",
+  "words": [
+    {
+      "id": "time-2-month",
+      "he": "חודש",
+      "niqqud": "חוֹדֶשׁ",
+      "translit": "хо́деш",
+      "ru": "месяц",
+      "example": {
+        "he": "חודש טוב",
+        "translit": "ходеш тов",
+        "ru": "Хорошего месяца"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-month.svg"
+    },
+    {
+      "id": "time-2-season",
+      "he": "עונה",
+      "niqqud": "עוֹנָה",
+      "translit": "она́",
+      "ru": "время года, сезон",
+      "example": {
+        "he": "זאת עונה יפה",
+        "translit": "зот она яфа",
+        "ru": "Это красивое время года"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-season.svg"
+    },
+    {
+      "id": "time-2-spring",
+      "he": "אביב",
+      "niqqud": "אָבִיב",
+      "translit": "ави́в",
+      "ru": "весна",
+      "example": {
+        "he": "באביב נעים",
+        "translit": "ба-авив наим",
+        "ru": "Весной приятно"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-spring.svg"
+    },
+    {
+      "id": "time-2-summer",
+      "he": "קיץ",
+      "niqqud": "קַיִץ",
+      "translit": "ка́иц",
+      "ru": "лето",
+      "example": {
+        "he": "בקיץ חם מאוד",
+        "translit": "ба-каиц хам меод",
+        "ru": "Летом очень жарко"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-summer.svg"
+    },
+    {
+      "id": "time-2-autumn",
+      "he": "סתיו",
+      "niqqud": "סְתָיו",
+      "translit": "став",
+      "ru": "осень",
+      "example": {
+        "he": "בסתיו יורד גשם",
+        "translit": "ба-став йоред гешем",
+        "ru": "Осенью идёт дождь"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-autumn.svg"
+    },
+    {
+      "id": "time-2-winter",
+      "he": "חורף",
+      "niqqud": "חוֹרֶף",
+      "translit": "хо́реф",
+      "ru": "зима",
+      "example": {
+        "he": "בחורף קר",
+        "translit": "ба-хореф кар",
+        "ru": "Зимой холодно"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-winter.svg"
+    },
+    {
+      "id": "time-2-calendar",
+      "he": "לוח שנה",
+      "niqqud": "לוּחַ שָׁנָה",
+      "translit": "лу́ах шана́",
+      "ru": "календарь",
+      "example": {
+        "he": "יש לי לוח שנה חדש",
+        "translit": "йеш ли луах шана хадаш",
+        "ru": "У меня новый календарь"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-calendar.svg"
+    },
+    {
+      "id": "time-2-next-week",
+      "he": "בשבוע הבא",
+      "niqqud": "בַּשָּׁבוּעַ הַבָּא",
+      "translit": "ба-шаву́а хаба́",
+      "ru": "на следующей неделе",
+      "example": {
+        "he": "נתראה בשבוע הבא",
+        "translit": "нитраэ ба-шавуа хаба",
+        "ru": "Увидимся на следующей неделе"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-next-week.svg"
+    },
+    {
+      "id": "time-2-last-year",
+      "he": "בשנה שעברה",
+      "niqqud": "בַּשָּׁנָה שֶׁעָבְרָה",
+      "translit": "ба-шана́ ше-авра́",
+      "ru": "в прошлом году",
+      "example": {
+        "he": "עליתי לארץ בשנה שעברה",
+        "translit": "алити ла-арец ба-шана ше-авра",
+        "ru": "Я репатриировался в прошлом году"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-last-year.svg"
+    },
+    {
+      "id": "time-2-once-a-week",
+      "he": "פעם בשבוע",
+      "niqqud": "פַּעַם בְּשָׁבוּעַ",
+      "translit": "па́ам бе-шаву́а",
+      "ru": "раз в неделю",
+      "example": {
+        "he": "אני בא לאולפן פעם בשבוע",
+        "translit": "ани ба ла-ульпан паам бе-шавуа",
+        "ru": "Я хожу в ульпан раз в неделю"
+      },
+      "reviewed": false,
+      "image": "/words/time-2-once-a-week.svg"
+    }
+  ]
+}

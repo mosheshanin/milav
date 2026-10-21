@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "time-1",
+  "topicId": "time",
+  "section": "numbers",
+  "topic": "Время и календарь",
+  "number": 1,
+  "free": true,
+  "title": "Который час",
+  "words": [
+    {
+      "id": "time-1-hour",
+      "he": "שעה",
+      "niqqud": "שָׁעָה",
+      "translit": "шаа́",
+      "ru": "час",
+      "example": {
+        "he": "עברה שעה",
+        "translit": "авра шаа",
+        "ru": "Прошёл час"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-hour.svg"
+    },
+    {
+      "id": "time-1-minute",
+      "he": "דקה",
+      "niqqud": "דַּקָּה",
+      "translit": "дака́",
+      "ru": "минута",
+      "example": {
+        "he": "רק דקה",
+        "translit": "рак дака",
+        "ru": "Всего минуту"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-minute.svg"
+    },
+    {
+      "id": "time-1-half",
+      "he": "חצי",
+      "niqqud": "חֵצִי",
+      "translit": "хе́ци",
+      "ru": "половина",
+      "example": {
+        "he": "שלוש וחצי",
+        "translit": "шалош ва-хеци",
+        "ru": "Три тридцать (полчетвёртого)"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-half.svg"
+    },
+    {
+      "id": "time-1-quarter",
+      "he": "רבע",
+      "niqqud": "רֶבַע",
+      "translit": "ре́ва",
+      "ru": "четверть",
+      "example": {
+        "he": "רבע לשמונה",
+        "translit": "рева ле-шмонэ",
+        "ru": "Без четверти восемь"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-quarter.svg"
+    },
+    {
+      "id": "time-1-what-time",
+      "he": "מה השעה",
+      "niqqud": "מָה הַשָּׁעָה",
+      "translit": "ма хашаа́",
+      "ru": "который час?",
+      "example": {
+        "he": "סליחה מה השעה",
+        "translit": "слиха ма хашаа",
+        "ru": "Извините, который час?"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-what-time.svg"
+    },
+    {
+      "id": "time-1-morning",
+      "he": "בוקר",
+      "niqqud": "בּוֹקֶר",
+      "translit": "бо́кер",
+      "ru": "утро",
+      "example": {
+        "he": "בשמונה בבוקר",
+        "translit": "бе-шмонэ ба-бокер",
+        "ru": "В восемь утра"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-morning.svg"
+    },
+    {
+      "id": "time-1-noon",
+      "he": "צהריים",
+      "niqqud": "צָהֳרַיִים",
+      "translit": "цохора́им",
+      "ru": "полдень, середина дня",
+      "example": {
+        "he": "בצהריים אני אוכל",
+        "translit": "ба-цохораим ани охель",
+        "ru": "Днём я обедаю"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-noon.svg"
+    },
+    {
+      "id": "time-1-afternoon",
+      "he": "אחר הצהריים",
+      "niqqud": "אַחַר הַצָּהֳרַיִים",
+      "translit": "аха́р хацохора́им",
+      "ru": "после обеда (после полудня)",
+      "example": {
+        "he": "נתראה אחר הצהריים",
+        "translit": "нитраэ ахар хацохораим",
+        "ru": "Увидимся после обеда"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-afternoon.svg"
+    },
+    {
+      "id": "time-1-evening",
+      "he": "ערב",
+      "niqqud": "עֶרֶב",
+      "translit": "э́рев",
+      "ru": "вечер",
+      "example": {
+        "he": "בשבע בערב",
+        "translit": "бе-шева ба-эрев",
+        "ru": "В семь вечера"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-evening.svg"
+    },
+    {
+      "id": "time-1-night",
+      "he": "לילה",
+      "niqqud": "לַיְלָה",
+      "translit": "ла́йла",
+      "ru": "ночь",
+      "example": {
+        "he": "בעשר בלילה",
+        "translit": "бе-эсер ба-лайла",
+        "ru": "В десять вечера (ночи)"
+      },
+      "reviewed": false,
+      "image": "/words/time-1-night.svg"
+    }
+  ]
+}
