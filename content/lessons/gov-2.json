@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "gov-2",
+  "topicId": "gov",
+  "section": "nouns",
+  "topic": "Учреждения Израиля",
+  "number": 2,
+  "free": false,
+  "title": "Куда обратиться",
+  "words": [
+    {
+      "id": "gov-2-id-card",
+      "he": "תעודת זהות",
+      "niqqud": "תְּעוּדַת זֶהוּת",
+      "translit": "теуда́т зеу́т",
+      "ru": "удостоверение личности (теудат зеут)",
+      "gender": "f",
+      "example": {
+        "he": "זו תעודת זהות חדשה",
+        "translit": "зо теудат зеут хадаша",
+        "ru": "Это новое удостоверение личности"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-id-card.svg"
+    },
+    {
+      "id": "gov-2-health-fund",
+      "he": "קופת חולים",
+      "niqqud": "קוּפַּת חוֹלִים",
+      "translit": "купа́т холи́м",
+      "ru": "больничная касса (купат холим)",
+      "gender": "f",
+      "example": {
+        "he": "זו קופת חולים גדולה",
+        "translit": "зо купат холим гдола",
+        "ru": "Это большая больничная касса"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-health-fund.svg"
+    },
+    {
+      "id": "gov-2-national-insurance",
+      "he": "ביטוח לאומי",
+      "niqqud": "בִּיטּוּחַ לְאוּמִּי",
+      "translit": "биту́ах леуми́",
+      "ru": "Битуах леуми (национальное страхование)",
+      "gender": "m",
+      "example": {
+        "he": "זה סניף של ביטוח לאומי",
+        "translit": "зэ сниф шель битуах леуми",
+        "ru": "Это отделение Битуах леуми"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-national-insurance.svg"
+    },
+    {
+      "id": "gov-2-income-tax",
+      "he": "מס הכנסה",
+      "niqqud": "מַס הַכְנָסָה",
+      "translit": "мас хахнаса́",
+      "ru": "налоговая (подоходный налог)",
+      "gender": "m",
+      "example": {
+        "he": "זה טופס של מס הכנסה",
+        "translit": "зэ тофес шель мас хахнаса",
+        "ru": "Это бланк налоговой"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-income-tax.svg"
+    },
+    {
+      "id": "gov-2-hospital",
+      "he": "בית חולים",
+      "niqqud": "בֵּית חוֹלִים",
+      "translit": "бейт холи́м",
+      "ru": "больница",
+      "gender": "m",
+      "example": {
+        "he": "זה בית חולים גדול",
+        "translit": "зэ бейт холим гадоль",
+        "ru": "Это большая больница"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-hospital.svg"
+    },
+    {
+      "id": "gov-2-school",
+      "he": "בית ספר",
+      "niqqud": "בֵּית סֵפֶר",
+      "translit": "бейт се́фер",
+      "ru": "школа",
+      "gender": "m",
+      "example": {
+        "he": "זה בית ספר חדש",
+        "translit": "зэ бейт сефер хадаш",
+        "ru": "Это новая школа"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-school.svg"
+    },
+    {
+      "id": "gov-2-court",
+      "he": "בית משפט",
+      "niqqud": "בֵּית מִשְׁפָּט",
+      "translit": "бейт мишпа́т",
+      "ru": "суд",
+      "gender": "m",
+      "example": {
+        "he": "זה בית משפט ישן",
+        "translit": "зэ бейт мишпат яшан",
+        "ru": "Это старый суд"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-court.svg"
+    },
+    {
+      "id": "gov-2-kindergarten",
+      "he": "גן ילדים",
+      "niqqud": "גַּן יְלָדִים",
+      "translit": "ган йелади́м",
+      "ru": "детский сад",
+      "gender": "m",
+      "example": {
+        "he": "זה גן ילדים קטן",
+        "translit": "зэ ган йеладим катан",
+        "ru": "Это маленький детский сад"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-kindergarten.svg"
+    },
+    {
+      "id": "gov-2-municipality",
+      "he": "עירייה",
+      "niqqud": "עִירִייָּה",
+      "translit": "ирия́",
+      "ru": "мэрия, муниципалитет",
+      "gender": "f",
+      "example": {
+        "he": "זו עירייה גדולה",
+        "translit": "зо ирия гдола",
+        "ru": "Это большая мэрия"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-municipality.svg"
+    },
+    {
+      "id": "gov-2-office",
+      "he": "משרד",
+      "niqqud": "מִשְׂרָד",
+      "translit": "мисра́д",
+      "ru": "контора, министерство",
+      "gender": "m",
+      "example": {
+        "he": "זה משרד חדש",
+        "translit": "зэ мисрад хадаш",
+        "ru": "Это новая контора"
+      },
+      "reviewed": false,
+      "image": "/words/gov-2-office.svg"
+    }
+  ]
+}

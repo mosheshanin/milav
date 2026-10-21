@@ -236,6 +236,34 @@ describe("проверка речи", () => {
     expect(body.match).toBe(true);
   });
 
+  it("фраза из двух слов засчитывается целиком, одно её слово нет (21.10)", async () => {
+    ctx.heard = "אחר כך";
+    expect(((await (await speak(70, "adverbs-4-later")).json()) as any).match).toBe(true);
+    ctx.heard = "אחרכך.";
+    expect(((await (await speak(70, "adverbs-4-later")).json()) as any).match).toBe(true);
+    ctx.heard = "אחר";
+    expect(((await (await speak(70, "adverbs-4-later")).json()) as any).match).toBe(false);
+  });
+
+  it("число цифрами засчитывается по значению слова, другое число нет", async () => {
+    ctx.heard = "11";
+    expect(((await (await speak(71, "numbers-4-eleven")).json()) as any).match).toBe(true);
+    expect(((await (await speak(71, "numbers-5-eleven")).json()) as any).match).toBe(true);
+    ctx.heard = "5";
+    expect(((await (await speak(71, "numbers-1-five")).json()) as any).match).toBe(true);
+    ctx.heard = "12";
+    expect(((await (await speak(71, "numbers-4-eleven")).json()) as any).match).toBe(false);
+  });
+
+  it("сказано соседнее число из двух слов: слово внутри него не засчитывается (אחד עשר вместо אחד)", async () => {
+    ctx.heard = "אחד עשר";
+    expect(((await (await speak(72, "numbers-2-one")).json()) as any).match).toBe(false);
+    expect(((await (await speak(72, "numbers-5-eleven")).json()) as any).match).toBe(true);
+    ctx.heard = "שמונה עשרה";
+    expect(((await (await speak(72, "numbers-5-eighteen")).json()) as any).match).toBe(false);
+    expect(((await (await speak(72, "numbers-4-eighteen")).json()) as any).match).toBe(true);
+  });
+
   it("латинский мусор не засчитывается", async () => {
     ctx.heard = "thank you";
     expect(((await (await speak(1, "animals-1-mouse")).json()) as any).match).toBe(false);

@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "adverbs-4",
+  "topicId": "adverbs",
+  "section": "basics",
+  "topic": "Время, место, количество",
+  "number": 4,
+  "free": false,
+  "title": "Потом, никогда, снова",
+  "words": [
+    {
+      "id": "adverbs-4-later",
+      "he": "אחר כך",
+      "niqqud": "אַחַר כָּךְ",
+      "translit": "аха́р ках",
+      "ru": "потом",
+      "example": {
+        "he": "נדבר אחר כך",
+        "translit": "недабер ахар ках",
+        "ru": "Поговорим потом"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-later.svg"
+    },
+    {
+      "id": "adverbs-4-never",
+      "he": "אף פעם",
+      "niqqud": "אַף פַּעַם",
+      "translit": "аф па́ам",
+      "ru": "никогда",
+      "example": {
+        "he": "הוא אף פעם לא בבית",
+        "translit": "ху аф паам ло бабайит",
+        "ru": "Его никогда нет дома"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-never.svg"
+    },
+    {
+      "id": "adverbs-4-in-a-moment",
+      "he": "עוד מעט",
+      "niqqud": "עוֹד מְעַט",
+      "translit": "од меа́т",
+      "ru": "скоро, вот-вот",
+      "example": {
+        "he": "אני בא עוד מעט",
+        "translit": "ани ба од меат",
+        "ru": "Я скоро приду"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-in-a-moment.svg"
+    },
+    {
+      "id": "adverbs-4-until-now",
+      "he": "עד עכשיו",
+      "niqqud": "עַד עַכְשָׁיו",
+      "translit": "ад ахша́в",
+      "ru": "до сих пор",
+      "example": {
+        "he": "הוא בעבודה עד עכשיו",
+        "translit": "ху баавода ад ахшав",
+        "ru": "Он до сих пор на работе"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-until-now.svg"
+    },
+    {
+      "id": "adverbs-4-every-day",
+      "he": "כל יום",
+      "niqqud": "כָּל יוֹם",
+      "translit": "коль йом",
+      "ru": "каждый день",
+      "example": {
+        "he": "אני קורא כל יום",
+        "translit": "ани коре коль йом",
+        "ru": "Я читаю каждый день"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-every-day.svg"
+    },
+    {
+      "id": "adverbs-4-in-the-end",
+      "he": "בסוף",
+      "niqqud": "בַּסּוֹף",
+      "translit": "басо́ф",
+      "ru": "в конце, в итоге",
+      "example": {
+        "he": "בסוף הוא בא",
+        "translit": "басоф ху ба",
+        "ru": "В итоге он пришёл"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-in-the-end.svg"
+    },
+    {
+      "id": "adverbs-4-suddenly",
+      "he": "פתאום",
+      "niqqud": "פִּתְאוֹם",
+      "translit": "пито́м",
+      "ru": "вдруг",
+      "example": {
+        "he": "פתאום יורד גשם",
+        "translit": "питом йоред гешем",
+        "ru": "Вдруг пошёл дождь"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-suddenly.svg"
+    },
+    {
+      "id": "adverbs-4-again",
+      "he": "שוב",
+      "niqqud": "שׁוּב",
+      "translit": "шув",
+      "ru": "снова",
+      "example": {
+        "he": "הוא שוב פה",
+        "translit": "ху шув по",
+        "ru": "Он снова здесь"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-again.svg"
+    },
+    {
+      "id": "adverbs-4-early",
+      "he": "מוקדם",
+      "niqqud": "מוּקְדָּם",
+      "translit": "мукда́м",
+      "ru": "рано",
+      "example": {
+        "he": "אני קם מוקדם",
+        "translit": "ани кам мукдам",
+        "ru": "Я встаю рано"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-early.svg"
+    },
+    {
+      "id": "adverbs-4-late",
+      "he": "מאוחר",
+      "niqqud": "מְאוּחָר",
+      "translit": "меуха́р",
+      "ru": "поздно",
+      "example": {
+        "he": "כבר מאוחר",
+        "translit": "квар меухар",
+        "ru": "Уже поздно"
+      },
+      "reviewed": false,
+      "image": "/words/adverbs-4-late.svg"
+    }
+  ]
+}

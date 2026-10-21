@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-4",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 4,
+  "free": false,
+  "title": "Счёт от 11 до 19",
+  "words": [
+    {
+      "id": "numbers-4-eleven",
+      "he": "אחת עשרה",
+      "niqqud": "אַחַת עֶשְׂרֵה",
+      "translit": "аха́т эсре́",
+      "ru": "одиннадцать",
+      "value": 11,
+      "example": {
+        "he": "עכשיו אחת עשרה",
+        "translit": "ахшав ахат эсре",
+        "ru": "Сейчас одиннадцать часов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-eleven.svg"
+    },
+    {
+      "id": "numbers-4-twelve",
+      "he": "שתים עשרה",
+      "niqqud": "שְׁתֵּים עֶשְׂרֵה",
+      "translit": "штейм эсре́",
+      "ru": "двенадцать",
+      "value": 12,
+      "example": {
+        "he": "היא בת שתים עשרה",
+        "translit": "хи бат штейм эсре",
+        "ru": "Ей двенадцать лет"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-twelve.svg"
+    },
+    {
+      "id": "numbers-4-thirteen",
+      "he": "שלוש עשרה",
+      "niqqud": "שְׁלוֹשׁ עֶשְׂרֵה",
+      "translit": "шлош эсре́",
+      "ru": "тринадцать",
+      "value": 13,
+      "example": {
+        "he": "שלוש עשרה בנות",
+        "translit": "шлош эсре бнот",
+        "ru": "Тринадцать девочек"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-thirteen.svg"
+    },
+    {
+      "id": "numbers-4-fourteen",
+      "he": "ארבע עשרה",
+      "niqqud": "אַרְבַּע עֶשְׂרֵה",
+      "translit": "арба́ эсре́",
+      "ru": "четырнадцать",
+      "value": 14,
+      "example": {
+        "he": "ארבע עשרה שנים",
+        "translit": "арба эсре шаним",
+        "ru": "Четырнадцать лет"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-fourteen.svg"
+    },
+    {
+      "id": "numbers-4-fifteen",
+      "he": "חמש עשרה",
+      "niqqud": "חֲמֵשׁ עֶשְׂרֵה",
+      "translit": "хаме́ш эсре́",
+      "ru": "пятнадцать",
+      "value": 15,
+      "example": {
+        "he": "חמש עשרה דקות",
+        "translit": "хамеш эсре дакот",
+        "ru": "Пятнадцать минут"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-fifteen.svg"
+    },
+    {
+      "id": "numbers-4-sixteen",
+      "he": "שש עשרה",
+      "niqqud": "שֵׁשׁ עֶשְׂרֵה",
+      "translit": "шеш эсре́",
+      "ru": "шестнадцать",
+      "value": 16,
+      "example": {
+        "he": "הוא בן שש עשרה",
+        "translit": "ху бен шеш эсре",
+        "ru": "Ему шестнадцать лет"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-sixteen.svg"
+    },
+    {
+      "id": "numbers-4-seventeen",
+      "he": "שבע עשרה",
+      "niqqud": "שְׁבַע עֶשְׂרֵה",
+      "translit": "шва эсре́",
+      "ru": "семнадцать",
+      "value": 17,
+      "example": {
+        "he": "שבע עשרה מכוניות",
+        "translit": "шва эсре мехонийот",
+        "ru": "Семнадцать машин"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-seventeen.svg"
+    },
+    {
+      "id": "numbers-4-eighteen",
+      "he": "שמונה עשרה",
+      "niqqud": "שְׁמוֹנֶה עֶשְׂרֵה",
+      "translit": "шмонэ́ эсре́",
+      "ru": "восемнадцать",
+      "value": 18,
+      "example": {
+        "he": "שמונה עשרה שאלות",
+        "translit": "шмонэ эсре шеэлот",
+        "ru": "Восемнадцать вопросов"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-eighteen.svg"
+    },
+    {
+      "id": "numbers-4-nineteen",
+      "he": "תשע עשרה",
+      "niqqud": "תְּשַׁע עֶשְׂרֵה",
+      "translit": "тша эсре́",
+      "ru": "девятнадцать",
+      "value": 19,
+      "example": {
+        "he": "תשע עשרה תחנות",
+        "translit": "тша эсре таханот",
+        "ru": "Девятнадцать остановок"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-nineteen.svg"
+    },
+    {
+      "id": "numbers-4-number",
+      "he": "מספר",
+      "niqqud": "מִסְפָּר",
+      "translit": "миспа́р",
+      "ru": "число, номер",
+      "example": {
+        "he": "זה מספר טלפון",
+        "translit": "зэ миспар телефон",
+        "ru": "Это номер телефона"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-4-number.svg"
+    }
+  ]
+}

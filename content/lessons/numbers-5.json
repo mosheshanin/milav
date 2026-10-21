@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-5",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 5,
+  "free": false,
+  "title": "11–19 с мужскими словами",
+  "words": [
+    {
+      "id": "numbers-5-eleven",
+      "he": "אחד עשר",
+      "niqqud": "אַחַד עָשָׂר",
+      "translit": "аха́д аса́р",
+      "ru": "одиннадцать (м.)",
+      "value": 11,
+      "example": {
+        "he": "אחד עשר ילדים",
+        "translit": "ахад асар йеладим",
+        "ru": "Одиннадцать мальчиков"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-eleven.svg"
+    },
+    {
+      "id": "numbers-5-twelve",
+      "he": "שנים עשר",
+      "niqqud": "שְׁנֵים עָשָׂר",
+      "translit": "шнейм аса́р",
+      "ru": "двенадцать (м.)",
+      "value": 12,
+      "example": {
+        "he": "שנים עשר חודשים",
+        "translit": "шнейм асар ходашим",
+        "ru": "Двенадцать месяцев"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-twelve.svg"
+    },
+    {
+      "id": "numbers-5-thirteen",
+      "he": "שלושה עשר",
+      "niqqud": "שְׁלוֹשָׁה עָשָׂר",
+      "translit": "шлоша́ аса́р",
+      "ru": "тринадцать (м.)",
+      "value": 13,
+      "example": {
+        "he": "שלושה עשר ספרים",
+        "translit": "шлоша асар сфарим",
+        "ru": "Тринадцать книг"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-thirteen.svg"
+    },
+    {
+      "id": "numbers-5-fourteen",
+      "he": "ארבעה עשר",
+      "niqqud": "אַרְבָּעָה עָשָׂר",
+      "translit": "арбаа́ аса́р",
+      "ru": "четырнадцать (м.)",
+      "value": 14,
+      "example": {
+        "he": "ארבעה עשר ימים",
+        "translit": "арбаа асар ямим",
+        "ru": "Четырнадцать дней"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-fourteen.svg"
+    },
+    {
+      "id": "numbers-5-fifteen",
+      "he": "חמישה עשר",
+      "niqqud": "חֲמִישָּׁה עָשָׂר",
+      "translit": "хамиша́ аса́р",
+      "ru": "пятнадцать (м.)",
+      "value": 15,
+      "example": {
+        "he": "חמישה עשר שקלים",
+        "translit": "хамиша асар шкалим",
+        "ru": "Пятнадцать шекелей"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-fifteen.svg"
+    },
+    {
+      "id": "numbers-5-sixteen",
+      "he": "שישה עשר",
+      "niqqud": "שִׁישָּׁה עָשָׂר",
+      "translit": "шиша́ аса́р",
+      "ru": "шестнадцать (м.)",
+      "value": 16,
+      "example": {
+        "he": "שישה עשר תלמידים",
+        "translit": "шиша асар тальмидим",
+        "ru": "Шестнадцать учеников"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-sixteen.svg"
+    },
+    {
+      "id": "numbers-5-seventeen",
+      "he": "שבעה עשר",
+      "niqqud": "שִׁבְעָה עָשָׂר",
+      "translit": "шива́ аса́р",
+      "ru": "семнадцать (м.)",
+      "value": 17,
+      "example": {
+        "he": "שבעה עשר אנשים",
+        "translit": "шива асар анашим",
+        "ru": "Семнадцать человек"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-seventeen.svg"
+    },
+    {
+      "id": "numbers-5-eighteen",
+      "he": "שמונה עשר",
+      "niqqud": "שְׁמוֹנָה עָשָׂר",
+      "translit": "шмона́ аса́р",
+      "ru": "восемнадцать (м.)",
+      "value": 18,
+      "example": {
+        "he": "שמונה עשר חדרים",
+        "translit": "шмона асар хадарим",
+        "ru": "Восемнадцать комнат"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-eighteen.svg"
+    },
+    {
+      "id": "numbers-5-nineteen",
+      "he": "תשעה עשר",
+      "niqqud": "תִּשְׁעָה עָשָׂר",
+      "translit": "тиша́ аса́р",
+      "ru": "девятнадцать (м.)",
+      "value": 19,
+      "example": {
+        "he": "תשעה עשר קילומטר",
+        "translit": "тиша асар километр",
+        "ru": "Девятнадцать километров"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-nineteen.svg"
+    },
+    {
+      "id": "numbers-5-twenty-one",
+      "he": "עשרים ואחד",
+      "niqqud": "עֶשְׂרִים וְאֶחָד",
+      "translit": "эсри́м вэ-эха́д",
+      "ru": "двадцать один (м.)",
+      "value": 21,
+      "example": {
+        "he": "עשרים ואחד שקלים",
+        "translit": "эсрим вэ-эхад шкалим",
+        "ru": "Двадцать один шекель"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-5-twenty-one.svg"
+    }
+  ]
+}

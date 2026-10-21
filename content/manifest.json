@@ -257,6 +257,23 @@
       "v": "2fcebbeeb4"
     },
     {
+      "id": "adverbs-4",
+      "topicId": "adverbs",
+      "section": "basics",
+      "topic": "Время, место, количество",
+      "number": 4,
+      "free": false,
+      "title": "Потом, никогда, снова",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "60ddee325c"
+    },
+    {
       "id": "animals-1",
       "topicId": "animals",
       "section": "nouns",
@@ -682,6 +699,23 @@
       "v": "04583fc02e"
     },
     {
+      "id": "gov-2",
+      "topicId": "gov",
+      "section": "nouns",
+      "topic": "Учреждения Израиля",
+      "number": 2,
+      "free": false,
+      "title": "Куда обратиться",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "d66b66065a"
+    },
+    {
       "id": "hifil-1",
       "topicId": "hifil",
       "section": "verbs",
@@ -951,7 +985,7 @@
         "write",
         "type"
       ],
-      "v": "a245ba4a86"
+      "v": "ef2721bcd5"
     },
     {
       "id": "numbers-2",
@@ -968,7 +1002,7 @@
         "write",
         "type"
       ],
-      "v": "d34e115692"
+      "v": "6a7d5b8d15"
     },
     {
       "id": "numbers-3",
@@ -985,7 +1019,41 @@
         "write",
         "type"
       ],
-      "v": "e925262fec"
+      "v": "ed6f63b9d3"
+    },
+    {
+      "id": "numbers-4",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 4,
+      "free": false,
+      "title": "Счёт от 11 до 19",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "2f935719e6"
+    },
+    {
+      "id": "numbers-5",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 5,
+      "free": false,
+      "title": "11–19 с мужскими словами",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "ac0f980844"
     },
     {
       "id": "paal-1",
@@ -1363,8 +1431,8 @@
     }
   ],
   "info": {
-    "totalWords": 720,
-    "totalLessons": 78,
+    "totalWords": 760,
+    "totalLessons": 82,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1392,7 +1460,8 @@
         "lessonIds": [
           "adverbs-1",
           "adverbs-2",
-          "adverbs-3"
+          "adverbs-3",
+          "adverbs-4"
         ]
       },
       {
@@ -1471,7 +1540,8 @@
         "id": "gov",
         "title": "Учреждения Израиля",
         "lessonIds": [
-          "gov-1"
+          "gov-1",
+          "gov-2"
         ]
       },
       {
@@ -1531,7 +1601,9 @@
         "lessonIds": [
           "numbers-1",
           "numbers-2",
-          "numbers-3"
+          "numbers-3",
+          "numbers-4",
+          "numbers-5"
         ]
       },
       {

@@ -7,6 +7,7 @@ import lesson_abstract_4 from "./lessons/abstract-4.json";
 import lesson_adverbs_1 from "./lessons/adverbs-1.json";
 import lesson_adverbs_2 from "./lessons/adverbs-2.json";
 import lesson_adverbs_3 from "./lessons/adverbs-3.json";
+import lesson_adverbs_4 from "./lessons/adverbs-4.json";
 import lesson_alphabet_1 from "./lessons/alphabet-1.json";
 import lesson_alphabet_2 from "./lessons/alphabet-2.json";
 import lesson_alphabet_3 from "./lessons/alphabet-3.json";
@@ -38,6 +39,7 @@ import lesson_food_2 from "./lessons/food-2.json";
 import lesson_food_3 from "./lessons/food-3.json";
 import lesson_food_4 from "./lessons/food-4.json";
 import lesson_gov_1 from "./lessons/gov-1.json";
+import lesson_gov_2 from "./lessons/gov-2.json";
 import lesson_hifil_1 from "./lessons/hifil-1.json";
 import lesson_hifil_2 from "./lessons/hifil-2.json";
 import lesson_hifil_3 from "./lessons/hifil-3.json";
@@ -56,6 +58,8 @@ import lesson_nifal_3 from "./lessons/nifal-3.json";
 import lesson_numbers_1 from "./lessons/numbers-1.json";
 import lesson_numbers_2 from "./lessons/numbers-2.json";
 import lesson_numbers_3 from "./lessons/numbers-3.json";
+import lesson_numbers_4 from "./lessons/numbers-4.json";
+import lesson_numbers_5 from "./lessons/numbers-5.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
@@ -87,6 +91,7 @@ export const lessonFiles: unknown[] = [
   lesson_adverbs_1,
   lesson_adverbs_2,
   lesson_adverbs_3,
+  lesson_adverbs_4,
   lesson_alphabet_1,
   lesson_alphabet_2,
   lesson_alphabet_3,
@@ -118,6 +123,7 @@ export const lessonFiles: unknown[] = [
   lesson_food_3,
   lesson_food_4,
   lesson_gov_1,
+  lesson_gov_2,
   lesson_hifil_1,
   lesson_hifil_2,
   lesson_hifil_3,
@@ -136,6 +142,8 @@ export const lessonFiles: unknown[] = [
   lesson_numbers_1,
   lesson_numbers_2,
   lesson_numbers_3,
+  lesson_numbers_4,
+  lesson_numbers_5,
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
