@@ -1,4 +1,4 @@
-import type { Word } from "@milav/shared";
+import { isPhrase, type Word } from "@milav/shared";
 import { SpeakerButton } from "./SpeakerButton";
 import { VerbForms } from "./VerbForms";
 import { WordImage } from "./WordImage";
@@ -20,6 +20,8 @@ const FORM_LABELS = [
  * рядом с картинкой длинные формы (מפוספסים, כחלחלות) не помещались и давали горизонтальную прокрутку на экране 360 px.
  */
 export function WordCard({ word, compact = false }: { word: Word; compact?: boolean }) {
+  // Фраза из нескольких слов («תעודת זהות») крупным шрифтом не помещается рядом с картинкой на 360 px: шрифт меньше, перенос по словам.
+  const manyWords = isPhrase(word.he);
   if (compact) {
     // На этапах письма и набора остаётся главное, чтобы холст и клавиатура помещались на экране.
     return (
@@ -30,7 +32,7 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
             <div className="text-xl font-semibold">{word.ru}</div>
             <div className="text-accent">[{word.translit}]</div>
           </div>
-          <div dir="rtl" lang="he" className="font-hebrew text-4xl font-bold" data-testid="word-he">
+          <div dir="rtl" lang="he" className={`min-w-0 font-hebrew font-bold ${manyWords ? "text-3xl leading-tight" : "text-4xl"}`} data-testid="word-he">
             {word.he}
           </div>
         </div>
@@ -75,10 +77,10 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
     <>
       <WordImage key={word.id} image={word.image} fallback={word.he} className="size-28" />
       <div className="flex min-w-0 flex-1 flex-col items-end gap-1 text-right">
-        <div dir="rtl" lang="he" className="font-hebrew text-5xl font-bold leading-tight" data-testid="word-he">
+        <div dir="rtl" lang="he" className={`font-hebrew font-bold leading-tight ${manyWords ? "text-4xl" : "text-5xl"}`} data-testid="word-he">
           {word.he}
         </div>
-        <div dir="rtl" lang="he" className="font-hand text-3xl leading-tight text-ink-soft" aria-label="Рукописное начертание">
+        <div dir="rtl" lang="he" className={`font-hand leading-tight text-ink-soft ${manyWords ? "text-2xl" : "text-3xl"}`} aria-label="Рукописное начертание">
           {word.he}
         </div>
         <div className="text-lg text-accent">[{word.translit}]</div>

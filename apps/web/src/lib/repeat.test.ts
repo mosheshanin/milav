@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { MyWordItem, RepeatQuestion, RepeatWord } from "@milav/shared";
-import { drillQueue, filterWords, localCorrect, repeatCardText, repeatVerdict, returnsText, strengthFilled, wordsCount } from "./repeat";
+import { drillQueue, filterWords, lettersHint, localCorrect, repeatCardText, repeatVerdict, returnsText, strengthFilled, wordsCount } from "./repeat";
 
 const item = (id: string, box: number, dueIn: number): MyWordItem => ({
   word: { id, lessonId: "l", he: "א", translit: "а", ru: id },
@@ -80,3 +80,11 @@ describe("проверка на телефоне и «Ещё раз»", () => {
   });
 });
 
+
+describe("подсказка набора в повторении", () => {
+  it("у слова число букв, у фразы по словам", () => {
+    expect(lettersHint("ציפור")).toBe("Букв в слове: 5");
+    expect(lettersHint("אחר כך")).toBe("Букв: 3 + 2, пробел встанет сам");
+    expect(lettersHint("כמה זה עולה")).toBe("Букв: 3 + 2 + 4, пробел встанет сам");
+  });
+});

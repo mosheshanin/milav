@@ -4,6 +4,7 @@ import {
   REPEAT_LAST_BOX,
   dueInText,
   typedLetters,
+  typedPartLengths,
   type MyWordItem,
   type RepeatAnswerRequest,
   type RepeatQuestion,
@@ -15,6 +16,12 @@ import { plural } from "./play";
 /** «7 слов». */
 export function wordsCount(n: number): string {
   return `${n} ${plural(n, "слово", "слова", "слов")}`;
+}
+
+/** Подсказка в «Напиши на иврите», сколько набирать: «Букв в слове: 5», у фразы по словам «Букв: 3 + 2» (пробел ставится сам). */
+export function lettersHint(he: string): string {
+  const parts = typedPartLengths(he);
+  return parts.length > 1 ? `Букв: ${parts.join(" + ")}, пробел встанет сам` : `Букв в слове: ${parts[0] ?? 0}`;
 }
 
 /** Текст карточки «Повторение» на главной. */

@@ -6,6 +6,7 @@ import {
   isLetterAccepted,
   loadTemplates,
   roundStrokes,
+  wordLetterGroups,
   wordLetters,
   type Stroke,
   type Template,
@@ -57,6 +58,9 @@ export function WriteWord({
   autoNext?: boolean;
 }) {
   const letters = lettersOf(word);
+  /** Клетки по словам: у фразы («אחר כך») группы с промежутком, буквы рисуют подряд, пробел не рисуют. */
+  const groups = wordLetterGroups(word.he);
+  const phrase = groups.length > 1;
   const canvas = useRef<DrawHandle>(null);
   /** Принятые штрихи по буквам (по индексу буквы). Хранится в ref: на отрисовку не влияет. */
   const accepted = useRef<Stroke[][]>([]);
@@ -117,31 +121,43 @@ export function WriteWord({
 
   return (
     <div className="flex flex-col gap-block">
-      <div dir="rtl" className="flex flex-wrap justify-center gap-2" data-testid="write-slots">
-        {letters.map((letter, i) => (
-          <span
-            key={i}
-            lang="he"
-            data-slot={slots[i]}
-            className={`flex size-12 items-center justify-center rounded-control border-2 font-hebrew text-2xl font-bold ${
-              slots[i] === "ok"
-                ? "border-success bg-success-soft text-success"
-                : slots[i] === "fail"
-                  ? "border-danger bg-danger-soft text-danger"
-                  : i === index
-                    ? "border-accent bg-accent-soft"
-                    : "border-line bg-surface"
-            }`}
-          >
-            {slots[i] !== "pending" || (mode === "study" && i === index) ? letter : ""}
-          </span>
-        ))}
+      <div dir="rtl" className="flex flex-wrap justify-center gap-x-5 gap-y-2" data-testid="write-slots">
+        {groups.map((group, g) => {
+          const offset = groups.slice(0, g).reduce((sum, x) => sum + x.length, 0);
+          return (
+            <div key={g} className="flex flex-wrap justify-center gap-2" data-testid="write-group">
+              {group.map((letter, k) => {
+                const i = offset + k;
+                return (
+                  <span
+                    key={i}
+                    lang="he"
+                    data-slot={slots[i]}
+                    className={`flex items-center justify-center rounded-control border-2 font-hebrew font-bold ${
+                      letters.length > 7 ? "size-10 text-xl" : "size-12 text-2xl"
+                    } ${
+                      slots[i] === "ok"
+                        ? "border-success bg-success-soft text-success"
+                        : slots[i] === "fail"
+                          ? "border-danger bg-danger-soft text-danger"
+                          : i === index
+                            ? "border-accent bg-accent-soft"
+                            : "border-line bg-surface"
+                    }`}
+                  >
+                    {slots[i] !== "pending" || (mode === "study" && i === index) ? letter : ""}
+                  </span>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
 
       {finished ? (
         <>
           <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
-            {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : "Слово написано!"}
+            {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : phrase ? "Фраза написана!" : "Слово написано!"}
           </p>
           <AutoNextButton
             running={autoNext && failedLetters === 0}

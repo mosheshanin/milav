@@ -112,13 +112,17 @@ async function drawLetter(page, letter) {
   }
 }
 
+/** Буквы слова без пробелов: у фразы («אחר כך») пробел не рисуют и не набирают. */
+const lettersOf = (he) => [...he].filter((ch) => ch !== " ");
+
 /** Пишет слово по буквам. Возвращает число неудачных проверок. */
 async function writeWord(page, he, { retriesAllowed = 3 } = {}) {
   let misses = 0;
   const slots = page.locator('[data-testid="write-slots"] [data-slot]');
-  for (let k = 0; k < [...he].length; k++) {
+  const letters = lettersOf(he);
+  for (let k = 0; k < letters.length; k++) {
     for (let attempt = 0; attempt < retriesAllowed; attempt++) {
-      await drawLetter(page, [...he][k]);
+      await drawLetter(page, letters[k]);
       await page.locator('[data-testid="check"]').click();
       await page.waitForTimeout(80);
       if ((await slots.nth(k).getAttribute("data-slot")) !== "pending") break;
@@ -129,7 +133,7 @@ async function writeWord(page, he, { retriesAllowed = 3 } = {}) {
 }
 
 async function typeWord(page, he) {
-  for (const letter of [...he]) await page.locator('[data-testid="keyboard"] button').filter({ hasText: letter }).click();
+  for (const letter of lettersOf(he)) await page.locator('[data-testid="keyboard"] button').filter({ hasText: letter }).click();
 }
 
 // ---------- Сценарий А: полный урок и викторина на проходной балл ----------
@@ -201,6 +205,7 @@ const autoMs = Date.now() - autoFrom;
 check(autoMs >= 1500 && autoMs < 3500, `автопереход к «Говори» без нажатия через ${autoMs} мс`);
 await page.click('[data-testid="speak-start"]');
 await page.waitForSelector('[data-testid="equalizer"]');
+const recordStartedAt = Date.now();
 // Фальшивый микрофон Chromium пищит раз в секунду: снимаем высоты столбиков несколько раз за время записи.
 const seen = new Set();
 for (let i = 0; i < 12; i++) {
@@ -211,9 +216,15 @@ for (let i = 0; i < 12; i++) {
 }
 check(seen.size > 2, `эквалайзер реагирует на звук (разных высот: ${seen.size})`);
 // Руками не останавливаем: запись должна закончиться сама не позже чем через 2.5 с (+ запас на отправку).
+// У фразы из нескольких слов («אחר כך») пауза для остановки 1,2 с, а фальшивый микрофон пищит каждую секунду, поэтому запись
+// идёт до предела SPEAK_PHRASE_MAX_MS (4 с) от начала.
 const startedAt = Date.now();
-await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 5000 });
-check(Date.now() - startedAt < 2600, `запись остановилась сама за ${Date.now() - startedAt} мс после показа эквалайзера`);
+await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 7000 });
+if (first.he.includes(" ")) {
+  check(Date.now() - recordStartedAt < 4700, `запись фразы остановилась сама за ${Date.now() - recordStartedAt} мс от начала (предел 4 с)`);
+} else {
+  check(Date.now() - startedAt < 2600, `запись остановилась сама за ${Date.now() - startedAt} мс после показа эквалайзера`);
+}
 check(!(await page.locator('[data-testid="recording"]').count()), "после остановки эквалайзер скрыт");
 await shot(page, "04-speak-unavailable");
 check(

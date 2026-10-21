@@ -119,7 +119,7 @@ for (let i = 0; i < 10; i++) {
     const ru = (await text(page, "repeat-prompt")).trim();
     const word = byRu.get(ru);
     if (!typedOk && word) {
-      for (const ch of [...word.he]) await page.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
+      for (const ch of [...word.he].filter((c) => c !== " ")) await page.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
       await page.waitForSelector('[data-testid="repeat-check"]:not([disabled])');
       await shot(page, "03-typed");
       await page.click('[data-testid="repeat-check"]');
@@ -178,7 +178,7 @@ while (drillSteps < 40) {
     await shot(page, "06b-drill");
   } else if (type === "type") {
     const word = byRu.get((await text(page, "repeat-prompt")).trim());
-    for (const ch of [...word.he]) await page.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
+    for (const ch of [...word.he].filter((c) => c !== " ")) await page.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
     await page.click('[data-testid="repeat-check"]');
   } else {
     await page.locator('[data-testid="repeat-option"][data-correct="true"]').click();
@@ -233,7 +233,7 @@ await page.context().close();
     }
     if (type === "type") {
       const word = byRu.get((await text(vp, "repeat-prompt")).trim());
-      for (const ch of [...word.he]) await vp.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
+      for (const ch of [...word.he].filter((c) => c !== " ")) await vp.locator(`[data-testid="keyboard"] button:text-is("${ch}")`).first().click();
       await vp.click('[data-testid="repeat-check"]');
     } else {
       await vp.locator('[data-testid="repeat-option"][data-correct="true"]').first().click();

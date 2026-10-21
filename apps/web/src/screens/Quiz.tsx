@@ -6,6 +6,7 @@ import {
   isAlphabetLesson,
   isGereshForm,
   isLetter,
+  isPhrase,
   lessonItems,
   quizRulesFor,
   type AnyLesson,
@@ -543,6 +544,7 @@ function QuestionBody({
           {!outcome && (
             <SpeakRecorder
               mode="quiz"
+              phrase={isPhrase(word.he)}
               check={checkSpeech}
               onPassed={onSpeechAnswered}
               onFailed={onSpeechAnswered}

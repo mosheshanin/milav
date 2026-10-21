@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { GERESH, typedLetters } from "@milav/shared";
+import { GERESH, isPhrase, spacedTyped, typedLetters } from "@milav/shared";
 import type { Spelled } from "./WriteWord";
 import { HebrewKeyboard } from "./HebrewKeyboard";
 import { AutoNextButton } from "./AutoNextButton";
@@ -7,6 +7,7 @@ import { AutoNextButton } from "./AutoNextButton";
 /**
  * Набор слова (или одной буквы) на экранной клавиатуре. Слово видно на карточке выше.
  * Звуки дж, ж, ч набирают двумя знаками: буква и гереш (ג׳); для них на клавиатуре есть клавиша ׳.
+ * Фразу («אחר כך») набирают без пробела: промежуток между словами приложение ставит само (`spacedTyped`), на сервер уходят только буквы.
  * `autoNext`: после верного набора кнопка «Дальше» сама срабатывает через 2 секунды (этапы урока).
  */
 export function TypeWord({
@@ -20,6 +21,7 @@ export function TypeWord({
 }) {
   const target = typedLetters(word.he);
   const needsGeresh = target.includes(GERESH);
+  const phrase = isPhrase(word.he);
   const [typed, setTyped] = useState<string[]>([]);
 
   const complete = typed.length === target.length;
@@ -36,7 +38,11 @@ export function TypeWord({
           correct ? "border-success text-success" : wrong ? "border-danger text-danger" : "border-line"
         }`}
       >
-        {typed.join("") || <span className="text-xl font-normal text-ink-soft">{needsGeresh ? "Нажмите букву, затем гереш" : target.length === 1 ? "Нажмите букву" : "Наберите слово"}</span>}
+        {spacedTyped(typed, word.he) || (
+          <span className="text-xl font-normal text-ink-soft">
+            {needsGeresh ? "Нажмите букву, затем гереш" : target.length === 1 ? "Нажмите букву" : phrase ? "Наберите фразу, пробел встанет сам" : "Наберите слово"}
+          </span>
+        )}
       </div>
 
       {correct ? (
@@ -56,7 +62,7 @@ export function TypeWord({
           />
           {wrong && (
             <p role="alert" className="text-center font-semibold text-danger">
-              {needsGeresh ? "Не совпадает. Сотрите и наберите букву и гереш ещё раз." : target.length === 1 ? "Это другая буква. Сотрите и попробуйте ещё раз." : "Не совпадает со словом. Сотрите лишнее и наберите ещё раз."}
+              {needsGeresh ? "Не совпадает. Сотрите и наберите букву и гереш ещё раз." : target.length === 1 ? "Это другая буква. Сотрите и попробуйте ещё раз." : phrase ? "Не совпадает с фразой. Сотрите лишнее и наберите ещё раз." : "Не совпадает со словом. Сотрите лишнее и наберите ещё раз."}
             </p>
           )}
         </>

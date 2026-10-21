@@ -3,6 +3,7 @@ import { Lock, PartyPopper } from "lucide-react";
 import {
   isAlphabetLesson,
   isLetter,
+  isPhrase,
   lessonItems,
   stagesFor,
   type AnyLesson,
@@ -212,9 +213,12 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
           )}
           {view === "speak" && (
             <>
-              <p className="text-center text-ink-soft">Нажмите «Записать» и скажите слово вслух.</p>
+              <p className="text-center text-ink-soft">
+                {isPhrase(word.he) ? "Нажмите «Записать» и скажите всю фразу вслух." : "Нажмите «Записать» и скажите слово вслух."}
+              </p>
               <SpeakRecorder
                 mode="study"
+                phrase={isPhrase(word.he)}
                 check={(audio) => api.speech(word.id, audio)}
                 onPassed={onSpeakPassed}
                 onGiveUp={onSpeakSkipped}

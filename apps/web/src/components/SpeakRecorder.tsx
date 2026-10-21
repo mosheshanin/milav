@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { CircleCheck, Mic, Square } from "lucide-react";
+import { SPEAK_PHRASE_MAX_MS, SPEAK_PHRASE_SILENCE_MS } from "@milav/shared";
 import { ApiError } from "../api";
 import { micPermission, type MicState } from "../lib/mic";
 import { reportEvent } from "../lib/telemetry";
@@ -61,8 +62,11 @@ export function SpeakRecorder<R extends SpeakVerdict>({
   onFailed,
   onGiveUp,
   onContinue,
+  phrase = false,
 }: {
   mode: "study" | "quiz";
+  /** Фраза из нескольких слов: запись дольше и ждёт паузу подольше (SPEAK_PHRASE_MAX_MS, SPEAK_PHRASE_SILENCE_MS). */
+  phrase?: boolean;
   check: (audio: Blob) => Promise<R>;
   onPassed: (response: R) => void;
   onFailed?: (response: R) => void;
@@ -101,8 +105,10 @@ export function SpeakRecorder<R extends SpeakVerdict>({
     setStarting(true);
     setHeard(null);
     try {
-      // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS; можно и вручную.
-      const rec = await startRecording({ onLevels: setBars });
+      // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS (у фразы SPEAK_PHRASE_*); можно и вручную.
+      const rec = await startRecording(
+        phrase ? { onLevels: setBars, maxMs: SPEAK_PHRASE_MAX_MS, silenceMs: SPEAK_PHRASE_SILENCE_MS } : { onLevels: setBars },
+      );
       active.current = rec;
       setMic("granted");
       setRecording(rec);

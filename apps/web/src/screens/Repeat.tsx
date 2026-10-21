@@ -3,6 +3,7 @@ import { CheckCircle2, XCircle } from "lucide-react";
 import {
   GERESH,
   REPEAT_TYPE_TITLES,
+  spacedTyped,
   typedLetters,
   type PlayEvent,
   type RepeatAnswerRequest,
@@ -21,7 +22,7 @@ import { SpeakerButton } from "../components/SpeakerButton";
 import { CelebrationSheet } from "../components/play";
 import { Button, Card, Chip, Notice } from "../components/ui";
 import { haptic } from "../lib/haptic";
-import { drillQueue, localCorrect, repeatCardText, repeatVerdict, returnsText, wordsCount } from "../lib/repeat";
+import { drillQueue, lettersHint, localCorrect, repeatCardText, repeatVerdict, returnsText, wordsCount } from "../lib/repeat";
 import { useBackButton } from "../lib/useBackButton";
 
 type Load = { kind: "loading" } | { kind: "error" } | { kind: "ready"; session: RepeatSessionResponse };
@@ -537,7 +538,7 @@ function TypeQuestion({
           answered ? (answered.correct ? "border-success text-success" : "border-danger text-danger") : "border-line"
         }`}
       >
-        {typed.join("") || <span className="text-xl font-normal text-ink-soft">{`Букв в слове: ${target.length}`}</span>}
+        {spacedTyped(typed, word.he) || <span className="text-xl font-normal text-ink-soft">{lettersHint(word.he)}</span>}
       </div>
       {!answered && (
         <>
