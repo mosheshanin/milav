@@ -2,9 +2,18 @@
 // Новому уроку или теме нужно добавить эмодзи сюда: это проверяет тест `homeEmoji.test.ts`.
 // Если эмодзи нет, урок получает эмодзи своей темы, тема получает книгу.
 
-import type { AnyLesson } from "@milav/shared";
+import type { AnyLesson, Section } from "@milav/shared";
 
 export const DEFAULT_EMOJI = "📘";
+
+/** Главные разделы слов на главной (21.10). Алфавит берёт эмодзи своей темы. */
+export const SECTION_EMOJI: Record<Section, string> = {
+  basics: "🧱",
+  numbers: "🕰️",
+  nouns: "📦",
+  verbs: "🏃",
+  adjectives: "🌈",
+};
 
 /** По `topicId`. */
 export const TOPIC_EMOJI: Record<string, string> = {
@@ -121,6 +130,10 @@ export const LESSON_EMOJI: Record<string, string> = {
   "weak-5": "⏳",
   "weak-6": "👀",
 };
+
+export function sectionEmoji(section: Section): string {
+  return SECTION_EMOJI[section] ?? DEFAULT_EMOJI;
+}
 
 export function topicEmoji(topicId: string): string {
   return TOPIC_EMOJI[topicId] ?? DEFAULT_EMOJI;

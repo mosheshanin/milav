@@ -20,7 +20,7 @@ import { Header } from "../components/Header";
 import { prefetchLesson } from "../components/LessonGate";
 import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../components/play";
 import { Button, Card, Chip } from "../components/ui";
-import { lessonEmoji, topicEmoji } from "../lib/homeEmoji";
+import { lessonEmoji, sectionEmoji, topicEmoji } from "../lib/homeEmoji";
 import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
 import { alphabetAllLessonIds, alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
@@ -256,6 +256,7 @@ export function Home({
                     testId={`fold-section-${section}`}
                     className="px-block py-3"
                   >
+                    <Emoji>{sectionEmoji(section)}</Emoji>
                     <span className="text-lg font-bold" data-title>
                       {SECTION_TITLES[section]}
                     </span>
