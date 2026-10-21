@@ -60,11 +60,15 @@ import lesson_numbers_2 from "./lessons/numbers-2.json";
 import lesson_numbers_3 from "./lessons/numbers-3.json";
 import lesson_numbers_4 from "./lessons/numbers-4.json";
 import lesson_numbers_5 from "./lessons/numbers-5.json";
+import lesson_numbers_6 from "./lessons/numbers-6.json";
 import lesson_paal_1 from "./lessons/paal-1.json";
 import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
 import lesson_paal_4 from "./lessons/paal-4.json";
 import lesson_paal_5 from "./lessons/paal-5.json";
+import lesson_phrases_1 from "./lessons/phrases-1.json";
+import lesson_phrases_2 from "./lessons/phrases-2.json";
+import lesson_phrases_3 from "./lessons/phrases-3.json";
 import lesson_piel_1 from "./lessons/piel-1.json";
 import lesson_piel_2 from "./lessons/piel-2.json";
 import lesson_piel_3 from "./lessons/piel-3.json";
@@ -82,6 +86,7 @@ import lesson_weak_4 from "./lessons/weak-4.json";
 import lesson_weak_5 from "./lessons/weak-5.json";
 import lesson_weak_6 from "./lessons/weak-6.json";
 import lesson_yesno_1 from "./lessons/yesno-1.json";
+import lesson_yesno_2 from "./lessons/yesno-2.json";
 
 export const lessonFiles: unknown[] = [
   lesson_abstract_1,
@@ -144,11 +149,15 @@ export const lessonFiles: unknown[] = [
   lesson_numbers_3,
   lesson_numbers_4,
   lesson_numbers_5,
+  lesson_numbers_6,
   lesson_paal_1,
   lesson_paal_2,
   lesson_paal_3,
   lesson_paal_4,
   lesson_paal_5,
+  lesson_phrases_1,
+  lesson_phrases_2,
+  lesson_phrases_3,
   lesson_piel_1,
   lesson_piel_2,
   lesson_piel_3,
@@ -166,4 +175,5 @@ export const lessonFiles: unknown[] = [
   lesson_weak_5,
   lesson_weak_6,
   lesson_yesno_1,
+  lesson_yesno_2,
 ];

@@ -1056,6 +1056,23 @@
       "v": "7ce25c6729"
     },
     {
+      "id": "numbers-6",
+      "topicId": "numbers",
+      "section": "numbers",
+      "topic": "Числа",
+      "number": 6,
+      "free": false,
+      "title": "Дни недели",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "0b3e30f4a0"
+    },
+    {
       "id": "paal-1",
       "topicId": "paal",
       "section": "verbs",
@@ -1139,6 +1156,57 @@
         "type"
       ],
       "v": "42e7d72e03"
+    },
+    {
+      "id": "phrases-1",
+      "topicId": "phrases",
+      "section": "basics",
+      "topic": "Знакомство и вежливость",
+      "number": 1,
+      "free": true,
+      "title": "Привет и пока",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "1e956544b0"
+    },
+    {
+      "id": "phrases-2",
+      "topicId": "phrases",
+      "section": "basics",
+      "topic": "Знакомство и вежливость",
+      "number": 2,
+      "free": false,
+      "title": "Спасибо и извините",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "f0ece12af1"
+    },
+    {
+      "id": "phrases-3",
+      "topicId": "phrases",
+      "section": "basics",
+      "topic": "Знакомство и вежливость",
+      "number": 3,
+      "free": false,
+      "title": "Знакомство и просьбы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "01dc1b20ba"
     },
     {
       "id": "piel-1",
@@ -1428,11 +1496,28 @@
         "type"
       ],
       "v": "1dde787f81"
+    },
+    {
+      "id": "yesno-2",
+      "topicId": "yesno",
+      "section": "basics",
+      "topic": "Да, нет, нужно, можно",
+      "number": 2,
+      "free": false,
+      "title": "Нужно, можно",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "0c07dea074"
     }
   ],
   "info": {
-    "totalWords": 760,
-    "totalLessons": 82,
+    "totalWords": 810,
+    "totalLessons": 87,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1603,7 +1688,8 @@
           "numbers-2",
           "numbers-3",
           "numbers-4",
-          "numbers-5"
+          "numbers-5",
+          "numbers-6"
         ]
       },
       {
@@ -1615,6 +1701,15 @@
           "paal-3",
           "paal-4",
           "paal-5"
+        ]
+      },
+      {
+        "id": "phrases",
+        "title": "Знакомство и вежливость",
+        "lessonIds": [
+          "phrases-1",
+          "phrases-2",
+          "phrases-3"
         ]
       },
       {
@@ -1667,7 +1762,8 @@
         "id": "yesno",
         "title": "Да, нет, нужно, можно",
         "lessonIds": [
-          "yesno-1"
+          "yesno-1",
+          "yesno-2"
         ]
       }
     ]

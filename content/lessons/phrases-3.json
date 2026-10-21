@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "phrases-3",
+  "topicId": "phrases",
+  "section": "basics",
+  "topic": "Знакомство и вежливость",
+  "number": 3,
+  "free": false,
+  "title": "Знакомство и просьбы",
+  "words": [
+    {
+      "id": "phrases-3-dont-understand-m",
+      "he": "אני לא מבין",
+      "niqqud": "אֲנִי לֹא מֵבִין",
+      "translit": "ани́ ло меви́н",
+      "ru": "я не понимаю (м.)",
+      "example": {
+        "he": "אני לא מבין עברית",
+        "translit": "ани ло мевин иврит",
+        "ru": "Я не понимаю иврит"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-dont-understand-m.svg"
+    },
+    {
+      "id": "phrases-3-dont-understand-f",
+      "he": "אני לא מבינה",
+      "niqqud": "אֲנִי לֹא מְבִינָה",
+      "translit": "ани́ ло мевина́",
+      "ru": "я не понимаю (ж.)",
+      "example": {
+        "he": "אני לא מבינה מה זה",
+        "translit": "ани ло мевина ма зэ",
+        "ru": "Я не понимаю, что это"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-dont-understand-f.svg"
+    },
+    {
+      "id": "phrases-3-slower",
+      "he": "אפשר לאט יותר",
+      "niqqud": "אֶפְשָׁר לְאַט יוֹתֵר",
+      "translit": "эфша́р леа́т йоте́р",
+      "ru": "можно помедленнее?",
+      "example": {
+        "he": "אפשר לאט יותר בבקשה",
+        "translit": "эфшар леат йотер бевакаша",
+        "ru": "Можно помедленнее, пожалуйста?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-slower.svg"
+    },
+    {
+      "id": "phrases-3-whats-your-name",
+      "he": "איך קוראים לך",
+      "niqqud": "אֵיךְ קוֹרְאִים לְךָ",
+      "translit": "эйх кори́м леха́",
+      "ru": "как тебя зовут?",
+      "example": {
+        "he": "שלום איך קוראים לך",
+        "translit": "шалом эйх корим леха",
+        "ru": "Привет, как тебя зовут?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-whats-your-name.svg"
+    },
+    {
+      "id": "phrases-3-my-name-is",
+      "he": "קוראים לי",
+      "niqqud": "קוֹרְאִים לִי",
+      "translit": "кори́м ли",
+      "ru": "меня зовут",
+      "example": {
+        "he": "קוראים לי דני",
+        "translit": "корим ли дани",
+        "ru": "Меня зовут Дани"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-my-name-is.svg"
+    },
+    {
+      "id": "phrases-3-where-from",
+      "he": "מאיפה אתה",
+      "niqqud": "מֵאֵיפֹה אַתָּה",
+      "translit": "меэ́йфо ата́",
+      "ru": "откуда ты? (м.)",
+      "example": {
+        "he": "מאיפה אתה במקור",
+        "translit": "меэйфо ата бамакор",
+        "ru": "Откуда ты родом?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-where-from.svg"
+    },
+    {
+      "id": "phrases-3-new-immigrant",
+      "he": "עולה חדש",
+      "niqqud": "עוֹלֶה חָדָשׁ",
+      "translit": "олэ́ хада́ш",
+      "ru": "новый репатриант",
+      "example": {
+        "he": "אני עולה חדש",
+        "translit": "ани олэ хадаш",
+        "ru": "Я новый репатриант"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-new-immigrant.svg"
+    },
+    {
+      "id": "phrases-3-speak-russian",
+      "he": "אתה מדבר רוסית",
+      "niqqud": "אַתָּה מְדַבֵּר רוּסִית",
+      "translit": "ата́ медабе́р руси́т",
+      "ru": "ты говоришь по-русски? (м.)",
+      "example": {
+        "he": "אתה מדבר רוסית או עברית",
+        "translit": "ата медабер русит о иврит",
+        "ru": "Ты говоришь по-русски или на иврите?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-speak-russian.svg"
+    },
+    {
+      "id": "phrases-3-what-is-it",
+      "he": "מה זה",
+      "niqqud": "מַה זֶּה",
+      "translit": "ма зэ",
+      "ru": "что это?",
+      "example": {
+        "he": "מה זה בעברית",
+        "translit": "ма зэ беиврит",
+        "ru": "Как это на иврите?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-what-is-it.svg"
+    },
+    {
+      "id": "phrases-3-how-much",
+      "he": "כמה זה עולה",
+      "niqqud": "כַּמָּה זֶה עוֹלֶה",
+      "translit": "ка́ма зэ олэ́",
+      "ru": "сколько это стоит?",
+      "example": {
+        "he": "כמה זה עולה בשקלים",
+        "translit": "кама зэ олэ бешкалим",
+        "ru": "Сколько это стоит в шекелях?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-3-how-much.svg"
+    }
+  ]
+}

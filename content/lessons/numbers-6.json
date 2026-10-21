@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "numbers-6",
+  "topicId": "numbers",
+  "section": "numbers",
+  "topic": "Числа",
+  "number": 6,
+  "free": false,
+  "title": "Дни недели",
+  "words": [
+    {
+      "id": "numbers-6-sunday",
+      "he": "יום ראשון",
+      "niqqud": "יוֹם רִאשׁוֹן",
+      "translit": "йом ришо́н",
+      "ru": "воскресенье",
+      "example": {
+        "he": "ביום ראשון אני עובד",
+        "translit": "байом ришон ани овед",
+        "ru": "В воскресенье я работаю"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-sunday.svg"
+    },
+    {
+      "id": "numbers-6-monday",
+      "he": "יום שני",
+      "niqqud": "יוֹם שֵׁנִי",
+      "translit": "йом шени́",
+      "ru": "понедельник",
+      "example": {
+        "he": "מחר יום שני",
+        "translit": "махар йом шени",
+        "ru": "Завтра понедельник"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-monday.svg"
+    },
+    {
+      "id": "numbers-6-tuesday",
+      "he": "יום שלישי",
+      "niqqud": "יוֹם שְׁלִישִׁי",
+      "translit": "йом шлиши́",
+      "ru": "вторник",
+      "example": {
+        "he": "היום יום שלישי",
+        "translit": "хайом йом шлиши",
+        "ru": "Сегодня вторник"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-tuesday.svg"
+    },
+    {
+      "id": "numbers-6-wednesday",
+      "he": "יום רביעי",
+      "niqqud": "יוֹם רְבִיעִי",
+      "translit": "йом реви́и",
+      "ru": "среда",
+      "example": {
+        "he": "נתראה ביום רביעי",
+        "translit": "нитраэ байом ревии",
+        "ru": "Увидимся в среду"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-wednesday.svg"
+    },
+    {
+      "id": "numbers-6-thursday",
+      "he": "יום חמישי",
+      "niqqud": "יוֹם חֲמִישִׁי",
+      "translit": "йом хамиши́",
+      "ru": "четверг",
+      "example": {
+        "he": "ביום חמישי יש שוק",
+        "translit": "байом хамиши йеш шук",
+        "ru": "В четверг есть рынок"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-thursday.svg"
+    },
+    {
+      "id": "numbers-6-friday",
+      "he": "יום שישי",
+      "niqqud": "יוֹם שִׁישִׁי",
+      "translit": "йом шиши́",
+      "ru": "пятница",
+      "example": {
+        "he": "יום שישי קצר",
+        "translit": "йом шиши кацар",
+        "ru": "Пятница короткая"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-friday.svg"
+    },
+    {
+      "id": "numbers-6-shabbat",
+      "he": "שבת",
+      "niqqud": "שַׁבָּת",
+      "translit": "шаба́т",
+      "ru": "суббота, шаббат",
+      "example": {
+        "he": "בשבת אני בבית",
+        "translit": "бешабат ани бабайит",
+        "ru": "В субботу я дома"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-shabbat.svg"
+    },
+    {
+      "id": "numbers-6-week",
+      "he": "שבוע",
+      "niqqud": "שָׁבוּעַ",
+      "translit": "шаву́а",
+      "ru": "неделя",
+      "example": {
+        "he": "שבוע טוב",
+        "translit": "шавуа тов",
+        "ru": "Хорошей недели"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-week.svg"
+    },
+    {
+      "id": "numbers-6-weekend",
+      "he": "סוף שבוע",
+      "niqqud": "סוֹף שָׁבוּעַ",
+      "translit": "соф шаву́а",
+      "ru": "выходные",
+      "example": {
+        "he": "סוף שבוע נעים",
+        "translit": "соф шавуа наим",
+        "ru": "Приятных выходных"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-weekend.svg"
+    },
+    {
+      "id": "numbers-6-birthday",
+      "he": "יום הולדת",
+      "niqqud": "יוֹם הוּלֶּדֶת",
+      "translit": "йом хуле́дет",
+      "ru": "день рождения",
+      "example": {
+        "he": "יום הולדת שמח",
+        "translit": "йом хуледет самеах",
+        "ru": "С днём рождения"
+      },
+      "reviewed": false,
+      "image": "/words/numbers-6-birthday.svg"
+    }
+  ]
+}

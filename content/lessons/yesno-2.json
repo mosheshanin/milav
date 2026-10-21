@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "yesno-2",
+  "topicId": "yesno",
+  "section": "basics",
+  "topic": "Да, нет, нужно, можно",
+  "number": 2,
+  "free": false,
+  "title": "Нужно, можно",
+  "words": [
+    {
+      "id": "yesno-2-need",
+      "he": "צריך",
+      "niqqud": "צָרִיךְ",
+      "translit": "цари́х",
+      "ru": "нужно, должен (м.)",
+      "example": {
+        "he": "אני צריך מים",
+        "translit": "ани царих маим",
+        "ru": "Мне нужна вода"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-need.svg"
+    },
+    {
+      "id": "yesno-2-possible",
+      "he": "אפשר",
+      "niqqud": "אֶפְשָׁר",
+      "translit": "эфша́р",
+      "ru": "можно",
+      "example": {
+        "he": "אפשר קפה",
+        "translit": "эфшар кафэ",
+        "ru": "Можно кофе?"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-possible.svg"
+    },
+    {
+      "id": "yesno-2-impossible",
+      "he": "אי אפשר",
+      "niqqud": "אִי אֶפְשָׁר",
+      "translit": "и эфша́р",
+      "ru": "нельзя, невозможно",
+      "example": {
+        "he": "אי אפשר ככה",
+        "translit": "и эфшар каха",
+        "ru": "Так нельзя"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-impossible.svg"
+    },
+    {
+      "id": "yesno-2-forbidden",
+      "he": "אסור",
+      "niqqud": "אָסוּר",
+      "translit": "асу́р",
+      "ru": "запрещено",
+      "example": {
+        "he": "אסור לעשן",
+        "translit": "асур леашен",
+        "ru": "Курить запрещено"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-forbidden.svg"
+    },
+    {
+      "id": "yesno-2-allowed",
+      "he": "מותר",
+      "niqqud": "מוּתָּר",
+      "translit": "мута́р",
+      "ru": "разрешено",
+      "example": {
+        "he": "מותר לשבת פה",
+        "translit": "мутар лашевет по",
+        "ru": "Здесь можно сидеть"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-allowed.svg"
+    },
+    {
+      "id": "yesno-2-must",
+      "he": "חייב",
+      "niqqud": "חַיָּיב",
+      "translit": "хая́в",
+      "ru": "обязан, должен (м.)",
+      "example": {
+        "he": "אני חייב ללכת",
+        "translit": "ани хаяв лалехет",
+        "ru": "Мне надо идти"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-must.svg"
+    },
+    {
+      "id": "yesno-2-worth",
+      "he": "כדאי",
+      "niqqud": "כְּדַאי",
+      "translit": "кеда́й",
+      "ru": "стоит, имеет смысл",
+      "example": {
+        "he": "כדאי לבוא מוקדם",
+        "translit": "кедай лаво мукдам",
+        "ru": "Стоит прийти пораньше"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-worth.svg"
+    },
+    {
+      "id": "yesno-2-ready",
+      "he": "מוכן",
+      "niqqud": "מוּכָן",
+      "translit": "муха́н",
+      "ru": "готов (м.)",
+      "example": {
+        "he": "הוא מוכן ללכת",
+        "translit": "ху мухан лалехет",
+        "ru": "Он готов идти"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-ready.svg"
+    },
+    {
+      "id": "yesno-2-want",
+      "he": "רוצה",
+      "niqqud": "רוֹצֶה",
+      "translit": "роцэ́",
+      "ru": "хочу, хочет (м.)",
+      "example": {
+        "he": "אני רוצה קפה",
+        "translit": "ани роцэ кафэ",
+        "ru": "Я хочу кофе"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-want.svg"
+    },
+    {
+      "id": "yesno-2-sure",
+      "he": "בטח",
+      "niqqud": "בֶּטַח",
+      "translit": "бе́тах",
+      "ru": "конечно (разг.)",
+      "example": {
+        "he": "בטח אני בא",
+        "translit": "бетах ани ба",
+        "ru": "Конечно, я приду"
+      },
+      "reviewed": false,
+      "image": "/words/yesno-2-sure.svg"
+    }
+  ]
+}

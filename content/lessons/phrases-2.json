@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "phrases-2",
+  "topicId": "phrases",
+  "section": "basics",
+  "topic": "Знакомство и вежливость",
+  "number": 2,
+  "free": false,
+  "title": "Спасибо и извините",
+  "words": [
+    {
+      "id": "phrases-2-thank-you-very",
+      "he": "תודה רבה",
+      "niqqud": "תּוֹדָה רַבָּה",
+      "translit": "тода́ раба́",
+      "ru": "большое спасибо",
+      "example": {
+        "he": "תודה רבה לך",
+        "translit": "тода раба леха",
+        "ru": "Большое тебе спасибо"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-thank-you-very.svg"
+    },
+    {
+      "id": "phrases-2-please",
+      "he": "בבקשה",
+      "niqqud": "בְּבַקָּשָׁה",
+      "translit": "бевакаша́",
+      "ru": "пожалуйста",
+      "example": {
+        "he": "מים בבקשה",
+        "translit": "маим бевакаша",
+        "ru": "Воды, пожалуйста"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-please.svg"
+    },
+    {
+      "id": "phrases-2-sorry",
+      "he": "סליחה",
+      "niqqud": "סְלִיחָה",
+      "translit": "слиха́",
+      "ru": "извините, простите",
+      "example": {
+        "he": "סליחה איפה אתה",
+        "translit": "слиха эйфо ата",
+        "ru": "Извини, где ты?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-sorry.svg"
+    },
+    {
+      "id": "phrases-2-no-problem",
+      "he": "אין בעיה",
+      "niqqud": "אֵין בְּעָיָה",
+      "translit": "эйн беая́",
+      "ru": "нет проблем",
+      "example": {
+        "he": "אין בעיה אני בא",
+        "translit": "эйн беая ани ба",
+        "ru": "Без проблем, я приду"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-no-problem.svg"
+    },
+    {
+      "id": "phrases-2-not-at-all",
+      "he": "על לא דבר",
+      "niqqud": "עַל לֹא דָּבָר",
+      "translit": "аль ло дава́р",
+      "ru": "не за что",
+      "example": {
+        "he": "על לא דבר באמת",
+        "translit": "аль ло давар беэмет",
+        "ru": "Да не за что, правда"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-not-at-all.svg"
+    },
+    {
+      "id": "phrases-2-nice-to-meet",
+      "he": "נעים מאוד",
+      "niqqud": "נָעִים מְאוֹד",
+      "translit": "наи́м мео́д",
+      "ru": "очень приятно",
+      "example": {
+        "he": "נעים מאוד אני דני",
+        "translit": "наим меод ани дани",
+        "ru": "Очень приятно, я Дани"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-nice-to-meet.svg"
+    },
+    {
+      "id": "phrases-2-im-sorry-m",
+      "he": "אני מצטער",
+      "niqqud": "אֲנִי מִצְטַעֵר",
+      "translit": "ани́ мицтае́р",
+      "ru": "мне жаль, простите (м.)",
+      "example": {
+        "he": "אני מצטער אני מאחר",
+        "translit": "ани мицтаер ани меахер",
+        "ru": "Простите, я опаздываю"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-im-sorry-m.svg"
+    },
+    {
+      "id": "phrases-2-im-sorry-f",
+      "he": "אני מצטערת",
+      "niqqud": "אֲנִי מִצְטַעֶרֶת",
+      "translit": "ани́ мицтае́рет",
+      "ru": "мне жаль, простите (ж.)",
+      "example": {
+        "he": "אני מצטערת על זה",
+        "translit": "ани мицтаерет аль зэ",
+        "ru": "Мне жаль, что так вышло"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-im-sorry-f.svg"
+    },
+    {
+      "id": "phrases-2-bon-appetit",
+      "he": "בתיאבון",
+      "niqqud": "בְּתֵיאָבוֹן",
+      "translit": "бетеаво́н",
+      "ru": "приятного аппетита",
+      "example": {
+        "he": "בתיאבון לכולם",
+        "translit": "бетеавон лехулам",
+        "ru": "Приятного аппетита всем"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-bon-appetit.svg"
+    },
+    {
+      "id": "phrases-2-well-done",
+      "he": "כל הכבוד",
+      "niqqud": "כָּל הַכָּבוֹד",
+      "translit": "коль хакаво́д",
+      "ru": "молодец, браво",
+      "example": {
+        "he": "כל הכבוד לך",
+        "translit": "коль хакавод леха",
+        "ru": "Ты молодец"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-2-well-done.svg"
+    }
+  ]
+}

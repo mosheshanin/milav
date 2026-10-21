@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "phrases-1",
+  "topicId": "phrases",
+  "section": "basics",
+  "topic": "Знакомство и вежливость",
+  "number": 1,
+  "free": true,
+  "title": "Привет и пока",
+  "words": [
+    {
+      "id": "phrases-1-hello",
+      "he": "שלום",
+      "niqqud": "שָׁלוֹם",
+      "translit": "шало́м",
+      "ru": "привет, до свидания",
+      "example": {
+        "he": "שלום חברים",
+        "translit": "шалом хаверим",
+        "ru": "Привет, друзья"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-hello.svg"
+    },
+    {
+      "id": "phrases-1-good-morning",
+      "he": "בוקר טוב",
+      "niqqud": "בּוֹקֶר טוֹב",
+      "translit": "бо́кер тов",
+      "ru": "доброе утро",
+      "example": {
+        "he": "בוקר טוב אמא",
+        "translit": "бокер тов има",
+        "ru": "Доброе утро, мама"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-good-morning.svg"
+    },
+    {
+      "id": "phrases-1-good-evening",
+      "he": "ערב טוב",
+      "niqqud": "עֶרֶב טוֹב",
+      "translit": "э́рев тов",
+      "ru": "добрый вечер",
+      "example": {
+        "he": "ערב טוב לכולם",
+        "translit": "эрев тов лехулам",
+        "ru": "Добрый вечер всем"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-good-evening.svg"
+    },
+    {
+      "id": "phrases-1-good-night",
+      "he": "לילה טוב",
+      "niqqud": "לַיְלָה טוֹב",
+      "translit": "ла́йла тов",
+      "ru": "спокойной ночи",
+      "example": {
+        "he": "לילה טוב ילדים",
+        "translit": "лайла тов йеладим",
+        "ru": "Спокойной ночи, дети"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-good-night.svg"
+    },
+    {
+      "id": "phrases-1-good-day",
+      "he": "יום טוב",
+      "niqqud": "יוֹם טוֹב",
+      "translit": "йом тов",
+      "ru": "хорошего дня",
+      "example": {
+        "he": "יום טוב לך",
+        "translit": "йом тов леха",
+        "ru": "Хорошего тебе дня"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-good-day.svg"
+    },
+    {
+      "id": "phrases-1-shabbat-shalom",
+      "he": "שבת שלום",
+      "niqqud": "שַׁבָּת שָׁלוֹם",
+      "translit": "шаба́т шало́м",
+      "ru": "шаббат шалом (хорошей субботы)",
+      "example": {
+        "he": "שבת שלום לכולם",
+        "translit": "шабат шалом лехулам",
+        "ru": "Шаббат шалом всем"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-shabbat-shalom.svg"
+    },
+    {
+      "id": "phrases-1-how-are-you",
+      "he": "מה שלומך",
+      "niqqud": "מַה שְּׁלוֹמְךָ",
+      "translit": "ма шломха́",
+      "ru": "как дела? (как поживаешь)",
+      "example": {
+        "he": "מה שלומך היום",
+        "translit": "ма шломха хайом",
+        "ru": "Как ты сегодня?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-how-are-you.svg"
+    },
+    {
+      "id": "phrases-1-whats-up",
+      "he": "מה נשמע",
+      "niqqud": "מַה נִּשְׁמָע",
+      "translit": "ма нишма́",
+      "ru": "как дела? (разг.)",
+      "example": {
+        "he": "היי מה נשמע",
+        "translit": "хай ма нишма",
+        "ru": "Привет, как дела?"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-whats-up.svg"
+    },
+    {
+      "id": "phrases-1-see-you",
+      "he": "להתראות",
+      "niqqud": "לְהִתְרָאוֹת",
+      "translit": "лехитрао́т",
+      "ru": "до встречи, пока",
+      "example": {
+        "he": "להתראות מחר",
+        "translit": "лехитраот махар",
+        "ru": "До завтра"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-see-you.svg"
+    },
+    {
+      "id": "phrases-1-all-good",
+      "he": "הכול טוב",
+      "niqqud": "הַכּוֹל טוֹב",
+      "translit": "хако́ль тов",
+      "ru": "всё хорошо",
+      "example": {
+        "he": "הכול טוב תודה",
+        "translit": "хаколь тов тода",
+        "ru": "Всё хорошо, спасибо"
+      },
+      "reviewed": false,
+      "image": "/words/phrases-1-all-good.svg"
+    }
+  ]
+}
