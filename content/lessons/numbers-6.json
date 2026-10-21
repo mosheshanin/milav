@@ -17,10 +17,12 @@
       "example": {
         "he": "ביום ראשון אני עובד",
         "translit": "байом ришон ани овед",
-        "ru": "В воскресенье я работаю"
+        "ru": "В воскресенье я работаю",
+        "audio": "/audio/numbers-6-sunday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-sunday.svg"
+      "image": "/words/numbers-6-sunday.svg",
+      "audio": "/audio/numbers-6-sunday.mp3"
     },
     {
       "id": "numbers-6-monday",
@@ -31,10 +33,12 @@
       "example": {
         "he": "מחר יום שני",
         "translit": "махар йом шени",
-        "ru": "Завтра понедельник"
+        "ru": "Завтра понедельник",
+        "audio": "/audio/numbers-6-monday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-monday.svg"
+      "image": "/words/numbers-6-monday.svg",
+      "audio": "/audio/numbers-6-monday.mp3"
     },
     {
       "id": "numbers-6-tuesday",
@@ -45,10 +49,12 @@
       "example": {
         "he": "היום יום שלישי",
         "translit": "хайом йом шлиши",
-        "ru": "Сегодня вторник"
+        "ru": "Сегодня вторник",
+        "audio": "/audio/numbers-6-tuesday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-tuesday.svg"
+      "image": "/words/numbers-6-tuesday.svg",
+      "audio": "/audio/numbers-6-tuesday.mp3"
     },
     {
       "id": "numbers-6-wednesday",
@@ -59,10 +65,12 @@
       "example": {
         "he": "נתראה ביום רביעי",
         "translit": "нитраэ байом ревии",
-        "ru": "Увидимся в среду"
+        "ru": "Увидимся в среду",
+        "audio": "/audio/numbers-6-wednesday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-wednesday.svg"
+      "image": "/words/numbers-6-wednesday.svg",
+      "audio": "/audio/numbers-6-wednesday.mp3"
     },
     {
       "id": "numbers-6-thursday",
@@ -73,10 +81,12 @@
       "example": {
         "he": "ביום חמישי יש שוק",
         "translit": "байом хамиши йеш шук",
-        "ru": "В четверг есть рынок"
+        "ru": "В четверг есть рынок",
+        "audio": "/audio/numbers-6-thursday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-thursday.svg"
+      "image": "/words/numbers-6-thursday.svg",
+      "audio": "/audio/numbers-6-thursday.mp3"
     },
     {
       "id": "numbers-6-friday",
@@ -87,10 +97,12 @@
       "example": {
         "he": "יום שישי קצר",
         "translit": "йом шиши кацар",
-        "ru": "Пятница короткая"
+        "ru": "Пятница короткая",
+        "audio": "/audio/numbers-6-friday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-friday.svg"
+      "image": "/words/numbers-6-friday.svg",
+      "audio": "/audio/numbers-6-friday.mp3"
     },
     {
       "id": "numbers-6-shabbat",
@@ -101,10 +113,12 @@
       "example": {
         "he": "בשבת אני בבית",
         "translit": "бешабат ани бабайит",
-        "ru": "В субботу я дома"
+        "ru": "В субботу я дома",
+        "audio": "/audio/numbers-6-shabbat-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-shabbat.svg"
+      "image": "/words/numbers-6-shabbat.svg",
+      "audio": "/audio/numbers-6-shabbat.mp3"
     },
     {
       "id": "numbers-6-week",
@@ -115,10 +129,12 @@
       "example": {
         "he": "שבוע טוב",
         "translit": "шавуа тов",
-        "ru": "Хорошей недели"
+        "ru": "Хорошей недели",
+        "audio": "/audio/numbers-6-week-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-week.svg"
+      "image": "/words/numbers-6-week.svg",
+      "audio": "/audio/numbers-6-week.mp3"
     },
     {
       "id": "numbers-6-weekend",
@@ -129,10 +145,12 @@
       "example": {
         "he": "סוף שבוע נעים",
         "translit": "соф шавуа наим",
-        "ru": "Приятных выходных"
+        "ru": "Приятных выходных",
+        "audio": "/audio/numbers-6-weekend-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-weekend.svg"
+      "image": "/words/numbers-6-weekend.svg",
+      "audio": "/audio/numbers-6-weekend.mp3"
     },
     {
       "id": "numbers-6-birthday",
@@ -143,10 +161,12 @@
       "example": {
         "he": "יום הולדת שמח",
         "translit": "йом хуледет самеах",
-        "ru": "С днём рождения"
+        "ru": "С днём рождения",
+        "audio": "/audio/numbers-6-birthday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/numbers-6-birthday.svg"
+      "image": "/words/numbers-6-birthday.svg",
+      "audio": "/audio/numbers-6-birthday.mp3"
     }
   ]
 }

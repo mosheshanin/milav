@@ -17,10 +17,12 @@
       "example": {
         "he": "שלום חברים",
         "translit": "шалом хаверим",
-        "ru": "Привет, друзья"
+        "ru": "Привет, друзья",
+        "audio": "/audio/phrases-1-hello-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-hello.svg"
+      "image": "/words/phrases-1-hello.svg",
+      "audio": "/audio/phrases-1-hello.mp3"
     },
     {
       "id": "phrases-1-good-morning",
@@ -31,10 +33,12 @@
       "example": {
         "he": "בוקר טוב אמא",
         "translit": "бокер тов има",
-        "ru": "Доброе утро, мама"
+        "ru": "Доброе утро, мама",
+        "audio": "/audio/phrases-1-good-morning-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-good-morning.svg"
+      "image": "/words/phrases-1-good-morning.svg",
+      "audio": "/audio/phrases-1-good-morning.mp3"
     },
     {
       "id": "phrases-1-good-evening",
@@ -45,10 +49,12 @@
       "example": {
         "he": "ערב טוב לכולם",
         "translit": "эрев тов лехулам",
-        "ru": "Добрый вечер всем"
+        "ru": "Добрый вечер всем",
+        "audio": "/audio/phrases-1-good-evening-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-good-evening.svg"
+      "image": "/words/phrases-1-good-evening.svg",
+      "audio": "/audio/phrases-1-good-evening.mp3"
     },
     {
       "id": "phrases-1-good-night",
@@ -59,10 +65,12 @@
       "example": {
         "he": "לילה טוב ילדים",
         "translit": "лайла тов йеладим",
-        "ru": "Спокойной ночи, дети"
+        "ru": "Спокойной ночи, дети",
+        "audio": "/audio/phrases-1-good-night-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-good-night.svg"
+      "image": "/words/phrases-1-good-night.svg",
+      "audio": "/audio/phrases-1-good-night.mp3"
     },
     {
       "id": "phrases-1-good-day",
@@ -73,10 +81,12 @@
       "example": {
         "he": "יום טוב לך",
         "translit": "йом тов леха",
-        "ru": "Хорошего тебе дня"
+        "ru": "Хорошего тебе дня",
+        "audio": "/audio/phrases-1-good-day-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-good-day.svg"
+      "image": "/words/phrases-1-good-day.svg",
+      "audio": "/audio/phrases-1-good-day.mp3"
     },
     {
       "id": "phrases-1-shabbat-shalom",
@@ -87,10 +97,12 @@
       "example": {
         "he": "שבת שלום לכולם",
         "translit": "шабат шалом лехулам",
-        "ru": "Шаббат шалом всем"
+        "ru": "Шаббат шалом всем",
+        "audio": "/audio/phrases-1-shabbat-shalom-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-shabbat-shalom.svg"
+      "image": "/words/phrases-1-shabbat-shalom.svg",
+      "audio": "/audio/phrases-1-shabbat-shalom.mp3"
     },
     {
       "id": "phrases-1-how-are-you",
@@ -101,10 +113,12 @@
       "example": {
         "he": "מה שלומך היום",
         "translit": "ма шломха хайом",
-        "ru": "Как ты сегодня?"
+        "ru": "Как ты сегодня?",
+        "audio": "/audio/phrases-1-how-are-you-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-how-are-you.svg"
+      "image": "/words/phrases-1-how-are-you.svg",
+      "audio": "/audio/phrases-1-how-are-you.mp3"
     },
     {
       "id": "phrases-1-whats-up",
@@ -115,10 +129,12 @@
       "example": {
         "he": "היי מה נשמע",
         "translit": "хай ма нишма",
-        "ru": "Привет, как дела?"
+        "ru": "Привет, как дела?",
+        "audio": "/audio/phrases-1-whats-up-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-whats-up.svg"
+      "image": "/words/phrases-1-whats-up.svg",
+      "audio": "/audio/phrases-1-whats-up.mp3"
     },
     {
       "id": "phrases-1-see-you",
@@ -129,10 +145,12 @@
       "example": {
         "he": "להתראות מחר",
         "translit": "лехитраот махар",
-        "ru": "До завтра"
+        "ru": "До завтра",
+        "audio": "/audio/phrases-1-see-you-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-see-you.svg"
+      "image": "/words/phrases-1-see-you.svg",
+      "audio": "/audio/phrases-1-see-you.mp3"
     },
     {
       "id": "phrases-1-all-good",
@@ -143,10 +161,12 @@
       "example": {
         "he": "הכול טוב תודה",
         "translit": "хаколь тов тода",
-        "ru": "Всё хорошо, спасибо"
+        "ru": "Всё хорошо, спасибо",
+        "audio": "/audio/phrases-1-all-good-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-1-all-good.svg"
+      "image": "/words/phrases-1-all-good.svg",
+      "audio": "/audio/phrases-1-all-good.mp3"
     }
   ]
 }

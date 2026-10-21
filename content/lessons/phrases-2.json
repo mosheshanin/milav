@@ -17,10 +17,12 @@
       "example": {
         "he": "תודה רבה לך",
         "translit": "тода раба леха",
-        "ru": "Большое тебе спасибо"
+        "ru": "Большое тебе спасибо",
+        "audio": "/audio/phrases-2-thank-you-very-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-thank-you-very.svg"
+      "image": "/words/phrases-2-thank-you-very.svg",
+      "audio": "/audio/phrases-2-thank-you-very.mp3"
     },
     {
       "id": "phrases-2-please",
@@ -31,10 +33,12 @@
       "example": {
         "he": "מים בבקשה",
         "translit": "маим бевакаша",
-        "ru": "Воды, пожалуйста"
+        "ru": "Воды, пожалуйста",
+        "audio": "/audio/phrases-2-please-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-please.svg"
+      "image": "/words/phrases-2-please.svg",
+      "audio": "/audio/phrases-2-please.mp3"
     },
     {
       "id": "phrases-2-sorry",
@@ -45,10 +49,12 @@
       "example": {
         "he": "סליחה איפה אתה",
         "translit": "слиха эйфо ата",
-        "ru": "Извини, где ты?"
+        "ru": "Извини, где ты?",
+        "audio": "/audio/phrases-2-sorry-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-sorry.svg"
+      "image": "/words/phrases-2-sorry.svg",
+      "audio": "/audio/phrases-2-sorry.mp3"
     },
     {
       "id": "phrases-2-no-problem",
@@ -59,10 +65,12 @@
       "example": {
         "he": "אין בעיה אני בא",
         "translit": "эйн беая ани ба",
-        "ru": "Без проблем, я приду"
+        "ru": "Без проблем, я приду",
+        "audio": "/audio/phrases-2-no-problem-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-no-problem.svg"
+      "image": "/words/phrases-2-no-problem.svg",
+      "audio": "/audio/phrases-2-no-problem.mp3"
     },
     {
       "id": "phrases-2-not-at-all",
@@ -73,10 +81,12 @@
       "example": {
         "he": "על לא דבר באמת",
         "translit": "аль ло давар беэмет",
-        "ru": "Да не за что, правда"
+        "ru": "Да не за что, правда",
+        "audio": "/audio/phrases-2-not-at-all-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-not-at-all.svg"
+      "image": "/words/phrases-2-not-at-all.svg",
+      "audio": "/audio/phrases-2-not-at-all.mp3"
     },
     {
       "id": "phrases-2-nice-to-meet",
@@ -87,10 +97,12 @@
       "example": {
         "he": "נעים מאוד אני דני",
         "translit": "наим меод ани дани",
-        "ru": "Очень приятно, я Дани"
+        "ru": "Очень приятно, я Дани",
+        "audio": "/audio/phrases-2-nice-to-meet-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-nice-to-meet.svg"
+      "image": "/words/phrases-2-nice-to-meet.svg",
+      "audio": "/audio/phrases-2-nice-to-meet.mp3"
     },
     {
       "id": "phrases-2-im-sorry-m",
@@ -101,10 +113,12 @@
       "example": {
         "he": "אני מצטער אני מאחר",
         "translit": "ани мицтаер ани меахер",
-        "ru": "Простите, я опаздываю"
+        "ru": "Простите, я опаздываю",
+        "audio": "/audio/phrases-2-im-sorry-m-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-im-sorry-m.svg"
+      "image": "/words/phrases-2-im-sorry-m.svg",
+      "audio": "/audio/phrases-2-im-sorry-m.mp3"
     },
     {
       "id": "phrases-2-im-sorry-f",
@@ -115,10 +129,12 @@
       "example": {
         "he": "אני מצטערת על זה",
         "translit": "ани мицтаерет аль зэ",
-        "ru": "Мне жаль, что так вышло"
+        "ru": "Мне жаль, что так вышло",
+        "audio": "/audio/phrases-2-im-sorry-f-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-im-sorry-f.svg"
+      "image": "/words/phrases-2-im-sorry-f.svg",
+      "audio": "/audio/phrases-2-im-sorry-f.mp3"
     },
     {
       "id": "phrases-2-bon-appetit",
@@ -129,10 +145,12 @@
       "example": {
         "he": "בתיאבון לכולם",
         "translit": "бетеавон лехулам",
-        "ru": "Приятного аппетита всем"
+        "ru": "Приятного аппетита всем",
+        "audio": "/audio/phrases-2-bon-appetit-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-bon-appetit.svg"
+      "image": "/words/phrases-2-bon-appetit.svg",
+      "audio": "/audio/phrases-2-bon-appetit.mp3"
     },
     {
       "id": "phrases-2-well-done",
@@ -143,10 +161,12 @@
       "example": {
         "he": "כל הכבוד לך",
         "translit": "коль хакавод леха",
-        "ru": "Ты молодец"
+        "ru": "Ты молодец",
+        "audio": "/audio/phrases-2-well-done-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-2-well-done.svg"
+      "image": "/words/phrases-2-well-done.svg",
+      "audio": "/audio/phrases-2-well-done.mp3"
     }
   ]
 }

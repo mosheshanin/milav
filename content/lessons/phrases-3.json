@@ -17,10 +17,12 @@
       "example": {
         "he": "אני לא מבין עברית",
         "translit": "ани ло мевин иврит",
-        "ru": "Я не понимаю иврит"
+        "ru": "Я не понимаю иврит",
+        "audio": "/audio/phrases-3-dont-understand-m-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-dont-understand-m.svg"
+      "image": "/words/phrases-3-dont-understand-m.svg",
+      "audio": "/audio/phrases-3-dont-understand-m.mp3"
     },
     {
       "id": "phrases-3-dont-understand-f",
@@ -31,10 +33,12 @@
       "example": {
         "he": "אני לא מבינה מה זה",
         "translit": "ани ло мевина ма зэ",
-        "ru": "Я не понимаю, что это"
+        "ru": "Я не понимаю, что это",
+        "audio": "/audio/phrases-3-dont-understand-f-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-dont-understand-f.svg"
+      "image": "/words/phrases-3-dont-understand-f.svg",
+      "audio": "/audio/phrases-3-dont-understand-f.mp3"
     },
     {
       "id": "phrases-3-slower",
@@ -45,10 +49,12 @@
       "example": {
         "he": "אפשר לאט יותר בבקשה",
         "translit": "эфшар леат йотер бевакаша",
-        "ru": "Можно помедленнее, пожалуйста?"
+        "ru": "Можно помедленнее, пожалуйста?",
+        "audio": "/audio/phrases-3-slower-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-slower.svg"
+      "image": "/words/phrases-3-slower.svg",
+      "audio": "/audio/phrases-3-slower.mp3"
     },
     {
       "id": "phrases-3-whats-your-name",
@@ -59,10 +65,12 @@
       "example": {
         "he": "שלום איך קוראים לך",
         "translit": "шалом эйх корим леха",
-        "ru": "Привет, как тебя зовут?"
+        "ru": "Привет, как тебя зовут?",
+        "audio": "/audio/phrases-3-whats-your-name-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-whats-your-name.svg"
+      "image": "/words/phrases-3-whats-your-name.svg",
+      "audio": "/audio/phrases-3-whats-your-name.mp3"
     },
     {
       "id": "phrases-3-my-name-is",
@@ -73,10 +81,12 @@
       "example": {
         "he": "קוראים לי דני",
         "translit": "корим ли дани",
-        "ru": "Меня зовут Дани"
+        "ru": "Меня зовут Дани",
+        "audio": "/audio/phrases-3-my-name-is-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-my-name-is.svg"
+      "image": "/words/phrases-3-my-name-is.svg",
+      "audio": "/audio/phrases-3-my-name-is.mp3"
     },
     {
       "id": "phrases-3-where-from",
@@ -87,10 +97,12 @@
       "example": {
         "he": "מאיפה אתה במקור",
         "translit": "меэйфо ата бамакор",
-        "ru": "Откуда ты родом?"
+        "ru": "Откуда ты родом?",
+        "audio": "/audio/phrases-3-where-from-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-where-from.svg"
+      "image": "/words/phrases-3-where-from.svg",
+      "audio": "/audio/phrases-3-where-from.mp3"
     },
     {
       "id": "phrases-3-new-immigrant",
@@ -101,10 +113,12 @@
       "example": {
         "he": "אני עולה חדש",
         "translit": "ани олэ хадаш",
-        "ru": "Я новый репатриант"
+        "ru": "Я новый репатриант",
+        "audio": "/audio/phrases-3-new-immigrant-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-new-immigrant.svg"
+      "image": "/words/phrases-3-new-immigrant.svg",
+      "audio": "/audio/phrases-3-new-immigrant.mp3"
     },
     {
       "id": "phrases-3-speak-russian",
@@ -115,10 +129,12 @@
       "example": {
         "he": "אתה מדבר רוסית או עברית",
         "translit": "ата медабер русит о иврит",
-        "ru": "Ты говоришь по-русски или на иврите?"
+        "ru": "Ты говоришь по-русски или на иврите?",
+        "audio": "/audio/phrases-3-speak-russian-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-speak-russian.svg"
+      "image": "/words/phrases-3-speak-russian.svg",
+      "audio": "/audio/phrases-3-speak-russian.mp3"
     },
     {
       "id": "phrases-3-what-is-it",
@@ -129,10 +145,12 @@
       "example": {
         "he": "מה זה בעברית",
         "translit": "ма зэ беиврит",
-        "ru": "Как это на иврите?"
+        "ru": "Как это на иврите?",
+        "audio": "/audio/phrases-3-what-is-it-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-what-is-it.svg"
+      "image": "/words/phrases-3-what-is-it.svg",
+      "audio": "/audio/phrases-3-what-is-it.mp3"
     },
     {
       "id": "phrases-3-how-much",
@@ -143,10 +161,12 @@
       "example": {
         "he": "כמה זה עולה בשקלים",
         "translit": "кама зэ олэ бешкалим",
-        "ru": "Сколько это стоит в шекелях?"
+        "ru": "Сколько это стоит в шекелях?",
+        "audio": "/audio/phrases-3-how-much-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/phrases-3-how-much.svg"
+      "image": "/words/phrases-3-how-much.svg",
+      "audio": "/audio/phrases-3-how-much.mp3"
     }
   ]
 }

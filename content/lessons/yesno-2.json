@@ -17,10 +17,12 @@
       "example": {
         "he": "אני צריך מים",
         "translit": "ани царих маим",
-        "ru": "Мне нужна вода"
+        "ru": "Мне нужна вода",
+        "audio": "/audio/yesno-2-need-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-need.svg"
+      "image": "/words/yesno-2-need.svg",
+      "audio": "/audio/yesno-2-need.mp3"
     },
     {
       "id": "yesno-2-possible",
@@ -31,10 +33,12 @@
       "example": {
         "he": "אפשר קפה",
         "translit": "эфшар кафэ",
-        "ru": "Можно кофе?"
+        "ru": "Можно кофе?",
+        "audio": "/audio/yesno-2-possible-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-possible.svg"
+      "image": "/words/yesno-2-possible.svg",
+      "audio": "/audio/yesno-2-possible.mp3"
     },
     {
       "id": "yesno-2-impossible",
@@ -45,10 +49,12 @@
       "example": {
         "he": "אי אפשר ככה",
         "translit": "и эфшар каха",
-        "ru": "Так нельзя"
+        "ru": "Так нельзя",
+        "audio": "/audio/yesno-2-impossible-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-impossible.svg"
+      "image": "/words/yesno-2-impossible.svg",
+      "audio": "/audio/yesno-2-impossible.mp3"
     },
     {
       "id": "yesno-2-forbidden",
@@ -59,10 +65,12 @@
       "example": {
         "he": "אסור לעשן",
         "translit": "асур леашен",
-        "ru": "Курить запрещено"
+        "ru": "Курить запрещено",
+        "audio": "/audio/yesno-2-forbidden-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-forbidden.svg"
+      "image": "/words/yesno-2-forbidden.svg",
+      "audio": "/audio/yesno-2-forbidden.mp3"
     },
     {
       "id": "yesno-2-allowed",
@@ -73,10 +81,12 @@
       "example": {
         "he": "מותר לשבת פה",
         "translit": "мутар лашевет по",
-        "ru": "Здесь можно сидеть"
+        "ru": "Здесь можно сидеть",
+        "audio": "/audio/yesno-2-allowed-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-allowed.svg"
+      "image": "/words/yesno-2-allowed.svg",
+      "audio": "/audio/yesno-2-allowed.mp3"
     },
     {
       "id": "yesno-2-must",
@@ -87,10 +97,12 @@
       "example": {
         "he": "אני חייב ללכת",
         "translit": "ани хаяв лалехет",
-        "ru": "Мне надо идти"
+        "ru": "Мне надо идти",
+        "audio": "/audio/yesno-2-must-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-must.svg"
+      "image": "/words/yesno-2-must.svg",
+      "audio": "/audio/yesno-2-must.mp3"
     },
     {
       "id": "yesno-2-worth",
@@ -101,10 +113,12 @@
       "example": {
         "he": "כדאי לבוא מוקדם",
         "translit": "кедай лаво мукдам",
-        "ru": "Стоит прийти пораньше"
+        "ru": "Стоит прийти пораньше",
+        "audio": "/audio/yesno-2-worth-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-worth.svg"
+      "image": "/words/yesno-2-worth.svg",
+      "audio": "/audio/yesno-2-worth.mp3"
     },
     {
       "id": "yesno-2-ready",
@@ -115,10 +129,12 @@
       "example": {
         "he": "הוא מוכן ללכת",
         "translit": "ху мухан лалехет",
-        "ru": "Он готов идти"
+        "ru": "Он готов идти",
+        "audio": "/audio/yesno-2-ready-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-ready.svg"
+      "image": "/words/yesno-2-ready.svg",
+      "audio": "/audio/yesno-2-ready.mp3"
     },
     {
       "id": "yesno-2-want",
@@ -129,10 +145,12 @@
       "example": {
         "he": "אני רוצה קפה",
         "translit": "ани роцэ кафэ",
-        "ru": "Я хочу кофе"
+        "ru": "Я хочу кофе",
+        "audio": "/audio/yesno-2-want-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-want.svg"
+      "image": "/words/yesno-2-want.svg",
+      "audio": "/audio/yesno-2-want.mp3"
     },
     {
       "id": "yesno-2-sure",
@@ -143,10 +161,12 @@
       "example": {
         "he": "בטח אני בא",
         "translit": "бетах ани ба",
-        "ru": "Конечно, я приду"
+        "ru": "Конечно, я приду",
+        "audio": "/audio/yesno-2-sure-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/yesno-2-sure.svg"
+      "image": "/words/yesno-2-sure.svg",
+      "audio": "/audio/yesno-2-sure.mp3"
     }
   ]
 }
