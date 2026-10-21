@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { FREE_LESSONS_PER_TOPIC, WORDS_PER_LESSON, normalizeHebrew, verbForms } from "@milav/shared";
+import { FREE_LESSONS_PER_TOPIC, MAX_WORD_PARTS, WORDS_PER_LESSON, normalizeHebrew, verbForms, wordParts } from "@milav/shared";
 import { lessons } from "./index";
 import { skeletonProblems, stressProblems, stripStress } from "./rules";
 
@@ -46,23 +46,35 @@ describe("уроки", () => {
 
       for (const word of lesson.words) {
         it(`слово ${word.id} заполнено корректно`, () => {
-          expect(word.he, "иврит только буквами, без огласовок").toMatch(ONLY_HEBREW_LETTERS);
+          // Слово урока может быть фразой из нескольких слов через один пробел («אחר כך», 21.10): каждая часть проверяется как слово.
+          const parts = wordParts(word.he);
+          expect(parts.join(" "), "слова фразы через один пробел, без пробелов по краям").toBe(word.he);
+          expect(parts.length, `не больше ${MAX_WORD_PARTS} слов иврита`).toBeLessThanOrEqual(MAX_WORD_PARTS);
+          for (const part of parts) expect(part, "иврит только буквами, без огласовок").toMatch(ONLY_HEBREW_LETTERS);
           expect(stressProblems(word.translit), "ударение в транскрипции (docs/CONTENT.md)").toEqual([]);
           expect(skeletonProblems(word.he, word.translit), "согласные иврита есть в транскрипции").toEqual([]);
           expect(word.ru.trim().length).toBeGreaterThan(0);
 
-          // Конечные буквы только в конце слова, и в конце слова нет обычных форм ך ם ן ף ץ.
-          const letters = [...word.he];
-          letters.forEach((ch, i) => {
-            const isLast = i === letters.length - 1;
-            if (FINAL_LETTERS.includes(ch)) expect(isLast, `${word.he}: конечная буква не в конце`).toBe(true);
-            if (isLast) expect(REGULAR_FORMS_OF_FINALS.includes(ch), `${word.he}: в конце нужна конечная форма`).toBe(false);
-          });
+          // Конечные буквы только в конце слова, и в конце слова нет обычных форм ך ם ן ף ץ (у фразы в каждом её слове).
+          for (const part of parts) {
+            const letters = [...part];
+            letters.forEach((ch, i) => {
+              const isLast = i === letters.length - 1;
+              if (FINAL_LETTERS.includes(ch)) expect(isLast, `${word.he}: конечная буква не в конце слова`).toBe(true);
+              if (isLast) expect(REGULAR_FORMS_OF_FINALS.includes(ch), `${word.he}: в конце слова нужна конечная форма`).toBe(false);
+            });
+          }
 
           expect(word.niqqud, "у каждого слова есть вариант с огласовками для озвучки").toBeDefined();
           if (word.niqqud) {
             expect(word.niqqud, "огласовки действительно есть").toMatch(/[\u05B0-\u05BC\u05C1\u05C2]/);
             expect(normalizeHebrew(word.niqqud), "с огласовками то же слово").toBe(normalizeHebrew(word.he));
+            // У фразы те же слова по отдельности, и у каждого есть огласовки: синтезатор не должен гадать ни в одном слове.
+            const niqqudParts = wordParts(word.niqqud);
+            expect(niqqudParts.map(normalizeHebrew), "с огласовками те же слова фразы").toEqual(parts.map(normalizeHebrew));
+            for (const part of niqqudParts) expect(part, `огласовки в каждом слове: ${part}`).toMatch(/[\u05B0-\u05BC\u05C1\u05C2]/);
+            // Транскрипция фразы тоже из стольких же частей: ударение ставится в каждом слове отдельно (docs/CONTENT.md).
+            if (parts.length > 1) expect(word.translit.split(" ").length, "в транскрипции столько же слов, сколько в иврите").toBe(parts.length);
           }
           // Формы глагола: все времена по порядку (у прилагательных формы лежат в forms).
           const verbEntries = word.verb ? verbForms(word.verb) : [];

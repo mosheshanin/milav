@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { BINYAN_KEYS, FREE_LESSONS_PER_TOPIC, GIZRA_KEYS, VERB_FORM_KEYS, WORDS_PER_LESSON } from "@milav/shared";
+import { BINYAN_KEYS, FREE_LESSONS_PER_TOPIC, GIZRA_KEYS, MAX_WORD_PARTS, VERB_FORM_KEYS, WORDS_PER_LESSON } from "@milav/shared";
 import { schema, schemaProblems } from "./validate";
 import { katavWord } from "./verbFixture";
 
@@ -91,6 +91,12 @@ describe("schema.json: согласованность с правилами пр
     expect(rule.if.properties.number.maximum).toBe(FREE_LESSONS_PER_TOPIC);
   });
 
+  it("слово урока в схеме не длиннее MAX_WORD_PARTS слов иврита", () => {
+    const defs = (schema as any).definitions;
+    expect(defs.wordHebrew.pattern).toContain(`{0,${MAX_WORD_PARTS - 1}}`);
+    expect(defs.wordNiqqud.pattern).toContain(`{0,${MAX_WORD_PARTS - 1}}`);
+  });
+
   it("ключи форм глагола и бинъяны в схеме равны константам shared", () => {
     const defs = (schema as any).definitions;
     const byTense = { present: "presentForms", past: "pastForms", future: "futureForms", imperative: "imperativeForms" } as const;
@@ -130,6 +136,25 @@ describe("schema.json: образцы допустимых уроков", () => 
       expect(schemaProblems(lessonOf(section, (i) => ({ ...word(i), verb: verb().verb }))).length, `${section}: verb`).toBeGreaterThan(0);
       expect(schemaProblems(lessonOf(section, (i) => ({ ...word(i), example: undefined }))).length, `${section}: фраза`).toBeGreaterThan(0);
     }
+  });
+
+  it("слово из двух и трёх слов иврита (21.10) и число у слов раздела «Числа»", () => {
+    const base = (i: number) => {
+      const { gender, ...rest } = noun(i);
+      return rest;
+    };
+    const phrase = (i: number) => ({
+      ...base(i),
+      he: "אחר כך",
+      niqqud: "אַחַר כָּךְ",
+      translit: "аха́р ках",
+      ru: "потом",
+      example: { he: "נדבר אחר כך", translit: "недабер ахар ках", ru: "Поговорим потом" },
+    });
+    expect(schemaProblems(lessonOf("basics", phrase))).toEqual([]);
+    expect(schemaProblems(lessonOf("basics", (i) => ({ ...phrase(i), he: "כמה זה עולה", niqqud: "כַּמָּה זֶה עוֹלֶה" })))).toEqual([]);
+    expect(schemaProblems(lessonOf("nouns", (i) => ({ ...noun(i), he: "בית ספר", niqqud: "בֵּית סֵפֶר" })))).toEqual([]);
+    expect(schemaProblems(lessonOf("numbers", (i) => ({ ...base(i), value: 11 })))).toEqual([]);
   });
 
   it("прилагательные с четырьмя формами", () => {
@@ -175,6 +200,14 @@ describe("schema.json: ошибки формата ловятся", () => {
     ["reviewed с неверной датой", lessonOf("nouns", (i) => ({ ...noun(i), reviewed: { by: "Я", at: "13.10.2026" } }))],
     ["he с огласовками", lessonOf("nouns", (i) => ({ ...noun(i), he: "חָתוּל" }))],
     ["he латиницей", lessonOf("nouns", (i) => ({ ...noun(i), he: "cat" }))],
+    ["he из четырёх слов", lessonOf("nouns", (i) => ({ ...noun(i), he: "אחד שתיים שלוש ארבע" }))],
+    ["he с двумя пробелами подряд", lessonOf("nouns", (i) => ({ ...noun(i), he: "בית  ספר" }))],
+    ["he с пробелом по краям", lessonOf("nouns", (i) => ({ ...noun(i), he: "בית ספר " }))],
+    ["he с дефисом", lessonOf("nouns", (i) => ({ ...noun(i), he: "בית-ספר" }))],
+    ["niqqud фразы без огласовок", lessonOf("nouns", (i) => ({ ...noun(i), he: "בית ספר", niqqud: "בית ספר" }))],
+    ["число не в разделе «Числа»", lessonOf("nouns", (i) => ({ ...noun(i), value: 1 }))],
+    ["число дробное", lessonOf("numbers", (i) => ({ ...(({ gender, ...rest }) => rest)(noun(i)), value: 1.5 }))],
+    ["форма прилагательного из двух слов", lessonOf("adjectives", () => ({ ...adjective(), forms: { ...adjective().forms, f: { he: "אדומה מאוד", niqqud: "אֲדֻמָּה מְאוֹד", translit: "адума́ меод" } } }))],
     ["niqqud без огласовок", lessonOf("nouns", (i) => ({ ...noun(i), niqqud: "חתול" }))],
     ["translit латиницей", lessonOf("nouns", (i) => ({ ...noun(i), translit: "hatul" }))],
     ["translit с заглавной", lessonOf("nouns", (i) => ({ ...noun(i), translit: "Хату́ль" }))],

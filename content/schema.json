@@ -94,6 +94,17 @@
       }
     },
     {
+      "if": { "required": ["section"], "properties": { "section": { "const": "numbers" } } },
+      "else": {
+        "properties": {
+          "words": {
+            "type": "array",
+            "items": { "type": "object", "not": { "type": "object", "required": ["value"] } }
+          }
+        }
+      }
+    },
+    {
       "if": { "required": ["section"], "properties": { "section": { "const": "nouns" } } },
       "then": {
         "properties": {
@@ -162,6 +173,16 @@
       "type": "string",
       "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+$",
       "description": "Слово с огласовками: те же буквы, что в he, плюс знаки огласовок. Уходит в синтезатор речи, на экране не показывается."
+    },
+    "wordHebrew": {
+      "type": "string",
+      "pattern": "^[א-ת]+( [א-ת]+){0,2}$",
+      "description": "Иврит слова урока: как hebrew, но может быть фразой из 2–3 слов через один пробел («אחר כך», «כמה זה עולה», MAX_WORD_PARTS в packages/shared). Конечные формы только в конце каждого слова (проверяют тесты)."
+    },
+    "wordNiqqud": {
+      "type": "string",
+      "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+( [א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+){0,2}$",
+      "description": "То же слово урока с огласовками: те же слова и буквы, что в he. Уходит в синтезатор речи, на экране не показывается."
     },
     "translit": {
       "type": "string",
@@ -407,10 +428,16 @@
           "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*-[1-9][0-9]*-[a-z][a-z0-9]*(-[a-z0-9]+)*$",
           "description": "<id урока>-<ключ слова>, например animals-1-cat. Прогресс пользователей привязан к id: после выпуска не менять."
         },
-        "he": { "$ref": "#/definitions/hebrew" },
-        "niqqud": { "$ref": "#/definitions/niqqud" },
+        "he": { "$ref": "#/definitions/wordHebrew" },
+        "niqqud": { "$ref": "#/definitions/wordNiqqud" },
         "translit": { "$ref": "#/definitions/translit" },
         "ru": { "$ref": "#/definitions/text" },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000,
+          "description": "Только раздел numbers: число, которое значит слово (אחת 1, אחד עשר 11). Ответ цифрами на этапе «говори» засчитывается, если равен ему."
+        },
         "gender": { "enum": ["m", "f"], "description": "Род: m мужской, f женский (у существительных)." },
         "example": { "$ref": "#/definitions/phrase" },
         "forms": { "$ref": "#/definitions/forms" },
