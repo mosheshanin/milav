@@ -4,9 +4,17 @@ import {
   consonantSkeleton,
   isSpeechMatch,
   latinSounds,
+  isPhrase,
   normalizeHebrew,
+  normalizeWords,
+  spacedTyped,
   speechMatchDetail,
   statusForPassedLessons,
+  typedLetters,
+  typedPartLengths,
+  wordLetterGroups,
+  wordLetters,
+  wordParts,
 } from "./index";
 
 describe("статусы по сданным урокам", () => {
@@ -245,5 +253,101 @@ describe("иврит, записанный латиницей", () => {
   it("ивритский ответ по-прежнему главный: при ивритских буквах латиница не нужна", () => {
     expect(speechMatchDetail("עכבר", "עכבר").latin).toBeUndefined();
     expect(isSpeechMatch("akhbar עכבר", "עכבר")).toBe(true);
+  });
+});
+
+describe("слово урока из нескольких слов иврита (фраза, 21.10)", () => {
+  it("делится на части по пробелу; у обычного слова одна часть", () => {
+    expect(wordParts("אחר כך")).toEqual(["אחר", "כך"]);
+    expect(wordParts("כמה זה עולה")).toEqual(["כמה", "זה", "עולה"]);
+    expect(wordParts("ציפור")).toEqual(["ציפור"]);
+    expect(isPhrase("בית ספר")).toBe(true);
+    expect(isPhrase("ציפור")).toBe(false);
+  });
+
+  it("буквы для «пиши» и «печатай» без пробела, клетки по словам", () => {
+    expect(wordLetters("אחר כך")).toEqual(["א", "ח", "ר", "כ", "ך"]);
+    expect(typedLetters("אחר כך").join("")).toBe("אחרכך");
+    expect(wordLetterGroups("אחר כך")).toEqual([["א", "ח", "ר"], ["כ", "ך"]]);
+    expect(wordLetterGroups("ציפור")).toEqual([["צ", "י", "פ", "ו", "ר"]]);
+    expect(typedPartLengths("בית ספר")).toEqual([3, 3]);
+  });
+
+  it("набранное показывается с пробелом, который ставит приложение", () => {
+    const he = "אחר כך";
+    expect(spacedTyped([], he)).toBe("");
+    expect(spacedTyped(["א", "ח"], he)).toBe("אח");
+    expect(spacedTyped(["א", "ח", "ר"], he)).toBe("אחר");
+    expect(spacedTyped(["א", "ח", "ר", "כ"], he)).toBe("אחר כ");
+    expect(spacedTyped([..."אחרכך"], he)).toBe("אחר כך");
+    expect(spacedTyped([..."אחרכךא"], he)).toBe("אחר כךא");
+    expect(spacedTyped([..."ציפ"], "ציפור")).toBe("ציפ");
+  });
+
+  it("нормализует слова по отдельности: огласовки, конечные формы, дефис и макаф", () => {
+    expect(normalizeWords("אַחַר כָּךְ.")).toBe("אחר ככ");
+    expect(normalizeWords("אחת-עשרה")).toBe("אחת עשרה");
+    expect(normalizeWords("בֵּית\u05BEסֵפֶר")).toBe("בית ספר");
+  });
+
+  it("фразу засчитывает целиком, с паузой или без, и с лишним словом рядом", () => {
+    expect(isSpeechMatch("אחר כך", "אחר כך")).toBe(true);
+    expect(isSpeechMatch("אחרכך", "אחר כך")).toBe(true); // Whisper склеил слова
+    expect(isSpeechMatch("אחר, כך.", "אחר כך")).toBe(true);
+    expect(isSpeechMatch("אחת-עשרה", "אחת עשרה")).toBe(true);
+    expect(isSpeechMatch("טוב, אחר כך", "אחר כך")).toBe(true);
+    expect(isSpeechMatch("בית ספר גדול", "בית ספר")).toBe(true);
+    expect(isSpeechMatch("כמה זה עולה?", "כמה זה עולה")).toBe(true);
+  });
+
+  it("одно слово фразы не засчитывается за всю фразу", () => {
+    expect(isSpeechMatch("אחר", "אחר כך")).toBe(false);
+    expect(isSpeechMatch("כך", "אחר כך")).toBe(false);
+    expect(isSpeechMatch("בית", "בית ספר")).toBe(false);
+    expect(isSpeechMatch("עשרה", "אחת עשרה")).toBe(false);
+  });
+
+  it("одна ошибка на всю фразу прощается, две нет (решение владельца: один допуск)", () => {
+    expect(isSpeechMatch("בית ספרים", "בית ספר")).toBe(true); // лишняя буква с י: י бесплатна, ם настоящая: одна ошибка
+    expect(isSpeechMatch("בית ספרה", "בית ספר")).toBe(true);
+    expect(isSpeechMatch("בת ספרה", "בית ספר")).toBe(true); // י бесплатна
+    expect(isSpeechMatch("בית סיפרה", "בית ספר")).toBe(true);
+    expect(isSpeechMatch("פית ספרה", "בית ספר")).toBe(false); // две ошибки
+    expect(speechMatchDetail("בית ספר", "בית ספר").budget).toBe(3);
+  });
+
+  it("тихая א в начале второго слова настоящая, как в начале слова", () => {
+    // «עשרים ואחד»: א после ו, в начале слова «אחד», в склейке оказалась бы в середине и стала бы «мягкой».
+    expect(isSpeechMatch("עשרים ואחד", "עשרים ואחד")).toBe(true);
+    expect(speechMatchDetail("אף פעם", "אף פעם").expected).toBe("אפ פעמ");
+  });
+
+  it("числа цифрами засчитываются по значению слова", () => {
+    expect(speechMatchDetail("11", "אחת עשרה", [], 11)).toMatchObject({ match: true, cost: 0, digits: true, closest: "11" });
+    expect(isSpeechMatch("11.", "אחת עשרה")).toBe(false); // без значения цифры не разбираются
+    expect(speechMatchDetail("12", "אחת עשרה", [], 11).match).toBe(false);
+    expect(speechMatchDetail("1", "אחת", [], 1).match).toBe(true);
+    expect(speechMatchDetail("11", "אחת", [], 1).match).toBe(false);
+    expect(speechMatchDetail("מספר 7", "שבע", [], 7).match).toBe(true);
+    expect(speechMatchDetail("100", "מאה", [], 100).match).toBe(true);
+  });
+
+  it("соседа-фразу целиком не засчитывает за слово внутри неё", () => {
+    const numbers = ["אחד", "עשר", "אחד עשר", "אחת עשרה", "שמונה עשר", "שמונה עשרה", "שמונה"];
+    expect(speechMatchDetail("אחד עשר", "אחד", numbers)).toMatchObject({ match: false, rival: "אחד עשר" });
+    expect(isSpeechMatch("אחד עשר", "עשר", numbers)).toBe(false);
+    expect(isSpeechMatch("שמונה עשרה", "שמונה עשר", numbers)).toBe(false); // 18 ж. вместо 18 м.
+    expect(isSpeechMatch("שמונה עשר", "שמונה עשרה", numbers)).toBe(false);
+    expect(isSpeechMatch("שמונה עשר", "שמונה", numbers)).toBe(false);
+    expect(isSpeechMatch("אחד", "אחד", numbers)).toBe(true);
+    expect(isSpeechMatch("ילד אחד", "אחד", numbers)).toBe(true); // лишнее слово не сосед
+    expect(isSpeechMatch("אחד עשר", "אחד עשר", numbers)).toBe(true);
+    expect(isSpeechMatch("שמונה עשרה", "שמונה עשרה", numbers)).toBe(true);
+  });
+
+  it("латиница для фразы: звуки обоих слов", () => {
+    expect(isSpeechMatch("achar kach", "אחר כך")).toBe(true);
+    expect(isSpeechMatch("beit sefer", "בית ספר")).toBe(true);
+    expect(isSpeechMatch("achar", "אחר כך")).toBe(false);
   });
 });

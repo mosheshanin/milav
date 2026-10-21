@@ -17,6 +17,31 @@ export function normalizeHebrew(text: string): string {
     .replace(/[ךםןףץ]/g, (c) => FINAL_TO_REGULAR[c] ?? c);
 }
 
+// ---- Слова урока из нескольких слов иврита ----
+// Слово урока может состоять из двух-трёх слов иврита через пробел: «אחר כך» (потом), «בית ספר» (школа), «כמה זה עולה»
+// (решение владельца 21.10). Все этапы работают с фразой целиком: пробел не рисуют и не набирают, он не буква.
+
+/** Сколько слов иврита может быть в одном слове урока («כמה זה עולה» это три). */
+export const MAX_WORD_PARTS = 3;
+
+/** Части слова урока: слова иврита через пробел («אחר כך» → ["אחר", "כך"]). У обычного слова одна часть. */
+export function wordParts(he: string): string[] {
+  return he.trim().split(/\s+/).filter(Boolean);
+}
+
+/** Слово урока из нескольких слов иврита («אחר כך»). */
+export function isPhrase(he: string): boolean {
+  return wordParts(he).length > 1;
+}
+
+/** Разделители слов в распознанной речи: пробел, дефис и макаф (Whisper пишет «אחת-עשרה»). */
+const SPEECH_WORD_BREAK = /[\s\-־]+/;
+
+/** Текст как нормализованные слова через пробел («אַחַר כָּךְ» → «אחר ככ»): границы слов нужны сравнению по звучанию. */
+export function normalizeWords(text: string): string {
+  return text.split(SPEECH_WORD_BREAK).map(normalizeHebrew).filter(Boolean).join(" ");
+}
+
 /** Согласный «скелет» слова: без ו и י, которые в иврите пишутся по-разному (полное и неполное написание). */
 export function consonantSkeleton(text: string): string {
   return normalizeHebrew(text).replace(/[וי]/g, "");
@@ -62,10 +87,28 @@ const SAME_SOUND = new Set(["תט", "טת", "כק", "קכ", "אע", "עא"]);
  * мягкая: Whisper дописывает её как гласный (פארה вместо פרה). В начале и на конце слова א, а также ע и ה настоящие:
  * דם и אדם, שן и שעון, ילד и ילדה, כיסא и כיס это разные слова, поэтому там цена обычная.
  */
-function skipCosts(letters: string[]): number[] {
-  return letters.map((ch, i) => {
+/** Буква и её место в своём слове: начало и конец слова важны для тихих букв (у фразы «אחר כך» слов несколько). */
+interface LetterSpot {
+  ch: string;
+  first: boolean;
+  last: boolean;
+}
+
+/** Буквы нормализованного текста с местом в слове; слова разделены пробелами (`normalizeWords`). */
+function letterSpots(text: string): LetterSpot[] {
+  return text
+    .split(" ")
+    .filter(Boolean)
+    .flatMap((part) => {
+      const letters = [...part];
+      return letters.map((ch, i) => ({ ch, first: i === 0, last: i === letters.length - 1 }));
+    });
+}
+
+function skipCosts(letters: LetterSpot[]): number[] {
+  return letters.map(({ ch, first, last }) => {
     if (ch === "ו" || ch === "י") return 0;
-    if (ch === "א" && i > 0 && i < letters.length - 1) return SOFT;
+    if (ch === "א" && !first && !last) return SOFT;
     return FULL;
   });
 }
@@ -78,21 +121,27 @@ function substituteCost(a: string, b: string, atEnd: boolean): number {
   return FULL;
 }
 
-/** Расстояние между словами (оба уже нормализованы `normalizeHebrew`), в единицах FULL и SOFT. */
+/**
+ * Расстояние между словами (оба уже нормализованы: `normalizeHebrew`, а у фразы `normalizeWords`, слова через пробел),
+ * в единицах FULL и SOFT. Пробелы буквами не считаются: «אחרכך» и «אחר כך» совпадают, границы слов влияют только на цену
+ * тихих букв в начале и конце слова.
+ */
 export function soundDistance(heard: string, expected: string): number {
-  const a = [...heard];
-  const b = [...expected];
+  const a = letterSpots(heard);
+  const b = letterSpots(expected);
   const skipA = skipCosts(a);
   const skipB = skipCosts(b);
   let prev: number[] = [0];
   for (let j = 1; j <= b.length; j++) prev[j] = (prev[j - 1] ?? 0) + (skipB[j - 1] ?? FULL);
   for (let i = 1; i <= a.length; i++) {
     const cur: number[] = [(prev[0] ?? 0) + (skipA[i - 1] ?? FULL)];
+    const x = a[i - 1]!;
     for (let j = 1; j <= b.length; j++) {
+      const y = b[j - 1]!;
       cur[j] = Math.min(
         (prev[j] ?? 0) + (skipA[i - 1] ?? FULL),
         (cur[j - 1] ?? 0) + (skipB[j - 1] ?? FULL),
-        (prev[j - 1] ?? 0) + substituteCost(a[i - 1] ?? "", b[j - 1] ?? "", i === a.length && j === b.length),
+        (prev[j - 1] ?? 0) + substituteCost(x.ch, y.ch, x.last && y.last),
       );
     }
     prev = cur;
@@ -100,10 +149,13 @@ export function soundDistance(heard: string, expected: string): number {
   return prev[b.length] ?? 0;
 }
 
-/** Сколько прощаем для ожидаемого слова (нормализованного). */
+/**
+ * Сколько прощаем для ожидаемого слова (нормализованного). У фразы из нескольких слов допуск один на всю фразу
+ * (решение владельца 21.10): как у одного длинного слова.
+ */
 export function speechBudget(expected: string): number {
   // Слово без опорных согласных (או, אי): только точное совпадение, иначе подойдёт почти любая тихая буква.
-  if (!skipCosts([...expected]).some((cost) => cost === FULL)) return 0;
+  if (!skipCosts(letterSpots(expected)).some((cost) => cost === FULL)) return 0;
   // Допуск в одну ошибку, как и раньше, только от 4 букв без י и ו.
   return consonantSkeleton(expected).length >= 4 ? SPEECH_BUDGET_LONG : SPEECH_BUDGET_ANY;
 }
@@ -131,32 +183,35 @@ const LATIN_SINGLE: Record<string, string> = {
 
 /** Латинский текст как последовательность звуков (каждый: ивритские буквы, которыми его можно записать). Гласные и знаки отбрасываются. */
 export function latinSounds(text: string): string[] {
-  const letters = text.normalize("NFKD").toLowerCase().replace(/[^a-z]/g, "");
   const sounds: string[] = [];
-  let previous: string | undefined;
-  for (let i = 0; i < letters.length; i++) {
-    const pair = LATIN_DIGRAPHS[letters.slice(i, i + 2)];
-    const sound = pair ?? LATIN_SINGLE[letters[i] ?? ""];
-    if (pair) i++;
-    // Удвоенная согласная подряд («mm», «bb») это один звук; через гласную («dod», «gag») это два.
-    if (sound && sound !== previous) sounds.push(sound);
-    previous = sound;
+  // По словам отдельно: «beit sefer» это т и с, а не «ts» (צ) на стыке слов.
+  for (const word of text.normalize("NFKD").toLowerCase().split(/[^a-z̀-ͯ]+/)) {
+    const letters = word.replace(/[^a-z]/g, "");
+    let previous: string | undefined;
+    for (let i = 0; i < letters.length; i++) {
+      const pair = LATIN_DIGRAPHS[letters.slice(i, i + 2)];
+      const sound = pair ?? LATIN_SINGLE[letters[i] ?? ""];
+      if (pair) i++;
+      // Удвоенная согласная подряд («mm», «bb») это один звук; через гласную («dod», «gag») это два.
+      if (sound && sound !== previous) sounds.push(sound);
+      previous = sound;
+    }
   }
   return sounds;
 }
 
 /** Цена пропустить букву ожидаемого слова, когда услышанное записано латиницей: тихие א ע י ו и ה на конце слова бесплатны. */
-function latinSkipCosts(letters: string[]): number[] {
-  return letters.map((ch, i) => {
+function latinSkipCosts(letters: LetterSpot[]): number[] {
+  return letters.map(({ ch, last }) => {
     if (ch === "ו" || ch === "י" || ch === "א" || ch === "ע") return 0;
-    if (ch === "ה" && i === letters.length - 1) return 0;
+    if (ch === "ה" && last) return 0;
     return FULL;
   });
 }
 
 /** Сколько опорных согласных в ожидаемом слове для сравнения с латиницей. */
 function latinAnchors(expected: string): number {
-  return latinSkipCosts([...expected]).filter((cost) => cost === FULL).length;
+  return latinSkipCosts(letterSpots(expected)).filter((cost) => cost === FULL).length;
 }
 
 /** Чем кончается латинская запись: гласной (`v`, также «ah», «eh»), согласной (`c`) или неясно (`undefined`, например «y»). */
@@ -171,8 +226,9 @@ export function latinEnding(text: string): "v" | "c" | undefined {
  * слова, которые без гласных совпадают: ילד кончается согласной, ילדה (ה на конце это «а») гласной.
  */
 export function latinDistance(sounds: readonly string[], expected: string, ending?: "v" | "c"): number {
-  const b = [...expected];
-  const skipB = latinSkipCosts(b);
+  const spots = letterSpots(expected);
+  const b = spots.map((s) => s.ch);
+  const skipB = latinSkipCosts(spots);
   // Звук, которым можно записать י или ו, мог быть и тихой буквой, поэтому его пропуск бесплатен.
   const skipA = sounds.map((sound) => (/[וי]/.test(sound) ? 0 : FULL));
   let prev: number[] = [0];
@@ -209,7 +265,25 @@ export interface SpeechMatchDetail {
   latin?: true;
   /** Соседнее слово, из-за которого отказано: услышанное ближе к нему, чем к ожидаемому слову (нормализованное). Иначе не задано. */
   rival?: string;
+  /** Засчитано по цифрам: Whisper записал число цифрами («11»), и оно равно значению слова (`value` у чисел). */
+  digits?: true;
 }
+
+/** Сколько слов распознанной речи разбираем (запись короткая; длинный текст обрезаем, чтобы перебор частей не рос). */
+const MAX_HEARD_WORDS = 12;
+
+/** Варианты услышанного: весь текст и каждый кусок из идущих подряд слов (человек мог сказать лишнее до или после). */
+function heardVariants(heard: string): string[] {
+  const words = heard.split(SPEECH_WORD_BREAK).filter(Boolean).slice(0, MAX_HEARD_WORDS);
+  const variants = [heard];
+  for (let from = 0; from < words.length; from++) {
+    for (let to = from + 1; to <= words.length; to++) variants.push(words.slice(from, to).join(" "));
+  }
+  return variants;
+}
+
+/** Ключ для точного сравнения: буквы без пробелов («אחר כך» и «אחרכך» одно и то же). */
+const glued = (normalized: string) => normalized.replaceAll(" ", "");
 
 /**
  * Разбор сравнения: совпало ли и насколько близко. Проверяем и всю фразу, и каждое слово по отдельности
@@ -218,26 +292,39 @@ export interface SpeechMatchDetail {
  * `rivals`: другие слова той же темы. Если услышанное ближе к одному из них, чем к ожидаемому слову, оно не засчитывается
  * (решение владельца 18.10, вопрос 71): иначе סבא сошло бы за סבתא, а להסתיר за להסביר. Если услышанное совпало с соседом дословно,
  * отказ и при равном расстоянии (עוגה и עוגייה, קר и יקר: י и ו бесплатны, и слова иначе не различить).
+ * Сосед из нескольких слов («אחד עשר») мешает и тогда, когда услышанное лишь содержит ожидаемое слово: если сказано «אחד עשר»,
+ * слово «אחד» не засчитывается (21.10).
+ *
+ * Ожидаемое слово может быть фразой из нескольких слов («אחר כך»): она сравнивается целиком, с одним допуском на всю фразу.
+ * `value`: число, которое значит слово (у слов темы «Числа»). Whisper часто пишет числа цифрами («11»), и такой ответ засчитывается,
+ * если цифры равны значению.
  */
-export function speechMatchDetail(heard: string, expected: string, rivals: readonly string[] = []): SpeechMatchDetail {
-  const e = normalizeHebrew(expected);
+export function speechMatchDetail(heard: string, expected: string, rivals: readonly string[] = [], value?: number): SpeechMatchDetail {
+  const e = normalizeWords(expected);
   const budget = e ? speechBudget(e) : 0;
-  const rivalKeys = [...new Set(rivals.map(normalizeHebrew))].filter((r) => r && r !== e);
-  const raws = [heard, ...heard.split(/\s+/).filter(Boolean)];
+  const rivalKeys = [...new Set(rivals.map(normalizeWords))].filter((r) => r && glued(r) !== glued(e));
+  const raws = heardVariants(heard);
+  // Соседи из нескольких слов, сказанные целиком: тогда засчитывать ожидаемое слово нельзя, даже если оно прозвучало внутри.
+  const phraseRivals = new Set(rivalKeys.filter((r) => r.includes(" ")).map(glued));
+  const saidRival = raws.map(normalizeWords).find((v) => v.includes(" ") && phraseRivals.has(glued(v)));
   let cost: number | null = null;
   let closest = "";
   let latin = false;
   let match = false;
   let rival: string | undefined;
+  if (e && value !== undefined) {
+    const said = heard.match(/\d+/g)?.find((d) => Number(d) === value);
+    if (said !== undefined && saidRival === undefined) return { match: true, cost: 0, budget, expected: e, closest: said, digits: true };
+  }
   if (e) {
     for (const raw of raws) {
-      const candidate = normalizeHebrew(raw);
+      const candidate = normalizeWords(raw);
       let c: number;
       let blocker: string | undefined;
       let isLatin = false;
       if (candidate) {
         c = soundDistance(candidate, e);
-        if (c <= budget) blocker = rivalKeys.find((r) => r === candidate || soundDistance(candidate, r) < c);
+        if (c <= budget) blocker = saidRival ?? rivalKeys.find((r) => glued(r) === glued(candidate) || soundDistance(candidate, r) < c);
       } else {
         // Ивритских букв нет: возможно, иврит записан латиницей. Короткие слова (одна опорная согласная) так не проверяем:
         // по одной согласной без гласных подойдёт случайный звук.
@@ -286,4 +373,35 @@ export function wordLetters(he: string): string[] {
  */
 export function typedLetters(he: string): string[] {
   return [...he.normalize("NFC")].filter((ch) => HEBREW_LETTER_OR_GERESH.test(ch));
+}
+
+/**
+ * Буквы каждого слова фразы по отдельности («בית ספר» → [[ב, י, ת], [ס, פ, ר]]): на этапе «пиши» клетки букв показываются
+ * группами по словам, а рисуют все буквы подряд, пробел не рисуют. У обычного слова одна группа.
+ */
+export function wordLetterGroups(he: string): string[][] {
+  return wordParts(he).map(wordLetters).filter((g) => g.length > 0);
+}
+
+/** Сколько знаков набирают в каждом слове фразы (`typedLetters` по частям): после них приложение само ставит пробел. */
+export function typedPartLengths(he: string): number[] {
+  return wordParts(he).map((p) => typedLetters(p).length).filter((n) => n > 0);
+}
+
+/**
+ * Набранное с пробелами между словами фразы: пробел не набирают, его ставит приложение, как только после первого слова
+ * набрана следующая буква (решение владельца 21.10). Лишние знаки остаются в конце как есть.
+ */
+export function spacedTyped(typed: readonly string[], he: string): string {
+  const parts: string[] = [];
+  let i = 0;
+  for (const n of typedPartLengths(he)) {
+    if (i >= typed.length) break;
+    parts.push(typed.slice(i, i + n).join(""));
+    i += n;
+  }
+  const rest = typed.slice(i).join("");
+  if (parts.length === 0) return rest;
+  parts[parts.length - 1] += rest;
+  return parts.join(" ");
 }

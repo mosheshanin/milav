@@ -58,6 +58,7 @@ export function speechLogFields(he: string, detail: SpeechMatchDetail): LogField
     closest: detail.closest || undefined,
     rival: detail.rival,
     latin: detail.latin,
+    digits: detail.digits,
   };
 }
 

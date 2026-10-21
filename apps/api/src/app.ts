@@ -346,7 +346,7 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
     return c.json({ error: "speech_failed" }, 502);
   }
 
-  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id));
+  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id), found.word.value);
   const match = detail.match;
   // Что услышал распознаватель: по несовпадениям видно, какие слова Whisper слышит плохо (и не слишком ли строг допуск).
   logEvent("speech", { uid: user.id, word: found.word.id, where: "study", match, heard, ...speechLogFields(found.word.he, detail) });
@@ -484,7 +484,7 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
     return c.json({ error: "speech_failed" }, 502);
   }
 
-  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id));
+  const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id), found.word.value);
   const match = detail.match;
   logEvent("speech", { uid: user.id, word: found.word.id, where: "quiz", match, heard, ...speechLogFields(found.word.he, detail) });
   const step = speechStep(session, match, heard);
