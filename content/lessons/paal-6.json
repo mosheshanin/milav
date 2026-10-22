@@ -22,8 +22,10 @@
         "female": {
           "he": "אני שואלת שאלה",
           "translit": "ани шоелет шеэла",
-          "ru": "Я задаю вопрос"
-        }
+          "ru": "Я задаю вопрос",
+          "audio": "/audio/paal-6-ask-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-6-ask-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -32,147 +34,175 @@
           "ms": {
             "he": "שואל",
             "niqqud": "שׁוֹאֵל",
-            "translit": "шое́л"
+            "translit": "шое́л",
+            "audio": "/audio/paal-6-ask-form-present-ms.mp3"
           },
           "fs": {
             "he": "שואלת",
             "niqqud": "שׁוֹאֶלֶת",
-            "translit": "шое́лет"
+            "translit": "шое́лет",
+            "audio": "/audio/paal-6-ask-form-present-fs.mp3"
           },
           "mp": {
             "he": "שואלים",
             "niqqud": "שׁוֹאֲלִים",
-            "translit": "шоали́м"
+            "translit": "шоали́м",
+            "audio": "/audio/paal-6-ask-form-present-mp.mp3"
           },
           "fp": {
             "he": "שואלות",
             "niqqud": "שׁוֹאֲלוֹת",
-            "translit": "шоало́т"
+            "translit": "шоало́т",
+            "audio": "/audio/paal-6-ask-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "שאלתי",
             "niqqud": "שָׁאַלְתִּי",
-            "translit": "шаа́лти"
+            "translit": "шаа́лти",
+            "audio": "/audio/paal-6-ask-form-past-1s.mp3"
           },
           "2ms": {
             "he": "שאלת",
             "niqqud": "שָׁאַלְתָּ",
-            "translit": "шаа́лта"
+            "translit": "шаа́лта",
+            "audio": "/audio/paal-6-ask-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "שאלת",
             "niqqud": "שָׁאַלְתְּ",
-            "translit": "шаа́лт"
+            "translit": "шаа́лт",
+            "audio": "/audio/paal-6-ask-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "שאל",
             "niqqud": "שָׁאַל",
-            "translit": "шаа́л"
+            "translit": "шаа́л",
+            "audio": "/audio/paal-6-ask-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "שאלה",
             "niqqud": "שָׁאֲלָה",
-            "translit": "шаала́"
+            "translit": "шаала́",
+            "audio": "/audio/paal-6-ask-form-past-3fs.mp3"
           },
           "1p": {
             "he": "שאלנו",
             "niqqud": "שָׁאַלְנוּ",
-            "translit": "шаа́лну"
+            "translit": "шаа́лну",
+            "audio": "/audio/paal-6-ask-form-past-1p.mp3"
           },
           "2mp": {
             "he": "שאלתם",
             "niqqud": "שְׁאַלְתֶּם",
-            "translit": "шалте́м"
+            "translit": "шалте́м",
+            "audio": "/audio/paal-6-ask-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "שאלתן",
             "niqqud": "שְׁאַלְתֶּן",
-            "translit": "шалте́н"
+            "translit": "шалте́н",
+            "audio": "/audio/paal-6-ask-form-past-2fp.mp3"
           },
           "3p": {
             "he": "שאלו",
             "niqqud": "שָׁאֲלוּ",
-            "translit": "шаалу́"
+            "translit": "шаалу́",
+            "audio": "/audio/paal-6-ask-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אשאל",
             "niqqud": "אֶשְׁאַל",
-            "translit": "эша́л"
+            "translit": "эша́л",
+            "audio": "/audio/paal-6-ask-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תשאל",
             "niqqud": "תִּשְׁאַל",
-            "translit": "тиша́л"
+            "translit": "тиша́л",
+            "audio": "/audio/paal-6-ask-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תשאלי",
             "niqqud": "תִּשְׁאֲלִי",
-            "translit": "тишали́"
+            "translit": "тишали́",
+            "audio": "/audio/paal-6-ask-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ישאל",
             "niqqud": "יִשְׁאַל",
-            "translit": "иша́л"
+            "translit": "иша́л",
+            "audio": "/audio/paal-6-ask-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תשאל",
             "niqqud": "תִּשְׁאַל",
-            "translit": "тиша́л"
+            "translit": "тиша́л",
+            "audio": "/audio/paal-6-ask-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נשאל",
             "niqqud": "נִשְׁאַל",
-            "translit": "ниша́л"
+            "translit": "ниша́л",
+            "audio": "/audio/paal-6-ask-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תשאלו",
             "niqqud": "תִּשְׁאֲלוּ",
-            "translit": "тишалу́"
+            "translit": "тишалу́",
+            "audio": "/audio/paal-6-ask-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תשאלנה",
             "niqqud": "תִּשְׁאַלְנָה",
-            "translit": "тиша́лна"
+            "translit": "тиша́лна",
+            "audio": "/audio/paal-6-ask-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ישאלו",
             "niqqud": "יִשְׁאֲלוּ",
-            "translit": "ишалу́"
+            "translit": "ишалу́",
+            "audio": "/audio/paal-6-ask-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ישאלנה",
             "niqqud": "יִשְׁאַלְנָה",
-            "translit": "иша́лна"
+            "translit": "иша́лна",
+            "audio": "/audio/paal-6-ask-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "שאל",
             "niqqud": "שְׁאַל",
-            "translit": "шал"
+            "translit": "шал",
+            "audio": "/audio/paal-6-ask-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "שאלי",
             "niqqud": "שַׁאֲלִי",
-            "translit": "шаали́"
+            "translit": "шаали́",
+            "audio": "/audio/paal-6-ask-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "שאלו",
             "niqqud": "שַׁאֲלוּ",
-            "translit": "шаалу́"
+            "translit": "шаалу́",
+            "audio": "/audio/paal-6-ask-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "שאלנה",
             "niqqud": "שְׁאַלְנָה",
-            "translit": "ша́лна"
+            "translit": "ша́лна",
+            "audio": "/audio/paal-6-ask-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-ask.mp3"
     },
     {
       "id": "paal-6-worry",
@@ -188,8 +218,10 @@
         "female": {
           "he": "אני דואגת לך",
           "translit": "ани доегет леха",
-          "ru": "Я волнуюсь за тебя"
-        }
+          "ru": "Я волнуюсь за тебя",
+          "audio": "/audio/paal-6-worry-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-6-worry-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -198,147 +230,175 @@
           "ms": {
             "he": "דואג",
             "niqqud": "דּוֹאֵג",
-            "translit": "дое́г"
+            "translit": "дое́г",
+            "audio": "/audio/paal-6-worry-form-present-ms.mp3"
           },
           "fs": {
             "he": "דואגת",
             "niqqud": "דּוֹאֶגֶת",
-            "translit": "дое́гет"
+            "translit": "дое́гет",
+            "audio": "/audio/paal-6-worry-form-present-fs.mp3"
           },
           "mp": {
             "he": "דואגים",
             "niqqud": "דּוֹאֲגִים",
-            "translit": "доаги́м"
+            "translit": "доаги́м",
+            "audio": "/audio/paal-6-worry-form-present-mp.mp3"
           },
           "fp": {
             "he": "דואגות",
             "niqqud": "דּוֹאֲגוֹת",
-            "translit": "доаго́т"
+            "translit": "доаго́т",
+            "audio": "/audio/paal-6-worry-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "דאגתי",
             "niqqud": "דָּאַגְתִּי",
-            "translit": "даа́гти"
+            "translit": "даа́гти",
+            "audio": "/audio/paal-6-worry-form-past-1s.mp3"
           },
           "2ms": {
             "he": "דאגת",
             "niqqud": "דָּאַגְתָּ",
-            "translit": "даа́гта"
+            "translit": "даа́гта",
+            "audio": "/audio/paal-6-worry-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "דאגת",
             "niqqud": "דָּאַגְתְּ",
-            "translit": "даа́гт"
+            "translit": "даа́гт",
+            "audio": "/audio/paal-6-worry-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "דאג",
             "niqqud": "דָּאַג",
-            "translit": "даа́г"
+            "translit": "даа́г",
+            "audio": "/audio/paal-6-worry-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "דאגה",
             "niqqud": "דָּאֲגָה",
-            "translit": "даага́"
+            "translit": "даага́",
+            "audio": "/audio/paal-6-worry-form-past-3fs.mp3"
           },
           "1p": {
             "he": "דאגנו",
             "niqqud": "דָּאַגְנוּ",
-            "translit": "даа́гну"
+            "translit": "даа́гну",
+            "audio": "/audio/paal-6-worry-form-past-1p.mp3"
           },
           "2mp": {
             "he": "דאגתם",
             "niqqud": "דְּאַגְתֶּם",
-            "translit": "дагте́м"
+            "translit": "дагте́м",
+            "audio": "/audio/paal-6-worry-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "דאגתן",
             "niqqud": "דְּאַגְתֶּן",
-            "translit": "дагте́н"
+            "translit": "дагте́н",
+            "audio": "/audio/paal-6-worry-form-past-2fp.mp3"
           },
           "3p": {
             "he": "דאגו",
             "niqqud": "דָּאֲגוּ",
-            "translit": "даагу́"
+            "translit": "даагу́",
+            "audio": "/audio/paal-6-worry-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אדאג",
             "niqqud": "אֶדְאַג",
-            "translit": "эда́г"
+            "translit": "эда́г",
+            "audio": "/audio/paal-6-worry-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תדאג",
             "niqqud": "תִּדְאַג",
-            "translit": "тида́г"
+            "translit": "тида́г",
+            "audio": "/audio/paal-6-worry-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תדאגי",
             "niqqud": "תִּדְאֲגִי",
-            "translit": "тидаги́"
+            "translit": "тидаги́",
+            "audio": "/audio/paal-6-worry-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ידאג",
             "niqqud": "יִדְאַג",
-            "translit": "ида́г"
+            "translit": "ида́г",
+            "audio": "/audio/paal-6-worry-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תדאג",
             "niqqud": "תִּדְאַג",
-            "translit": "тида́г"
+            "translit": "тида́г",
+            "audio": "/audio/paal-6-worry-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נדאג",
             "niqqud": "נִדְאַג",
-            "translit": "нида́г"
+            "translit": "нида́г",
+            "audio": "/audio/paal-6-worry-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תדאגו",
             "niqqud": "תִּדְאֲגוּ",
-            "translit": "тидагу́"
+            "translit": "тидагу́",
+            "audio": "/audio/paal-6-worry-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תדאגנה",
             "niqqud": "תִּדְאַגְנָה",
-            "translit": "тида́гна"
+            "translit": "тида́гна",
+            "audio": "/audio/paal-6-worry-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ידאגו",
             "niqqud": "יִדְאֲגוּ",
-            "translit": "идагу́"
+            "translit": "идагу́",
+            "audio": "/audio/paal-6-worry-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ידאגנה",
             "niqqud": "יִדְאַגְנָה",
-            "translit": "ида́гна"
+            "translit": "ида́гна",
+            "audio": "/audio/paal-6-worry-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "דאג",
             "niqqud": "דְּאַג",
-            "translit": "даг"
+            "translit": "даг",
+            "audio": "/audio/paal-6-worry-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "דאגי",
             "niqqud": "דַּאֲגִי",
-            "translit": "дааги́"
+            "translit": "дааги́",
+            "audio": "/audio/paal-6-worry-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "דאגו",
             "niqqud": "דַּאֲגוּ",
-            "translit": "даагу́"
+            "translit": "даагу́",
+            "audio": "/audio/paal-6-worry-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "דאגנה",
             "niqqud": "דְּאַגְנָה",
-            "translit": "да́гна"
+            "translit": "да́гна",
+            "audio": "/audio/paal-6-worry-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-worry.mp3"
     },
     {
       "id": "paal-6-sell",
@@ -349,7 +409,8 @@
       "example": {
         "he": "הוא מוכר פירות",
         "translit": "ху мохер перот",
-        "ru": "Он продаёт фрукты"
+        "ru": "Он продаёт фрукты",
+        "audio": "/audio/paal-6-sell-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -358,147 +419,175 @@
           "ms": {
             "he": "מוכר",
             "niqqud": "מוֹכֵר",
-            "translit": "мохе́р"
+            "translit": "мохе́р",
+            "audio": "/audio/paal-6-sell-form-present-ms.mp3"
           },
           "fs": {
             "he": "מוכרת",
             "niqqud": "מוֹכֶרֶת",
-            "translit": "мохе́рет"
+            "translit": "мохе́рет",
+            "audio": "/audio/paal-6-sell-form-present-fs.mp3"
           },
           "mp": {
             "he": "מוכרים",
             "niqqud": "מוֹכְרִים",
-            "translit": "мохри́м"
+            "translit": "мохри́м",
+            "audio": "/audio/paal-6-sell-form-present-mp.mp3"
           },
           "fp": {
             "he": "מוכרות",
             "niqqud": "מוֹכְרוֹת",
-            "translit": "мохро́т"
+            "translit": "мохро́т",
+            "audio": "/audio/paal-6-sell-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "מכרתי",
             "niqqud": "מָכַרְתִּי",
-            "translit": "маха́рти"
+            "translit": "маха́рти",
+            "audio": "/audio/paal-6-sell-form-past-1s.mp3"
           },
           "2ms": {
             "he": "מכרת",
             "niqqud": "מָכַרְתָּ",
-            "translit": "маха́рта"
+            "translit": "маха́рта",
+            "audio": "/audio/paal-6-sell-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "מכרת",
             "niqqud": "מָכַרְתְּ",
-            "translit": "маха́рт"
+            "translit": "маха́рт",
+            "audio": "/audio/paal-6-sell-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "מכר",
             "niqqud": "מָכַר",
-            "translit": "маха́р"
+            "translit": "маха́р",
+            "audio": "/audio/paal-6-sell-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "מכרה",
             "niqqud": "מָכְרָה",
-            "translit": "махра́"
+            "translit": "махра́",
+            "audio": "/audio/paal-6-sell-form-past-3fs.mp3"
           },
           "1p": {
             "he": "מכרנו",
             "niqqud": "מָכַרְנוּ",
-            "translit": "маха́рну"
+            "translit": "маха́рну",
+            "audio": "/audio/paal-6-sell-form-past-1p.mp3"
           },
           "2mp": {
             "he": "מכרתם",
             "niqqud": "מְכַרְתֶּם",
-            "translit": "мхарте́м"
+            "translit": "мхарте́м",
+            "audio": "/audio/paal-6-sell-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "מכרתן",
             "niqqud": "מְכַרְתֶּן",
-            "translit": "мхарте́н"
+            "translit": "мхарте́н",
+            "audio": "/audio/paal-6-sell-form-past-2fp.mp3"
           },
           "3p": {
             "he": "מכרו",
             "niqqud": "מָכְרוּ",
-            "translit": "махру́"
+            "translit": "махру́",
+            "audio": "/audio/paal-6-sell-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אמכור",
             "niqqud": "אֶמְכּוֹר",
-            "translit": "эмко́р"
+            "translit": "эмко́р",
+            "audio": "/audio/paal-6-sell-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תמכור",
             "niqqud": "תִּמְכּוֹר",
-            "translit": "тимко́р"
+            "translit": "тимко́р",
+            "audio": "/audio/paal-6-sell-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תמכרי",
             "niqqud": "תִּמְכְּרִי",
-            "translit": "тимкри́"
+            "translit": "тимкри́",
+            "audio": "/audio/paal-6-sell-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "ימכור",
             "niqqud": "יִמְכּוֹר",
-            "translit": "имко́р"
+            "translit": "имко́р",
+            "audio": "/audio/paal-6-sell-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תמכור",
             "niqqud": "תִּמְכּוֹר",
-            "translit": "тимко́р"
+            "translit": "тимко́р",
+            "audio": "/audio/paal-6-sell-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נמכור",
             "niqqud": "נִמְכּוֹר",
-            "translit": "нимко́р"
+            "translit": "нимко́р",
+            "audio": "/audio/paal-6-sell-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תמכרו",
             "niqqud": "תִּמְכְּרוּ",
-            "translit": "тимкру́"
+            "translit": "тимкру́",
+            "audio": "/audio/paal-6-sell-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תמכרנה",
             "niqqud": "תִּמְכֹּרְנָה",
-            "translit": "тимко́рна"
+            "translit": "тимко́рна",
+            "audio": "/audio/paal-6-sell-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "ימכרו",
             "niqqud": "יִמְכְּרוּ",
-            "translit": "имкру́"
+            "translit": "имкру́",
+            "audio": "/audio/paal-6-sell-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "ימכרנה",
             "niqqud": "יִמְכֹּרְנָה",
-            "translit": "имко́рна"
+            "translit": "имко́рна",
+            "audio": "/audio/paal-6-sell-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "מכור",
             "niqqud": "מְכוֹר",
-            "translit": "мхор"
+            "translit": "мхор",
+            "audio": "/audio/paal-6-sell-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "מכרי",
             "niqqud": "מִכְרִי",
-            "translit": "михри́"
+            "translit": "михри́",
+            "audio": "/audio/paal-6-sell-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "מכרו",
             "niqqud": "מִכְרוּ",
-            "translit": "михру́"
+            "translit": "михру́",
+            "audio": "/audio/paal-6-sell-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "מכרנה",
             "niqqud": "מְכֹרְנָה",
-            "translit": "мхо́рна"
+            "translit": "мхо́рна",
+            "audio": "/audio/paal-6-sell-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-sell.mp3"
     },
     {
       "id": "paal-6-angry",
@@ -509,7 +598,8 @@
       "example": {
         "he": "היא כועסת עליו",
         "translit": "хи коесет алав",
-        "ru": "Она сердится на него"
+        "ru": "Она сердится на него",
+        "audio": "/audio/paal-6-angry-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -518,147 +608,175 @@
           "ms": {
             "he": "כועס",
             "niqqud": "כּוֹעֵס",
-            "translit": "кое́с"
+            "translit": "кое́с",
+            "audio": "/audio/paal-6-angry-form-present-ms.mp3"
           },
           "fs": {
             "he": "כועסת",
             "niqqud": "כּוֹעֶסֶת",
-            "translit": "кое́сет"
+            "translit": "кое́сет",
+            "audio": "/audio/paal-6-angry-form-present-fs.mp3"
           },
           "mp": {
             "he": "כועסים",
             "niqqud": "כּוֹעֲסִים",
-            "translit": "коаси́м"
+            "translit": "коаси́м",
+            "audio": "/audio/paal-6-angry-form-present-mp.mp3"
           },
           "fp": {
             "he": "כועסות",
             "niqqud": "כּוֹעֲסוֹת",
-            "translit": "коасо́т"
+            "translit": "коасо́т",
+            "audio": "/audio/paal-6-angry-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "כעסתי",
             "niqqud": "כָּעַסְתִּי",
-            "translit": "каа́сти"
+            "translit": "каа́сти",
+            "audio": "/audio/paal-6-angry-form-past-1s.mp3"
           },
           "2ms": {
             "he": "כעסת",
             "niqqud": "כָּעַסְתָּ",
-            "translit": "каа́ста"
+            "translit": "каа́ста",
+            "audio": "/audio/paal-6-angry-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "כעסת",
             "niqqud": "כָּעַסְתְּ",
-            "translit": "каа́ст"
+            "translit": "каа́ст",
+            "audio": "/audio/paal-6-angry-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "כעס",
             "niqqud": "כָּעַס",
-            "translit": "каа́с"
+            "translit": "каа́с",
+            "audio": "/audio/paal-6-angry-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "כעסה",
             "niqqud": "כָּעֲסָה",
-            "translit": "кааса́"
+            "translit": "кааса́",
+            "audio": "/audio/paal-6-angry-form-past-3fs.mp3"
           },
           "1p": {
             "he": "כעסנו",
             "niqqud": "כָּעַסְנוּ",
-            "translit": "каа́сну"
+            "translit": "каа́сну",
+            "audio": "/audio/paal-6-angry-form-past-1p.mp3"
           },
           "2mp": {
             "he": "כעסתם",
             "niqqud": "כְּעַסְתֶּם",
-            "translit": "касте́м"
+            "translit": "касте́м",
+            "audio": "/audio/paal-6-angry-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "כעסתן",
             "niqqud": "כְּעַסְתֶּן",
-            "translit": "касте́н"
+            "translit": "касте́н",
+            "audio": "/audio/paal-6-angry-form-past-2fp.mp3"
           },
           "3p": {
             "he": "כעסו",
             "niqqud": "כָּעֲסוּ",
-            "translit": "каасу́"
+            "translit": "каасу́",
+            "audio": "/audio/paal-6-angry-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אכעס",
             "niqqud": "אֶכְעַס",
-            "translit": "эха́с"
+            "translit": "эха́с",
+            "audio": "/audio/paal-6-angry-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תכעס",
             "niqqud": "תִּכְעַס",
-            "translit": "тиха́с"
+            "translit": "тиха́с",
+            "audio": "/audio/paal-6-angry-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תכעסי",
             "niqqud": "תִּכְעֲסִי",
-            "translit": "тихаси́"
+            "translit": "тихаси́",
+            "audio": "/audio/paal-6-angry-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יכעס",
             "niqqud": "יִכְעַס",
-            "translit": "иха́с"
+            "translit": "иха́с",
+            "audio": "/audio/paal-6-angry-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תכעס",
             "niqqud": "תִּכְעַס",
-            "translit": "тиха́с"
+            "translit": "тиха́с",
+            "audio": "/audio/paal-6-angry-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נכעס",
             "niqqud": "נִכְעַס",
-            "translit": "ниха́с"
+            "translit": "ниха́с",
+            "audio": "/audio/paal-6-angry-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תכעסו",
             "niqqud": "תִּכְעֲסוּ",
-            "translit": "тихасу́"
+            "translit": "тихасу́",
+            "audio": "/audio/paal-6-angry-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תכעסנה",
             "niqqud": "תִּכְעַסְנָה",
-            "translit": "тиха́сна"
+            "translit": "тиха́сна",
+            "audio": "/audio/paal-6-angry-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יכעסו",
             "niqqud": "יִכְעֲסוּ",
-            "translit": "ихасу́"
+            "translit": "ихасу́",
+            "audio": "/audio/paal-6-angry-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יכעסנה",
             "niqqud": "יִכְעַסְנָה",
-            "translit": "иха́сна"
+            "translit": "иха́сна",
+            "audio": "/audio/paal-6-angry-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "כעס",
             "niqqud": "כְּעַס",
-            "translit": "кас"
+            "translit": "кас",
+            "audio": "/audio/paal-6-angry-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "כעסי",
             "niqqud": "כַּעֲסִי",
-            "translit": "кааси́"
+            "translit": "кааси́",
+            "audio": "/audio/paal-6-angry-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "כעסו",
             "niqqud": "כַּעֲסוּ",
-            "translit": "каасу́"
+            "translit": "каасу́",
+            "audio": "/audio/paal-6-angry-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "כעסנה",
             "niqqud": "כְּעַסְנָה",
-            "translit": "ка́сна"
+            "translit": "ка́сна",
+            "audio": "/audio/paal-6-angry-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-angry.mp3"
     },
     {
       "id": "paal-6-taste",
@@ -674,8 +792,10 @@
         "female": {
           "he": "אני טועמת מרק",
           "translit": "ани тоемет марак",
-          "ru": "Я пробую суп"
-        }
+          "ru": "Я пробую суп",
+          "audio": "/audio/paal-6-taste-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-6-taste-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -684,147 +804,175 @@
           "ms": {
             "he": "טועם",
             "niqqud": "טוֹעֵם",
-            "translit": "тое́м"
+            "translit": "тое́м",
+            "audio": "/audio/paal-6-taste-form-present-ms.mp3"
           },
           "fs": {
             "he": "טועמת",
             "niqqud": "טוֹעֶמֶת",
-            "translit": "тое́мет"
+            "translit": "тое́мет",
+            "audio": "/audio/paal-6-taste-form-present-fs.mp3"
           },
           "mp": {
             "he": "טועמים",
             "niqqud": "טוֹעֲמִים",
-            "translit": "тоами́м"
+            "translit": "тоами́м",
+            "audio": "/audio/paal-6-taste-form-present-mp.mp3"
           },
           "fp": {
             "he": "טועמות",
             "niqqud": "טוֹעֲמוֹת",
-            "translit": "тоамо́т"
+            "translit": "тоамо́т",
+            "audio": "/audio/paal-6-taste-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "טעמתי",
             "niqqud": "טָעַמְתִּי",
-            "translit": "таа́мти"
+            "translit": "таа́мти",
+            "audio": "/audio/paal-6-taste-form-past-1s.mp3"
           },
           "2ms": {
             "he": "טעמת",
             "niqqud": "טָעַמְתָּ",
-            "translit": "таа́мта"
+            "translit": "таа́мта",
+            "audio": "/audio/paal-6-taste-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "טעמת",
             "niqqud": "טָעַמְתְּ",
-            "translit": "таа́мт"
+            "translit": "таа́мт",
+            "audio": "/audio/paal-6-taste-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "טעם",
             "niqqud": "טָעַם",
-            "translit": "таа́м"
+            "translit": "таа́м",
+            "audio": "/audio/paal-6-taste-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "טעמה",
             "niqqud": "טָעֲמָה",
-            "translit": "таама́"
+            "translit": "таама́",
+            "audio": "/audio/paal-6-taste-form-past-3fs.mp3"
           },
           "1p": {
             "he": "טעמנו",
             "niqqud": "טָעַמְנוּ",
-            "translit": "таа́мну"
+            "translit": "таа́мну",
+            "audio": "/audio/paal-6-taste-form-past-1p.mp3"
           },
           "2mp": {
             "he": "טעמתם",
             "niqqud": "טְעַמְתֶּם",
-            "translit": "тамте́м"
+            "translit": "тамте́м",
+            "audio": "/audio/paal-6-taste-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "טעמתן",
             "niqqud": "טְעַמְתֶּן",
-            "translit": "тамте́н"
+            "translit": "тамте́н",
+            "audio": "/audio/paal-6-taste-form-past-2fp.mp3"
           },
           "3p": {
             "he": "טעמו",
             "niqqud": "טָעֲמוּ",
-            "translit": "тааму́"
+            "translit": "тааму́",
+            "audio": "/audio/paal-6-taste-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אטעם",
             "niqqud": "אֶטְעַם",
-            "translit": "эта́м"
+            "translit": "эта́м",
+            "audio": "/audio/paal-6-taste-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תטעם",
             "niqqud": "תִּטְעַם",
-            "translit": "тита́м"
+            "translit": "тита́м",
+            "audio": "/audio/paal-6-taste-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תטעמי",
             "niqqud": "תִּטְעֲמִי",
-            "translit": "титами́"
+            "translit": "титами́",
+            "audio": "/audio/paal-6-taste-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יטעם",
             "niqqud": "יִטְעַם",
-            "translit": "ита́м"
+            "translit": "ита́м",
+            "audio": "/audio/paal-6-taste-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תטעם",
             "niqqud": "תִּטְעַם",
-            "translit": "тита́м"
+            "translit": "тита́м",
+            "audio": "/audio/paal-6-taste-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נטעם",
             "niqqud": "נִטְעַם",
-            "translit": "нита́м"
+            "translit": "нита́м",
+            "audio": "/audio/paal-6-taste-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תטעמו",
             "niqqud": "תִּטְעֲמוּ",
-            "translit": "титаму́"
+            "translit": "титаму́",
+            "audio": "/audio/paal-6-taste-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תטעמנה",
             "niqqud": "תִּטְעַמְנָה",
-            "translit": "тита́мна"
+            "translit": "тита́мна",
+            "audio": "/audio/paal-6-taste-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יטעמו",
             "niqqud": "יִטְעֲמוּ",
-            "translit": "итаму́"
+            "translit": "итаму́",
+            "audio": "/audio/paal-6-taste-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יטעמנה",
             "niqqud": "יִטְעַמְנָה",
-            "translit": "ита́мна"
+            "translit": "ита́мна",
+            "audio": "/audio/paal-6-taste-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "טעם",
             "niqqud": "טְעַם",
-            "translit": "там"
+            "translit": "там",
+            "audio": "/audio/paal-6-taste-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "טעמי",
             "niqqud": "טַעֲמִי",
-            "translit": "таами́"
+            "translit": "таами́",
+            "audio": "/audio/paal-6-taste-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "טעמו",
             "niqqud": "טַעֲמוּ",
-            "translit": "тааму́"
+            "translit": "тааму́",
+            "audio": "/audio/paal-6-taste-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "טעמנה",
             "niqqud": "טְעַמְנָה",
-            "translit": "та́мна"
+            "translit": "та́мна",
+            "audio": "/audio/paal-6-taste-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-taste.mp3"
     },
     {
       "id": "paal-6-dream",
@@ -835,7 +983,8 @@
       "example": {
         "he": "הוא חולם בלילה",
         "translit": "ху холем балайла",
-        "ru": "Ему снятся сны ночью"
+        "ru": "Ему снятся сны ночью",
+        "audio": "/audio/paal-6-dream-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -844,147 +993,175 @@
           "ms": {
             "he": "חולם",
             "niqqud": "חוֹלֵם",
-            "translit": "холе́м"
+            "translit": "холе́м",
+            "audio": "/audio/paal-6-dream-form-present-ms.mp3"
           },
           "fs": {
             "he": "חולמת",
             "niqqud": "חוֹלֶמֶת",
-            "translit": "холе́мет"
+            "translit": "холе́мет",
+            "audio": "/audio/paal-6-dream-form-present-fs.mp3"
           },
           "mp": {
             "he": "חולמים",
             "niqqud": "חוֹלְמִים",
-            "translit": "холми́м"
+            "translit": "холми́м",
+            "audio": "/audio/paal-6-dream-form-present-mp.mp3"
           },
           "fp": {
             "he": "חולמות",
             "niqqud": "חוֹלְמוֹת",
-            "translit": "холмо́т"
+            "translit": "холмо́т",
+            "audio": "/audio/paal-6-dream-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "חלמתי",
             "niqqud": "חָלַמְתִּי",
-            "translit": "хала́мти"
+            "translit": "хала́мти",
+            "audio": "/audio/paal-6-dream-form-past-1s.mp3"
           },
           "2ms": {
             "he": "חלמת",
             "niqqud": "חָלַמְתָּ",
-            "translit": "хала́мта"
+            "translit": "хала́мта",
+            "audio": "/audio/paal-6-dream-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "חלמת",
             "niqqud": "חָלַמְתְּ",
-            "translit": "хала́мт"
+            "translit": "хала́мт",
+            "audio": "/audio/paal-6-dream-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "חלם",
             "niqqud": "חָלַם",
-            "translit": "хала́м"
+            "translit": "хала́м",
+            "audio": "/audio/paal-6-dream-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "חלמה",
             "niqqud": "חָלְמָה",
-            "translit": "халма́"
+            "translit": "халма́",
+            "audio": "/audio/paal-6-dream-form-past-3fs.mp3"
           },
           "1p": {
             "he": "חלמנו",
             "niqqud": "חָלַמְנוּ",
-            "translit": "хала́мну"
+            "translit": "хала́мну",
+            "audio": "/audio/paal-6-dream-form-past-1p.mp3"
           },
           "2mp": {
             "he": "חלמתם",
             "niqqud": "חֲלַמְתֶּם",
-            "translit": "халамте́м"
+            "translit": "халамте́м",
+            "audio": "/audio/paal-6-dream-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "חלמתן",
             "niqqud": "חֲלַמְתֶּן",
-            "translit": "халамте́н"
+            "translit": "халамте́н",
+            "audio": "/audio/paal-6-dream-form-past-2fp.mp3"
           },
           "3p": {
             "he": "חלמו",
             "niqqud": "חָלְמוּ",
-            "translit": "халму́"
+            "translit": "халму́",
+            "audio": "/audio/paal-6-dream-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אחלום",
             "niqqud": "אֶחֱלוֹם",
-            "translit": "эхэло́м"
+            "translit": "эхэло́м",
+            "audio": "/audio/paal-6-dream-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תחלום",
             "niqqud": "תַּחֲלוֹם",
-            "translit": "тахало́м"
+            "translit": "тахало́м",
+            "audio": "/audio/paal-6-dream-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תחלמי",
             "niqqud": "תַּחַלְמִי",
-            "translit": "тахалми́"
+            "translit": "тахалми́",
+            "audio": "/audio/paal-6-dream-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יחלום",
             "niqqud": "יַחֲלוֹם",
-            "translit": "яхало́м"
+            "translit": "яхало́м",
+            "audio": "/audio/paal-6-dream-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תחלום",
             "niqqud": "תַּחֲלוֹם",
-            "translit": "тахало́м"
+            "translit": "тахало́м",
+            "audio": "/audio/paal-6-dream-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נחלום",
             "niqqud": "נַחֲלוֹם",
-            "translit": "нахало́м"
+            "translit": "нахало́м",
+            "audio": "/audio/paal-6-dream-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תחלמו",
             "niqqud": "תַּחַלְמוּ",
-            "translit": "тахалму́"
+            "translit": "тахалму́",
+            "audio": "/audio/paal-6-dream-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תחלמנה",
             "niqqud": "תַּחֲלֹמְנָה",
-            "translit": "тахало́мна"
+            "translit": "тахало́мна",
+            "audio": "/audio/paal-6-dream-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יחלמו",
             "niqqud": "יַחַלְמוּ",
-            "translit": "яхалму́"
+            "translit": "яхалму́",
+            "audio": "/audio/paal-6-dream-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יחלמנה",
             "niqqud": "יַחֲלֹמְנָה",
-            "translit": "яхало́мна"
+            "translit": "яхало́мна",
+            "audio": "/audio/paal-6-dream-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "חלום",
             "niqqud": "חֲלוֹם",
-            "translit": "хало́м"
+            "translit": "хало́м",
+            "audio": "/audio/paal-6-dream-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "חלמי",
             "niqqud": "חִלְמִי",
-            "translit": "хилми́"
+            "translit": "хилми́",
+            "audio": "/audio/paal-6-dream-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "חלמו",
             "niqqud": "חִלְמוּ",
-            "translit": "хилму́"
+            "translit": "хилму́",
+            "audio": "/audio/paal-6-dream-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "חלמנה",
             "niqqud": "חֲלֹמְנָה",
-            "translit": "хало́мна"
+            "translit": "хало́мна",
+            "audio": "/audio/paal-6-dream-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-dream.mp3"
     },
     {
       "id": "paal-6-cut",
@@ -1000,8 +1177,10 @@
         "female": {
           "he": "אני חותכת עגבנייה",
           "translit": "ани хотехет агвания",
-          "ru": "Я режу помидор"
-        }
+          "ru": "Я режу помидор",
+          "audio": "/audio/paal-6-cut-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-6-cut-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1010,147 +1189,175 @@
           "ms": {
             "he": "חותך",
             "niqqud": "חוֹתֵךְ",
-            "translit": "хоте́х"
+            "translit": "хоте́х",
+            "audio": "/audio/paal-6-cut-form-present-ms.mp3"
           },
           "fs": {
             "he": "חותכת",
             "niqqud": "חוֹתֶכֶת",
-            "translit": "хоте́хет"
+            "translit": "хоте́хет",
+            "audio": "/audio/paal-6-cut-form-present-fs.mp3"
           },
           "mp": {
             "he": "חותכים",
             "niqqud": "חוֹתְכִים",
-            "translit": "хотхи́м"
+            "translit": "хотхи́м",
+            "audio": "/audio/paal-6-cut-form-present-mp.mp3"
           },
           "fp": {
             "he": "חותכות",
             "niqqud": "חוֹתְכוֹת",
-            "translit": "хотхо́т"
+            "translit": "хотхо́т",
+            "audio": "/audio/paal-6-cut-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "חתכתי",
             "niqqud": "חָתַכְתִּי",
-            "translit": "хата́хти"
+            "translit": "хата́хти",
+            "audio": "/audio/paal-6-cut-form-past-1s.mp3"
           },
           "2ms": {
             "he": "חתכת",
             "niqqud": "חָתַכְתָּ",
-            "translit": "хата́хта"
+            "translit": "хата́хта",
+            "audio": "/audio/paal-6-cut-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "חתכת",
             "niqqud": "חָתַכְתְּ",
-            "translit": "хата́хт"
+            "translit": "хата́хт",
+            "audio": "/audio/paal-6-cut-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "חתך",
             "niqqud": "חָתַךְ",
-            "translit": "хата́х"
+            "translit": "хата́х",
+            "audio": "/audio/paal-6-cut-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "חתכה",
             "niqqud": "חָתְכָה",
-            "translit": "хатха́"
+            "translit": "хатха́",
+            "audio": "/audio/paal-6-cut-form-past-3fs.mp3"
           },
           "1p": {
             "he": "חתכנו",
             "niqqud": "חָתַכְנוּ",
-            "translit": "хата́хну"
+            "translit": "хата́хну",
+            "audio": "/audio/paal-6-cut-form-past-1p.mp3"
           },
           "2mp": {
             "he": "חתכתם",
             "niqqud": "חֲתַכְתֶּם",
-            "translit": "хатахте́м"
+            "translit": "хатахте́м",
+            "audio": "/audio/paal-6-cut-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "חתכתן",
             "niqqud": "חֲתַכְתֶּן",
-            "translit": "хатахте́н"
+            "translit": "хатахте́н",
+            "audio": "/audio/paal-6-cut-form-past-2fp.mp3"
           },
           "3p": {
             "he": "חתכו",
             "niqqud": "חָתְכוּ",
-            "translit": "хатху́"
+            "translit": "хатху́",
+            "audio": "/audio/paal-6-cut-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אחתוך",
             "niqqud": "אֶחְתּוֹךְ",
-            "translit": "эхто́х"
+            "translit": "эхто́х",
+            "audio": "/audio/paal-6-cut-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תחתוך",
             "niqqud": "תַּחְתּוֹךְ",
-            "translit": "тахто́х"
+            "translit": "тахто́х",
+            "audio": "/audio/paal-6-cut-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תחתכי",
             "niqqud": "תַּחְתְּכִי",
-            "translit": "тахтхи́"
+            "translit": "тахтхи́",
+            "audio": "/audio/paal-6-cut-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יחתוך",
             "niqqud": "יַחְתּוֹךְ",
-            "translit": "яхто́х"
+            "translit": "яхто́х",
+            "audio": "/audio/paal-6-cut-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תחתוך",
             "niqqud": "תַּחְתּוֹךְ",
-            "translit": "тахто́х"
+            "translit": "тахто́х",
+            "audio": "/audio/paal-6-cut-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נחתוך",
             "niqqud": "נַחְתּוֹךְ",
-            "translit": "нахто́х"
+            "translit": "нахто́х",
+            "audio": "/audio/paal-6-cut-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תחתכו",
             "niqqud": "תַּחְתְּכוּ",
-            "translit": "тахтху́"
+            "translit": "тахтху́",
+            "audio": "/audio/paal-6-cut-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תחתכנה",
             "niqqud": "תַּחְתֹּכְנָה",
-            "translit": "тахто́хна"
+            "translit": "тахто́хна",
+            "audio": "/audio/paal-6-cut-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יחתכו",
             "niqqud": "יַחְתְּכוּ",
-            "translit": "яхтху́"
+            "translit": "яхтху́",
+            "audio": "/audio/paal-6-cut-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יחתכנה",
             "niqqud": "יַחְתֹּכְנָה",
-            "translit": "яхто́хна"
+            "translit": "яхто́хна",
+            "audio": "/audio/paal-6-cut-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "חתוך",
             "niqqud": "חֲתוֹךְ",
-            "translit": "хато́х"
+            "translit": "хато́х",
+            "audio": "/audio/paal-6-cut-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "חתכי",
             "niqqud": "חִתְכִי",
-            "translit": "хитхи́"
+            "translit": "хитхи́",
+            "audio": "/audio/paal-6-cut-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "חתכו",
             "niqqud": "חִתְכוּ",
-            "translit": "хитху́"
+            "translit": "хитху́",
+            "audio": "/audio/paal-6-cut-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "חתכנה",
             "niqqud": "חֲתֹכְנָה",
-            "translit": "хато́хна"
+            "translit": "хато́хна",
+            "audio": "/audio/paal-6-cut-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-cut.mp3"
     },
     {
       "id": "paal-6-set",
@@ -1166,8 +1373,10 @@
         "female": {
           "he": "אני קובעת פגישה",
           "translit": "ани коваат пгиша",
-          "ru": "Я назначаю встречу"
-        }
+          "ru": "Я назначаю встречу",
+          "audio": "/audio/paal-6-set-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-6-set-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1176,147 +1385,175 @@
           "ms": {
             "he": "קובע",
             "niqqud": "קוֹבֵעַ",
-            "translit": "кове́а"
+            "translit": "кове́а",
+            "audio": "/audio/paal-6-set-form-present-ms.mp3"
           },
           "fs": {
             "he": "קובעת",
             "niqqud": "קוֹבַעַת",
-            "translit": "кова́ат"
+            "translit": "кова́ат",
+            "audio": "/audio/paal-6-set-form-present-fs.mp3"
           },
           "mp": {
             "he": "קובעים",
             "niqqud": "קוֹבְעִים",
-            "translit": "кови́м"
+            "translit": "кови́м",
+            "audio": "/audio/paal-6-set-form-present-mp.mp3"
           },
           "fp": {
             "he": "קובעות",
             "niqqud": "קוֹבְעוֹת",
-            "translit": "ково́т"
+            "translit": "ково́т",
+            "audio": "/audio/paal-6-set-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "קבעתי",
             "niqqud": "קָבַעְתִּי",
-            "translit": "кава́ти"
+            "translit": "кава́ти",
+            "audio": "/audio/paal-6-set-form-past-1s.mp3"
           },
           "2ms": {
             "he": "קבעת",
             "niqqud": "קָבַעְתָּ",
-            "translit": "кава́та"
+            "translit": "кава́та",
+            "audio": "/audio/paal-6-set-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "קבעת",
             "niqqud": "קָבַעְתְּ",
-            "translit": "кава́т"
+            "translit": "кава́т",
+            "audio": "/audio/paal-6-set-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "קבע",
             "niqqud": "קָבַע",
-            "translit": "кава́"
+            "translit": "кава́",
+            "audio": "/audio/paal-6-set-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "קבעה",
             "niqqud": "קָבְעָה",
-            "translit": "кава́"
+            "translit": "кава́",
+            "audio": "/audio/paal-6-set-form-past-3fs.mp3"
           },
           "1p": {
             "he": "קבענו",
             "niqqud": "קָבַעְנוּ",
-            "translit": "кава́ну"
+            "translit": "кава́ну",
+            "audio": "/audio/paal-6-set-form-past-1p.mp3"
           },
           "2mp": {
             "he": "קבעתם",
             "niqqud": "קְבַעְתֶּם",
-            "translit": "квате́м"
+            "translit": "квате́м",
+            "audio": "/audio/paal-6-set-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "קבעתן",
             "niqqud": "קְבַעְתֶּן",
-            "translit": "квате́н"
+            "translit": "квате́н",
+            "audio": "/audio/paal-6-set-form-past-2fp.mp3"
           },
           "3p": {
             "he": "קבעו",
             "niqqud": "קָבְעוּ",
-            "translit": "каву́"
+            "translit": "каву́",
+            "audio": "/audio/paal-6-set-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אקבע",
             "niqqud": "אֶקְבַּע",
-            "translit": "экба́"
+            "translit": "экба́",
+            "audio": "/audio/paal-6-set-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תקבע",
             "niqqud": "תִּקְבַּע",
-            "translit": "тикба́"
+            "translit": "тикба́",
+            "audio": "/audio/paal-6-set-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תקבעי",
             "niqqud": "תִּקְבְּעִי",
-            "translit": "тикби́"
+            "translit": "тикби́",
+            "audio": "/audio/paal-6-set-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יקבע",
             "niqqud": "יִקְבַּע",
-            "translit": "икба́"
+            "translit": "икба́",
+            "audio": "/audio/paal-6-set-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תקבע",
             "niqqud": "תִּקְבַּע",
-            "translit": "тикба́"
+            "translit": "тикба́",
+            "audio": "/audio/paal-6-set-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נקבע",
             "niqqud": "נִקְבַּע",
-            "translit": "никба́"
+            "translit": "никба́",
+            "audio": "/audio/paal-6-set-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תקבעו",
             "niqqud": "תִּקְבְּעוּ",
-            "translit": "тикбу́"
+            "translit": "тикбу́",
+            "audio": "/audio/paal-6-set-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תקבענה",
             "niqqud": "תִּקְבַּעְנָה",
-            "translit": "тикба́на"
+            "translit": "тикба́на",
+            "audio": "/audio/paal-6-set-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יקבעו",
             "niqqud": "יִקְבְּעוּ",
-            "translit": "икбу́"
+            "translit": "икбу́",
+            "audio": "/audio/paal-6-set-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יקבענה",
             "niqqud": "יִקְבַּעְנָה",
-            "translit": "икба́на"
+            "translit": "икба́на",
+            "audio": "/audio/paal-6-set-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "קבע",
             "niqqud": "קְבַע",
-            "translit": "ква"
+            "translit": "ква",
+            "audio": "/audio/paal-6-set-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "קבעי",
             "niqqud": "קִבְעִי",
-            "translit": "киви́"
+            "translit": "киви́",
+            "audio": "/audio/paal-6-set-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "קבעו",
             "niqqud": "קִבְעוּ",
-            "translit": "киву́"
+            "translit": "киву́",
+            "audio": "/audio/paal-6-set-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "קבענה",
             "niqqud": "קְבַעְנָה",
-            "translit": "ква́на"
+            "translit": "ква́на",
+            "audio": "/audio/paal-6-set-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-set.mp3"
     },
     {
       "id": "paal-6-hurt",
@@ -1327,7 +1564,8 @@
       "example": {
         "he": "הוא פוגע בי",
         "translit": "ху погеа би",
-        "ru": "Он меня обижает"
+        "ru": "Он меня обижает",
+        "audio": "/audio/paal-6-hurt-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1336,147 +1574,175 @@
           "ms": {
             "he": "פוגע",
             "niqqud": "פּוֹגֵעַ",
-            "translit": "поге́а"
+            "translit": "поге́а",
+            "audio": "/audio/paal-6-hurt-form-present-ms.mp3"
           },
           "fs": {
             "he": "פוגעת",
             "niqqud": "פּוֹגַעַת",
-            "translit": "пога́ат"
+            "translit": "пога́ат",
+            "audio": "/audio/paal-6-hurt-form-present-fs.mp3"
           },
           "mp": {
             "he": "פוגעים",
             "niqqud": "פּוֹגְעִים",
-            "translit": "поги́м"
+            "translit": "поги́м",
+            "audio": "/audio/paal-6-hurt-form-present-mp.mp3"
           },
           "fp": {
             "he": "פוגעות",
             "niqqud": "פּוֹגְעוֹת",
-            "translit": "пого́т"
+            "translit": "пого́т",
+            "audio": "/audio/paal-6-hurt-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "פגעתי",
             "niqqud": "פָּגַעְתִּי",
-            "translit": "пага́ти"
+            "translit": "пага́ти",
+            "audio": "/audio/paal-6-hurt-form-past-1s.mp3"
           },
           "2ms": {
             "he": "פגעת",
             "niqqud": "פָּגַעְתָּ",
-            "translit": "пага́та"
+            "translit": "пага́та",
+            "audio": "/audio/paal-6-hurt-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "פגעת",
             "niqqud": "פָּגַעְתְּ",
-            "translit": "пага́т"
+            "translit": "пага́т",
+            "audio": "/audio/paal-6-hurt-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "פגע",
             "niqqud": "פָּגַע",
-            "translit": "пага́"
+            "translit": "пага́",
+            "audio": "/audio/paal-6-hurt-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "פגעה",
             "niqqud": "פָּגְעָה",
-            "translit": "пага́"
+            "translit": "пага́",
+            "audio": "/audio/paal-6-hurt-form-past-3fs.mp3"
           },
           "1p": {
             "he": "פגענו",
             "niqqud": "פָּגַעְנוּ",
-            "translit": "пага́ну"
+            "translit": "пага́ну",
+            "audio": "/audio/paal-6-hurt-form-past-1p.mp3"
           },
           "2mp": {
             "he": "פגעתם",
             "niqqud": "פְּגַעְתֶּם",
-            "translit": "пгате́м"
+            "translit": "пгате́м",
+            "audio": "/audio/paal-6-hurt-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "פגעתן",
             "niqqud": "פְּגַעְתֶּן",
-            "translit": "пгате́н"
+            "translit": "пгате́н",
+            "audio": "/audio/paal-6-hurt-form-past-2fp.mp3"
           },
           "3p": {
             "he": "פגעו",
             "niqqud": "פָּגְעוּ",
-            "translit": "пагу́"
+            "translit": "пагу́",
+            "audio": "/audio/paal-6-hurt-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אפגע",
             "niqqud": "אֶפְגַּע",
-            "translit": "эфга́"
+            "translit": "эфга́",
+            "audio": "/audio/paal-6-hurt-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תפגע",
             "niqqud": "תִּפְגַּע",
-            "translit": "тифга́"
+            "translit": "тифга́",
+            "audio": "/audio/paal-6-hurt-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תפגעי",
             "niqqud": "תִּפְגְּעִי",
-            "translit": "тифги́"
+            "translit": "тифги́",
+            "audio": "/audio/paal-6-hurt-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יפגע",
             "niqqud": "יִפְגַּע",
-            "translit": "ифга́"
+            "translit": "ифга́",
+            "audio": "/audio/paal-6-hurt-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תפגע",
             "niqqud": "תִּפְגַּע",
-            "translit": "тифга́"
+            "translit": "тифга́",
+            "audio": "/audio/paal-6-hurt-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נפגע",
             "niqqud": "נִפְגַּע",
-            "translit": "нифга́"
+            "translit": "нифга́",
+            "audio": "/audio/paal-6-hurt-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תפגעו",
             "niqqud": "תִּפְגְּעוּ",
-            "translit": "тифгу́"
+            "translit": "тифгу́",
+            "audio": "/audio/paal-6-hurt-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תפגענה",
             "niqqud": "תִּפְגַּעְנָה",
-            "translit": "тифга́на"
+            "translit": "тифга́на",
+            "audio": "/audio/paal-6-hurt-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יפגעו",
             "niqqud": "יִפְגְּעוּ",
-            "translit": "ифгу́"
+            "translit": "ифгу́",
+            "audio": "/audio/paal-6-hurt-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יפגענה",
             "niqqud": "יִפְגַּעְנָה",
-            "translit": "ифга́на"
+            "translit": "ифга́на",
+            "audio": "/audio/paal-6-hurt-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "פגע",
             "niqqud": "פְּגַע",
-            "translit": "пга"
+            "translit": "пга",
+            "audio": "/audio/paal-6-hurt-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "פגעי",
             "niqqud": "פִּגְעִי",
-            "translit": "пиги́"
+            "translit": "пиги́",
+            "audio": "/audio/paal-6-hurt-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "פגעו",
             "niqqud": "פִּגְעוּ",
-            "translit": "пигу́"
+            "translit": "пигу́",
+            "audio": "/audio/paal-6-hurt-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "פגענה",
             "niqqud": "פְּגַעְנָה",
-            "translit": "пга́на"
+            "translit": "пга́на",
+            "audio": "/audio/paal-6-hurt-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-hurt.mp3"
     },
     {
       "id": "paal-6-forgive",
@@ -1487,7 +1753,8 @@
       "example": {
         "he": "אמא סולחת לי",
         "translit": "има солахат ли",
-        "ru": "Мама меня прощает"
+        "ru": "Мама меня прощает",
+        "audio": "/audio/paal-6-forgive-phrase.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1496,147 +1763,175 @@
           "ms": {
             "he": "סולח",
             "niqqud": "סוֹלֵחַ",
-            "translit": "соле́ах"
+            "translit": "соле́ах",
+            "audio": "/audio/paal-6-forgive-form-present-ms.mp3"
           },
           "fs": {
             "he": "סולחת",
             "niqqud": "סוֹלַחַת",
-            "translit": "сола́хат"
+            "translit": "сола́хат",
+            "audio": "/audio/paal-6-forgive-form-present-fs.mp3"
           },
           "mp": {
             "he": "סולחים",
             "niqqud": "סוֹלְחִים",
-            "translit": "солхи́м"
+            "translit": "солхи́м",
+            "audio": "/audio/paal-6-forgive-form-present-mp.mp3"
           },
           "fp": {
             "he": "סולחות",
             "niqqud": "סוֹלְחוֹת",
-            "translit": "солхо́т"
+            "translit": "солхо́т",
+            "audio": "/audio/paal-6-forgive-form-present-fp.mp3"
           }
         },
         "past": {
           "1s": {
             "he": "סלחתי",
             "niqqud": "סָלַחְתִּי",
-            "translit": "сала́хти"
+            "translit": "сала́хти",
+            "audio": "/audio/paal-6-forgive-form-past-1s.mp3"
           },
           "2ms": {
             "he": "סלחת",
             "niqqud": "סָלַחְתָּ",
-            "translit": "сала́хта"
+            "translit": "сала́хта",
+            "audio": "/audio/paal-6-forgive-form-past-2ms.mp3"
           },
           "2fs": {
             "he": "סלחת",
             "niqqud": "סָלַחְתְּ",
-            "translit": "сала́хт"
+            "translit": "сала́хт",
+            "audio": "/audio/paal-6-forgive-form-past-2fs.mp3"
           },
           "3ms": {
             "he": "סלח",
             "niqqud": "סָלַח",
-            "translit": "сала́х"
+            "translit": "сала́х",
+            "audio": "/audio/paal-6-forgive-form-past-3ms.mp3"
           },
           "3fs": {
             "he": "סלחה",
             "niqqud": "סָלְחָה",
-            "translit": "салха́"
+            "translit": "салха́",
+            "audio": "/audio/paal-6-forgive-form-past-3fs.mp3"
           },
           "1p": {
             "he": "סלחנו",
             "niqqud": "סָלַחְנוּ",
-            "translit": "сала́хну"
+            "translit": "сала́хну",
+            "audio": "/audio/paal-6-forgive-form-past-1p.mp3"
           },
           "2mp": {
             "he": "סלחתם",
             "niqqud": "סְלַחְתֶּם",
-            "translit": "слахте́м"
+            "translit": "слахте́м",
+            "audio": "/audio/paal-6-forgive-form-past-2mp.mp3"
           },
           "2fp": {
             "he": "סלחתן",
             "niqqud": "סְלַחְתֶּן",
-            "translit": "слахте́н"
+            "translit": "слахте́н",
+            "audio": "/audio/paal-6-forgive-form-past-2fp.mp3"
           },
           "3p": {
             "he": "סלחו",
             "niqqud": "סָלְחוּ",
-            "translit": "салху́"
+            "translit": "салху́",
+            "audio": "/audio/paal-6-forgive-form-past-3p.mp3"
           }
         },
         "future": {
           "1s": {
             "he": "אסלח",
             "niqqud": "אֶסְלַח",
-            "translit": "эсла́х"
+            "translit": "эсла́х",
+            "audio": "/audio/paal-6-forgive-form-future-1s.mp3"
           },
           "2ms": {
             "he": "תסלח",
             "niqqud": "תִּסְלַח",
-            "translit": "тисла́х"
+            "translit": "тисла́х",
+            "audio": "/audio/paal-6-forgive-form-future-2ms.mp3"
           },
           "2fs": {
             "he": "תסלחי",
             "niqqud": "תִּסְלְחִי",
-            "translit": "тислхи́"
+            "translit": "тислхи́",
+            "audio": "/audio/paal-6-forgive-form-future-2fs.mp3"
           },
           "3ms": {
             "he": "יסלח",
             "niqqud": "יִסְלַח",
-            "translit": "исла́х"
+            "translit": "исла́х",
+            "audio": "/audio/paal-6-forgive-form-future-3ms.mp3"
           },
           "3fs": {
             "he": "תסלח",
             "niqqud": "תִּסְלַח",
-            "translit": "тисла́х"
+            "translit": "тисла́х",
+            "audio": "/audio/paal-6-forgive-form-future-3fs.mp3"
           },
           "1p": {
             "he": "נסלח",
             "niqqud": "נִסְלַח",
-            "translit": "нисла́х"
+            "translit": "нисла́х",
+            "audio": "/audio/paal-6-forgive-form-future-1p.mp3"
           },
           "2mp": {
             "he": "תסלחו",
             "niqqud": "תִּסְלְחוּ",
-            "translit": "тислху́"
+            "translit": "тислху́",
+            "audio": "/audio/paal-6-forgive-form-future-2mp.mp3"
           },
           "2fp": {
             "he": "תסלחנה",
             "niqqud": "תִּסְלַחְנָה",
-            "translit": "тисла́хна"
+            "translit": "тисла́хна",
+            "audio": "/audio/paal-6-forgive-form-future-2fp.mp3"
           },
           "3mp": {
             "he": "יסלחו",
             "niqqud": "יִסְלְחוּ",
-            "translit": "ислху́"
+            "translit": "ислху́",
+            "audio": "/audio/paal-6-forgive-form-future-3mp.mp3"
           },
           "3fp": {
             "he": "יסלחנה",
             "niqqud": "יִסְלַחְנָה",
-            "translit": "исла́хна"
+            "translit": "исла́хна",
+            "audio": "/audio/paal-6-forgive-form-future-3fp.mp3"
           }
         },
         "imperative": {
           "ms": {
             "he": "סלח",
             "niqqud": "סְלַח",
-            "translit": "слах"
+            "translit": "слах",
+            "audio": "/audio/paal-6-forgive-form-imperative-ms.mp3"
           },
           "fs": {
             "he": "סלחי",
             "niqqud": "סִלְחִי",
-            "translit": "силхи́"
+            "translit": "силхи́",
+            "audio": "/audio/paal-6-forgive-form-imperative-fs.mp3"
           },
           "mp": {
             "he": "סלחו",
             "niqqud": "סִלְחוּ",
-            "translit": "силху́"
+            "translit": "силху́",
+            "audio": "/audio/paal-6-forgive-form-imperative-mp.mp3"
           },
           "fp": {
             "he": "סלחנה",
             "niqqud": "סְלַחְנָה",
-            "translit": "сла́хна"
+            "translit": "сла́хна",
+            "audio": "/audio/paal-6-forgive-form-imperative-fp.mp3"
           }
         }
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/paal-6-forgive.mp3"
     }
   ]
 }
