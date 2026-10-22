@@ -157,7 +157,15 @@ describe("викторина: счётчики, бейджи, статус", () 
   });
 
   it("закрытие темы: последний урок темы выдаёт бейдж темы", async () => {
-    const topic = allLessons.filter((l) => l.topicId === "family");
+    // Самая короткая тема существительных из двух и больше уроков: проход всех её викторин подряд
+    // не должен упираться в минутный лимит распознавания речи, сколько бы уроков ни было в больших темах.
+    const byTopic = new Map<string, typeof allLessons>();
+    for (const l of allLessons.filter((l) => l.section === "nouns")) {
+      byTopic.set(l.topicId, [...(byTopic.get(l.topicId) ?? []), l]);
+    }
+    const [topicId, topic] = [...byTopic.entries()]
+      .filter(([, ls]) => ls.length >= 2)
+      .sort(([a, x], [b, y]) => x.length - y.length || a.localeCompare(b))[0]!;
     expect(topic.length).toBeGreaterThanOrEqual(2);
     // Все слова темы пройдены, кроме викторин: прогресс записан прямо в базу.
     await meOf(1);
@@ -169,10 +177,10 @@ describe("викторина: счётчики, бейджи, статус", () 
       }
     }
     for (const l of topic.slice(0, -1)) await playQuiz(1, await startQuiz(1, l.id));
-    expect(await badgeIds(1)).not.toContain("topic-family");
+    expect(await badgeIds(1)).not.toContain(`topic-${topicId}`);
     const last = topic[topic.length - 1]!;
     const res = await playQuiz(1, await startQuiz(1, last.id));
-    expect(res.result!.play.newBadges).toContain("topic-family");
+    expect(res.result!.play.newBadges).toContain(`topic-${topicId}`);
     expect((await statsRow(1)).topics_closed).toBe(1);
   });
 });
