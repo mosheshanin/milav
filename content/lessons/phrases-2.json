@@ -70,8 +70,10 @@
         "female": {
           "he": "אין בעיה אני באה",
           "translit": "эйн беая ани баа",
-          "ru": "Без проблем, я приду"
-        }
+          "ru": "Без проблем, я приду",
+          "audio": "/audio/phrases-2-no-problem-phrase-f.mp3"
+        },
+        "audio": "/audio/phrases-2-no-problem-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-2-no-problem.svg",
@@ -107,8 +109,10 @@
         "female": {
           "he": "נעים מאוד אני דנה",
           "translit": "наим меод ани дана",
-          "ru": "Очень приятно, я Дана"
-        }
+          "ru": "Очень приятно, я Дана",
+          "audio": "/audio/phrases-2-nice-to-meet-phrase-f.mp3"
+        },
+        "audio": "/audio/phrases-2-nice-to-meet-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-2-nice-to-meet.svg",
@@ -124,7 +128,8 @@
         "he": "אני מצטער אני מאחר",
         "translit": "ани мицтаер ани меахер",
         "ru": "Простите, я опаздываю",
-        "speaker": "m"
+        "speaker": "m",
+        "audio": "/audio/phrases-2-im-sorry-m-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-2-im-sorry-m.svg",

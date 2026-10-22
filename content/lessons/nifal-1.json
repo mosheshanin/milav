@@ -22,8 +22,10 @@
         "female": {
           "he": "אני נכנסת פנימה",
           "translit": "ани нихнесет пнима",
-          "ru": "Я захожу внутрь"
-        }
+          "ru": "Я захожу внутрь",
+          "audio": "/audio/nifal-1-enter-phrase-f.mp3"
+        },
+        "audio": "/audio/nifal-1-enter-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -216,8 +218,10 @@
         "female": {
           "he": "אני נשארת כאן",
           "translit": "ани нишерет кан",
-          "ru": "Я остаюсь здесь"
-        }
+          "ru": "Я остаюсь здесь",
+          "audio": "/audio/nifal-1-stay-phrase-f.mp3"
+        },
+        "audio": "/audio/nifal-1-stay-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -410,8 +414,10 @@
         "female": {
           "he": "אני נפגשת עם חבר",
           "translit": "ани нифгешет им хавер",
-          "ru": "Я встречаюсь с другом"
-        }
+          "ru": "Я встречаюсь с другом",
+          "audio": "/audio/nifal-1-meet-phrase-f.mp3"
+        },
+        "audio": "/audio/nifal-1-meet-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -1393,8 +1399,10 @@
         "female": {
           "he": "אני נזכרת בשיר",
           "translit": "ани низкерет бешир",
-          "ru": "Я вспоминаю песню"
-        }
+          "ru": "Я вспоминаю песню",
+          "audio": "/audio/nifal-1-recall-phrase-f.mp3"
+        },
+        "audio": "/audio/nifal-1-recall-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",
@@ -1587,8 +1595,10 @@
         "female": {
           "he": "אני נפרדת מחבר",
           "translit": "ани нифредет мехавер",
-          "ru": "Я прощаюсь с другом"
-        }
+          "ru": "Я прощаюсь с другом",
+          "audio": "/audio/nifal-1-part-phrase-f.mp3"
+        },
+        "audio": "/audio/nifal-1-part-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",

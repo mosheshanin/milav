@@ -22,8 +22,10 @@
         "female": {
           "he": "אני מתרגשת לפני מבחן",
           "translit": "ани митрагешет лифней мивхан",
-          "ru": "Я волнуюсь перед экзаменом"
-        }
+          "ru": "Я волнуюсь перед экзаменом",
+          "audio": "/audio/hitpael-2-excite-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-excite-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -216,8 +218,10 @@
         "female": {
           "he": "אני מתלהבת מרעיון",
           "translit": "ани митлахевет мераайон",
-          "ru": "Я в восторге от идеи"
-        }
+          "ru": "Я в восторге от идеи",
+          "audio": "/audio/hitpael-2-enthuse-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-enthuse-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -599,8 +603,10 @@
         "female": {
           "he": "אני מתלבטת הרבה",
           "translit": "ани митлабетет харбе",
-          "ru": "Я много сомневаюсь"
-        }
+          "ru": "Я много сомневаюсь",
+          "audio": "/audio/hitpael-2-doubt-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-doubt-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -793,8 +799,10 @@
         "female": {
           "he": "אני מתנצלת על איחור",
           "translit": "ани митнацелет аль ихур",
-          "ru": "Я извиняюсь за опоздание"
-        }
+          "ru": "Я извиняюсь за опоздание",
+          "audio": "/audio/hitpael-2-apologize-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-apologize-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -987,8 +995,10 @@
         "female": {
           "he": "אני מתרשמת מאוד",
           "translit": "ани митрашемет меод",
-          "ru": "Я под большим впечатлением"
-        }
+          "ru": "Я под большим впечатлением",
+          "audio": "/audio/hitpael-2-impressed-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-impressed-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1181,8 +1191,10 @@
         "female": {
           "he": "אני מתפעלת ממנו",
           "translit": "ани митпаелет мимено",
-          "ru": "Я восхищаюсь им"
-        }
+          "ru": "Я восхищаюсь им",
+          "audio": "/audio/hitpael-2-admire-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-2-admire-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",

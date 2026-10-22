@@ -22,8 +22,10 @@
         "female": {
           "he": "אני הולכת לעבודה",
           "translit": "ани холехет леавода",
-          "ru": "Я иду на работу"
-        }
+          "ru": "Я иду на работу",
+          "audio": "/audio/weak-1-go-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-go-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -219,8 +221,10 @@
         "female": {
           "he": "אני אוכלת לחם",
           "translit": "ани охелет лехем",
-          "ru": "Я ем хлеб"
-        }
+          "ru": "Я ем хлеб",
+          "audio": "/audio/weak-1-eat-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-eat-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -416,8 +420,10 @@
         "female": {
           "he": "אני יודעת עברית",
           "translit": "ани йодаат иврит",
-          "ru": "Я знаю иврит"
-        }
+          "ru": "Я знаю иврит",
+          "audio": "/audio/weak-1-know-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-know-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -588,8 +594,10 @@
           "he": "אני רוצה מים",
           "niqqud": "אני רוֹצָה מים",
           "translit": "ани роца маим",
-          "ru": "Я хочу воды"
-        }
+          "ru": "Я хочу воды",
+          "audio": "/audio/weak-1-want-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-want-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -759,8 +767,10 @@
         "female": {
           "he": "אני באה מחר",
           "translit": "ани баа махар",
-          "ru": "Я приду завтра"
-        }
+          "ru": "Я приду завтра",
+          "audio": "/audio/weak-1-come-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-come-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -957,8 +967,10 @@
         "female": {
           "he": "אני שמה סוכר בקפה",
           "translit": "ани сама сукар бекафе",
-          "ru": "Я кладу сахар в кофе"
-        }
+          "ru": "Я кладу сахар в кофе",
+          "audio": "/audio/weak-1-put-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-put-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1154,8 +1166,10 @@
         "female": {
           "he": "אני נותנת מתנה",
           "translit": "ани нотенет матана",
-          "ru": "Я даю подарок"
-        }
+          "ru": "Я даю подарок",
+          "audio": "/audio/weak-1-give-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-give-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1351,8 +1365,10 @@
         "female": {
           "he": "אני לוקחת מונית",
           "translit": "ани локахат монит",
-          "ru": "Я беру такси"
-        }
+          "ru": "Я беру такси",
+          "audio": "/audio/weak-1-take-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-take-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1548,8 +1564,10 @@
         "female": {
           "he": "אני יושבת ליד חלון",
           "translit": "ани йошевет леяд халон",
-          "ru": "Я сижу у окна"
-        }
+          "ru": "Я сижу у окна",
+          "audio": "/audio/weak-1-sit-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-sit-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1745,8 +1763,10 @@
         "female": {
           "he": "אני קמה בבוקר",
           "translit": "ани кама бебокер",
-          "ru": "Я встаю утром"
-        }
+          "ru": "Я встаю утром",
+          "audio": "/audio/weak-1-getup-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-1-getup-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",

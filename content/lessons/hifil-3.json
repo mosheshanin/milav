@@ -22,8 +22,10 @@
         "female": {
           "he": "אני מדפיסה מכתב",
           "translit": "ани мадписа михтав",
-          "ru": "Я распечатываю письмо"
-        }
+          "ru": "Я распечатываю письмо",
+          "audio": "/audio/hifil-3-print-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-3-print-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -972,8 +974,10 @@
         "female": {
           "he": "אני מפרידה בין ילדים",
           "translit": "ани мафрида бейн еладим",
-          "ru": "Я разнимаю детей"
-        }
+          "ru": "Я разнимаю детей",
+          "audio": "/audio/hifil-3-separate-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-3-separate-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1166,8 +1170,10 @@
         "female": {
           "he": "אני מגבילה זמן מסך",
           "translit": "ани магбила зман масах",
-          "ru": "Я ограничиваю время у экрана"
-        }
+          "ru": "Я ограничиваю время у экрана",
+          "audio": "/audio/hifil-3-limit-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-3-limit-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",

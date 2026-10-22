@@ -130,8 +130,10 @@
         "female": {
           "he": "אני עסוקה היום",
           "translit": "ани асука хайом",
-          "ru": "Я сегодня занята"
-        }
+          "ru": "Я сегодня занята",
+          "audio": "/audio/mood-2-busy-phrase-f.mp3"
+        },
+        "audio": "/audio/mood-2-busy-phrase-m.mp3"
       },
       "forms": {
         "f": {
@@ -351,8 +353,10 @@
         "female": {
           "he": "אני מאושרת",
           "translit": "ани меушерет",
-          "ru": "Я счастлива"
-        }
+          "ru": "Я счастлива",
+          "audio": "/audio/mood-2-happy-phrase-f.mp3"
+        },
+        "audio": "/audio/mood-2-happy-phrase-m.mp3"
       },
       "forms": {
         "f": {

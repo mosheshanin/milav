@@ -150,8 +150,10 @@
         "female": {
           "he": "עליתי לארץ בשנה שעברה",
           "translit": "алити ла-арец ба-шана ше-авра",
-          "ru": "Я репатриировалась в прошлом году"
-        }
+          "ru": "Я репатриировалась в прошлом году",
+          "audio": "/audio/time-2-last-year-phrase-f.mp3"
+        },
+        "audio": "/audio/time-2-last-year-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/time-2-last-year.svg",
@@ -171,8 +173,10 @@
         "female": {
           "he": "אני באה לאולפן פעם בשבוע",
           "translit": "ани баа ла-ульпан паам бе-шавуа",
-          "ru": "Я хожу в ульпан раз в неделю"
-        }
+          "ru": "Я хожу в ульпан раз в неделю",
+          "audio": "/audio/time-2-once-a-week-phrase-f.mp3"
+        },
+        "audio": "/audio/time-2-once-a-week-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/time-2-once-a-week.svg",

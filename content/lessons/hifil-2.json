@@ -589,8 +589,10 @@
         "female": {
           "he": "אני מגדילה תמונה",
           "translit": "ани магдила тмуна",
-          "ru": "Я увеличиваю фотографию"
-        }
+          "ru": "Я увеличиваю фотографию",
+          "audio": "/audio/hifil-2-enlarge-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-2-enlarge-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1161,8 +1163,10 @@
         "female": {
           "he": "אני מפסידה כסף",
           "translit": "ани мафсида кесеф",
-          "ru": "Я теряю деньги"
-        }
+          "ru": "Я теряю деньги",
+          "audio": "/audio/hifil-2-lose-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-2-lose-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1355,8 +1359,10 @@
         "female": {
           "he": "אני ממליצה על מסעדה",
           "translit": "ани мамлица аль мисада",
-          "ru": "Я советую ресторан"
-        }
+          "ru": "Я советую ресторан",
+          "audio": "/audio/hifil-2-recommend-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-2-recommend-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1549,8 +1555,10 @@
         "female": {
           "he": "אני לא מספיקה לאכול",
           "translit": "ани ло маспика леехоль",
-          "ru": "Я не успеваю поесть"
-        }
+          "ru": "Я не успеваю поесть",
+          "audio": "/audio/hifil-2-manage-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-2-manage-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",

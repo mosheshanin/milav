@@ -22,8 +22,10 @@
         "female": {
           "he": "אני מתלבשת מהר",
           "translit": "ани митлабешет махер",
-          "ru": "Я быстро одеваюсь"
-        }
+          "ru": "Я быстро одеваюсь",
+          "audio": "/audio/hitpael-1-dress-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-dress-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -216,8 +218,10 @@
         "female": {
           "he": "אני מתקשרת לאמא",
           "translit": "ани миткашерет леима",
-          "ru": "Я звоню маме"
-        }
+          "ru": "Я звоню маме",
+          "audio": "/audio/hitpael-1-call-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-call-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -410,8 +414,10 @@
         "female": {
           "he": "אני מסתכלת בטלפון",
           "translit": "ани мистакелет бетелефон",
-          "ru": "Я смотрю в телефон"
-        }
+          "ru": "Я смотрю в телефон",
+          "audio": "/audio/hitpael-1-look-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-look-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -604,8 +610,10 @@
         "female": {
           "he": "אני משתמשת במחשב",
           "translit": "ани миштамешет бемахшев",
-          "ru": "Я пользуюсь компьютером"
-        }
+          "ru": "Я пользуюсь компьютером",
+          "audio": "/audio/hitpael-1-use-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-use-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -798,8 +806,10 @@
         "female": {
           "he": "אני מסתדרת לבד",
           "translit": "ани мистадерет левад",
-          "ru": "Я справляюсь сама"
-        }
+          "ru": "Я справляюсь сама",
+          "audio": "/audio/hitpael-1-manage-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-manage-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -992,8 +1002,10 @@
         "female": {
           "he": "אני מתרגלת לעבודה חדשה",
           "translit": "ани митрагелет леавода хадаша",
-          "ru": "Я привыкаю к новой работе"
-        }
+          "ru": "Я привыкаю к новой работе",
+          "audio": "/audio/hitpael-1-getused-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-getused-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1186,8 +1198,10 @@
         "female": {
           "he": "אני מצטערת מאוד",
           "translit": "ани мицтаерет меод",
-          "ru": "Я очень сожалею"
-        }
+          "ru": "Я очень сожалею",
+          "audio": "/audio/hitpael-1-regret-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-regret-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1758,8 +1772,10 @@
         "female": {
           "he": "אני מתקרבת אליך",
           "translit": "ани миткаревет элеха",
-          "ru": "Я приближаюсь к тебе"
-        }
+          "ru": "Я приближаюсь к тебе",
+          "audio": "/audio/hitpael-1-approach-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-1-approach-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",

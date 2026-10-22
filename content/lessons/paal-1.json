@@ -22,8 +22,10 @@
         "female": {
           "he": "אני כותבת מכתב",
           "translit": "ани котевет михтав",
-          "ru": "Я пишу письмо"
-        }
+          "ru": "Я пишу письмо",
+          "audio": "/audio/paal-1-write-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-1-write-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -405,8 +407,10 @@
         "female": {
           "he": "אני שוברת כוס",
           "translit": "ани шоверет кос",
-          "ru": "Я разбиваю стакан"
-        }
+          "ru": "Я разбиваю стакан",
+          "audio": "/audio/paal-1-break-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-1-break-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -788,8 +792,10 @@
         "female": {
           "he": "אני זוכרת שיר",
           "translit": "ани зохерет шир",
-          "ru": "Я помню песню"
-        }
+          "ru": "Я помню песню",
+          "audio": "/audio/paal-1-remember-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-1-remember-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1360,8 +1366,10 @@
         "female": {
           "he": "אני סופרת כסף",
           "translit": "ани соферет кесеф",
-          "ru": "Я считаю деньги"
-        }
+          "ru": "Я считаю деньги",
+          "audio": "/audio/paal-1-count-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-1-count-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1743,8 +1751,10 @@
         "female": {
           "he": "אני שופכת מים",
           "translit": "ани шофехет маим",
-          "ru": "Я выливаю воду"
-        }
+          "ru": "Я выливаю воду",
+          "audio": "/audio/paal-1-pour-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-1-pour-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",

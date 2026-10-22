@@ -100,8 +100,10 @@
           "he": "אני רוצה יותר",
           "niqqud": "אני רוֹצָה יותר",
           "translit": "ани роца йотер",
-          "ru": "Я хочу больше"
-        }
+          "ru": "Я хочу больше",
+          "audio": "/audio/adverbs-3-more-than-phrase-f.mp3"
+        },
+        "audio": "/audio/adverbs-3-more-than-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/adverbs-3-more-than.svg",
@@ -122,8 +124,10 @@
           "he": "אני רוצה פחות",
           "niqqud": "אני רוֹצָה פחות",
           "translit": "ани роца пахот",
-          "ru": "Я хочу меньше"
-        }
+          "ru": "Я хочу меньше",
+          "audio": "/audio/adverbs-3-less-phrase-f.mp3"
+        },
+        "audio": "/audio/adverbs-3-less-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/adverbs-3-less.svg",

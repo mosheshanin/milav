@@ -22,8 +22,10 @@
         "female": {
           "he": "אני נמצאת בבית",
           "translit": "ани нимцет бабайт",
-          "ru": "Я нахожусь дома"
-        }
+          "ru": "Я нахожусь дома",
+          "audio": "/audio/weak-6-befound-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-6-befound-phrase-m.mp3"
       },
       "verb": {
         "binyan": "nifal",

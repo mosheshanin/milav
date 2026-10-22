@@ -400,8 +400,10 @@
         "female": {
           "he": "אני מלטפת חתול",
           "translit": "ани мелатефет хатуль",
-          "ru": "Я глажу кота"
-        }
+          "ru": "Я глажу кота",
+          "audio": "/audio/piel-3-stroke-phrase-f.mp3"
+        },
+        "audio": "/audio/piel-3-stroke-phrase-m.mp3"
       },
       "verb": {
         "binyan": "piel",
@@ -1161,8 +1163,10 @@
         "female": {
           "he": "אני מקצרת מכנסיים",
           "translit": "ани мекацерет михнасаим",
-          "ru": "Я укорачиваю брюки"
-        }
+          "ru": "Я укорачиваю брюки",
+          "audio": "/audio/piel-3-shorten-phrase-f.mp3"
+        },
+        "audio": "/audio/piel-3-shorten-phrase-m.mp3"
       },
       "verb": {
         "binyan": "piel",

@@ -22,8 +22,10 @@
         "female": {
           "he": "אני יורדת במעלית",
           "translit": "ани йоредет бемаалит",
-          "ru": "Я спускаюсь на лифте"
-        }
+          "ru": "Я спускаюсь на лифте",
+          "audio": "/audio/weak-3-descend-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-descend-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -220,8 +222,10 @@
           "he": "אני עולה במדרגות",
           "niqqud": "אני עוֹלָה במדרגות",
           "translit": "ани ола бемадрегот",
-          "ru": "Я поднимаюсь по лестнице"
-        }
+          "ru": "Я поднимаюсь по лестнице",
+          "audio": "/audio/weak-3-ascend-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-ascend-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -417,8 +421,10 @@
         "female": {
           "he": "אני גרה בתל אביב",
           "translit": "ани гара бетель авив",
-          "ru": "Я живу в Тель-Авиве"
-        }
+          "ru": "Я живу в Тель-Авиве",
+          "audio": "/audio/weak-3-reside-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-reside-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -614,8 +620,10 @@
         "female": {
           "he": "אני חיה חיים טובים",
           "translit": "ани хайя хаим товим",
-          "ru": "Я живу хорошей жизнью"
-        }
+          "ru": "Я живу хорошей жизнью",
+          "audio": "/audio/weak-3-live-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-live-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -785,8 +793,10 @@
         "female": {
           "he": "אני רצה בפארק",
           "translit": "ани раца бепарк",
-          "ru": "Я бегу в парке"
-        }
+          "ru": "Я бегу в парке",
+          "audio": "/audio/weak-3-run-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-run-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -982,8 +992,10 @@
         "female": {
           "he": "אני נוסעת לירושלים",
           "translit": "ани носаат лирушалаим",
-          "ru": "Я еду в Иерусалим"
-        }
+          "ru": "Я еду в Иерусалим",
+          "audio": "/audio/weak-3-travel-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-travel-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1179,8 +1191,10 @@
         "female": {
           "he": "אני נופלת בשלג",
           "translit": "ани нофелет бешелег",
-          "ru": "Я падаю на снегу"
-        }
+          "ru": "Я падаю на снегу",
+          "audio": "/audio/weak-3-fall-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-fall-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1351,8 +1365,10 @@
           "he": "אני בונה בית",
           "niqqud": "אני בּוֹנָה בית",
           "translit": "ани бона байт",
-          "ru": "Я строю дом"
-        }
+          "ru": "Я строю дом",
+          "audio": "/audio/weak-3-build-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-build-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1548,8 +1564,10 @@
         "female": {
           "he": "אני שרה שיר",
           "translit": "ани шара шир",
-          "ru": "Я пою песню"
-        }
+          "ru": "Я пою песню",
+          "audio": "/audio/weak-3-sing-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-sing-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1745,8 +1763,10 @@
         "female": {
           "he": "אני נחה אחרי עבודה",
           "translit": "ани наха ахарей авода",
-          "ru": "Я отдыхаю после работы"
-        }
+          "ru": "Я отдыхаю после работы",
+          "audio": "/audio/weak-3-rest-phrase-f.mp3"
+        },
+        "audio": "/audio/weak-3-rest-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",

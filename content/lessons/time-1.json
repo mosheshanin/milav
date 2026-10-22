@@ -118,8 +118,10 @@
         "female": {
           "he": "בצהריים אני אוכלת",
           "translit": "ба-цохораим ани охелет",
-          "ru": "Днём я обедаю"
-        }
+          "ru": "Днём я обедаю",
+          "audio": "/audio/time-1-noon-phrase-f.mp3"
+        },
+        "audio": "/audio/time-1-noon-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/time-1-noon.svg",

@@ -22,8 +22,10 @@
         "female": {
           "he": "ביום ראשון אני עובדת",
           "translit": "байом ришон ани оведет",
-          "ru": "В воскресенье я работаю"
-        }
+          "ru": "В воскресенье я работаю",
+          "audio": "/audio/numbers-6-sunday-phrase-f.mp3"
+        },
+        "audio": "/audio/numbers-6-sunday-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/numbers-6-sunday.svg",

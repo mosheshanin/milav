@@ -211,8 +211,10 @@
         "female": {
           "he": "אני מקפלת חולצה",
           "translit": "ани мекапелет хульца",
-          "ru": "Я складываю рубашку"
-        }
+          "ru": "Я складываю рубашку",
+          "audio": "/audio/piel-2-fold-phrase-f.mp3"
+        },
+        "audio": "/audio/piel-2-fold-phrase-m.mp3"
       },
       "verb": {
         "binyan": "piel",
@@ -783,8 +785,10 @@
         "female": {
           "he": "אני מדלגת על שאלה",
           "translit": "ани медалегет аль шеэла",
-          "ru": "Я пропускаю вопрос"
-        }
+          "ru": "Я пропускаю вопрос",
+          "audio": "/audio/piel-2-skip-phrase-f.mp3"
+        },
+        "audio": "/audio/piel-2-skip-phrase-m.mp3"
       },
       "verb": {
         "binyan": "piel",
@@ -1733,8 +1737,10 @@
         "female": {
           "he": "אני מכבדת מורים",
           "translit": "ани мехабедет морим",
-          "ru": "Я уважаю учителей"
-        }
+          "ru": "Я уважаю учителей",
+          "audio": "/audio/piel-2-respect-phrase-f.mp3"
+        },
+        "audio": "/audio/piel-2-respect-phrase-m.mp3"
       },
       "verb": {
         "binyan": "piel",

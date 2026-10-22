@@ -22,8 +22,10 @@
         "female": {
           "he": "אני מתכתבת עם חבר",
           "translit": "ани миткатевет им хавер",
-          "ru": "Я переписываюсь с другом"
-        }
+          "ru": "Я переписываюсь с другом",
+          "audio": "/audio/hitpael-3-correspond-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-correspond-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -405,8 +407,10 @@
         "female": {
           "he": "אני מתחבקת עם אמא",
           "translit": "ани митхабекет им има",
-          "ru": "Я обнимаюсь с мамой"
-        }
+          "ru": "Я обнимаюсь с мамой",
+          "audio": "/audio/hitpael-3-hug-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-hug-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -788,8 +792,10 @@
         "female": {
           "he": "אני מתעסקת בספורט",
           "translit": "ани митасекет биспорт",
-          "ru": "Я занимаюсь спортом"
-        }
+          "ru": "Я занимаюсь спортом",
+          "audio": "/audio/hitpael-3-deal-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-deal-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -982,8 +988,10 @@
         "female": {
           "he": "אני מתקדמת לאט",
           "translit": "ани миткадемет леат",
-          "ru": "Я продвигаюсь медленно"
-        }
+          "ru": "Я продвигаюсь медленно",
+          "audio": "/audio/hitpael-3-advance-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-advance-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1176,8 +1184,10 @@
         "female": {
           "he": "אני משתתפת בשיעור",
           "translit": "ани миштатефет бешиур",
-          "ru": "Я участвую в уроке"
-        }
+          "ru": "Я участвую в уроке",
+          "audio": "/audio/hitpael-3-participate-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-participate-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1370,8 +1380,10 @@
         "female": {
           "he": "אני מצטרפת לקבוצה",
           "translit": "ани мицтарефет ликвуца",
-          "ru": "Я присоединяюсь к группе"
-        }
+          "ru": "Я присоединяюсь к группе",
+          "audio": "/audio/hitpael-3-join-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-join-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",
@@ -1753,8 +1765,10 @@
         "female": {
           "he": "אני מזדרזת כי מאוחר",
           "translit": "ани миздарезет ки меухар",
-          "ru": "Я тороплюсь, потому что поздно"
-        }
+          "ru": "Я тороплюсь, потому что поздно",
+          "audio": "/audio/hitpael-3-hurry-phrase-f.mp3"
+        },
+        "audio": "/audio/hitpael-3-hurry-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hitpael",

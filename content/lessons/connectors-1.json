@@ -97,8 +97,10 @@
         "female": {
           "he": "אז אני באה",
           "translit": "аз ани баа",
-          "ru": "Тогда я приду"
-        }
+          "ru": "Тогда я приду",
+          "audio": "/audio/connectors-1-then-phrase-f.mp3"
+        },
+        "audio": "/audio/connectors-1-then-phrase-m.mp3"
       },
       "reviewed": false,
       "audio": "/audio/connectors-1-then.mp3"

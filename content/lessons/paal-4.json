@@ -211,8 +211,10 @@
         "female": {
           "he": "אני חושבת עליך",
           "translit": "ани хошевет алеха",
-          "ru": "Я думаю о тебе"
-        }
+          "ru": "Я думаю о тебе",
+          "audio": "/audio/paal-4-think-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-4-think-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -405,8 +407,10 @@
         "female": {
           "he": "אני חוזרת הביתה",
           "translit": "ани хозерет хабайта",
-          "ru": "Я возвращаюсь домой"
-        }
+          "ru": "Я возвращаюсь домой",
+          "audio": "/audio/paal-4-return-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-4-return-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1166,8 +1170,10 @@
         "female": {
           "he": "אני שומעת מוזיקה",
           "translit": "ани шомаат музика",
-          "ru": "Я слышу музыку"
-        }
+          "ru": "Я слышу музыку",
+          "audio": "/audio/paal-4-hear-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-4-hear-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1549,8 +1555,10 @@
         "female": {
           "he": "אני פותחת דלת",
           "translit": "ани потахат делет",
-          "ru": "Я открываю дверь"
-        }
+          "ru": "Я открываю дверь",
+          "audio": "/audio/paal-4-open-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-4-open-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",

@@ -22,8 +22,10 @@
         "female": {
           "he": "אני פוגשת חבר",
           "translit": "ани погешет хавер",
-          "ru": "Я встречаю друга"
-        }
+          "ru": "Я встречаю друга",
+          "audio": "/audio/paal-2-meet-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-2-meet-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -594,8 +596,10 @@
         "female": {
           "he": "אני פורסת לחם",
           "translit": "ани поресет лехем",
-          "ru": "Я нарезаю хлеб"
-        }
+          "ru": "Я нарезаю хлеб",
+          "audio": "/audio/paal-2-slice-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-2-slice-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -977,8 +981,10 @@
         "female": {
           "he": "אני זורקת כדור",
           "translit": "ани зорекет кадур",
-          "ru": "Я бросаю мяч"
-        }
+          "ru": "Я бросаю мяч",
+          "audio": "/audio/paal-2-throw-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-2-throw-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",
@@ -1738,8 +1744,10 @@
         "female": {
           "he": "אני גוזרת נייר",
           "translit": "ани гозерет нейар",
-          "ru": "Я вырезаю бумагу"
-        }
+          "ru": "Я вырезаю бумагу",
+          "audio": "/audio/paal-2-cut-phrase-f.mp3"
+        },
+        "audio": "/audio/paal-2-cut-phrase-m.mp3"
       },
       "verb": {
         "binyan": "paal",

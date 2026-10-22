@@ -94,8 +94,10 @@
         "female": {
           "he": "אני עייפה",
           "translit": "ани айефа",
-          "ru": "Я устала"
-        }
+          "ru": "Я устала",
+          "audio": "/audio/mood-1-tired-phrase-f.mp3"
+        },
+        "audio": "/audio/mood-1-tired-phrase-m.mp3"
       },
       "forms": {
         "f": {

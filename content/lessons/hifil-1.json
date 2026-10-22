@@ -211,8 +211,10 @@
         "female": {
           "he": "אני מסבירה לך",
           "translit": "ани масбира леха",
-          "ru": "Я объясняю тебе"
-        }
+          "ru": "Я объясняю тебе",
+          "audio": "/audio/hifil-1-explain-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-1-explain-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -405,8 +407,10 @@
         "female": {
           "he": "אני מזמינה פיצה",
           "translit": "ани мазмина пица",
-          "ru": "Я заказываю пиццу"
-        }
+          "ru": "Я заказываю пиццу",
+          "audio": "/audio/hifil-1-order-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-1-order-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -788,8 +792,10 @@
         "female": {
           "he": "אני מרגישה טוב",
           "translit": "ани маргиша тов",
-          "ru": "Я хорошо себя чувствую"
-        }
+          "ru": "Я хорошо себя чувствую",
+          "audio": "/audio/hifil-1-feel-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-1-feel-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1171,8 +1177,10 @@
         "female": {
           "he": "אני משאירה הודעה",
           "translit": "ани машира ходаа",
-          "ru": "Я оставляю сообщение"
-        }
+          "ru": "Я оставляю сообщение",
+          "audio": "/audio/hifil-1-leave-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-1-leave-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",
@@ -1365,8 +1373,10 @@
         "female": {
           "he": "אני מסכימה איתך",
           "translit": "ани маскима итха",
-          "ru": "Я с тобой согласна"
-        }
+          "ru": "Я с тобой согласна",
+          "audio": "/audio/hifil-1-agree-phrase-f.mp3"
+        },
+        "audio": "/audio/hifil-1-agree-phrase-m.mp3"
       },
       "verb": {
         "binyan": "hifil",

@@ -18,7 +18,8 @@
         "he": "אני לא מבין עברית",
         "translit": "ани ло мевин иврит",
         "ru": "Я не понимаю иврит",
-        "speaker": "m"
+        "speaker": "m",
+        "audio": "/audio/phrases-3-dont-understand-m-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-3-dont-understand-m.svg",
@@ -87,8 +88,10 @@
         "female": {
           "he": "קוראים לי דנה",
           "translit": "корим ли дана",
-          "ru": "Меня зовут Дана"
-        }
+          "ru": "Меня зовут Дана",
+          "audio": "/audio/phrases-3-my-name-is-phrase-f.mp3"
+        },
+        "audio": "/audio/phrases-3-my-name-is-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-3-my-name-is.svg",
@@ -125,8 +128,10 @@
           "he": "אני עולה חדשה",
           "niqqud": "אני עוֹלָה חֲדָשָׁה",
           "translit": "ани ола хадаша",
-          "ru": "Я новая репатриантка"
-        }
+          "ru": "Я новая репатриантка",
+          "audio": "/audio/phrases-3-new-immigrant-phrase-f.mp3"
+        },
+        "audio": "/audio/phrases-3-new-immigrant-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/phrases-3-new-immigrant.svg",

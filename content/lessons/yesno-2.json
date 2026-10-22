@@ -22,8 +22,10 @@
         "female": {
           "he": "אני צריכה מים",
           "translit": "ани цриха маим",
-          "ru": "Мне нужна вода"
-        }
+          "ru": "Мне нужна вода",
+          "audio": "/audio/yesno-2-need-phrase-f.mp3"
+        },
+        "audio": "/audio/yesno-2-need-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/yesno-2-need.svg",
@@ -107,8 +109,10 @@
         "female": {
           "he": "אני חייבת ללכת",
           "translit": "ани хайевет лалехет",
-          "ru": "Мне надо идти"
-        }
+          "ru": "Мне надо идти",
+          "audio": "/audio/yesno-2-must-phrase-f.mp3"
+        },
+        "audio": "/audio/yesno-2-must-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/yesno-2-must.svg",
@@ -161,8 +165,10 @@
           "he": "אני רוצה קפה",
           "niqqud": "אני רוֹצָה קפה",
           "translit": "ани роца кафэ",
-          "ru": "Я хочу кофе"
-        }
+          "ru": "Я хочу кофе",
+          "audio": "/audio/yesno-2-want-phrase-f.mp3"
+        },
+        "audio": "/audio/yesno-2-want-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/yesno-2-want.svg",
@@ -182,8 +188,10 @@
         "female": {
           "he": "בטח אני באה",
           "translit": "бетах ани баа",
-          "ru": "Конечно, я приду"
-        }
+          "ru": "Конечно, я приду",
+          "audio": "/audio/yesno-2-sure-phrase-f.mp3"
+        },
+        "audio": "/audio/yesno-2-sure-phrase-m.mp3"
       },
       "reviewed": false,
       "image": "/words/yesno-2-sure.svg",
