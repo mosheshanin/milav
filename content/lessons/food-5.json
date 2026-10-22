@@ -1,0 +1,161 @@
+{
+  "$schema": "../schema.json",
+  "id": "food-5",
+  "topicId": "food",
+  "section": "nouns",
+  "topic": "Еда",
+  "number": 5,
+  "free": false,
+  "title": "Фрукты, овощи, специи",
+  "words": [
+    {
+      "id": "food-5-strawberry",
+      "he": "תות",
+      "niqqud": "תּוּת",
+      "translit": "тут",
+      "ru": "клубника",
+      "gender": "m",
+      "example": {
+        "he": "זה תות מתוק",
+        "translit": "зэ тут маток",
+        "ru": "Это сладкая клубника"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-strawberry.svg"
+    },
+    {
+      "id": "food-5-pear",
+      "he": "אגס",
+      "niqqud": "אַגָּס",
+      "translit": "ага́с",
+      "ru": "груша",
+      "gender": "m",
+      "example": {
+        "he": "זה אגס צהוב",
+        "translit": "зэ агас цахов",
+        "ru": "Это жёлтая груша"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-pear.svg"
+    },
+    {
+      "id": "food-5-peach",
+      "he": "אפרסק",
+      "niqqud": "אֲפַרְסֵק",
+      "translit": "афарсе́к",
+      "ru": "персик",
+      "gender": "m",
+      "example": {
+        "he": "זה אפרסק מתוק",
+        "translit": "зэ афарсек маток",
+        "ru": "Это сладкий персик"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-peach.svg"
+    },
+    {
+      "id": "food-5-pomegranate",
+      "he": "רימון",
+      "niqqud": "רִימּוֹן",
+      "translit": "римо́н",
+      "ru": "гранат",
+      "gender": "m",
+      "example": {
+        "he": "זה רימון אדום",
+        "translit": "зэ римон адом",
+        "ru": "Это красный гранат"
+      },
+      "reviewed": false
+    },
+    {
+      "id": "food-5-avocado",
+      "he": "אבוקדו",
+      "niqqud": "אָבוֹקָדוֹ",
+      "translit": "авока́до",
+      "ru": "авокадо",
+      "gender": "m",
+      "example": {
+        "he": "זה אבוקדו טרי",
+        "translit": "зэ авокадо три",
+        "ru": "Это свежее авокадо"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-avocado.svg"
+    },
+    {
+      "id": "food-5-olive",
+      "he": "זית",
+      "niqqud": "זַיִת",
+      "translit": "за́ит",
+      "ru": "маслина, оливка",
+      "gender": "m",
+      "example": {
+        "he": "זה זית שחור",
+        "translit": "зэ заит шахор",
+        "ru": "Это чёрная маслина"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-olive.svg"
+    },
+    {
+      "id": "food-5-potato",
+      "he": "תפוח אדמה",
+      "niqqud": "תַּפּוּחַ אֲדָמָה",
+      "translit": "тапу́ах адама́",
+      "ru": "картофель",
+      "gender": "m",
+      "example": {
+        "he": "זה תפוח אדמה גדול",
+        "translit": "зэ тапуах адама гадоль",
+        "ru": "Это большая картофелина"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-potato.svg"
+    },
+    {
+      "id": "food-5-eggplant",
+      "he": "חציל",
+      "niqqud": "חָצִיל",
+      "translit": "хаци́ль",
+      "ru": "баклажан",
+      "gender": "m",
+      "example": {
+        "he": "זה חציל גדול",
+        "translit": "зэ хациль гадоль",
+        "ru": "Это большой баклажан"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-eggplant.svg"
+    },
+    {
+      "id": "food-5-garlic",
+      "he": "שום",
+      "niqqud": "שׁוּם",
+      "translit": "шум",
+      "ru": "чеснок",
+      "gender": "m",
+      "example": {
+        "he": "זה שום טרי",
+        "translit": "зэ шум три",
+        "ru": "Это свежий чеснок"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-garlic.svg"
+    },
+    {
+      "id": "food-5-spice",
+      "he": "תבלין",
+      "niqqud": "תַּבְלִין",
+      "translit": "тавли́н",
+      "ru": "специя, приправа",
+      "gender": "m",
+      "example": {
+        "he": "זה תבלין חריף",
+        "translit": "зэ тавлин хариф",
+        "ru": "Это острая приправа"
+      },
+      "reviewed": false,
+      "image": "/words/food-5-spice.svg"
+    }
+  ]
+}

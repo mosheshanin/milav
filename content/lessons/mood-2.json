@@ -1,0 +1,322 @@
+{
+  "$schema": "../schema.json",
+  "id": "mood-2",
+  "topicId": "mood",
+  "section": "adjectives",
+  "topic": "Люди: характер и чувства",
+  "number": 2,
+  "free": false,
+  "title": "Умный и смелый",
+  "words": [
+    {
+      "id": "mood-2-nice",
+      "he": "נחמד",
+      "niqqud": "נֶחְמָד",
+      "translit": "нехма́д",
+      "ru": "милый, приятный",
+      "example": {
+        "he": "הוא נחמד מאוד",
+        "translit": "ху нехмад меод",
+        "ru": "Он очень милый"
+      },
+      "forms": {
+        "f": {
+          "he": "נחמדה",
+          "niqqud": "נֶחְמָדָה",
+          "translit": "нехмада́"
+        },
+        "mp": {
+          "he": "נחמדים",
+          "niqqud": "נֶחְמָדִים",
+          "translit": "нехмади́м"
+        },
+        "fp": {
+          "he": "נחמדות",
+          "niqqud": "נֶחְמָדוֹת",
+          "translit": "нехмадо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-nice.svg"
+    },
+    {
+      "id": "mood-2-smart",
+      "he": "חכם",
+      "niqqud": "חָכָם",
+      "translit": "хаха́м",
+      "ru": "умный",
+      "example": {
+        "he": "ילד חכם",
+        "translit": "елед хахам",
+        "ru": "Умный мальчик"
+      },
+      "forms": {
+        "f": {
+          "he": "חכמה",
+          "niqqud": "חֲכָמָה",
+          "translit": "хахама́"
+        },
+        "mp": {
+          "he": "חכמים",
+          "niqqud": "חֲכָמִים",
+          "translit": "хахами́м"
+        },
+        "fp": {
+          "he": "חכמות",
+          "niqqud": "חֲכָמוֹת",
+          "translit": "хахамо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-smart.svg"
+    },
+    {
+      "id": "mood-2-stupid",
+      "he": "טיפש",
+      "niqqud": "טִיפֵּשׁ",
+      "translit": "типе́ш",
+      "ru": "глупый",
+      "example": {
+        "he": "הוא לא טיפש",
+        "translit": "ху ло типеш",
+        "ru": "Он не глупый"
+      },
+      "forms": {
+        "f": {
+          "he": "טיפשה",
+          "niqqud": "טִיפְּשָׁה",
+          "translit": "типша́"
+        },
+        "mp": {
+          "he": "טיפשים",
+          "niqqud": "טִיפְּשִׁים",
+          "translit": "типши́м"
+        },
+        "fp": {
+          "he": "טיפשות",
+          "niqqud": "טִיפְּשׁוֹת",
+          "translit": "типшо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-stupid.svg"
+    },
+    {
+      "id": "mood-2-busy",
+      "he": "עסוק",
+      "niqqud": "עָסוּק",
+      "translit": "асу́к",
+      "ru": "занятой, занят",
+      "example": {
+        "he": "אני עסוק היום",
+        "translit": "ани асук хайом",
+        "ru": "Я сегодня занят"
+      },
+      "forms": {
+        "f": {
+          "he": "עסוקה",
+          "niqqud": "עֲסוּקָה",
+          "translit": "асука́"
+        },
+        "mp": {
+          "he": "עסוקים",
+          "niqqud": "עֲסוּקִים",
+          "translit": "асуки́м"
+        },
+        "fp": {
+          "he": "עסוקות",
+          "niqqud": "עֲסוּקוֹת",
+          "translit": "асуко́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-busy.svg"
+    },
+    {
+      "id": "mood-2-satisfied",
+      "he": "מרוצה",
+      "niqqud": "מְרוּצֶּה",
+      "translit": "меруцэ́",
+      "ru": "довольный",
+      "example": {
+        "he": "הוא מרוצה",
+        "translit": "ху меруцэ",
+        "ru": "Он доволен"
+      },
+      "forms": {
+        "f": {
+          "he": "מרוצה",
+          "niqqud": "מְרוּצָּה",
+          "translit": "меруца́"
+        },
+        "mp": {
+          "he": "מרוצים",
+          "niqqud": "מְרוּצִּים",
+          "translit": "меруци́м"
+        },
+        "fp": {
+          "he": "מרוצות",
+          "niqqud": "מְרוּצּוֹת",
+          "translit": "меруцо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-satisfied.svg"
+    },
+    {
+      "id": "mood-2-calm",
+      "he": "רגוע",
+      "niqqud": "רָגוּעַ",
+      "translit": "рагу́а",
+      "ru": "спокойный",
+      "example": {
+        "he": "ים רגוע",
+        "translit": "ям рагуа",
+        "ru": "Спокойное море"
+      },
+      "forms": {
+        "f": {
+          "he": "רגועה",
+          "niqqud": "רְגוּעָה",
+          "translit": "ргуа́"
+        },
+        "mp": {
+          "he": "רגועים",
+          "niqqud": "רְגוּעִים",
+          "translit": "ргуи́м"
+        },
+        "fp": {
+          "he": "רגועות",
+          "niqqud": "רְגוּעוֹת",
+          "translit": "ргуо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-calm.svg"
+    },
+    {
+      "id": "mood-2-brave",
+      "he": "אמיץ",
+      "niqqud": "אַמִּיץ",
+      "translit": "ами́ц",
+      "ru": "смелый",
+      "example": {
+        "he": "חייל אמיץ",
+        "translit": "хаяль амиц",
+        "ru": "Смелый солдат"
+      },
+      "forms": {
+        "f": {
+          "he": "אמיצה",
+          "niqqud": "אַמִּיצָה",
+          "translit": "амица́"
+        },
+        "mp": {
+          "he": "אמיצים",
+          "niqqud": "אַמִּיצִים",
+          "translit": "амици́м"
+        },
+        "fp": {
+          "he": "אמיצות",
+          "niqqud": "אַמִּיצוֹת",
+          "translit": "амицо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-brave.svg"
+    },
+    {
+      "id": "mood-2-shy",
+      "he": "ביישן",
+      "niqqud": "בַּיְישָׁן",
+      "translit": "байша́н",
+      "ru": "застенчивый",
+      "example": {
+        "he": "ילדה ביישנית",
+        "translit": "ялда байшанит",
+        "ru": "Застенчивая девочка"
+      },
+      "forms": {
+        "f": {
+          "he": "ביישנית",
+          "niqqud": "בַּיְישָׁנִית",
+          "translit": "байшани́т"
+        },
+        "mp": {
+          "he": "ביישנים",
+          "niqqud": "בַּיְישָׁנִים",
+          "translit": "байшани́м"
+        },
+        "fp": {
+          "he": "ביישניות",
+          "niqqud": "בַּיְישָׁנִיּוֹת",
+          "translit": "байшанийо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-shy.svg"
+    },
+    {
+      "id": "mood-2-funny",
+      "he": "מצחיק",
+      "niqqud": "מַצְחִיק",
+      "translit": "мацхи́к",
+      "ru": "смешной",
+      "example": {
+        "he": "סרט מצחיק",
+        "translit": "серет мацхик",
+        "ru": "Смешной фильм"
+      },
+      "forms": {
+        "f": {
+          "he": "מצחיקה",
+          "niqqud": "מַצְחִיקָה",
+          "translit": "мацхика́"
+        },
+        "mp": {
+          "he": "מצחיקים",
+          "niqqud": "מַצְחִיקִים",
+          "translit": "мацхики́м"
+        },
+        "fp": {
+          "he": "מצחיקות",
+          "niqqud": "מַצְחִיקוֹת",
+          "translit": "мацхико́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-funny.svg"
+    },
+    {
+      "id": "mood-2-happy",
+      "he": "מאושר",
+      "niqqud": "מְאוּשָּׁר",
+      "translit": "меуша́р",
+      "ru": "счастливый",
+      "example": {
+        "he": "אני מאושר",
+        "translit": "ани меушар",
+        "ru": "Я счастлив"
+      },
+      "forms": {
+        "f": {
+          "he": "מאושרת",
+          "niqqud": "מְאוּשֶּׁרֶת",
+          "translit": "меуше́рет"
+        },
+        "mp": {
+          "he": "מאושרים",
+          "niqqud": "מְאוּשָּׁרִים",
+          "translit": "меушари́м"
+        },
+        "fp": {
+          "he": "מאושרות",
+          "niqqud": "מְאוּשָּׁרוֹת",
+          "translit": "меушаро́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/mood-2-happy.svg"
+    }
+  ]
+}

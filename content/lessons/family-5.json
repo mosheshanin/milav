@@ -1,0 +1,162 @@
+{
+  "$schema": "../schema.json",
+  "id": "family-5",
+  "topicId": "family",
+  "section": "nouns",
+  "topic": "Семья",
+  "number": 5,
+  "free": false,
+  "title": "Этапы жизни и родня",
+  "words": [
+    {
+      "id": "family-5-birth",
+      "he": "לידה",
+      "niqqud": "לֵידָה",
+      "translit": "лейда́",
+      "ru": "рождение, роды",
+      "gender": "f",
+      "example": {
+        "he": "זאת לידה קלה",
+        "translit": "зот лейда кала",
+        "ru": "Это лёгкие роды"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-birth.svg"
+    },
+    {
+      "id": "family-5-childhood",
+      "he": "ילדות",
+      "niqqud": "יַלְדוּת",
+      "translit": "ялду́т",
+      "ru": "детство",
+      "gender": "f",
+      "example": {
+        "he": "זאת ילדות שמחה",
+        "translit": "зот ялдут смеха",
+        "ru": "Это счастливое детство"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-childhood.svg"
+    },
+    {
+      "id": "family-5-youth",
+      "he": "נעורים",
+      "niqqud": "נְעוּרִים",
+      "translit": "неури́м",
+      "ru": "юность",
+      "gender": "m",
+      "example": {
+        "he": "אלה נעורים יפים",
+        "translit": "эле неурим яфим",
+        "ru": "Это прекрасная юность"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-youth.svg"
+    },
+    {
+      "id": "family-5-old-age",
+      "he": "זקנה",
+      "niqqud": "זִקְנָה",
+      "translit": "зикна́",
+      "ru": "старость",
+      "gender": "f",
+      "example": {
+        "he": "זאת זקנה טובה",
+        "translit": "зот зикна това",
+        "ru": "Это хорошая старость"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-old-age.svg"
+    },
+    {
+      "id": "family-5-cousin-m",
+      "he": "בן דוד",
+      "niqqud": "בֶּן דּוֹד",
+      "translit": "бен дод",
+      "ru": "двоюродный брат",
+      "gender": "m",
+      "example": {
+        "he": "זה בן דוד שלי",
+        "translit": "зэ бен дод шели",
+        "ru": "Это мой двоюродный брат"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-cousin-m.svg"
+    },
+    {
+      "id": "family-5-cousin-f",
+      "he": "בת דודה",
+      "niqqud": "בַּת דּוֹדָה",
+      "translit": "бат дода́",
+      "ru": "двоюродная сестра",
+      "gender": "f",
+      "example": {
+        "he": "זאת בת דודה שלי",
+        "translit": "зот бат дода шели",
+        "ru": "Это моя двоюродная сестра"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-cousin-f.svg"
+    },
+    {
+      "id": "family-5-nephew",
+      "he": "אחיין",
+      "niqqud": "אַחְיָין",
+      "translit": "ахья́н",
+      "ru": "племянник",
+      "gender": "m",
+      "example": {
+        "he": "זה אחיין שלי",
+        "translit": "зэ ахьян шели",
+        "ru": "Это мой племянник"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-nephew.svg"
+    },
+    {
+      "id": "family-5-niece",
+      "he": "אחיינית",
+      "niqqud": "אַחְיָינִית",
+      "translit": "ахьяни́т",
+      "ru": "племянница",
+      "gender": "f",
+      "example": {
+        "he": "זאת אחיינית שלי",
+        "translit": "зот ахьянит шели",
+        "ru": "Это моя племянница"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-niece.svg"
+    },
+    {
+      "id": "family-5-bachelor",
+      "he": "רווק",
+      "niqqud": "רַוְוָק",
+      "translit": "рава́к",
+      "ru": "холостяк",
+      "gender": "m",
+      "example": {
+        "he": "זה רווק צעיר",
+        "translit": "зэ равак цаир",
+        "ru": "Это молодой холостяк"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-bachelor.svg"
+    },
+    {
+      "id": "family-5-widow",
+      "he": "אלמנה",
+      "niqqud": "אַלְמָנָה",
+      "translit": "альмана́",
+      "ru": "вдова",
+      "gender": "f",
+      "example": {
+        "he": "זאת אלמנה צעירה",
+        "translit": "зот альмана цеира",
+        "ru": "Это молодая вдова"
+      },
+      "reviewed": false,
+      "image": "/words/family-5-widow.svg"
+    }
+  ]
+}

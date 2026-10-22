@@ -631,6 +631,23 @@
       "v": "995fea2a7c"
     },
     {
+      "id": "family-5",
+      "topicId": "family",
+      "section": "nouns",
+      "topic": "Семья",
+      "number": 5,
+      "free": false,
+      "title": "Этапы жизни и родня",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "ad78bd1e92"
+    },
+    {
       "id": "food-1",
       "topicId": "food",
       "section": "nouns",
@@ -697,6 +714,23 @@
         "type"
       ],
       "v": "24be2f2400"
+    },
+    {
+      "id": "food-5",
+      "topicId": "food",
+      "section": "nouns",
+      "topic": "Еда",
+      "number": 5,
+      "free": false,
+      "title": "Фрукты, овощи, специи",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "c0149d86c3"
     },
     {
       "id": "gov-1",
@@ -918,6 +952,23 @@
         "type"
       ],
       "v": "d2045adc79"
+    },
+    {
+      "id": "mood-2",
+      "topicId": "mood",
+      "section": "adjectives",
+      "topic": "Люди: характер и чувства",
+      "number": 2,
+      "free": false,
+      "title": "Умный и смелый",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "07f0052de6"
     },
     {
       "id": "nature-1",
@@ -1362,6 +1413,23 @@
       "v": "a9bd3fc5f9"
     },
     {
+      "id": "qualities-4",
+      "topicId": "qualities",
+      "section": "adjectives",
+      "topic": "Главные качества",
+      "number": 4,
+      "free": false,
+      "title": "Широкий и узкий",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "db53808668"
+    },
+    {
       "id": "shops-1",
       "topicId": "shops",
       "section": "nouns",
@@ -1567,8 +1635,8 @@
     }
   ],
   "info": {
-    "totalWords": 840,
-    "totalLessons": 90,
+    "totalWords": 880,
+    "totalLessons": 94,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1660,7 +1728,8 @@
           "family-1",
           "family-2",
           "family-3",
-          "family-4"
+          "family-4",
+          "family-5"
         ]
       },
       {
@@ -1670,7 +1739,8 @@
           "food-1",
           "food-2",
           "food-3",
-          "food-4"
+          "food-4",
+          "food-5"
         ]
       },
       {
@@ -1713,7 +1783,8 @@
         "id": "mood",
         "title": "Люди: характер и чувства",
         "lessonIds": [
-          "mood-1"
+          "mood-1",
+          "mood-2"
         ]
       },
       {
@@ -1787,7 +1858,8 @@
         "lessonIds": [
           "qualities-1",
           "qualities-2",
-          "qualities-3"
+          "qualities-3",
+          "qualities-4"
         ]
       },
       {

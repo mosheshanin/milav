@@ -35,10 +35,12 @@ import lesson_family_1 from "./lessons/family-1.json";
 import lesson_family_2 from "./lessons/family-2.json";
 import lesson_family_3 from "./lessons/family-3.json";
 import lesson_family_4 from "./lessons/family-4.json";
+import lesson_family_5 from "./lessons/family-5.json";
 import lesson_food_1 from "./lessons/food-1.json";
 import lesson_food_2 from "./lessons/food-2.json";
 import lesson_food_3 from "./lessons/food-3.json";
 import lesson_food_4 from "./lessons/food-4.json";
+import lesson_food_5 from "./lessons/food-5.json";
 import lesson_gov_1 from "./lessons/gov-1.json";
 import lesson_gov_2 from "./lessons/gov-2.json";
 import lesson_hifil_1 from "./lessons/hifil-1.json";
@@ -52,6 +54,7 @@ import lesson_home_2 from "./lessons/home-2.json";
 import lesson_home_3 from "./lessons/home-3.json";
 import lesson_home_4 from "./lessons/home-4.json";
 import lesson_mood_1 from "./lessons/mood-1.json";
+import lesson_mood_2 from "./lessons/mood-2.json";
 import lesson_nature_1 from "./lessons/nature-1.json";
 import lesson_nifal_1 from "./lessons/nifal-1.json";
 import lesson_nifal_2 from "./lessons/nifal-2.json";
@@ -78,6 +81,7 @@ import lesson_pronouns_2 from "./lessons/pronouns-2.json";
 import lesson_qualities_1 from "./lessons/qualities-1.json";
 import lesson_qualities_2 from "./lessons/qualities-2.json";
 import lesson_qualities_3 from "./lessons/qualities-3.json";
+import lesson_qualities_4 from "./lessons/qualities-4.json";
 import lesson_shops_1 from "./lessons/shops-1.json";
 import lesson_shops_2 from "./lessons/shops-2.json";
 import lesson_time_1 from "./lessons/time-1.json";
@@ -127,10 +131,12 @@ export const lessonFiles: unknown[] = [
   lesson_family_2,
   lesson_family_3,
   lesson_family_4,
+  lesson_family_5,
   lesson_food_1,
   lesson_food_2,
   lesson_food_3,
   lesson_food_4,
+  lesson_food_5,
   lesson_gov_1,
   lesson_gov_2,
   lesson_hifil_1,
@@ -144,6 +150,7 @@ export const lessonFiles: unknown[] = [
   lesson_home_3,
   lesson_home_4,
   lesson_mood_1,
+  lesson_mood_2,
   lesson_nature_1,
   lesson_nifal_1,
   lesson_nifal_2,
@@ -170,6 +177,7 @@ export const lessonFiles: unknown[] = [
   lesson_qualities_1,
   lesson_qualities_2,
   lesson_qualities_3,
+  lesson_qualities_4,
   lesson_shops_1,
   lesson_shops_2,
   lesson_time_1,

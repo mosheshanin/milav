@@ -1,0 +1,322 @@
+{
+  "$schema": "../schema.json",
+  "id": "qualities-4",
+  "topicId": "qualities",
+  "section": "adjectives",
+  "topic": "Главные качества",
+  "number": 4,
+  "free": false,
+  "title": "Широкий и узкий",
+  "words": [
+    {
+      "id": "qualities-4-wide",
+      "he": "רחב",
+      "niqqud": "רָחָב",
+      "translit": "раха́в",
+      "ru": "широкий",
+      "example": {
+        "he": "רחוב רחב",
+        "translit": "рехов рахав",
+        "ru": "Широкая улица"
+      },
+      "forms": {
+        "f": {
+          "he": "רחבה",
+          "niqqud": "רְחָבָה",
+          "translit": "рхава́"
+        },
+        "mp": {
+          "he": "רחבים",
+          "niqqud": "רְחָבִים",
+          "translit": "рхави́м"
+        },
+        "fp": {
+          "he": "רחבות",
+          "niqqud": "רְחָבוֹת",
+          "translit": "рхаво́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-wide.svg"
+    },
+    {
+      "id": "qualities-4-narrow",
+      "he": "צר",
+      "niqqud": "צַר",
+      "translit": "цар",
+      "ru": "узкий",
+      "example": {
+        "he": "חדר צר",
+        "translit": "хедер цар",
+        "ru": "Узкая комната"
+      },
+      "forms": {
+        "f": {
+          "he": "צרה",
+          "niqqud": "צָרָה",
+          "translit": "цара́"
+        },
+        "mp": {
+          "he": "צרים",
+          "niqqud": "צָרִים",
+          "translit": "цари́м"
+        },
+        "fp": {
+          "he": "צרות",
+          "niqqud": "צָרוֹת",
+          "translit": "царо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-narrow.svg"
+    },
+    {
+      "id": "qualities-4-wet",
+      "he": "רטוב",
+      "niqqud": "רָטוֹב",
+      "translit": "рато́в",
+      "ru": "мокрый",
+      "example": {
+        "he": "מגבת רטובה",
+        "translit": "магевет ртува",
+        "ru": "Мокрое полотенце"
+      },
+      "forms": {
+        "f": {
+          "he": "רטובה",
+          "niqqud": "רְטוּבָה",
+          "translit": "ртува́"
+        },
+        "mp": {
+          "he": "רטובים",
+          "niqqud": "רְטוּבִים",
+          "translit": "ртуви́м"
+        },
+        "fp": {
+          "he": "רטובות",
+          "niqqud": "רְטוּבוֹת",
+          "translit": "ртуво́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-wet.svg"
+    },
+    {
+      "id": "qualities-4-dry",
+      "he": "יבש",
+      "niqqud": "יָבֵשׁ",
+      "translit": "яве́ш",
+      "ru": "сухой",
+      "example": {
+        "he": "לחם יבש",
+        "translit": "лехем явеш",
+        "ru": "Сухой (чёрствый) хлеб"
+      },
+      "forms": {
+        "f": {
+          "he": "יבשה",
+          "niqqud": "יְבֵשָׁה",
+          "translit": "йевеша́"
+        },
+        "mp": {
+          "he": "יבשים",
+          "niqqud": "יְבֵשִׁים",
+          "translit": "йевеши́м"
+        },
+        "fp": {
+          "he": "יבשות",
+          "niqqud": "יְבֵשׁוֹת",
+          "translit": "йевешо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-dry.svg"
+    },
+    {
+      "id": "qualities-4-noisy",
+      "he": "רועש",
+      "niqqud": "רוֹעֵשׁ",
+      "translit": "роэ́ш",
+      "ru": "шумный, громкий",
+      "example": {
+        "he": "רחוב רועש",
+        "translit": "рехов роэш",
+        "ru": "Шумная улица"
+      },
+      "forms": {
+        "f": {
+          "he": "רועשת",
+          "niqqud": "רוֹעֶשֶׁת",
+          "translit": "роэ́шет"
+        },
+        "mp": {
+          "he": "רועשים",
+          "niqqud": "רוֹעֲשִׁים",
+          "translit": "роаши́м"
+        },
+        "fp": {
+          "he": "רועשות",
+          "niqqud": "רוֹעֲשׁוֹת",
+          "translit": "роашо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-noisy.svg"
+    },
+    {
+      "id": "qualities-4-correct",
+      "he": "נכון",
+      "niqqud": "נָכוֹן",
+      "translit": "нахо́н",
+      "ru": "правильный, верный",
+      "example": {
+        "he": "תשובה נכונה",
+        "translit": "тшува нехона",
+        "ru": "Правильный ответ"
+      },
+      "forms": {
+        "f": {
+          "he": "נכונה",
+          "niqqud": "נְכוֹנָה",
+          "translit": "нехона́"
+        },
+        "mp": {
+          "he": "נכונים",
+          "niqqud": "נְכוֹנִים",
+          "translit": "нехони́м"
+        },
+        "fp": {
+          "he": "נכונות",
+          "niqqud": "נְכוֹנוֹת",
+          "translit": "нехоно́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-correct.svg"
+    },
+    {
+      "id": "qualities-4-other",
+      "he": "אחר",
+      "niqqud": "אַחֵר",
+      "translit": "ахе́р",
+      "ru": "другой",
+      "example": {
+        "he": "יום אחר",
+        "translit": "йом ахер",
+        "ru": "Другой день"
+      },
+      "forms": {
+        "f": {
+          "he": "אחרת",
+          "niqqud": "אַחֶרֶת",
+          "translit": "ахе́рет"
+        },
+        "mp": {
+          "he": "אחרים",
+          "niqqud": "אֲחֵרִים",
+          "translit": "ахери́м"
+        },
+        "fp": {
+          "he": "אחרות",
+          "niqqud": "אֲחֵרוֹת",
+          "translit": "ахеро́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-other.svg"
+    },
+    {
+      "id": "qualities-4-round",
+      "he": "עגול",
+      "niqqud": "עָגוֹל",
+      "translit": "аго́ль",
+      "ru": "круглый",
+      "example": {
+        "he": "שולחן עגול",
+        "translit": "шульхан аголь",
+        "ru": "Круглый стол"
+      },
+      "forms": {
+        "f": {
+          "he": "עגולה",
+          "niqqud": "עֲגוּלָּה",
+          "translit": "агула́"
+        },
+        "mp": {
+          "he": "עגולים",
+          "niqqud": "עֲגוּלִּים",
+          "translit": "агули́м"
+        },
+        "fp": {
+          "he": "עגולות",
+          "niqqud": "עֲגוּלּוֹת",
+          "translit": "агуло́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-round.svg"
+    },
+    {
+      "id": "qualities-4-sharp",
+      "he": "חד",
+      "niqqud": "חַד",
+      "translit": "хад",
+      "ru": "острый",
+      "example": {
+        "he": "סכין חדה",
+        "translit": "сакин хада",
+        "ru": "Острый нож"
+      },
+      "forms": {
+        "f": {
+          "he": "חדה",
+          "niqqud": "חַדָּה",
+          "translit": "хада́"
+        },
+        "mp": {
+          "he": "חדים",
+          "niqqud": "חַדִּים",
+          "translit": "хади́м"
+        },
+        "fp": {
+          "he": "חדות",
+          "niqqud": "חַדּוֹת",
+          "translit": "хадо́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-sharp.svg"
+    },
+    {
+      "id": "qualities-4-soft",
+      "he": "רך",
+      "niqqud": "רַךְ",
+      "translit": "рах",
+      "ru": "мягкий",
+      "example": {
+        "he": "כרית רכה",
+        "translit": "карит рака",
+        "ru": "Мягкая подушка"
+      },
+      "forms": {
+        "f": {
+          "he": "רכה",
+          "niqqud": "רַכָּה",
+          "translit": "рака́"
+        },
+        "mp": {
+          "he": "רכים",
+          "niqqud": "רַכִּים",
+          "translit": "раки́м"
+        },
+        "fp": {
+          "he": "רכות",
+          "niqqud": "רַכּוֹת",
+          "translit": "рако́т"
+        }
+      },
+      "reviewed": false,
+      "image": "/words/qualities-4-soft.svg"
+    }
+  ]
+}
