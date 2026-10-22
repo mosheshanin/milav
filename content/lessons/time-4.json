@@ -130,7 +130,12 @@
         "he": "הייתי בחופש בחודש שעבר",
         "translit": "хаити ба-хофеш ба-ходеш ше-авар",
         "ru": "В прошлом месяце я был в отпуске",
-        "audio": "/audio/time-4-last-month-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "הייתי בחופש בחודש שעבר",
+          "translit": "хаити ба-хофеш ба-ходеш ше-авар",
+          "ru": "В прошлом месяце я была в отпуске"
+        }
       },
       "reviewed": false,
       "image": "/words/time-4-last-month.svg",
@@ -146,7 +151,12 @@
         "he": "השנה אני לומד עברית",
         "translit": "хашана ани ломед иврит",
         "ru": "В этом году я учу иврит",
-        "audio": "/audio/time-4-this-year-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "השנה אני לומדת עברית",
+          "translit": "хашана ани ломедет иврит",
+          "ru": "В этом году я учу иврит"
+        }
       },
       "reviewed": false,
       "image": "/words/time-4-this-year.svg",

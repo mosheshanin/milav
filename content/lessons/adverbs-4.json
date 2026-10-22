@@ -50,7 +50,12 @@
         "he": "אני בא עוד מעט",
         "translit": "ани ба од меат",
         "ru": "Я скоро приду",
-        "audio": "/audio/adverbs-4-in-a-moment-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני באה עוד מעט",
+          "translit": "ани баа од меат",
+          "ru": "Я скоро приду"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-4-in-a-moment.svg",
@@ -82,7 +87,12 @@
         "he": "אני קורא כל יום",
         "translit": "ани коре коль йом",
         "ru": "Я читаю каждый день",
-        "audio": "/audio/adverbs-4-every-day-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני קוראת כל יום",
+          "translit": "ани корет коль йом",
+          "ru": "Я читаю каждый день"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-4-every-day.svg",
@@ -146,7 +156,12 @@
         "he": "אני קם מוקדם",
         "translit": "ани кам мукдам",
         "ru": "Я встаю рано",
-        "audio": "/audio/adverbs-4-early-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני קמה מוקדם",
+          "translit": "ани кама мукдам",
+          "ru": "Я встаю рано"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-4-early.svg",

@@ -12,6 +12,7 @@ export * from "./admin";
 export * from "./reminders";
 export * from "./review";
 export * from "./repeat";
+export * from "./phrase";
 export {
   PRACTICE_OPTIONS,
   PRACTICE_QUESTIONS,

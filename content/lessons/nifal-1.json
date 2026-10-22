@@ -18,7 +18,12 @@
         "he": "אני נכנס פנימה",
         "translit": "ани нихнас пнима",
         "ru": "Я захожу внутрь",
-        "audio": "/audio/nifal-1-enter-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נכנסת פנימה",
+          "translit": "ани нихнесет пнима",
+          "ru": "Я захожу внутрь"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -207,7 +212,12 @@
         "he": "אני נשאר כאן",
         "translit": "ани нишар кан",
         "ru": "Я остаюсь здесь",
-        "audio": "/audio/nifal-1-stay-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נשארת כאן",
+          "translit": "ани нишерет кан",
+          "ru": "Я остаюсь здесь"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -396,7 +406,12 @@
         "he": "אני נפגש עם חבר",
         "translit": "ани нифгаш им хавер",
         "ru": "Я встречаюсь с другом",
-        "audio": "/audio/nifal-1-meet-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נפגשת עם חבר",
+          "translit": "ани нифгешет им хавер",
+          "ru": "Я встречаюсь с другом"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -1374,7 +1389,12 @@
         "he": "אני נזכר בשיר",
         "translit": "ани низкар бешир",
         "ru": "Я вспоминаю песню",
-        "audio": "/audio/nifal-1-recall-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נזכרת בשיר",
+          "translit": "ани низкерет бешир",
+          "ru": "Я вспоминаю песню"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -1563,7 +1583,12 @@
         "he": "אני נפרד מחבר",
         "translit": "ани нифрад мехавер",
         "ru": "Я прощаюсь с другом",
-        "audio": "/audio/nifal-1-part-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נפרדת מחבר",
+          "translit": "ани нифредет мехавер",
+          "ru": "Я прощаюсь с другом"
+        }
       },
       "verb": {
         "binyan": "nifal",

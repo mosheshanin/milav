@@ -1,4 +1,5 @@
 // Типы API геймификации (docs/GAMIFICATION.md, раздел 10).
+import type { Gender } from "../types";
 import type { Metrics } from "./badges";
 
 /** Путь к следующему шахматному статусу. */
@@ -22,6 +23,8 @@ export interface PlaySettings {
   leaderboard: boolean;
   /** Не учитывать меня в сравнении с теми, кто пришёл в одно время. */
   cohortExcluded: boolean;
+  /** От чьего лица показывать и озвучивать фразы-примеры: m мужчины (по умолчанию), f женщины (docs/SPEC.md, «Род во фразах-примерах»). */
+  gender: Gender;
 }
 
 /** Блок «Мой путь» из GET /api/me. */
@@ -108,4 +111,5 @@ export interface SettingsRequest {
   dailyGoal?: number;
   tz?: string;
   cohortExcluded?: boolean;
+  gender?: Gender;
 }

@@ -90,7 +90,12 @@
         "he": "אני עייף",
         "translit": "ани айеф",
         "ru": "Я устал",
-        "audio": "/audio/mood-1-tired-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני עייפה",
+          "translit": "ани айефа",
+          "ru": "Я устала"
+        }
       },
       "forms": {
         "f": {

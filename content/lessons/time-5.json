@@ -82,7 +82,12 @@
         "he": "אני משלם במזומן",
         "translit": "ани мешалем бе-мезуман",
         "ru": "Я плачу наличными",
-        "audio": "/audio/time-5-cash-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני משלמת במזומן",
+          "translit": "ани мешалемет бе-мезуман",
+          "ru": "Я плачу наличными"
+        }
       },
       "reviewed": false,
       "image": "/words/time-5-cash.svg",

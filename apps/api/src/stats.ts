@@ -3,6 +3,7 @@
 import { catalog, contentInfo, getAnyLesson } from "@milav/content";
 import {
   DEFAULT_DAILY_GOAL,
+  DEFAULT_LEARNER_GENDER,
   DEFAULT_TZ,
   EMPTY_PLAY,
   LEADERBOARD_TZ,
@@ -13,6 +14,7 @@ import {
   closedTopics,
   crossedBadges,
   eligibleBadges,
+  isGender,
   isValidTimeZone,
   localEpochDay,
   parseDbTime,
@@ -21,6 +23,7 @@ import {
   utcEpochDay,
   viewPlay,
   weekIndex,
+  type Gender,
   type Metrics,
   type PlayState,
   type StatusInfo,
@@ -53,6 +56,8 @@ export interface Stats {
   lbUpdatedAt: number;
   cohortWeek: number;
   cohortExcluded: boolean;
+  /** Род ученика для фраз-примеров (миграция 0010). */
+  gender: Gender;
   badgesVer: number;
   createdAt: number;
 }
@@ -92,6 +97,7 @@ interface StatsRow {
   lb_updated_at: number;
   cohort_week: number;
   cohort_excluded: number;
+  gender: string | null;
   badges_ver: number;
   created_at: number;
 }
@@ -134,6 +140,7 @@ function fromRow(r: StatsRow): Stats {
     lbUpdatedAt: r.lb_updated_at,
     cohortWeek: r.cohort_week,
     cohortExcluded: !!r.cohort_excluded,
+    gender: isGender(r.gender) ? r.gender : DEFAULT_LEARNER_GENDER,
     badgesVer: r.badges_ver,
     createdAt: r.created_at,
   };
@@ -299,6 +306,7 @@ async function recount(db: D1Database, userId: number, tz: string, now: number):
     lbUpdatedAt: 0,
     cohortWeek: weekIndex(localEpochDay(LEADERBOARD_TZ, created * 1000)),
     cohortExcluded: false,
+    gender: DEFAULT_LEARNER_GENDER,
     badgesVer: 0,
     createdAt: now,
   };

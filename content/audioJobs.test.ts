@@ -1,3 +1,4 @@
+import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { VERB_FORMS_TOTAL, VERB_TENSES, verbFormAudioPath, type VerbData } from "@milav/shared";
 // @ts-expect-error модуль на чистом JS (tools/*.mjs), деклараций типов нет
@@ -6,6 +7,7 @@ import { KATAV, katavWord } from "./verbFixture";
 
 interface Job {
   kind: string;
+  voice: string;
   id: string;
   name: string;
   niqqud: string;
@@ -24,11 +26,11 @@ describe("озвучка: формы глагола", () => {
     expect(VERB_TENSE_ORDER).toEqual([...VERB_TENSES]);
   });
 
-  it("один файл на слово и 27 файлов на формы", () => {
+  it("один файл на слово, 27 файлов на формы и по файлу на мужскую фразу и её женский вариант", () => {
     const jobs = jobsOf(katav());
     expect(jobs.filter((j) => j.kind === "word")).toHaveLength(1);
     expect(jobs.filter((j) => j.kind === "form")).toHaveLength(VERB_FORMS_TOTAL);
-    expect(jobs.filter((j) => j.kind === "phrase")).toHaveLength(1);
+    expect(jobs.filter((j) => j.kind === "phrase").map((j) => j.name)).toEqual(["paal-1-write-phrase-m", "paal-1-write-phrase-f"]);
   });
 
   it("имя файла совпадает с путём, который знает приложение (verbFormAudioPath)", () => {
@@ -106,7 +108,63 @@ describe("озвучка: прежние виды не изменились", ()
     ]);
   });
 
+  it("у нейтральной фразы основной голос", () => {
+    const word = { id: "animals-1-dog", he: "כלב", niqqud: "כֶּלֶב", example: { he: "זה כלב" } };
+    expect(jobsOf(word).find((j) => j.kind === "phrase")!.voice).toBe("main");
+  });
+
   it("виды озвучки перечислены целиком", () => {
     expect(ALL_KINDS).toEqual(["word", "form", "phrase", "letter", "example"]);
+  });
+});
+
+describe("озвучка: фразы от первого лица (docs/CONTENT.md, «Фразы от первого лица»)", () => {
+  const word = () => ({
+    id: "weak-1-want",
+    he: "לרצות",
+    example: {
+      he: "אני רוצה מים",
+      translit: "ани роце маим",
+      ru: "Я хочу воды",
+      speaker: "m",
+      female: { he: "אני רוצה מים", niqqud: "אני רוֹצָה מים", translit: "ани роца маим", ru: "Я хочу воды" },
+    } as Record<string, unknown> & { female: Record<string, unknown> },
+  });
+
+  it("мужская фраза мужским голосом в <id>-phrase-m, женский вариант основным (женским) в <id>-phrase-f", () => {
+    const jobs = jobsOf(word()).filter((j) => j.kind === "phrase");
+    expect(jobs.map((j) => [j.name, j.voice])).toEqual([
+      ["weak-1-want-phrase-m", "male"],
+      ["weak-1-want-phrase-f", "main"],
+    ]);
+  });
+
+  it("в синтезатор уходят огласовки варианта, если они есть", () => {
+    const jobs = jobsOf(word()).filter((j) => j.kind === "phrase");
+    expect(jobs[0]!.niqqud).toBe("אני רוצה מים");
+    expect(jobs[1]!.niqqud).toBe("אני רוֹצָה מים");
+  });
+
+  it("set пишет путь в поле audio своего варианта", () => {
+    const w = word();
+    const [male, female] = jobsOf(w).filter((j) => j.kind === "phrase");
+    male!.set("/audio/weak-1-want-phrase-m.mp3");
+    female!.set("/audio/weak-1-want-phrase-f.mp3");
+    expect(w.example.audio).toBe("/audio/weak-1-want-phrase-m.mp3");
+    expect(w.example.female.audio).toBe("/audio/weak-1-want-phrase-f.mp3");
+  });
+
+  it("фраза, которую говорит женщина без варианта (слово «אני מצטערת»), основным голосом в <id>-phrase", () => {
+    const w = { id: "phrases-2-im-sorry-f", he: "אני מצטערת", example: { he: "אני מצטערת על זה", speaker: "f" } };
+    expect(jobsOf(w).filter((j) => j.kind === "phrase").map((j) => [j.name, j.voice])).toEqual([["phrases-2-im-sorry-f-phrase", "main"]]);
+  });
+
+  it("во всех уроках озвучка фраз лежит под именем, которое даёт задание (голос не перепутан)", () => {
+    const dir = new URL("./lessons/", import.meta.url);
+    const lessons = readdirSync(dir)
+      .filter((f) => f.endsWith(".json"))
+      .map((file) => ({ file, data: JSON.parse(readFileSync(new URL(file, dir), "utf8")) }));
+    const wrong = (buildJobs(lessons, { kinds: ["phrase"] }) as Job[]).filter((j) => j.has !== undefined && j.has !== `/audio/${j.name}.mp3`);
+    expect(wrong.map((j) => `${j.name}: ${j.has}`)).toEqual([]);
   });
 });

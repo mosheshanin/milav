@@ -193,20 +193,52 @@
       "type": "object",
       "required": ["he", "translit", "ru"],
       "additionalProperties": false,
+      "description": "Фраза-пример. Фраза от первого лица, зависящая от рода говорящего, помечена speaker; у мужской есть женский вариант female (docs/CONTENT.md, «Фразы от первого лица»).",
       "properties": {
         "he": { "type": "string", "pattern": "^[א-ת]+( [א-ת]+)*$" },
-        "translit": {
-          "type": "string",
-          "pattern": "^[абвгдежзийклмнопрстуфхцчшьэюя]+([ -][абвгдежзийклмнопрстуфхцчшьэюя]+)*$",
-          "description": "Транскрипция фразы без знаков ударения."
-        },
+        "niqqud": { "$ref": "#/definitions/phraseNiqqud" },
+        "translit": { "$ref": "#/definitions/phraseTranslit" },
         "ru": { "$ref": "#/definitions/text" },
         "audio": {
           "type": "string",
           "pattern": "^/audio/[a-z0-9-]+\\.mp3$",
-          "description": "Озвучка фразы: /audio/<id слова>-phrase.mp3. Заполняется скриптом озвучки."
+          "description": "Озвучка фразы: /audio/<id слова>-phrase-m.mp3 у мужской фразы (speaker m, мужской голос), иначе /audio/<id слова>-phrase.mp3 (женский голос). Заполняется скриптом озвучки."
+        },
+        "speaker": {
+          "enum": ["m", "f"],
+          "description": "Кто говорит фразу: m мужчина, f женщина. Обязателен, если фраза зависит от рода говорящего («אני הולך», «Я устал»); по нему выбирается голос озвучки. У нейтральных фраз («Я дома», «Это хорошая мама») его нет."
+        },
+        "female": { "$ref": "#/definitions/phraseFemale" }
+      },
+      "if": { "required": ["female"] },
+      "then": { "required": ["speaker"], "properties": { "speaker": { "const": "m" } } }
+    },
+    "phraseFemale": {
+      "type": "object",
+      "required": ["he", "translit", "ru"],
+      "additionalProperties": false,
+      "description": "Женский вариант мужской фразы от первого лица: «אני הולכת», «Я устала». Его видит и слышит ученица (настройка «Фразы-примеры от лица»).",
+      "properties": {
+        "he": { "type": "string", "pattern": "^[א-ת]+( [א-ת]+)*$" },
+        "niqqud": { "$ref": "#/definitions/phraseNiqqud" },
+        "translit": { "$ref": "#/definitions/phraseTranslit" },
+        "ru": { "$ref": "#/definitions/text" },
+        "audio": {
+          "type": "string",
+          "pattern": "^/audio/[a-z0-9-]+-phrase-f\\.mp3$",
+          "description": "Озвучка женским голосом: /audio/<id слова>-phrase-f.mp3. Заполняется скриптом озвучки."
         }
       }
+    },
+    "phraseTranslit": {
+      "type": "string",
+      "pattern": "^[абвгдежзийклмнопрстуфхцчшьэюя]+([ -][абвгдежзийклмнопрстуфхцчшьэюя]+)*$",
+      "description": "Транскрипция фразы без знаков ударения."
+    },
+    "phraseNiqqud": {
+      "type": "string",
+      "pattern": "^(?=.*[\\u05B0-\\u05BC\\u05C1\\u05C2])[א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+( [א-ת\\u05B0-\\u05BC\\u05C1\\u05C2]+)*$",
+      "description": "Огласовки для озвучки, необязательно: нужны, когда одно написание читается по-разному (у женщины «אני רוֹצָה»). Можно огласовать только спорное слово; без огласовок это тот же текст, что he. На экране не показываются."
     },
     "form": {
       "type": "object",

@@ -34,7 +34,12 @@
         "he": "מחר אני בא",
         "translit": "махар ани ба",
         "ru": "Завтра я приду",
-        "audio": "/audio/adverbs-1-tomorrow-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "מחר אני באה",
+          "translit": "махар ани баа",
+          "ru": "Завтра я приду"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-1-tomorrow.svg",
@@ -50,7 +55,12 @@
         "he": "אתמול הייתי בבית",
         "translit": "этмоль хайити бабайит",
         "ru": "Вчера я был дома",
-        "audio": "/audio/adverbs-1-yesterday-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אתמול הייתי בבית",
+          "translit": "этмоль хайити бабайит",
+          "ru": "Вчера я была дома"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-1-yesterday.svg",
@@ -161,7 +171,12 @@
         "he": "אני בא מיד",
         "translit": "ани ба мияд",
         "ru": "Я сейчас приду",
-        "audio": "/audio/adverbs-1-immediately-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני באה מיד",
+          "translit": "ани баа мияд",
+          "ru": "Я сейчас приду"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-1-immediately.svg",

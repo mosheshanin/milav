@@ -1,6 +1,6 @@
 // Сквозная проверка геймификации в настоящем браузере (390×844 и 360×640): блок «Мой путь», тост бейджа в уроке,
 // экран «Достижения» (бейджи, цель дня, настройки, «Поделиться»), таблица лидеров (вступить, выйти, приватность),
-// лист «Мы нашли ваши достижения», возврат на экран после перезагрузки. Любое нарушение CSP это провал.
+// лист «Мы нашли ваши достижения», возврат на экран после перезагрузки, выбор рода для фраз-примеров в «Настройках». Любое нарушение CSP это провал.
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs), в локальной среде таблица включена.
 // Запуск: node tools/e2e-gamification.mjs [каталог для скриншотов]
 import { execFileSync } from "node:child_process";
@@ -280,6 +280,39 @@ await shot(page, "10-achievements-360");
 check(!(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)), "на экране 360 px достижения не уходят вбок");
 await page.context().close();
 
+// ---------- Сценарий Д: фразы-примеры от лица мужчины или женщины (22.10, docs/SPEC.md «Род во фразах-примерах») ----------
+{
+  const D = 3103;
+  resetUser(D);
+  const weak = JSON.parse(readFileSync(new URL("../content/lessons/weak-1.json", import.meta.url), "utf8"));
+  const go = weak.words[0];
+  const p = await openPage(D);
+  await p.click('header [data-testid="open-settings"]');
+  await p.waitForSelector('[data-testid="settings"]');
+  const checked = (id) => p.locator(`[data-testid="${id}"]`).getAttribute("aria-checked");
+  check((await checked("gender-m")) === "true", "по умолчанию фразы-примеры от лица мужчины");
+  await p.click('[data-testid="gender-f"]');
+  await p.waitForFunction(() => document.querySelector('[data-testid="gender-f"]')?.getAttribute("aria-checked") === "true");
+  await shot(p, "11-settings-gender");
+  await p.reload();
+  await p.waitForSelector('[data-testid="settings"]');
+  check((await checked("gender-f")) === "true", "выбор «Женщины» сохранён на сервере и переживает перезагрузку");
+  await pressBack(p);
+  await revealLesson(p, weak.id);
+  await p.click(`[data-testid="lesson-${weak.id}"]`);
+  await p.waitForSelector('[data-testid="phrase-he"]');
+  check((await text(p, "phrase-he")) === go.example.female.he, `женщине фраза в женском роде: ${go.example.female.he}`);
+  check((await p.locator('[data-testid="listen-phrase"]').count()) === 1, "у фразы одна кнопка «послушать»");
+  await shot(p, "12-card-female-phrase");
+  // Обратно на мужской род запросом: карточка после перезагрузки снова в мужском.
+  const res = await p.context().request.put(`${BASE}/api/settings`, { headers: { Authorization: `dev ${D}:Tester`, "Content-Type": "application/json" }, data: { gender: "m" } });
+  check(res.status() === 200, "род меняется запросом PUT /api/settings");
+  await p.reload();
+  await p.waitForSelector('[data-testid="phrase-he"]');
+  check((await text(p, "phrase-he")) === go.example.he, `мужчине фраза в мужском роде: ${go.example.he}`);
+  await p.context().close();
+}
+
 // ---------- Сценарий Г: запросы в обход приложения ----------
 {
   const context = await browser.newContext();
@@ -288,6 +321,7 @@ await page.context().close();
   check((await put({ dailyGoal: 7 })) === 400, "цель дня 7 не принимается");
   check((await put({ tz: "Не/Пояс" })) === 200 || true, "неверный часовой пояс не ломает запрос");
   check((await put({ leaderboard: "да" })) === 400, "участие должно быть логическим значением");
+  check((await put({ gender: "x" })) === 400, "род для фраз только m или f");
   const seen = await context.request.post(`${BASE}/api/achievements/seen`, { headers, data: { ids: "x" } });
   check(seen.status() === 400, "список просмотренных бейджей проверяется");
   await context.close();

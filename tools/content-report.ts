@@ -76,6 +76,7 @@ const describeWord = (w: Word): string => {
     }
   }
   if (w.example) parts.push(`фраза: ${w.example.he} [${w.example.translit}] — ${w.example.ru}`);
+  if (w.example?.female) parts.push(`фраза (говорит женщина): ${w.example.female.he} [${w.example.female.translit}] — ${w.example.female.ru}`);
   return parts.join("\n      ");
 };
 const describeLetter = (l: Letter): string =>

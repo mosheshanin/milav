@@ -13,6 +13,9 @@ on:
       voice:
         description: "Голос, например he-IL-Wavenet-A (список даёт действие voices)"
         default: he-IL-Wavenet-A
+      male_voice:
+        description: "Для publish: мужской голос для мужских фраз от первого лица (файлы -phrase-m), например he-IL-Wavenet-B"
+        default: he-IL-Wavenet-B
       text:
         description: "Для publish: что отправлять в синтезатор"
         type: choice
@@ -65,13 +68,15 @@ jobs:
         # Список id приходит через переменную окружения и проверяется: в команду попадают только id уроков.
         env:
           ONLY: ${{ inputs.only }}
+          MALE_VOICE: ${{ inputs.male_voice }}
         run: |
           ONLY_ARGS=()
           if [ -n "$ONLY" ]; then
             if ! [[ "$ONLY" =~ ^[a-z0-9,-]+$ ]]; then echo "only: только id через запятую"; exit 1; fi
             ONLY_ARGS=(--only "$ONLY")
           fi
-          node tools/generate-audio.mjs --voice "${{ inputs.voice }}" --text "${{ inputs.text }}" --update-content ${{ inputs.force && '--force' || '' }} "${ONLY_ARGS[@]}"
+          if ! [[ "$MALE_VOICE" =~ ^[A-Za-z0-9-]+$ ]]; then echo "male_voice: только имя голоса"; exit 1; fi
+          node tools/generate-audio.mjs --voice "${{ inputs.voice }}" --male-voice "$MALE_VOICE" --text "${{ inputs.text }}" --update-content ${{ inputs.force && '--force' || '' }} "${ONLY_ARGS[@]}"
 
       # Поле audio в уроке меняет его версию: манифест приложения пересобирается, иначе тест манифеста остановит выкладку.
       - name: Манифест уроков
@@ -85,5 +90,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/web/public/audio content/lessons content/manifest.json content/registry.ts
           git diff --cached --quiet && echo "Нечего сохранять" && exit 0
-          git commit -m "Озвучка слов: ${{ inputs.voice }}, текст ${{ inputs.text }}"
+          git commit -m "Озвучка слов: ${{ inputs.voice }} (мужские фразы ${{ inputs.male_voice }}), текст ${{ inputs.text }}"
           git push

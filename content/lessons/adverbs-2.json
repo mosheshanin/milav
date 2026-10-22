@@ -82,7 +82,12 @@
         "he": "אני הולך מהר",
         "translit": "ани холех махер",
         "ru": "Я иду быстро",
-        "audio": "/audio/adverbs-2-fast-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני הולכת מהר",
+          "translit": "ани холехет махер",
+          "ru": "Я иду быстро"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-2-fast.svg",
@@ -98,7 +103,12 @@
         "he": "אני הולך לאט",
         "translit": "ани холех леат",
         "ru": "Я иду медленно",
-        "audio": "/audio/adverbs-2-slow-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני הולכת לאט",
+          "translit": "ани холехет леат",
+          "ru": "Я иду медленно"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-2-slow.svg",
@@ -114,7 +124,12 @@
         "he": "אני מרגיש טוב",
         "translit": "ани маргиш тов",
         "ru": "Я чувствую себя хорошо",
-        "audio": "/audio/adverbs-2-good-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מרגישה טוב",
+          "translit": "ани маргиша тов",
+          "ru": "Я чувствую себя хорошо"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-2-good.svg",
@@ -130,7 +145,12 @@
         "he": "אני מרגיש רע",
         "translit": "ани маргиш ра",
         "ru": "Я чувствую себя плохо",
-        "audio": "/audio/adverbs-2-bad-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מרגישה רע",
+          "translit": "ани маргиша ра",
+          "ru": "Я чувствую себя плохо"
+        }
       },
       "reviewed": false,
       "image": "/words/adverbs-2-bad.svg",

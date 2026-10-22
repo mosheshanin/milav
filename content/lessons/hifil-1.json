@@ -207,7 +207,12 @@
         "he": "אני מסביר לך",
         "translit": "ани масбир леха",
         "ru": "Я объясняю тебе",
-        "audio": "/audio/hifil-1-explain-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מסבירה לך",
+          "translit": "ани масбира леха",
+          "ru": "Я объясняю тебе"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -396,7 +401,12 @@
         "he": "אני מזמין פיצה",
         "translit": "ани мазмин пица",
         "ru": "Я заказываю пиццу",
-        "audio": "/audio/hifil-1-order-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מזמינה פיצה",
+          "translit": "ани мазмина пица",
+          "ru": "Я заказываю пиццу"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -774,7 +784,12 @@
         "he": "אני מרגיש טוב",
         "translit": "ани маргиш тов",
         "ru": "Я хорошо себя чувствую",
-        "audio": "/audio/hifil-1-feel-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מרגישה טוב",
+          "translit": "ани маргиша тов",
+          "ru": "Я хорошо себя чувствую"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -1152,7 +1167,12 @@
         "he": "אני משאיר הודעה",
         "translit": "ани машир ходаа",
         "ru": "Я оставляю сообщение",
-        "audio": "/audio/hifil-1-leave-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני משאירה הודעה",
+          "translit": "ани машира ходаа",
+          "ru": "Я оставляю сообщение"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -1341,7 +1361,12 @@
         "he": "אני מסכים איתך",
         "translit": "ани маским итха",
         "ru": "Я с тобой согласен",
-        "audio": "/audio/hifil-1-agree-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מסכימה איתך",
+          "translit": "ани маскима итха",
+          "ru": "Я с тобой согласна"
+        }
       },
       "verb": {
         "binyan": "hifil",

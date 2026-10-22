@@ -18,7 +18,12 @@
         "he": "אני לומד עברית",
         "translit": "ани ломед иврит",
         "ru": "Я учу иврит",
-        "audio": "/audio/paal-5-learn-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני לומדת עברית",
+          "translit": "ани ломедет иврит",
+          "ru": "Я учу иврит"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -207,7 +212,12 @@
         "he": "אני בוחר ספר",
         "translit": "ани бохер сефер",
         "ru": "Я выбираю книгу",
-        "audio": "/audio/paal-5-choose-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני בוחרת ספר",
+          "translit": "ани бохерет сефер",
+          "ru": "Я выбираю книгу"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -585,7 +595,12 @@
         "he": "אני צוחק עם חבר",
         "translit": "ани цохек им хавер",
         "ru": "Я смеюсь с другом",
-        "audio": "/audio/paal-5-laugh-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני צוחקת עם חבר",
+          "translit": "ани цохекет им хавер",
+          "ru": "Я смеюсь с другом"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1152,7 +1167,12 @@
         "he": "אני מוחק קובץ",
         "translit": "ани мохек ковец",
         "ru": "Я удаляю файл",
-        "audio": "/audio/paal-5-erase-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מוחקת קובץ",
+          "translit": "ани мохекет ковец",
+          "ru": "Я удаляю файл"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1341,7 +1361,12 @@
         "he": "אני רוחץ ידיים",
         "translit": "ани рохец ядаим",
         "ru": "Я мою руки",
-        "audio": "/audio/paal-5-wash-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני רוחצת ידיים",
+          "translit": "ани рохецет ядаим",
+          "ru": "Я мою руки"
+        }
       },
       "verb": {
         "binyan": "paal",

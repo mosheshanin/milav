@@ -242,7 +242,13 @@ export function katavWord(): Record<string, unknown> {
     niqqud: KATAV_INFINITIVE.niqqud,
     translit: KATAV_INFINITIVE.translit,
     ru: "писать",
-    example: { he: "אני כותב מכתב", translit: "ани котев михтав", ru: "Я пишу письмо" },
+    example: {
+      he: "אני כותב מכתב",
+      translit: "ани котев михтав",
+      ru: "Я пишу письмо",
+      speaker: "m",
+      female: { he: "אני כותבת מכתב", translit: "ани котевет михтав", ru: "Я пишу письмо" },
+    },
     verb: structuredClone(KATAV),
     reviewed: false,
   };

@@ -146,7 +146,12 @@
         "he": "עליתי לארץ בשנה שעברה",
         "translit": "алити ла-арец ба-шана ше-авра",
         "ru": "Я репатриировался в прошлом году",
-        "audio": "/audio/time-2-last-year-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "עליתי לארץ בשנה שעברה",
+          "translit": "алити ла-арец ба-шана ше-авра",
+          "ru": "Я репатриировалась в прошлом году"
+        }
       },
       "reviewed": false,
       "image": "/words/time-2-last-year.svg",
@@ -162,7 +167,12 @@
         "he": "אני בא לאולפן פעם בשבוע",
         "translit": "ани ба ла-ульпан паам бе-шавуа",
         "ru": "Я хожу в ульпан раз в неделю",
-        "audio": "/audio/time-2-once-a-week-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני באה לאולפן פעם בשבוע",
+          "translit": "ани баа ла-ульпан паам бе-шавуа",
+          "ru": "Я хожу в ульпан раз в неделю"
+        }
       },
       "reviewed": false,
       "image": "/words/time-2-once-a-week.svg",

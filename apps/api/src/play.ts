@@ -6,6 +6,7 @@ import {
   featureOn,
   MAX_SEEN_IDS,
   RHYTHM_DAYS_PER_WEEK,
+  isGender,
   isValidTimeZone,
   localEpochDay,
   statusPath,
@@ -76,7 +77,7 @@ export function buildPlayInfo(stats: Stats, unseenBadges: number, now: number, f
     activeDays: stats.play.activeDays,
     unseenBadges,
     recap: view.recap,
-    settings: { dailyGoal: stats.dailyGoal, leaderboard: stats.lbOptin && !stats.lbBanned, cohortExcluded: stats.cohortExcluded },
+    settings: { dailyGoal: stats.dailyGoal, leaderboard: stats.lbOptin && !stats.lbBanned, cohortExcluded: stats.cohortExcluded, gender: stats.gender },
     features,
   };
 }
@@ -140,9 +141,9 @@ playRoutes.post("/api/achievements/seen", requireUser, rateLimit("seen"), async 
   return c.json({ ok: true, marked: res.meta?.changes ?? 0 });
 });
 
-const SETTING_KEYS = new Set(["leaderboard", "dailyGoal", "tz", "cohortExcluded"]);
+const SETTING_KEYS = new Set(["leaderboard", "dailyGoal", "tz", "cohortExcluded", "gender"]);
 
-// Настройки: цель дня, участие в таблице, учёт в сравнении, часовой пояс.
+// Настройки: цель дня, участие в таблице, учёт в сравнении, часовой пояс, род для фраз-примеров.
 playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) => {
   const user = c.get("user");
   const body = await readJson<Record<string, unknown>>(c.req.raw);
@@ -152,6 +153,7 @@ playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) =>
 
   if (req.leaderboard !== undefined && typeof req.leaderboard !== "boolean") return c.json({ error: "bad_request" }, 400);
   if (req.cohortExcluded !== undefined && typeof req.cohortExcluded !== "boolean") return c.json({ error: "bad_request" }, 400);
+  if (req.gender !== undefined && !isGender(req.gender)) return c.json({ error: "bad_request" }, 400);
   if (req.dailyGoal !== undefined && !(DAILY_GOAL_OPTIONS as readonly unknown[]).includes(req.dailyGoal)) {
     return c.json({ error: "bad_goal" }, 400);
   }
@@ -165,7 +167,7 @@ playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) =>
 
   // Имена столбцов фиксированы здесь, значения идут параметрами.
   const sets: string[] = [];
-  const values: number[] = [];
+  const values: (number | string)[] = [];
   if (req.leaderboard !== undefined) {
     sets.push("lb_optin = ?");
     values.push(req.leaderboard ? 1 : 0);
@@ -177,6 +179,10 @@ playRoutes.put("/api/settings", requireUser, rateLimit("settings"), async (c) =>
   if (req.cohortExcluded !== undefined) {
     sets.push("cohort_excluded = ?");
     values.push(req.cohortExcluded ? 1 : 0);
+  }
+  if (req.gender !== undefined) {
+    sets.push("gender = ?");
+    values.push(req.gender);
   }
   if (sets.length > 0) {
     await c.env.DB.prepare(`UPDATE user_stats SET ${sets.join(", ")} WHERE user_id = ?`).bind(...values, user.id).run();

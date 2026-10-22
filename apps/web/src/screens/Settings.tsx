@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BookCheck, Check, Copy, Shield } from "lucide-react";
-import { DAILY_GOAL_OPTIONS, STAFF_ROLE_TITLES, type SettingsRequest } from "@milav/shared";
+import { DAILY_GOAL_OPTIONS, LEARNER_GENDERS, LEARNER_GENDER_TITLES, STAFF_ROLE_TITLES, type SettingsRequest } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
@@ -14,7 +14,7 @@ import { THEME_CHOICES, THEME_TITLES, loadThemeChoice, setThemeChoice, type Them
 import { useBackButton } from "../lib/useBackButton";
 
 /**
- * Настройки пользователя. Разделы: оформление (тема; позже цветовые схемы), занятия (цель дня), звук и отклик
+ * Настройки пользователя. Разделы: оформление (тема; позже цветовые схемы), занятия (цель дня, род во фразах-примерах), звук и отклик
  * (вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение), внизу Telegram id и вход в панель
  * администратора (пункт панели виден только администраторам, docs/ADMIN.md).
  * Тема и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
@@ -72,6 +72,15 @@ export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; on
             disabled={busy}
             testId="goal"
             onChange={(n) => void change({ dailyGoal: n })}
+          />
+          <Choice
+            label="Фразы-примеры от лица"
+            hint="В иврите «я иду» мужчина говорит «אני הולך», а женщина «אני הולכת». Фразы на карточках слов и их озвучка будут от лица, которое вы выберете."
+            options={LEARNER_GENDERS.map((g) => ({ value: g, title: LEARNER_GENDER_TITLES[g] }))}
+            value={settings.gender}
+            disabled={busy}
+            testId="gender"
+            onChange={(g) => void change({ gender: g })}
           />
         </Section>
 

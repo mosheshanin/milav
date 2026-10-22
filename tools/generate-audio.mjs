@@ -6,8 +6,9 @@
 //   node tools/generate-audio.mjs --voices                      список доступных голосов he-IL
 //   node tools/generate-audio.mjs --review --voice he-IL-Wavenet-A
 //        для прослушивания: по каждому слову два файла, без огласовок и с огласовками, в каталог audio-review/
-//   node tools/generate-audio.mjs --voice he-IL-Wavenet-A --text niqqud --update-content
-//        боевая озвучка: apps/web/public/audio/<id>.mp3 и поле "audio" в JSON урока
+//   node tools/generate-audio.mjs --voice he-IL-Wavenet-A --male-voice he-IL-Wavenet-B --text niqqud --update-content
+//        боевая озвучка: apps/web/public/audio/<id>.mp3 и поле "audio" в JSON урока. Мужские фразы от первого лица
+//        (speaker m, файлы <id>-phrase-m.mp3) озвучивает --male-voice, всё остальное --voice (docs/AUDIO.md).
 //
 // Другие параметры: --only id1,id2   --kinds word,form,phrase,letter,example   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
 import { mkdirSync, existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -23,6 +24,9 @@ const option = (name, fallback) => {
 const API = "https://texttospeech.googleapis.com/v1";
 const KEY = process.env.GOOGLE_TTS_API_KEY;
 const voice = option("voice", "he-IL-Wavenet-A");
+/** Мужской голос для мужских фраз от первого лица («אני הולך»): задание с voice "male" (tools/audio-jobs.mjs). */
+const maleVoice = option("male-voice", "he-IL-Wavenet-B");
+const voiceOf = (job) => (job.voice === "male" ? maleVoice : voice);
 const rate = Number(option("rate", "0.9"));
 const only = option("only", "")?.split(",").filter(Boolean);
 const outDir = option("out", "apps/web/public/audio");
@@ -67,13 +71,13 @@ async function listVoices() {
  */
 const forSpeech = (text) => text.replaceAll("\u05F3", "'");
 
-async function synthesize(text) {
+async function synthesize(text, name = voice) {
   const body = await call("/text:synthesize", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       input: { text: forSpeech(text) },
-      voice: { languageCode: "he-IL", name: voice },
+      voice: { languageCode: "he-IL", name },
       audioConfig: { audioEncoding: "MP3", speakingRate: rate },
     }),
   });
@@ -109,9 +113,11 @@ if (flag("voices")) {
 
 if (!dry) {
   const available = (await listVoices()).map((line) => line.split("\t")[0]);
-  if (!available.includes(voice)) {
-    console.error(`Голоса ${voice} нет. Доступные для he-IL:\n${available.join("\n")}`);
-    process.exit(1);
+  for (const name of new Set([voice, maleVoice])) {
+    if (!available.includes(name)) {
+      console.error(`Голоса ${name} нет. Доступные для he-IL:\n${available.join("\n")}`);
+      process.exit(1);
+    }
   }
 }
 
@@ -145,8 +151,8 @@ if (flag("review")) {
     if (existsSync(target) && !flag("force")) {
       skipped++;
     } else {
-      console.log(`${dry ? "[dry] " : ""}${target}  «${text}»`);
-      if (!dry) writeFileSync(target, await synthesize(text));
+      console.log(`${dry ? "[dry] " : ""}${target}  «${text}»  ${voiceOf(job)}`);
+      if (!dry) writeFileSync(target, await synthesize(text, voiceOf(job)));
       made++;
     }
     // Поле audio записывается, когда файл есть (создан сейчас или раньше).

@@ -52,7 +52,15 @@ export function reviewValueTitle(field: Pick<ReviewField, "kind">, value: string
 
 /** Озвучка создаётся из этих полей: после их правки файл нужно переозвучить (docs/AUDIO.md). */
 export function isVoicedPath(path: string): boolean {
-  return path === "niqqud" || path === "example.he" || path === "example.niqqud" || path === "name.niqqud" || /^(forms|verb\.\w+)\.\w+\.niqqud$/.test(path);
+  return (
+    path === "niqqud" ||
+    path === "example.he" ||
+    path === "example.niqqud" ||
+    path === "example.female.he" ||
+    path === "example.female.niqqud" ||
+    path === "name.niqqud" ||
+    /^(forms|verb\.\w+)\.\w+\.niqqud$/.test(path)
+  );
 }
 
 function wordFields(word: Word): ReviewField[] {
@@ -69,6 +77,13 @@ function wordFields(word: Word): ReviewField[] {
     add("Фраза", "example.he", "Иврит", word.example.he, "he");
     add("Фраза", "example.translit", "Транскрипция", word.example.translit);
     add("Фраза", "example.ru", "Перевод", word.example.ru);
+    // Фраза от первого лица: основная мужская, рядом женский вариант (docs/CONTENT.md, «Фразы от первого лица»).
+    const female = word.example.female;
+    if (female) {
+      add("Фраза (говорит женщина)", "example.female.he", "Иврит", female.he, "he");
+      add("Фраза (говорит женщина)", "example.female.translit", "Транскрипция", female.translit);
+      add("Фраза (говорит женщина)", "example.female.ru", "Перевод", female.ru);
+    }
   }
   if (word.forms) {
     const titles = { f: "Ж. р.", mp: "Мн. ч., м. р.", fp: "Мн. ч., ж. р." } as const;

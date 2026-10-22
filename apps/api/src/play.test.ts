@@ -361,9 +361,20 @@ describe("настройки", () => {
     const res = await put("/api/settings", 1, { dailyGoal: 10, cohortExcluded: true, tz: "Asia/Tokyo" });
     expect(res.status).toBe(200);
     const { play } = (await res.json()) as any;
-    expect(play.settings).toEqual({ dailyGoal: 10, leaderboard: false, cohortExcluded: true });
+    expect(play.settings).toEqual({ dailyGoal: 10, leaderboard: false, cohortExcluded: true, gender: "m" });
     expect(play.tz).toBe("Asia/Tokyo");
     expect((await meOf(1)).play.settings.dailyGoal).toBe(10);
+  });
+
+  it("род для фраз-примеров: по умолчанию мужской, сохраняется и возвращается в профиле", async () => {
+    expect((await meOf(1)).play.settings.gender).toBe("m");
+    const res = await put("/api/settings", 1, { gender: "f" });
+    expect(res.status).toBe(200);
+    expect(((await res.json()) as any).play.settings.gender).toBe("f");
+    expect((await meOf(1)).play.settings.gender).toBe("f");
+    expect((await statsRow(1)).gender).toBe("f");
+    await put("/api/settings", 1, { gender: "m" });
+    expect((await meOf(1)).play.settings.gender).toBe("m");
   });
 
   it("плохие значения отклоняются, ничего не меняя", async () => {
@@ -376,6 +387,8 @@ describe("настройки", () => {
       [{ tz: 5 }, "bad_tz"],
       [{ leaderboard: "yes" }, "bad_request"],
       [{ cohortExcluded: 1 }, "bad_request"],
+      [{ gender: "x" }, "bad_request"],
+      [{ gender: null }, "bad_request"],
       [{ unknown: true }, "bad_request"],
       [[], "bad_request"],
     ] as const) {

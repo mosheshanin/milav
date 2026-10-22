@@ -18,7 +18,13 @@
         "he": "כן אני רוצה",
         "translit": "кен ани роцэ",
         "ru": "Да, я хочу",
-        "audio": "/audio/yesno-1-yes-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "כן אני רוצה",
+          "niqqud": "כן אני רוֹצָה",
+          "translit": "кен ани роца",
+          "ru": "Да, я хочу"
+        }
       },
       "reviewed": false,
       "image": "/words/yesno-1-yes.svg",
@@ -34,7 +40,13 @@
         "he": "אני לא רוצה",
         "translit": "ани ло роцэ",
         "ru": "Я не хочу",
-        "audio": "/audio/yesno-1-no-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני לא רוצה",
+          "niqqud": "אני לא רוֹצָה",
+          "translit": "ани ло роца",
+          "ru": "Я не хочу"
+        }
       },
       "reviewed": false,
       "image": "/words/yesno-1-no.svg",
@@ -80,7 +92,12 @@
         "he": "אולי אני בא",
         "translit": "улай ани ба",
         "ru": "Может быть, я приду",
-        "audio": "/audio/yesno-1-maybe-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אולי אני באה",
+          "translit": "улай ани баа",
+          "ru": "Может быть, я приду"
+        }
       },
       "reviewed": false,
       "image": "/words/yesno-1-maybe.svg",
@@ -96,7 +113,12 @@
         "he": "כמובן אני בא",
         "translit": "камуван ани ба",
         "ru": "Конечно, я приду",
-        "audio": "/audio/yesno-1-of-course-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "כמובן אני באה",
+          "translit": "камуван ани баа",
+          "ru": "Конечно, я приду"
+        }
       },
       "reviewed": false,
       "audio": "/audio/yesno-1-of-course.mp3"

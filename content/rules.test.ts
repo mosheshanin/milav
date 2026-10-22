@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ACUTE, skeletonProblems, stressProblems, stripStress, syllables } from "./rules";
+import { ACUTE, phraseSpeakerProblems, skeletonProblems, speakerReason, stressProblems, stripStress, syllables, wordAfterAni } from "./rules";
 
 const a = ACUTE;
 
@@ -97,5 +97,52 @@ describe("транскрипция: согласные иврита по пор�
 
   it("редкие звуки передаются двумя буквами: ג как «дж»", () => {
     expect(skeletonProblems("גרפה", "джираф")).toEqual([]);
+  });
+});
+
+describe("фразы от первого лица (docs/CONTENT.md, «Фразы от первого лица»)", () => {
+  const forms = new Map<string, unknown>([
+    ["הולך", { he: "הולכת", translit: "холехет" }],
+    ["רוצה", { he: "רוצה", translit: "роца" }],
+  ]);
+  const word = (example: Record<string, unknown>, he = "הולך") => ({ id: "w", he, translit: "", ru: "", reviewed: false, example }) as never;
+
+  it("«אני הולך» без пометки: нужен speaker и женский вариант", () => {
+    expect(phraseSpeakerProblems(word({ he: "אני הולך לעבודה", translit: "ани холех леавода", ru: "Я иду на работу" }), forms)).toHaveLength(1);
+    expect(phraseSpeakerProblems(word({ he: "אני לא רוצה", translit: "ани ло роце", ru: "Я не хочу" }), forms)).toHaveLength(1);
+  });
+
+  it("по-русски мужской род (был, сам, -лся) тоже требует пометки; «он был» и «я дома» нет", () => {
+    expect(speakerReason({ he: "הייתי בבית", ru: "Вчера я был дома" }, forms)).toBeDefined();
+    expect(speakerReason({ he: "קבעתי תור", ru: "Я записался к врачу" }, forms)).toBeDefined();
+    expect(speakerReason({ he: "אני מסתדר", ru: "Я справляюсь сам" }, forms)).toBeDefined();
+    expect(speakerReason({ he: "הוא היה בבית", ru: "Он был дома" }, forms)).toBeUndefined();
+    expect(speakerReason({ he: "אני בבית", ru: "Я дома" }, forms)).toBeUndefined();
+  });
+
+  it("правильная мужская фраза с женским вариантом без замечаний", () => {
+    const ok = { he: "אני הולך", translit: "ани холех", ru: "Я иду", speaker: "m", female: { he: "אני הולכת", translit: "ани холехет", ru: "Я иду" } };
+    expect(phraseSpeakerProblems(word(ok), forms)).toEqual([]);
+  });
+
+  it("женский вариант: не совпадает с мужским, после «אני» женская форма, перевод не мужской, огласовки того же текста", () => {
+    const base = { he: "אני הולך", translit: "ани холех", ru: "Я иду", speaker: "m" };
+    expect(phraseSpeakerProblems(word({ ...base, female: { he: "אני הולך", translit: "ани холех", ru: "Я иду" } }), forms).length).toBeGreaterThan(0);
+    expect(phraseSpeakerProblems(word({ ...base, female: { he: "אני הולכת", translit: "ани холехет", ru: "Я сам иду" } }), forms)).toHaveLength(1);
+    const want = { he: "אני רוצה", translit: "ани роце", ru: "Я хочу", speaker: "m" };
+    expect(phraseSpeakerProblems(word({ ...want, female: { he: "אני רוצה", niqqud: "אני רוֹצָה", translit: "ани роца", ru: "Я хочу" } }, "רוצה"), forms)).toEqual([]);
+    expect(phraseSpeakerProblems(word({ ...want, female: { he: "אני רוצה", niqqud: "אני רוֹצֶה מים", translit: "ани роца", ru: "Я хочу" } }, "רוצה"), forms)).toHaveLength(1);
+  });
+
+  it("мужская фраза без женского варианта допустима, только если само слово от первого лица («אני מצטער»)", () => {
+    const sorry = { he: "אני מצטער אני מאחר", translit: "ани мицтаер ани меахер", ru: "Простите, я опаздываю", speaker: "m" };
+    expect(phraseSpeakerProblems(word(sorry, "אני מצטער"), forms)).toEqual([]);
+    expect(phraseSpeakerProblems(word({ he: "אני הולך", translit: "ани холех", ru: "Я иду", speaker: "m" }), forms)).toHaveLength(1);
+  });
+
+  it("wordAfterAni пропускает «לא»", () => {
+    expect(wordAfterAni("כן אני רוצה")).toBe("רוצה");
+    expect(wordAfterAni("אני לא מבין עברית")).toBe("מבין");
+    expect(wordAfterAni("זה כלב")).toBeUndefined();
   });
 });

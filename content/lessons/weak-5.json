@@ -18,7 +18,13 @@
         "he": "אני מחכה לחבר",
         "translit": "ани мехаке лехавер",
         "ru": "Я жду друга",
-        "audio": "/audio/weak-5-wait-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מחכה לחבר",
+          "niqqud": "אני מְחַכָּה לחבר",
+          "translit": "ани мехака лехавер",
+          "ru": "Я жду друга"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -210,7 +216,13 @@
         "he": "אני מכסה סיר",
         "translit": "ани мехасе сир",
         "ru": "Я накрываю кастрюлю",
-        "audio": "/audio/weak-5-cover-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מכסה סיר",
+          "niqqud": "אני מְכַסָּה סיר",
+          "translit": "ани мехаса сир",
+          "ru": "Я накрываю кастрюлю"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -402,7 +414,13 @@
         "he": "אני מגלה סוד",
         "translit": "ани мегале сод",
         "ru": "Я раскрываю секрет",
-        "audio": "/audio/weak-5-reveal-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מגלה סוד",
+          "niqqud": "אני מְגַלָּה סוד",
+          "translit": "ани мегала сод",
+          "ru": "Я раскрываю секрет"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -594,7 +612,13 @@
         "he": "אני מקווה לטוב",
         "translit": "ани мекаве летов",
         "ru": "Я надеюсь на хорошее",
-        "audio": "/audio/weak-5-hope-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מקווה לטוב",
+          "niqqud": "אני מְקַווָּה לטוב",
+          "translit": "ани мекава летов",
+          "ru": "Я надеюсь на хорошее"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -760,7 +784,13 @@
         "he": "אני מנסה לישון",
         "translit": "ани менасе лишон",
         "ru": "Я пытаюсь уснуть",
-        "audio": "/audio/weak-5-try-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מנסה לישון",
+          "niqqud": "אני מְנַסָּה לישון",
+          "translit": "ани менаса лишон",
+          "ru": "Я пытаюсь уснуть"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -952,7 +982,13 @@
         "he": "אני מבלה בים",
         "translit": "ани мевале баям",
         "ru": "Я провожу время на море",
-        "audio": "/audio/weak-5-spend-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מבלה בים",
+          "niqqud": "אני מְבַלָּה בים",
+          "translit": "ани мевала баям",
+          "ru": "Я провожу время на море"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -1144,7 +1180,13 @@
         "he": "אני משנה תוכנית",
         "translit": "ани мешане токнит",
         "ru": "Я меняю план",
-        "audio": "/audio/weak-5-change-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני משנה תוכנית",
+          "niqqud": "אני מְשַׁנָּה תוכנית",
+          "translit": "ани мешана токнит",
+          "ru": "Я меняю план"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -1336,7 +1378,13 @@
         "he": "אני מנקה חדר",
         "translit": "ани менаке хедер",
         "ru": "Я убираю комнату",
-        "audio": "/audio/weak-5-clean-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מנקה חדר",
+          "niqqud": "אני מְנַקָּה חדר",
+          "translit": "ани менака хедер",
+          "ru": "Я убираю комнату"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -1528,7 +1576,12 @@
         "he": "אני מסיים עבודה",
         "translit": "ани месайем авода",
         "ru": "Я заканчиваю работу",
-        "audio": "/audio/weak-5-finish-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מסיימת עבודה",
+          "translit": "ани месайемет авода",
+          "ru": "Я заканчиваю работу"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -1720,7 +1773,12 @@
         "he": "אני ממלא טופס",
         "translit": "ани мемале тофес",
         "ru": "Я заполняю бланк",
-        "audio": "/audio/weak-5-fill-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני ממלאת טופס",
+          "translit": "ани мемалет тофес",
+          "ru": "Я заполняю бланк"
+        }
       },
       "verb": {
         "binyan": "piel",

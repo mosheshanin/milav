@@ -18,7 +18,13 @@
         "he": "אני עושה קפה",
         "translit": "ани осе кафе",
         "ru": "Я делаю кофе",
-        "audio": "/audio/weak-2-do-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני עושה קפה",
+          "niqqud": "אני עוֹשָׂה קפה",
+          "translit": "ани оса кафе",
+          "ru": "Я делаю кофе"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -210,7 +216,13 @@
         "he": "אני רואה ים",
         "translit": "ани рое ям",
         "ru": "Я вижу море",
-        "audio": "/audio/weak-2-see-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני רואה ים",
+          "niqqud": "אני רוֹאָה ים",
+          "translit": "ани роа ям",
+          "ru": "Я вижу море"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -402,7 +414,13 @@
         "he": "אני קונה חלב",
         "translit": "ани коне халав",
         "ru": "Я покупаю молоко",
-        "audio": "/audio/weak-2-buy-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני קונה חלב",
+          "niqqud": "אני קוֹנָה חלב",
+          "translit": "ани кона халав",
+          "ru": "Я покупаю молоко"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -594,7 +612,13 @@
         "he": "אני שותה תה",
         "translit": "ани шоте те",
         "ru": "Я пью чай",
-        "audio": "/audio/weak-2-drink-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני שותה תה",
+          "niqqud": "אני שׁוֹתָה תה",
+          "translit": "ани шота те",
+          "ru": "Я пью чай"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -786,7 +810,12 @@
         "he": "אני יוצא עכשיו",
         "translit": "ани йоце ахшав",
         "ru": "Я выхожу сейчас",
-        "audio": "/audio/weak-2-goout-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני יוצאת עכשיו",
+          "translit": "ани йоцет ахшав",
+          "ru": "Я выхожу сейчас"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -979,7 +1008,12 @@
         "he": "אני קורא ספר",
         "translit": "ани коре сефер",
         "ru": "Я читаю книгу",
-        "audio": "/audio/weak-2-read-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני קוראת ספר",
+          "translit": "ани корет сефер",
+          "ru": "Я читаю книгу"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1171,7 +1205,12 @@
         "he": "אני מוצא ארנק",
         "translit": "ани моце арнак",
         "ru": "Я нахожу кошелёк",
-        "audio": "/audio/weak-2-find-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מוצאת ארנק",
+          "translit": "ани моцет арнак",
+          "ru": "Я нахожу кошелёк"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1363,7 +1402,12 @@
         "he": "אני אומר שלום",
         "translit": "ани омер шалом",
         "ru": "Я говорю «шалом»",
-        "audio": "/audio/weak-2-say-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני אומרת שלום",
+          "translit": "ани омерет шалом",
+          "ru": "Я говорю «шалом»"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1555,7 +1599,12 @@
         "he": "אני אוהב שוקולד",
         "translit": "ани охев шоколад",
         "ru": "Я люблю шоколад",
-        "audio": "/audio/weak-2-love-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני אוהבת שוקולד",
+          "translit": "ани охевет шоколад",
+          "ru": "Я люблю шоколад"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1721,7 +1770,12 @@
         "he": "אני ישן בלילה",
         "translit": "ани яшен балайла",
         "ru": "Я сплю ночью",
-        "audio": "/audio/weak-2-sleep-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני ישנה בלילה",
+          "translit": "ани ешена балайла",
+          "ru": "Я сплю ночью"
+        }
       },
       "verb": {
         "binyan": "paal",

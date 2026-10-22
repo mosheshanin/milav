@@ -396,7 +396,12 @@
         "he": "אני מלטף חתול",
         "translit": "ани мелатеф хатуль",
         "ru": "Я глажу кота",
-        "audio": "/audio/piel-3-stroke-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מלטפת חתול",
+          "translit": "ани мелатефет хатуль",
+          "ru": "Я глажу кота"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -1152,7 +1157,12 @@
         "he": "אני מקצר מכנסיים",
         "translit": "ани мекацер михнасаим",
         "ru": "Я укорачиваю брюки",
-        "audio": "/audio/piel-3-shorten-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מקצרת מכנסיים",
+          "translit": "ани мекацерет михнасаим",
+          "ru": "Я укорачиваю брюки"
+        }
       },
       "verb": {
         "binyan": "piel",

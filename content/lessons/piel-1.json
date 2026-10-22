@@ -18,7 +18,12 @@
         "he": "אני מדבר עברית",
         "translit": "ани медабер иврит",
         "ru": "Я говорю на иврите",
-        "audio": "/audio/piel-1-speak-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מדברת עברית",
+          "translit": "ани медаберет иврит",
+          "ru": "Я говорю на иврите"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -396,7 +401,12 @@
         "he": "אני מקבל מכתב",
         "translit": "ани мекабел михтав",
         "ru": "Я получаю письмо",
-        "audio": "/audio/piel-1-receive-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מקבלת מכתב",
+          "translit": "ани мекабелет михтав",
+          "ru": "Я получаю письмо"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -774,7 +784,12 @@
         "he": "אני מבקש עזרה",
         "translit": "ани мевакеш эзра",
         "ru": "Я прошу помощи",
-        "audio": "/audio/piel-1-ask-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מבקשת עזרה",
+          "translit": "ани мевакешет эзра",
+          "ru": "Я прошу помощи"
+        }
       },
       "verb": {
         "binyan": "piel",
@@ -963,7 +978,12 @@
         "he": "אני משלם במזומן",
         "translit": "ани мешалем бимзуман",
         "ru": "Я плачу наличными",
-        "audio": "/audio/piel-1-pay-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני משלמת במזומן",
+          "translit": "ани мешалемет бимзуман",
+          "ru": "Я плачу наличными"
+        }
       },
       "verb": {
         "binyan": "piel",

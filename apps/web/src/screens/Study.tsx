@@ -193,7 +193,7 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
         {isLetter(word) ? (
           <LetterCard letter={word} compact={view === "write" || view === "type"} />
         ) : (
-          <WordCard word={word} compact={view === "write" || view === "type"} />
+          <WordCard word={word} compact={view === "write" || view === "type"} gender={me.play.settings.gender} />
         )}
 
         <StageTabs

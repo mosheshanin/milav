@@ -114,7 +114,12 @@
         "he": "בצהריים אני אוכל",
         "translit": "ба-цохораим ани охель",
         "ru": "Днём я обедаю",
-        "audio": "/audio/time-1-noon-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "בצהריים אני אוכלת",
+          "translit": "ба-цохораим ани охелет",
+          "ru": "Днём я обедаю"
+        }
       },
       "reviewed": false,
       "image": "/words/time-1-noon.svg",

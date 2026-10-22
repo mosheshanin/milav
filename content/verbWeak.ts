@@ -1,4 +1,5 @@
 import { FREE_LESSONS_PER_TOPIC, FUTURE_KEYS, IMPERATIVE_KEYS, PAST_KEYS, PRESENT_KEYS, WEAK_ROOTS_TOPIC_ID, type Binyan, type Gizra, type WordForm } from "@milav/shared";
+import { withFemaleVariant } from "./phraseGender";
 import { ACUTE } from "./rules";
 import { WEAK_LESSONS_PART2 } from "./verbWeak2";
 
@@ -27,8 +28,11 @@ export interface WeakVerbSpec {
   /** Перевод инфинитива. */
   ru: string;
   inf: F;
-  /** Фраза-пример с глаголом в настоящем времени: иврит, транскрипция без ударения, перевод. */
-  phrase: readonly [he: string, translit: string, ru: string];
+  /**
+   * Фраза-пример с глаголом в настоящем времени: иврит, транскрипция без ударения, перевод. Фраза «אני <ms> …» сама получает
+   * женский вариант (docs/CONTENT.md, «Фразы от первого лица»); четвёртый элемент нужен, если женщина по-русски скажет иначе.
+   */
+  phrase: readonly [he: string, translit: string, ru: string, ruFemale?: string];
   present: readonly [F, F, F, F];
   past: readonly [F, F, F, F, F, F, F, F, F];
   future: readonly [F, F, F, F, F, F, F, F, F, F];
@@ -1347,11 +1351,12 @@ export function buildWeakLesson(number: number): Record<string, unknown> {
     title: spec.title,
     words: spec.verbs.map((v) => {
       const inf = toForm(v.inf);
+      const present = formSet(PRESENT_KEYS, v.present);
       const verb: Record<string, unknown> = {
         binyan: v.binyan ?? "paal",
         root: v.root,
         gizra: v.gizra,
-        present: formSet(PRESENT_KEYS, v.present),
+        present,
         past: formSet(PAST_KEYS, v.past),
         future: formSet(FUTURE_KEYS, v.future),
       };
@@ -1362,7 +1367,8 @@ export function buildWeakLesson(number: number): Record<string, unknown> {
         niqqud: inf.niqqud,
         translit: inf.translit,
         ru: v.ru,
-        example: { he: v.phrase[0], translit: v.phrase[1], ru: v.phrase[2] },
+        // Фраза «אני <ms> …» получает пометку speaker и женский вариант (docs/CONTENT.md, «Фразы от первого лица»).
+        example: withFemaleVariant({ he: v.phrase[0], translit: v.phrase[1], ru: v.phrase[2] }, present.ms, present.fs, v.phrase[3]),
         verb,
         reviewed: false,
       };

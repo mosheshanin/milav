@@ -36,7 +36,13 @@
         "he": "אני רוצה שתיים",
         "translit": "ани роцэ штаим",
         "ru": "Я хочу две",
-        "audio": "/audio/numbers-1-two-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני רוצה שתיים",
+          "niqqud": "אני רוֹצָה שתיים",
+          "translit": "ани роца штаим",
+          "ru": "Я хочу две"
+        }
       },
       "reviewed": false,
       "image": "/words/numbers-1-two.svg",

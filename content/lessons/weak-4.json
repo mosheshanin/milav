@@ -16,9 +16,14 @@
       "ru": "приносить, приводить",
       "example": {
         "he": "אני מביא קפה",
-        "translit": "ани мевиа кафе",
+        "translit": "ани меви кафе",
         "ru": "Я приношу кофе",
-        "audio": "/audio/weak-4-bring-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מביאה קפה",
+          "translit": "ани мевиа кафе",
+          "ru": "Я приношу кофе"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -211,7 +216,12 @@
         "he": "אני מבין עברית",
         "translit": "ани мевин иврит",
         "ru": "Я понимаю иврит",
-        "audio": "/audio/weak-4-understand-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מבינה עברית",
+          "translit": "ани мевина иврит",
+          "ru": "Я понимаю иврит"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -403,7 +413,12 @@
         "he": "אני מגיד אמת",
         "translit": "ани магид эмет",
         "ru": "Я говорю правду",
-        "audio": "/audio/weak-4-tell-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מגידה אמת",
+          "translit": "ани магида эмет",
+          "ru": "Я говорю правду"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -787,7 +802,12 @@
         "he": "אני מכין ארוחה",
         "translit": "ани мехин аруха",
         "ru": "Я готовлю обед",
-        "audio": "/audio/weak-4-prepare-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מכינה ארוחה",
+          "translit": "ани мехина аруха",
+          "ru": "Я готовлю обед"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -979,7 +999,12 @@
         "he": "אני מוציא כסף מהארנק",
         "translit": "ани моци ксеф меарнак",
         "ru": "Я достаю деньги из кошелька",
-        "audio": "/audio/weak-4-takeout-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מוציאה כסף מהארנק",
+          "translit": "ани моциа ксеф меарнак",
+          "ru": "Я достаю деньги из кошелька"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -1172,7 +1197,12 @@
         "he": "אני מכיר אותו",
         "translit": "ани макир ото",
         "ru": "Я его знаю",
-        "audio": "/audio/weak-4-recognize-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מכירה אותו",
+          "translit": "ани макира ото",
+          "ru": "Я его знаю"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -1364,7 +1394,12 @@
         "he": "אני מניח מפתח כאן",
         "translit": "ани маниах мафтеах кан",
         "ru": "Я кладу ключ здесь",
-        "audio": "/audio/weak-4-place-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מניחה מפתח כאן",
+          "translit": "ани маниха мафтеах кан",
+          "ru": "Я кладу ключ здесь"
+        }
       },
       "verb": {
         "binyan": "hifil",
@@ -1748,7 +1783,12 @@
         "he": "אני מגיע מחר",
         "translit": "ани магиа махар",
         "ru": "Я приезжаю завтра",
-        "audio": "/audio/weak-4-arrive-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מגיעה מחר",
+          "translit": "ани магиа махар",
+          "ru": "Я приезжаю завтра"
+        }
       },
       "verb": {
         "binyan": "hifil",

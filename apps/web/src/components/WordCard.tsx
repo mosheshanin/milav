@@ -1,4 +1,4 @@
-import { isPhrase, type Word } from "@milav/shared";
+import { DEFAULT_LEARNER_GENDER, isPhrase, phraseFor, type Gender, type PhraseText, type Word } from "@milav/shared";
 import { SpeakerButton } from "./SpeakerButton";
 import { VerbForms } from "./VerbForms";
 import { WordImage } from "./WordImage";
@@ -18,8 +18,21 @@ const FORM_LABELS = [
  * У существительных фраза для запоминания стоит там же, справа.
  * У прилагательных (формы) и глаголов (таблица форм) формы и фраза идут под картинкой на всю ширину карточки:
  * рядом с картинкой длинные формы (מפוספסים, כחלחלות) не помещались и давали горизонтальную прокрутку на экране 360 px.
+ *
+ * Фраза от первого лица показывается в роде ученика (`gender`, настройка «Фразы-примеры от лица»): «אני הולך» мужчине,
+ * «אני הולכת» женщине, и озвучка голосом того же рода. Проверяющему (`bothPhrases`) видны оба варианта с подписями.
  */
-export function WordCard({ word, compact = false }: { word: Word; compact?: boolean }) {
+export function WordCard({
+  word,
+  compact = false,
+  gender = DEFAULT_LEARNER_GENDER,
+  bothPhrases = false,
+}: {
+  word: Word;
+  compact?: boolean;
+  gender?: Gender;
+  bothPhrases?: boolean;
+}) {
   // Фраза из нескольких слов («תעודת זהות») крупным шрифтом не помещается рядом с картинкой на 360 px: шрифт меньше, перенос по словам.
   const manyWords = isPhrase(word.he);
   if (compact) {
@@ -39,17 +52,35 @@ export function WordCard({ word, compact = false }: { word: Word; compact?: bool
       </Card>
     );
   }
-  const phrase = word.example && (
-    <div className="mt-1 flex w-full items-center gap-2 border-t border-line pt-2" data-testid="word-phrase">
-      <SpeakerButton item={{ he: word.example.he, audio: word.example.audio }} label="Послушать фразу" testId="listen-phrase" />
-      <div className="min-w-0 flex-1 text-right">
-        <div dir="rtl" lang="he" className="font-hebrew text-xl">
-          {word.example.he}
+  const example = word.example;
+  const variants: { text: PhraseText; label?: string; key: string }[] = !example
+    ? []
+    : bothPhrases && example.female
+      ? [
+          { text: example, label: "говорит мужчина", key: "m" },
+          { text: example.female, label: "говорит женщина", key: "f" },
+        ]
+      : [{ text: phraseFor(example, gender), key: "one" }];
+  const phrase = variants.length > 0 && (
+    <div className="mt-1 flex w-full flex-col gap-2 border-t border-line pt-2" data-testid="word-phrase">
+      {variants.map(({ text, label, key }) => (
+        <div key={key} className="flex w-full items-center gap-2">
+          <SpeakerButton
+            item={{ he: text.niqqud ?? text.he, audio: text.audio }}
+            label={label ? `Послушать фразу: ${label}` : "Послушать фразу"}
+            testId={label ? `listen-phrase-${key}` : "listen-phrase"}
+          />
+          <div className="min-w-0 flex-1 text-right">
+            {label && <div className="text-xs text-ink-soft">{label}</div>}
+            <div dir="rtl" lang="he" className="font-hebrew text-xl" data-testid="phrase-he">
+              {text.he}
+            </div>
+            <div className="text-sm text-ink-soft">
+              {text.translit} — {text.ru}
+            </div>
+          </div>
         </div>
-        <div className="text-sm text-ink-soft">
-          {word.example.translit} — {word.example.ru}
-        </div>
-      </div>
+      ))}
     </div>
   );
   const forms = word.forms && (

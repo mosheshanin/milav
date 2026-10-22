@@ -18,7 +18,12 @@
         "he": "אני קושר חבל",
         "translit": "ани кошер хевел",
         "ru": "Я завязываю верёвку",
-        "audio": "/audio/paal-3-tie-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני קושרת חבל",
+          "translit": "ани кошерет хевел",
+          "ru": "Я завязываю верёвку"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -963,7 +968,12 @@
         "he": "אני דופק חזק",
         "translit": "ани дофек хазак",
         "ru": "Я сильно стучу",
-        "audio": "/audio/paal-3-knock-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני דופקת חזק",
+          "translit": "ани дофекет хазак",
+          "ru": "Я сильно стучу"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1152,7 +1162,12 @@
         "he": "אני שותל עץ",
         "translit": "ани шотел ец",
         "ru": "Я сажаю дерево",
-        "audio": "/audio/paal-3-plant-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני שותלת עץ",
+          "translit": "ани шотелет ец",
+          "ru": "Я сажаю дерево"
+        }
       },
       "verb": {
         "binyan": "paal",

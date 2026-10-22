@@ -18,7 +18,12 @@
         "he": "אני נזהר מאוד",
         "translit": "ани низхар меод",
         "ru": "Я очень осторожен",
-        "audio": "/audio/nifal-2-beware-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נזהרת מאוד",
+          "translit": "ани низхерет меод",
+          "ru": "Я очень осторожна"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -559,7 +564,12 @@
         "he": "אני נפגע בקלות",
         "translit": "ани нифга бекалут",
         "ru": "Я легко обижаюсь",
-        "audio": "/audio/nifal-2-offend-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נפגעת בקלות",
+          "translit": "ани нифгаат бекалут",
+          "ru": "Я легко обижаюсь"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -722,7 +732,12 @@
         "he": "אני נבהל מכלבים",
         "translit": "ани нивхал миклавим",
         "ru": "Я пугаюсь собак",
-        "audio": "/audio/nifal-2-fear-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נבהלת מכלבים",
+          "translit": "ани нивхелет миклавим",
+          "ru": "Я пугаюсь собак"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -885,7 +900,12 @@
         "he": "אני נתקל בחבר",
         "translit": "ани ниткал бехавер",
         "ru": "Я случайно натыкаюсь на друга",
-        "audio": "/audio/nifal-2-bump-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נתקלת בחבר",
+          "translit": "ани ниткелет бехавер",
+          "ru": "Я случайно натыкаюсь на друга"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -1048,7 +1068,12 @@
         "he": "אני נמנע מסוכר",
         "translit": "ани нимна мисукар",
         "ru": "Я воздерживаюсь от сахара",
-        "audio": "/audio/nifal-2-avoid-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נמנעת מסוכר",
+          "translit": "ани нимнаат мисукар",
+          "ru": "Я воздерживаюсь от сахара"
+        }
       },
       "verb": {
         "binyan": "nifal",
@@ -1400,7 +1425,12 @@
         "he": "אני נבדק אצל רופא",
         "translit": "ани нивдак ецель рофе",
         "ru": "Я обследуюсь у врача",
-        "audio": "/audio/nifal-2-examine-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נבדקת אצל רופא",
+          "translit": "ани нивдекет ецель рофе",
+          "ru": "Я обследуюсь у врача"
+        }
       },
       "verb": {
         "binyan": "nifal",

@@ -351,7 +351,7 @@ function ReviewForm({ data, reload, onSaved }: { data: ReviewItemResponse; reloa
           </div>
         </>
       ) : (
-        <WordCard word={item} />
+        <WordCard word={item} bothPhrases />
       )}
 
       <section className="flex flex-col gap-2">

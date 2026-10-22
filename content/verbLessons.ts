@@ -1,4 +1,5 @@
 import { FREE_LESSONS_PER_TOPIC, type Binyan } from "@milav/shared";
+import { withFemaleVariant } from "./phraseGender";
 import { stripStress } from "./rules";
 import { conjugateHifil, conjugateHitpael, conjugateNifal, conjugatePaal, conjugatePiel, type ConjugatedVerb } from "./verbGen";
 
@@ -12,8 +13,11 @@ export interface VerbSpec {
   root: string;
   /** Перевод инфинитива. */
   ru: string;
-  /** Фраза-пример с глаголом в настоящем времени. `{ms}` и `{fs}` заменяются на форму (иврит и транскрипцию). */
-  phrase: { he: string; translit: string; ru: string };
+  /**
+   * Фраза-пример с глаголом в настоящем времени. `{ms}` и `{fs}` заменяются на форму (иврит и транскрипцию). Фраза
+   * «אני {ms} …» сама получает женский вариант; `ruFemale` нужен, если по-русски женщина скажет иначе («Я согласна»).
+   */
+  phrase: { he: string; translit: string; ru: string; ruFemale?: string };
   /** У глагола нет повелительного наклонения (страдательные нифъаль: נסגר, נגמר): блок `imperative` в слове не создаётся. */
   noImperative?: true;
 }
@@ -23,7 +27,7 @@ export interface VerbLessonSpec {
   verbs: VerbSpec[];
 }
 
-const p = (he: string, translit: string, ru: string) => ({ he, translit, ru });
+const p = (he: string, translit: string, ru: string, ruFemale?: string) => ({ he, translit, ru, ...(ruFemale ? { ruFemale } : {}) });
 
 export const PAAL_LESSONS: VerbLessonSpec[] = [
   {
@@ -171,7 +175,7 @@ export const HIFIL_LESSONS: VerbLessonSpec[] = [
       { key: "feel", root: "רגש", ru: "чувствовать", phrase: p("אני {ms} טוב", "ани {ms} тов", "Я хорошо себя чувствую") },
       { key: "stop", root: "פסק", ru: "прекращать, переставать", phrase: p("היא {fs} לעשן", "хи {fs} леашен", "Она бросает курить") },
       { key: "leave", root: "שאר", ru: "оставлять", phrase: p("אני {ms} הודעה", "ани {ms} ходаа", "Я оставляю сообщение") },
-      { key: "agree", root: "סכמ", ru: "соглашаться", phrase: p("אני {ms} איתך", "ани {ms} итха", "Я с тобой согласен") },
+      { key: "agree", root: "סכמ", ru: "соглашаться", phrase: p("אני {ms} איתך", "ани {ms} итха", "Я с тобой согласен", "Я с тобой согласна") },
       { key: "light", root: "דלק", ru: "зажигать, включать (свет)", phrase: p("הוא {ms} אור", "ху {ms} ор", "Он включает свет") },
       { key: "listen", root: "קשב", ru: "слушать (внимательно)", phrase: p("היא {fs} למוזיקה", "хи {fs} ламузика", "Она слушает музыку") },
     ],
@@ -234,7 +238,7 @@ export const NIFAL_LESSONS: VerbLessonSpec[] = [
   {
     title: "Люди и чувства",
     verbs: [
-      { key: "beware", root: "זהר", ru: "остерегаться, быть осторожным", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я очень осторожен") },
+      { key: "beware", root: "זהר", ru: "остерегаться, быть осторожным", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я очень осторожен", "Я очень осторожна") },
       { key: "fight", root: "לחמ", ru: "воевать, сражаться, бороться", phrase: p("חייל {ms} באומץ", "хаяль {ms} беомец", "Солдат смело сражается") },
       { key: "fail", root: "כשל", ru: "терпеть неудачу, проваливаться", phrase: p("הוא תמיד {ms}", "ху тамид {ms}", "Он всегда терпит неудачу"), noImperative: true },
       { key: "offend", root: "פגע", ru: "обижаться, пострадать", phrase: p("אני {ms} בקלות", "ани {ms} бекалут", "Я легко обижаюсь"), noImperative: true },
@@ -276,7 +280,7 @@ export const HITPAEL_LESSONS: VerbLessonSpec[] = [
       { key: "call", root: "קשר", ru: "звонить, связываться", phrase: p("אני {ms} לאמא", "ани {ms} леима", "Я звоню маме") },
       { key: "look", root: "סכל", ru: "смотреть", phrase: p("אני {ms} בטלפון", "ани {ms} бетелефон", "Я смотрю в телефон") },
       { key: "use", root: "שמש", ru: "пользоваться", phrase: p("אני {ms} במחשב", "ани {ms} бемахшев", "Я пользуюсь компьютером") },
-      { key: "manage", root: "סדר", ru: "справляться, устраиваться", phrase: p("אני {ms} לבד", "ани {ms} левад", "Я справляюсь сам") },
+      { key: "manage", root: "סדר", ru: "справляться, устраиваться", phrase: p("אני {ms} לבד", "ани {ms} левад", "Я справляюсь сам", "Я справляюсь сама") },
       { key: "getused", root: "רגל", ru: "привыкать", phrase: p("אני {ms} לעבודה חדשה", "ани {ms} леавода хадаша", "Я привыкаю к новой работе") },
       { key: "regret", root: "צער", ru: "сожалеть", phrase: p("אני {ms} מאוד", "ани {ms} меод", "Я очень сожалею") },
       { key: "marry", root: "חתנ", ru: "жениться, выходить замуж", phrase: p("הוא {ms} בקרוב", "ху {ms} бекаров", "Он скоро женится") },
@@ -353,7 +357,8 @@ export function buildVerbLesson(binyan: Binyan, number: number): Record<string, 
         niqqud: infinitive.niqqud,
         translit: infinitive.translit,
         ru: v.ru,
-        example: { he: fill(v.phrase.he, "he"), translit: fill(v.phrase.translit, "translit"), ru: v.phrase.ru },
+        // Фраза «אני {ms} …» получает пометку speaker и женский вариант с {fs} (docs/CONTENT.md, «Фразы от первого лица»).
+        example: withFemaleVariant({ he: fill(v.phrase.he, "he"), translit: fill(v.phrase.translit, "translit"), ru: v.phrase.ru }, verb.present.ms, verb.present.fs, v.phrase.ruFemale),
         verb,
         reviewed: false,
       };

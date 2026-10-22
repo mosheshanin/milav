@@ -339,6 +339,92 @@ export function verbProblems(he: string, verb: VerbData): string[] {
   return problems;
 }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// Фразы от первого лица и род говорящего (решение владельца 22.10: docs/CONTENT.md, «Фразы от первого лица»)
+
+/**
+ * Мужские формы набора, у которых женская пишется или читается иначе: настоящее время глаголов (ms → fs) и прилагательные
+ * (основная форма → f). По ним правило узнаёт фразу вида «אני הולך», которой нужен женский вариант. Ключ: мужская форма
+ * без огласовок; значение: женская (транскрипция без ударения).
+ */
+export function genderedForms(lessons: Lesson[]): Map<string, { he: string; translit: string }> {
+  const map = new Map<string, { he: string; translit: string }>();
+  for (const lesson of lessons) {
+    for (const word of lesson.words) {
+      const pairs: [{ he: string; translit: string }, { he: string; translit: string }][] = [];
+      if (word.verb) pairs.push([word.verb.present.ms, word.verb.present.fs]);
+      if (word.forms) pairs.push([word, word.forms.f]);
+      for (const [m, f] of pairs) {
+        if (m.he !== f.he || stripStress(m.translit) !== stripStress(f.translit)) map.set(m.he, { he: f.he, translit: stripStress(f.translit) });
+      }
+    }
+  }
+  return map;
+}
+
+/** Слово сразу после «אני» (или после «אני לא»): оно и меняется по роду говорящего. */
+export function wordAfterAni(he: string): string | undefined {
+  const parts = he.split(" ");
+  const i = parts.indexOf("אני");
+  if (i < 0) return undefined;
+  return parts[parts[i + 1] === "לא" ? i + 2 : i + 1];
+}
+
+/** Русские слова, которые у женщины другие: «был», «сам», краткие прилагательные. */
+const RU_MASCULINE = /(^|[\s,])(был|сам|рад|должен|готов|уверен|согласен|занят|счастлив|устал|осторожен|болен|женат|голоден)(?=[\s,.!?»]|$)/i;
+/** Фраза от первого лица в переводе: есть отдельное слово «я». */
+const RU_I = /(^|[\s,])я(?=[\s,.!?»]|$)/i;
+/** Прошедшее время сразу после «я»: «я записался», «я пришёл». */
+const RU_PAST_AFTER_I = /(^|[\s,])я\s+[а-яё]+(л|лся)(?=[\s,.!?»]|$)/i;
+
+/** Почему фразе нужна пометка `speaker` (и женский вариант), или undefined, если фраза от рода говорящего не зависит. */
+export function speakerReason(example: { he: string; ru: string }, forms: Map<string, unknown>): string | undefined {
+  const next = wordAfterAni(example.he);
+  if (next && forms.has(next)) return `после «אני» мужская форма ${next}`;
+  const firstPerson = RU_I.test(example.ru);
+  if (firstPerson && (RU_MASCULINE.test(example.ru) || RU_PAST_AFTER_I.test(example.ru))) return `в переводе мужской род («${example.ru}»)`;
+  return undefined;
+}
+
+/** Нарушения правил фраз от первого лица у одного слова. `forms`: результат genderedForms по всему набору. */
+export function phraseSpeakerProblems(word: Lesson["words"][number], forms: Map<string, unknown>): string[] {
+  const ex = word.example;
+  if (!ex) return [];
+  const problems: string[] = [];
+  if (!ex.speaker) {
+    const reason = speakerReason(ex, forms);
+    if (reason) problems.push(`${word.id}: фраза «${ex.he}» зависит от рода говорящего (${reason}): нужны speaker "m" и женский вариант female`);
+  }
+  // Мужская фраза без женского варианта допустима, только если само слово сказано от первого лица («אני מצטער»).
+  if (ex.speaker === "m" && !ex.female && !word.he.startsWith("אני ")) {
+    problems.push(`${word.id}: у мужской фразы нет женского варианта female (без него допустимо, только если слово само мужское: «אני מצטער»)`);
+  }
+  for (const [label, text] of [["фраза", ex], ["женский вариант", ex.female]] as const) {
+    if (text?.niqqud && normalizeHebrew(text.niqqud) !== normalizeHebrew(text.he)) {
+      problems.push(`${word.id}: ${label}: огласовки «${text.niqqud}» не совпадают с «${text.he}»`);
+    }
+  }
+  const female = ex.female;
+  if (female) {
+    if (female.he === ex.he && stripStress(female.translit) === stripStress(ex.translit) && female.ru === ex.ru) {
+      problems.push(`${word.id}: женский вариант совпадает с мужским (тогда фраза нейтральная: убрать female и speaker)`);
+    }
+    if (speakerReason({ he: "", ru: female.ru }, forms)) problems.push(`${word.id}: в переводе женского варианта мужской род («${female.ru}»)`);
+    // Как у основной фразы: в ней само слово или его форма (у глагола любая форма, у прилагательного любая из четырёх).
+    const verbForms = word.verb ? Object.values(word.verb).flatMap((set) => (set && typeof set === "object" ? Object.values(set) : [])) : [];
+    const heForms = [word.he, ...Object.values(word.forms ?? {}).map((f) => f.he), ...verbForms.map((f) => (f as { he?: string }).he).filter(Boolean)] as string[];
+    if (!heForms.some((f) => normalizeHebrew(female.he).includes(normalizeHebrew(f)))) {
+      problems.push(`${word.id}: в женском варианте «${female.he}» нет самого слова или его формы`);
+    }
+    const next = wordAfterAni(ex.he);
+    const expected = next ? forms.get(next) : undefined;
+    if (expected && wordAfterAni(female.he) !== (expected as { he: string }).he) {
+      problems.push(`${word.id}: в женском варианте после «אני» ожидалось ${(expected as { he: string }).he}`);
+    }
+  }
+  return problems;
+}
+
 export const SET_RULES: SetRule[] = [
   {
     name: "id урока равен <topicId>-<номер>",
@@ -435,6 +521,13 @@ export const SET_RULES: SetRule[] = [
           ...(l.section !== "verbs" ? [`${l.id}: тема ${l.topicId} должна быть в разделе verbs`] : []),
           ...l.words.filter((w) => !w.verb?.gizra?.length).map((w) => `${w.id}: у глагола темы ${l.topicId} нет поля gizra`),
         ]),
+  },
+  {
+    name: "фраза от первого лица, зависящая от рода говорящего, помечена speaker и (у мужской) имеет женский вариант",
+    check: (lessons) => {
+      const forms = genderedForms(lessons);
+      return lessons.flatMap((l) => l.words.flatMap((w) => phraseSpeakerProblems(w, forms)));
+    },
   },
   {
     name: "иврит не повторяется внутри темы",

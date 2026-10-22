@@ -18,7 +18,7 @@
         "he": "אני לא מבין עברית",
         "translit": "ани ло мевин иврит",
         "ru": "Я не понимаю иврит",
-        "audio": "/audio/phrases-3-dont-understand-m-phrase.mp3"
+        "speaker": "m"
       },
       "reviewed": false,
       "image": "/words/phrases-3-dont-understand-m.svg",
@@ -34,6 +34,7 @@
         "he": "אני לא מבינה מה זה",
         "translit": "ани ло мевина ма зэ",
         "ru": "Я не понимаю, что это",
+        "speaker": "f",
         "audio": "/audio/phrases-3-dont-understand-f-phrase.mp3"
       },
       "reviewed": false,
@@ -82,7 +83,12 @@
         "he": "קוראים לי דני",
         "translit": "корим ли дани",
         "ru": "Меня зовут Дани",
-        "audio": "/audio/phrases-3-my-name-is-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "קוראים לי דנה",
+          "translit": "корим ли дана",
+          "ru": "Меня зовут Дана"
+        }
       },
       "reviewed": false,
       "image": "/words/phrases-3-my-name-is.svg",
@@ -114,7 +120,13 @@
         "he": "אני עולה חדש",
         "translit": "ани олэ хадаш",
         "ru": "Я новый репатриант",
-        "audio": "/audio/phrases-3-new-immigrant-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני עולה חדשה",
+          "niqqud": "אני עוֹלָה חֲדָשָׁה",
+          "translit": "ани ола хадаша",
+          "ru": "Я новая репатриантка"
+        }
       },
       "reviewed": false,
       "image": "/words/phrases-3-new-immigrant.svg",

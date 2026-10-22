@@ -87,7 +87,12 @@
         "he": "קבעתי תור לרופא",
         "translit": "кавати тор ла-рофе",
         "ru": "Я записался к врачу",
-        "audio": "/audio/body-5-appointment-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "קבעתי תור לרופא",
+          "translit": "кавати тор ла-рофе",
+          "ru": "Я записалась к врачу"
+        }
       },
       "reviewed": false,
       "image": "/words/body-5-appointment.svg",

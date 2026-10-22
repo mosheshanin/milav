@@ -18,7 +18,12 @@
         "he": "אני מתכתב עם חבר",
         "translit": "ани миткатев им хавер",
         "ru": "Я переписываюсь с другом",
-        "audio": "/audio/hitpael-3-correspond-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מתכתבת עם חבר",
+          "translit": "ани миткатевет им хавер",
+          "ru": "Я переписываюсь с другом"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -396,7 +401,12 @@
         "he": "אני מתחבק עם אמא",
         "translit": "ани митхабек им има",
         "ru": "Я обнимаюсь с мамой",
-        "audio": "/audio/hitpael-3-hug-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מתחבקת עם אמא",
+          "translit": "ани митхабекет им има",
+          "ru": "Я обнимаюсь с мамой"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -774,7 +784,12 @@
         "he": "אני מתעסק בספורט",
         "translit": "ани митасек биспорт",
         "ru": "Я занимаюсь спортом",
-        "audio": "/audio/hitpael-3-deal-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מתעסקת בספורט",
+          "translit": "ани митасекет биспорт",
+          "ru": "Я занимаюсь спортом"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -963,7 +978,12 @@
         "he": "אני מתקדם לאט",
         "translit": "ани миткадем леат",
         "ru": "Я продвигаюсь медленно",
-        "audio": "/audio/hitpael-3-advance-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מתקדמת לאט",
+          "translit": "ани миткадемет леат",
+          "ru": "Я продвигаюсь медленно"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -1152,7 +1172,12 @@
         "he": "אני משתתף בשיעור",
         "translit": "ани миштатеф бешиур",
         "ru": "Я участвую в уроке",
-        "audio": "/audio/hitpael-3-participate-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני משתתפת בשיעור",
+          "translit": "ани миштатефет бешиур",
+          "ru": "Я участвую в уроке"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -1341,7 +1366,12 @@
         "he": "אני מצטרף לקבוצה",
         "translit": "ани мицтареф ликвуца",
         "ru": "Я присоединяюсь к группе",
-        "audio": "/audio/hitpael-3-join-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מצטרפת לקבוצה",
+          "translit": "ани мицтарефет ликвуца",
+          "ru": "Я присоединяюсь к группе"
+        }
       },
       "verb": {
         "binyan": "hitpael",
@@ -1719,7 +1749,12 @@
         "he": "אני מזדרז כי מאוחר",
         "translit": "ани миздарез ки меухар",
         "ru": "Я тороплюсь, потому что поздно",
-        "audio": "/audio/hitpael-3-hurry-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני מזדרזת כי מאוחר",
+          "translit": "ани миздарезет ки меухар",
+          "ru": "Я тороплюсь, потому что поздно"
+        }
       },
       "verb": {
         "binyan": "hitpael",

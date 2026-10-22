@@ -18,7 +18,12 @@
         "he": "אני יורד במעלית",
         "translit": "ани йоред бемаалит",
         "ru": "Я спускаюсь на лифте",
-        "audio": "/audio/weak-3-descend-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני יורדת במעלית",
+          "translit": "ани йоредет бемаалит",
+          "ru": "Я спускаюсь на лифте"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -210,7 +215,13 @@
         "he": "אני עולה במדרגות",
         "translit": "ани оле бемадрегот",
         "ru": "Я поднимаюсь по лестнице",
-        "audio": "/audio/weak-3-ascend-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני עולה במדרגות",
+          "niqqud": "אני עוֹלָה במדרגות",
+          "translit": "ани ола бемадрегот",
+          "ru": "Я поднимаюсь по лестнице"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -402,7 +413,12 @@
         "he": "אני גר בתל אביב",
         "translit": "ани гар бетель авив",
         "ru": "Я живу в Тель-Авиве",
-        "audio": "/audio/weak-3-reside-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני גרה בתל אביב",
+          "translit": "ани гара бетель авив",
+          "ru": "Я живу в Тель-Авиве"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -594,7 +610,12 @@
         "he": "אני חי חיים טובים",
         "translit": "ани хай хаим товим",
         "ru": "Я живу хорошей жизнью",
-        "audio": "/audio/weak-3-live-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני חיה חיים טובים",
+          "translit": "ани хайя хаим товим",
+          "ru": "Я живу хорошей жизнью"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -760,7 +781,12 @@
         "he": "אני רץ בפארק",
         "translit": "ани рац бепарк",
         "ru": "Я бегу в парке",
-        "audio": "/audio/weak-3-run-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני רצה בפארק",
+          "translit": "ани раца бепарк",
+          "ru": "Я бегу в парке"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -952,7 +978,12 @@
         "he": "אני נוסע לירושלים",
         "translit": "ани носеа лирушалаим",
         "ru": "Я еду в Иерусалим",
-        "audio": "/audio/weak-3-travel-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נוסעת לירושלים",
+          "translit": "ани носаат лирушалаим",
+          "ru": "Я еду в Иерусалим"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1144,7 +1175,12 @@
         "he": "אני נופל בשלג",
         "translit": "ани нофел бешелег",
         "ru": "Я падаю на снегу",
-        "audio": "/audio/weak-3-fall-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נופלת בשלג",
+          "translit": "ани нофелет бешелег",
+          "ru": "Я падаю на снегу"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1310,7 +1346,13 @@
         "he": "אני בונה בית",
         "translit": "ани боне байт",
         "ru": "Я строю дом",
-        "audio": "/audio/weak-3-build-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני בונה בית",
+          "niqqud": "אני בּוֹנָה בית",
+          "translit": "ани бона байт",
+          "ru": "Я строю дом"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1502,7 +1544,12 @@
         "he": "אני שר שיר",
         "translit": "ани шар шир",
         "ru": "Я пою песню",
-        "audio": "/audio/weak-3-sing-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני שרה שיר",
+          "translit": "ани шара шир",
+          "ru": "Я пою песню"
+        }
       },
       "verb": {
         "binyan": "paal",
@@ -1694,7 +1741,12 @@
         "he": "אני נח אחרי עבודה",
         "translit": "ани нах ахарей авода",
         "ru": "Я отдыхаю после работы",
-        "audio": "/audio/weak-3-rest-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אני נחה אחרי עבודה",
+          "translit": "ани наха ахарей авода",
+          "ru": "Я отдыхаю после работы"
+        }
       },
       "verb": {
         "binyan": "paal",

@@ -93,7 +93,12 @@
         "he": "אז אני בא",
         "translit": "аз ани ба",
         "ru": "Тогда я приду",
-        "audio": "/audio/connectors-1-then-phrase.mp3"
+        "speaker": "m",
+        "female": {
+          "he": "אז אני באה",
+          "translit": "аз ани баа",
+          "ru": "Тогда я приду"
+        }
       },
       "reviewed": false,
       "audio": "/audio/connectors-1-then.mp3"
