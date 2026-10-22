@@ -411,7 +411,7 @@ CREATE TABLE cohort_snapshots (
 | `POST /api/achievements/seen` | `{ ids: string[] }`, отметка «просмотрено» (только свои бейджи) | `seen`: 30 в минуту, 300 в сутки |
 | `GET /api/leaderboard?board=week\|all` | таблица (раздел 8) | без лимита в D1 (раздел 10.2) |
 | `GET /api/cohort` | сравнение с ровесниками | без лимита в D1 |
-| `PUT /api/settings` | настройки: участие в таблице, цель дня, часовой пояс, учёт в сравнении | `settings`: 20 в минуту, 200 в сутки |
+| `PUT /api/settings` | настройки: участие в таблице, цель дня, часовой пояс, учёт в сравнении, род для фраз-примеров (с 22.10) | `settings`: 20 в минуту, 200 в сутки |
 
 ### 10.1. Формы ответов
 
@@ -446,7 +446,7 @@ play: {
 { level: "week" | "window" | "none"; size: number; p25?: number; p50?: number; p75?: number; mine: number }
 
 // PUT /api/settings   (любые поля по отдельности)
-{ leaderboard?: boolean; dailyGoal?: 0 | 3 | 5 | 10; tz?: string; cohortExcluded?: boolean }
+{ leaderboard?: boolean; dailyGoal?: 0 | 3 | 5 | 10; tz?: string; cohortExcluded?: boolean; gender?: "m" | "f" }   // gender с 22.10: фразы-примеры от лица (docs/SPEC.md)
 ```
 
 Ошибки как в остальных маршрутах: `{ error: "…" }` и коды 400, 429, 500. Неизвестные поля отвергаются. Из таблицы наружу **не выходят** Telegram id, username, фамилия.
