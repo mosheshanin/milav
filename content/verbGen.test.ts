@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { VERB_FORMS_TOTAL, formSound, normalizeHebrew, verbForms } from "@milav/shared";
+import { VERB_FORMS_TOTAL, VERB_TENSES, formSound, normalizeHebrew, verbForms } from "@milav/shared";
 import { DIBER, DIBER_INFINITIVE, HISBIR, HISBIR_INFINITIVE, HITLABESH, HITLABESH_INFINITIVE, KATAV, KATAV_INFINITIVE, NIKHTAV, NIKHTAV_INFINITIVE } from "./verbFixture";
 import { stressProblems, skeletonProblems, stripStress, syllables, verbProblems } from "./rules";
 import { SIN_ROOTS, conjugateHifil, conjugateHitpael, conjugateNifal, conjugatePaal, conjugatePiel, hifilRootProblems, hitpaelRootProblems, nifalRootProblems, paalRootProblems, pielRootProblems } from "./verbGen";
@@ -127,10 +127,10 @@ describe("генератор форм пааль: отказ на неподхо
 });
 
 describe("уроки пааль: составлены генератором", () => {
-  it("5 уроков по 10 глаголов, все корни разные, все ключи и ru заданы", () => {
-    expect(PAAL_LESSONS).toHaveLength(5);
+  it("6 уроков по 10 глаголов, все корни разные, все ключи и ru заданы", () => {
+    expect(PAAL_LESSONS).toHaveLength(6);
     for (const lesson of PAAL_LESSONS) expect(lesson.verbs).toHaveLength(10);
-    expect(new Set(ROOTS).size).toBe(50);
+    expect(new Set(ROOTS).size).toBe(60);
     for (const lesson of PAAL_LESSONS) {
       const keys = lesson.verbs.map((v) => v.key);
       expect(new Set(keys).size).toBe(10);
@@ -139,7 +139,7 @@ describe("уроки пааль: составлены генератором", (
 
   it("корни проходят проверку генератора, а формы — проверки глаголов, ударения и согласных", () => {
     for (const root of ROOTS) expect(paalRootProblems(root), root).toEqual([]);
-    for (let n = 1; n <= 5; n++) {
+    for (let n = 1; n <= 6; n++) {
       const lesson = buildPaalLesson(n) as { words: { he: string; verb: Parameters<typeof verbProblems>[1] }[] };
       for (const word of lesson.words) {
         expect(verbProblems(word.he, word.verb), word.he).toEqual([]);
@@ -171,12 +171,57 @@ describe("уроки пааль: составлены генератором", (
     expect(dance.example.he).toContain(dance.verb.present.fs.he);
   });
 
-  it("урок 1 бесплатный, 2–5 платные, id paal-<номер>, тема «Пааль» раздел verbs", () => {
-    for (let n = 1; n <= 5; n++) {
+  it("урок 1 бесплатный, 2–6 платные, id paal-<номер>, тема «Пааль» раздел verbs", () => {
+    for (let n = 1; n <= 6; n++) {
       const lesson = buildPaalLesson(n) as { id: string; free: boolean; topicId: string; section: string; topic: string };
       expect(lesson).toMatchObject({ id: `paal-${n}`, free: n === 1, topicId: "paal", section: "verbs", topic: "Пааль" });
     }
-    expect(() => buildPaalLesson(6)).toThrow();
+    expect(() => buildPaalLesson(7)).toThrow();
+  });
+});
+
+describe("пааль: вторая א и немая шва под ח (22.10, «Пааль 6», формы с pealim.com)", () => {
+  const forms = (root: string) => {
+    const { infinitive, verb } = conjugatePaal(root);
+    // Порядок знаков над буквой (точка «шин» и гласная) у генератора свой: сравниваем после нормализации Unicode.
+    const n = (text: string) => text.normalize("NFC");
+    return { inf: n(infinitive.niqqud), ...Object.fromEntries(VERB_TENSES.flatMap((t) => Object.entries(verb[t] ?? {}).map(([k, f]) => [`${t}.${k}`, n(f.niqqud)]))) } as Record<string, string>;
+  };
+  const nfc = (expected: Record<string, string>) => Object.fromEntries(Object.entries(expected).map(([k, v]) => [k, v.normalize("NFC")]));
+
+  it("לשאול: хатаф-патах под א, патах в будущем и повелительном", () => {
+    expect(forms("שאל")).toMatchObject(nfc({
+      inf: "לִשְׁאוֹל",
+      "present.ms": "שׁוֹאֵל",
+      "present.mp": "שׁוֹאֲלִים",
+      "past.3fs": "שָׁאֲלָה",
+      "past.2mp": "שְׁאַלְתֶּם",
+      "future.1s": "אֶשְׁאַל",
+      "future.2fs": "תִּשְׁאֲלִי",
+      "imperative.ms": "שְׁאַל",
+      "imperative.fs": "שַׁאֲלִי",
+    }));
+  });
+
+  it("לדאוג: так же", () => {
+    expect(forms("דאג")).toMatchObject(nfc({ "present.fs": "דּוֹאֶגֶת", "past.3p": "דָּאֲגוּ", "future.3ms": "יִדְאַג", "imperative.mp": "דַּאֲגוּ" }));
+  });
+
+  it("לחתוך: немая шва под ח в формах с приставкой, хатаф в повелительном ms", () => {
+    expect(forms("חתכ")).toMatchObject(nfc({
+      inf: "לַחְתּוֹךְ",
+      "future.1s": "אֶחְתּוֹךְ",
+      "future.3ms": "יַחְתּוֹךְ",
+      "future.2fs": "תַּחְתְּכִי",
+      "past.2mp": "חֲתַכְתֶּם",
+      "imperative.ms": "חֲתוֹךְ",
+      "imperative.fs": "חִתְכִי",
+    }));
+  });
+
+  it("א на втором месте вместе с гортанной с краю генератор не берёт", () => {
+    expect(paalRootProblems("שאל")).toEqual([]);
+    expect(paalRootProblems("באח").length).toBeGreaterThan(0);
   });
 });
 

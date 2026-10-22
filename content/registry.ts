@@ -70,6 +70,7 @@ import lesson_paal_2 from "./lessons/paal-2.json";
 import lesson_paal_3 from "./lessons/paal-3.json";
 import lesson_paal_4 from "./lessons/paal-4.json";
 import lesson_paal_5 from "./lessons/paal-5.json";
+import lesson_paal_6 from "./lessons/paal-6.json";
 import lesson_phrases_1 from "./lessons/phrases-1.json";
 import lesson_phrases_2 from "./lessons/phrases-2.json";
 import lesson_phrases_3 from "./lessons/phrases-3.json";
@@ -169,6 +170,7 @@ export const lessonFiles: unknown[] = [
   lesson_paal_3,
   lesson_paal_4,
   lesson_paal_5,
+  lesson_paal_6,
   lesson_phrases_1,
   lesson_phrases_2,
   lesson_phrases_3,

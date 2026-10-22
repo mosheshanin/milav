@@ -1226,6 +1226,23 @@
       "v": "1ad5c6572f"
     },
     {
+      "id": "paal-6",
+      "topicId": "paal",
+      "section": "verbs",
+      "topic": "Пааль",
+      "number": 6,
+      "free": false,
+      "title": "Частые глаголы",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "478c5e7095"
+    },
+    {
       "id": "phrases-1",
       "topicId": "phrases",
       "section": "basics",
@@ -1686,8 +1703,8 @@
     }
   ],
   "info": {
-    "totalWords": 910,
-    "totalLessons": 97,
+    "totalWords": 920,
+    "totalLessons": 98,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1874,7 +1891,8 @@
           "paal-2",
           "paal-3",
           "paal-4",
-          "paal-5"
+          "paal-5",
+          "paal-6"
         ]
       },
       {
