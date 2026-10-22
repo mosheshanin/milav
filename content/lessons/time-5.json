@@ -17,10 +17,12 @@
       "example": {
         "he": "אין לי כסף",
         "translit": "эйн ли кесеф",
-        "ru": "У меня нет денег"
+        "ru": "У меня нет денег",
+        "audio": "/audio/time-5-money-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-money.svg"
+      "image": "/words/time-5-money.svg",
+      "audio": "/audio/time-5-money.mp3"
     },
     {
       "id": "time-5-shekel",
@@ -31,10 +33,12 @@
       "example": {
         "he": "זה עולה שקל אחד",
         "translit": "зэ олэ шекель эхад",
-        "ru": "Это стоит один шекель"
+        "ru": "Это стоит один шекель",
+        "audio": "/audio/time-5-shekel-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-shekel.svg"
+      "image": "/words/time-5-shekel.svg",
+      "audio": "/audio/time-5-shekel.mp3"
     },
     {
       "id": "time-5-agora",
@@ -45,10 +49,12 @@
       "example": {
         "he": "רק אגורה אחת",
         "translit": "рак агора ахат",
-        "ru": "Всего одна агора"
+        "ru": "Всего одна агора",
+        "audio": "/audio/time-5-agora-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-agora.svg"
+      "image": "/words/time-5-agora.svg",
+      "audio": "/audio/time-5-agora.mp3"
     },
     {
       "id": "time-5-change",
@@ -59,10 +65,12 @@
       "example": {
         "he": "יש לך עודף",
         "translit": "йеш леха одеф",
-        "ru": "У тебя есть сдача?"
+        "ru": "У тебя есть сдача?",
+        "audio": "/audio/time-5-change-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-change.svg"
+      "image": "/words/time-5-change.svg",
+      "audio": "/audio/time-5-change.mp3"
     },
     {
       "id": "time-5-cash",
@@ -73,10 +81,12 @@
       "example": {
         "he": "אני משלם במזומן",
         "translit": "ани мешалем бе-мезуман",
-        "ru": "Я плачу наличными"
+        "ru": "Я плачу наличными",
+        "audio": "/audio/time-5-cash-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-cash.svg"
+      "image": "/words/time-5-cash.svg",
+      "audio": "/audio/time-5-cash.mp3"
     },
     {
       "id": "time-5-credit-card",
@@ -87,10 +97,12 @@
       "example": {
         "he": "אפשר לשלם בכרטיס אשראי",
         "translit": "эфшар лешалем бе-картис ашрай",
-        "ru": "Можно заплатить кредитной картой"
+        "ru": "Можно заплатить кредитной картой",
+        "audio": "/audio/time-5-credit-card-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-credit-card.svg"
+      "image": "/words/time-5-credit-card.svg",
+      "audio": "/audio/time-5-credit-card.mp3"
     },
     {
       "id": "time-5-percent",
@@ -101,10 +113,12 @@
       "example": {
         "he": "עשרה אחוז הנחה",
         "translit": "асара ахуз ханаха",
-        "ru": "Скидка десять процентов"
+        "ru": "Скидка десять процентов",
+        "audio": "/audio/time-5-percent-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-percent.svg"
+      "image": "/words/time-5-percent.svg",
+      "audio": "/audio/time-5-percent.mp3"
     },
     {
       "id": "time-5-third",
@@ -115,10 +129,12 @@
       "example": {
         "he": "שליש מהמחיר",
         "translit": "шлиш ме-хамехир",
-        "ru": "Треть цены"
+        "ru": "Треть цены",
+        "audio": "/audio/time-5-third-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-third.svg"
+      "image": "/words/time-5-third.svg",
+      "audio": "/audio/time-5-third.mp3"
     },
     {
       "id": "time-5-dozen",
@@ -129,10 +145,12 @@
       "example": {
         "he": "תריסר ביצים",
         "translit": "трейсар бейцим",
-        "ru": "Дюжина яиц"
+        "ru": "Дюжина яиц",
+        "audio": "/audio/time-5-dozen-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-dozen.svg"
+      "image": "/words/time-5-dozen.svg",
+      "audio": "/audio/time-5-dozen.mp3"
     },
     {
       "id": "time-5-free",
@@ -143,10 +161,12 @@
       "example": {
         "he": "הכניסה בחינם",
         "translit": "хакниса бе-хинам",
-        "ru": "Вход бесплатный"
+        "ru": "Вход бесплатный",
+        "audio": "/audio/time-5-free-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-5-free.svg"
+      "image": "/words/time-5-free.svg",
+      "audio": "/audio/time-5-free.mp3"
     }
   ]
 }

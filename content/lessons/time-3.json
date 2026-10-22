@@ -17,10 +17,12 @@
       "example": {
         "he": "בינואר קר מאוד",
         "translit": "бе-януар кар меод",
-        "ru": "В январе очень холодно"
+        "ru": "В январе очень холодно",
+        "audio": "/audio/time-3-january-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-january.svg"
+      "image": "/words/time-3-january.svg",
+      "audio": "/audio/time-3-january.mp3"
     },
     {
       "id": "time-3-february",
@@ -31,10 +33,12 @@
       "example": {
         "he": "בפברואר יורד גשם",
         "translit": "бе-фебруар йоред гешем",
-        "ru": "В феврале идёт дождь"
+        "ru": "В феврале идёт дождь",
+        "audio": "/audio/time-3-february-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-february.svg"
+      "image": "/words/time-3-february.svg",
+      "audio": "/audio/time-3-february.mp3"
     },
     {
       "id": "time-3-march",
@@ -45,10 +49,12 @@
       "example": {
         "he": "יום ההולדת שלי במרץ",
         "translit": "йом хахуледет шели бе-мерц",
-        "ru": "Мой день рождения в марте"
+        "ru": "Мой день рождения в марте",
+        "audio": "/audio/time-3-march-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-march.svg"
+      "image": "/words/time-3-march.svg",
+      "audio": "/audio/time-3-march.mp3"
     },
     {
       "id": "time-3-april",
@@ -59,10 +65,12 @@
       "example": {
         "he": "פסח באפריל",
         "translit": "песах бе-априль",
-        "ru": "Песах в апреле"
+        "ru": "Песах в апреле",
+        "audio": "/audio/time-3-april-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-april.svg"
+      "image": "/words/time-3-april.svg",
+      "audio": "/audio/time-3-april.mp3"
     },
     {
       "id": "time-3-may",
@@ -73,10 +81,12 @@
       "example": {
         "he": "במאי חם",
         "translit": "бе-май хам",
-        "ru": "В мае жарко"
+        "ru": "В мае жарко",
+        "audio": "/audio/time-3-may-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-may.svg"
+      "image": "/words/time-3-may.svg",
+      "audio": "/audio/time-3-may.mp3"
     },
     {
       "id": "time-3-june",
@@ -87,10 +97,12 @@
       "example": {
         "he": "ביוני מתחיל הקיץ",
         "translit": "бе-юни матхиль хакаиц",
-        "ru": "В июне начинается лето"
+        "ru": "В июне начинается лето",
+        "audio": "/audio/time-3-june-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-june.svg"
+      "image": "/words/time-3-june.svg",
+      "audio": "/audio/time-3-june.mp3"
     },
     {
       "id": "time-3-month-start",
@@ -101,10 +113,12 @@
       "example": {
         "he": "המשכורת בתחילת החודש",
         "translit": "хамаскорет би-тхилат хаходеш",
-        "ru": "Зарплата в начале месяца"
+        "ru": "Зарплата в начале месяца",
+        "audio": "/audio/time-3-month-start-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-month-start.svg"
+      "image": "/words/time-3-month-start.svg",
+      "audio": "/audio/time-3-month-start.mp3"
     },
     {
       "id": "time-3-month-middle",
@@ -115,10 +129,12 @@
       "example": {
         "he": "נתראה באמצע החודש",
         "translit": "нитраэ бе-эмца хаходеш",
-        "ru": "Увидимся в середине месяца"
+        "ru": "Увидимся в середине месяца",
+        "audio": "/audio/time-3-month-middle-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-month-middle.svg"
+      "image": "/words/time-3-month-middle.svg",
+      "audio": "/audio/time-3-month-middle.mp3"
     },
     {
       "id": "time-3-month-end",
@@ -129,10 +145,12 @@
       "example": {
         "he": "עד סוף החודש",
         "translit": "ад соф хаходеш",
-        "ru": "До конца месяца"
+        "ru": "До конца месяца",
+        "audio": "/audio/time-3-month-end-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-month-end.svg"
+      "image": "/words/time-3-month-end.svg",
+      "audio": "/audio/time-3-month-end.mp3"
     },
     {
       "id": "time-3-what-date",
@@ -143,10 +161,12 @@
       "example": {
         "he": "סליחה מה התאריך היום",
         "translit": "слиха ма хатаарих хайом",
-        "ru": "Извините, какое сегодня число?"
+        "ru": "Извините, какое сегодня число?",
+        "audio": "/audio/time-3-what-date-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-3-what-date.svg"
+      "image": "/words/time-3-what-date.svg",
+      "audio": "/audio/time-3-what-date.mp3"
     }
   ]
 }

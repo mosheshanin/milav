@@ -17,10 +17,12 @@
       "example": {
         "he": "ביולי חם מאוד",
         "translit": "бе-юли хам меод",
-        "ru": "В июле очень жарко"
+        "ru": "В июле очень жарко",
+        "audio": "/audio/time-4-july-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-july.svg"
+      "image": "/words/time-4-july.svg",
+      "audio": "/audio/time-4-july.mp3"
     },
     {
       "id": "time-4-august",
@@ -31,10 +33,12 @@
       "example": {
         "he": "באוגוסט יש חופש",
         "translit": "бе-огуст йеш хофеш",
-        "ru": "В августе каникулы"
+        "ru": "В августе каникулы",
+        "audio": "/audio/time-4-august-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-august.svg"
+      "image": "/words/time-4-august.svg",
+      "audio": "/audio/time-4-august.mp3"
     },
     {
       "id": "time-4-september",
@@ -45,10 +49,12 @@
       "example": {
         "he": "הלימודים מתחילים בספטמבר",
         "translit": "халимудим матхилим бе-септембер",
-        "ru": "Учёба начинается в сентябре"
+        "ru": "Учёба начинается в сентябре",
+        "audio": "/audio/time-4-september-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-september.svg"
+      "image": "/words/time-4-september.svg",
+      "audio": "/audio/time-4-september.mp3"
     },
     {
       "id": "time-4-october",
@@ -59,10 +65,12 @@
       "example": {
         "he": "באוקטובר יש חגים",
         "translit": "бе-октобер йеш хагим",
-        "ru": "В октябре праздники"
+        "ru": "В октябре праздники",
+        "audio": "/audio/time-4-october-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-october.svg"
+      "image": "/words/time-4-october.svg",
+      "audio": "/audio/time-4-october.mp3"
     },
     {
       "id": "time-4-november",
@@ -73,10 +81,12 @@
       "example": {
         "he": "בנובמבר יורד גשם",
         "translit": "бе-новембер йоред гешем",
-        "ru": "В ноябре идёт дождь"
+        "ru": "В ноябре идёт дождь",
+        "audio": "/audio/time-4-november-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-november.svg"
+      "image": "/words/time-4-november.svg",
+      "audio": "/audio/time-4-november.mp3"
     },
     {
       "id": "time-4-december",
@@ -87,10 +97,12 @@
       "example": {
         "he": "חנוכה בדצמבר",
         "translit": "ханука бе-децембер",
-        "ru": "Ханука в декабре"
+        "ru": "Ханука в декабре",
+        "audio": "/audio/time-4-december-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-december.svg"
+      "image": "/words/time-4-december.svg",
+      "audio": "/audio/time-4-december.mp3"
     },
     {
       "id": "time-4-next-month",
@@ -101,10 +113,12 @@
       "example": {
         "he": "נתראה בחודש הבא",
         "translit": "нитраэ ба-ходеш хаба",
-        "ru": "Увидимся в следующем месяце"
+        "ru": "Увидимся в следующем месяце",
+        "audio": "/audio/time-4-next-month-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-next-month.svg"
+      "image": "/words/time-4-next-month.svg",
+      "audio": "/audio/time-4-next-month.mp3"
     },
     {
       "id": "time-4-last-month",
@@ -115,10 +129,12 @@
       "example": {
         "he": "הייתי בחופש בחודש שעבר",
         "translit": "хаити ба-хофеш ба-ходеш ше-авар",
-        "ru": "В прошлом месяце я был в отпуске"
+        "ru": "В прошлом месяце я был в отпуске",
+        "audio": "/audio/time-4-last-month-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-last-month.svg"
+      "image": "/words/time-4-last-month.svg",
+      "audio": "/audio/time-4-last-month.mp3"
     },
     {
       "id": "time-4-this-year",
@@ -129,10 +145,12 @@
       "example": {
         "he": "השנה אני לומד עברית",
         "translit": "хашана ани ломед иврит",
-        "ru": "В этом году я учу иврит"
+        "ru": "В этом году я учу иврит",
+        "audio": "/audio/time-4-this-year-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-this-year.svg"
+      "image": "/words/time-4-this-year.svg",
+      "audio": "/audio/time-4-this-year.mp3"
     },
     {
       "id": "time-4-holiday",
@@ -143,10 +161,12 @@
       "example": {
         "he": "חג שמח",
         "translit": "хаг самеах",
-        "ru": "Счастливого праздника"
+        "ru": "Счастливого праздника",
+        "audio": "/audio/time-4-holiday-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/time-4-holiday.svg"
+      "image": "/words/time-4-holiday.svg",
+      "audio": "/audio/time-4-holiday.mp3"
     }
   ]
 }
