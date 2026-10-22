@@ -86,6 +86,9 @@ import lesson_shops_1 from "./lessons/shops-1.json";
 import lesson_shops_2 from "./lessons/shops-2.json";
 import lesson_time_1 from "./lessons/time-1.json";
 import lesson_time_2 from "./lessons/time-2.json";
+import lesson_time_3 from "./lessons/time-3.json";
+import lesson_time_4 from "./lessons/time-4.json";
+import lesson_time_5 from "./lessons/time-5.json";
 import lesson_weak_1 from "./lessons/weak-1.json";
 import lesson_weak_2 from "./lessons/weak-2.json";
 import lesson_weak_3 from "./lessons/weak-3.json";
@@ -182,6 +185,9 @@ export const lessonFiles: unknown[] = [
   lesson_shops_2,
   lesson_time_1,
   lesson_time_2,
+  lesson_time_3,
+  lesson_time_4,
+  lesson_time_5,
   lesson_weak_1,
   lesson_weak_2,
   lesson_weak_3,

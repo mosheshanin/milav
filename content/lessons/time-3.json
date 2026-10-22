@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "time-3",
+  "topicId": "time",
+  "section": "numbers",
+  "topic": "Время и календарь",
+  "number": 3,
+  "free": false,
+  "title": "Январь–июнь",
+  "words": [
+    {
+      "id": "time-3-january",
+      "he": "ינואר",
+      "niqqud": "יָנוּאָר",
+      "translit": "я́нуар",
+      "ru": "январь",
+      "example": {
+        "he": "בינואר קר מאוד",
+        "translit": "бе-януар кар меод",
+        "ru": "В январе очень холодно"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-january.svg"
+    },
+    {
+      "id": "time-3-february",
+      "he": "פברואר",
+      "niqqud": "פֶבְּרוּאָר",
+      "translit": "фе́бруар",
+      "ru": "февраль",
+      "example": {
+        "he": "בפברואר יורד גשם",
+        "translit": "бе-фебруар йоред гешем",
+        "ru": "В феврале идёт дождь"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-february.svg"
+    },
+    {
+      "id": "time-3-march",
+      "he": "מרץ",
+      "niqqud": "מֶרְץ",
+      "translit": "мерц",
+      "ru": "март",
+      "example": {
+        "he": "יום ההולדת שלי במרץ",
+        "translit": "йом хахуледет шели бе-мерц",
+        "ru": "Мой день рождения в марте"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-march.svg"
+    },
+    {
+      "id": "time-3-april",
+      "he": "אפריל",
+      "niqqud": "אַפְּרִיל",
+      "translit": "апри́ль",
+      "ru": "апрель",
+      "example": {
+        "he": "פסח באפריל",
+        "translit": "песах бе-априль",
+        "ru": "Песах в апреле"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-april.svg"
+    },
+    {
+      "id": "time-3-may",
+      "he": "מאי",
+      "niqqud": "מַאי",
+      "translit": "май",
+      "ru": "май",
+      "example": {
+        "he": "במאי חם",
+        "translit": "бе-май хам",
+        "ru": "В мае жарко"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-may.svg"
+    },
+    {
+      "id": "time-3-june",
+      "he": "יוני",
+      "niqqud": "יוּנִי",
+      "translit": "ю́ни",
+      "ru": "июнь",
+      "example": {
+        "he": "ביוני מתחיל הקיץ",
+        "translit": "бе-юни матхиль хакаиц",
+        "ru": "В июне начинается лето"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-june.svg"
+    },
+    {
+      "id": "time-3-month-start",
+      "he": "תחילת החודש",
+      "niqqud": "תְּחִילַּת הַחוֹדֶשׁ",
+      "translit": "тхила́т хахо́деш",
+      "ru": "начало месяца",
+      "example": {
+        "he": "המשכורת בתחילת החודש",
+        "translit": "хамаскорет би-тхилат хаходеш",
+        "ru": "Зарплата в начале месяца"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-month-start.svg"
+    },
+    {
+      "id": "time-3-month-middle",
+      "he": "אמצע החודש",
+      "niqqud": "אֶמְצַע הַחוֹדֶשׁ",
+      "translit": "э́мца хахо́деш",
+      "ru": "середина месяца",
+      "example": {
+        "he": "נתראה באמצע החודש",
+        "translit": "нитраэ бе-эмца хаходеш",
+        "ru": "Увидимся в середине месяца"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-month-middle.svg"
+    },
+    {
+      "id": "time-3-month-end",
+      "he": "סוף החודש",
+      "niqqud": "סוֹף הַחוֹדֶשׁ",
+      "translit": "соф хахо́деш",
+      "ru": "конец месяца",
+      "example": {
+        "he": "עד סוף החודש",
+        "translit": "ад соф хаходеш",
+        "ru": "До конца месяца"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-month-end.svg"
+    },
+    {
+      "id": "time-3-what-date",
+      "he": "מה התאריך היום",
+      "niqqud": "מָה הַתַּאֲרִיךְ הַיּוֹם",
+      "translit": "ма хатаари́х хайо́м",
+      "ru": "какое сегодня число?",
+      "example": {
+        "he": "סליחה מה התאריך היום",
+        "translit": "слиха ма хатаарих хайом",
+        "ru": "Извините, какое сегодня число?"
+      },
+      "reviewed": false,
+      "image": "/words/time-3-what-date.svg"
+    }
+  ]
+}

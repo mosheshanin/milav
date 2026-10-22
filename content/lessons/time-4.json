@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "time-4",
+  "topicId": "time",
+  "section": "numbers",
+  "topic": "Время и календарь",
+  "number": 4,
+  "free": false,
+  "title": "Июль–декабрь",
+  "words": [
+    {
+      "id": "time-4-july",
+      "he": "יולי",
+      "niqqud": "יוּלִי",
+      "translit": "ю́ли",
+      "ru": "июль",
+      "example": {
+        "he": "ביולי חם מאוד",
+        "translit": "бе-юли хам меод",
+        "ru": "В июле очень жарко"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-july.svg"
+    },
+    {
+      "id": "time-4-august",
+      "he": "אוגוסט",
+      "niqqud": "אוֹגוּסְט",
+      "translit": "о́густ",
+      "ru": "август",
+      "example": {
+        "he": "באוגוסט יש חופש",
+        "translit": "бе-огуст йеш хофеш",
+        "ru": "В августе каникулы"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-august.svg"
+    },
+    {
+      "id": "time-4-september",
+      "he": "ספטמבר",
+      "niqqud": "סֶפְּטֶמְבֶּר",
+      "translit": "септе́мбер",
+      "ru": "сентябрь",
+      "example": {
+        "he": "הלימודים מתחילים בספטמבר",
+        "translit": "халимудим матхилим бе-септембер",
+        "ru": "Учёба начинается в сентябре"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-september.svg"
+    },
+    {
+      "id": "time-4-october",
+      "he": "אוקטובר",
+      "niqqud": "אוֹקְטוֹבֶּר",
+      "translit": "окто́бер",
+      "ru": "октябрь",
+      "example": {
+        "he": "באוקטובר יש חגים",
+        "translit": "бе-октобер йеш хагим",
+        "ru": "В октябре праздники"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-october.svg"
+    },
+    {
+      "id": "time-4-november",
+      "he": "נובמבר",
+      "niqqud": "נוֹבֶמְבֶּר",
+      "translit": "нове́мбер",
+      "ru": "ноябрь",
+      "example": {
+        "he": "בנובמבר יורד גשם",
+        "translit": "бе-новембер йоред гешем",
+        "ru": "В ноябре идёт дождь"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-november.svg"
+    },
+    {
+      "id": "time-4-december",
+      "he": "דצמבר",
+      "niqqud": "דֶּצֶמְבֶּר",
+      "translit": "деце́мбер",
+      "ru": "декабрь",
+      "example": {
+        "he": "חנוכה בדצמבר",
+        "translit": "ханука бе-децембер",
+        "ru": "Ханука в декабре"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-december.svg"
+    },
+    {
+      "id": "time-4-next-month",
+      "he": "בחודש הבא",
+      "niqqud": "בַּחוֹדֶשׁ הַבָּא",
+      "translit": "ба-хо́деш хаба́",
+      "ru": "в следующем месяце",
+      "example": {
+        "he": "נתראה בחודש הבא",
+        "translit": "нитраэ ба-ходеш хаба",
+        "ru": "Увидимся в следующем месяце"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-next-month.svg"
+    },
+    {
+      "id": "time-4-last-month",
+      "he": "בחודש שעבר",
+      "niqqud": "בַּחוֹדֶשׁ שֶׁעָבַר",
+      "translit": "ба-хо́деш ше-ава́р",
+      "ru": "в прошлом месяце",
+      "example": {
+        "he": "הייתי בחופש בחודש שעבר",
+        "translit": "хаити ба-хофеш ба-ходеш ше-авар",
+        "ru": "В прошлом месяце я был в отпуске"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-last-month.svg"
+    },
+    {
+      "id": "time-4-this-year",
+      "he": "השנה",
+      "niqqud": "הַשָּׁנָה",
+      "translit": "хашана́",
+      "ru": "в этом году",
+      "example": {
+        "he": "השנה אני לומד עברית",
+        "translit": "хашана ани ломед иврит",
+        "ru": "В этом году я учу иврит"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-this-year.svg"
+    },
+    {
+      "id": "time-4-holiday",
+      "he": "חג",
+      "niqqud": "חַג",
+      "translit": "хаг",
+      "ru": "праздник",
+      "example": {
+        "he": "חג שמח",
+        "translit": "хаг самеах",
+        "ru": "Счастливого праздника"
+      },
+      "reviewed": false,
+      "image": "/words/time-4-holiday.svg"
+    }
+  ]
+}

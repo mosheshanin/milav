@@ -1,0 +1,152 @@
+{
+  "$schema": "../schema.json",
+  "id": "time-5",
+  "topicId": "time",
+  "section": "numbers",
+  "topic": "Время и календарь",
+  "number": 5,
+  "free": false,
+  "title": "Деньги и количество",
+  "words": [
+    {
+      "id": "time-5-money",
+      "he": "כסף",
+      "niqqud": "כֶּסֶף",
+      "translit": "ке́сеф",
+      "ru": "деньги",
+      "example": {
+        "he": "אין לי כסף",
+        "translit": "эйн ли кесеф",
+        "ru": "У меня нет денег"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-money.svg"
+    },
+    {
+      "id": "time-5-shekel",
+      "he": "שקל",
+      "niqqud": "שֶׁקֶל",
+      "translit": "ше́кель",
+      "ru": "шекель",
+      "example": {
+        "he": "זה עולה שקל אחד",
+        "translit": "зэ олэ шекель эхад",
+        "ru": "Это стоит один шекель"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-shekel.svg"
+    },
+    {
+      "id": "time-5-agora",
+      "he": "אגורה",
+      "niqqud": "אֲגוֹרָה",
+      "translit": "агора́",
+      "ru": "агора (сотая шекеля)",
+      "example": {
+        "he": "רק אגורה אחת",
+        "translit": "рак агора ахат",
+        "ru": "Всего одна агора"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-agora.svg"
+    },
+    {
+      "id": "time-5-change",
+      "he": "עודף",
+      "niqqud": "עוֹדֶף",
+      "translit": "о́деф",
+      "ru": "сдача",
+      "example": {
+        "he": "יש לך עודף",
+        "translit": "йеш леха одеф",
+        "ru": "У тебя есть сдача?"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-change.svg"
+    },
+    {
+      "id": "time-5-cash",
+      "he": "מזומן",
+      "niqqud": "מְזוּמָּן",
+      "translit": "мезума́н",
+      "ru": "наличные",
+      "example": {
+        "he": "אני משלם במזומן",
+        "translit": "ани мешалем бе-мезуман",
+        "ru": "Я плачу наличными"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-cash.svg"
+    },
+    {
+      "id": "time-5-credit-card",
+      "he": "כרטיס אשראי",
+      "niqqud": "כַּרְטִיס אַשְׁרַאי",
+      "translit": "карти́с ашра́й",
+      "ru": "кредитная карта",
+      "example": {
+        "he": "אפשר לשלם בכרטיס אשראי",
+        "translit": "эфшар лешалем бе-картис ашрай",
+        "ru": "Можно заплатить кредитной картой"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-credit-card.svg"
+    },
+    {
+      "id": "time-5-percent",
+      "he": "אחוז",
+      "niqqud": "אָחוּז",
+      "translit": "аху́з",
+      "ru": "процент",
+      "example": {
+        "he": "עשרה אחוז הנחה",
+        "translit": "асара ахуз ханаха",
+        "ru": "Скидка десять процентов"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-percent.svg"
+    },
+    {
+      "id": "time-5-third",
+      "he": "שליש",
+      "niqqud": "שְׁלִישׁ",
+      "translit": "шлиш",
+      "ru": "треть",
+      "example": {
+        "he": "שליש מהמחיר",
+        "translit": "шлиш ме-хамехир",
+        "ru": "Треть цены"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-third.svg"
+    },
+    {
+      "id": "time-5-dozen",
+      "he": "תריסר",
+      "niqqud": "תְּרֵיסָר",
+      "translit": "трейса́р",
+      "ru": "дюжина",
+      "example": {
+        "he": "תריסר ביצים",
+        "translit": "трейсар бейцим",
+        "ru": "Дюжина яиц"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-dozen.svg"
+    },
+    {
+      "id": "time-5-free",
+      "he": "חינם",
+      "niqqud": "חִינָּם",
+      "translit": "хина́м",
+      "ru": "бесплатно, даром",
+      "example": {
+        "he": "הכניסה בחינם",
+        "translit": "хакниса бе-хинам",
+        "ru": "Вход бесплатный"
+      },
+      "reviewed": false,
+      "image": "/words/time-5-free.svg"
+    }
+  ]
+}

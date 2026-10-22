@@ -1498,6 +1498,57 @@
       "v": "6aa78dc73f"
     },
     {
+      "id": "time-3",
+      "topicId": "time",
+      "section": "numbers",
+      "topic": "Время и календарь",
+      "number": 3,
+      "free": false,
+      "title": "Январь–июнь",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "54adbc9297"
+    },
+    {
+      "id": "time-4",
+      "topicId": "time",
+      "section": "numbers",
+      "topic": "Время и календарь",
+      "number": 4,
+      "free": false,
+      "title": "Июль–декабрь",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "02fdc41937"
+    },
+    {
+      "id": "time-5",
+      "topicId": "time",
+      "section": "numbers",
+      "topic": "Время и календарь",
+      "number": 5,
+      "free": false,
+      "title": "Деньги и количество",
+      "count": 10,
+      "stages": [
+        "listen",
+        "speak",
+        "write",
+        "type"
+      ],
+      "v": "67f15c6c82"
+    },
+    {
       "id": "weak-1",
       "topicId": "weak",
       "section": "verbs",
@@ -1635,8 +1686,8 @@
     }
   ],
   "info": {
-    "totalWords": 880,
-    "totalLessons": 94,
+    "totalWords": 910,
+    "totalLessons": 97,
     "alphabetLessons": 6,
     "alphabetLetters": 30,
     "sections": [
@@ -1875,7 +1926,10 @@
         "title": "Время и календарь",
         "lessonIds": [
           "time-1",
-          "time-2"
+          "time-2",
+          "time-3",
+          "time-4",
+          "time-5"
         ]
       },
       {
