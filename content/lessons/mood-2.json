@@ -17,27 +17,32 @@
       "example": {
         "he": "הוא נחמד מאוד",
         "translit": "ху нехмад меод",
-        "ru": "Он очень милый"
+        "ru": "Он очень милый",
+        "audio": "/audio/mood-2-nice-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "נחמדה",
           "niqqud": "נֶחְמָדָה",
-          "translit": "нехмада́"
+          "translit": "нехмада́",
+          "audio": "/audio/mood-2-nice-form-f.mp3"
         },
         "mp": {
           "he": "נחמדים",
           "niqqud": "נֶחְמָדִים",
-          "translit": "нехмади́м"
+          "translit": "нехмади́м",
+          "audio": "/audio/mood-2-nice-form-mp.mp3"
         },
         "fp": {
           "he": "נחמדות",
           "niqqud": "נֶחְמָדוֹת",
-          "translit": "нехмадо́т"
+          "translit": "нехмадо́т",
+          "audio": "/audio/mood-2-nice-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-nice.svg"
+      "image": "/words/mood-2-nice.svg",
+      "audio": "/audio/mood-2-nice.mp3"
     },
     {
       "id": "mood-2-smart",
@@ -48,27 +53,32 @@
       "example": {
         "he": "ילד חכם",
         "translit": "елед хахам",
-        "ru": "Умный мальчик"
+        "ru": "Умный мальчик",
+        "audio": "/audio/mood-2-smart-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חכמה",
           "niqqud": "חֲכָמָה",
-          "translit": "хахама́"
+          "translit": "хахама́",
+          "audio": "/audio/mood-2-smart-form-f.mp3"
         },
         "mp": {
           "he": "חכמים",
           "niqqud": "חֲכָמִים",
-          "translit": "хахами́м"
+          "translit": "хахами́м",
+          "audio": "/audio/mood-2-smart-form-mp.mp3"
         },
         "fp": {
           "he": "חכמות",
           "niqqud": "חֲכָמוֹת",
-          "translit": "хахамо́т"
+          "translit": "хахамо́т",
+          "audio": "/audio/mood-2-smart-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-smart.svg"
+      "image": "/words/mood-2-smart.svg",
+      "audio": "/audio/mood-2-smart.mp3"
     },
     {
       "id": "mood-2-stupid",
@@ -79,27 +89,32 @@
       "example": {
         "he": "הוא לא טיפש",
         "translit": "ху ло типеш",
-        "ru": "Он не глупый"
+        "ru": "Он не глупый",
+        "audio": "/audio/mood-2-stupid-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "טיפשה",
           "niqqud": "טִיפְּשָׁה",
-          "translit": "типша́"
+          "translit": "типша́",
+          "audio": "/audio/mood-2-stupid-form-f.mp3"
         },
         "mp": {
           "he": "טיפשים",
           "niqqud": "טִיפְּשִׁים",
-          "translit": "типши́м"
+          "translit": "типши́м",
+          "audio": "/audio/mood-2-stupid-form-mp.mp3"
         },
         "fp": {
           "he": "טיפשות",
           "niqqud": "טִיפְּשׁוֹת",
-          "translit": "типшо́т"
+          "translit": "типшо́т",
+          "audio": "/audio/mood-2-stupid-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-stupid.svg"
+      "image": "/words/mood-2-stupid.svg",
+      "audio": "/audio/mood-2-stupid.mp3"
     },
     {
       "id": "mood-2-busy",
@@ -110,27 +125,32 @@
       "example": {
         "he": "אני עסוק היום",
         "translit": "ани асук хайом",
-        "ru": "Я сегодня занят"
+        "ru": "Я сегодня занят",
+        "audio": "/audio/mood-2-busy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "עסוקה",
           "niqqud": "עֲסוּקָה",
-          "translit": "асука́"
+          "translit": "асука́",
+          "audio": "/audio/mood-2-busy-form-f.mp3"
         },
         "mp": {
           "he": "עסוקים",
           "niqqud": "עֲסוּקִים",
-          "translit": "асуки́м"
+          "translit": "асуки́м",
+          "audio": "/audio/mood-2-busy-form-mp.mp3"
         },
         "fp": {
           "he": "עסוקות",
           "niqqud": "עֲסוּקוֹת",
-          "translit": "асуко́т"
+          "translit": "асуко́т",
+          "audio": "/audio/mood-2-busy-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-busy.svg"
+      "image": "/words/mood-2-busy.svg",
+      "audio": "/audio/mood-2-busy.mp3"
     },
     {
       "id": "mood-2-satisfied",
@@ -141,27 +161,32 @@
       "example": {
         "he": "הוא מרוצה",
         "translit": "ху меруцэ",
-        "ru": "Он доволен"
+        "ru": "Он доволен",
+        "audio": "/audio/mood-2-satisfied-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מרוצה",
           "niqqud": "מְרוּצָּה",
-          "translit": "меруца́"
+          "translit": "меруца́",
+          "audio": "/audio/mood-2-satisfied-form-f.mp3"
         },
         "mp": {
           "he": "מרוצים",
           "niqqud": "מְרוּצִּים",
-          "translit": "меруци́м"
+          "translit": "меруци́м",
+          "audio": "/audio/mood-2-satisfied-form-mp.mp3"
         },
         "fp": {
           "he": "מרוצות",
           "niqqud": "מְרוּצּוֹת",
-          "translit": "меруцо́т"
+          "translit": "меруцо́т",
+          "audio": "/audio/mood-2-satisfied-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-satisfied.svg"
+      "image": "/words/mood-2-satisfied.svg",
+      "audio": "/audio/mood-2-satisfied.mp3"
     },
     {
       "id": "mood-2-calm",
@@ -172,27 +197,32 @@
       "example": {
         "he": "ים רגוע",
         "translit": "ям рагуа",
-        "ru": "Спокойное море"
+        "ru": "Спокойное море",
+        "audio": "/audio/mood-2-calm-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רגועה",
           "niqqud": "רְגוּעָה",
-          "translit": "ргуа́"
+          "translit": "ргуа́",
+          "audio": "/audio/mood-2-calm-form-f.mp3"
         },
         "mp": {
           "he": "רגועים",
           "niqqud": "רְגוּעִים",
-          "translit": "ргуи́м"
+          "translit": "ргуи́м",
+          "audio": "/audio/mood-2-calm-form-mp.mp3"
         },
         "fp": {
           "he": "רגועות",
           "niqqud": "רְגוּעוֹת",
-          "translit": "ргуо́т"
+          "translit": "ргуо́т",
+          "audio": "/audio/mood-2-calm-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-calm.svg"
+      "image": "/words/mood-2-calm.svg",
+      "audio": "/audio/mood-2-calm.mp3"
     },
     {
       "id": "mood-2-brave",
@@ -203,27 +233,32 @@
       "example": {
         "he": "חייל אמיץ",
         "translit": "хаяль амиц",
-        "ru": "Смелый солдат"
+        "ru": "Смелый солдат",
+        "audio": "/audio/mood-2-brave-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "אמיצה",
           "niqqud": "אַמִּיצָה",
-          "translit": "амица́"
+          "translit": "амица́",
+          "audio": "/audio/mood-2-brave-form-f.mp3"
         },
         "mp": {
           "he": "אמיצים",
           "niqqud": "אַמִּיצִים",
-          "translit": "амици́м"
+          "translit": "амици́м",
+          "audio": "/audio/mood-2-brave-form-mp.mp3"
         },
         "fp": {
           "he": "אמיצות",
           "niqqud": "אַמִּיצוֹת",
-          "translit": "амицо́т"
+          "translit": "амицо́т",
+          "audio": "/audio/mood-2-brave-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-brave.svg"
+      "image": "/words/mood-2-brave.svg",
+      "audio": "/audio/mood-2-brave.mp3"
     },
     {
       "id": "mood-2-shy",
@@ -234,27 +269,32 @@
       "example": {
         "he": "ילדה ביישנית",
         "translit": "ялда байшанит",
-        "ru": "Застенчивая девочка"
+        "ru": "Застенчивая девочка",
+        "audio": "/audio/mood-2-shy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "ביישנית",
           "niqqud": "בַּיְישָׁנִית",
-          "translit": "байшани́т"
+          "translit": "байшани́т",
+          "audio": "/audio/mood-2-shy-form-f.mp3"
         },
         "mp": {
           "he": "ביישנים",
           "niqqud": "בַּיְישָׁנִים",
-          "translit": "байшани́м"
+          "translit": "байшани́м",
+          "audio": "/audio/mood-2-shy-form-mp.mp3"
         },
         "fp": {
           "he": "ביישניות",
           "niqqud": "בַּיְישָׁנִיּוֹת",
-          "translit": "байшанийо́т"
+          "translit": "байшанийо́т",
+          "audio": "/audio/mood-2-shy-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-shy.svg"
+      "image": "/words/mood-2-shy.svg",
+      "audio": "/audio/mood-2-shy.mp3"
     },
     {
       "id": "mood-2-funny",
@@ -265,27 +305,32 @@
       "example": {
         "he": "סרט מצחיק",
         "translit": "серет мацхик",
-        "ru": "Смешной фильм"
+        "ru": "Смешной фильм",
+        "audio": "/audio/mood-2-funny-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מצחיקה",
           "niqqud": "מַצְחִיקָה",
-          "translit": "мацхика́"
+          "translit": "мацхика́",
+          "audio": "/audio/mood-2-funny-form-f.mp3"
         },
         "mp": {
           "he": "מצחיקים",
           "niqqud": "מַצְחִיקִים",
-          "translit": "мацхики́м"
+          "translit": "мацхики́м",
+          "audio": "/audio/mood-2-funny-form-mp.mp3"
         },
         "fp": {
           "he": "מצחיקות",
           "niqqud": "מַצְחִיקוֹת",
-          "translit": "мацхико́т"
+          "translit": "мацхико́т",
+          "audio": "/audio/mood-2-funny-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-funny.svg"
+      "image": "/words/mood-2-funny.svg",
+      "audio": "/audio/mood-2-funny.mp3"
     },
     {
       "id": "mood-2-happy",
@@ -296,27 +341,32 @@
       "example": {
         "he": "אני מאושר",
         "translit": "ани меушар",
-        "ru": "Я счастлив"
+        "ru": "Я счастлив",
+        "audio": "/audio/mood-2-happy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "מאושרת",
           "niqqud": "מְאוּשֶּׁרֶת",
-          "translit": "меуше́рет"
+          "translit": "меуше́рет",
+          "audio": "/audio/mood-2-happy-form-f.mp3"
         },
         "mp": {
           "he": "מאושרים",
           "niqqud": "מְאוּשָּׁרִים",
-          "translit": "меушари́м"
+          "translit": "меушари́м",
+          "audio": "/audio/mood-2-happy-form-mp.mp3"
         },
         "fp": {
           "he": "מאושרות",
           "niqqud": "מְאוּשָּׁרוֹת",
-          "translit": "меушаро́т"
+          "translit": "меушаро́т",
+          "audio": "/audio/mood-2-happy-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/mood-2-happy.svg"
+      "image": "/words/mood-2-happy.svg",
+      "audio": "/audio/mood-2-happy.mp3"
     }
   ]
 }

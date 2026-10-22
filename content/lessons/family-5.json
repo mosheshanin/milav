@@ -18,10 +18,12 @@
       "example": {
         "he": "זאת לידה קלה",
         "translit": "зот лейда кала",
-        "ru": "Это лёгкие роды"
+        "ru": "Это лёгкие роды",
+        "audio": "/audio/family-5-birth-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-birth.svg"
+      "image": "/words/family-5-birth.svg",
+      "audio": "/audio/family-5-birth.mp3"
     },
     {
       "id": "family-5-childhood",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זאת ילדות שמחה",
         "translit": "зот ялдут смеха",
-        "ru": "Это счастливое детство"
+        "ru": "Это счастливое детство",
+        "audio": "/audio/family-5-childhood-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-childhood.svg"
+      "image": "/words/family-5-childhood.svg",
+      "audio": "/audio/family-5-childhood.mp3"
     },
     {
       "id": "family-5-youth",
@@ -48,10 +52,12 @@
       "example": {
         "he": "אלה נעורים יפים",
         "translit": "эле неурим яфим",
-        "ru": "Это прекрасная юность"
+        "ru": "Это прекрасная юность",
+        "audio": "/audio/family-5-youth-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-youth.svg"
+      "image": "/words/family-5-youth.svg",
+      "audio": "/audio/family-5-youth.mp3"
     },
     {
       "id": "family-5-old-age",
@@ -63,10 +69,12 @@
       "example": {
         "he": "זאת זקנה טובה",
         "translit": "зот зикна това",
-        "ru": "Это хорошая старость"
+        "ru": "Это хорошая старость",
+        "audio": "/audio/family-5-old-age-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-old-age.svg"
+      "image": "/words/family-5-old-age.svg",
+      "audio": "/audio/family-5-old-age.mp3"
     },
     {
       "id": "family-5-cousin-m",
@@ -78,10 +86,12 @@
       "example": {
         "he": "זה בן דוד שלי",
         "translit": "зэ бен дод шели",
-        "ru": "Это мой двоюродный брат"
+        "ru": "Это мой двоюродный брат",
+        "audio": "/audio/family-5-cousin-m-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-cousin-m.svg"
+      "image": "/words/family-5-cousin-m.svg",
+      "audio": "/audio/family-5-cousin-m.mp3"
     },
     {
       "id": "family-5-cousin-f",
@@ -93,10 +103,12 @@
       "example": {
         "he": "זאת בת דודה שלי",
         "translit": "зот бат дода шели",
-        "ru": "Это моя двоюродная сестра"
+        "ru": "Это моя двоюродная сестра",
+        "audio": "/audio/family-5-cousin-f-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-cousin-f.svg"
+      "image": "/words/family-5-cousin-f.svg",
+      "audio": "/audio/family-5-cousin-f.mp3"
     },
     {
       "id": "family-5-nephew",
@@ -108,10 +120,12 @@
       "example": {
         "he": "זה אחיין שלי",
         "translit": "зэ ахьян шели",
-        "ru": "Это мой племянник"
+        "ru": "Это мой племянник",
+        "audio": "/audio/family-5-nephew-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-nephew.svg"
+      "image": "/words/family-5-nephew.svg",
+      "audio": "/audio/family-5-nephew.mp3"
     },
     {
       "id": "family-5-niece",
@@ -123,10 +137,12 @@
       "example": {
         "he": "זאת אחיינית שלי",
         "translit": "зот ахьянит шели",
-        "ru": "Это моя племянница"
+        "ru": "Это моя племянница",
+        "audio": "/audio/family-5-niece-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-niece.svg"
+      "image": "/words/family-5-niece.svg",
+      "audio": "/audio/family-5-niece.mp3"
     },
     {
       "id": "family-5-bachelor",
@@ -138,10 +154,12 @@
       "example": {
         "he": "זה רווק צעיר",
         "translit": "зэ равак цаир",
-        "ru": "Это молодой холостяк"
+        "ru": "Это молодой холостяк",
+        "audio": "/audio/family-5-bachelor-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-bachelor.svg"
+      "image": "/words/family-5-bachelor.svg",
+      "audio": "/audio/family-5-bachelor.mp3"
     },
     {
       "id": "family-5-widow",
@@ -153,10 +171,12 @@
       "example": {
         "he": "זאת אלמנה צעירה",
         "translit": "зот альмана цеира",
-        "ru": "Это молодая вдова"
+        "ru": "Это молодая вдова",
+        "audio": "/audio/family-5-widow-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/family-5-widow.svg"
+      "image": "/words/family-5-widow.svg",
+      "audio": "/audio/family-5-widow.mp3"
     }
   ]
 }

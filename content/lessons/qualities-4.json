@@ -17,27 +17,32 @@
       "example": {
         "he": "רחוב רחב",
         "translit": "рехов рахав",
-        "ru": "Широкая улица"
+        "ru": "Широкая улица",
+        "audio": "/audio/qualities-4-wide-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רחבה",
           "niqqud": "רְחָבָה",
-          "translit": "рхава́"
+          "translit": "рхава́",
+          "audio": "/audio/qualities-4-wide-form-f.mp3"
         },
         "mp": {
           "he": "רחבים",
           "niqqud": "רְחָבִים",
-          "translit": "рхави́м"
+          "translit": "рхави́м",
+          "audio": "/audio/qualities-4-wide-form-mp.mp3"
         },
         "fp": {
           "he": "רחבות",
           "niqqud": "רְחָבוֹת",
-          "translit": "рхаво́т"
+          "translit": "рхаво́т",
+          "audio": "/audio/qualities-4-wide-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-wide.svg"
+      "image": "/words/qualities-4-wide.svg",
+      "audio": "/audio/qualities-4-wide.mp3"
     },
     {
       "id": "qualities-4-narrow",
@@ -48,27 +53,32 @@
       "example": {
         "he": "חדר צר",
         "translit": "хедер цар",
-        "ru": "Узкая комната"
+        "ru": "Узкая комната",
+        "audio": "/audio/qualities-4-narrow-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "צרה",
           "niqqud": "צָרָה",
-          "translit": "цара́"
+          "translit": "цара́",
+          "audio": "/audio/qualities-4-narrow-form-f.mp3"
         },
         "mp": {
           "he": "צרים",
           "niqqud": "צָרִים",
-          "translit": "цари́м"
+          "translit": "цари́м",
+          "audio": "/audio/qualities-4-narrow-form-mp.mp3"
         },
         "fp": {
           "he": "צרות",
           "niqqud": "צָרוֹת",
-          "translit": "царо́т"
+          "translit": "царо́т",
+          "audio": "/audio/qualities-4-narrow-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-narrow.svg"
+      "image": "/words/qualities-4-narrow.svg",
+      "audio": "/audio/qualities-4-narrow.mp3"
     },
     {
       "id": "qualities-4-wet",
@@ -79,27 +89,32 @@
       "example": {
         "he": "מגבת רטובה",
         "translit": "магевет ртува",
-        "ru": "Мокрое полотенце"
+        "ru": "Мокрое полотенце",
+        "audio": "/audio/qualities-4-wet-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רטובה",
           "niqqud": "רְטוּבָה",
-          "translit": "ртува́"
+          "translit": "ртува́",
+          "audio": "/audio/qualities-4-wet-form-f.mp3"
         },
         "mp": {
           "he": "רטובים",
           "niqqud": "רְטוּבִים",
-          "translit": "ртуви́м"
+          "translit": "ртуви́м",
+          "audio": "/audio/qualities-4-wet-form-mp.mp3"
         },
         "fp": {
           "he": "רטובות",
           "niqqud": "רְטוּבוֹת",
-          "translit": "ртуво́т"
+          "translit": "ртуво́т",
+          "audio": "/audio/qualities-4-wet-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-wet.svg"
+      "image": "/words/qualities-4-wet.svg",
+      "audio": "/audio/qualities-4-wet.mp3"
     },
     {
       "id": "qualities-4-dry",
@@ -110,27 +125,32 @@
       "example": {
         "he": "לחם יבש",
         "translit": "лехем явеш",
-        "ru": "Сухой (чёрствый) хлеб"
+        "ru": "Сухой (чёрствый) хлеб",
+        "audio": "/audio/qualities-4-dry-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "יבשה",
           "niqqud": "יְבֵשָׁה",
-          "translit": "йевеша́"
+          "translit": "йевеша́",
+          "audio": "/audio/qualities-4-dry-form-f.mp3"
         },
         "mp": {
           "he": "יבשים",
           "niqqud": "יְבֵשִׁים",
-          "translit": "йевеши́м"
+          "translit": "йевеши́м",
+          "audio": "/audio/qualities-4-dry-form-mp.mp3"
         },
         "fp": {
           "he": "יבשות",
           "niqqud": "יְבֵשׁוֹת",
-          "translit": "йевешо́т"
+          "translit": "йевешо́т",
+          "audio": "/audio/qualities-4-dry-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-dry.svg"
+      "image": "/words/qualities-4-dry.svg",
+      "audio": "/audio/qualities-4-dry.mp3"
     },
     {
       "id": "qualities-4-noisy",
@@ -141,27 +161,32 @@
       "example": {
         "he": "רחוב רועש",
         "translit": "рехов роэш",
-        "ru": "Шумная улица"
+        "ru": "Шумная улица",
+        "audio": "/audio/qualities-4-noisy-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רועשת",
           "niqqud": "רוֹעֶשֶׁת",
-          "translit": "роэ́шет"
+          "translit": "роэ́шет",
+          "audio": "/audio/qualities-4-noisy-form-f.mp3"
         },
         "mp": {
           "he": "רועשים",
           "niqqud": "רוֹעֲשִׁים",
-          "translit": "роаши́м"
+          "translit": "роаши́м",
+          "audio": "/audio/qualities-4-noisy-form-mp.mp3"
         },
         "fp": {
           "he": "רועשות",
           "niqqud": "רוֹעֲשׁוֹת",
-          "translit": "роашо́т"
+          "translit": "роашо́т",
+          "audio": "/audio/qualities-4-noisy-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-noisy.svg"
+      "image": "/words/qualities-4-noisy.svg",
+      "audio": "/audio/qualities-4-noisy.mp3"
     },
     {
       "id": "qualities-4-correct",
@@ -172,27 +197,32 @@
       "example": {
         "he": "תשובה נכונה",
         "translit": "тшува нехона",
-        "ru": "Правильный ответ"
+        "ru": "Правильный ответ",
+        "audio": "/audio/qualities-4-correct-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "נכונה",
           "niqqud": "נְכוֹנָה",
-          "translit": "нехона́"
+          "translit": "нехона́",
+          "audio": "/audio/qualities-4-correct-form-f.mp3"
         },
         "mp": {
           "he": "נכונים",
           "niqqud": "נְכוֹנִים",
-          "translit": "нехони́м"
+          "translit": "нехони́м",
+          "audio": "/audio/qualities-4-correct-form-mp.mp3"
         },
         "fp": {
           "he": "נכונות",
           "niqqud": "נְכוֹנוֹת",
-          "translit": "нехоно́т"
+          "translit": "нехоно́т",
+          "audio": "/audio/qualities-4-correct-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-correct.svg"
+      "image": "/words/qualities-4-correct.svg",
+      "audio": "/audio/qualities-4-correct.mp3"
     },
     {
       "id": "qualities-4-other",
@@ -203,27 +233,32 @@
       "example": {
         "he": "יום אחר",
         "translit": "йом ахер",
-        "ru": "Другой день"
+        "ru": "Другой день",
+        "audio": "/audio/qualities-4-other-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "אחרת",
           "niqqud": "אַחֶרֶת",
-          "translit": "ахе́рет"
+          "translit": "ахе́рет",
+          "audio": "/audio/qualities-4-other-form-f.mp3"
         },
         "mp": {
           "he": "אחרים",
           "niqqud": "אֲחֵרִים",
-          "translit": "ахери́м"
+          "translit": "ахери́м",
+          "audio": "/audio/qualities-4-other-form-mp.mp3"
         },
         "fp": {
           "he": "אחרות",
           "niqqud": "אֲחֵרוֹת",
-          "translit": "ахеро́т"
+          "translit": "ахеро́т",
+          "audio": "/audio/qualities-4-other-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-other.svg"
+      "image": "/words/qualities-4-other.svg",
+      "audio": "/audio/qualities-4-other.mp3"
     },
     {
       "id": "qualities-4-round",
@@ -234,27 +269,32 @@
       "example": {
         "he": "שולחן עגול",
         "translit": "шульхан аголь",
-        "ru": "Круглый стол"
+        "ru": "Круглый стол",
+        "audio": "/audio/qualities-4-round-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "עגולה",
           "niqqud": "עֲגוּלָּה",
-          "translit": "агула́"
+          "translit": "агула́",
+          "audio": "/audio/qualities-4-round-form-f.mp3"
         },
         "mp": {
           "he": "עגולים",
           "niqqud": "עֲגוּלִּים",
-          "translit": "агули́м"
+          "translit": "агули́м",
+          "audio": "/audio/qualities-4-round-form-mp.mp3"
         },
         "fp": {
           "he": "עגולות",
           "niqqud": "עֲגוּלּוֹת",
-          "translit": "агуло́т"
+          "translit": "агуло́т",
+          "audio": "/audio/qualities-4-round-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-round.svg"
+      "image": "/words/qualities-4-round.svg",
+      "audio": "/audio/qualities-4-round.mp3"
     },
     {
       "id": "qualities-4-sharp",
@@ -265,27 +305,32 @@
       "example": {
         "he": "סכין חדה",
         "translit": "сакин хада",
-        "ru": "Острый нож"
+        "ru": "Острый нож",
+        "audio": "/audio/qualities-4-sharp-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "חדה",
           "niqqud": "חַדָּה",
-          "translit": "хада́"
+          "translit": "хада́",
+          "audio": "/audio/qualities-4-sharp-form-f.mp3"
         },
         "mp": {
           "he": "חדים",
           "niqqud": "חַדִּים",
-          "translit": "хади́м"
+          "translit": "хади́м",
+          "audio": "/audio/qualities-4-sharp-form-mp.mp3"
         },
         "fp": {
           "he": "חדות",
           "niqqud": "חַדּוֹת",
-          "translit": "хадо́т"
+          "translit": "хадо́т",
+          "audio": "/audio/qualities-4-sharp-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-sharp.svg"
+      "image": "/words/qualities-4-sharp.svg",
+      "audio": "/audio/qualities-4-sharp.mp3"
     },
     {
       "id": "qualities-4-soft",
@@ -296,27 +341,32 @@
       "example": {
         "he": "כרית רכה",
         "translit": "карит рака",
-        "ru": "Мягкая подушка"
+        "ru": "Мягкая подушка",
+        "audio": "/audio/qualities-4-soft-phrase.mp3"
       },
       "forms": {
         "f": {
           "he": "רכה",
           "niqqud": "רַכָּה",
-          "translit": "рака́"
+          "translit": "рака́",
+          "audio": "/audio/qualities-4-soft-form-f.mp3"
         },
         "mp": {
           "he": "רכים",
           "niqqud": "רַכִּים",
-          "translit": "раки́м"
+          "translit": "раки́м",
+          "audio": "/audio/qualities-4-soft-form-mp.mp3"
         },
         "fp": {
           "he": "רכות",
           "niqqud": "רַכּוֹת",
-          "translit": "рако́т"
+          "translit": "рако́т",
+          "audio": "/audio/qualities-4-soft-form-fp.mp3"
         }
       },
       "reviewed": false,
-      "image": "/words/qualities-4-soft.svg"
+      "image": "/words/qualities-4-soft.svg",
+      "audio": "/audio/qualities-4-soft.mp3"
     }
   ]
 }

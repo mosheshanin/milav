@@ -18,10 +18,12 @@
       "example": {
         "he": "זה תות מתוק",
         "translit": "зэ тут маток",
-        "ru": "Это сладкая клубника"
+        "ru": "Это сладкая клубника",
+        "audio": "/audio/food-5-strawberry-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-strawberry.svg"
+      "image": "/words/food-5-strawberry.svg",
+      "audio": "/audio/food-5-strawberry.mp3"
     },
     {
       "id": "food-5-pear",
@@ -33,10 +35,12 @@
       "example": {
         "he": "זה אגס צהוב",
         "translit": "зэ агас цахов",
-        "ru": "Это жёлтая груша"
+        "ru": "Это жёлтая груша",
+        "audio": "/audio/food-5-pear-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-pear.svg"
+      "image": "/words/food-5-pear.svg",
+      "audio": "/audio/food-5-pear.mp3"
     },
     {
       "id": "food-5-peach",
@@ -48,10 +52,12 @@
       "example": {
         "he": "זה אפרסק מתוק",
         "translit": "зэ афарсек маток",
-        "ru": "Это сладкий персик"
+        "ru": "Это сладкий персик",
+        "audio": "/audio/food-5-peach-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-peach.svg"
+      "image": "/words/food-5-peach.svg",
+      "audio": "/audio/food-5-peach.mp3"
     },
     {
       "id": "food-5-pomegranate",
@@ -63,9 +69,11 @@
       "example": {
         "he": "זה רימון אדום",
         "translit": "зэ римон адом",
-        "ru": "Это красный гранат"
+        "ru": "Это красный гранат",
+        "audio": "/audio/food-5-pomegranate-phrase.mp3"
       },
-      "reviewed": false
+      "reviewed": false,
+      "audio": "/audio/food-5-pomegranate.mp3"
     },
     {
       "id": "food-5-avocado",
@@ -77,10 +85,12 @@
       "example": {
         "he": "זה אבוקדו טרי",
         "translit": "зэ авокадо три",
-        "ru": "Это свежее авокадо"
+        "ru": "Это свежее авокадо",
+        "audio": "/audio/food-5-avocado-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-avocado.svg"
+      "image": "/words/food-5-avocado.svg",
+      "audio": "/audio/food-5-avocado.mp3"
     },
     {
       "id": "food-5-olive",
@@ -92,10 +102,12 @@
       "example": {
         "he": "זה זית שחור",
         "translit": "зэ заит шахор",
-        "ru": "Это чёрная маслина"
+        "ru": "Это чёрная маслина",
+        "audio": "/audio/food-5-olive-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-olive.svg"
+      "image": "/words/food-5-olive.svg",
+      "audio": "/audio/food-5-olive.mp3"
     },
     {
       "id": "food-5-potato",
@@ -107,10 +119,12 @@
       "example": {
         "he": "זה תפוח אדמה גדול",
         "translit": "зэ тапуах адама гадоль",
-        "ru": "Это большая картофелина"
+        "ru": "Это большая картофелина",
+        "audio": "/audio/food-5-potato-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-potato.svg"
+      "image": "/words/food-5-potato.svg",
+      "audio": "/audio/food-5-potato.mp3"
     },
     {
       "id": "food-5-eggplant",
@@ -122,10 +136,12 @@
       "example": {
         "he": "זה חציל גדול",
         "translit": "зэ хациль гадоль",
-        "ru": "Это большой баклажан"
+        "ru": "Это большой баклажан",
+        "audio": "/audio/food-5-eggplant-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-eggplant.svg"
+      "image": "/words/food-5-eggplant.svg",
+      "audio": "/audio/food-5-eggplant.mp3"
     },
     {
       "id": "food-5-garlic",
@@ -137,10 +153,12 @@
       "example": {
         "he": "זה שום טרי",
         "translit": "зэ шум три",
-        "ru": "Это свежий чеснок"
+        "ru": "Это свежий чеснок",
+        "audio": "/audio/food-5-garlic-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-garlic.svg"
+      "image": "/words/food-5-garlic.svg",
+      "audio": "/audio/food-5-garlic.mp3"
     },
     {
       "id": "food-5-spice",
@@ -152,10 +170,12 @@
       "example": {
         "he": "זה תבלין חריף",
         "translit": "зэ тавлин хариф",
-        "ru": "Это острая приправа"
+        "ru": "Это острая приправа",
+        "audio": "/audio/food-5-spice-phrase.mp3"
       },
       "reviewed": false,
-      "image": "/words/food-5-spice.svg"
+      "image": "/words/food-5-spice.svg",
+      "audio": "/audio/food-5-spice.mp3"
     }
   ]
 }
