@@ -40,6 +40,7 @@ import {
 import { parseJson, readBodyLimited } from "./body";
 import type { AppEnv } from "./env";
 import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, playRoutes, repeatOn } from "./play";
+import { numbersRoutes } from "./numbers";
 import { repeatRoutes, repeatSummaryFor } from "./repeat";
 import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
@@ -533,6 +534,7 @@ app.route("/", playRoutes);
 
 // Повторение слов: подход, ответы, «Мои слова» (repeat.ts).
 app.route("/", repeatRoutes);
+app.route("/", numbersRoutes);
 
 // Напоминания от бота: настройки ученика (reminders.ts). Таймер отправки: scheduler.ts.
 app.route("/", reminderRoutes);

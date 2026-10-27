@@ -50,7 +50,7 @@ export interface PlayInfo {
   recap: { weekIdx: number; words: number; days: number } | null;
   settings: PlaySettings;
   /** Включено ли на сервере то, что выпускается отдельно (таблица лидеров ждёт политику конфиденциальности). */
-  features: { leaderboard: boolean; repeat: boolean };
+  features: { leaderboard: boolean; repeat: boolean; numbersTrainer: boolean };
 }
 
 /** Что отдаёт сервер после события (слово пройдено или викторина закончена). */

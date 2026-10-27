@@ -48,6 +48,11 @@ export const APP_CONFIG = {
     title: "Повторение слов",
     hint: "Карточка «Повторить» на главной, подход повторения и «Мои слова». При выключении коробки слов сохраняются.",
   },
+  numbersTrainer: {
+    kind: "feature",
+    title: "Тренажёр «Числа на слух»",
+    hint: "Строка «Числа на слух» в разделе «Числа и время» и проверка речи в тренажёре. «Команда»: только администраторам и проверяющим (для проверки на телефоне). Очки, цель дня и ритм тренажёр не меняет.",
+  },
   defaultDailyGoal: {
     kind: "choice",
     title: "Цель дня для новых учеников",
@@ -63,6 +68,7 @@ export interface AppConfig {
   leaderboard: FeatureMode;
   reminders: FeatureMode;
   repeat: FeatureMode;
+  numbersTrainer: FeatureMode;
   defaultDailyGoal: number;
 }
 

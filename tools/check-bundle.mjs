@@ -24,6 +24,11 @@ function textFiles(dir, prefix = "") {
   return out;
 }
 
+// Куски озвучки чисел (packages/shared/src/numberPieces.json) лежат в приложении открыто: тренажёр «Числа на слух» собирает числа из них.
+// Они совпадают со словами уроков чисел, поэтому такие написания в примету не берём. Id слов и остальные слова проверяются как раньше.
+const pieceForms = JSON.parse(readFileSync(new URL("../packages/shared/src/numberPieces.json", import.meta.url), "utf8")).map((p) => p.niqqud);
+const isPieceForm = (niqqud) => pieceForms.some((form) => form.includes(niqqud)); // и слитные с «и» куски (וְחֵצִי)
+
 // Приметы слов: id слова (например animals-1-tsipor) и написание с огласовками. И то и другое встречается только в уроках.
 // Алфавит бесплатный, а формы букв нужны распознаванию рукописного ввода, поэтому его буквы не проверяем.
 const markers = [];
@@ -33,7 +38,7 @@ for (const file of readdirSync(lessonsDir).filter((f) => f.endsWith(".json"))) {
   for (const word of lesson.words ?? []) {
     markers.push({ lesson: lesson.id, what: `id ${word.id}`, needle: `"${word.id}"` });
     // Короткие написания (עַל, אֵם) встречаются в служебных текстах приложения (נִפְעַל), поэтому их не берём: утечку урока всё равно выдаёт id слова.
-    if (word.niqqud && word.niqqud.length >= 5) markers.push({ lesson: lesson.id, what: `слово ${word.niqqud}`, needle: word.niqqud });
+    if (word.niqqud && word.niqqud.length >= 5 && !isPieceForm(word.niqqud)) markers.push({ lesson: lesson.id, what: `слово ${word.niqqud}`, needle: word.niqqud });
   }
 }
 

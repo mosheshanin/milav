@@ -43,6 +43,7 @@ export function Home({
   onSettings,
   onRepeat,
   onWords,
+  onNumbers,
 }: {
   onOpen: (lessonId: string) => void;
   onOpenQuiz: (lessonId: string) => void;
@@ -51,6 +52,7 @@ export function Home({
   onSettings: () => void;
   onRepeat: () => void;
   onWords: () => void;
+  onNumbers: () => void;
 }) {
   const { me, refreshIfStale } = useApp();
   const [recapHidden, setRecapHidden] = useState(false);
@@ -264,6 +266,7 @@ export function Home({
                 </h2>
                 {sectionOpen && (
                   <div className="flex flex-col gap-2 px-3 pb-3">
+                    {section === "numbers" && me.play.features.numbersTrainer && <NumbersTrainerRow onOpen={onNumbers} />}
                     {inSection.length === 0 && <p className="text-ink-soft">Скоро здесь появятся уроки.</p>}
                     {topicsOf(inSection).map(({ topicId, topic, items }) => {
                       const topicOpen = open.has(topicKey(topicId));
@@ -404,6 +407,27 @@ function FoldButton({
         className={`size-icon shrink-0 text-ink-soft transition-transform ${open ? "rotate-180" : ""}`}
         aria-hidden
       />
+    </button>
+  );
+}
+
+/** Вход в тренажёр «Числа на слух» (не урок: без очков и статуса). Показывается, когда он включён в панели («team» или «all»). */
+function NumbersTrainerRow({ onOpen }: { onOpen: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      data-testid="numbers-trainer"
+      className="flex w-full items-center gap-2.5 rounded-control bg-page p-2.5 text-left active:bg-line"
+    >
+      <span className="flex size-10 shrink-0 items-center justify-center rounded-control bg-surface text-xl leading-none" aria-hidden>
+        🎧
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="font-semibold">Числа на слух</div>
+        <div className="text-sm text-ink-soft">Тренажёр: услышать число, цену или время и записать цифрами</div>
+      </div>
+      <ChevronRight className="size-icon shrink-0 text-ink-soft" aria-hidden />
     </button>
   );
 }

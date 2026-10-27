@@ -15,6 +15,8 @@ export type Screen =
   | { name: "leaderboard" }
   /** Подход «Повторить» (повторение слов): после перезагрузки начинается заново, поэтому возвращает на главную. */
   | { name: "repeat" }
+  /** Тренажёр «Числа на слух»: подход после перезагрузки начинается заново, поэтому возвращает на главную. */
+  | { name: "numbers" }
   /** «Мои слова»: выученные слова и когда их повторять. */
   | { name: "words" }
   /** Настройки; `from` это экран, куда ведёт «назад» (главная или достижения). */
@@ -37,6 +39,7 @@ export const ACHIEVEMENTS: Screen = { name: "achievements" };
 export const LEADERBOARD: Screen = { name: "leaderboard" };
 export const REPEAT: Screen = { name: "repeat" };
 export const WORDS: Screen = { name: "words" };
+export const NUMBERS: Screen = { name: "numbers" };
 
 /** Ключ в sessionStorage. Его же читает отчёт об ошибке (lib/telemetry.ts), чтобы знать экран. */
 export const SCREEN_KEY = "milav:screen";
@@ -99,7 +102,7 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   if (name === "leaderboard") return LEADERBOARD;
   if (name === "words") return WORDS;
   // Подход повторения после перезагрузки начнётся заново: возвращаем на главную, там карточка «Повторить».
-  if (name === "repeat") return HOME;
+  if (name === "repeat" || name === "numbers") return HOME;
   if (name === "settings") {
     const from = (raw as { from?: unknown }).from;
     return { name: "settings", from: from === "achievements" ? "achievements" : "home" };

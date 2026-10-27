@@ -2,7 +2,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { VERB_FORMS_TOTAL, VERB_TENSES, verbFormAudioPath, type VerbData } from "@milav/shared";
 // @ts-expect-error модуль на чистом JS (tools/*.mjs), деклараций типов нет
-import { ALL_KINDS, VERB_TENSE_ORDER, buildJobs } from "../tools/audio-jobs.mjs";
+import { ALL_KINDS, NUMBER_PIECES, VERB_TENSE_ORDER, buildJobs } from "../tools/audio-jobs.mjs";
 import { KATAV, katavWord } from "./verbFixture";
 
 interface Job {
@@ -19,7 +19,9 @@ interface Job {
 const katav = () => ({ ...katavWord(), id: "paal-1-write", verb: structuredClone(KATAV) as VerbData });
 
 const lessonWith = (word: unknown) => [{ file: "paal-1.json", data: { words: [word] } }];
-const jobsOf = (word: unknown, options?: { kinds?: string[]; only?: string[] }): Job[] => buildJobs(lessonWith(word), options);
+/** Виды озвучки уроков: куски чисел (num) не относятся к уроку, их проверяет отдельный блок ниже. */
+const LESSON_KINDS = ALL_KINDS.filter((k: string) => k !== "num");
+const jobsOf = (word: unknown, options?: { kinds?: string[]; only?: string[] }): Job[] => buildJobs(lessonWith(word), { kinds: LESSON_KINDS, ...options });
 
 describe("озвучка: формы глагола", () => {
   it("времена в скрипте те же и в том же порядке, что в приложении", () => {
@@ -101,7 +103,7 @@ describe("озвучка: прежние виды не изменились", ()
 
   it("буква: название и слово-пример без своего файла", () => {
     const letters = [{ file: "alphabet-1.json", data: { letters: [{ id: "alef", name: { he: "אלף", niqqud: "אָלֶף" }, example: { he: "אריה", niqqud: "אַרְיֵה" } }] } }];
-    const jobs: Job[] = buildJobs(letters);
+    const jobs: Job[] = buildJobs(letters, { kinds: LESSON_KINDS });
     expect(jobs.map((j) => [j.kind, j.name])).toEqual([
       ["letter", "alef"],
       ["example", "alef-example"],
@@ -114,7 +116,31 @@ describe("озвучка: прежние виды не изменились", ()
   });
 
   it("виды озвучки перечислены целиком", () => {
-    expect(ALL_KINDS).toEqual(["word", "form", "phrase", "letter", "example"]);
+    expect(ALL_KINDS).toEqual(["word", "form", "phrase", "letter", "example", "num"]);
+  });
+});
+
+describe("озвучка: куски для тренажёра чисел", () => {
+  const nums = (options?: { kinds?: string[]; only?: string[] }): Job[] => buildJobs([], options).filter((j: Job) => j.kind === "num");
+
+  it("по заданию на каждый кусок, файл в /audio/num/<id>.mp3, текст с огласовками", () => {
+    const jobs = nums();
+    expect(jobs).toHaveLength(NUMBER_PIECES.length);
+    expect(jobs[0]!.name).toBe(`num/${NUMBER_PIECES[0]!.id}`);
+    expect(jobs[0]!.has).toBe(`/audio/num/${NUMBER_PIECES[0]!.id}.mp3`);
+    expect(jobs[0]!.niqqud).toBe(NUMBER_PIECES[0]!.niqqud);
+    expect(jobs.every((j) => j.voice === "main")).toBe(true);
+  });
+
+  it("--kinds без num и --only их не трогают", () => {
+    expect(nums({ kinds: ["word"] })).toEqual([]);
+    expect(nums({ only: ["animals-1-dog"] })).toEqual([]);
+  });
+
+  it("имена уникальны и не пересекаются с файлами уроков", () => {
+    const names = nums().map((j) => j.name);
+    expect(new Set(names).size).toBe(names.length);
+    expect(names.every((n) => n.startsWith("num/"))).toBe(true);
   });
 });
 

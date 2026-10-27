@@ -43,10 +43,21 @@ export async function repeatOn(env: Bindings, userId: number): Promise<boolean> 
   return featureOn(repeat, await staffOf(env, userId));
 }
 
+/** Включён ли тренажёр «Числа на слух» для этого человека (настройка в панели и его роль). */
+export async function numbersTrainerOn(env: Bindings, userId: number): Promise<boolean> {
+  const { numbersTrainer } = await loadConfig(env);
+  if (numbersTrainer !== "team") return numbersTrainer === "all";
+  return featureOn(numbersTrainer, await staffOf(env, userId));
+}
+
 /** Какие функции включены для человека (приложение прячет кнопки выключенных). */
 export async function featuresFor(env: Bindings, userId: number): Promise<PlayInfo["features"]> {
-  const [leaderboard, repeat] = await Promise.all([leaderboardOn(env, userId), repeatOn(env, userId)]);
-  return { leaderboard, repeat };
+  const [leaderboard, repeat, numbersTrainer] = await Promise.all([
+    leaderboardOn(env, userId),
+    repeatOn(env, userId),
+    numbersTrainerOn(env, userId),
+  ]);
+  return { leaderboard, repeat, numbersTrainer };
 }
 
 /** Сколько бейджей человек ещё не видел (поздравление не показано или ответ потерялся). */

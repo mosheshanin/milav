@@ -13,6 +13,8 @@ export * from "./reminders";
 export * from "./review";
 export * from "./repeat";
 export * from "./phrase";
+export * from "./numbers";
+export * from "./numbersTrainer";
 export {
   PRACTICE_OPTIONS,
   PRACTICE_QUESTIONS,

@@ -22,6 +22,7 @@ import type {
   LessonProgressResponse,
   MeResponse,
   MyWordsResponse,
+  NumberTarget,
   PlayEvent,
   RepeatAnswerRequest,
   RepeatAnswerResponse,
@@ -37,6 +38,7 @@ import type {
   TemplatesResponse,
   WordProgress,
 } from "@milav/shared";
+import { numberTargetQuery } from "@milav/shared";
 import { deviceTimeZone } from "./lib/timezone";
 import { authHeader } from "./telegram";
 
@@ -132,6 +134,13 @@ export const api = {
   /** Вопрос «произнеси»: запись голоса. */
   quizSpeech: (sessionId: string, index: number, audio: Blob) =>
     request<QuizAnswerResponse>(`/api/quiz/speech?sessionId=${encodeURIComponent(sessionId)}&index=${index}`, {
+      method: "POST",
+      headers: { "Content-Type": audio.type || "audio/webm" },
+      body: audio,
+    }),
+  /** Тренажёр «Числа на слух», задание «сказать вслух»: запись голоса и задание (число, цена, время…) в адресе. */
+  numbersSpeech: (target: NumberTarget, audio: Blob) =>
+    request<{ match: boolean; heard: string }>(`/api/numbers/speech?${numberTargetQuery(target)}`, {
       method: "POST",
       headers: { "Content-Type": audio.type || "audio/webm" },
       body: audio,

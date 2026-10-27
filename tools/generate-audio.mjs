@@ -10,8 +10,9 @@
 //        боевая озвучка: apps/web/public/audio/<id>.mp3 и поле "audio" в JSON урока. Мужские фразы от первого лица
 //        (speaker m, файлы <id>-phrase-m.mp3) озвучивает --male-voice, всё остальное --voice (docs/AUDIO.md).
 //
-// Другие параметры: --only id1,id2   --kinds word,form,phrase,letter,example   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
+// Другие параметры: --only id1,id2   --kinds word,form,phrase,letter,example,num   --force (перезаписать готовые)   --rate 0.9   --dry-run (только показать, что будет сделано)
 import { mkdirSync, existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { ALL_KINDS, buildJobs } from "./audio-jobs.mjs";
 
 const args = process.argv.slice(2);
@@ -152,7 +153,10 @@ if (flag("review")) {
       skipped++;
     } else {
       console.log(`${dry ? "[dry] " : ""}${target}  «${text}»  ${voiceOf(job)}`);
-      if (!dry) writeFileSync(target, await synthesize(text, voiceOf(job)));
+      if (!dry) {
+        mkdirSync(dirname(target), { recursive: true }); // у кусков чисел каталог num/
+        writeFileSync(target, await synthesize(text, voiceOf(job)));
+      }
       made++;
     }
     // Поле audio записывается, когда файл есть (создан сейчас или раньше).

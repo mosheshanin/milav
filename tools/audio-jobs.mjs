@@ -11,9 +11,17 @@
 //           /audio/<id>-phrase-m.mp3 мужским голосом, её женский вариант (example.female) /audio/<id>-phrase-f.mp3 женским,
 //           остальные фразы /audio/<id>-phrase.mp3 женским (основной голос);
 //   letter  название буквы: /audio/<id буквы>.mp3, поле audio буквы (огласовки из name.niqqud);
-//   example слово-пример буквы, только если у него ещё нет файла: /audio/<id буквы>-example.mp3, поле example.audio.
+//   example слово-пример буквы, только если у него ещё нет файла: /audio/<id буквы>-example.mp3, поле example.audio;
+//   num     кусок для тренажёра «Числа на слух» (packages/shared/src/numberPieces.json): /audio/num/<id куска>.mp3, поля audio нигде нет:
+//           приложение складывает числа из кусков по имени файла (docs/AUDIO.md, «Куски для чисел»). Не относится к урокам, поэтому
+//           `file` пустой, а `only` на них не действует.
 
-export const ALL_KINDS = ["word", "form", "phrase", "letter", "example"];
+import { readFileSync } from "node:fs";
+
+export const ALL_KINDS = ["word", "form", "phrase", "letter", "example", "num"];
+
+/** Куски озвучки чисел: общий список с приложением и тестами. */
+export const NUMBER_PIECES = JSON.parse(readFileSync(new URL("../packages/shared/src/numberPieces.json", import.meta.url), "utf8"));
 
 /** Голоса: `main` основной (женский, he-IL-Wavenet-A), `male` мужской для мужских фраз от первого лица. */
 export const VOICE_ROLES = ["main", "male"];
@@ -65,6 +73,13 @@ export function buildJobs(lessons, { kinds = ALL_KINDS, only } = {}) {
         const name = `${letter.id}-example`;
         add({ file, kind: "example", id: name, name, plain: letter.example.he, niqqud: letter.example.niqqud, set: (path) => (letter.example.audio = path), has: undefined });
       }
+    }
+  }
+  // Куски чисел не принадлежат урокам и не зависят от `only`: список один и тот же в любом запуске (готовые файлы не перезаписываются).
+  if (!only?.length) {
+    for (const piece of NUMBER_PIECES) {
+      const name = `num/${piece.id}`;
+      add({ file: null, kind: "num", id: name, name, plain: piece.he, niqqud: piece.niqqud, set: () => {}, has: `/audio/${name}.mp3` });
     }
   }
   return list;

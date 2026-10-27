@@ -139,6 +139,7 @@ describe("настройки приложения", () => {
       { key: "leaderboard", value: "off", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "reminders", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "repeat", value: "all", isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "numbersTrainer", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "defaultDailyGoal", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
     ]);
     const on = env({ LEADERBOARD_ENABLED: "1" });

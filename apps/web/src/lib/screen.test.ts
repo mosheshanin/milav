@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, RECORD, REPEAT, REVIEW, WORDS, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
+import { ACHIEVEMENTS, ADMIN, HOME, LEADERBOARD, NUMBERS, RECORD, REPEAT, REVIEW, WORDS, hasSavedScreen, restoreScreen, saveScreen, type ScreenStorage } from "./screen";
 
 function memoryStorage(initial: Record<string, string> = {}): ScreenStorage & { data: Record<string, string> } {
   const data = { ...initial };
@@ -40,6 +40,12 @@ describe("сохранение экрана", () => {
     expect(restoreScreen(storage, exists)).toEqual(HOME);
     saveScreen(storage, WORDS);
     expect(restoreScreen(storage, exists)).toEqual(WORDS);
+  });
+
+  it("тренажёр чисел после перезагрузки ведёт на главную: подход начнётся заново", () => {
+    const storage = memoryStorage();
+    saveScreen(storage, NUMBERS);
+    expect(restoreScreen(storage, exists)).toEqual(HOME);
   });
 
   it("достижения и таблица восстанавливаются как есть", () => {

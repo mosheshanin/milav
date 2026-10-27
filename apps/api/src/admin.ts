@@ -133,6 +133,8 @@ export function configDefaults(env: Bindings): AppConfig {
     reminders: isFeatureMode(env.REMINDERS_DEFAULT) ? env.REMINDERS_DEFAULT : "team",
     // Повторение слов (задача 10): сразу для всех, при сбое его можно выключить в панели без выкладки.
     repeat: "all",
+    // Тренажёр «Числа на слух» (27.10): сначала команда проверяет на своих телефонах, потом владелец включает «Все» в панели.
+    numbersTrainer: "team",
     defaultDailyGoal: DEFAULT_DAILY_GOAL,
   };
 }

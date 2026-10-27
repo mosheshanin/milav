@@ -194,5 +194,7 @@ export const RATE_LIMITS = {
   review: { perMinute: 60, perDay: 3000 },
   // Повторение слов: ответы (каждое слово не чаще раза в день) и начало подхода.
   repeat: { perMinute: 60, perDay: 1500 },
+  // Тренажёр «Числа на слух»: проверка речи сверх общего лимита `speech` (квота Whisper, вопрос 91); потолок в день NUMBERS_SPEECH_PER_DAY.
+  numbers: { perMinute: 10, perDay: 30 },
 } as const;
 export type RateAction = keyof typeof RATE_LIMITS;
