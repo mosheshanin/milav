@@ -1,8 +1,9 @@
 // Сквозная проверка тренажёра «Числа на слух» (docs/SPEC.md, «Тренажёр «Числа на слух»») в браузере на размере телефона:
 // выключатель в панели (team, all, off), строка входа в разделе «Числа и время», все уровни, ошибка и разбор, повтор ошибок
 // с верными ответами, задание «сказать вслух» (без Workers AI: «проверка недоступна» и «Пропустить»), 360 px, тёмная тема.
-// Файлов озвучки чисел в локальной среде нет (их делает workflow «Озвучка слов»), поэтому здесь проверяется запасной путь:
-// число читает голос устройства (подмена speechSynthesis); сам проигрыш кусками проверяется на телефоне (docs/QA-PHONE.md).
+// «Послушать» засчитывается и голосом устройства (подмена speechSynthesis, запасной путь без файлов), и кусками озвучки
+// (apps/web/public/audio/num, опубликованы 27.10, перехват AudioBufferSourceNode.start); как звучит склейка, проверяется
+// на телефоне (docs/QA-PHONE.md).
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
 // Запуск: node tools/e2e-numbers.mjs [каталог для скриншотов]
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
@@ -57,6 +58,15 @@ async function openPage(id, { colorScheme = "light", speech = false } = {}) {
       window.__spoken.push(u.text);
       setTimeout(() => u.onend?.(new Event("end")), 20);
     };
+    // С 27.10 куски озвучки опубликованы, и число играется ими (Web Audio); голос устройства остался запасным путём.
+    // Запуск каждого куска тоже считаем «прочитанным».
+    if (window.AudioBufferSourceNode) {
+      const start = AudioBufferSourceNode.prototype.start;
+      AudioBufferSourceNode.prototype.start = function (...args) {
+        window.__spoken.push("[кусок озвучки]");
+        return start.apply(this, args);
+      };
+    }
     try {
       localStorage.setItem("milav:numbers-speech", speechOn ? "1" : "0");
     } catch {
@@ -147,11 +157,13 @@ async function playRound(levelId, { wrongOnly = true } = {}) {
     if (i === 0) {
       await shot(page, `03-${levelId}-task`);
       // Кнопка «Послушать» читает число (запасной путь: голос устройства).
+      const before = await page.evaluate(() => window.__spoken.length);
       await page.click('[data-testid="numbers-listen"]');
-      await page.waitForFunction(() => window.__spoken.length > 0);
+      await page.waitForFunction((n) => window.__spoken.length > n, before);
       check((await page.evaluate(() => window.__spoken.at(-1))).length > 0, `${levelId}: «Послушать» читает число`);
+      const beforeSlow = await page.evaluate(() => window.__spoken.length);
       await page.click('[data-testid="numbers-listen-slow"]');
-      await page.waitForFunction(() => window.__spoken.length > 1);
+      await page.waitForFunction((n) => window.__spoken.length > n, beforeSlow);
     }
     check((await page.locator('[data-testid="num-submit"]').isDisabled()), `${levelId} ${i + 1}: пока ничего не набрано «Проверить» недоступна`);
     check((await page.locator('[data-testid="num-key-colon"]').count()) === (scene === "time" ? 1 : 0), `${levelId} ${i + 1}: двоеточие только у времени`);
