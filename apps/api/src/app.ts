@@ -80,6 +80,7 @@ import {
   replyTo,
   type TelegramUpdate,
 } from "./bot";
+import { appOrigin } from "./appUrl";
 
 /** Фоновая задача: дожидается её Workers (waitUntil). В тестах контекста выполнения нет, тогда просто не ждём. */
 function inBackground(c: { executionCtx: { waitUntil(promise: Promise<unknown>): void } }, task: Promise<unknown>): void {
@@ -197,7 +198,7 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
     logEvent("bot_message", { uid: message.from.id, cmd: "reminders" });
     return c.json(await reminderCommandReply(c.env, message.chat.id, message.from.id));
   }
-  const reply = replyTo(update, `${new URL(c.req.url).origin}/`);
+  const reply = replyTo(update, `${appOrigin(c.env, c.req.url)}/`);
   if (!reply) return c.body(null, 200);
   logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
   return c.json(reply);
@@ -219,7 +220,8 @@ app.get("/api/me", requireUser, async (c) => {
   logEvent("app_open", { uid: user.id, tz: timezone, points: totalsOf(stats).points });
   // Владелец открыл приложение: в фоне проверяем вебхук бота и при необходимости регистрируем его (bot.ts).
   if (ownerIds(c.env).has(user.id)) {
-    const origin = new URL(c.req.url).origin;
+    // Адрес из APP_URL (свой домен), даже если владелец открыл приложение по запасному адресу workers.dev.
+    const origin = appOrigin(c.env, c.req.url);
     const setup = ensureBotSetupOnce(c.env, origin);
     if (setup) inBackground(c, setup);
     // И таймер напоминаний (scheduler.ts): заводится, если ещё не заведён.

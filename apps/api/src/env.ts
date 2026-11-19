@@ -9,6 +9,11 @@ export type Bindings = {
   AI?: unknown;
   /** Токен бота. Задаётся секретом в Cloudflare, в репозитории его нет. */
   BOT_TOKEN?: string;
+  /**
+   * Основной адрес приложения (https://milav.app, wrangler.jsonc). Из него строятся кнопки бота и напоминаний и адрес
+   * вебхука (appUrl.ts). Без переменной берётся адрес текущего запроса.
+   */
+  APP_URL?: string;
   /** "true" только для локальной разработки: разрешает вход без Telegram. */
   ALLOW_DEV_AUTH?: string;
   /**

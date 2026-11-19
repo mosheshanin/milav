@@ -41,6 +41,7 @@ import {
 import { adminRoutes, loadConfig, staffOf } from "./admin";
 import { requireUser } from "./auth";
 import { parseJson, readBodyLimited } from "./body";
+import { appOrigin } from "./appUrl";
 import type { AppEnv, Bindings } from "./env";
 import { statsFor } from "./play";
 import { countDueForReminders } from "./repeat";
@@ -509,7 +510,7 @@ reminderRoutes.put("/api/reminders", requireUser, rateLimit("settings"), async (
   const stats = await statsFor(c.env, user, now);
   let row = await loadReminderRow(c.env.DB, user.id);
   const minute = req.minute ?? row?.minute ?? DEFAULT_REMINDER_MINUTE;
-  const origin = new URL(c.req.url).origin;
+  const origin = appOrigin(c.env, c.req.url);
 
   if (req.dismissOffer) {
     await upsert(c.env.DB, user.id, { asked_count: (row?.asked_count ?? 0) + 1, asked_at: now }, now).run();
@@ -641,7 +642,7 @@ adminRoutes.post("/api/admin/reminders/:id/send", async (c) => {
   const vars: ReminderVars = {};
   for (const name of allowed) (vars as Record<string, string | undefined>)[name] = (own as Record<string, string | undefined>)[name] ?? (SAMPLE_VARS as Record<string, string | undefined>)[name];
   const text = renderReminder(row.text, vars) ?? row.text;
-  const origin = new URL(c.req.url).origin;
+  const origin = appOrigin(c.env, c.req.url);
   const sent = await sendToUser(c.env, user.id, text, reminderKeyboard(`${origin}/`, row.kind === "daily"));
   if (sent === "blocked") return c.json({ error: "bot_blocked", text }, 409);
   if (sent === "retry") return c.json({ error: "telegram_error", text }, 502);

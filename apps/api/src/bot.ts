@@ -9,7 +9,8 @@
 //   ADMIN_IDS или TEMPLATE_RECORDER_IDS), не чаще раза на экземпляр Worker. Расписание (cron) не используем: на бесплатном тарифе их
 //   5 на весь аккаунт Cloudflare, а там есть и другие проекты.
 // - Чужой вебхук (на другой адрес) не перезаписывается: это мог бы быть другой сервер владельца. В журнале будет
-//   запись `bot_webhook_foreign`, и тогда вебхук надо снять вручную (docs/DEPLOY.md, «Бот»).
+//   запись `bot_webhook_foreign`, и тогда вебхук надо снять вручную (docs/DEPLOY.md, «Бот»). Свой вебхук на другом
+//   адресе этого Worker (метка токена совпадает, например старый workers.dev) переносится на APP_URL сам.
 
 import { logError, logEvent, logWarn } from "./telemetry";
 
@@ -201,7 +202,7 @@ export async function ensureBotSetup(
       if (info.last_error_message) logWarn("bot_webhook_error", { error: info.last_error_message.slice(0, 200) });
       return "ok";
     }
-    if (current && !current.startsWith(`${origin}${BOT_WEBHOOK_PATH}`)) {
+    if (current && !(await isOwnWebhook(current, origin, token))) {
       // Адрес вебхука это хост и путь, секрета в нём нет; печатаем только хост.
       logWarn("bot_webhook_foreign", { host: hostOf(current) });
       return "foreign";
@@ -224,6 +225,22 @@ export async function ensureBotSetup(
   } catch (err) {
     logError("bot_setup_error", { message: err instanceof Error ? err.message.slice(0, 200) : String(err).slice(0, 200) });
     return "error";
+  }
+}
+
+/**
+ * Наш ли это вебхук. Наш: тот же адрес и путь (возможно, со старой меткой токена), либо наш путь с меткой текущего
+ * токена на другом адресе того же Worker (переезд с milav.<поддомен>.workers.dev на свой домен, APP_URL). Метку
+ * чужой сервер получить не может: она выводится из токена бота.
+ */
+async function isOwnWebhook(current: string, origin: string, token: string): Promise<boolean> {
+  if (current.startsWith(`${origin}${BOT_WEBHOOK_PATH}`)) return true;
+  try {
+    const url = new URL(current);
+    const own = new URL(await webhookUrl(url.origin, token));
+    return url.protocol === "https:" && url.pathname === BOT_WEBHOOK_PATH && url.search === own.search;
+  } catch {
+    return false;
   }
 }
 

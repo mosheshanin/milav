@@ -106,6 +106,20 @@ describe("вебхук", () => {
     expect(body.reply_markup.inline_keyboard[0][0].web_app.url).toBe("http://localhost/");
   });
 
+  it("с APP_URL кнопка ведёт на свой домен, даже если вебхук пришёл на другой адрес", async () => {
+    const res = await api(
+      BOT_WEBHOOK_PATH,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Telegram-Bot-Api-Secret-Token": await webhookSecret(TOKEN) },
+        body: JSON.stringify(privateMessage("/start")),
+      },
+      { ...ctx.env, APP_URL: "https://milav.app" },
+    );
+    const body = (await res.json()) as any;
+    expect(body.reply_markup.inline_keyboard[0][0].web_app.url).toBe("https://milav.app/");
+  });
+
   it("мусор, группа и слишком большое тело: 200 без ответа (Telegram не будет повторять)", async () => {
     for (const bad of ["не json", "null", "5", JSON.stringify(privateMessage("/start", { chat: { id: -1, type: "group" } }))]) {
       const res = await webhook(bad);
@@ -183,6 +197,23 @@ describe("самонастройка вебхука", () => {
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, narrow.fetchFn)).toBe("set");
   });
 
+  it("свой вебхук на запасном адресе (workers.dev) переносит на основной адрес", async () => {
+    const domain = "https://milav.app";
+    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message"] });
+    expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, domain, tg.fetchFn)).toBe("set");
+    expect(tg.calls.find((c) => c.method === "setWebhook")!.body.url).toBe(await webhookUrl(domain, TOKEN));
+  });
+
+  it("чужой вебхук с нашим путём, но без метки нашего токена, не трогает", async () => {
+    vi.spyOn(console, "warn").mockImplementation(() => undefined);
+    const domain = "https://milav.app";
+    const other = fakeTelegram({ url: await webhookUrl("https://other.example.com", "other:token") });
+    expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, domain, other.fetchFn)).toBe("foreign");
+    const bare = fakeTelegram({ url: `https://other.example.com${BOT_WEBHOOK_PATH}` });
+    expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, domain, bare.fetchFn)).toBe("foreign");
+    expect(other.methods()).toEqual(["getWebhookInfo"]);
+  });
+
   it("чужой вебхук не перезаписывает и пишет в журнал только хост", async () => {
     const warn = vi.spyOn(console, "warn").mockImplementation(() => undefined);
     const tg = fakeTelegram({ url: "https://old-server.example.com/hook/secret-path" });
@@ -222,5 +253,15 @@ describe("самонастройка при входе", () => {
     await api("/api/me", { as: 7 }, { ...ctx.env, TEMPLATE_RECORDER_IDS: "7" });
     await vi.waitFor(() => expect(fetchSpy).toHaveBeenCalled());
     expect(String(fetchSpy.mock.calls[0]![0])).toMatch(/\/getWebhookInfo$/);
+  });
+
+  it("регистрирует вебхук на APP_URL, а не на адрес, по которому открыли приложение", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async () =>
+      new Response(JSON.stringify({ ok: true, result: { url: "" } }), { status: 200 }),
+    );
+    await api("/api/me", { as: 7 }, { ...ctx.env, TEMPLATE_RECORDER_IDS: "7", APP_URL: "https://milav.app" });
+    await vi.waitFor(() => expect(fetchSpy.mock.calls.some((c) => String(c[0]).endsWith("/setWebhook"))).toBe(true));
+    const set = fetchSpy.mock.calls.find((c) => String(c[0]).endsWith("/setWebhook"))!;
+    expect(JSON.parse(String(set[1]!.body)).url.startsWith(`https://milav.app${BOT_WEBHOOK_PATH}?v=`)).toBe(true);
   });
 });

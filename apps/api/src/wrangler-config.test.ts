@@ -142,3 +142,12 @@ describe("wrangler.jsonc: напоминания", () => {
     expect(config.env?.local?.vars?.REMINDERS_DEFAULT).toBe("off");
   });
 });
+
+describe("wrangler.jsonc: свой домен", () => {
+  // Кнопки бота и напоминаний и адрес вебхука строятся из APP_URL (appUrl.ts). В env.local его нет: локально и в
+  // сквозном тесте ссылки идут на адрес запроса (localhost).
+  it("APP_URL задан только в проде и ведёт на https://milav.app", () => {
+    expect(findKeyPaths(config, "APP_URL")).toEqual(["vars.APP_URL"]);
+    expect(config.vars.APP_URL).toBe("https://milav.app");
+  });
+});
