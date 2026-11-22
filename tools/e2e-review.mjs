@@ -194,7 +194,7 @@ const owner = await openPage(OWNER, { clipboard: true });
 await openSettings(owner);
 await owner.click('[data-testid="open-admin"]');
 await owner.waitForSelector('[data-testid="admin-menu"]');
-check((await owner.locator('[data-testid^="admin-open-"]').count()) === 7, "в меню панели 7 разделов (добавился «Контент»)");
+check((await owner.locator('[data-testid^="admin-open-"]').count()) === 8, "в меню панели 8 разделов (есть «Контент» и «Сообщения бота»)");
 await owner.click('[data-testid="admin-open-content"]');
 await owner.waitForSelector('[data-testid="review-list"]');
 await owner.click('[data-testid="review-export-prepare"]');
