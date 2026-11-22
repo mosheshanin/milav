@@ -10,6 +10,7 @@ export * from "./gamification";
 export * from "./telemetry";
 export * from "./admin";
 export * from "./reminders";
+export * from "./botTexts";
 export * from "./review";
 export * from "./repeat";
 export * from "./phrase";

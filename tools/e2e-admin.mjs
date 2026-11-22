@@ -37,7 +37,7 @@ const HELPER = 1003;
 const dev = (id) => ({ authorization: `dev ${id}:Tester` });
 
 // Чистое состояние: настройки по умолчанию, пустая команда и журнал. В конце то же самое, чтобы не мешать другим тестам.
-const reset = () => sql("DELETE FROM app_config; DELETE FROM staff; DELETE FROM admin_log; DELETE FROM daily_stats;");
+const reset = () => sql("DELETE FROM app_config; DELETE FROM staff; DELETE FROM admin_log; DELETE FROM daily_stats; DELETE FROM bot_texts;");
 reset();
 
 const browser = await chromium.launch({ executablePath: findChromium(), args: ["--no-sandbox"] });
@@ -94,7 +94,7 @@ check((await text(page, "staff-role")).includes("владелец"), "владе
 await page.click('[data-testid="open-admin"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
 check((await scriptUrls(page)).some((u) => /\/Admin-/.test(u)), "код панели подгружается отдельным файлом при входе в панель");
-check((await page.locator('[data-testid^="admin-open-"]').count()) === 7, "в меню панели 7 разделов (обзор, настройки, напоминания, контент, команда, журнал, шаблоны)");
+check((await page.locator('[data-testid^="admin-open-"]').count()) === 8, "в меню панели 8 разделов (обзор, настройки, сообщения бота, напоминания, контент, команда, журнал, шаблоны)");
 check(await noOverflow(page), "меню панели без горизонтальной прокрутки");
 await shot(page, "a2-menu");
 
@@ -140,8 +140,51 @@ check(newcomer.play.settings.dailyGoal === 10, "новый ученик полу
 await page.click('[data-testid="config-defaultDailyGoal-5"]');
 await page.waitForFunction(() => document.querySelector('[data-testid="config-defaultDailyGoal-5"]')?.getAttribute("aria-checked") === "true");
 check(await noOverflow(page), "настройки приложения без горизонтальной прокрутки");
+check((await page.locator('[data-testid="config-shabbatFrom"]').count()) === 0, "настройки сообщений бота не в «Настройках приложения»");
 await shot(page, "a4-config");
 await page.click('header button[aria-label="Назад"]');
+
+// «Сообщения бота» (22.11): все тексты бота и настройки отправки.
+await page.click('[data-testid="admin-open-bot"]');
+await page.waitForSelector('[data-testid="bot-settings"]');
+for (const group of ["replies", "remindersCommand", "reminderButtons", "popups", "confirm", "profile"]) {
+  check((await page.locator(`[data-testid="bot-group-${group}"]`).count()) === 1, `группа текстов «${group}» на месте`);
+}
+check((await page.locator('[data-testid^="bot-text-"][data-testid$="-edit"]').count()) === 23, "все 23 текста бота можно изменить");
+check((await page.locator('[data-testid="config-shabbatFrom-900"]').getAttribute("aria-checked")) === "true", "пауза на шаббат по умолчанию с 15:00");
+await page.click('[data-testid="config-reminderMinute-540"]');
+await page.waitForFunction(() => document.querySelector('[data-testid="config-reminderMinute-540"]')?.getAttribute("aria-checked") === "true");
+const botConfig = await (await page.request.get(`${BASE}/api/admin/config`, { headers: dev(OWNER) })).json();
+check(botConfig.items.find((i) => i.key === "reminderMinute").value === 540, "время напоминаний по умолчанию сохранено: 9:00");
+await shot(page, "a5a-bot-settings");
+
+await page.click('[data-testid="bot-text-start-edit"]');
+await page.fill('[data-testid="bot-text-start-input"]', "Привет, {фамилия}!");
+await page.click('[data-testid="bot-text-start-save"]');
+check((await page.locator('[data-testid="bot-text-start-editor"] [role="alert"]').textContent()).includes("{фамилия}"), "неизвестная подстановка: понятная ошибка до отправки");
+await page.fill('[data-testid="bot-text-start-input"]', "Привет, {имя}! Учим иврит 👋");
+await page.click('[data-testid="bot-text-start-save"]');
+await page.waitForSelector('[data-testid="bot-message"]');
+check((await text(page, "bot-message")).includes("Сохранено"), "текст приветствия сохранён");
+check((await text(page, "bot-text-start-text")) === "Привет, {имя}! Учим иврит 👋", "в карточке новый текст");
+check((await text(page, "bot-text-start")).includes("Пример: Привет, Анна!"), "пример с подстановкой");
+const botTexts = await (await page.request.get(`${BASE}/api/admin/bot`, { headers: dev(OWNER) })).json();
+check(botTexts.items.find((i) => i.key === "start").isDefault === false, "сервер хранит изменённое приветствие");
+await page.click('[data-testid="bot-text-start-send"]');
+await page.waitForFunction(() => /Бот не настроен|Отправлено/.test(document.querySelector('[data-testid="bot-message"]')?.textContent ?? ""));
+check(true, "«Прислать мне» отвечает (локально бот не настроен)");
+check(await noOverflow(page), "«Сообщения бота» без горизонтальной прокрутки на 360 px");
+await page.locator('[data-testid="bot-text-start"]').scrollIntoViewIfNeeded();
+await shot(page, "a5b-bot-text");
+await page.click('[data-testid="bot-text-start-reset"]');
+await page.waitForFunction(() => !document.querySelector('[data-testid="bot-text-start-reset"]'));
+check(dialogs.some((d) => d.includes("Вернуть исходный")), "«Вернуть исходный» спрашивает подтверждение");
+check((await text(page, "bot-text-start-text")).startsWith("Шалом, {имя}!"), "исходное приветствие вернулось");
+await page.click('[data-testid="bot-open-reminders"]');
+await page.waitForSelector('[data-testid="reminders-summary"]');
+check(true, "из «Сообщений бота» открываются «Напоминания»");
+await page.click('header button[aria-label="Назад"]');
+await page.waitForSelector('[data-testid="admin-menu"]');
 
 // Команда: добавить проверяющего, сделать администратором, убрать.
 await page.click('[data-testid="admin-open-team"]');
@@ -194,6 +237,8 @@ const log = await text(page, "log-list");
 check(log.includes("Таблица лидеров: Все → Команда"), "в журнале изменение таблицы лидеров");
 check(log.includes(`Добавлен в команду: id ${HELPER}, проверяющий`), "в журнале добавление в команду");
 check(log.includes(`Убран из команды: id ${HELPER}`), "в журнале удаление из команды");
+check(log.includes("Сообщение бота «Приветствие на /start»"), "в журнале изменение сообщения бота");
+check(log.includes("Время напоминаний по умолчанию: 20:00 → 9:00"), "в журнале изменение настройки бота");
 check(await noOverflow(page), "журнал без горизонтальной прокрутки");
 await shot(page, "a6-log");
 await page.click('header button[aria-label="Назад"]');

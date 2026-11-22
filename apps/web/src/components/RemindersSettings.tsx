@@ -74,7 +74,9 @@ export function RemindersSettings() {
     <Section title="Напоминания">
       <Toggle
         label="Напоминать заниматься"
-        hint="Бот напишет в Telegram в выбранное время, только если в этот день вы ещё не занимались. С пятницы 15:00 до конца субботы, в шаббат, не пишем."
+        hint={`Бот напишет в Telegram в выбранное время, только если в этот день вы ещё не занимались.${
+          info.shabbatFrom === null ? "" : ` С пятницы ${minuteText(info.shabbatFrom)} до конца субботы, в шаббат, не пишем.`
+        }`}
         checked={info.enabled}
         disabled={busy}
         testId="toggle-reminders"

@@ -1,3 +1,4 @@
+import type { AdminBotResponse, AdminBotSaveResponse, BotTextKey } from "@milav/shared";
 import type {
   AdminConfigResponse,
   AdminRemindersResponse,
@@ -175,6 +176,11 @@ export const api = {
       request<{ item: ReminderTextItem; changed: boolean }>(`/api/admin/reminders/${id}`, jsonPut(body)),
     deleteReminder: (id: number) => request<{ ok: true }>(`/api/admin/reminders/${id}`, { method: "DELETE" }),
     sendReminderToMe: (id: number) => request<{ ok: true; text: string; sent: boolean }>(`/api/admin/reminders/${id}/send`, json({})),
+    bot: () => request<AdminBotResponse>("/api/admin/bot"),
+    setBotText: (key: BotTextKey, text: string) => request<AdminBotSaveResponse>(`/api/admin/bot/${encodeURIComponent(key)}`, jsonPut({ text })),
+    resetBotText: (key: BotTextKey) => request<AdminBotSaveResponse>(`/api/admin/bot/${encodeURIComponent(key)}`, { method: "DELETE" }),
+    sendBotTextToMe: (key: BotTextKey) =>
+      request<{ ok: true; text: string; sent: boolean }>(`/api/admin/bot/${encodeURIComponent(key)}/send`, json({})),
   },
 
   // ---- Проверка слов носителем (администраторы и проверяющие; выгрузка только администраторам) ----

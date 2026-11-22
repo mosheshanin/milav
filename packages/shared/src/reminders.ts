@@ -26,10 +26,14 @@ export function isValidReminderMinute(value: unknown): value is number {
  */
 export const SHABBAT_FRIDAY_FROM_MINUTE = 15 * 60;
 
-/** Попадает ли местный день (номер) и минута дня в шаббат. День недели 0 = воскресенье, 5 = пятница, 6 = суббота. */
-export function isShabbat(localDay: number, minuteOfDay: number): boolean {
+/**
+ * Попадает ли местный день (номер) и минута дня в шаббат. День недели 0 = воскресенье, 5 = пятница, 6 = суббота.
+ * `fridayFrom`: с какой минуты пятницы пауза (настройка «Пауза на шаббат» в панели); отрицательное число: паузы нет.
+ */
+export function isShabbat(localDay: number, minuteOfDay: number, fridayFrom: number = SHABBAT_FRIDAY_FROM_MINUTE): boolean {
+  if (fridayFrom < 0) return false;
   const weekday = dayInWeek(localDay);
-  return weekday === 6 || (weekday === 5 && minuteOfDay >= SHABBAT_FRIDAY_FROM_MINUTE);
+  return weekday === 6 || (weekday === 5 && minuteOfDay >= fridayFrom);
 }
 
 const clockFormatters = new Map<string, Intl.DateTimeFormat>();
@@ -50,10 +54,10 @@ export function localDayMinute(tz: string, ms: number): { day: number; minute: n
  * Следующий момент напоминания строго позже `afterMs`: ближайший день, когда местное время `minute` ещё впереди
  * и это не шаббат. Возвращает миллисекунды.
  */
-export function nextReminderAt(tz: string, minute: number, afterMs: number): number {
+export function nextReminderAt(tz: string, minute: number, afterMs: number, fridayFrom: number = SHABBAT_FRIDAY_FROM_MINUTE): number {
   const today = localEpochDay(tz, afterMs);
   for (let day = today; day < today + 8; day++) {
-    if (isShabbat(day, minute)) continue;
+    if (isShabbat(day, minute, fridayFrom)) continue;
     let at = localDayStartMs(tz, day) + minute * 60_000;
     // В день перевода часов от полуночи до нужного времени не ровно minute минут: поправляем по местным часам.
     const actual = localDayMinute(tz, at);
@@ -202,6 +206,8 @@ export interface ReminderInfo {
   offer: boolean;
   /** Бот не может писать: человек его заблокировал или не нажимал «Старт». */
   blocked: boolean;
+  /** С какой минуты пятницы пауза на шаббат (настройка панели); null: бот пишет и в шаббат. Для подсказок в приложении. */
+  shabbatFrom: number | null;
 }
 
 export interface ReminderSettingsRequest {

@@ -1,7 +1,9 @@
 // Тексты панели администратора: строки журнала, сравнение недель, ошибки. Чистые функции (с тестами).
 import {
   APP_CONFIG,
+  BOT_TEXTS,
   CONFIG_KEYS,
+  isBotTextKey,
   STAFF_ROLE_TITLES,
   configValueTitle,
   type AdminLogEntry,
@@ -49,6 +51,10 @@ export function logEntryText(entry: AdminLogEntry): string {
     }
     case "review.remove":
       return `Отозвана проверка ${target}`;
+    case "bot.text":
+      return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: «${short(entry.oldValue)}» → «${short(entry.newValue)}»`;
+    case "bot.reset":
+      return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: возвращён исходный текст`;
     default:
       return `${entry.action} ${target}`.trim();
   }
@@ -116,6 +122,10 @@ export function adminErrorText(error: unknown): string {
         return "Значение не подходит: пустое или с переводом строки.";
       case "bad_field":
         return "Такое поле исправить нельзя. Обновите карточку.";
+      case "bot_blocked":
+        return "Бот не может вам написать: нажмите «Старт» в чате с ботом и попробуйте снова.";
+      case "telegram_error":
+        return "Telegram не принял сообщение. Попробуйте ещё раз через минуту.";
     }
     if (error.status !== 0) return "Сервер не принял изменение. Попробуйте ещё раз.";
   }
@@ -133,6 +143,23 @@ export function reminderTextErrorText(error: string, name?: string): string {
       return "Фигурные скобки только для подстановок: {имя}. Проверьте, что у каждой открывающей есть закрывающая.";
     case "unknown_placeholder":
       return `Неизвестная подстановка {${name ?? ""}}. Список подстановок над текстами.`;
+  }
+  return "Текст не подходит.";
+}
+
+/** Ошибка проверки текста бота («Сообщения бота») по-русски. */
+export function botTextErrorText(error: string, max: number, name?: string): string {
+  switch (error.replace(/^text_/, "")) {
+    case "empty":
+      return "Текст пустой.";
+    case "too_long":
+      return `Текст длиннее ${max} знаков.`;
+    case "bad_braces":
+      return "Фигурные скобки только для подстановок, например {имя}. Проверьте, что у каждой открывающей есть закрывающая.";
+    case "unknown_placeholder":
+      return `Подстановку {${name ?? ""}} в этом тексте использовать нельзя. Доступные перечислены под полем.`;
+    case "multiline":
+      return "Здесь текст в одну строку: перенос строки на кнопке и в меню не виден.";
   }
   return "Текст не подходит.";
 }

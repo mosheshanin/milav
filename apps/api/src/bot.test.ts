@@ -1,16 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { BOT_TEXTS, defaultBotTexts } from "@milav/shared";
 import {
-  BOT_COMMANDS,
-  BOT_DESCRIPTION,
   BOT_WEBHOOK_PATH,
-  FALLBACK_TEXT,
-  HELP_TEXT,
+  botCommands,
   commandOf,
   ensureBotSetup,
   ensureBotSetupOnce,
   isTelegramWebhook,
   replyTo,
   resetBotSetupForTests,
+  syncBotProfile,
   webhookSecret,
   webhookUrl,
   type FetchLike,
@@ -60,14 +59,21 @@ describe("ответы бота", () => {
   });
 
   it("на /help объясняет, как заниматься; на прочий текст предлагает приложение", () => {
-    expect(replyTo(privateMessage("/help"), APP)!.text).toBe(HELP_TEXT);
-    expect(replyTo(privateMessage("шалом!"), APP)!.text).toBe(FALLBACK_TEXT);
-    expect(replyTo(privateMessage("/unknown"), APP)!.text).toBe(FALLBACK_TEXT);
+    expect(replyTo(privateMessage("/help"), APP)!.text).toBe(BOT_TEXTS.help.default);
+    expect(replyTo(privateMessage("шалом!"), APP)!.text).toBe(BOT_TEXTS.fallback.default);
+    expect(replyTo(privateMessage("/unknown"), APP)!.text).toBe(BOT_TEXTS.fallback.default);
   });
 
-  it("без имени приветствие без запятой; управляющие символы в имени убираются", () => {
+  it("тексты и кнопка из «Сообщений бота», если их меняли в панели", () => {
+    const texts = { ...defaultBotTexts(), start: "Привет, {имя}!", "button.open": "Учить" };
+    const reply = replyTo(privateMessage("/start"), APP, texts)!;
+    expect(reply.text).toBe("Привет, Аня!");
+    expect(reply.reply_markup.inline_keyboard[0]![0]!.text).toBe("Учить");
+  });
+
+  it("без имени «друг»; управляющие символы в имени убираются", () => {
     expect(replyTo({ message: { text: "/start", chat: { id: 1, type: "private" }, from: { id: 1 } } }, APP)!.text).toMatch(
-      /^Шалом! /,
+      /^Шалом, друг! /,
     );
     const odd = replyTo(privateMessage("/start", { from: { id: 1, first_name: "А\nня" } }), APP)!;
     expect(odd.text.startsWith("Шалом, Аня!")).toBe(true);
@@ -172,8 +178,9 @@ describe("самонастройка вебхука", () => {
     expect(set.body.url.startsWith(`${ORIGIN}${BOT_WEBHOOK_PATH}?v=`)).toBe(true);
     expect(set.body.secret_token).toBe(await webhookSecret(TOKEN));
     expect(set.body.allowed_updates).toEqual(["message", "callback_query"]);
-    expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands).toEqual(BOT_COMMANDS);
-    expect(tg.calls.find((c) => c.method === "setMyDescription")!.body.description).toBe(BOT_DESCRIPTION);
+    expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands).toEqual(botCommands(defaultBotTexts()));
+    expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands[2]).toEqual({ command: "reminders", description: "Напоминания: включить или отключить" });
+    expect(tg.calls.find((c) => c.method === "setMyDescription")!.body.description).toBe(BOT_TEXTS["profile.description"].default);
     expect(tg.methods()).toContain("setMyShortDescription");
   });
 
@@ -263,5 +270,20 @@ describe("самонастройка при входе", () => {
     await vi.waitFor(() => expect(fetchSpy.mock.calls.some((c) => String(c[0]).endsWith("/setWebhook"))).toBe(true));
     const set = fetchSpy.mock.calls.find((c) => String(c[0]).endsWith("/setWebhook"))!;
     expect(JSON.parse(String(set[1]!.body)).url.startsWith(`https://milav.app${BOT_WEBHOOK_PATH}?v=`)).toBe(true);
+  });
+});
+
+describe("профиль бота из панели", () => {
+  it("без токена ничего не отправляет", async () => {
+    const tg = fakeTelegram({});
+    expect(await syncBotProfile({}, "description", defaultBotTexts(), tg.fetchFn)).toBe("no-token");
+    expect(tg.calls).toHaveLength(0);
+  });
+
+  it("самонастройка ставит меню команд с подписями из панели", async () => {
+    const tg = fakeTelegram({});
+    const texts = { ...defaultBotTexts(), "command.start": "Учить иврит" };
+    expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, tg.fetchFn, texts)).toBe("set");
+    expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands[0]).toEqual({ command: "start", description: "Учить иврит" });
   });
 });

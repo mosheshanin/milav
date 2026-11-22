@@ -62,7 +62,7 @@ export function ReminderOffer({ onClose }: { onClose: () => void }) {
           <>
             <h2 className="px-8 text-xl font-bold">Напоминать заниматься?</h2>
             <p className="text-ink-soft">
-              Каждый день в {minuteText(minute)} бот напишет в Telegram, если вы ещё не занимались. Не в шаббат. Отключить можно в любой момент.
+              Каждый день в {minuteText(minute)} бот напишет в Telegram, если вы ещё не занимались.{me.reminders?.shabbatFrom === null ? "" : " Не в шаббат."} Отключить можно в любой момент.
             </p>
             <Button block disabled={busy} onClick={() => void yes()} data-testid="reminder-offer-yes">
               Да, напоминать

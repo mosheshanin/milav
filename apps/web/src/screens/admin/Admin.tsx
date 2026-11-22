@@ -1,23 +1,25 @@
 // Панель администратора (docs/ADMIN.md): этап 1 основа, этап 2 напоминания, этап 3 «Контент». Подгружается отдельным файлом только для команды (App.tsx, lazy),
 // поэтому её код не попадает к ученикам. Доступ всё равно проверяет сервер: остальным он отвечает 403.
 import { useEffect, useState, type ReactNode } from "react";
-import { BarChart3, BellRing, BookCheck, ChevronRight, History, PenLine, SlidersHorizontal, Users } from "lucide-react";
+import { BarChart3, BellRing, BookCheck, Bot, ChevronRight, History, PenLine, SlidersHorizontal, Users } from "lucide-react";
 import { Header } from "../../components/Header";
 import { Card } from "../../components/ui";
 import { useBackButton } from "../../lib/useBackButton";
 import { AppSettings } from "./AppSettings";
+import { BotMessages } from "./BotMessages";
 import { Content } from "./Content";
 import { Journal } from "./Journal";
 import { Overview } from "./Overview";
 import { Reminders } from "./Reminders";
 import { Team } from "./Team";
 
-type Section = "overview" | "config" | "reminders" | "content" | "team" | "log";
+type Section = "overview" | "config" | "bot" | "reminders" | "content" | "team" | "log";
 
 const SECTIONS: { id: Section; title: string; hint: string; icon: ReactNode }[] = [
   { id: "overview", title: "Обзор", hint: "Новые ученики, кто занимался, слова и викторины", icon: <BarChart3 className="size-icon" aria-hidden /> },
   { id: "config", title: "Настройки приложения", hint: "Таблица лидеров, напоминания, цель дня для новых", icon: <SlidersHorizontal className="size-icon" aria-hidden /> },
-  { id: "reminders", title: "Напоминания", hint: "Тексты сообщений бота и их статистика", icon: <BellRing className="size-icon" aria-hidden /> },
+  { id: "bot", title: "Сообщения бота", hint: "Ответы на команды, кнопки, описание бота, время и шаббат", icon: <Bot className="size-icon" aria-hidden /> },
+  { id: "reminders", title: "Напоминания", hint: "Тексты ежедневных напоминаний и их статистика", icon: <BellRing className="size-icon" aria-hidden /> },
   { id: "content", title: "Контент", hint: "Проверка слов носителем и перенос правок в уроки", icon: <BookCheck className="size-icon" aria-hidden /> },
   { id: "team", title: "Команда", hint: "Администраторы и проверяющие", icon: <Users className="size-icon" aria-hidden /> },
   { id: "log", title: "Журнал", hint: "Кто, когда и что поменял", icon: <History className="size-icon" aria-hidden /> },
@@ -61,6 +63,7 @@ export default function Admin({ onBack, onRecord }: { onBack: () => void; onReco
         )}
         {section === "overview" && <Overview />}
         {section === "config" && <AppSettings />}
+        {section === "bot" && <BotMessages onOpenReminders={() => setSection("reminders")} />}
         {section === "reminders" && <Reminders />}
         {section === "content" && <Content admin itemId={reviewItem} onItem={setReviewItem} />}
         {section === "team" && <Team />}

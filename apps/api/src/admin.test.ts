@@ -141,6 +141,11 @@ describe("настройки приложения", () => {
       { key: "repeat", value: "all", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "numbersTrainer", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "defaultDailyGoal", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "reminderMinute", value: 1200, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "shabbatFrom", value: 900, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "repeatReminderMin", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "offerTimes", value: 2, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "offerAgainDays", value: 7, isDefault: true, updatedAt: null, updatedBy: null },
     ]);
     const on = env({ LEADERBOARD_ENABLED: "1" });
     expect((await getJson<AdminConfigResponse>("/api/admin/config", OWNER, on)).items[0]!.value).toBe("all");

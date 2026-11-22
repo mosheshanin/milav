@@ -278,6 +278,9 @@ node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты по�
 | `bot_webhook_foreign` | warn | у бота чужой вебхук, Worker его не трогает | `host` |
 | `bot_webhook_error` | warn | Telegram сообщает об ошибке доставки на наш вебхук | `error` |
 | `bot_setup_error` | error | самонастройка бота не удалась (сеть, ответ Telegram) | `message` |
+| `bot_profile_set` | info | описание, короткое описание или меню команд из панели («Сообщения бота») ушли в Telegram (22.11) | `part` (`description` / `short` / `commands`) |
+| `bot_profile_error` | error | Telegram не принял описание или меню из панели | `part`, `message` |
+| `admin_bot_text` | info | в панели изменили или вернули исходный текст бота | `uid`, `key`, `reset` |
 
 Кроме того, Cloudflare сам пишет запись о каждом запросе к `/api/*`: адрес, код ответа, время процессора (видно, если упираемся в 10 мс бесплатного тарифа).
 

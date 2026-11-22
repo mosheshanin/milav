@@ -12,6 +12,8 @@
 //   запись `bot_webhook_foreign`, и тогда вебхук надо снять вручную (docs/DEPLOY.md, «Бот»). Свой вебхук на другом
 //   адресе этого Worker (метка токена совпадает, например старый workers.dev) переносится на APP_URL сам.
 
+import { BOT_MENU_COMMANDS, defaultBotTexts, type BotProfileSync, type BotTexts } from "@milav/shared";
+import { botText, cleanName, openKeyboard, type InlineKeyboard } from "./botTexts";
 import { logError, logEvent, logWarn } from "./telemetry";
 
 /** Путь вебхука (под /api/*, поэтому запрос доходит до Worker, а не до статики). */
@@ -26,19 +28,10 @@ export const BOT_ALLOWED_UPDATES = ["message", "callback_query"] as const;
 /** Самое большое обновление, которое принимаем (обычное сообщение занимает 1–2 КБ). */
 export const BOT_MAX_UPDATE_BYTES = 64 * 1024;
 
-/** Команды в меню «/» бота. */
-export const BOT_COMMANDS = [
-  { command: "start", description: "Открыть приложение" },
-  { command: "help", description: "Как заниматься" },
-  { command: "reminders", description: "Напоминания: включить или отключить" },
-] as const;
-
-/** Описание в пустом чате («Что умеет этот бот?») и короткое описание в профиле. Ставятся, только если пусты. */
-export const BOT_DESCRIPTION =
-  "Milav — иврит для русскоязычных. Слова с озвучкой, произношение, письмо от руки и викторины. Нажмите «Старт», чтобы начать.";
-export const BOT_SHORT_DESCRIPTION = "Иврит для русскоязычных: слова, произношение, письмо и викторины.";
-
-const OPEN_BUTTON = "📚 Открыть Milav";
+/** Команды в меню «/» бота: подписи из текстов бота (раздел панели «Сообщения бота»). */
+export function botCommands(texts: BotTexts): { command: string; description: string }[] {
+  return BOT_MENU_COMMANDS.map(({ command, key }) => ({ command, description: botText(texts, key) }));
+}
 
 const encoder = new TextEncoder();
 
@@ -96,7 +89,7 @@ export interface BotReply {
   method: "sendMessage";
   chat_id: number;
   text: string;
-  reply_markup: { inline_keyboard: { text: string; web_app: { url: string } }[][] };
+  reply_markup: InlineKeyboard;
 }
 
 /** Команда из текста: «/start», «/start payload», «/Start@milavbotbot» → "start". Не команда → null. */
@@ -105,51 +98,27 @@ export function commandOf(text: string | undefined): string | null {
   return match ? match[1]!.toLowerCase() : null;
 }
 
-/** Имя для приветствия: из Telegram, без управляющих символов, не длиннее 32 знаков. */
-function greetingName(name: string | undefined): string {
-  const clean = (name ?? "").replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 32);
-  return clean ? `, ${clean}` : "";
+/** Подстановка {имя}: имя из Telegram; если его нет (у живого человека оно всегда есть), «друг». */
+export function nameVar(firstName: string | undefined): string {
+  return cleanName(firstName) || "друг";
 }
-
-export function startText(firstName?: string): string {
-  return [
-    `Шалом${greetingName(firstName)}! 👋`,
-    "",
-    "Milav — иврит для русскоязычных. В каждом уроке 10 слов: слушаете, произносите, пишете от руки и печатаете, а потом сдаёте викторину.",
-    "",
-    "Начните с алфавита: первые уроки в каждой теме бесплатные. Нажмите кнопку ниже 👇",
-  ].join("\n");
-}
-
-export const HELP_TEXT = [
-  "Как заниматься в Milav:",
-  "",
-  "1. Откройте приложение кнопкой ниже или кнопкой меню слева от поля ввода.",
-  "2. Выберите урок. Каждое слово проходит 4 этапа: «Слушай», «Говори», «Пиши», «Печатай».",
-  "3. Когда все слова пройдены, откроется викторина. Сдали — урок засчитан, растёт статус.",
-  "",
-  "Для этапа «Говори» нужен микрофон: приложение попросит доступ.",
-  "Цель дня, тема оформления и другие настройки — в приложении, шестерёнка вверху главной.",
-  "Напоминания заниматься: команда /reminders.",
-].join("\n");
-
-export const FALLBACK_TEXT = "Я пока не отвечаю на сообщения, все занятия в приложении. Нажмите кнопку ниже 👇";
 
 /**
  * Что ответить на обновление. null: не отвечаем (не личный чат, сообщение от бота, не сообщение вовсе).
  * Кнопка Mini App в сообщении работает только в личном чате, поэтому в группах бот молчит.
+ * Тексты из раздела панели «Сообщения бота» (`texts`), по умолчанию исходные.
  */
-export function replyTo(update: TelegramUpdate, appUrl: string): BotReply | null {
+export function replyTo(update: TelegramUpdate, appUrl: string, texts: BotTexts = defaultBotTexts()): BotReply | null {
   const message = update.message;
   const chatId = message?.chat?.id;
   if (!message || typeof chatId !== "number" || message.chat?.type !== "private" || message.from?.is_bot) return null;
   const command = commandOf(message.text);
-  const text = command === "start" ? startText(message.from?.first_name) : command === "help" ? HELP_TEXT : FALLBACK_TEXT;
+  const key = command === "start" ? "start" : command === "help" ? "help" : "fallback";
   return {
     method: "sendMessage",
     chat_id: chatId,
-    text,
-    reply_markup: { inline_keyboard: [[{ text: OPEN_BUTTON, web_app: { url: appUrl } }]] },
+    text: botText(texts, key, { имя: nameVar(message.from?.first_name) }),
+    reply_markup: openKeyboard(texts, appUrl),
   };
 }
 
@@ -185,6 +154,7 @@ export async function ensureBotSetup(
   env: { BOT_TOKEN?: string },
   origin: string,
   fetchFn: FetchLike = fetch,
+  texts: BotTexts = defaultBotTexts(),
 ): Promise<BotSetupResult> {
   const token = env.BOT_TOKEN;
   if (!token) return "no-token";
@@ -213,12 +183,15 @@ export async function ensureBotSetup(
       allowed_updates: BOT_ALLOWED_UPDATES,
       max_connections: 20,
     });
-    await callTelegram(fetchFn, token, "setMyCommands", { commands: BOT_COMMANDS });
+    await callTelegram(fetchFn, token, "setMyCommands", { commands: botCommands(texts) });
+    // Описание ставим, только если оно пустое: из панели («Сообщения бота») оно уходит в Telegram сразу при сохранении.
     const description = await callTelegram<{ description?: string }>(fetchFn, token, "getMyDescription");
-    if (!description.description) await callTelegram(fetchFn, token, "setMyDescription", { description: BOT_DESCRIPTION });
+    if (!description.description) {
+      await callTelegram(fetchFn, token, "setMyDescription", { description: botText(texts, "profile.description") });
+    }
     const short = await callTelegram<{ short_description?: string }>(fetchFn, token, "getMyShortDescription");
     if (!short.short_description) {
-      await callTelegram(fetchFn, token, "setMyShortDescription", { short_description: BOT_SHORT_DESCRIPTION });
+      await callTelegram(fetchFn, token, "setMyShortDescription", { short_description: botText(texts, "profile.short") });
     }
     logEvent("bot_webhook_set", { previous: current ? "own" : "none" });
     return "set";
@@ -252,6 +225,33 @@ function hostOf(url: string): string {
   }
 }
 
+/** Какая часть профиля бота меняется вместе с текстом из панели. */
+export type BotProfilePart = "description" | "short" | "commands";
+
+/**
+ * Отправляет в Telegram описание, короткое описание или меню команд (после сохранения в панели «Сообщения бота»).
+ * Ошибка не бросается: панель покажет, что текст сохранён, но в Telegram не ушёл.
+ */
+export async function syncBotProfile(
+  env: { BOT_TOKEN?: string },
+  part: BotProfilePart,
+  texts: BotTexts,
+  fetchFn: FetchLike = fetch,
+): Promise<BotProfileSync> {
+  const token = env.BOT_TOKEN;
+  if (!token) return "no-token";
+  try {
+    if (part === "description") await callTelegram(fetchFn, token, "setMyDescription", { description: botText(texts, "profile.description") });
+    else if (part === "short") await callTelegram(fetchFn, token, "setMyShortDescription", { short_description: botText(texts, "profile.short") });
+    else await callTelegram(fetchFn, token, "setMyCommands", { commands: botCommands(texts) });
+    logEvent("bot_profile_set", { part });
+    return "ok";
+  } catch (err) {
+    logError("bot_profile_error", { part, message: err instanceof Error ? err.message.slice(0, 200) : String(err).slice(0, 200) });
+    return "error";
+  }
+}
+
 /** Самонастройка запускается не чаще раза на экземпляр Worker (экземпляры живут минуты или часы). */
 let setupStarted = false;
 
@@ -260,10 +260,11 @@ export function ensureBotSetupOnce(
   env: { BOT_TOKEN?: string },
   origin: string,
   fetchFn?: FetchLike,
+  texts?: () => Promise<BotTexts>,
 ): Promise<BotSetupResult> | null {
   if (setupStarted) return null;
   setupStarted = true;
-  return ensureBotSetup(env, origin, fetchFn);
+  return (async () => ensureBotSetup(env, origin, fetchFn, texts ? await texts() : undefined))();
 }
 
 /** Для тестов: снова разрешить самонастройку. */

@@ -24,6 +24,11 @@ describe("шаббат", () => {
     expect(isShabbat(dayOf("2026-10-17"), 23 * 60 + 59)).toBe(true);
     expect(isShabbat(dayOf("2026-10-18"), 0)).toBe(false);
     expect(isShabbat(dayOf("2026-10-15"), 20 * 60)).toBe(false);
+    // Настройка панели «Пауза на шаббат»: другой час пятницы или без паузы.
+    expect(isShabbat(dayOf("2026-10-16"), 16 * 60, 17 * 60)).toBe(false);
+    expect(isShabbat(dayOf("2026-10-16"), 17 * 60, 17 * 60)).toBe(true);
+    expect(isShabbat(dayOf("2026-10-17"), 12 * 60, -1)).toBe(false);
+    expect(isShabbat(dayOf("2026-10-16"), 20 * 60, -1)).toBe(false);
   });
 });
 
@@ -32,6 +37,8 @@ describe("следующее напоминание", () => {
     // Иерусалим летнее время +3: 20:00 местного это 17:00 UTC.
     expect(iso(nextReminderAt(TZ, 1200, at("2026-10-14T10:00:00Z")))).toBe("2026-10-14T17:00:00.000Z");
     expect(iso(nextReminderAt(TZ, 1200, at("2026-10-14T17:00:00Z")))).toBe("2026-10-15T17:00:00.000Z");
+    // Без паузы на шаббат из пятницы вечером напоминание в субботу.
+    expect(iso(nextReminderAt(TZ, 1200, at("2026-10-16T18:00:00Z"), -1))).toBe("2026-10-17T17:00:00.000Z");
     // Нью-Йорк: 08:00 местного (-4 летом) это 12:00 UTC.
     expect(iso(nextReminderAt("America/New_York", 480, at("2026-10-14T13:00:00Z")))).toBe("2026-10-15T12:00:00.000Z");
   });

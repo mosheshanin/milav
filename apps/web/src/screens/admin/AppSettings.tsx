@@ -1,7 +1,7 @@
 // «Настройки приложения»: значения в базе действуют без выкладки (на всех экземплярах сервера не дольше чем за минуту).
 // Каждое изменение пишется в журнал. Выключение функции для всех спрашивает подтверждение.
 import { useState } from "react";
-import { APP_CONFIG, FEATURE_MODES, FEATURE_MODE_TITLES, configValueTitle, type ConfigDef, type ConfigItem } from "@milav/shared";
+import { APP_CONFIG, FEATURE_MODES, FEATURE_MODE_TITLES, configValueTitle, type ConfigDef, type ConfigItem, type ConfigKey } from "@milav/shared";
 import { api } from "../../api";
 import { useApp } from "../../AppContext";
 import { Choice, Section } from "../../components/Controls";
@@ -9,12 +9,28 @@ import { adminErrorText, dateTimeText } from "../../lib/adminText";
 import { confirmAction } from "../../telegram";
 import { LoadView, useLoad } from "./load";
 
+/** Настройки приложения, кроме настроек сообщений бота (они в разделе «Сообщения бота»). */
 export function AppSettings() {
   const [value, reload] = useLoad(() => api.admin.config());
-  return <LoadView value={value} reload={reload}>{(data) => <ConfigList items={data.items} />}</LoadView>;
+  return (
+    <LoadView value={value} reload={reload}>
+      {(data) => (
+        <>
+          <p className="text-sm text-ink-soft">
+            Изменения действуют без выкладки. Остальные ученики увидят их не позже чем через минуту, когда снова откроют приложение.
+            «Команда» включает функцию только администраторам и проверяющим: так новое можно проверить на своём телефоне до открытия всем.
+            Настройки сообщений бота (время, шаббат, повторение) в разделе «Сообщения бота».
+          </p>
+          <ConfigList items={data.items.filter((i) => (APP_CONFIG[i.key] as ConfigDef).group !== "bot")} />
+        </>
+      )}
+    </LoadView>
+  );
 }
 
-function ConfigList({ items: initial }: { items: ConfigItem[] }) {
+/** Список настроек с выбором значения. `keys`: показать только эти и в этом порядке. */
+export function ConfigList({ items: all, keys }: { items: ConfigItem[]; keys?: readonly ConfigKey[] }) {
+  const initial = keys ? keys.map((k) => all.find((i) => i.key === k)).filter((i): i is ConfigItem => !!i) : all;
   const { me, refresh } = useApp();
   const [items, setItems] = useState(initial);
   const [busy, setBusy] = useState(false);
@@ -45,10 +61,6 @@ function ConfigList({ items: initial }: { items: ConfigItem[] }) {
 
   return (
     <>
-      <p className="text-sm text-ink-soft">
-        Изменения действуют без выкладки. Остальные ученики увидят их не позже чем через минуту, когда снова откроют приложение.
-        «Команда» включает функцию только администраторам и проверяющим: так новое можно проверить на своём телефоне до открытия всем.
-      </p>
       {items.map((item) => {
         const def: ConfigDef = APP_CONFIG[item.key];
         const options =

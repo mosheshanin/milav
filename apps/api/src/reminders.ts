@@ -10,7 +10,6 @@
 // - Telegram ответил «заблокирован» или «чат не найден»: напоминания выключаются (blocked = 1), больше не шлём.
 import { Hono } from "hono";
 import {
-  DEFAULT_REMINDER_MINUTE,
   KIND_PLACEHOLDERS,
   MAX_REMINDER_TEXTS,
   REMINDER_KINDS,
@@ -24,7 +23,7 @@ import {
   nextReminderAt,
   pickDailyReminder,
   pickReminder,
-  REPEAT_REMINDER_MIN,
+  SHABBAT_OFF,
   wordsText,
   popcount,
   renderReminder,
@@ -36,9 +35,11 @@ import {
   type ReminderKind,
   type ReminderSettingsRequest,
   type ReminderTextItem,
+  type AppConfig,
   type ReminderVars,
 } from "@milav/shared";
 import { adminRoutes, loadConfig, staffOf } from "./admin";
+import { botText, loadBotTexts, disableKeyboard, enableKeyboard, reminderKeyboard } from "./botTexts";
 import { requireUser } from "./auth";
 import { parseJson, readBodyLimited } from "./body";
 import { appOrigin } from "./appUrl";
@@ -53,14 +54,32 @@ import { describeError, logError, logEvent, logWarn } from "./telemetry";
 export const SEND_BATCH = 40;
 /** Напоминание опоздало больше чем на столько (таймер не работал): не шлём, переносим на следующий день. */
 export const STALE_SECONDS = 3 * 60 * 60;
-/** «Не сейчас» спрашивает снова не раньше чем через неделю и не больше двух раз. */
-export const OFFER_AGAIN_SECONDS = 7 * 86_400;
-export const OFFER_MAX_DISMISSALS = 2;
 /** Приложение открыли в течение суток после напоминания: засчитывается тексту как «открыли». */
 export const OPEN_WINDOW_SECONDS = 86_400;
 
-/** Запасной текст подтверждения, если в базе все такие тексты выключены. */
-const FALLBACK_ENABLED_TEXT = "Готово! Буду напоминать в {время}, если в этот день вы ещё не занимались. В шаббат не пишу.";
+/**
+ * Настройки сообщений бота из панели («Сообщения бота»): время по умолчанию, пауза на шаббат, порог «пора повторить»,
+ * сколько раз и как часто предлагать напоминания.
+ */
+export interface ReminderSettings {
+  defaultMinute: number;
+  /** С какой минуты пятницы пауза; SHABBAT_OFF (−1): паузы нет. */
+  shabbatFrom: number;
+  /** С какого числа слов к повторению напоминать о повторении; 0: не напоминать. */
+  repeatMin: number;
+  offerTimes: number;
+  offerAgainSeconds: number;
+}
+
+export function reminderSettings(config: AppConfig): ReminderSettings {
+  return {
+    defaultMinute: config.reminderMinute,
+    shabbatFrom: config.shabbatFrom,
+    repeatMin: config.repeatReminderMin,
+    offerTimes: config.offerTimes,
+    offerAgainSeconds: config.offerAgainDays * 86_400,
+  };
+}
 
 const nowSeconds = () => Math.floor(Date.now() / 1000);
 
@@ -74,19 +93,12 @@ export function setTelegramFetchForTests(fn: FetchLike | null): void {
   telegramFetch = fn ?? ((input, init) => fetch(input, init));
 }
 
-export type SendResult = "sent" | "blocked" | "retry" | "no-token";
-
-/** Кнопки под напоминанием: открыть приложение, «завтра не напоминать», «отключить». */
-export function reminderKeyboard(appUrl: string, withControls: boolean) {
-  const rows: object[][] = [[{ text: "📚 Продолжить", web_app: { url: `${appUrl}?from=reminder` } }]];
-  if (withControls) {
-    rows.push([
-      { text: "Завтра не напоминать", callback_data: "rem:skip" },
-      { text: "Отключить", callback_data: "rem:off" },
-    ]);
-  }
-  return { inline_keyboard: rows };
+/** Текущая функция обращения к Telegram (в тестах подменённая): нужна панели, которая меняет профиль бота. */
+export function telegramFetchFn(): FetchLike {
+  return telegramFetch;
 }
+
+export type SendResult = "sent" | "blocked" | "retry" | "no-token";
 
 /**
  * Отправляет сообщение ученику. «blocked»: бот не может писать (заблокирован, не нажат «Старт», аккаунт удалён).
@@ -141,12 +153,19 @@ export async function loadReminderRow(db: D1Database, userId: number): Promise<R
 }
 
 /** Напоминания для профиля: включены ли, время, можно ли предложить. */
-export function reminderInfo(row: ReminderRow | null, now: number): ReminderInfo {
+export function reminderInfo(row: ReminderRow | null, now: number, settings: ReminderSettings): ReminderInfo {
   const enabled = !!row?.enabled;
   const blocked = !!row?.blocked;
   const asked = row?.asked_count ?? 0;
-  const offer = !enabled && !blocked && asked < OFFER_MAX_DISMISSALS && (asked === 0 || now - (row?.asked_at ?? 0) >= OFFER_AGAIN_SECONDS);
-  return { enabled, minute: row?.minute ?? DEFAULT_REMINDER_MINUTE, offer, blocked };
+  const offer =
+    !enabled && !blocked && asked < settings.offerTimes && (asked === 0 || now - (row?.asked_at ?? 0) >= settings.offerAgainSeconds);
+  return {
+    enabled,
+    minute: row?.minute ?? settings.defaultMinute,
+    offer,
+    blocked,
+    shabbatFrom: settings.shabbatFrom === SHABBAT_OFF ? null : settings.shabbatFrom,
+  };
 }
 
 /** Включены ли напоминания для этого человека (настройка из панели и его роль). */
@@ -260,19 +279,22 @@ export async function enableReminders(
   minute: number,
   appUrl: string,
   now: number,
+  settings: ReminderSettings,
 ): Promise<EnableResult> {
   const today = localEpochDay(stats.tz, now * 1000);
   const vars = varsFor(user.firstName, minute, statsColumns(stats), today);
   const texts = await enabledTexts(env.DB, "enabled");
+  const bot = await loadBotTexts(env.DB);
   const chosen = pickReminder(texts, vars, null, Math.random());
-  const text = chosen?.text ?? renderReminder(FALLBACK_ENABLED_TEXT, vars)!;
-  const sent = await sendToUser(env, user.id, text, reminderKeyboard(appUrl, false));
+  // Все тексты «Напоминания включены» выключены: запасной из «Сообщений бота».
+  const text = chosen?.text ?? botText(bot, "confirm.fallback", { имя: vars.имя ?? "", время: vars.время });
+  const sent = await sendToUser(env, user.id, text, reminderKeyboard(bot, appUrl, false));
   if (sent === "blocked") {
     await upsert(env.DB, user.id, { enabled: 0, blocked: 1, next_at: null, minute }, now).run();
     logEvent("reminder_blocked", { uid: user.id, where: "enable" });
     return { ok: false, error: "bot_blocked" };
   }
-  const nextAt = Math.floor(nextReminderAt(stats.tz, minute, now * 1000) / 1000);
+  const nextAt = Math.floor(nextReminderAt(stats.tz, minute, now * 1000, settings.shabbatFrom) / 1000);
   const statements = [upsert(env.DB, user.id, { enabled: 1, blocked: 0, minute, next_at: nextAt }, now)];
   if (sent === "sent" && chosen) statements.push(env.DB.prepare("UPDATE reminder_texts SET sent = sent + 1 WHERE id = ?").bind(chosen.id));
   await env.DB.batch(statements);
@@ -341,11 +363,14 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
   summary.due = due.length;
   if (due.length === 0) return summary;
 
-  const { reminders: mode, repeat: repeatMode } = await loadConfig(env);
+  const config = await loadConfig(env);
+  const { reminders: mode, repeat: repeatMode } = config;
+  const settings = reminderSettings(config);
   const texts = await enabledTexts(env.DB, "daily");
+  const bot = await loadBotTexts(env.DB);
   // Слова к повторению у всех, кому пора, одним запросом (каждому по его местному дню).
   const repeatDue =
-    repeatMode === "off"
+    repeatMode === "off" || settings.repeatMin === 0
       ? new Map<number, number>()
       : await countDueForReminders(env.DB, due.map((r) => ({ userId: r.user_id, day: localEpochDay(r.tz ?? DEFAULT_TZ, nowMs) })));
   const updates: D1PreparedStatement[] = [];
@@ -353,7 +378,7 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
 
   for (const row of due) {
     const tz = row.tz ?? DEFAULT_TZ;
-    const next = Math.floor(nextReminderAt(tz, row.minute, nowMs + 60_000) / 1000);
+    const next = Math.floor(nextReminderAt(tz, row.minute, nowMs + 60_000, settings.shabbatFrom) / 1000);
     const reschedule = () => updates.push(env.DB.prepare("UPDATE reminders SET next_at = ? WHERE user_id = ?").bind(next, row.user_id));
     if (stop) break; // Telegram просит подождать: остальных возьмёт следующий запуск (next_at у них не тронут)
 
@@ -363,7 +388,7 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
       ? "feature_off"
       : now - row.next_at > STALE_SECONDS
         ? "stale"
-        : isShabbat(local.day, local.minute)
+        : isShabbat(local.day, local.minute, settings.shabbatFrom)
           ? "shabbat"
           : row.last_day === local.day
             ? "studied"
@@ -379,7 +404,7 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
     const vars = varsFor(row.first_name ?? "", row.minute, row, local.day);
     // Слова к повторению (задача 10): только если повторение включено для этого человека.
     const dueWords = repeatDue.get(row.user_id) ?? 0;
-    if (dueWords >= REPEAT_REMINDER_MIN && (repeatMode === "all" || (repeatMode === "team" && !!(await staffOf(env, row.user_id))))) {
+    if (settings.repeatMin > 0 && dueWords >= settings.repeatMin && (repeatMode === "all" || (repeatMode === "team" && !!(await staffOf(env, row.user_id))))) {
       vars.к_повторению = wordsText(dueWords);
     }
     const chosen = pickDailyReminder(texts, vars, row.last_text_id, random());
@@ -391,7 +416,7 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
       continue;
     }
 
-    const result = await sendToUser(env, row.user_id, chosen.text, reminderKeyboard(appUrl, true));
+    const result = await sendToUser(env, row.user_id, chosen.text, reminderKeyboard(bot, appUrl, true));
     if (result === "sent") {
       summary.sent++;
       updates.push(
@@ -435,51 +460,52 @@ export async function handleReminderCallback(env: Bindings, query: CallbackQuery
   const row = await loadReminderRow(env.DB, userId);
   const stats = await env.DB.prepare("SELECT tz FROM user_stats WHERE user_id = ?").bind(userId).first<{ tz: string }>();
   const tz = stats?.tz ?? DEFAULT_TZ;
+  const texts = await loadBotTexts(env.DB);
 
   if (query.data === "rem:off") {
     if (row?.enabled) await disableReminders(env.DB, userId, now, "chat");
-    return answer("Напоминания отключены. Включить снова: /reminders или «Настройки» в приложении.");
+    return answer(botText(texts, "popup.off"));
   }
   if (query.data === "rem:skip") {
-    if (!row?.enabled) return answer("Напоминания и так выключены.");
+    if (!row?.enabled) return answer(botText(texts, "popup.alreadyOff"));
     const tomorrow = localEpochDay(tz, now * 1000) + 1;
     await env.DB.prepare("UPDATE reminders SET skip_day = ?, updated_at = ? WHERE user_id = ?").bind(tomorrow, now, userId).run();
     logEvent("reminder_skip", { uid: userId });
-    return answer("Хорошо, завтра не напомню. Послезавтра снова буду рядом 🙂");
+    return answer(botText(texts, "popup.skip"));
   }
   if (query.data === "rem:on") {
-    if (!(await remindersOn(env, userId))) return answer("Напоминания пока недоступны.");
-    if (row?.enabled) return answer(`Напоминания уже включены: каждый день в ${minuteText(row.minute)}.`);
-    const minute = row?.minute ?? DEFAULT_REMINDER_MINUTE;
+    if (!(await remindersOn(env, userId))) return answer(botText(texts, "popup.unavailable"));
+    if (row?.enabled) return answer(botText(texts, "popup.alreadyOn", { время: minuteText(row.minute) }));
+    const settings = reminderSettings(await loadConfig(env));
+    const minute = row?.minute ?? settings.defaultMinute;
     // Человек нажал кнопку в чате с ботом, значит бот ему писать может. Подтверждение не шлём: ответим подсказкой.
-    const nextAt = Math.floor(nextReminderAt(tz, minute, now * 1000) / 1000);
+    const nextAt = Math.floor(nextReminderAt(tz, minute, now * 1000, settings.shabbatFrom) / 1000);
     await upsert(env.DB, userId, { enabled: 1, blocked: 0, minute, next_at: nextAt }, now).run();
     logEvent("reminder_on", { uid: userId, minute, where: "chat" });
-    return answer(`Готово! Напомню в ${minuteText(minute)}, если в этот день вы ещё не занимались. В шаббат не пишу.`);
+    return answer(botText(texts, "popup.on", { время: minuteText(minute) }));
   }
   return answer("");
 }
 
-/** Команда /reminders: что сейчас включено и кнопка «включить» или «отключить». */
-export async function reminderCommandReply(env: Bindings, chatId: number, userId: number) {
+/** Команда /reminders: что сейчас включено и кнопка «включить» или «отключить». Тексты из «Сообщений бота». */
+export async function reminderCommandReply(env: Bindings, chatId: number, userId: number, firstName?: string) {
   const row = await loadReminderRow(env.DB, userId);
   const allowed = await remindersOn(env, userId);
-  if (!allowed) return { method: "sendMessage" as const, chat_id: chatId, text: "Напоминания пока недоступны. Скоро включим!" };
+  const texts = await loadBotTexts(env.DB);
+  const имя = nameVarOf(firstName);
+  if (!allowed) return { method: "sendMessage" as const, chat_id: chatId, text: botText(texts, "remcmd.unavailable", { имя }) };
   if (row?.enabled) {
-    return {
-      method: "sendMessage" as const,
-      chat_id: chatId,
-      text: `Напоминания включены: каждый день в ${minuteText(row.minute)} (по времени вашего телефона), если в этот день вы ещё не занимались. В шаббат не пишу. Время меняется в приложении: «Настройки» → «Напоминания».`,
-      reply_markup: { inline_keyboard: [[{ text: "Отключить", callback_data: "rem:off" }]] },
-    };
+    const vars = { имя, время: minuteText(row.minute) };
+    return { method: "sendMessage" as const, chat_id: chatId, text: botText(texts, "remcmd.on", vars), reply_markup: disableKeyboard(texts) };
   }
-  const minute = row?.minute ?? DEFAULT_REMINDER_MINUTE;
-  return {
-    method: "sendMessage" as const,
-    chat_id: chatId,
-    text: `Напоминания выключены. Включить? Буду писать в ${minuteText(minute)}, только если в этот день вы ещё не занимались, и не в шаббат.`,
-    reply_markup: { inline_keyboard: [[{ text: `Включить в ${minuteText(minute)}`, callback_data: "rem:on" }]] },
-  };
+  const minute = row?.minute ?? reminderSettings(await loadConfig(env)).defaultMinute;
+  const vars = { имя, время: minuteText(minute) };
+  return { method: "sendMessage" as const, chat_id: chatId, text: botText(texts, "remcmd.off", vars), reply_markup: enableKeyboard(texts, vars) };
+}
+
+/** Подстановка {имя} в ответах бота: имя из Telegram или «друг». */
+function nameVarOf(firstName: string | undefined): string {
+  return firstName?.replace(/[\u0000-\u001f\u007f]/g, "").trim().slice(0, 32) || "друг";
 }
 
 // ---- Маршруты ученика ----
@@ -508,27 +534,28 @@ reminderRoutes.put("/api/reminders", requireUser, rateLimit("settings"), async (
 
   const now = nowSeconds();
   const stats = await statsFor(c.env, user, now);
+  const settings = reminderSettings(await loadConfig(c.env));
   let row = await loadReminderRow(c.env.DB, user.id);
-  const minute = req.minute ?? row?.minute ?? DEFAULT_REMINDER_MINUTE;
+  const minute = req.minute ?? row?.minute ?? settings.defaultMinute;
   const origin = appOrigin(c.env, c.req.url);
 
   if (req.dismissOffer) {
     await upsert(c.env.DB, user.id, { asked_count: (row?.asked_count ?? 0) + 1, asked_at: now }, now).run();
     logEvent("reminder_offer_dismissed", { uid: user.id, times: (row?.asked_count ?? 0) + 1 });
   } else if (req.enabled === true && !row?.enabled) {
-    const result = await enableReminders(c.env, user, stats, minute, `${origin}/`, now);
+    const result = await enableReminders(c.env, user, stats, minute, `${origin}/`, now, settings);
     if (!result.ok) {
-      return c.json({ error: "bot_blocked", reminders: reminderInfo(await loadReminderRow(c.env.DB, user.id), now) }, 409);
+      return c.json({ error: "bot_blocked", reminders: reminderInfo(await loadReminderRow(c.env.DB, user.id), now, settings) }, 409);
     }
     await ensureScheduler(c.env, origin);
   } else if (req.enabled === false) {
     if (row?.enabled) await disableReminders(c.env.DB, user.id, now, "app");
   } else if (req.minute !== undefined) {
-    const nextAt = row?.enabled ? Math.floor(nextReminderAt(stats.tz, minute, now * 1000) / 1000) : null;
+    const nextAt = row?.enabled ? Math.floor(nextReminderAt(stats.tz, minute, now * 1000, settings.shabbatFrom) / 1000) : null;
     await upsert(c.env.DB, user.id, row?.enabled ? { minute, next_at: nextAt } : { minute }, now).run();
   }
   row = await loadReminderRow(c.env.DB, user.id);
-  return c.json({ reminders: reminderInfo(row, now) });
+  return c.json({ reminders: reminderInfo(row, now, settings) });
 });
 
 // ---- Раздел панели «Напоминания» (только администраторы: проверка роли в adminRoutes) ----
@@ -637,13 +664,13 @@ adminRoutes.post("/api/admin/reminders/:id/send", async (c) => {
   const stats = await statsFor(c.env, user, now);
   const reminder = await loadReminderRow(c.env.DB, user.id);
   const today = localEpochDay(stats.tz, now * 1000);
-  const own = varsFor(user.firstName, reminder?.minute ?? DEFAULT_REMINDER_MINUTE, statsColumns(stats), today);
+  const own = varsFor(user.firstName, reminder?.minute ?? reminderSettings(await loadConfig(c.env)).defaultMinute, statsColumns(stats), today);
   const allowed = KIND_PLACEHOLDERS[row.kind] as readonly string[];
   const vars: ReminderVars = {};
   for (const name of allowed) (vars as Record<string, string | undefined>)[name] = (own as Record<string, string | undefined>)[name] ?? (SAMPLE_VARS as Record<string, string | undefined>)[name];
   const text = renderReminder(row.text, vars) ?? row.text;
   const origin = appOrigin(c.env, c.req.url);
-  const sent = await sendToUser(c.env, user.id, text, reminderKeyboard(`${origin}/`, row.kind === "daily"));
+  const sent = await sendToUser(c.env, user.id, text, reminderKeyboard(await loadBotTexts(c.env.DB), `${origin}/`, row.kind === "daily"));
   if (sent === "blocked") return c.json({ error: "bot_blocked", text }, 409);
   if (sent === "retry") return c.json({ error: "telegram_error", text }, 502);
   return c.json({ ok: true, text, sent: sent === "sent" });

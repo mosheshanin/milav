@@ -46,6 +46,8 @@ import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
 import { checkSession, commitAnswer, loadSession, silentSpeechAnswer, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
+import "./botAdmin";
+import { loadBotTexts } from "./botTexts";
 import { isNoSpeech, readAudio, rivalsOf, silenceLogFields, speechLogFields, transcribeHebrew } from "./speech";
 import { ensureStats, loadStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
@@ -68,6 +70,7 @@ import {
   noteAppOpen,
   reminderCommandReply,
   reminderInfo,
+  reminderSettings,
   reminderRoutes,
   remindersOn,
 } from "./reminders";
@@ -196,9 +199,9 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
     !message.from.is_bot
   ) {
     logEvent("bot_message", { uid: message.from.id, cmd: "reminders" });
-    return c.json(await reminderCommandReply(c.env, message.chat.id, message.from.id));
+    return c.json(await reminderCommandReply(c.env, message.chat.id, message.from.id, message.from.first_name));
   }
-  const reply = replyTo(update, `${appOrigin(c.env, c.req.url)}/`);
+  const reply = replyTo(update, `${appOrigin(c.env, c.req.url)}/`, await loadBotTexts(c.env.DB));
   if (!reply) return c.body(null, 200);
   logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
   return c.json(reply);
@@ -222,7 +225,7 @@ app.get("/api/me", requireUser, async (c) => {
   if (ownerIds(c.env).has(user.id)) {
     // Адрес из APP_URL (свой домен), даже если владелец открыл приложение по запасному адресу workers.dev.
     const origin = appOrigin(c.env, c.req.url);
-    const setup = ensureBotSetupOnce(c.env, origin);
+    const setup = ensureBotSetupOnce(c.env, origin, undefined, () => loadBotTexts(c.env.DB));
     if (setup) inBackground(c, setup);
     // И таймер напоминаний (scheduler.ts): заводится, если ещё не заведён.
     inBackground(c, ensureScheduler(c.env, origin));
@@ -235,7 +238,7 @@ app.get("/api/me", requireUser, async (c) => {
     user: { id: user.id, firstName: user.firstName, username: user.username },
     ...totalsOf(stats),
     play: buildPlayInfo(stats, await countUnseen(c.env.DB, user.id), now, await featuresFor(c.env, user.id)),
-    ...((await remindersOn(c.env, user.id)) ? { reminders: reminderInfo(reminderRow, now) } : {}),
+    ...((await remindersOn(c.env, user.id)) ? { reminders: reminderInfo(reminderRow, now, reminderSettings(config)) } : {}),
     ...(staff ? { staff } : {}),
   };
   return c.json(body);

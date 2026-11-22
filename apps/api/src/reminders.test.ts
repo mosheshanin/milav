@@ -2,7 +2,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { localEpochDay, type AdminRemindersResponse } from "@milav/shared";
 import { webhookSecret } from "./bot";
 import type { Bindings } from "./env";
-import { OFFER_AGAIN_SECONDS, SEND_BATCH, runDueReminders, setTelegramFetchForTests } from "./reminders";
+import { SEND_BATCH, runDueReminders, setTelegramFetchForTests } from "./reminders";
+
+/** «Предложить снова через» по умолчанию (настройка панели offerAgainDays). */
+const OFFER_AGAIN_SECONDS = 7 * 86_400;
 import { TOKEN, api, completeLesson, completeWord, ctx, lesson, resetHarness } from "./test-utils/harness";
 
 const OWNER = 8001;
@@ -54,7 +57,7 @@ describe("настройки ученика", () => {
   it("по умолчанию напоминания только для команды", async () => {
     expect((await me(STUDENT)).reminders).toBeUndefined();
     expect((await setReminders(STUDENT, { enabled: true })).status).toBe(403);
-    expect((await me(OWNER)).reminders).toEqual({ enabled: false, minute: 1200, offer: true, blocked: false });
+    expect((await me(OWNER)).reminders).toEqual({ enabled: false, minute: 1200, offer: true, blocked: false, shabbatFrom: 900 });
     await setMode("all");
     expect((await me(STUDENT)).reminders).toMatchObject({ enabled: false, offer: true });
   });
@@ -63,7 +66,7 @@ describe("настройки ученика", () => {
     await me(OWNER);
     const res = await setReminders(OWNER, { enabled: true });
     expect(res.status).toBe(200);
-    expect(((await res.json()) as any).reminders).toEqual({ enabled: true, minute: 1200, offer: false, blocked: false });
+    expect(((await res.json()) as any).reminders).toEqual({ enabled: true, minute: 1200, offer: false, blocked: false, shabbatFrom: 900 });
     expect(outbox).toHaveLength(1);
     expect(outbox[0]).toMatchObject({ method: "sendMessage", chat_id: OWNER });
     expect(outbox[0]!.text).toContain("Тест");
@@ -220,6 +223,22 @@ describe("отправка по расписанию", () => {
     await putJson("/api/admin/config", OWNER, { key: "repeat", value: "off" });
     await run("2026-10-18T17:00:00Z", () => 0);
     expect(outbox[2]!.text).not.toMatch(/10 слов|11 слов/);
+  });
+
+  it("порог «напоминать о повторении» из панели: 20 слов, а к повторению 10, значит обычный текст; «Выкл.» тоже", async () => {
+    await subscribed(STUDENT);
+    await completeLesson(STUDENT);
+    await ctx.env.DB.prepare("UPDATE word_progress SET completed_at = '2026-10-10 08:00:00' WHERE user_id = ?").bind(STUDENT).run();
+    await ctx.env.DB.prepare("UPDATE user_stats SET last_day = last_day - 3 WHERE user_id = ?").bind(STUDENT).run();
+    expect((await putJson("/api/admin/config", OWNER, { key: "repeatReminderMin", value: 20 })).status).toBe(200);
+    await run("2026-10-14T17:00:00Z", () => 0);
+    expect(outbox[0]!.text).not.toContain("10 слов");
+    expect((await putJson("/api/admin/config", OWNER, { key: "repeatReminderMin", value: 0 })).status).toBe(200);
+    await run("2026-10-15T17:00:00Z", () => 0);
+    expect(outbox[1]!.text).not.toContain("10 слов");
+    expect((await putJson("/api/admin/config", OWNER, { key: "repeatReminderMin", value: 10 })).status).toBe(200);
+    await run("2026-10-18T17:00:00Z", () => 0);
+    expect(outbox[2]!.text).toContain("10 слов");
   });
 
   it("открыл приложение в течение суток после напоминания: засчитывается тексту один раз", async () => {

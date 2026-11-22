@@ -7,6 +7,7 @@ import { Hono } from "hono";
 import { createMiddleware } from "hono/factory";
 import {
   ADMIN_LOG_PAGE,
+  BOT_CONFIG_DEFAULTS,
   CONFIG_KEYS,
   DEFAULT_DAILY_GOAL,
   FEATURE_MODES,
@@ -136,6 +137,8 @@ export function configDefaults(env: Bindings): AppConfig {
     // Тренажёр «Числа на слух» (27.10): сначала команда проверяет на своих телефонах, потом владелец включает «Все» в панели.
     numbersTrainer: "team",
     defaultDailyGoal: DEFAULT_DAILY_GOAL,
+    // Сообщения бота (раздел «Сообщения бота», 22.11.2026): как было до панели.
+    ...BOT_CONFIG_DEFAULTS,
   };
 }
 

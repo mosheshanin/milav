@@ -1,5 +1,7 @@
 // Панель администратора (docs/ADMIN.md): роли, настройки приложения в базе, ответы API панели.
 import { DAILY_GOAL_OPTIONS } from "./gamification/constants";
+import { REPEAT_REMINDER_MIN } from "./repeat";
+import { DEFAULT_REMINDER_MINUTE, SHABBAT_FRIDAY_FROM_MINUTE, minuteText } from "./reminders";
 
 /** Роль в команде. Владелец задаётся секретом и всегда администратор. */
 export type StaffRole = "admin" | "reviewer";
@@ -23,10 +25,25 @@ export function featureOn(mode: FeatureMode, staff: StaffInfo | null | undefined
   return mode === "all" || (mode === "team" && !!staff);
 }
 
-/** Описание настройки приложения: по нему сервер проверяет значение, а панель рисует выбор. */
+/**
+ * Описание настройки приложения: по нему сервер проверяет значение, а панель рисует выбор. `group: "bot"`: настройка
+ * сообщений бота, она показывается в разделе «Сообщения бота», а не в «Настройках приложения».
+ */
 export type ConfigDef =
-  | { kind: "feature"; title: string; hint: string }
-  | { kind: "choice"; title: string; hint: string; options: readonly number[] };
+  | { kind: "feature"; title: string; hint: string; group?: "bot" }
+  | { kind: "choice"; title: string; hint: string; options: readonly number[]; group?: "bot" };
+
+/** «Не останавливать» в настройке паузы на шаббат. */
+export const SHABBAT_OFF = -1;
+
+/** Настройки сообщений бота (раздел «Сообщения бота»), по умолчанию как было до панели. */
+export const BOT_CONFIG_DEFAULTS = {
+  reminderMinute: DEFAULT_REMINDER_MINUTE,
+  shabbatFrom: SHABBAT_FRIDAY_FROM_MINUTE,
+  repeatReminderMin: REPEAT_REMINDER_MIN,
+  offerTimes: 2,
+  offerAgainDays: 7,
+} as const;
 
 /**
  * Настройки приложения, которые меняются из панели без выкладки. Значение по умолчанию (пока в базе ничего нет)
@@ -59,6 +76,41 @@ export const APP_CONFIG = {
     hint: "Сколько слов в день предлагать тем, кто открывает приложение впервые. У остальных цель не меняется.",
     options: DAILY_GOAL_OPTIONS,
   },
+  reminderMinute: {
+    kind: "choice",
+    group: "bot",
+    title: "Время напоминаний по умолчанию",
+    hint: "Его предлагает приложение («Напоминать вам заниматься?») и команда /reminders тем, кто время ещё не выбирал. У тех, кто уже включил напоминания, время не меняется.",
+    options: [7 * 60, 8 * 60, 9 * 60, 10 * 60, 12 * 60, 17 * 60, 18 * 60, 19 * 60, 20 * 60, 21 * 60, 22 * 60],
+  },
+  shabbatFrom: {
+    kind: "choice",
+    group: "bot",
+    title: "Пауза на шаббат",
+    hint: "С пятницы с этого часа до конца субботы (по часам ученика) напоминания не уходят. «Не останавливать»: бот пишет и в шаббат; тогда поправьте тексты, где сказано «В шаббат не пишу».",
+    options: [SHABBAT_OFF, 12 * 60, 13 * 60, 14 * 60, 15 * 60, 16 * 60, 17 * 60],
+  },
+  repeatReminderMin: {
+    kind: "choice",
+    group: "bot",
+    title: "Напоминать о повторении слов",
+    hint: "Если слов, которые пора повторить, набралось столько или больше, ежедневное напоминание через раз берёт текст с {к_повторению}. «Выкл.»: о повторении не напоминаем.",
+    options: [0, 3, 5, 10, 20],
+  },
+  offerTimes: {
+    kind: "choice",
+    group: "bot",
+    title: "Сколько раз предлагать напоминания",
+    hint: "Предложение «Напоминать вам заниматься?» появляется в приложении после выученного слова. Здесь: сколько раз его показывать, если человек отвечает «Не сейчас». «Не предлагать»: только сам, в «Настройках».",
+    options: [0, 1, 2, 3, 5],
+  },
+  offerAgainDays: {
+    kind: "choice",
+    group: "bot",
+    title: "Предложить снова через",
+    hint: "Сколько дней ждать после «Не сейчас», прежде чем предложить ещё раз.",
+    options: [1, 3, 7, 14, 30],
+  },
 } as const satisfies Record<string, ConfigDef>;
 
 export type ConfigKey = keyof typeof APP_CONFIG;
@@ -70,7 +122,17 @@ export interface AppConfig {
   repeat: FeatureMode;
   numbersTrainer: FeatureMode;
   defaultDailyGoal: number;
+  reminderMinute: number;
+  shabbatFrom: number;
+  repeatReminderMin: number;
+  offerTimes: number;
+  offerAgainDays: number;
 }
+
+/** Ключи настроек сообщений бота (раздел «Сообщения бота»); остальные в «Настройках приложения». */
+export const BOT_CONFIG_KEYS = (Object.keys(APP_CONFIG) as (keyof typeof APP_CONFIG)[]).filter(
+  (key) => (APP_CONFIG[key] as ConfigDef).group === "bot",
+);
 
 /** Проверяет значение настройки. Возвращает true, если его можно сохранить. */
 export function isValidConfigValue(key: ConfigKey, value: unknown): boolean {
@@ -84,6 +146,11 @@ export function configValueTitle(key: ConfigKey, value: unknown): string {
   const def: ConfigDef = APP_CONFIG[key];
   if (def.kind === "feature") return FEATURE_MODE_TITLES[value as FeatureMode] ?? String(value);
   if (key === "defaultDailyGoal") return value === 0 ? "Выкл." : `${value} сл.`;
+  if (key === "reminderMinute") return minuteText(Number(value));
+  if (key === "shabbatFrom") return value === SHABBAT_OFF ? "Не останавливать" : `с ${minuteText(Number(value))}`;
+  if (key === "repeatReminderMin") return value === 0 ? "Выкл." : `от ${value} сл.`;
+  if (key === "offerTimes") return value === 0 ? "Не предлагать" : `${value} р.`;
+  if (key === "offerAgainDays") return `${value} дн.`;
   return String(value);
 }
 
