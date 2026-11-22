@@ -43,10 +43,10 @@ import { applyTimezone, buildPlayInfo, countUnseen, featuresFor, nowSeconds, pla
 import { numbersRoutes } from "./numbers";
 import { repeatRoutes, repeatSummaryFor } from "./repeat";
 import { generateLessonQuiz, isChoiceType, isWriteType } from "./quizGen";
-import { checkSession, commitAnswer, loadSession, speechStep, startSession, type AnswerStep } from "./quizSession";
+import { checkSession, commitAnswer, loadSession, silentSpeechAnswer, speechStep, startSession, type AnswerStep } from "./quizSession";
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
-import { readAudio, rivalsOf, speechLogFields, transcribeHebrew } from "./speech";
+import { isNoSpeech, readAudio, rivalsOf, silenceLogFields, speechLogFields, transcribeHebrew } from "./speech";
 import { ensureStats, loadStats, reconcileBadges, recordWordCompleted, totalsOf, type PlayOutcome } from "./stats";
 import { recognizeLetters, verifyTyped, verifyWritten, type ProofResult } from "./stageProof";
 import { createThrottle, describeError, logClientReport, logError, logEvent, logWarn, parseClientReport } from "./telemetry";
@@ -343,16 +343,22 @@ app.post("/api/speech/check", requireUser, rateLimit("speech"), async (c) => {
   const recording = await readAudio(c.req.raw);
   if (!recording.ok) return c.json({ error: recording.error }, recording.status);
 
-  const heard = await transcribeHebrew(c.env.AI, recording.audio);
-  if (heard === null) {
+  const transcript = await transcribeHebrew(c.env.AI, recording.audio);
+  if (transcript === null) {
     logWarn("speech_failed", { uid: user.id, word: found.word.id, where: "study", bytes: recording.audio.byteLength });
     return c.json({ error: "speech_failed" }, 502);
   }
 
+  const heard = transcript.text;
   const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id), found.word.value);
+  // Тишина или фраза, которую Whisper выдумывает на тишине («תודה רבה»): просим сказать ещё раз и выдуманное не показываем.
+  if (isNoSpeech(transcript, detail.match)) {
+    logEvent("speech_silence", { uid: user.id, word: found.word.id, where: "study", heard, bytes: recording.audio.byteLength, ...silenceLogFields(transcript) });
+    return c.json({ heard: "", match: false, noSpeech: true });
+  }
   const match = detail.match;
   // Что услышал распознаватель: по несовпадениям видно, какие слова Whisper слышит плохо (и не слишком ли строг допуск).
-  logEvent("speech", { uid: user.id, word: found.word.id, where: "study", match, heard, ...speechLogFields(found.word.he, detail) });
+  logEvent("speech", { uid: user.id, word: found.word.id, where: "study", match, heard, ...speechLogFields(found.word.he, detail), ...silenceLogFields(transcript) });
   if (!match) return c.json({ heard, match });
 
   await ensureUser(c.env.DB, user);
@@ -481,15 +487,21 @@ app.post("/api/quiz/speech", requireUser, rateLimit("speech"), async (c) => {
   if (!recording.ok) return c.json({ error: recording.error }, recording.status);
 
   // Если распознаватель не сработал, попытка не тратится: это не вина ученика.
-  const heard = await transcribeHebrew(c.env.AI, recording.audio);
-  if (heard === null) {
+  const transcript = await transcribeHebrew(c.env.AI, recording.audio);
+  if (transcript === null) {
     logWarn("speech_failed", { uid: user.id, word: found.word.id, where: "quiz", bytes: recording.audio.byteLength });
     return c.json({ error: "speech_failed" }, 502);
   }
 
+  const heard = transcript.text;
   const detail = speechMatchDetail(heard, found.word.he, rivalsOf(found.lesson.topicId, found.word.id), found.word.value);
+  // Голоса не слышно: попытка не тратится, в сессии ничего не меняется (как при сбое распознавателя).
+  if (isNoSpeech(transcript, detail.match)) {
+    logEvent("speech_silence", { uid: user.id, word: found.word.id, where: "quiz", heard, bytes: recording.audio.byteLength, ...silenceLogFields(transcript) });
+    return c.json(silentSpeechAnswer(session));
+  }
   const match = detail.match;
-  logEvent("speech", { uid: user.id, word: found.word.id, where: "quiz", match, heard, ...speechLogFields(found.word.he, detail) });
+  logEvent("speech", { uid: user.id, word: found.word.id, where: "quiz", match, heard, ...speechLogFields(found.word.he, detail), ...silenceLogFields(transcript) });
   const step = speechStep(session, match, heard);
   const committed = await commitAnswer(c.env.DB, session, step);
   if (!committed.ok) return c.json({ error: "answer_conflict" }, 409);

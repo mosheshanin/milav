@@ -42,3 +42,21 @@ describe("определение конца речи по паузе", () => {
     expect(stop).not.toBeNull();
   });
 });
+
+describe("был ли голос на записи (heardVoice, 22.11)", () => {
+  function voice(levels: (t: number) => number, until = 2500): boolean {
+    const d = new SilenceDetector();
+    for (let t = 0; t <= until; t += 50) d.push(levels(t), t);
+    return d.heardVoice;
+  }
+
+  it("тишина, шум комнаты и одиночный щелчок: голоса нет", () => {
+    expect(voice(() => 0.005)).toBe(false);
+    expect(voice(() => 0.04)).toBe(false);
+    expect(voice((t) => (t === 500 ? 0.4 : 0.005))).toBe(false);
+  });
+
+  it("короткое слово: голос есть", () => {
+    expect(voice((t) => (t >= 400 && t < 700 ? 0.15 : 0.005))).toBe(true);
+  });
+});

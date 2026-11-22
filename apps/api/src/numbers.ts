@@ -7,7 +7,7 @@ import { requireUser } from "./auth";
 import type { AppEnv } from "./env";
 import { numbersTrainerOn } from "./play";
 import { rateLimit } from "./rateLimit";
-import { readAudio, transcribeHebrew } from "./speech";
+import { isNoSpeech, readAudio, silenceLogFields, transcribeHebrew } from "./speech";
 import { logEvent, logWarn } from "./telemetry";
 
 export const numbersRoutes = new Hono<AppEnv>();
@@ -30,13 +30,19 @@ numbersRoutes.post("/api/numbers/speech", rateLimit("numbers"), rateLimit("speec
   const recording = await readAudio(c.req.raw);
   if (!recording.ok) return c.json({ error: recording.error }, recording.status);
 
-  const heard = await transcribeHebrew(c.env.AI, recording.audio);
-  if (heard === null) {
+  const transcript = await transcribeHebrew(c.env.AI, recording.audio);
+  if (transcript === null) {
     logWarn("speech_failed", { uid: user.id, where: "numbers", scene, bytes: recording.audio.byteLength });
     return c.json({ error: "speech_failed" }, 502);
   }
+  const heard = transcript.text;
   const verdict = checkSpoken(target, heard);
+  // Тишина или фраза, которую Whisper выдумывает на тишине: попытка не тратится, выдуманное не показываем.
+  if (isNoSpeech(transcript, verdict.match)) {
+    logEvent("speech_silence", { uid: user.id, where: "numbers", scene, heard, bytes: recording.audio.byteLength, ...silenceLogFields(transcript) });
+    return c.json({ heard: "", match: false, noSpeech: true });
+  }
   // Что услышал распознаватель: по несовпадениям видно, как Whisper пишет числа (цифрами или словами).
-  logEvent("speech", { uid: user.id, where: "numbers", scene, match: verdict.match, heard, digits: verdict.digits });
+  logEvent("speech", { uid: user.id, where: "numbers", scene, match: verdict.match, heard, digits: verdict.digits, ...silenceLogFields(transcript) });
   return c.json({ heard, match: verdict.match });
 });

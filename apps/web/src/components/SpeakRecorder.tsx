@@ -23,6 +23,8 @@ export interface SpeakVerdict {
   final?: boolean;
   /** Викторина: сколько попыток осталось. */
   attemptsLeft?: number;
+  /** Голоса на записи не слышно (тишина или выдумка распознавателя): попытка не потрачена, просим сказать ещё раз. */
+  noSpeech?: boolean;
 }
 
 const BLOCKED_TEXT: Record<string, { title: string; hint: string }> = {
@@ -78,6 +80,10 @@ export function SpeakRecorder<R extends SpeakVerdict>({
   const [recording, setRecording] = useState<ActiveRecording | null>(null);
   const [fails, setFails] = useState(0);
   const [heard, setHeard] = useState<string | null>(null);
+  /** Последняя запись без голоса: показываем «Голоса не слышно» вместо «Услышано: …». */
+  const [silent, setSilent] = useState(false);
+  /** Прошлую запись не отправили, потому что микрофон не услышал голоса: следующую отправим в любом случае. */
+  const skippedSilent = useRef(false);
   /** Квиз: сколько попыток осталось по словам сервера (null, пока не было неудачных). */
   const [attemptsLeft, setAttemptsLeft] = useState<number | null>(null);
   const [blocked, setBlocked] = useState<string | null>(null);
@@ -104,6 +110,7 @@ export function SpeakRecorder<R extends SpeakVerdict>({
     if (starting) return;
     setStarting(true);
     setHeard(null);
+    setSilent(false);
     try {
       // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS (у фразы SPEAK_PHRASE_*); можно и вручную.
       const rec = await startRecording(
@@ -113,7 +120,7 @@ export function SpeakRecorder<R extends SpeakVerdict>({
       setMic("granted");
       setRecording(rec);
       setPhase("recording");
-      void finish(rec.finished);
+      void finish(rec);
     } catch (e) {
       const problem = e instanceof RecorderError ? e.problem : "unsupported";
       // Сколько учеников не может включить микрофон и на каких платформах: без этого этап «говори» не пройти.
@@ -124,11 +131,20 @@ export function SpeakRecorder<R extends SpeakVerdict>({
     }
   }
 
-  async function finish(finished: Promise<Blob>) {
-    const blob = await finished;
+  async function finish(rec: ActiveRecording) {
+    const blob = await rec.finished;
     if (!alive.current) return;
     active.current = null;
     setRecording(null);
+    // Микрофон не услышал голоса: не отправляем запись (Whisper на тишине выдумывает «תודה רבה», а квота общая на всех).
+    // Только один раз подряд: если микрофон слишком тихий и порог не срабатывает, следующая запись всё равно уйдёт на сервер.
+    if (rec.voiceHeard() === false && !skippedSilent.current) {
+      skippedSilent.current = true;
+      setSilent(true);
+      setPhase("idle");
+      return;
+    }
+    skippedSilent.current = false;
     setPhase("checking");
     try {
       const result = await check(blob);
@@ -136,6 +152,12 @@ export function SpeakRecorder<R extends SpeakVerdict>({
         setPhase(onContinue ? "passed" : "idle");
         setHeard(null);
         onPassed(result);
+        return;
+      }
+      if (result.noSpeech) {
+        setSilent(true);
+        setPhase("idle");
+        if (mode === "study") setFails(fails + 1);
         return;
       }
       setHeard(result.heard);
@@ -209,6 +231,11 @@ export function SpeakRecorder<R extends SpeakVerdict>({
         </Button>
       )}
 
+      {silent && (
+        <p className="text-danger" role="status" data-testid="speak-silence">
+          Голоса не слышно. Скажите слово громче и поднесите телефон ближе.
+        </p>
+      )}
       {heard !== null && (
         <p className="text-danger" role="status">
           Услышано: «{heard || "тишина"}». Не совпало со словом. Скажите отчётливо и не торопясь.

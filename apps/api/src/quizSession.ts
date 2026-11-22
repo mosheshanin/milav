@@ -238,6 +238,19 @@ export function speechStep(session: QuizSession, match: boolean, heard: string):
   return { correct: false, final: used >= SPEAK_ATTEMPTS_IN_QUIZ, heard };
 }
 
+/** «Голоса не слышно» в «произнеси»: ничего не записываем, счётчики и оставшиеся попытки как были. */
+export function silentSpeechAnswer(session: QuizSession): QuizAnswerResponse {
+  return {
+    index: session.nextIndex,
+    correct: false,
+    final: false,
+    correctCount: session.correct,
+    mistakes: session.mistakes,
+    attemptsLeft: Math.max(0, SPEAK_ATTEMPTS_IN_QUIZ - session.speakAttempts),
+    noSpeech: true,
+  };
+}
+
 export type CommitResult = { ok: true; response: QuizAnswerResponse } | { ok: false };
 
 /**

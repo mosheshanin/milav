@@ -35,6 +35,11 @@ export class SilenceDetector {
     this.threshold = options.minThreshold;
   }
 
+  /** Человек заговорил хотя бы раз за запись (громкость выше порога не меньше `minSpeechMs`). */
+  get heardVoice(): boolean {
+    return this.spoke;
+  }
+
   /** Принимает громкость `level` (0..1) в момент `t` (мс от начала записи). Возвращает true, когда пора остановить запись. */
   push(level: number, t: number): boolean {
     const dt = this.lastSample === null ? 0 : Math.max(0, t - this.lastSample);

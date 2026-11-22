@@ -252,7 +252,8 @@ function QuizPlay({
   async function checkSpeech(audio: Blob) {
     try {
       const res = await api.quizSpeech(sessionId, index, audio);
-      return { ...res, match: res.correct, heard: res.heard ?? "" };
+      // noSpeech: голоса не слышно, попытка не потрачена; SpeakRecorder просит сказать ещё раз и дальше ответ не передаёт.
+      return { ...res, match: res.correct, heard: res.heard ?? "", noSpeech: res.noSpeech === true };
     } catch (e) {
       if (isQuizSessionLost(e)) setLost(true);
       throw e;
@@ -465,7 +466,7 @@ function QuestionBody({
   busy: boolean;
   onChoose: (optionId: string) => void;
   onTypeLetter: (letter: string) => void;
-  checkSpeech: (audio: Blob) => Promise<QuizAnswerResponse & { match: boolean; heard: string }>;
+  checkSpeech: (audio: Blob) => Promise<QuizAnswerResponse & { match: boolean; heard: string; noSpeech: boolean }>;
   onSpeechAnswered: (res: QuizAnswerResponse) => void;
   onSpeechGiveUp: () => void;
   onWriteDone: (result: WriteResult) => void;

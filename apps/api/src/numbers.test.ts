@@ -13,7 +13,8 @@ const setMode = (value: string) =>
   api("/api/admin/config", { method: "PUT", as: OWNER, body: JSON.stringify({ key: "numbersTrainer", value }), headers: { "Content-Type": "application/json" } }, env());
 const speak = (as: number, query: string, bytes = 2000, e: Bindings = env()) =>
   api(`/api/numbers/speech?${query}`, { method: "POST", as, body: new Uint8Array(bytes), headers: { "Content-Type": "audio/webm" } }, e);
-const json = async (res: Response) => (await res.json()) as { match?: boolean; heard?: string; error?: string; retryAfter?: number };
+const json = async (res: Response) =>
+  (await res.json()) as { match?: boolean; heard?: string; noSpeech?: boolean; error?: string; retryAfter?: number };
 
 describe("тренажёр чисел: проверка речи", () => {
   it("по умолчанию только команде: ученику 403, владельцу 200", async () => {
@@ -32,6 +33,15 @@ describe("тренажёр чисел: проверка речи", () => {
     const off = await speak(OWNER, "scene=number&value=35");
     expect(off.status).toBe(403);
     expect(await json(off)).toEqual({ error: "feature_off" });
+  });
+
+  it("тишина и выдуманное «תודה רבה»: голоса не слышно, число 0 засчитывается (22.11)", async () => {
+    for (const heard of ["", "תודה רבה"]) {
+      ctx.heard = heard;
+      expect(await json(await speak(OWNER, "scene=number&value=35"))).toEqual({ heard: "", match: false, noSpeech: true });
+    }
+    ctx.heard = "0";
+    expect((await json(await speak(OWNER, "scene=number&value=0"))).match).toBe(true);
   });
 
   it("без входа 401", async () => {

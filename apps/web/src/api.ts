@@ -90,6 +90,8 @@ export interface StageResponse {
 export interface SpeechResponse {
   heard: string;
   match: boolean;
+  /** Голоса не слышно (тишина или выдумка распознавателя): этап не отмечен, просим сказать ещё раз. */
+  noSpeech?: boolean;
   progress?: WordProgress;
   pointsAwarded?: number;
   points?: number;
@@ -140,7 +142,7 @@ export const api = {
     }),
   /** Тренажёр «Числа на слух», задание «сказать вслух»: запись голоса и задание (число, цена, время…) в адресе. */
   numbersSpeech: (target: NumberTarget, audio: Blob) =>
-    request<{ match: boolean; heard: string }>(`/api/numbers/speech?${numberTargetQuery(target)}`, {
+    request<{ match: boolean; heard: string; noSpeech?: boolean }>(`/api/numbers/speech?${numberTargetQuery(target)}`, {
       method: "POST",
       headers: { "Content-Type": audio.type || "audio/webm" },
       body: audio,

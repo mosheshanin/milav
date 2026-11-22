@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { wordLetters, type Stroke } from "@milav/shared";
 import { app } from "./app";
+import { MAX_AUDIO_BYTES } from "./speech";
 import {
   api,
   auth,
@@ -273,6 +274,59 @@ describe("проверка речи", () => {
     expect((await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(10) }, { ...ctx.env, AI: undefined })).status).toBe(503);
     expect((await speak(1, word.id, 0)).status).toBe(400);
     expect((await speak(1, word.id, 1_600_000)).status).toBe(413);
+  });
+
+  it("запись больше 150 КБ отклоняется и до Whisper не доходит (вопрос 91)", async () => {
+    let calls = 0;
+    const counting = { ...ctx.env, AI: { run: async () => ((calls += 1), { text: word.he }) } };
+    const call = (bytes: number) =>
+      api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(bytes), headers: { "Content-Type": "audio/webm" } }, counting);
+    expect((await call(MAX_AUDIO_BYTES)).status).toBe(200);
+    expect(calls).toBe(1);
+    expect((await call(MAX_AUDIO_BYTES + 1)).status).toBe(413);
+    expect(calls).toBe(1);
+    expect(MAX_AUDIO_BYTES).toBeLessThanOrEqual(150_000);
+  });
+
+  it("тишина и выдуманное Whisper «תודה רבה»: этап не отмечен, выдуманное не показано (22.11)", async () => {
+    for (const heard of ["", "...", "תודה רבה", "תודה רבה!", "תודה", "תורגם על ידי", "Thank you."]) {
+      ctx.heard = heard;
+      const body = (await (await speak(1, word.id)).json()) as any;
+      expect(body).toEqual({ heard: "", match: false, noSpeech: true });
+    }
+    const progress = (await (await api(`/api/lessons/${lesson.id}/progress`, { as: 1 })).json()) as any;
+    expect(progress.words[0].speak).toBe(false);
+  });
+
+  it("«תודה רבה» как слово урока засчитывается, когда его сказали", async () => {
+    ctx.heard = "תודה רבה";
+    expect(((await (await speak(1, "phrases-2-thank-you-very")).json()) as any).match).toBe(true);
+  });
+
+  it("Whisper сам пометил запись «не речью»: голоса не слышно, даже если текст совпал", async () => {
+    const silent = { ...ctx.env, AI: { run: async () => ({ text: word.he, segments: [{ text: word.he, no_speech_prob: 0.93 }] }) } };
+    const body = (await (await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(100) }, silent)).json()) as any;
+    expect(body).toEqual({ heard: "", match: false, noSpeech: true });
+    const speech = { ...ctx.env, AI: { run: async () => ({ text: word.he, segments: [{ text: word.he, no_speech_prob: 0.12 }] }) } };
+    expect(((await (await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(100) }, speech)).json()) as any).match).toBe(true);
+  });
+
+  it("Whisper просят вырезать тишину; если параметр не принят, проверка идёт без него", async () => {
+    const inputs: Record<string, unknown>[] = [];
+    const picky = {
+      ...ctx.env,
+      AI: {
+        run: async (_model: string, input: Record<string, unknown>) => {
+          inputs.push(input);
+          if (input.vad_filter) throw new Error("unknown parameter vad_filter");
+          return { text: word.he };
+        },
+      },
+    };
+    const res = await api(`/api/speech/check?wordId=${word.id}`, { method: "POST", as: 1, body: new Uint8Array(100) }, picky);
+    expect(((await res.json()) as any).match).toBe(true);
+    expect(inputs.map((i) => i.vad_filter)).toEqual([true, undefined]);
+    expect(inputs[0]).toMatchObject({ language: "he", task: "transcribe" });
   });
 
   it("ошибка распознавателя превращается в 502", async () => {

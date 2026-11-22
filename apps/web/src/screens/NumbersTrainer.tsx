@@ -279,6 +279,11 @@ function SayAnswer({ task, onResult }: { task: NumberTask; onResult: (ok: boolea
     attempts.current += 1;
     try {
       const res = await api.numbersSpeech(task.target, audio);
+      if (res.noSpeech) {
+        // Голоса не слышно: попытка не тратится, SpeakRecorder просит сказать ещё раз.
+        attempts.current -= 1;
+        return { match: false, heard: "", noSpeech: true };
+      }
       return {
         match: res.match,
         heard: res.heard,

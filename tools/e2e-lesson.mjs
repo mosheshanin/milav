@@ -432,6 +432,33 @@ await shot(page, "20-mic-denied");
 check((await page.textContent('[data-testid="mic-denied"]')).includes("Микрофон выключен"), "при отказе показана инструкция, как включить микрофон");
 await page.context().close();
 
+// Микрофон пишет тишину (22.11): первая тихая запись не уходит на сервер (Whisper на тишине выдумывает «תודה רבה»),
+// ученик видит «Голоса не слышно»; следующая уходит в любом случае (вдруг микрофон просто тихий).
+page = await openSpeak(() => {
+  navigator.mediaDevices.getUserMedia = async () => {
+    const ac = new AudioContext();
+    const osc = ac.createOscillator();
+    const gain = ac.createGain();
+    gain.gain.value = 0;
+    const dest = ac.createMediaStreamDestination();
+    osc.connect(gain).connect(dest);
+    osc.start();
+    return dest.stream;
+  };
+});
+let speechPosts = 0;
+page.on("request", (r) => r.url().includes("/api/speech/check") && (speechPosts += 1));
+await page.waitForSelector('[data-testid="mic-ask"]');
+await page.click('[data-testid="mic-allow"]');
+await page.waitForSelector('[data-testid="speak-silence"]', { timeout: 8000 });
+await shot(page, "20b-speak-silence");
+check(speechPosts === 0, "тихая запись не отправлена на распознавание");
+check(!(await page.textContent("body")).includes("Услышано"), "вместо «Услышано: …» показано «Голоса не слышно»");
+await page.click('[data-testid="speak-start"]');
+await page.waitForSelector('[data-testid="speak-retry"]', { timeout: 8000 });
+check(speechPosts === 1, "вторая тихая запись подряд всё равно отправлена");
+await page.context().close();
+
 // ---------- Сценарий Г: навигация (кнопка «назад» Telegram, «Продолжить», перезагрузка, выход из викторины) ----------
 const D = 2004;
 const [w0, w1] = lesson.words;

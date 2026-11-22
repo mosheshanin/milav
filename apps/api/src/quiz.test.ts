@@ -334,9 +334,9 @@ describe("вопрос «произнеси»", () => {
 
   it("неверное слово: первая попытка не финальна, вторая засчитывается ошибкой", async () => {
     const { session, index } = await toSpeak();
-    ctx.heard = "";
+    ctx.heard = "שולחן";
     const first = (await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse;
-    expect(first).toMatchObject({ correct: false, final: false, attemptsLeft: 1, heard: "", mistakes: 0 });
+    expect(first).toMatchObject({ correct: false, final: false, attemptsLeft: 1, heard: "שולחן", mistakes: 0 });
 
     const second = (await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse;
     expect(second).toMatchObject({ correct: false, final: true, mistakes: 1 });
@@ -345,7 +345,7 @@ describe("вопрос «произнеси»", () => {
 
   it("вторая попытка может быть верной", async () => {
     const { session, index, target } = await toSpeak();
-    ctx.heard = "";
+    ctx.heard = "שולחן";
     await speechRaw(1, session.sessionId, index);
     ctx.heard = target.he;
     const second = (await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse;
@@ -354,13 +354,32 @@ describe("вопрос «произнеси»", () => {
 
   it("после попыток счётчик сбрасывается для следующего вопроса «произнеси»", async () => {
     const { session, index } = await toSpeak();
-    ctx.heard = "";
+    ctx.heard = "שולחן";
     await speechRaw(1, session.sessionId, index);
     await speechRaw(1, session.sessionId, index);
     const next = index + 1;
     expect(session.questions[next]!.type).toBe("speak");
     const body = (await (await speechRaw(1, session.sessionId, next)).json()) as QuizAnswerResponse;
     expect(body).toMatchObject({ final: false, attemptsLeft: 1 });
+  });
+
+  it("тишина и «תודה רבה», выдуманное Whisper на тишине, попытку не тратят (22.11)", async () => {
+    const { session, index, target } = await toSpeak();
+    for (const heard of ["", " . ", "תודה רבה.", "!תודה"]) {
+      ctx.heard = heard;
+      const body = (await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse;
+      expect(body).toMatchObject({ noSpeech: true, correct: false, final: false, index, attemptsLeft: 2, mistakes: 0 });
+      expect(body.heard).toBeUndefined();
+    }
+    expect(await count("SELECT speak_attempts AS n FROM quiz_sessions")).toBe(0);
+
+    ctx.heard = "שולחן";
+    const wrong = (await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse;
+    expect(wrong).toMatchObject({ correct: false, final: false, attemptsLeft: 1 });
+    ctx.heard = "";
+    expect(((await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse).attemptsLeft).toBe(1);
+    ctx.heard = target.he;
+    expect(((await (await speechRaw(1, session.sessionId, index)).json()) as QuizAnswerResponse).correct).toBe(true);
   });
 
   it("сбой распознавателя и недоступный ИИ не тратят попытку", async () => {

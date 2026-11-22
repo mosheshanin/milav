@@ -12,6 +12,11 @@ export interface ActiveRecording {
   /** Момент начала записи (performance.now) и максимальная длительность, мс: для индикатора времени. */
   startedAt: number;
   maxMs: number;
+  /**
+   * Был ли на записи голос по громкости микрофона: true заговорили, false только тишина, null не знаем (Web Audio недоступен).
+   * Смотреть после окончания записи.
+   */
+  voiceHeard(): boolean | null;
 }
 
 export interface RecordingOptions {
@@ -27,6 +32,11 @@ export interface RecordingOptions {
 export const EQUALIZER_BARS = 16;
 
 const MIME_TYPES = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"];
+/**
+ * Битрейт записи. Для распознавания речи 32 кбит/с с запасом, а запись в 4 с весит около 16 КБ: сервер принимает
+ * не больше 150 КБ (`MAX_AUDIO_BYTES`, вопрос 91). Без этого телефон может писать 128 кбит/с и больше.
+ */
+export const AUDIO_BITS_PER_SECOND = 32_000;
 const TICK_MS = 50;
 
 /**
@@ -41,7 +51,7 @@ export async function startRecording(options: RecordingOptions = {}): Promise<Ac
   const stream = await acquireMic();
 
   const mimeType = MIME_TYPES.find((t) => MediaRecorder.isTypeSupported(t));
-  const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
+  const recorder = new MediaRecorder(stream, { ...(mimeType ? { mimeType } : {}), audioBitsPerSecond: AUDIO_BITS_PER_SECOND });
   const chunks: Blob[] = [];
   recorder.ondataavailable = (e) => {
     if (e.data.size > 0) chunks.push(e.data);
@@ -101,6 +111,7 @@ export async function startRecording(options: RecordingOptions = {}): Promise<Ac
     finished,
     startedAt,
     maxMs,
+    voiceHeard: () => (analyser ? detector.heardVoice : null),
     stop: () => {
       stopRecorder();
       return finished;
