@@ -23,6 +23,19 @@ const templates = JSON.parse(
 ).filter((t) => t.source === "font:heebo");
 const heByRu = new Map(lesson.words.map((w) => [w.ru, w.he]));
 
+/**
+ * После нажатия «Записать» ждёт ответа сервера. Фальшивый микрофон Chromium пищит коротко и редко, и детектор голоса
+ * не всегда считает это речью: тогда приложение запись не отправляет и пишет «Голоса не слышно» (22.11). Вторая тихая
+ * запись подряд уходит на сервер всегда, поэтому записываем ещё раз и ждём его ответа («проверка недоступна»).
+ */
+async function untilServerAnswer(p, timeout = 7000) {
+  await p.waitForSelector('[data-testid="speak-skip"]', { timeout });
+  if (await p.locator('[data-testid="speak-silence"]').count()) {
+    await p.click('[data-testid="speak-start"]');
+    await p.waitForSelector('[data-testid="speak-retry"]', { timeout });
+  }
+}
+
 function findChromium() {
   const root = process.env.PLAYWRIGHT_BROWSERS_PATH ?? "/opt/pw-browsers";
   for (const dir of readdirSync(root)) {
@@ -220,10 +233,12 @@ check(seen.size > 2, `эквалайзер реагирует на звук (р�
 // идёт до предела SPEAK_PHRASE_MAX_MS (4 с) от начала.
 const startedAt = Date.now();
 await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 7000 });
+const stoppedAt = Date.now();
+await untilServerAnswer(page);
 if (first.he.includes(" ")) {
-  check(Date.now() - recordStartedAt < 4700, `запись фразы остановилась сама за ${Date.now() - recordStartedAt} мс от начала (предел 4 с)`);
+  check(stoppedAt - recordStartedAt < 4700, `запись фразы остановилась сама за ${stoppedAt - recordStartedAt} мс от начала (предел 4 с)`);
 } else {
-  check(Date.now() - startedAt < 2600, `запись остановилась сама за ${Date.now() - startedAt} мс после показа эквалайзера`);
+  check(stoppedAt - startedAt < 2600, `запись остановилась сама за ${stoppedAt - startedAt} мс после показа эквалайзера`);
 }
 check(!(await page.locator('[data-testid="recording"]').count()), "после остановки эквалайзер скрыт");
 await shot(page, "04-speak-unavailable");
@@ -294,7 +309,7 @@ for (let q = 0; q < 25; q++) {
   } else if (await page.locator('[data-testid="speak-start"]').count()) {
     // «произнеси»: распознавания нет, пропускаем — вопрос засчитывается неверным
     await page.click('[data-testid="speak-start"]');
-    await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
+    await untilServerAnswer(page);
     await page.click('[data-testid="speak-skip"]');
     await page.waitForSelector('[data-testid="quiz-feedback"]');
     wrongShown++;
@@ -413,12 +428,12 @@ check(true, "до первой записи показано приглашен�
 check((await page.evaluate(() => window.__gum)) === 0, "системный запрос не вызван, пока человек не нажал кнопку");
 await page.click('[data-testid="mic-allow"]');
 await page.waitForSelector('[data-testid="recording"]');
-await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
+await untilServerAnswer(page);
 await page.click('[data-testid="speak-retry"]');
 check((await page.locator('[data-testid="mic-ask"]').count()) === 0, "после разрешения приглашение больше не показывается");
 await page.click('[data-testid="speak-start"]');
 await page.waitForSelector('[data-testid="recording"]');
-await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 6000 });
+await untilServerAnswer(page);
 check((await page.evaluate(() => window.__gum)) === 1, "за две записи системный запрос микрофона был один");
 await page.context().close();
 
@@ -454,6 +469,7 @@ await page.waitForSelector('[data-testid="speak-silence"]', { timeout: 8000 });
 await shot(page, "20b-speak-silence");
 check(speechPosts === 0, "тихая запись не отправлена на распознавание");
 check(!(await page.textContent("body")).includes("Услышано"), "вместо «Услышано: …» показано «Голоса не слышно»");
+check((await page.locator('[data-testid="speak-skip"]').count()) === 1, "при «Голоса не слышно» можно отложить этап");
 await page.click('[data-testid="speak-start"]');
 await page.waitForSelector('[data-testid="speak-retry"]', { timeout: 8000 });
 check(speechPosts === 1, "вторая тихая запись подряд всё равно отправлена");

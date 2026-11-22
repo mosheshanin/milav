@@ -244,9 +244,10 @@ export function SpeakRecorder<R extends SpeakVerdict>({
       {mode === "quiz" && attemptsLeft !== null && attemptsLeft > 0 && (
         <p className="text-sm text-ink-soft">Осталась попытка: {attemptsLeft}</p>
       )}
-      {mode === "study" && fails >= STUDY_FAILS_BEFORE_SKIP && (
+      {/* Голоса не слышно: попытки не тратятся, поэтому с неработающим микрофоном без этой кнопки из вопроса не выйти. */}
+      {(silent || (mode === "study" && fails >= STUDY_FAILS_BEFORE_SKIP)) && (
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">
-          Отложить этап
+          {skipLabel}
         </Button>
       )}
     </div>

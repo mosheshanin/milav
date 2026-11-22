@@ -233,7 +233,12 @@ await page.context().close();
   await shot(sp, "08-say");
   check(await noOverflow(sp), "задание «сказать вслух» без горизонтальной прокрутки");
   await sp.click('[data-testid="speak-start"]');
+  // Фальшивый микрофон пищит редко: если приложение сочло запись тихой («Голоса не слышно»), вторая уйдёт на сервер.
   await sp.waitForSelector('[data-testid="speak-skip"]', { timeout: 9000 });
+  if (await sp.locator('[data-testid="speak-silence"]').count()) {
+    await sp.click('[data-testid="speak-start"]');
+    await sp.waitForSelector('[data-testid="speak-retry"]', { timeout: 9000 });
+  }
   check((await sp.textContent("body")).includes("Проверка произношения сейчас недоступна"), "без Workers AI: «проверка недоступна»");
   await shot(sp, "09-say-unavailable");
   await sp.click('[data-testid="speak-skip"]');
