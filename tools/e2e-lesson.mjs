@@ -447,20 +447,29 @@ await shot(page, "20-mic-denied");
 check((await page.textContent('[data-testid="mic-denied"]')).includes("Микрофон выключен"), "при отказе показана инструкция, как включить микрофон");
 await page.context().close();
 
-// Микрофон пишет тишину (22.11): первая тихая запись не уходит на сервер (Whisper на тишине выдумывает «תודה רבה»),
-// ученик видит «Голоса не слышно»; следующая уходит в любом случае (вдруг микрофон просто тихий).
-page = await openSpeak(() => {
+// Микрофон слышит только тихий шум комнаты (22.11): первая тихая запись не уходит на сервер (Whisper на тишине
+// выдумывает «תודה רבה»), ученик видит «Голоса не слышно»; следующая уходит в любом случае (вдруг микрофон просто тихий).
+// Громкость 0,012: живой, но ниже порога голоса (0,03).
+const fakeMic = (volume) => () => {
+  window.__gum = 0;
   navigator.mediaDevices.getUserMedia = async () => {
+    window.__gum++;
     const ac = new AudioContext();
     const osc = ac.createOscillator();
     const gain = ac.createGain();
-    gain.gain.value = 0;
+    gain.gain.value = Number(document.documentElement.dataset.fakeMicVolume ?? "0");
     const dest = ac.createMediaStreamDestination();
     osc.connect(gain).connect(dest);
     osc.start();
     return dest.stream;
   };
-});
+};
+async function openFakeMic(volume) {
+  const p = await openSpeak(fakeMic(volume));
+  await p.evaluate((v) => (document.documentElement.dataset.fakeMicVolume = String(v)), volume);
+  return p;
+}
+page = await openFakeMic(0.012);
 let speechPosts = 0;
 page.on("request", (r) => r.url().includes("/api/speech/check") && (speechPosts += 1));
 await page.waitForSelector('[data-testid="mic-ask"]');
@@ -473,6 +482,24 @@ check((await page.locator('[data-testid="speak-skip"]').count()) === 1, "при 
 await page.click('[data-testid="speak-start"]');
 await page.waitForSelector('[data-testid="speak-retry"]', { timeout: 8000 });
 check(speechPosts === 1, "вторая тихая запись подряд всё равно отправлена");
+check((await page.evaluate(() => window.__gum)) === 1, "живой тихий микрофон не пересоздаётся между записями");
+await page.context().close();
+
+// Мёртвый микрофон (22.11, iPhone со второго слова): ровный ноль без шума. Запись не отправляется, приложение
+// просит нажать ещё раз и при следующем нажатии создаёт поток заново (как перезапуск приложения).
+page = await openFakeMic(0);
+speechPosts = 0;
+page.on("request", (r) => r.url().includes("/api/speech/check") && (speechPosts += 1));
+await page.waitForSelector('[data-testid="mic-ask"]');
+await page.click('[data-testid="mic-allow"]');
+await page.waitForSelector('[data-testid="speak-mic-restarted"]', { timeout: 8000 });
+await shot(page, "20c-mic-restarted");
+check(speechPosts === 0, "мёртвая тишина не отправлена на распознавание");
+await page.evaluate(() => (document.documentElement.dataset.fakeMicVolume = "0.3"));
+await page.click('[data-testid="speak-start"]');
+await page.waitForSelector('[data-testid="speak-retry"]', { timeout: 8000 });
+check((await page.evaluate(() => window.__gum)) === 2, "после мёртвой тишины микрофон включён заново");
+check(speechPosts === 1, "живая запись после перезапуска микрофона ушла на распознавание");
 await page.context().close();
 
 // ---------- Сценарий Г: навигация (кнопка «назад» Telegram, «Продолжить», перезагрузка, выход из викторины) ----------

@@ -8,7 +8,7 @@ export const CLIENT_LOG_PATH = "/api/client-log";
 /**
  * События, о которых знает только телефон. Сервер принимает только эти имена, остальное отклоняет,
  * чтобы в логи не попадало что угодно.
- * - mic_problem: не удалось включить микрофон (detail: denied | unsupported);
+ * - mic_problem: не удалось включить микрофон (detail: denied | unsupported) или он отдал мёртвую тишину и включён заново (dead, 22.11);
  * - app_crash: интерфейс упал и показан экран «Что-то пошло не так» (подробности приходят отдельным отчётом об ошибке).
  */
 export const CLIENT_EVENTS = ["mic_problem", "app_crash"] as const;

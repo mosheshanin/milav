@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { CircleCheck, Mic, Square } from "lucide-react";
 import { SPEAK_PHRASE_MAX_MS, SPEAK_PHRASE_SILENCE_MS } from "@milav/shared";
 import { ApiError } from "../api";
-import { micPermission, type MicState } from "../lib/mic";
+import { micPermission, primeAudio, type MicState } from "../lib/mic";
 import { reportEvent } from "../lib/telemetry";
 import { EQUALIZER_BARS, RecorderError, startRecording, type ActiveRecording } from "../lib/recorder";
 import { MicAsk, MicDenied } from "./MicNotice";
@@ -82,6 +82,8 @@ export function SpeakRecorder<R extends SpeakVerdict>({
   const [heard, setHeard] = useState<string | null>(null);
   /** Последняя запись без голоса: показываем «Голоса не слышно» вместо «Услышано: …». */
   const [silent, setSilent] = useState(false);
+  /** Микрофон отдал мёртвую тишину (iPhone отнял его): он уже отпущен, следующее нажатие включит его заново. */
+  const [micRestarted, setMicRestarted] = useState(false);
   /** Прошлую запись не отправили, потому что микрофон не услышал голоса: следующую отправим в любом случае. */
   const skippedSilent = useRef(false);
   /** Квиз: сколько попыток осталось по словам сервера (null, пока не было неудачных). */
@@ -108,9 +110,12 @@ export function SpeakRecorder<R extends SpeakVerdict>({
 
   async function begin() {
     if (starting) return;
+    // Звуковой движок для эквалайзера на iPhone запускается только прямо по нажатию, до любых ожиданий.
+    primeAudio();
     setStarting(true);
     setHeard(null);
     setSilent(false);
+    setMicRestarted(false);
     try {
       // Запись остановится сама: после паузы в речи или через SPEAK_MAX_MS (у фразы SPEAK_PHRASE_*); можно и вручную.
       const rec = await startRecording(
@@ -136,6 +141,14 @@ export function SpeakRecorder<R extends SpeakVerdict>({
     if (!alive.current) return;
     active.current = null;
     setRecording(null);
+    // Микрофон был мёртв (ровная тишина без шума): запись бесполезна, её не отправляем и попытку не тратим.
+    // Микрофон уже отпущен, следующее нажатие возьмёт свежий поток, как после перезапуска приложения.
+    if (rec.deadInput()) {
+      reportEvent("mic_problem", "dead");
+      setMicRestarted(true);
+      setPhase("idle");
+      return;
+    }
     // Микрофон не услышал голоса: не отправляем запись (Whisper на тишине выдумывает «תודה רבה», а квота общая на всех).
     // Только один раз подряд: если микрофон слишком тихий и порог не срабатывает, следующая запись всё равно уйдёт на сервер.
     if (rec.voiceHeard() === false && !skippedSilent.current) {
@@ -231,6 +244,11 @@ export function SpeakRecorder<R extends SpeakVerdict>({
         </Button>
       )}
 
+      {micRestarted && (
+        <p className="text-danger" role="status" data-testid="speak-mic-restarted">
+          Микрофон не отвечал, мы включили его заново. Нажмите «Записать» ещё раз.
+        </p>
+      )}
       {silent && (
         <p className="text-danger" role="status" data-testid="speak-silence">
           Голоса не слышно. Скажите слово громче и поднесите телефон ближе.
@@ -245,7 +263,7 @@ export function SpeakRecorder<R extends SpeakVerdict>({
         <p className="text-sm text-ink-soft">Осталась попытка: {attemptsLeft}</p>
       )}
       {/* Голоса не слышно: попытки не тратятся, поэтому с неработающим микрофоном без этой кнопки из вопроса не выйти. */}
-      {(silent || (mode === "study" && fails >= STUDY_FAILS_BEFORE_SKIP)) && (
+      {(silent || micRestarted || (mode === "study" && fails >= STUDY_FAILS_BEFORE_SKIP)) && (
         <Button variant="ghost" onClick={onGiveUp} data-testid="speak-skip">
           {skipLabel}
         </Button>

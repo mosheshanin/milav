@@ -261,7 +261,7 @@ node tools/e2e-lesson.mjs e2e-shots  # в другом, скриншоты по�
 | `server_error` | error | необработанная ошибка сервера (ученик видит «internal_error») | `method`, `path`, `message`, `stack` |
 | `client_error` | error | ошибка в приложении на телефоне: скрипт, промис, падение экрана | `source` (`error` / `rejection` / `render`), `message`, `stack`, `screen`, `platform`, `tgVersion`, `app` (коммит сборки), `uid` |
 | `client_app_crash` | info | экран упал, ученик видит «Что-то пошло не так» и кнопку «Перезапустить» | `screen`, `platform`, … |
-| `client_mic_problem` | info | не включился микрофон | `detail` (`denied` / `unsupported`), `platform`, … |
+| `client_mic_problem` | info | не включился микрофон или он отдал мёртвую тишину и приложение включило его заново | `detail` (`denied` / `unsupported` / `dead`, 22.11: так бывает на iPhone), `platform`, … |
 | `whisper_error` | error | Workers AI не распознал запись (лимит, таймаут, формат) | `message` |
 | `whisper_vad_error` | warn | Workers AI не принял вызов с вырезанием тишины (`vad_filter`), запись распознана повторно без него (22.11) | `message` |
 | `health_db_error` | error | `/api/health` не достучался до базы | `message` |
