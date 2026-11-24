@@ -2,10 +2,10 @@
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
 // В env.local владелец (а значит, администратор) это тестовый пользователь 1001 (TEMPLATE_RECORDER_IDS в wrangler.jsonc).
 // Запуск: node tools/e2e-record.mjs [каталог для скриншотов]
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql, query } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -24,11 +24,6 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
-    stdio: "ignore",
-  });
-}
 
 const failures = [];
 function check(condition, text) {
@@ -156,12 +151,8 @@ await revealLesson(page, "animals-1");
 check(true, "стрелка назад в сетке ведёт на главную");
 
 // Рисунки лежат в базе (приёмник), номера и форма верны.
-const rows = execFileSync(
-  "npx",
-  ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", "SELECT letter, COUNT(*) AS n FROM letter_templates GROUP BY letter"],
-  { encoding: "utf8" },
-);
-check(JSON.parse(rows)[0].results.length === 1 && JSON.parse(rows)[0].results[0].n === 5, "в таблице letter_templates 5 рисунков одной формы");
+const rows = query("SELECT letter, COUNT(*) AS n FROM letter_templates GROUP BY letter");
+check(rows.length === 1 && rows[0].n === 5, "в таблице letter_templates 5 рисунков одной формы");
 
 await browser.close();
 sql("DELETE FROM letter_templates;");

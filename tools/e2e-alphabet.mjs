@@ -4,10 +4,10 @@
 //   npm run build && npx wrangler d1 migrations apply milav-db --local --env local && npm run dev:api
 // Запуск: node tools/e2e-alphabet.mjs [каталог для скриншотов]
 // Урок берётся из E2E_ALPHABET (по умолчанию alphabet-1): так же проверяются уроки с конечными формами.
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql, query } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -31,19 +31,7 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
-    stdio: "ignore",
-  });
-}
 
-function query(command) {
-  return JSON.parse(
-    execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", command], {
-      encoding: "utf8",
-    }),
-  )[0].results;
-}
 
 const failures = [];
 function check(condition, text) {

@@ -2,9 +2,9 @@
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
 // В env.local владелец это тестовый пользователь 1001 (TEMPLATE_RECORDER_IDS в wrangler.jsonc), ученик 1002.
 // Запуск: node tools/e2e-admin.mjs [каталог для скриншотов]
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { sql } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots/admin";
@@ -19,11 +19,6 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
-    stdio: "ignore",
-  });
-}
 
 const failures = [];
 function check(condition, text) {

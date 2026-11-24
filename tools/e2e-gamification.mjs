@@ -3,10 +3,10 @@
 // лист «Мы нашли ваши достижения», возврат на экран после перезагрузки, выбор рода для фраз-примеров в «Настройках». Любое нарушение CSP это провал.
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs), в локальной среде таблица включена.
 // Запуск: node tools/e2e-gamification.mjs [каталог для скриншотов]
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -25,11 +25,6 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
-    stdio: "ignore",
-  });
-}
 
 const failures = [];
 function check(condition, text) {

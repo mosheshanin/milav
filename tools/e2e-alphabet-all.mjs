@@ -10,10 +10,10 @@
 //  - автопереход: верный ответ сам ведёт к следующему вопросу через 2 секунды (выбор, письмо), после ошибки автоперехода
 //    нет, кнопка «Дальше» остаётся;
 //  - итог: «сдана», но это не урок: сданные уроки и статус не растут, на главной карточка «Сдана».
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql, query } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -35,14 +35,6 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], { stdio: "ignore" });
-}
-function query(command) {
-  return JSON.parse(
-    execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", command], { encoding: "utf8" }),
-  )[0].results;
-}
 
 const failures = [];
 function check(condition, text) {

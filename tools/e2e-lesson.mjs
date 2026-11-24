@@ -6,10 +6,10 @@
 // и уроки прилагательных с формами (colors-1).
 // Распознавание речи здесь недоступно (нет Workers AI), поэтому этап «говори» проверяется только как
 // «недоступно → отложить», а у слов он отмечается прямо в локальной базе.
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql, query } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -45,11 +45,6 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-function sql(command) {
-  execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command], {
-    stdio: "ignore",
-  });
-}
 
 const failures = [];
 function check(condition, text) {
@@ -307,9 +302,13 @@ for (let q = 0; q < 25; q++) {
     if (q === 0) await shot(page, "12-quiz-correct");
     await page.click('[data-testid="quiz-next"]');
   } else if (await page.locator('[data-testid="speak-start"]').count()) {
-    // «произнеси»: распознавания нет, пропускаем — вопрос засчитывается неверным
+    // «произнеси»: распознавания нет, пропускаем — вопрос засчитывается неверным. Запись не ждём до конца (2,5 с):
+    // через 0,3 с «Стоп». Что бы ни вышло (тишина, микрофон заново, «проверка недоступна»), появится «Пропустить».
     await page.click('[data-testid="speak-start"]');
-    await untilServerAnswer(page);
+    await page.waitForSelector('[data-testid="speak-stop"]');
+    await page.waitForTimeout(300);
+    if (await page.locator('[data-testid="speak-stop"]').count()) await page.click('[data-testid="speak-stop"]');
+    await page.waitForSelector('[data-testid="speak-skip"]', { timeout: 7000 });
     await page.click('[data-testid="speak-skip"]');
     await page.waitForSelector('[data-testid="quiz-feedback"]');
     wrongShown++;
@@ -333,13 +332,7 @@ await page.waitForSelector('[data-testid="quiz-saved"]');
 await shot(page, "16-result-saved");
 check((await page.textContent('[data-testid="quiz-saved"]')).includes("Новый сданный урок"), "урок сдан, засчитан в статус");
 {
-  const rows = JSON.parse(
-    execFileSync(
-      "npx",
-      ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT correct, total, passed FROM quiz_attempts WHERE user_id=${A}`],
-      { encoding: "utf8" },
-    ),
-  )[0].results;
+  const rows = query(`SELECT correct, total, passed FROM quiz_attempts WHERE user_id=${A}`);
   check(rows.length === 1 && `${rows[0].correct} из ${rows[0].total}` === resultText.trim() && rows[0].passed === 1, `в базе одна попытка с тем же итогом, что на экране (${JSON.stringify(rows)})`);
 }
 // Новичку после первого сданного урока показывается лист поздравления (геймификация): закрываем его.
@@ -383,12 +376,8 @@ await page.click('[data-testid="quiz-restart"]');
 await page.waitForSelector('[data-testid="quiz-progress"]');
 check((await page.textContent('[data-testid="quiz-progress"]')).includes("Вопрос 1 "), "после «Начать заново» снова первый вопрос");
 await page.context().close();
-const attempts = execFileSync(
-  "npx",
-  ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${B}`],
-  { encoding: "utf8" },
-);
-check(JSON.parse(attempts)[0].results[0].n === 0, "прерванная викторина ничего не записала в базу");
+const attempts = query(`SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${B}`);
+check(attempts[0].n === 0, "прерванная викторина ничего не записала в базу");
 
 
 // ---------- Сценарий В: приглашение микрофона, один системный запрос, отказ ----------
@@ -660,13 +649,7 @@ sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage
   check(last.body.aborted === true && !last.body.result, "скрипт без голоса и штрихов не набирает проходной балл: викторина прервана");
   const me = await (await context.request.get(`${BASE}/api/me`, { headers })).json();
   check(me.passedLessons === 0, "урок скриптом не сдан");
-  const forged = JSON.parse(
-    execFileSync(
-      "npx",
-      ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--json", "--command", `SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${E}`],
-      { encoding: "utf8" },
-    ),
-  )[0].results[0].n;
+  const forged = query(`SELECT COUNT(*) AS n FROM quiz_attempts WHERE user_id=${E}`)[0].n;
   check(forged === 0, "в базе нет попыток от скрипта");
   await context.close();
 }

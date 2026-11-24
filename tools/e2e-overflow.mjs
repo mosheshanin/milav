@@ -3,10 +3,10 @@
 // у глаголов ещё и каждую вкладку времени. Длинные слова и формы (כחלחלות, מפוספסים) раньше вылезали за край.
 // Нужен запущенный локальный Worker со свежей сборкой фронтенда (как для tools/e2e-lesson.mjs).
 // Запуск: node tools/e2e-overflow.mjs [каталог для скриншотов]. Только некоторые уроки: E2E_LESSON=colors-3 или E2E_LESSON=colors-3,city-1.
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots/overflow";
@@ -46,7 +46,7 @@ writeFileSync(
     `DELETE FROM word_progress WHERE user_id=${USER};\n` +
     `INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${rows.join(",")};\n`,
 );
-execFileSync("npx", ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--file", seedFile], { stdio: "ignore" });
+sql(readFileSync(seedFile, "utf8"));
 
 const failures = [];
 let checks = 0;

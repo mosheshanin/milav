@@ -3,10 +3,10 @@
 // Отправку в Telegram и кнопки в чате проверяют юнит-тесты (reminders.test.ts): локально токена бота нет.
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
 // Запуск: node tools/e2e-reminders.mjs [каталог для скриншотов]
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
+import { sql, queryRow } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots/reminders";
@@ -23,13 +23,8 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-const sqlArgs = (command) => ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command];
-const sql = (command) => execFileSync("npx", sqlArgs(command), { stdio: "ignore" });
 /** Первая строка ответа SELECT как объект. */
-function sqlRow(command) {
-  const out = execFileSync("npx", [...sqlArgs(command), "--json"], { encoding: "utf8" });
-  return JSON.parse(out)[0]?.results?.[0] ?? null;
-}
+const sqlRow = queryRow;
 
 const failures = [];
 function check(condition, text) {

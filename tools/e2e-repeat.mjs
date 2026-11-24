@@ -2,9 +2,9 @@
 // карточка «Повторение» на главной, подход из 10 слов (выбор, набор, «Не помню»), итог, «Мои слова», выключатель в панели.
 // Нужен запущенный локальный Worker со свежей сборкой (как для tools/e2e-lesson.mjs, см. docs/DEPLOY.md).
 // Запуск: node tools/e2e-repeat.mjs [каталог для скриншотов]
-import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
+import { sql, queryRow } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots/repeat";
@@ -23,12 +23,8 @@ function findChromium() {
   throw new Error("Chromium не найден");
 }
 
-const sqlArgs = (command) => ["wrangler", "d1", "execute", "milav-db", "--local", "--env", "local", "--command", command];
-const sql = (command) => execFileSync("npx", sqlArgs(command), { stdio: "ignore" });
-function sqlRow(command) {
-  const out = execFileSync("npx", [...sqlArgs(command), "--json"], { encoding: "utf8" });
-  return JSON.parse(out)[0]?.results?.[0] ?? null;
-}
+/** Первая строка ответа SELECT как объект. */
+const sqlRow = queryRow;
 
 const failures = [];
 function check(condition, text) {
