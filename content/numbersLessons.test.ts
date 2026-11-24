@@ -30,3 +30,22 @@ describe("числа сверены с уроками «Числа»", () => {
     expect(readdirSync(dir).length).toBeGreaterThan(0);
   });
 });
+
+describe("книжные формы чисел (вопрос 53, 24.11)", () => {
+  const dir = new URL("./lessons/", import.meta.url);
+  const words = (lesson: string) =>
+    JSON.parse(readFileSync(new URL(`${lesson}.json`, dir), "utf8")).words as { id: string; value?: number; book?: true }[];
+
+  it("пометка «книжн.» стоит у мужских 3–10 и 11–19 и только у них", () => {
+    const book = ["numbers-1", "numbers-2", "numbers-3", "numbers-4", "numbers-5", "numbers-6"]
+      .flatMap(words)
+      .filter((w) => w.book)
+      .map((w) => w.value);
+    expect(book.sort((a, b) => a! - b!)).toEqual([3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
+  });
+
+  it("разговорные мужские формы без пометки: один, два, два перед словом, двадцать один", () => {
+    const plain = [...words("numbers-2"), ...words("numbers-5")].filter((w) => !w.book).map((w) => w.id);
+    expect(plain.sort()).toEqual(["numbers-2-one", "numbers-2-two", "numbers-2-two-before", "numbers-5-twenty-one"]);
+  });
+});

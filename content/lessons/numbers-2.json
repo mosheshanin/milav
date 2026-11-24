@@ -65,6 +65,7 @@
       "niqqud": "שְׁלוֹשָׁה",
       "translit": "шлоша́",
       "ru": "три (м.)",
+      "book": true,
       "value": 3,
       "example": {
         "he": "שלושה ילדים",
@@ -82,6 +83,7 @@
       "niqqud": "אַרְבָּעָה",
       "translit": "арбаа́",
       "ru": "четыре (м.)",
+      "book": true,
       "value": 4,
       "example": {
         "he": "ארבעה ימים",
@@ -99,6 +101,7 @@
       "niqqud": "חֲמִישָּׁה",
       "translit": "хамиша́",
       "ru": "пять (м.)",
+      "book": true,
       "value": 5,
       "example": {
         "he": "חמישה שקלים",
@@ -116,6 +119,7 @@
       "niqqud": "שִׁישָּׁה",
       "translit": "шиша́",
       "ru": "шесть (м.)",
+      "book": true,
       "value": 6,
       "example": {
         "he": "שישה חודשים",
@@ -133,6 +137,7 @@
       "niqqud": "שִׁבְעָה",
       "translit": "шива́",
       "ru": "семь (м.)",
+      "book": true,
       "value": 7,
       "example": {
         "he": "שבעה אנשים",
@@ -150,6 +155,7 @@
       "niqqud": "תִּשְׁעָה",
       "translit": "тиша́",
       "ru": "девять (м.)",
+      "book": true,
       "value": 9,
       "example": {
         "he": "תשעה ספרים",
@@ -167,6 +173,7 @@
       "niqqud": "עֲשָׂרָה",
       "translit": "асара́",
       "ru": "десять (м.)",
+      "book": true,
       "value": 10,
       "example": {
         "he": "עשרה ילדים",

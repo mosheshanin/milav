@@ -117,6 +117,14 @@ export function WordCard({
         <div className="text-lg text-accent">[{word.translit}]</div>
         <div className="text-2xl font-semibold">{word.ru}</div>
         {word.gender && <Chip tone={word.gender === "f" ? "danger" : "accent"}>{GENDER[word.gender]}</Chip>}
+        {word.book && (
+          <>
+            <Chip>книжн.</Chip>
+            <p className="text-sm text-ink-soft" data-testid="word-book">
+              В разговоре чаще говорят женскую форму.
+            </p>
+          </>
+        )}
         {!wide && phrase}
       </div>
     </>
