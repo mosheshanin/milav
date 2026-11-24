@@ -590,6 +590,11 @@ check(true, "после перезагрузки кнопка «назад» с�
 await pressBack(page);
 await page.waitForSelector('[data-testid="continue"]');
 check(!(await backVisible(page)), "«назад» из урока ведёт на главную, кнопка скрывается");
+// Задача 11 (вопрос 37): «Продолжить» раскрыло раздел и тему урока, строка урока видна на главной без нажатий.
+check(
+  await page.locator(`[data-testid="lesson-${LESSON_ID}"]`).isVisible(),
+  "после «Продолжить» раздел и тема урока на главной раскрыты",
+);
 
 // Все слова пройдены: «Продолжить» ведёт к викторине.
 sql(`DELETE FROM word_progress WHERE user_id=${D}; DELETE FROM user_stats WHERE user_id=${D}; DELETE FROM user_badges WHERE user_id=${D};`);

@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "./homeFold";
+import { loadOpen, revealed, saveOpen, sectionKey, toggled, topicKey } from "./homeFold";
 
 function fakeStorage(initial: Record<string, string> = {}) {
   const data = { ...initial };
@@ -29,6 +29,15 @@ describe("homeFold", () => {
     const b = toggled(a, "topic:animals");
     expect([...b]).toEqual(["section:nouns"]);
     expect([...open]).toEqual(["topic:animals"]);
+  });
+
+  it("revealed раскрывает раздел и тему урока, у алфавита только раздел, ничего не сворачивает", () => {
+    const open = new Set(["topic:food"]);
+    expect([...revealed(open, { section: "nouns", topicId: "animals" })].sort()).toEqual(["section:nouns", "topic:animals", "topic:food"]);
+    expect([...revealed(open, { section: "alphabet", topicId: "alphabet" })].sort()).toEqual(["section:alphabet", "topic:food"]);
+    expect([...open]).toEqual(["topic:food"]);
+    const again = revealed(revealed(new Set(), { section: "verbs", topicId: "paal" }), { section: "verbs", topicId: "paal" });
+    expect([...again].sort()).toEqual(["section:verbs", "topic:paal"]);
   });
 
   it("по умолчанию всё свёрнуто", () => {

@@ -21,7 +21,7 @@ import { prefetchLesson } from "../components/LessonGate";
 import { CelebrationSheet, GoalRing, StatusPathBar, WeekDots } from "../components/play";
 import { Button, Card, Chip, chipClass } from "../components/ui";
 import { lessonEmoji, sectionEmoji, topicEmoji } from "../lib/homeEmoji";
-import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
+import { loadOpen, revealed, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFold";
 import { alphabetAllLessonIds, alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { repeatCardText } from "../lib/repeat";
@@ -68,6 +68,14 @@ export function Home({
       saveOpen(next);
       return next;
     });
+  /** «Продолжить»: раскрыть раздел и тему урока, чтобы при возвращении на главную он был виден (задача 11). */
+  // Сохраняем сразу, а не в функции обновления состояния: главная закрывается в том же нажатии, и отложенное
+  // обновление уже не выполнилось бы.
+  const reveal = (lesson: LessonMeta) => {
+    const next = revealed(open, lesson);
+    saveOpen(next);
+    setOpen(next);
+  };
 
   // Ритм и цель дня могли измениться в уроке: при возврате на главную профиль перечитывается, если он устарел.
   useEffect(() => {
@@ -206,7 +214,11 @@ export function Home({
             <Button
               block
               data-testid="continue"
-              onClick={() => (resume.kind === "quiz" ? onOpenQuiz(resume.lessonId) : onOpen(resume.lessonId))}
+              onClick={() => {
+                reveal(resumeLesson);
+                if (resume.kind === "quiz") onOpenQuiz(resume.lessonId);
+                else onOpen(resume.lessonId);
+              }}
             >
               {resume.kind === "quiz" ? "К викторине" : resume.started ? "Продолжить" : "Начать"}
             </Button>

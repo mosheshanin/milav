@@ -33,6 +33,18 @@ export function saveOpen(open: Set<string>): void {
   }
 }
 
+/**
+ * Новый набор, в котором раскрыты раздел и тема урока (задача 11, вопрос 37, 24.11): так после «Продолжить»
+ * человек, вернувшись на главную, сразу видит свой урок. У алфавита тем нет, раскрывается только раздел.
+ * Исходный набор не меняется; уже раскрытое остаётся раскрытым.
+ */
+export function revealed(open: Set<string>, lesson: { section: string; topicId: string }): Set<string> {
+  const next = new Set(open);
+  next.add(sectionKey(lesson.section));
+  if (lesson.section !== "alphabet") next.add(topicKey(lesson.topicId));
+  return next;
+}
+
 /** Новый набор, в котором блок `key` переключён. Исходный набор не меняется. */
 export function toggled(open: Set<string>, key: string): Set<string> {
   const next = new Set(open);
