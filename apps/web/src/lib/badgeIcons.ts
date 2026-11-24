@@ -15,6 +15,7 @@ import {
   Flag,
   Gem,
   Goal,
+  GraduationCap,
   Handshake,
   History,
   Languages,
@@ -64,4 +65,5 @@ export const BADGE_ICON_COMPONENTS: Record<BadgeIcon, LucideIcon> = {
   History,
   Brain,
   Anchor,
+  GraduationCap,
 };

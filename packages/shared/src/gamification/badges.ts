@@ -31,7 +31,7 @@ export const BADGE_ICONS = [
   "Footprints", "Sprout", "Flag", "BookOpen", "Layers", "Target", "Compass", "Castle", "Crown", "Medal", "Trophy",
   "Languages", "Award", "Shield", "Gem", "Sparkles", "CalendarDays",
   "CalendarCheck", "Calendar", "Waves", "Goal", "Shuffle", "Network", "LayoutGrid", "Handshake",
-  "RefreshCw", "History", "Brain", "Anchor",
+  "RefreshCw", "History", "Brain", "Anchor", "GraduationCap",
 ] as const;
 export type BadgeIcon = (typeof BADGE_ICONS)[number];
 
@@ -41,6 +41,7 @@ export const METRICS = [
   "letters",
   "lessons",
   "alphabetLessons",
+  "alphabetAll",
   "perfectQuizzes",
   "topicsClosed",
   "sections",
@@ -59,6 +60,7 @@ export const ZERO_METRICS: Metrics = {
   letters: 0,
   lessons: 0,
   alphabetLessons: 0,
+  alphabetAll: 0,
   perfectQuizzes: 0,
   topicsClosed: 0,
   sections: 0,
@@ -147,6 +149,8 @@ export function buildCatalog(info: ContentInfo): Catalog {
     // Алфавит
     spec("alphabet-letters", "alphabet", "rare", "Languages", `Все ${info.alphabetLetters} форм`, `Пройдите все этапы всех ${info.alphabetLetters} форм букв`, "letters", info.alphabetLetters, (i) => i.alphabetLetters > 0),
     spec("alphabet-passed", "alphabet", "rare", "Award", "Алфавит покорён", "Сдайте все уроки алфавита", "alphabetLessons", info.alphabetLessons, (i) => i.alphabetLessons > 0),
+    // Общая викторина по всем буквам (вопрос 75, 24.11): не урок, поэтому свой счётчик 0/1, а не сданные уроки.
+    spec("alphabet-all", "alphabet", "epic", "GraduationCap", "Весь алфавит разом", "Сдайте общую викторину по всем буквам алфавита", "alphabetAll", 1, (i) => i.alphabetLetters > 0),
     // Качество
     spec("quiz-perfect", "quality", "rare", "Gem", "Без единой ошибки", "Пройдите викторину без ошибок", "perfectQuizzes", 1),
     spec("quiz-perfect-5", "quality", "epic", "Sparkles", "Чистая игра", "Пройдите без ошибок викторины в 5 разных уроках", "perfectQuizzes", 5, lessonsAtLeast(5)),

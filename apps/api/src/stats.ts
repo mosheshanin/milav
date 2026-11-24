@@ -2,6 +2,7 @@
 // Описание и расчёт расхода: docs/GAMIFICATION.md, разделы 5, 9 и 11.
 import { catalog, contentInfo, getAnyLesson } from "@milav/content";
 import {
+  ALPHABET_ALL_ID,
   DEFAULT_DAILY_GOAL,
   DEFAULT_LEARNER_GENDER,
   DEFAULT_TZ,
@@ -38,6 +39,8 @@ export interface Stats {
   lettersDone: number;
   passedLessons: number;
   alphabetLessons: number;
+  /** Общая викторина по всем буквам сдана (0/1, миграция 0012): она не урок, но за неё есть бейдж. */
+  alphabetAll: number;
   perfectQuizzes: number;
   topicsClosed: number;
   sectionsMask: number;
@@ -68,6 +71,7 @@ interface StatsRow {
   letters_done: number;
   passed_lessons: number;
   alphabet_lessons: number;
+  alphabet_all: number | null;
   perfect_quizzes: number;
   topics_closed: number;
   sections_mask: number;
@@ -109,6 +113,7 @@ function fromRow(r: StatsRow): Stats {
     lettersDone: r.letters_done,
     passedLessons: r.passed_lessons,
     alphabetLessons: r.alphabet_lessons,
+    alphabetAll: r.alphabet_all ?? 0,
     perfectQuizzes: r.perfect_quizzes,
     topicsClosed: r.topics_closed,
     sectionsMask: r.sections_mask,
@@ -153,6 +158,7 @@ export function metricsOf(s: Stats): Metrics {
     letters: s.lettersDone,
     lessons: s.passedLessons,
     alphabetLessons: s.alphabetLessons,
+    alphabetAll: s.alphabetAll,
     perfectQuizzes: s.perfectQuizzes,
     topicsClosed: s.topicsClosed,
     sections: popcount(s.sectionsMask),
@@ -205,6 +211,7 @@ interface Timelines {
   letters: number[];
   lessons: number[];
   alphabetLessons: number[];
+  alphabetAll: number[];
   activeDays: number[];
 }
 
@@ -222,13 +229,13 @@ async function recount(db: D1Database, userId: number, tz: string, now: number):
   const [progress, passedRows, attemptRows, userRows, repeatRows] = await db.batch([
     db.prepare("SELECT lesson_id, completed_at FROM word_progress WHERE user_id = ? AND completed_at IS NOT NULL").bind(userId),
     db.prepare("SELECT lesson_id, first_passed_at FROM lesson_passed WHERE user_id = ?").bind(userId),
-    db.prepare("SELECT lesson_id, correct, total, created_at FROM quiz_attempts WHERE user_id = ?").bind(userId),
+    db.prepare("SELECT lesson_id, correct, total, passed, created_at FROM quiz_attempts WHERE user_id = ?").bind(userId),
     db.prepare("SELECT created_at FROM users WHERE id = ?").bind(userId),
     db.prepare(`SELECT COALESCE(SUM(reps), 0) AS reps, COALESCE(SUM(best_box >= ${REPEAT_LAST_BOX}), 0) AS mastered FROM repeat_state WHERE user_id = ?`).bind(userId),
   ]);
   const repeat = (repeatRows?.results?.[0] as { reps?: number; mastered?: number } | undefined) ?? {};
 
-  const timelines: Timelines = { words: [], letters: [], lessons: [], alphabetLessons: [], activeDays: [] };
+  const timelines: Timelines = { words: [], letters: [], lessons: [], alphabetLessons: [], alphabetAll: [], activeDays: [] };
   const dayWords = new Map<number, number>();
   const addDay = (seconds: number, words: number) => {
     const day = localEpochDay(tz, seconds * 1000);
@@ -267,8 +274,11 @@ async function recount(db: D1Database, userId: number, tz: string, now: number):
   // Попытки: безошибочные викторины (по одной на урок) и дни, в которые викторина была завершена. Прерванная викторина
   // нигде не записана, поэтому «сдан с первой попытки» и «после неудачи» посчитать нельзя: завершённая викторина всегда сдана.
   const perfectLessons = new Set<string>();
-  for (const a of (attemptRows?.results ?? []) as { lesson_id: string; correct: number; total: number; created_at: string }[]) {
-    if (a.correct === a.total) perfectLessons.add(a.lesson_id);
+  for (const a of (attemptRows?.results ?? []) as { lesson_id: string; correct: number; total: number; passed: number; created_at: string }[]) {
+    // Общая викторина по всем буквам не урок: в безошибочные уроки не идёт, у неё своя отметка «сдана».
+    if (a.lesson_id === ALPHABET_ALL_ID) {
+      if (a.passed) timelines.alphabetAll.push(dbSeconds(a.created_at, now));
+    } else if (a.correct === a.total) perfectLessons.add(a.lesson_id);
     addDay(dbSeconds(a.created_at, now), 0);
   }
   const perfectQuizzes = perfectLessons.size;
@@ -290,6 +300,7 @@ async function recount(db: D1Database, userId: number, tz: string, now: number):
     lettersDone,
     passedLessons: passed.size,
     alphabetLessons,
+    alphabetAll: timelines.alphabetAll.length > 0 ? 1 : 0,
     perfectQuizzes,
     topicsClosed: closedTopics(INFO, passed).size,
     sectionsMask,
@@ -319,8 +330,8 @@ INSERT OR IGNORE INTO user_stats (
   topics_closed, sections_mask, returns, tz, tz_changed_day, active_days, last_day, week_idx, week_days, week_words,
   rhythm_weeks, rhythm_hist, prev_week_idx, prev_week_days, prev_week_words, daily_goal, goal_day, goal_words, goal_days,
   lb_optin, lb_banned, lb_week_idx, lb_week_points, lb_updated_at, cohort_week, cohort_excluded, badges_ver, created_at,
-  repeats_done, words_mastered
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  repeats_done, words_mastered, alphabet_all
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
 function insertStatement(db: D1Database, s: Stats) {
   const p = s.play;
@@ -332,7 +343,7 @@ function insertStatement(db: D1Database, s: Stats) {
       p.rhythmWeeks, p.rhythmHist, p.prevWeekIdx, p.prevWeekDays, p.prevWeekWords, s.dailyGoal, p.goalDay, p.goalWords, p.goalDays,
       s.lbOptin ? 1 : 0, s.lbBanned ? 1 : 0, s.lbWeekIdx, s.lbWeekPoints, s.lbUpdatedAt, s.cohortWeek, s.cohortExcluded ? 1 : 0,
       s.badgesVer, s.createdAt,
-      s.repeatsDone, s.wordsMastered,
+      s.repeatsDone, s.wordsMastered, s.alphabetAll,
     );
 }
 
@@ -413,6 +424,8 @@ function timelineFor(t: Timelines, metric: string): number[] | undefined {
       return t.lessons;
     case "alphabetLessons":
       return t.alphabetLessons;
+    case "alphabetAll":
+      return t.alphabetAll;
     case "activeDays":
       return t.activeDays;
     default:

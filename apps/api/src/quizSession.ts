@@ -134,6 +134,8 @@ interface Finish {
   after: Stats;
   perfectNew: boolean;
   firstTimePassed: boolean;
+  /** Общая викторина по всем буквам сдана впервые (бейдж «Весь алфавит разом», вопрос 75). */
+  alphabetAllNew: boolean;
   now: number;
 }
 
@@ -150,11 +152,14 @@ async function finishQuiz(
     .bind(session.userId, session.lessonId)
     .first<{ perfect: number }>();
 
-  // Общая викторина по всем буквам не урок: в сданные уроки, статус и бейджи она не идёт (меняет только ритм дня).
+  // Общая викторина по всем буквам не урок: в сданные уроки, статус, очки и бейджи уроков она не идёт (меняет ритм дня
+  // и свою отметку «сдана», от которой зависит бейдж «Весь алфавит разом», вопрос 75).
   const countsAsLesson = session.lessonId !== ALPHABET_ALL_ID;
   const firstTimePassed = countsAsLesson && done.passed && !passedIds.has(session.lessonId);
   // Безошибочной считается викторина без ошибок по каждому уроку один раз (повторы одного урока бейдж не накручивают).
   const perfectNew = countsAsLesson && done.correct === done.total && !prior?.perfect;
+  // Её сдача ставит только свою отметку «общая викторина сдана», от которой зависит один бейдж.
+  const alphabetAllNew = !countsAsLesson && done.passed && !before.alphabetAll;
   const passedAfter = firstTimePassed ? new Set(passedIds).add(session.lessonId) : passedIds;
   const section = getAnyLesson(session.lessonId)?.section ?? "";
 
@@ -164,6 +169,7 @@ async function finishQuiz(
     ...before,
     passedLessons: before.passedLessons + (firstTimePassed ? 1 : 0),
     alphabetLessons: before.alphabetLessons + (firstTimePassed && section === "alphabet" ? 1 : 0),
+    alphabetAll: alphabetAllNew ? 1 : before.alphabetAll,
     perfectQuizzes: before.perfectQuizzes + (perfectNew ? 1 : 0),
     sectionsMask: before.sectionsMask | (firstTimePassed ? (SECTION_BITS[section] ?? 0) : 0),
     topicsClosed: closedTopics(INFO, passedAfter).size,
@@ -184,7 +190,7 @@ async function finishQuiz(
     play: { newBadges, goal: viewPlay(activity.state, today, before.dailyGoal).goal, goalMet: false },
     ...(statusBefore.key !== statusAfter.key ? { statusChanged: { from: statusBefore.key, to: statusAfter.key } } : {}),
   };
-  return { result, before, after, perfectNew, firstTimePassed, now };
+  return { result, before, after, perfectNew, firstTimePassed, alphabetAllNew, now };
 }
 
 /** Записи счётчиков, ритма и бейджей; каждая выполняется, только если сессия с меткой `rev` всё ещё наша. */
@@ -209,6 +215,9 @@ function finishStatements(db: D1Database, session: QuizSession, rev: string, f: 
           f.perfectNew ? 1 : 0,
         ),
     );
+  }
+  if (f.alphabetAllNew) {
+    statements.push(db.prepare(`UPDATE user_stats SET alphabet_all = 1 WHERE user_id = ?1 AND ${ours}`).bind(session.userId, rev));
   }
   // Ритм: завершённая викторина (сданная или нет) это день занятий. Запись не пройдёт, если состояние уже изменилось.
   statements.push(playUpdateStatement(db, session.userId, f.before.play, f.after.play, { rev }));

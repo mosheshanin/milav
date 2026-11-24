@@ -224,13 +224,25 @@ check(resultText === "27 из 28", `итог 27 из 28 (одна ошибка),
 const saved = (await page.textContent('[data-testid="quiz-saved"]')).trim();
 check(saved.includes("в статус она не добавляется"), "в итоге сказано, что в статус она не добавляется");
 check(!saved.includes("Новый сданный урок"), "это не «новый сданный урок»");
-check((await page.locator('[data-testid="celebration"]').count()) === 0, "листа поздравления нет: статус и бейджи не менялись");
+// Вопрос 75 (24.11): за первую сдачу свой бейдж «Весь алфавит разом»; статус не меняется.
+await page.waitForSelector('[data-testid="celebration"]', { timeout: 5000 });
+{
+  const sheet = (await page.textContent('[data-testid="celebration"]')) ?? "";
+  check(sheet.includes("Весь алфавит разом"), "лист поздравления с бейджем «Весь алфавит разом»");
+  check((await page.locator('[data-testid="celebration-status"]').count()) === 0, "статус в листе не меняется");
+  await shot(page, "05b-badge");
+  await page.click('[data-testid="celebration-close"]');
+  await page.waitForSelector('[data-testid="celebration"]', { state: "detached" });
+  const badges = query(`SELECT badge_id FROM user_badges WHERE user_id=${U}`).map((r) => r.badge_id);
+  check(badges.includes("alphabet-all"), `бейдж alphabet-all в базе (${badges.join(", ")})`);
+}
 {
   const attempts = query(`SELECT correct, total, passed FROM quiz_attempts WHERE user_id=${U} AND lesson_id='alphabet-all'`);
   check(attempts.length === 1 && attempts[0].correct === 27 && attempts[0].total === 28 && attempts[0].passed === 1, `в базе одна успешная попытка (${JSON.stringify(attempts)})`);
   check(query(`SELECT COUNT(*) AS n FROM lesson_passed WHERE user_id=${U}`)[0].n === 0, "в сданные уроки общая викторина не попала");
-  const stats = query(`SELECT passed_lessons, alphabet_lessons FROM user_stats WHERE user_id=${U}`)[0];
+  const stats = query(`SELECT passed_lessons, alphabet_lessons, alphabet_all FROM user_stats WHERE user_id=${U}`)[0];
   check(stats.passed_lessons === 0 && stats.alphabet_lessons === 0, `сданных уроков по-прежнему 0 (${JSON.stringify(stats)})`);
+  check(stats.alphabet_all === 1, "отметка «общая викторина сдана» стоит");
 }
 
 // ---------- Главная после викторины ----------

@@ -1,5 +1,6 @@
 // Общая викторина по всем буквам алфавита: генерация вопросов и серверный сценарий (настоящий SQLite, как в alphabet.test.ts).
-// Главное правило: это не урок, поэтому в сданные уроки, статус и бейджи она не идёт, а на главной видна как «сдана».
+// Главное правило: это не урок, поэтому в сданные уроки и статус она не идёт, а на главной видна как «сдана».
+// Бейдж у неё один, свой: «Весь алфавит разом» (вопрос 75, 24.11).
 import { beforeEach, describe, expect, it } from "vitest";
 import { alphabetAll, alphabetLessons, getQuizLesson } from "@milav/content";
 import {
@@ -28,6 +29,10 @@ function seeded(seed: number) {
 }
 
 const letters = alphabetAll.letters;
+const badgeIds = async (as: number): Promise<string[]> =>
+  (await ctx.env.DB.prepare("SELECT badge_id FROM user_badges WHERE user_id = ? ORDER BY badge_id").bind(as).all<{ badge_id: string }>()).results.map(
+    (r) => r.badge_id,
+  );
 const count = async (sql: string, ...params: unknown[]) =>
   (await ctx.env.DB.prepare(sql).bind(...params).first<{ n: number }>())!.n;
 
@@ -177,16 +182,46 @@ describe("общая викторина на сервере", () => {
     return playQuiz(as, session, wrong);
   }
 
-  it("все ответы верны: сдана, но это не урок (сданные уроки, статус и бейджи не меняются)", async () => {
+  it("все ответы верны: сдана, но это не урок (сданные уроки и статус не меняются), бейдж только свой", async () => {
     await learnAllLetters(1);
     const session = await start(1);
     const last = await playAll(1, session);
     expect(last.result).toMatchObject({ passed: true, correct: 28, total: 28, mistakes: 0, firstTimePassed: false, passedLessons: 0 });
-    expect(last.result!.play.newBadges).toEqual([]);
+    expect(last.result!.statusChanged).toBeUndefined();
+    // Вопрос 75 (24.11): за сдачу общей викторины отдельный бейдж, других (безошибочная викторина, уроки) нет.
+    expect(last.result!.play.newBadges).toEqual(["alphabet-all"]);
     expect(await count("SELECT COUNT(*) AS n FROM lesson_passed")).toBe(0);
     expect(await count("SELECT COUNT(*) AS n FROM quiz_attempts WHERE lesson_id = ? AND passed = 1", ALPHABET_ALL_ID)).toBe(1);
-    expect(await statsRow(1)).toMatchObject({ passed_lessons: 0, alphabet_lessons: 0, perfect_quizzes: 0, sections_mask: 0 });
-    expect(await count("SELECT COUNT(*) AS n FROM user_badges WHERE user_id = 1")).toBe(0);
+    expect(await statsRow(1)).toMatchObject({ passed_lessons: 0, alphabet_lessons: 0, perfect_quizzes: 0, sections_mask: 0, alphabet_all: 1 });
+    expect(await badgeIds(1)).toEqual(["alphabet-all"]);
+  });
+
+  it("бейдж «Весь алфавит разом» выдаётся один раз: повторная сдача его не дублирует", async () => {
+    await learnAllLetters(1);
+    await playAll(1, await start(1));
+    const again = await playAll(1, await start(1), [0]);
+    expect(again.result).toMatchObject({ passed: true });
+    expect(again.result!.play.newBadges).toEqual([]);
+    expect(await badgeIds(1)).toEqual(["alphabet-all"]);
+  });
+
+  it("несданная (прерванная) попытка бейдж не даёт, отметка остаётся 0", async () => {
+    await learnAllLetters(1);
+    const last = await playAll(1, await start(1), [0, 1, 2, 3, 4, 5, 6]);
+    expect(last.aborted).toBe(true);
+    expect(await statsRow(1)).toMatchObject({ alphabet_all: 0 });
+    expect(await badgeIds(1)).toEqual([]);
+  });
+
+  it("пересчёт счётчиков с нуля восстанавливает отметку и не выдаёт бейдж «без ошибок» за общую викторину", async () => {
+    await learnAllLetters(1);
+    await playAll(1, await start(1));
+    await ctx.env.DB.prepare("DELETE FROM user_stats WHERE user_id = 1").run();
+    await ctx.env.DB.prepare("DELETE FROM user_badges WHERE user_id = 1").run();
+    await api("/api/me", { as: 1 });
+    expect(await statsRow(1)).toMatchObject({ alphabet_all: 1, perfect_quizzes: 0, passed_lessons: 0 });
+    expect(await badgeIds(1)).toContain("alphabet-all");
+    expect(await badgeIds(1)).not.toContain("quiz-perfect");
   });
 
   it("6 ошибок допустимы, итог 22 из 28 сдан", async () => {
