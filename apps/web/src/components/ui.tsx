@@ -48,21 +48,25 @@ export function Chip({
   raised = false,
 }: {
   children: ReactNode;
-  tone?: "neutral" | "accent" | "success" | "danger";
+  tone?: ChipTone;
   raised?: boolean;
 }) {
-  const tones = {
-    neutral: ["bg-line", "text-ink-soft"],
-    accent: ["bg-accent-soft", "text-accent"],
-    success: ["bg-success-soft", "text-success"],
-    danger: ["bg-danger-soft", "text-danger"],
-  };
-  const [bg, text] = tones[tone];
-  return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold ${raised ? "bg-surface" : bg} ${text}`}>
-      {children}
-    </span>
-  );
+  return <span className={`${chipClass(tone, raised)} py-1`}>{children}</span>;
+}
+
+export type ChipTone = "neutral" | "accent" | "success" | "danger";
+
+const CHIP_TONES: Record<ChipTone, [bg: string, text: string]> = {
+  neutral: ["bg-line", "text-ink-soft"],
+  accent: ["bg-accent-soft", "text-accent"],
+  success: ["bg-success-soft", "text-success"],
+  danger: ["bg-danger-soft", "text-danger"],
+};
+
+/** Классы плашки-метки без вертикального отступа: им пользуются и `Chip`, и кнопки в виде плашки (ссылка на викторину). */
+export function chipClass(tone: ChipTone, raised = false): string {
+  const [bg, text] = CHIP_TONES[tone];
+  return `inline-flex items-center gap-1 rounded-full px-3 text-sm font-semibold ${raised ? "bg-surface" : bg} ${text}`;
 }
 
 /** Сообщение на весь экран: загрузка, ошибка, «откройте в Telegram». */

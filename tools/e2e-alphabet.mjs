@@ -222,7 +222,10 @@ await page.click('[data-testid="quiz-home"]');
 await revealLesson(page, lesson.id);
 await page.waitForTimeout(500);
 await shot(page, "12-home-after");
-check((await page.textContent(`[data-testid="lesson-${lesson.id}"]`)).includes("Сдан"), "на главной урок алфавита помечен «Сдан»");
+check(
+  (await page.getAttribute(`[data-testid="lesson-quiz-${lesson.id}"]`, "data-passed")) === "1",
+  "на главной у урока алфавита ссылка «Викторина сдана»",
+);
 check((await page.textContent('[data-testid="points"]')) === String(letters.length), `очков по числу букв: ${letters.length}`);
 await page.context().close();
 

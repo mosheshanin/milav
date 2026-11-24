@@ -344,7 +344,15 @@ await page.click('[data-testid="quiz-home"]');
 await revealLesson(page, lesson.id);
 await page.waitForTimeout(500);
 await shot(page, "17-home-after");
-check((await page.textContent("body")).includes("Сдан"), "на главной урок помечен «Сдан»");
+check(
+  (await page.getAttribute(`[data-testid="lesson-quiz-${lesson.id}"]`, "data-passed")) === "1",
+  "на главной у урока ссылка «Викторина сдана»",
+);
+// Ссылка ведёт в викторину (пересдать можно). Сначала закрыть лист «Мы нашли достижение», если главная его показала.
+await dismissFoundSheet(page);
+await page.click(`[data-testid="lesson-quiz-${lesson.id}"]`);
+await page.waitForSelector('[data-testid="quiz-progress"]');
+check(true, "ссылка на викторину с главной открывает викторину");
 await page.context().close();
 
 // ---------- Сценарий Б: урок пройден, викторина с ошибками не сдаётся ----------
@@ -354,6 +362,11 @@ const seedB = lesson.words.map((w) => `(${B}, '${w.id}', '${lesson.id}', 1, 1, 1
 sql(`INSERT INTO word_progress (user_id, word_id, lesson_id, stage_listen, stage_speak, stage_write, stage_type, completed_at) VALUES ${seedB};`);
 page = await openPage(B);
 await revealLesson(page, lesson.id);
+{
+  const link = page.locator(`[data-testid="lesson-quiz-${lesson.id}"]`);
+  check((await link.getAttribute("data-passed")) === "0", "слова пройдены, викторина нет: ссылка «Викторина не сдана»");
+  check((await link.evaluate((el) => el.tagName)) === "BUTTON", "ссылка на викторину нажимается, когда слова пройдены");
+}
 await page.click(`[data-testid="lesson-${lesson.id}"]`);
 await page.waitForSelector('[data-testid="word-he"]');
 check((await page.textContent('[data-testid="points"]')) === "10", "у готового урока 10 очков");
