@@ -32,7 +32,6 @@
   --color-brand-logo-orange: #ff7a00;
   --color-brand-logo-red: #ff4a14;
   --color-brand-logo-green: #00923c;
-  --color-brand-logo-green-dark: #00703c;
   --color-brand-logo-navy: #005484;
   --color-brand-logo-sky: #0090cc;
   /* Чёрная обводка букв логотипа и белая «бумага» стикеров. */
@@ -264,8 +263,8 @@
 
 /*
   Заставка при запуске (components/Splash.tsx, правила показа lib/splash.ts, docs/SPEC.md «Заставка при запуске»).
-  Палитра «Буквы» (решение владельца 24.11.2026): каждый слайд в цвете своей буквы логотипа M-I-L-A-V,
-  размытые пятна того же цвета медленно плывут. Стикеры (буквы, плитки, кнопка) — белая или цветная грань с чёрной
+  Палитра «Буквы» (решение владельца 24.11.2026): каждый слайд однотонный, в чистом цвете своей буквы логотипа M-I-L-A-V
+  (градиент из пятен владелец счёл слишком ярким). Стикеры (буквы, плитки, кнопка) — белая или цветная грань с чёрной
   обводкой, как буквы логотипа. Цвета заставки одинаковы в обеих темах. Слайд: .is-on (виден), .is-out + .out-<переход>
   (уходит), .in-<переход> (входит). В конце приложение открывается кругом из центра.
 */
@@ -291,38 +290,18 @@
 
 .splash[data-s="0"] {
   --splash-base: var(--color-brand-logo-orange);
-  --splash-b1: var(--color-brand-logo-yellow);
-  --splash-b2: var(--color-brand-logo-red);
-  --splash-b3: var(--color-brand-logo-orange);
-  --splash-b4: var(--color-brand-logo-yellow);
 }
 .splash[data-s="1"] {
   --splash-base: var(--color-brand-logo-green);
-  --splash-b1: var(--color-brand-logo-green);
-  --splash-b2: var(--color-brand-logo-green-dark);
-  --splash-b3: var(--color-brand-logo-green);
-  --splash-b4: var(--color-brand-logo-yellow);
 }
 .splash[data-s="2"] {
   --splash-base: var(--color-brand-logo-navy);
-  --splash-b1: var(--color-brand-logo-sky);
-  --splash-b2: var(--color-brand-logo-navy);
-  --splash-b3: var(--color-brand-logo-navy);
-  --splash-b4: var(--color-brand-logo-orange);
 }
 .splash[data-s="3"] {
   --splash-base: var(--color-brand-logo-sky);
-  --splash-b1: var(--color-brand-logo-sky);
-  --splash-b2: var(--color-brand-logo-navy);
-  --splash-b3: var(--color-brand-logo-sky);
-  --splash-b4: var(--color-brand-logo-green);
 }
 .splash[data-s="4"] {
   --splash-base: var(--color-brand-logo-yellow);
-  --splash-b1: var(--color-brand-logo-yellow);
-  --splash-b2: var(--color-brand-logo-orange);
-  --splash-b3: var(--color-brand-logo-yellow);
-  --splash-b4: var(--color-brand-logo-orange);
   --splash-text: var(--color-brand-logo-ink);
 }
 
@@ -330,30 +309,7 @@
   position: absolute;
   inset: 0;
   background-color: var(--splash-base);
-  transition: background-color 1s;
-}
-.splash-bg {
-  position: absolute;
-  inset: -25%;
-  filter: blur(46px);
-  transition: transform 1.2s var(--splash-ease);
-}
-.splash-bg i {
-  position: absolute;
-  border-radius: 50%;
-  animation: splash-drift 6s ease-in-out infinite alternate;
-  transition: background-color 1.1s;
-}
-.splash-bg i:nth-child(1) { width: 70%; height: 55%; left: -5%; top: 0; background-color: var(--splash-b1); }
-.splash-bg i:nth-child(2) { width: 60%; height: 50%; right: -5%; top: 25%; background-color: var(--splash-b2); animation-duration: 7s; }
-.splash-bg i:nth-child(3) { width: 65%; height: 50%; left: 10%; bottom: -5%; background-color: var(--splash-b3); animation-duration: 5s; }
-.splash-bg i:nth-child(4) { width: 35%; height: 30%; right: 5%; bottom: 5%; background-color: var(--splash-b4); animation-duration: 8s; }
-.splash[data-s="1"] .splash-bg { transform: rotate(-10deg) scale(1.05); }
-.splash[data-s="2"] .splash-bg { transform: rotate(12deg) scale(1.1); }
-.splash[data-s="3"] .splash-bg { transform: rotate(-6deg) scale(1.15); }
-.splash[data-s="4"] .splash-bg { transform: rotate(4deg); }
-@keyframes splash-drift {
-  to { transform: translate(8%, -6%) scale(1.15); }
+  transition: background-color 0.5s ease;
 }
 
 .splash-slide {
@@ -654,7 +610,6 @@
 
 /* «Уменьшить движение»: всё сразу на месте, слайды сменяются затуханием, приложение проявляется. */
 @media (prefers-reduced-motion: reduce) {
-  .splash-bg i,
   .is-on .splash-in,
   .is-on .splash-pop,
   .is-on .splash-logo,

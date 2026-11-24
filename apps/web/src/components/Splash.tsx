@@ -1,5 +1,5 @@
 // Заставка при запуске (docs/SPEC.md, «Заставка при запуске»; правила показа: lib/splash.ts, вид: index.css, «Заставка»).
-// Палитра «Буквы»: каждый слайд в цвете своей буквы логотипа. Элементы-стикеры с чёрной обводкой, как буквы логотипа.
+// Палитра «Буквы»: каждый слайд однотонный, в цвете своей буквы логотипа. Элементы-стикеры с чёрной обводкой, как буквы логотипа.
 // Приложение грузится под заставкой, а в конце открывается кругом из центра. Нажатие на экран — следующий слайд.
 // Заставка не должна ломать приложение: любая ошибка внутри неё просто убирает её (SplashBoundary).
 import { Component, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
@@ -268,12 +268,6 @@ function SplashScreen() {
   return (
     <div ref={root} className="splash" data-s="0" data-testid="splash" data-mode={mode} role="dialog" aria-label="Заставка Milav">
       <div className="splash-base" aria-hidden="true" />
-      <div className="splash-bg" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-        <i />
-      </div>
       <Slides mode={mode} />
       {mode === "full" && (
         <div className="splash-dots" aria-hidden="true">
