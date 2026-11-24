@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { PRIMED_LIMIT, playWord, primeAudio, primedSources, resetPrimedAudio } from "./audio";
+import { SLOW_RATE, audioRate, loadAudioSpeed } from "./audioSpeed";
 
 /** Поддельный элемент <audio>: `play()` сразу «играет» и через тик заканчивает, если `fail` не задан. */
 class FakeAudio {
@@ -9,6 +10,9 @@ class FakeAudio {
   preload = "";
   paused = true;
   currentTime = 5;
+  playbackRate = 1;
+  defaultPlaybackRate = 1;
+  preservesPitch = false;
   error: { code: number } | null = null;
   private listeners = new Map<string, Set<() => void>>();
   constructor(src?: string) {
@@ -45,6 +49,43 @@ beforeEach(() => {
 });
 afterEach(() => {
   vi.unstubAllGlobals();
+});
+
+describe("скорость озвучки (задача 12)", () => {
+  const storage = (value: string | null) => ({ localStorage: { getItem: () => value, setItem: () => undefined } });
+
+  it("по умолчанию обычная: файл играет со скоростью 1", async () => {
+    vi.stubGlobal("window", storage(null));
+    await playWord({ he: "חתול", audio: "/audio/a.mp3" });
+    expect(FakeAudio.created[0]!.playbackRate).toBe(1);
+  });
+
+  it("«медленнее»: тот же файл играет медленнее, высота голоса сохраняется", async () => {
+    vi.stubGlobal("window", storage("slow"));
+    await playWord({ he: "חתול", audio: "/audio/a.mp3" });
+    const audio = FakeAudio.created[0]!;
+    expect(audio.playbackRate).toBe(SLOW_RATE);
+    expect(audio.defaultPlaybackRate).toBe(SLOW_RATE);
+    expect(audio.preservesPitch).toBe(true);
+  });
+
+  it("заранее подгруженный элемент после смены на «обычную» снова играет со скоростью 1", async () => {
+    primeAudio("/audio/a.mp3");
+    vi.stubGlobal("window", storage("slow"));
+    await playWord({ he: "חתול", audio: "/audio/a.mp3" });
+    vi.stubGlobal("window", storage("normal"));
+    await playWord({ he: "חתול", audio: "/audio/a.mp3" });
+    expect(FakeAudio.created).toHaveLength(1);
+    expect(FakeAudio.created[0]!.playbackRate).toBe(1);
+  });
+
+  it("недоступное хранилище и мусор дают обычную скорость", () => {
+    vi.stubGlobal("window", storage("fast"));
+    expect(loadAudioSpeed()).toBe("normal");
+    expect(audioRate()).toBe(1);
+    vi.stubGlobal("window", undefined);
+    expect(loadAudioSpeed()).toBe("normal");
+  });
 });
 
 describe("playWord", () => {

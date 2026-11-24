@@ -198,6 +198,14 @@ await page.waitForSelector('[data-testid="settings"]');
 check((await themeOf()) === "dark", "после перезагрузки остаёмся на «Настройках» в тёмной теме");
 await page.click('[data-testid="theme-system"]');
 check((await themeOf()) === "light", "«Как в Telegram» снова даёт светлую");
+// Скорость озвучки (задача 12): по умолчанию обычная, «Медленнее» запоминается на устройстве и переживает перезагрузку.
+check((await radioChecked("audio-speed-normal")) === "true", "скорость озвучки по умолчанию обычная");
+await page.click('[data-testid="audio-speed-slow"]');
+check((await page.evaluate(() => localStorage.getItem("milav:audio-speed"))) === "slow", "«Медленнее» сохранено на устройстве");
+await page.reload();
+await page.waitForSelector('[data-testid="settings"]');
+check((await radioChecked("audio-speed-slow")) === "true", "после перезагрузки выбрано «Медленнее»");
+await page.click('[data-testid="audio-speed-normal"]');
 await pressBack(page);
 await page.waitForSelector('[data-testid="achievements"]');
 await page.waitForSelector('[data-testid="goal-card"]');

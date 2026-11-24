@@ -8,6 +8,7 @@ import { Choice, Section, Toggle } from "../components/Controls";
 import { RemindersSettings } from "../components/RemindersSettings";
 import { Button } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
+import { AUDIO_SPEEDS, AUDIO_SPEED_TITLES, loadAudioSpeed, setAudioSpeed, type AudioSpeed } from "../lib/audioSpeed";
 import { hapticsEnabled, setHapticsEnabled } from "../lib/haptic";
 import { plural } from "../lib/play";
 import { THEME_CHOICES, THEME_TITLES, loadThemeChoice, setThemeChoice, type ThemeChoice } from "../lib/theme";
@@ -15,9 +16,9 @@ import { useBackButton } from "../lib/useBackButton";
 
 /**
  * Настройки пользователя. Разделы: оформление (тема; позже цветовые схемы), занятия (цель дня, род во фразах-примерах), звук и отклик
- * (вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение), внизу Telegram id и вход в панель
+ * (скорость озвучки, вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение), внизу Telegram id и вход в панель
  * администратора (пункт панели виден только администраторам, docs/ADMIN.md).
- * Тема и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
+ * Тема, скорость озвучки и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
  */
 export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; onAdmin: () => void; onReview: () => void }) {
   const { me, applyPlay } = useApp();
@@ -25,6 +26,7 @@ export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; on
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [vibration, setVibration] = useState(hapticsEnabled);
+  const [speed, setSpeed] = useState<AudioSpeed>(loadAudioSpeed);
   const [theme, setTheme] = useState<ThemeChoice>(loadThemeChoice);
   useBackButton(onBack);
 
@@ -87,6 +89,17 @@ export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; on
         <RemindersSettings />
 
         <Section title="Звук и отклик">
+          <Choice
+            label="Скорость озвучки"
+            hint="Как быстро звучат слова, буквы и фразы. «Медленнее» помогает расслышать каждый звук. Хранится на этом устройстве."
+            options={AUDIO_SPEEDS.map((s) => ({ value: s, title: AUDIO_SPEED_TITLES[s] }))}
+            value={speed}
+            testId="audio-speed"
+            onChange={(s) => {
+              setAudioSpeed(s);
+              setSpeed(s);
+            }}
+          />
           <Toggle
             label="Вибрация"
             hint="Лёгкий отклик на телефоне при получении бейджа. Настройка хранится только на этом устройстве."

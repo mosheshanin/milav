@@ -1,4 +1,5 @@
 import type { Letter } from "@milav/shared";
+import { audioRate } from "./audioSpeed";
 
 /** То, что можно проиграть: текст для голоса устройства и необязательный файл озвучки. */
 export interface Playable {
@@ -89,6 +90,11 @@ function audioFor(src: string): HTMLAudioElement {
 async function playFile(src: string, hooks: PlayHooks): Promise<boolean> {
   try {
     const audio = audioFor(src);
+    // Скорость из «Настроек» (задача 12): тот же файл медленнее, высота голоса сохраняется.
+    const rate = audioRate();
+    audio.playbackRate = rate;
+    audio.defaultPlaybackRate = rate;
+    if ("preservesPitch" in audio) audio.preservesPitch = true;
     const ended = new Promise<boolean>((resolve) => {
       const onPlaying = () => hooks.onStart?.();
       const finish = (ok: boolean) => {
@@ -116,7 +122,7 @@ function speakWithDevice(text: string, hooks: PlayHooks): Promise<boolean> {
     speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "he-IL";
-    utterance.rate = 0.85;
+    utterance.rate = 0.85 * audioRate();
     const voice = speechSynthesis.getVoices().find((v) => v.lang.toLowerCase().startsWith("he"));
     if (voice) utterance.voice = voice;
     const timer = setTimeout(() => resolve(true), 5000);
