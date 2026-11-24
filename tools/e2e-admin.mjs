@@ -89,7 +89,7 @@ check((await text(page, "staff-role")).includes("владелец"), "владе
 await page.click('[data-testid="open-admin"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
 check((await scriptUrls(page)).some((u) => /\/Admin-/.test(u)), "код панели подгружается отдельным файлом при входе в панель");
-check((await page.locator('[data-testid^="admin-open-"]').count()) === 10, "в меню панели 10 разделов (обзор, аналитика, ученики, настройки, сообщения бота, напоминания, контент, команда, журнал, шаблоны)");
+check((await page.locator('[data-testid^="admin-open-"]').count()) === 11, "в меню панели 11 разделов (обзор, аналитика, ученики, настройки, сообщения бота, пост в канал, напоминания, контент, команда, журнал, шаблоны)");
 check(await noOverflow(page), "меню панели без горизонтальной прокрутки");
 await shot(page, "a2-menu");
 
@@ -219,6 +219,43 @@ await page.waitForSelector('[data-testid="reminders-summary"]');
 check(true, "из «Сообщений бота» открываются «Напоминания»");
 await page.click('header button[aria-label="Назад"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
+
+// «Пост в канал» (24.11): форма, предпросмотр, проверка до отправки. Локально токена бота нет: сервер отвечает «нет токена».
+{
+  const PNG_1PX = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
+  await page.evaluate(() => localStorage.removeItem("milav.admin.channelDraft"));
+  await page.click('[data-testid="admin-open-channel"]');
+  await page.waitForSelector('[data-testid="channel-text"]');
+  check((await page.inputValue('[data-testid="channel-name"]')) === "@milavnews", "канал по умолчанию @milavnews");
+  check((await page.inputValue('[data-testid="channel-button-url"]')) === "https://t.me/milavbotbot?startapp", "кнопка по умолчанию открывает приложение");
+  await page.click('[data-testid="channel-send-me"]');
+  check((await text(page, "channel-status")).includes("Напишите текст"), "пустой пост: понятная ошибка до отправки");
+  await page.fill('[data-testid="channel-text"]', "**Иврит** в Telegram 👋\nПишите @y_o_g_g_y");
+  check((await page.locator('[data-testid="channel-preview"] b').textContent()) === "Иврит", "предпросмотр показывает жирный текст");
+  check((await text(page, "channel-preview-button")).includes("Открыть Milav"), "предпросмотр показывает кнопку");
+  check((await text(page, "channel-length")).includes("из 4096"), "без картинки предел 4096 знаков");
+  await page.setInputFiles('[data-testid="channel-photo-input"]', { name: "post.png", mimeType: "image/png", buffer: PNG_1PX });
+  await page.waitForSelector('[data-testid="channel-preview"] img');
+  check((await text(page, "channel-length")).includes("из 1024"), "с картинкой предел 1024 знака (подпись)");
+  await page.fill('[data-testid="channel-button-url"]', "milav.app");
+  await page.click('[data-testid="channel-send-me"]');
+  check((await text(page, "channel-status")).includes("https://"), "ссылка кнопки без https: ошибка до отправки");
+  await page.fill('[data-testid="channel-button-url"]', "https://t.me/milavbotbot?startapp");
+  check(await noOverflow(page), "«Пост в канал» без горизонтальной прокрутки на 360 px");
+  await shot(page, "a5c-channel-post");
+  dialogs.length = 0;
+  await page.click('[data-testid="channel-publish"]');
+  await page.waitForFunction(() => /токена бота/.test(document.querySelector('[data-testid="channel-status"]')?.textContent ?? ""));
+  check(dialogs.some((d) => d.includes("Опубликовать пост в @milavnews")), "публикация спрашивает подтверждение");
+  check(true, "сервер принял форму с картинкой и ответил «нет токена бота» (локально бот не настроен)");
+  await page.click('header button[aria-label="Назад"]');
+  await page.waitForSelector('[data-testid="admin-menu"]');
+  await page.click('[data-testid="admin-open-channel"]');
+  check((await page.inputValue('[data-testid="channel-text"]')).startsWith("**Иврит**"), "черновик текста сохраняется на устройстве");
+  await page.evaluate(() => localStorage.removeItem("milav.admin.channelDraft"));
+  await page.click('header button[aria-label="Назад"]');
+  await page.waitForSelector('[data-testid="admin-menu"]');
+}
 
 // Команда: добавить проверяющего, сделать администратором, убрать.
 await page.click('[data-testid="admin-open-team"]');

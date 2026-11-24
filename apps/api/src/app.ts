@@ -47,6 +47,7 @@ import { checkSession, commitAnswer, loadSession, silentSpeechAnswer, speechStep
 import { rateLimit } from "./rateLimit";
 import { apiSecurityHeaders } from "./security";
 import "./botAdmin";
+import "./channelPost";
 import "./adminStudents";
 import { loadBotTexts } from "./botTexts";
 import { isNoSpeech, readAudio, rivalsOf, silenceLogFields, speechLogFields, transcribeHebrew } from "./speech";

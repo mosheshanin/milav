@@ -1,4 +1,4 @@
-import type { AdminBotResponse, AdminBotSaveResponse, BotTextKey } from "@milav/shared";
+import type { AdminBotResponse, AdminBotSaveResponse, AdminChannelPostResponse, BotTextKey } from "@milav/shared";
 import type {
   AdminConfigResponse,
   AdminRemindersResponse,
@@ -192,6 +192,8 @@ export const api = {
     resetBotText: (key: BotTextKey) => request<AdminBotSaveResponse>(`/api/admin/bot/${encodeURIComponent(key)}`, { method: "DELETE" }),
     sendBotTextToMe: (key: BotTextKey) =>
       request<{ ok: true; text: string; sent: boolean }>(`/api/admin/bot/${encodeURIComponent(key)}/send`, json({})),
+    /** Пост в канал или себе в чат с ботом: форма с полями и картинкой (multipart). */
+    postToChannel: (form: FormData) => request<AdminChannelPostResponse>("/api/admin/channel/post", { method: "POST", body: form }),
   },
 
   // ---- Проверка слов носителем (администраторы и проверяющие; выгрузка только администраторам) ----

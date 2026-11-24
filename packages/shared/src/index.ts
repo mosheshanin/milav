@@ -17,6 +17,7 @@ export * from "./phrase";
 export * from "./numbers";
 export * from "./numbersTrainer";
 export * from "./privacy";
+export * from "./channelPost";
 export {
   PRACTICE_OPTIONS,
   PRACTICE_QUESTIONS,

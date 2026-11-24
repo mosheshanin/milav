@@ -55,6 +55,10 @@ export function logEntryText(entry: AdminLogEntry): string {
       return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: «${short(entry.oldValue)}» → «${short(entry.newValue)}»`;
     case "student.leaderboard":
       return entry.newValue ? `Ученик id ${target} убран из таблицы лидеров` : `Ученик id ${target} возвращён в таблицу лидеров`;
+    case "channel.post": {
+      const post = entry.newValue as { text?: string; photo?: boolean } | null;
+      return `Пост в канал ${target}${post?.photo ? " с картинкой" : ""}: «${short(post?.text)}»`;
+    }
     case "bot.reset":
       return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: возвращён исходный текст`;
     default:
@@ -128,7 +132,20 @@ export function adminErrorText(error: unknown): string {
         return "Бот не может вам написать: нажмите «Старт» в чате с ботом и попробуйте снова.";
       case "telegram_error":
         return "Telegram не принял сообщение. Попробуйте ещё раз через минуту.";
+      case "channel_not_found":
+        return "Канал не найден. Проверьте @имя канала и что бот добавлен в него администратором.";
+      case "bot_not_admin":
+        return "Бот не может публиковать в канале: добавьте @milavbotbot в администраторы канала с правом «Публикация сообщений».";
+      case "bad_format":
+        return "Telegram не понял разметку текста. Проверьте пары ** и __.";
+      case "bad_button_url":
+        return "Telegram не принял ссылку кнопки. Проверьте её: она должна начинаться с https://.";
+      case "photo_bad":
+        return "Telegram не смог обработать картинку. Попробуйте другой файл (JPEG или PNG).";
+      case "no_token":
+        return "На сервере нет токена бота: отправить пост нельзя.";
     }
+    if (error.code.startsWith("post_") || error.code.startsWith("photo_")) return channelPostErrorText(error.code);
     if (error.status !== 0) return "Сервер не принял изменение. Попробуйте ещё раз.";
   }
   return "Нет связи с сервером. Проверьте интернет и попробуйте ещё раз.";
@@ -170,4 +187,30 @@ export function botTextErrorText(error: string, max: number, name?: string): str
 export function parseTelegramId(text: string): number | null {
   const t = text.trim();
   return /^\d{1,15}$/.test(t) && Number(t) > 0 ? Number(t) : null;
+}
+
+/** Ошибка поста в канал по-русски (проверка полей в панели и ответ сервера). */
+export function channelPostErrorText(error: string, max?: number): string {
+  switch (error.replace(/^post_/, "")) {
+    case "empty":
+      return "Напишите текст или выберите картинку.";
+    case "too_long":
+      return max ? `Слишком длинно: не больше ${max} знаков${max <= 1024 ? " (с картинкой текст — это подпись)" : ""}.` : "Текст слишком длинный.";
+    case "bad_channel":
+      return "Канал пишется как @имя (например, @milavnews) или числовой id вида -100….";
+    case "button_text_missing":
+      return "Напишите надпись на кнопке или выключите кнопку.";
+    case "button_url_missing":
+      return "Укажите ссылку для кнопки.";
+    case "button_too_long":
+      return "Надпись на кнопке слишком длинная: до 64 знаков.";
+    case "bad_button_url":
+      return "Ссылка кнопки должна начинаться с https://, например https://t.me/milavbotbot?startapp.";
+    case "photo_type":
+      return "Картинка должна быть JPEG или PNG.";
+    case "photo_too_big":
+      return "Картинка больше 5 МБ. Уменьшите её или выберите другую.";
+    default:
+      return "Пост не прошёл проверку. Проверьте поля.";
+  }
 }
