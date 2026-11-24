@@ -15,6 +15,7 @@ import "@fontsource/gveret-levin/hebrew-400.css";
 import "./index.css";
 import { App } from "./App";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { Splash } from "./components/Splash";
 import { installErrorHandlers } from "./lib/telemetry";
 import { initTheme } from "./lib/theme";
 import { initTelegram } from "./telegram";
@@ -33,5 +34,7 @@ createRoot(root).render(
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
+    {/* Заставка поверх приложения: оно грузится под ней (components/Splash.tsx, docs/SPEC.md «Заставка при запуске»). */}
+    <Splash />
   </StrictMode>,
 );

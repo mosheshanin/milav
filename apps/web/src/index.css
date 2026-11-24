@@ -26,6 +26,19 @@
   --color-brand-blue: #2196f3;
   --color-brand-cyan: #00bcd4;
 
+  /* Точные цвета граней логотипа (сняты с design/logo.png, 24.11.2026): заставка при запуске (палитра «Буквы»).
+     Одинаковы в обеих темах, как и остальные цвета бренда. */
+  --color-brand-logo-yellow: #ffc000;
+  --color-brand-logo-orange: #ff7a00;
+  --color-brand-logo-red: #ff4a14;
+  --color-brand-logo-green: #00923c;
+  --color-brand-logo-green-dark: #00703c;
+  --color-brand-logo-navy: #005484;
+  --color-brand-logo-sky: #0090cc;
+  /* Чёрная обводка букв логотипа и белая «бумага» стикеров. */
+  --color-brand-logo-ink: #141414;
+  --color-brand-logo-paper: #ffffff;
+
   /* Основной акцент интерфейса (кнопки действий, активный этап) */
   --color-accent: #3b82f6;
   --color-accent-soft: #dbeafe;
@@ -248,3 +261,414 @@
     animation-duration: 2.4s;
   }
 }
+
+/*
+  Заставка при запуске (components/Splash.tsx, правила показа lib/splash.ts, docs/SPEC.md «Заставка при запуске»).
+  Палитра «Буквы» (решение владельца 24.11.2026): каждый слайд в цвете своей буквы логотипа M-I-L-A-V,
+  размытые пятна того же цвета медленно плывут. Стикеры (буквы, плитки, кнопка) — белая или цветная грань с чёрной
+  обводкой, как буквы логотипа. Цвета заставки одинаковы в обеих темах. Слайд: .is-on (виден), .is-out + .out-<переход>
+  (уходит), .in-<переход> (входит). В конце приложение открывается кругом из центра.
+*/
+.splash-on body {
+  overflow: hidden;
+}
+
+.splash {
+  --splash-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --splash-spring: cubic-bezier(0.3, 1.5, 0.5, 1);
+  --splash-text: var(--color-brand-logo-paper);
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  color: var(--splash-text);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: color 0.6s;
+}
+
+.splash[data-s="0"] {
+  --splash-base: var(--color-brand-logo-orange);
+  --splash-b1: var(--color-brand-logo-yellow);
+  --splash-b2: var(--color-brand-logo-red);
+  --splash-b3: var(--color-brand-logo-orange);
+  --splash-b4: var(--color-brand-logo-yellow);
+}
+.splash[data-s="1"] {
+  --splash-base: var(--color-brand-logo-green);
+  --splash-b1: var(--color-brand-logo-green);
+  --splash-b2: var(--color-brand-logo-green-dark);
+  --splash-b3: var(--color-brand-logo-green);
+  --splash-b4: var(--color-brand-logo-yellow);
+}
+.splash[data-s="2"] {
+  --splash-base: var(--color-brand-logo-navy);
+  --splash-b1: var(--color-brand-logo-sky);
+  --splash-b2: var(--color-brand-logo-navy);
+  --splash-b3: var(--color-brand-logo-navy);
+  --splash-b4: var(--color-brand-logo-orange);
+}
+.splash[data-s="3"] {
+  --splash-base: var(--color-brand-logo-sky);
+  --splash-b1: var(--color-brand-logo-sky);
+  --splash-b2: var(--color-brand-logo-navy);
+  --splash-b3: var(--color-brand-logo-sky);
+  --splash-b4: var(--color-brand-logo-green);
+}
+.splash[data-s="4"] {
+  --splash-base: var(--color-brand-logo-yellow);
+  --splash-b1: var(--color-brand-logo-yellow);
+  --splash-b2: var(--color-brand-logo-orange);
+  --splash-b3: var(--color-brand-logo-yellow);
+  --splash-b4: var(--color-brand-logo-orange);
+  --splash-text: var(--color-brand-logo-ink);
+}
+
+.splash-base {
+  position: absolute;
+  inset: 0;
+  background-color: var(--splash-base);
+  transition: background-color 1s;
+}
+.splash-bg {
+  position: absolute;
+  inset: -25%;
+  filter: blur(46px);
+  transition: transform 1.2s var(--splash-ease);
+}
+.splash-bg i {
+  position: absolute;
+  border-radius: 50%;
+  animation: splash-drift 6s ease-in-out infinite alternate;
+  transition: background-color 1.1s;
+}
+.splash-bg i:nth-child(1) { width: 70%; height: 55%; left: -5%; top: 0; background-color: var(--splash-b1); }
+.splash-bg i:nth-child(2) { width: 60%; height: 50%; right: -5%; top: 25%; background-color: var(--splash-b2); animation-duration: 7s; }
+.splash-bg i:nth-child(3) { width: 65%; height: 50%; left: 10%; bottom: -5%; background-color: var(--splash-b3); animation-duration: 5s; }
+.splash-bg i:nth-child(4) { width: 35%; height: 30%; right: 5%; bottom: 5%; background-color: var(--splash-b4); animation-duration: 8s; }
+.splash[data-s="1"] .splash-bg { transform: rotate(-10deg) scale(1.05); }
+.splash[data-s="2"] .splash-bg { transform: rotate(12deg) scale(1.1); }
+.splash[data-s="3"] .splash-bg { transform: rotate(-6deg) scale(1.15); }
+.splash[data-s="4"] .splash-bg { transform: rotate(4deg); }
+@keyframes splash-drift {
+  to { transform: translate(8%, -6%) scale(1.15); }
+}
+
+.splash-slide {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+}
+.splash-slide.is-on,
+.splash-slide.is-out { visibility: visible; }
+.splash-slide.is-out { z-index: 2; }
+
+.splash-sc {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--safe-top) 22px calc(96px + var(--safe-bottom));
+  text-align: center;
+}
+
+/* Появление элементов слайда: только когда слайд показан (при каждом показе заново). */
+.splash-in,
+.splash-pop { opacity: 0; }
+.is-on .splash-in { animation: splash-rise 0.9s var(--splash-ease) var(--d, 0s) both; }
+.is-on .splash-pop { animation: splash-pop-in 0.8s var(--splash-spring) var(--d, 0s) both; }
+.is-out .splash-in,
+.is-out .splash-pop { opacity: 1; }
+@keyframes splash-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes splash-pop-in { from { opacity: 0; transform: scale(0.4) rotate(-12deg); } to { opacity: 1; transform: none; } }
+
+/* Логотип с белой обводкой-наклейкой. */
+.splash-logo {
+  display: block;
+  width: min(84vw, 340px);
+  height: auto;
+  filter: drop-shadow(3px 0 0 var(--color-brand-logo-paper)) drop-shadow(-3px 0 0 var(--color-brand-logo-paper))
+    drop-shadow(0 3px 0 var(--color-brand-logo-paper)) drop-shadow(0 -3px 0 var(--color-brand-logo-paper))
+    drop-shadow(0 12px 22px rgb(0 0 0 / 0.25));
+}
+.is-on .splash-logo { animation: splash-logo 1.1s cubic-bezier(0.2, 1.4, 0.4, 1) 0.15s both; }
+.splash-logo-sm { width: min(64vw, 250px); }
+@keyframes splash-logo { from { opacity: 0; transform: scale(0.6) rotate(-6deg); } }
+
+.splash-title {
+  margin: 0;
+  max-width: 340px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.splash-text {
+  margin: 12px 0 0;
+  max-width: 320px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Стикер: грань + чёрная обводка и «толщина» снизу, как у букв логотипа. */
+.splash-stk {
+  border: 2.5px solid var(--color-brand-logo-ink);
+  box-shadow: 0 4px 0 var(--color-brand-logo-ink);
+  background-color: var(--color-brand-logo-paper);
+  color: var(--color-brand-logo-ink);
+}
+
+.splash-tile {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  font: 700 30px/1 var(--font-hebrew);
+  opacity: 0;
+}
+.splash-tile-a { left: 9%; top: calc(12% + var(--safe-top)); background-color: var(--color-brand-logo-yellow); }
+.splash-tile-b { right: 10%; top: calc(16% + var(--safe-top)); background-color: var(--color-brand-logo-green); color: var(--color-brand-logo-paper); }
+.splash-tile-c { left: 12%; bottom: calc(22% + var(--safe-bottom)); background-color: var(--color-brand-logo-sky); color: var(--color-brand-logo-paper); }
+.splash-tile-d { right: 12%; bottom: calc(25% + var(--safe-bottom)); }
+.is-on .splash-tile {
+  animation: splash-tile 0.9s var(--splash-spring) var(--d) both, splash-bob 3s ease-in-out calc(var(--d) + 0.9s) infinite alternate;
+}
+.is-out .splash-tile { opacity: 1; transform: rotate(var(--r)); }
+@keyframes splash-tile { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: rotate(var(--r)); } }
+@keyframes splash-bob { from { opacity: 1; transform: rotate(var(--r)); } to { opacity: 1; transform: translateY(-9px) rotate(calc(var(--r) * -0.5)); } }
+
+.splash-ways {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, 300px);
+  margin-top: 18px;
+}
+.splash-ways div {
+  border-radius: 18px;
+  padding: 6px 6px 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.splash-ways img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+
+.splash-word {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(100%, 300px);
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 22px;
+  text-align: right;
+}
+.splash-word img { width: 64px; height: 64px; flex: none; }
+.splash-word div { flex: 1; }
+.splash-word b { display: block; font-size: 34px; line-height: 1.15; font-weight: 700; }
+.splash-word small { display: block; font-size: 15px; font-weight: 600; opacity: 0.75; }
+
+.splash-checks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.splash-checks span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgb(255 255 255 / 0.55);
+  background-color: rgb(255 255 255 / 0.16);
+  font-size: 13px;
+  font-weight: 700;
+}
+.is-on .splash-checks span { animation: splash-tick 0.4s ease var(--d) forwards; }
+.is-out .splash-checks span {
+  border-color: var(--color-brand-logo-ink);
+  background-color: var(--color-brand-logo-paper);
+  color: var(--color-brand-logo-ink);
+}
+@keyframes splash-tick {
+  to {
+    border-color: var(--color-brand-logo-ink);
+    background-color: var(--color-brand-logo-paper);
+    color: var(--color-brand-logo-ink);
+  }
+}
+
+.splash-chess {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+  height: 124px;
+  margin-top: 20px;
+}
+.splash-chess span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  border-radius: 12px;
+  font-size: 30px;
+  line-height: 1;
+  transform-origin: bottom;
+}
+.splash-chess-1 { background-color: var(--color-brand-logo-yellow); }
+.splash-chess-2 { background-color: var(--color-brand-logo-orange); }
+.splash-chess-3 { background-color: var(--color-brand-logo-red); }
+.splash-chess-4 { background-color: var(--color-brand-logo-green); }
+.splash-chess-5 { background-color: var(--color-brand-logo-navy); color: var(--color-brand-logo-paper); }
+.is-on .splash-chess span { animation: splash-grow 0.7s var(--splash-spring) var(--d) both; }
+@keyframes splash-grow { from { opacity: 0; transform: scaleY(0); } }
+
+.splash-nums {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+.splash-nums span {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.splash-nums b { font-size: 20px; }
+.splash-go {
+  margin: 22px 0 0;
+  padding: 13px 28px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.splash[data-s="4"] .splash-go {
+  border-color: var(--color-brand-logo-ink);
+  background-color: var(--color-brand-logo-ink);
+  color: var(--color-brand-logo-paper);
+  box-shadow: 0 4px 0 var(--color-brand-logo-orange);
+}
+.splash-go i { display: inline-block; font-style: normal; }
+.is-on .splash-go i { animation: splash-nudge 0.8s ease-in-out 1.2s infinite alternate; }
+@keyframes splash-nudge { to { transform: translateX(5px); } }
+
+/* Переходы между слайдами. */
+.out-zoom { animation: splash-zoom-out 0.8s cubic-bezier(0.6, 0, 0.4, 1) forwards; }
+.in-zoom.is-on { animation: splash-zoom-in 0.9s var(--splash-ease) both; }
+@keyframes splash-zoom-out { to { opacity: 0; transform: scale(2.3); filter: blur(14px); } }
+@keyframes splash-zoom-in { from { opacity: 0; transform: scale(0.6); filter: blur(10px); } }
+.out-swipe { animation: splash-swipe-out 0.75s cubic-bezier(0.6, 0, 0.3, 1) forwards; }
+.in-swipe.is-on { animation: splash-swipe-in 0.85s var(--splash-ease) both; }
+@keyframes splash-swipe-out { to { opacity: 0; transform: translateX(-55%) skewX(10deg) scale(0.9); } }
+@keyframes splash-swipe-in { from { opacity: 0; transform: translateX(60%) skewX(-10deg) scale(0.9); } }
+.out-wipe { animation: splash-fade-out 0.6s ease 0.15s forwards; }
+.in-wipe.is-on { animation: splash-wipe-in 0.9s cubic-bezier(0.7, 0, 0.3, 1) both; }
+@keyframes splash-wipe-in {
+  from { clip-path: polygon(0 0, 0 0, -30% 100%, -30% 100%); }
+  to { clip-path: polygon(0 0, 130% 0, 100% 100%, -30% 100%); }
+}
+@keyframes splash-fade-out { to { opacity: 0; transform: scale(0.94); } }
+.out-iris { animation: splash-iris-out 0.8s cubic-bezier(0.6, 0, 0.4, 1) forwards; }
+.in-iris.is-on { animation: splash-iris-in 0.9s cubic-bezier(0.7, 0, 0.3, 1) both; }
+@keyframes splash-iris-out { to { opacity: 0; transform: scale(0.7) rotate(-6deg); filter: blur(6px); } }
+@keyframes splash-iris-in { from { clip-path: circle(0% at 50% 50%); } to { clip-path: circle(80% at 50% 50%); } }
+
+/* Точки слайдов и «Пропустить». */
+.splash-dots {
+  position: absolute;
+  left: 50%;
+  bottom: calc(80px + var(--safe-bottom));
+  z-index: 8;
+  display: flex;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+.splash-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background-color: currentColor;
+  opacity: 0.4;
+  transition: width 0.4s var(--splash-ease), opacity 0.4s;
+}
+.splash-dots i.is-on { width: 22px; opacity: 1; }
+.splash-skip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(20px + var(--safe-bottom));
+  z-index: 8;
+  min-height: 44px;
+  padding: 0 22px;
+  transform: translateX(-50%);
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 0.14);
+  color: inherit;
+  font: 700 15px var(--font-sans);
+  cursor: pointer;
+}
+.splash-skip:focus-visible { outline: 3px solid var(--color-brand-logo-paper); outline-offset: 3px; }
+
+/* Раскрытие приложения: прозрачный круг в центре растёт до углов экрана. */
+@property --splash-hole {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+.splash.splash-reveal {
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1.5px));
+  mask-image: radial-gradient(circle at 50% 50%, transparent var(--splash-hole), #000 calc(var(--splash-hole) + 1.5px));
+  animation: splash-hole var(--splash-reveal-t, 0.7s) cubic-bezier(0.7, 0, 0.25, 1) forwards;
+  pointer-events: none;
+}
+.splash-reveal .splash-skip,
+.splash-reveal .splash-dots { opacity: 0; transition: opacity 0.2s; }
+.splash.splash-reveal.splash-fade {
+  -webkit-mask-image: none;
+  mask-image: none;
+  animation: splash-exit var(--splash-reveal-t, 0.7s) ease-in-out forwards;
+}
+@keyframes splash-hole { to { --splash-hole: 75vmax; } }
+@keyframes splash-exit { to { opacity: 0; transform: scale(1.04); visibility: hidden; } }
+
+/* Невысокие экраны (телефон боком): компактнее. */
+@media (max-height: 600px) {
+  .splash-ways { width: min(100%, 220px); gap: 8px; margin-top: 10px; }
+  .splash-tile { display: none; }
+  .splash-chess { height: 100px; }
+}
+
+/* «Уменьшить движение»: всё сразу на месте, слайды сменяются затуханием, приложение проявляется. */
+@media (prefers-reduced-motion: reduce) {
+  .splash-bg i,
+  .is-on .splash-in,
+  .is-on .splash-pop,
+  .is-on .splash-logo,
+  .is-on .splash-tile,
+  .is-on .splash-chess span,
+  .is-on .splash-go i {
+    animation: none;
+    opacity: 1;
+  }
+  .is-on .splash-tile { transform: rotate(var(--r)); }
+  .is-on .splash-checks span { animation-duration: 0.01s; }
+  .splash-slide.is-out { animation: splash-calm-out 0.4s ease forwards; }
+  .splash-slide.is-on { animation: splash-calm-in 0.4s ease both; clip-path: none; }
+  .splash.splash-reveal { -webkit-mask-image: none; mask-image: none; animation: splash-calm-out 0.6s ease forwards; }
+}
+@keyframes splash-calm-out { to { opacity: 0; visibility: hidden; } }
+@keyframes splash-calm-in { from { opacity: 0; } }
