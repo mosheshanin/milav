@@ -45,7 +45,7 @@ export function MicAsk({ onAllow, busy }: { onAllow: () => void; busy: boolean }
         <Mic className="size-icon" aria-hidden />
         Разрешить микрофон
       </Button>
-      <p className="text-xs text-ink-soft">Дальше появится системный запрос: нажмите «Разрешить».</p>
+      <p className="text-sm text-ink-soft">Дальше появится системный запрос: нажмите «Разрешить».</p>
     </div>
   );
 }

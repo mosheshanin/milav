@@ -41,7 +41,7 @@ export function BadgeTile({ view, onOpen }: { view: BadgeView; onOpen: (badge: B
       <span className={earned ? "" : "opacity-30 grayscale"}>
         <BadgeIconView badge={def} />
       </span>
-      <span className={`text-xs font-semibold leading-tight ${earned ? "text-ink" : "text-ink-soft"}`}>{def.title}</span>
+      <span className={`w-full text-xs font-semibold break-words ${earned ? "text-ink" : "text-ink-soft"}`}>{def.title}</span>
       {!earned && view.progress && (
         <span className="text-xs text-ink-soft">
           {view.progress.value} из {view.progress.target}
@@ -141,7 +141,7 @@ export function WeekDots({ week }: { week: PlayInfo["week"] }) {
   return (
     <ol className="flex justify-between" data-testid="week-dots" aria-label="Дни недели">
       {week.days.map((active, i) => (
-        <li key={labels[i]} className="flex flex-col items-center gap-1 text-xs text-ink-soft">
+        <li key={labels[i]} className="flex flex-col items-center gap-1 text-sm text-ink-soft">
           <span
             data-active={active ? "1" : "0"}
             className={`flex size-8 items-center justify-center rounded-full ${
@@ -204,7 +204,7 @@ export function StatusLegend({ currentKey }: { currentKey: StatusPath["key"] }) 
           );
         })}
       </ul>
-      <p className="text-xs text-ink-soft">Считаются разные сданные уроки, повторные прохождения не добавляют.</p>
+      <p className="text-sm text-ink-soft">Считаются разные сданные уроки, повторные прохождения не добавляют.</p>
     </div>
   );
 }

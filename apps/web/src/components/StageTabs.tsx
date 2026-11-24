@@ -48,7 +48,7 @@ export function StageTabs({
             data-testid={`tab-${stage}`}
             data-state={done ? "done" : locked ? "locked" : "open"}
             onClick={() => onSelect(stage)}
-            className={`flex min-h-20 flex-col items-center justify-center gap-1.5 rounded-control border-2 px-1 text-xs font-semibold transition ${
+            className={`flex min-h-20 flex-col items-center justify-center gap-1.5 rounded-control border-2 px-1 text-sm font-semibold transition ${
               active
                 ? done
                   ? "border-success/60 bg-success-soft text-success"

@@ -62,7 +62,7 @@ export function LetterGrid({
               }`}
             >
               <span className="font-hebrew text-3xl leading-none">{letter}</span>
-              <span className="mt-1 text-xs font-semibold" dir="ltr">
+              <span className="mt-1 text-sm font-semibold" dir="ltr">
                 {count}/{variants}
               </span>
             </button>

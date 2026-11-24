@@ -71,7 +71,7 @@ export function WordCard({
             testId={label ? `listen-phrase-${key}` : "listen-phrase"}
           />
           <div className="min-w-0 flex-1 text-right">
-            {label && <div className="text-xs text-ink-soft">{label}</div>}
+            {label && <div className="text-sm text-ink-soft">{label}</div>}
             <div dir="rtl" lang="he" className="font-hebrew text-xl" data-testid="phrase-he">
               {text.he}
             </div>

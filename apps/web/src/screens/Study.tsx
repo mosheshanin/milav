@@ -268,7 +268,7 @@ function StudyLesson({ lesson, onBack, onQuiz, onPractice }: StudyProps & { less
               aria-label={`${alphabet ? "Буква" : "Слово"} ${i + 1}`}
               aria-current={i === index}
               data-testid={`dot-${i}`}
-              className={`rounded-full font-semibold ${alphabet ? "size-11 font-hebrew text-xl" : "aspect-square text-xs"} ${
+              className={`rounded-full font-semibold ${alphabet ? "size-11 font-hebrew text-xl" : "aspect-square text-sm"} ${
                 i === index ? "bg-accent text-white" : p.completed ? "bg-success-soft text-success" : "bg-line text-ink-soft"
               }`}
             >

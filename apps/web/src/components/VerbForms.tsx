@@ -29,7 +29,7 @@ export function VerbForms({ verb }: { verb: VerbData }) {
             </Chip>
           </span>
         ))}
-        <span className="text-xs text-ink-soft">корень</span>
+        <span className="text-sm text-ink-soft">корень</span>
         <span dir="rtl" lang="he" className="font-hebrew text-lg font-semibold">
           {badge.root}
         </span>
@@ -47,7 +47,7 @@ export function VerbForms({ verb }: { verb: VerbData }) {
                 aria-label={t.title}
                 data-testid={`verb-tab-${t.tense}`}
                 onClick={() => setTense(t.tense)}
-                className={`min-h-10 rounded-control border px-1 text-xs font-semibold transition ${
+                className={`min-h-10 rounded-control border px-1 text-sm font-semibold transition ${
                   t.tense === tab.tense ? "border-accent bg-accent text-white" : "border-line bg-surface text-ink"
                 }`}
               >
@@ -57,11 +57,11 @@ export function VerbForms({ verb }: { verb: VerbData }) {
           </div>
 
           <div role="tabpanel" aria-label={tab.title} data-testid={`verb-panel-${tab.tense}`}>
-            <div className="mt-2 text-xs font-semibold text-ink-soft">{tab.title}</div>
+            <div className="mt-2 text-sm font-semibold text-ink-soft">{tab.title}</div>
             <dl>
               {tab.rows.map((row) => (
                 <div key={row.key} className="flex items-center justify-between gap-1.5" data-testid={`verb-row-${tab.tense}-${row.key}`}>
-                  <dt className="flex min-w-0 flex-col text-xs text-ink-soft">
+                  <dt className="flex min-w-0 flex-col text-sm text-ink-soft">
                     <span className="flex items-baseline gap-1.5 whitespace-nowrap">
                       <span>{row.label}</span>
                       {row.pronoun && (
@@ -91,7 +91,7 @@ export function VerbForms({ verb }: { verb: VerbData }) {
               ))}
             </dl>
             {tab.rows.some((r) => r.book) && (
-              <p className="mt-1 text-xs text-ink-soft" data-testid="verb-book-note">
+              <p className="mt-1 text-sm text-ink-soft" data-testid="verb-book-note">
                 книжн. — книжная форма: в разговоре вместо неё обычно говорят форму мужского рода.
               </p>
             )}

@@ -127,7 +127,7 @@ function WordRow({ item }: { item: MyWordItem }) {
             <span key={i} className={`h-2 w-2.5 rounded-sm ${i < filled ? "bg-accent" : "bg-line"}`} />
           ))}
         </div>
-        <span className={`text-xs ${dueIn === 0 ? "font-semibold text-accent" : "text-ink-soft"}`}>{dueIn === 0 ? "пора" : dueInText(dueIn)}</span>
+        <span className={`text-sm ${dueIn === 0 ? "font-semibold text-accent" : "text-ink-soft"}`}>{dueIn === 0 ? "пора" : dueInText(dueIn)}</span>
       </div>
     </div>
   );
