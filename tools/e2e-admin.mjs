@@ -4,7 +4,7 @@
 // Запуск: node tools/e2e-admin.mjs [каталог для скриншотов]
 import { existsSync, mkdirSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
-import { sql } from "./e2e-db.mjs";
+import { queryRow, sql } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots/admin";
@@ -89,7 +89,7 @@ check((await text(page, "staff-role")).includes("владелец"), "владе
 await page.click('[data-testid="open-admin"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
 check((await scriptUrls(page)).some((u) => /\/Admin-/.test(u)), "код панели подгружается отдельным файлом при входе в панель");
-check((await page.locator('[data-testid^="admin-open-"]').count()) === 8, "в меню панели 8 разделов (обзор, настройки, сообщения бота, напоминания, контент, команда, журнал, шаблоны)");
+check((await page.locator('[data-testid^="admin-open-"]').count()) === 10, "в меню панели 10 разделов (обзор, аналитика, ученики, настройки, сообщения бота, напоминания, контент, команда, журнал, шаблоны)");
 check(await noOverflow(page), "меню панели без горизонтальной прокрутки");
 await shot(page, "a2-menu");
 
@@ -104,6 +104,45 @@ await shot(page, "a3-overview");
 await page.click('header button[aria-label="Назад"]');
 await page.waitForSelector('[data-testid="admin-menu"]');
 check(true, "«назад» из раздела возвращает в меню панели");
+
+// Аналитика (этап 4): удержание, воронка, уроки, трудные слова, произношение.
+await page.click('[data-testid="admin-open-analytics"]');
+await page.waitForSelector('[data-testid="analytics-funnel"]');
+check((await text(page, "analytics-funnel")).includes("Открыли приложение"), "в аналитике есть воронка");
+for (const id of ["analytics-retention", "analytics-lessons", "analytics-hard", "analytics-speech"]) {
+  check((await page.locator(`[data-testid="${id}"]`).count()) === 1, `в аналитике есть блок ${id}`);
+}
+check(await noOverflow(page), "аналитика без горизонтальной прокрутки на 360 px");
+await shot(page, "a3b-analytics");
+await page.click('header button[aria-label="Назад"]');
+await page.waitForSelector('[data-testid="admin-menu"]');
+
+// Ученики (этап 5): поиск по id, карточка, убрать из таблицы лидеров и вернуть.
+await page.click('[data-testid="admin-open-students"]');
+await page.waitForSelector(`[data-testid="student-${OWNER}"]`);
+check(true, "в списке учеников есть владелец");
+await page.fill('[data-testid="students-search"]', String(STUDENT));
+await page.waitForFunction((id) => {
+  const rows = [...document.querySelectorAll('[data-testid^="student-"]')].filter((el) => /^student-\d+$/.test(el.getAttribute("data-testid")));
+  return rows.length === 1 && rows[0].getAttribute("data-testid") === `student-${id}`;
+}, STUDENT);
+check(true, "поиск по id находит одного ученика");
+await page.click(`[data-testid="student-${STUDENT}"]`);
+await page.waitForSelector('[data-testid="student-card"]');
+check((await text(page, "student-card")).includes(`id ${STUDENT}`), "карточка ученика открылась");
+check(await noOverflow(page), "карточка ученика без горизонтальной прокрутки");
+await shot(page, "a3c-student");
+await page.click('[data-testid="student-board"]');
+await page.waitForFunction(() => document.querySelector('[data-testid="student-board"]')?.textContent?.includes("Вернуть"));
+check(queryRow(`SELECT lb_banned AS b FROM user_stats WHERE user_id=${STUDENT}`).b === 1, "ученик убран из таблицы лидеров");
+await page.click('[data-testid="student-board"]');
+await page.waitForFunction(() => document.querySelector('[data-testid="student-board"]')?.textContent?.includes("Убрать"));
+check(queryRow(`SELECT lb_banned AS b FROM user_stats WHERE user_id=${STUDENT}`).b === 0, "ученик возвращён в таблицу лидеров");
+await page.click('header button[aria-label="Назад"]');
+await page.waitForSelector('[data-testid="students-search"]');
+check(true, "«назад» из карточки ведёт к списку учеников");
+await page.click('header button[aria-label="Назад"]');
+await page.waitForSelector('[data-testid="admin-menu"]');
 
 // Настройки приложения: таблица лидеров «только команда».
 await page.click('[data-testid="admin-open-config"]');

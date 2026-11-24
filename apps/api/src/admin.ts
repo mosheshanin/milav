@@ -188,7 +188,8 @@ export function logStatement(db: D1Database, actor: number, action: string, targ
     );
 }
 
-async function readJson<T>(request: Request): Promise<T | null> {
+/** Тело запроса панели (JSON до 4 КБ). */
+export async function readJson<T>(request: Request): Promise<T | null> {
   const bytes = await readBodyLimited(request, 4 * 1024);
   return bytes ? parseJson<T>(bytes) : null;
 }

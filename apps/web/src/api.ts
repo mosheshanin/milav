@@ -11,7 +11,10 @@ import type {
   ReviewListResponse,
   ReviewSaveRequest,
   AdminLogResponse,
+  AdminAnalyticsResponse,
   AdminOverviewResponse,
+  AdminStudentResponse,
+  AdminStudentsResponse,
   AdminTeamResponse,
   ConfigKey,
   StaffRole,
@@ -166,6 +169,12 @@ export const api = {
   // ---- Панель администратора (только администраторы; остальным сервер отвечает 403) ----
   admin: {
     overview: () => request<AdminOverviewResponse>("/api/admin/overview"),
+    analytics: () => request<AdminAnalyticsResponse>("/api/admin/analytics"),
+    students: (q: string, offset = 0) =>
+      request<AdminStudentsResponse>(`/api/admin/students?q=${encodeURIComponent(q)}${offset ? `&offset=${offset}` : ""}`),
+    student: (id: number) => request<AdminStudentResponse>(`/api/admin/students/${id}`),
+    setStudentLeaderboard: (id: number, banned: boolean) =>
+      request<{ ok: true; changed: boolean }>(`/api/admin/students/${id}/leaderboard`, jsonPut({ banned })),
     config: () => request<AdminConfigResponse>("/api/admin/config"),
     setConfig: (key: ConfigKey, value: unknown) => request<{ ok: true; changed: boolean }>("/api/admin/config", jsonPut({ key, value })),
     team: () => request<AdminTeamResponse>("/api/admin/team"),

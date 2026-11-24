@@ -235,3 +235,116 @@ export interface AdminLogResponse {
   /** id для следующей страницы (записи старше), null если больше нет. */
   nextBefore: number | null;
 }
+
+// ---- Аналитика (этап 4, 24.11.2026, docs/ADMIN.md «Аналитика: как сделано») ----
+
+/** Удержание одной недели прихода: доля новичков, открывших приложение через N дней и позже. null: прошло меньше N дней. */
+export interface RetentionCohort {
+  /** Первый день недели прихода (воскресенье, по Иерусалиму), `YYYY-MM-DD`. */
+  week: string;
+  /** Сколько новичков пришло за неделю. */
+  size: number;
+  d1: number | null;
+  d7: number | null;
+  d30: number | null;
+}
+
+/** Шаг воронки: сколько разных учеников дошли до него. */
+export interface FunnelStep {
+  key: "joined" | "firstItem" | "firstQuiz" | "firstPassed" | "fivePassed";
+  title: string;
+  users: number;
+}
+
+/** Урок в аналитике: сколько начали, прошли все слова, попытки викторины, сдали. */
+export interface LessonAnalytics {
+  lessonId: string;
+  title: string;
+  /** Учеников с хотя бы одним этапом в уроке. */
+  started: number;
+  /** Учеников, прошедших все слова урока. */
+  learnedAll: number;
+  /** Завершённых попыток викторины (прерванные не записываются). */
+  attempts: number;
+  /** Из них сданных. */
+  passedAttempts: number;
+  /** Средний результат завершённых попыток, % (null, если попыток нет). */
+  avgPercent: number | null;
+  /** Учеников, сдавших урок. */
+  passedUsers: number;
+}
+
+/** Слово (или буква) с типом вопроса, где ошибаются чаще всего. */
+export interface HardItem {
+  itemId: string;
+  he: string;
+  ru: string;
+  lessonTitle: string;
+  questionType: string;
+  questionTitle: string;
+  asked: number;
+  correct: number;
+}
+
+export interface AdminAnalyticsResponse {
+  /** С какого дня есть данные о посещениях (удержание раньше этой даты не считается). */
+  activeSince: string | null;
+  retention: RetentionCohort[];
+  funnel: FunnelStep[];
+  lessons: LessonAnalytics[];
+  /** Порог: слово попадает в «трудные», если его спросили этим типом хотя бы столько раз. */
+  hardMinAsked: number;
+  hardItems: HardItem[];
+  /** «Произнеси» в викторинах: сколько раз спросили и сколько засчитано (после двух попыток). */
+  speech: { asked: number; correct: number; hardest: HardItem[] };
+}
+
+// ---- Ученики (этап 5, 24.11.2026, docs/ADMIN.md «Ученики: как сделано») ----
+
+export interface StudentRow {
+  id: number;
+  /** Имя и фамилия из Telegram. */
+  name: string;
+  username: string | null;
+  /** Когда пришёл и когда последний раз открывал (время базы, `YYYY-MM-DD HH:MM:SS` UTC). */
+  createdAt: string;
+  lastSeenAt: string;
+  points: number;
+  passedLessons: number;
+  statusName: string;
+  badges: number;
+  /** Участвует в таблице лидеров; banned: убран из неё командой. */
+  leaderboard: boolean;
+  banned: boolean;
+  reminders: boolean;
+}
+
+export interface AdminStudentsResponse {
+  items: StudentRow[];
+  /** Сколько учеников подходит под поиск. */
+  total: number;
+  /** Смещение следующей страницы или null. */
+  nextOffset: number | null;
+}
+
+export interface AdminStudentResponse {
+  student: StudentRow;
+  settings: { dailyGoal: number; gender: string; tz: string; cohortExcluded: boolean };
+  progress: {
+    words: number;
+    letters: number;
+    activeDays: number;
+    rhythmWeeks: number;
+    goalDays: number;
+    repeats: number;
+    mastered: number;
+    /** Последний день занятий по часам ученика, `YYYY-MM-DD` (null, если не занимался). */
+    lastDay: string | null;
+  };
+  lessons: { lessonId: string; title: string; passedAt: string }[];
+  attempts: { lessonId: string; title: string; correct: number; total: number; passed: boolean; at: string }[];
+  badges: { id: string; title: string; earnedAt: number }[];
+  reminder: { enabled: boolean; minute: number; blocked: boolean } | null;
+  /** Роль в команде, если есть. */
+  staffRole: StaffRole | null;
+}

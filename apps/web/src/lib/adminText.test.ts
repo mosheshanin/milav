@@ -22,6 +22,8 @@ describe("тексты панели", () => {
     expect(logEntryText(entry("staff.add", "42", null, "reviewer"))).toBe("Добавлен в команду: id 42, проверяющий");
     expect(logEntryText(entry("staff.change", "42", "reviewer", "admin"))).toBe("Роль id 42: проверяющий → администратор");
     expect(logEntryText(entry("staff.remove", "42", "admin", null))).toBe("Убран из команды: id 42 (был администратор)");
+    expect(logEntryText(entry("student.leaderboard", "7", false, true))).toBe("Ученик id 7 убран из таблицы лидеров");
+    expect(logEntryText(entry("student.leaderboard", "7", true, false))).toBe("Ученик id 7 возвращён в таблицу лидеров");
     expect(logEntryText(entry("other", null, null, null))).toBe("other");
   });
 

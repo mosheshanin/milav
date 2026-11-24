@@ -53,6 +53,8 @@ export function logEntryText(entry: AdminLogEntry): string {
       return `Отозвана проверка ${target}`;
     case "bot.text":
       return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: «${short(entry.oldValue)}» → «${short(entry.newValue)}»`;
+    case "student.leaderboard":
+      return entry.newValue ? `Ученик id ${target} убран из таблицы лидеров` : `Ученик id ${target} возвращён в таблицу лидеров`;
     case "bot.reset":
       return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: возвращён исходный текст`;
     default:
