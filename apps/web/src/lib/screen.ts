@@ -21,6 +21,8 @@ export type Screen =
   | { name: "words" }
   /** Настройки; `from` это экран, куда ведёт «назад» (главная или достижения). */
   | { name: "settings"; from: "home" | "achievements" }
+  /** Политика конфиденциальности (из «Настроек»; «назад» ведёт в них же с тем же `from`). */
+  | { name: "privacy"; from: "home" | "achievements" }
   /** Панель администратора (только команда, docs/ADMIN.md). */
   | { name: "admin" }
   /** Проверка слов для проверяющего (раздел «Контент» без остальной панели, docs/ADMIN.md, этап 3). */
@@ -103,9 +105,9 @@ export function restoreScreen(storage: ScreenStorage | null, lessonExists: (less
   if (name === "words") return WORDS;
   // Подход повторения после перезагрузки начнётся заново: возвращаем на главную, там карточка «Повторить».
   if (name === "repeat" || name === "numbers") return HOME;
-  if (name === "settings") {
+  if (name === "settings" || name === "privacy") {
     const from = (raw as { from?: unknown }).from;
-    return { name: "settings", from: from === "achievements" ? "achievements" : "home" };
+    return { name, from: from === "achievements" ? "achievements" : "home" };
   }
   if ((name === "study" || name === "quiz" || name === "practice") && typeof lessonId === "string" && lessonExists(lessonId)) {
     return { name: "study", lessonId };

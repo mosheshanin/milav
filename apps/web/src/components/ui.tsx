@@ -1,12 +1,14 @@
 import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "success" | "ghost";
+type Variant = "primary" | "secondary" | "success" | "ghost" | "danger";
 
 const VARIANTS: Record<Variant, string> = {
   primary: "bg-accent text-white active:opacity-80",
   secondary: "bg-accent-soft text-accent active:opacity-80",
   success: "bg-success text-white active:opacity-80",
   ghost: "bg-surface text-ink border border-line active:bg-page",
+  /** Необратимое действие (удаление данных). */
+  danger: "bg-danger text-white active:opacity-80",
 };
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -42,6 +42,8 @@ export interface TelegramWebApp {
   };
   /** Просит разрешение «боту можно писать вам» (с версии 6.9): родной диалог Telegram. */
   requestWriteAccess?: (callback?: (granted: boolean) => void) => void;
+  /** Закрывает мини-приложение (после удаления данных). */
+  close?: () => void;
   /** Открывает ссылку t.me внутри Telegram (например, выбор чата для «Поделиться»). */
   openTelegramLink?: (url: string) => void;
   /** Схема оформления Telegram: светлая или тёмная (для темы «Как в Telegram»). */

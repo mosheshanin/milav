@@ -13,6 +13,7 @@ import { NumbersTrainer } from "./screens/NumbersTrainer";
 import { Repeat } from "./screens/Repeat";
 import { Quiz } from "./screens/Quiz";
 import { Settings } from "./screens/Settings";
+import { Privacy } from "./screens/Privacy";
 import { Study } from "./screens/Study";
 import { launchTarget } from "./telegram";
 
@@ -137,8 +138,10 @@ export function App() {
           onBack={() => setScreen(screen.from === "achievements" ? ACHIEVEMENTS : HOME)}
           onAdmin={() => setScreen(ADMIN)}
           onReview={() => setScreen(REVIEW)}
+          onPrivacy={() => setScreen({ name: "privacy", from: screen.from })}
         />
       )}
+      {screen.name === "privacy" && <Privacy onBack={() => setScreen({ name: "settings", from: screen.from })} />}
       {screen.name === "leaderboard" && <Leaderboard onBack={() => setScreen(HOME)} />}
       {screen.name === "admin" && (
         <AdminOnly onBack={() => setScreen(HOME)}>

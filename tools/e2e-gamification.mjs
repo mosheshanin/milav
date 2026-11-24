@@ -6,7 +6,7 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { revealLesson } from "./e2e-home.mjs";
-import { sql } from "./e2e-db.mjs";
+import { queryRow, sql } from "./e2e-db.mjs";
 
 const BASE = process.env.BASE ?? "http://localhost:8787";
 const SHOTS = process.argv[2] ?? "e2e-shots";
@@ -313,6 +313,41 @@ await page.context().close();
   await p.reload();
   await p.waitForSelector('[data-testid="phrase-he"]');
   check((await text(p, "phrase-he")) === go.example.he, `мужчине фраза в мужском роде: ${go.example.he}`);
+  await p.context().close();
+}
+
+// ---------- Сценарий Е: политика конфиденциальности и удаление данных (24.11) ----------
+{
+  const E = 3109;
+  sql(`INSERT OR IGNORE INTO users (id, first_name) VALUES (${E}, 'Удаляемый');`);
+  const p = await openPage(E);
+  await p.click('header [data-testid="open-settings"]');
+  await p.waitForSelector('[data-testid="settings"]');
+  await p.click('[data-testid="open-privacy"]');
+  await p.waitForSelector('[data-testid="privacy"]');
+  check((await text(p, "privacy")).includes("Удалить мои данные"), "в приложении открывается политика конфиденциальности");
+  await shot(p, "13-privacy");
+  await pressBack(p);
+  await p.waitForSelector('[data-testid="settings"]');
+  check(true, "«назад» из политики ведёт в «Настройки»");
+
+  const privacyPage = await p.context().request.get(`${BASE}/privacy`);
+  check(privacyPage.status() === 200 && (await privacyPage.text()).includes("Политика конфиденциальности Milav"), "страница /privacy отдаётся сервером");
+
+  check(queryRow(`SELECT COUNT(*) AS n FROM user_stats WHERE user_id=${E}`).n === 1, "у ученика есть счётчики до удаления");
+  await p.click('[data-testid="delete-data"]');
+  await p.click('[data-testid="delete-confirm-no"]');
+  check((await p.locator('[data-testid="delete-confirm"]').count()) === 0, "«Отмена» ничего не удаляет");
+  check(queryRow(`SELECT COUNT(*) AS n FROM users WHERE id=${E}`).n === 1, "после «Отмены» ученик на месте");
+  await p.click('[data-testid="delete-data"]');
+  await shot(p, "14-delete-confirm");
+  await p.click('[data-testid="delete-confirm-yes"]');
+  await p.waitForSelector('[data-testid="data-deleted"]');
+  await shot(p, "15-data-deleted");
+  check(queryRow(`SELECT COUNT(*) AS n FROM users WHERE id=${E}`).n === 0, "профиль удалён из базы");
+  check(queryRow(`SELECT COUNT(*) AS n FROM user_stats WHERE user_id=${E}`).n === 0, "счётчики удалены из базы");
+  const keys = await p.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("milav")));
+  check(keys.length === 0, `данные на устройстве очищены (${keys.join(", ")})`);
   await p.context().close();
 }
 

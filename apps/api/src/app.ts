@@ -84,6 +84,8 @@ import {
   type TelegramUpdate,
 } from "./bot";
 import { appOrigin } from "./appUrl";
+import { deleteUserData } from "./deleteMe";
+import { PRIVACY_PAGE_CSP, privacyPageHtml } from "./privacyPage";
 
 /** Фоновая задача: дожидается её Workers (waitUntil). В тестах контекста выполнения нет, тогда просто не ждём. */
 function inBackground(c: { executionCtx: { waitUntil(promise: Promise<unknown>): void } }, task: Promise<unknown>): void {
@@ -205,6 +207,24 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
   if (!reply) return c.body(null, 200);
   logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
   return c.json(reply);
+});
+
+// Политика конфиденциальности для браузера и @BotFather (тот же текст, что на экране приложения).
+app.get("/privacy", (c) => {
+  c.header("Content-Security-Policy", PRIVACY_PAGE_CSP);
+  c.header("X-Content-Type-Options", "nosniff");
+  c.header("Referrer-Policy", "no-referrer");
+  c.header("Cache-Control", "public, max-age=3600");
+  return c.html(privacyPageHtml());
+});
+
+// Удаление своих данных («Настройки» → «Приватность»): всё про ученика одним пакетом, восстановить нельзя (deleteMe.ts).
+// Лимит settings: удаление не дороже обычной настройки и не позволяет обнулять счётчики лимитов.
+app.delete("/api/me", requireUser, rateLimit("settings"), async (c) => {
+  const user = c.get("user");
+  await deleteUserData(c.env.DB, user.id);
+  logEvent("data_deleted", { uid: user.id });
+  return c.json({ ok: true });
 });
 
 // Профиль, очки, статус и блок «Мой путь». Приложение вызывает это при запуске и присылает свой часовой пояс.

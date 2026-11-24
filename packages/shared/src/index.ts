@@ -16,6 +16,7 @@ export * from "./repeat";
 export * from "./phrase";
 export * from "./numbers";
 export * from "./numbersTrainer";
+export * from "./privacy";
 export {
   PRACTICE_OPTIONS,
   PRACTICE_QUESTIONS,

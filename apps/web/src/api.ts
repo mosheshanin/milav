@@ -111,6 +111,8 @@ export const api = {
   /** Человек увидел поздравление с этими бейджами. */
   seen: (ids: string[]) => request<{ ok: true }>("/api/achievements/seen", json({ ids })),
   settings: (body: SettingsRequest) => request<{ play: PlayInfo }>("/api/settings", jsonPut(body)),
+  /** Удалить все свои данные (необратимо, «Настройки» → «Приватность»). */
+  deleteMe: () => request<{ ok: true }>("/api/me", { method: "DELETE" }),
   /** Напоминания от бота: включить (бот сразу пришлёт подтверждение), выключить, время, «Не сейчас». */
   reminders: (body: ReminderSettingsRequest) => request<{ reminders: ReminderInfo }>("/api/reminders", jsonPut(body)),
   leaderboard: (board: "week" | "all") => request<LeaderboardResponse>(`/api/leaderboard?board=${board}`),

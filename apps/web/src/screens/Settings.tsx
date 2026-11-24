@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { BookCheck, Check, Copy, Shield } from "lucide-react";
+import { BookCheck, Check, Copy, FileText, Shield } from "lucide-react";
 import { DAILY_GOAL_OPTIONS, LEARNER_GENDERS, LEARNER_GENDER_TITLES, STAFF_ROLE_TITLES, type SettingsRequest } from "@milav/shared";
 import { api } from "../api";
 import { useApp } from "../AppContext";
 import { Header } from "../components/Header";
 import { Choice, Section, Toggle } from "../components/Controls";
+import { DataDeleted, DeleteData } from "../components/DeleteData";
 import { RemindersSettings } from "../components/RemindersSettings";
 import { Button } from "../components/ui";
 import { saveErrorText } from "../lib/apiErrors";
@@ -16,17 +17,28 @@ import { useBackButton } from "../lib/useBackButton";
 
 /**
  * Настройки пользователя. Разделы: оформление (тема; позже цветовые схемы), занятия (цель дня, род во фразах-примерах), звук и отклик
- * (скорость озвучки, вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение), внизу Telegram id и вход в панель
+ * (скорость озвучки, вибрация; позже выбор голоса озвучки), приватность (таблица лидеров, сравнение, политика конфиденциальности, удаление данных), внизу Telegram id и вход в панель
  * администратора (пункт панели виден только администраторам, docs/ADMIN.md).
  * Тема, скорость озвучки и вибрация хранятся на этом устройстве, остальное на сервере (PUT /api/settings).
  */
-export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; onAdmin: () => void; onReview: () => void }) {
+export function Settings({
+  onBack,
+  onAdmin,
+  onReview,
+  onPrivacy,
+}: {
+  onBack: () => void;
+  onAdmin: () => void;
+  onReview: () => void;
+  onPrivacy: () => void;
+}) {
   const { me, applyPlay } = useApp();
   const { settings, features } = me.play;
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [vibration, setVibration] = useState(hapticsEnabled);
   const [speed, setSpeed] = useState<AudioSpeed>(loadAudioSpeed);
+  const [deleted, setDeleted] = useState(false);
   const [theme, setTheme] = useState<ThemeChoice>(loadThemeChoice);
   useBackButton(onBack);
 
@@ -43,6 +55,9 @@ export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; on
       setBusy(false);
     }
   }
+
+  // После удаления данных только итог, без шапки и запросов: иначе профиль сразу создался бы заново.
+  if (deleted) return <DataDeleted />;
 
   return (
     <>
@@ -131,6 +146,11 @@ export function Settings({ onBack, onAdmin, onReview }: { onBack: () => void; on
             testId="toggle-cohort"
             onChange={(v) => void change({ cohortExcluded: !v })}
           />
+          <Button variant="ghost" block onClick={onPrivacy} data-testid="open-privacy">
+            <FileText className="size-icon" aria-hidden />
+            Политика конфиденциальности
+          </Button>
+          <DeleteData onDeleted={() => setDeleted(true)} />
         </Section>
 
         <Section title="Аккаунт">
