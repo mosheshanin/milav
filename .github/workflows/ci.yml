@@ -148,8 +148,11 @@ jobs:
           path: .pw-browsers
           key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
+      # Без --with-deps (24.11.2026): системные библиотеки Chromium на машине GitHub уже есть, а --with-deps каждый раз
+      # ставил через apt только шрифты (японские, китайские, юникод), которые приложению не нужны (у него свои шрифты).
+      # Шесть групп одновременно качали их с зеркала Ubuntu по 100 КБ/с: до 5 минут на группу вместо 30 секунд.
       - name: Установка Chromium
-        run: npx playwright-core install --with-deps chromium
+        run: npx playwright-core install chromium
 
       - name: Локальная база (миграции)
         run: npx wrangler d1 migrations apply milav-db --local --env local
