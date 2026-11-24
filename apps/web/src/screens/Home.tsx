@@ -25,6 +25,7 @@ import { loadOpen, saveOpen, sectionKey, toggled, topicKey } from "../lib/homeFo
 import { alphabetAllLessonIds, alphabetMetas, lessonMetas, wordMetas } from "../lib/lessons";
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { repeatCardText } from "../lib/repeat";
+import { fillLook, groupFill, lessonFill } from "../lib/progressFill";
 import { findResume } from "../lib/resume";
 
 const SECTIONS: Section[] = ["basics", "numbers", "nouns", "verbs", "adjectives"];
@@ -219,7 +220,7 @@ export function Home({
                 lessons={alphabetMetas}
                 progress={progress}
                 testId="fold-section-alphabet"
-                className="px-block py-3"
+                className="rounded-card px-block py-3"
               >
                 <Emoji>{topicEmoji("alphabet")}</Emoji>
                 <span className="text-lg font-bold" data-title>
@@ -256,7 +257,7 @@ export function Home({
                     lessons={inSection}
                     progress={progress}
                     testId={`fold-section-${section}`}
-                    className="px-block py-3"
+                    className="rounded-card px-block py-3"
                   >
                     <Emoji>{sectionEmoji(section)}</Emoji>
                     <span className="text-lg font-bold" data-title>
@@ -279,7 +280,7 @@ export function Home({
                               lessons={items}
                               progress={progress}
                               testId={`fold-topic-${topicId}`}
-                              className="px-3 py-2"
+                              className="rounded-control px-3 py-2"
                             >
                               <Emoji>{topicEmoji(topicId)}</Emoji>
                               <span className="font-semibold">{topic}</span>
@@ -392,6 +393,8 @@ function FoldButton({
   const passed = items.filter((l) => progress[l.id]?.quiz.passed).length;
   const summary =
     passed > 0 ? `сдано ${passed} из ${items.length}` : `${items.length} ${plural(items.length, "урок", "урока", "уроков")}`;
+  // Сданная тема (раздел) выделена цветом, частично сданная — полоса прогресса на фоне заголовка.
+  const look = fillLook(groupFill(items, progress), "");
   return (
     <button
       type="button"
@@ -399,10 +402,12 @@ function FoldButton({
       aria-expanded={open}
       data-testid={testId}
       data-lessons={items.map((l) => l.id).join(" ")}
-      className={`flex min-h-12 w-full items-center gap-3 rounded-card text-left active:bg-page ${className}`}
+      data-fill={look.state}
+      style={look.style}
+      className={`flex min-h-12 w-full items-center gap-3 text-left active:opacity-80 ${look.className} ${className} ${open ? "rounded-b-none" : ""}`}
     >
       {children}
-      <span className="ml-auto shrink-0 text-sm text-ink-soft">{summary}</span>
+      <span className={`ml-auto shrink-0 text-sm ${look.state === "passed" ? "font-semibold text-success" : "text-ink-soft"}`}>{summary}</span>
       <ChevronDown
         className={`size-icon shrink-0 text-ink-soft transition-transform ${open ? "rotate-180" : ""}`}
         aria-hidden
@@ -453,6 +458,9 @@ function GeneralQuizRow({
   const quiz = progress[ALPHABET_ALL_ID]?.quiz;
   const unlocked = settled && total > 0 && learned === total;
   const canOpen = unlocked || (admin && settled);
+  // Сдана — цвет успеха; пока нет — полоса по выученным буквам (до открытия викторины).
+  const look = fillLook(quiz?.passed ? { passed: true, ratio: 1 } : { passed: false, ratio: total > 0 ? learned / total : 0 }, "bg-page");
+  const raised = look.state !== "none";
   return (
     <button
       type="button"
@@ -460,7 +468,9 @@ function GeneralQuizRow({
       disabled={!canOpen}
       data-testid="general-quiz"
       data-unlocked={unlocked}
-      className="flex w-full items-center gap-2.5 rounded-control bg-page p-2.5 text-left active:bg-line disabled:active:bg-page"
+      data-fill={look.state}
+      style={look.style}
+      className={`flex w-full items-center gap-2.5 rounded-control p-2.5 text-left active:opacity-80 disabled:active:opacity-100 ${look.className}`}
     >
       <span
         className="flex size-10 shrink-0 items-center justify-center rounded-control bg-surface text-xl leading-none"
@@ -473,14 +483,16 @@ function GeneralQuizRow({
         <div className="text-sm text-ink-soft">{ALPHABET_ALL_QUIZ_RULES.size} вопросов по всем буквам, без звуков дж, ж, ч</div>
         <div className="mt-1 flex flex-wrap items-center gap-2">
           {quiz?.passed ? (
-            <Chip tone="success">
+            <Chip tone="success" raised>
               <CheckCircle2 className="size-4" aria-hidden />
               Сдана
             </Chip>
           ) : unlocked ? (
-            <Chip tone="accent">Викторина открыта</Chip>
+            <Chip tone="accent" raised>
+              Викторина открыта
+            </Chip>
           ) : (
-            <Chip tone="neutral">
+            <Chip tone="neutral" raised={raised}>
               <Lock className="size-4" aria-hidden />
               Букв: {learned} из {total}
             </Chip>
@@ -505,12 +517,17 @@ function LessonRow({
   const letters = lesson.section === "alphabet";
   const done = progress?.words.filter((w) => w.completed).length ?? 0;
   const passed = progress?.quiz.passed ?? false;
+  // Сданный урок выделен цветом, начатый — фон как полоса прогресса по пройденным этапам.
+  const look = fillLook(lessonFill(lesson, progress), "bg-page");
+  const raised = look.state !== "none";
   return (
     <button
       type="button"
       onClick={() => onOpen(lesson.id)}
       data-testid={`lesson-${lesson.id}`}
-      className="flex w-full items-center gap-2.5 rounded-control bg-page p-2.5 text-left active:bg-line"
+      data-fill={look.state}
+      style={look.style}
+      className={`flex w-full items-center gap-2.5 rounded-control p-2.5 text-left active:opacity-80 ${look.className}`}
     >
       <span
         className="flex size-10 shrink-0 items-center justify-center rounded-control bg-surface text-xl leading-none"
@@ -528,19 +545,23 @@ function LessonRow({
           </div>
         )}
         <div className="mt-1 flex flex-wrap items-center gap-2">
-          <Chip tone={done === total ? "success" : "neutral"}>
+          <Chip tone={done === total ? "success" : "neutral"} raised={raised}>
             {letters ? "Букв" : "Слов"}: {done} из {total}
           </Chip>
-          {!passed && done === total && <Chip tone="accent">Викторина открыта</Chip>}
+          {!passed && done === total && (
+            <Chip tone="accent" raised={raised}>
+              Викторина открыта
+            </Chip>
+          )}
           {passed && (
-            <Chip tone="success">
+            <Chip tone="success" raised>
               <CheckCircle2 className="size-4" aria-hidden />
               Сдан
             </Chip>
           )}
           {/* Замок только у закрытых уроков: пока платные открыты всем до Stars, плашки нет. */}
           {!lessonOpenWithoutPurchase(lesson, PAID_LESSONS_OPEN) && (
-            <Chip tone="accent">
+            <Chip tone="accent" raised={raised}>
               <Lock className="size-4" aria-hidden />
               Подписка
             </Chip>

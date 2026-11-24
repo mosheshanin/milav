@@ -134,6 +134,16 @@
   padding-bottom: calc(var(--spacing-section) + var(--safe-bottom));
 }
 
+/* Плашка как полоса прогресса (урок или тема начаты, но не сданы): слева залито на долю --fill (lib/progressFill.ts),
+   справа остаётся базовый фон плашки. Цвет из токена, поэтому тёмная тема работает сама. */
+@utility bg-progress {
+  background-image: linear-gradient(
+    to right,
+    var(--color-accent-soft) var(--fill, 0%),
+    transparent var(--fill, 0%)
+  );
+}
+
 /* Всплывающее уведомление над нижним краем. */
 @utility bottom-toast {
   bottom: calc(var(--spacing-block) + var(--safe-bottom));

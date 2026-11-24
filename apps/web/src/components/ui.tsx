@@ -38,21 +38,28 @@ export function Card({
   );
 }
 
+/**
+ * Плашка-метка. `raised`: метка стоит на цветном фоне (сданный или начатый урок на главной), и её мягкий фон слился бы
+ * с ним, поэтому фон берётся от карточки, а цвет текста остаётся по тону.
+ */
 export function Chip({
   children,
   tone = "neutral",
+  raised = false,
 }: {
   children: ReactNode;
   tone?: "neutral" | "accent" | "success" | "danger";
+  raised?: boolean;
 }) {
   const tones = {
-    neutral: "bg-line text-ink-soft",
-    accent: "bg-accent-soft text-accent",
-    success: "bg-success-soft text-success",
-    danger: "bg-danger-soft text-danger",
+    neutral: ["bg-line", "text-ink-soft"],
+    accent: ["bg-accent-soft", "text-accent"],
+    success: ["bg-success-soft", "text-success"],
+    danger: ["bg-danger-soft", "text-danger"],
   };
+  const [bg, text] = tones[tone];
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold ${tones[tone]}`}>
+    <span className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold ${raised ? "bg-surface" : bg} ${text}`}>
       {children}
     </span>
   );
