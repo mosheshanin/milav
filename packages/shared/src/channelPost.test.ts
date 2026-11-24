@@ -4,6 +4,7 @@ import {
   CHANNEL_BUTTON_DEFAULT,
   CHANNEL_CAPTION_MAX,
   CHANNEL_DEFAULT,
+  CHANNEL_PHOTOS_MAX,
   CHANNEL_TEXT_MAX,
   channelPostLink,
   checkChannelPost,
@@ -11,7 +12,9 @@ import {
   isChannelId,
   parsePost,
   postHtml,
+  postLayout,
   postLength,
+  postTextMax,
 } from "./channelPost";
 
 describe("разметка поста", () => {
@@ -53,34 +56,34 @@ describe("разметка поста", () => {
 
 describe("проверка поста", () => {
   it("по умолчанию канал @milavnews, кнопки нет", () => {
-    expect(checkChannelPost({ text: "  Привет  ", hasPhoto: false })).toEqual({
+    expect(checkChannelPost({ text: "  Привет  ", photos: 0 })).toEqual({
       ok: true,
-      post: { text: "Привет", channel: CHANNEL_DEFAULT, button: null },
+      post: { text: "Привет", channel: CHANNEL_DEFAULT, button: null, layout: "text" },
     });
   });
 
   it("без текста можно только с картинкой", () => {
-    expect(checkChannelPost({ text: " ", hasPhoto: false })).toMatchObject({ ok: false, error: "empty" });
-    expect(checkChannelPost({ text: "", hasPhoto: true })).toMatchObject({ ok: true });
+    expect(checkChannelPost({ text: " ", photos: 0 })).toMatchObject({ ok: false, error: "empty" });
+    expect(checkChannelPost({ text: "", photos: 1 })).toMatchObject({ ok: true });
   });
 
   it("предел длины: 1024 с картинкой, 4096 без", () => {
     const caption = "а".repeat(CHANNEL_CAPTION_MAX);
-    expect(checkChannelPost({ text: caption, hasPhoto: true }).ok).toBe(true);
-    expect(checkChannelPost({ text: `${caption}б`, hasPhoto: true })).toEqual({ ok: false, error: "too_long", max: CHANNEL_CAPTION_MAX });
-    expect(checkChannelPost({ text: `${caption}б`, hasPhoto: false }).ok).toBe(true);
-    expect(checkChannelPost({ text: "а".repeat(CHANNEL_TEXT_MAX + 1), hasPhoto: false })).toMatchObject({ error: "too_long", max: CHANNEL_TEXT_MAX });
+    expect(checkChannelPost({ text: caption, photos: 1 }).ok).toBe(true);
+    expect(checkChannelPost({ text: `${caption}б`, photos: 1 })).toEqual({ ok: false, error: "too_long", max: CHANNEL_CAPTION_MAX });
+    expect(checkChannelPost({ text: `${caption}б`, photos: 0 }).ok).toBe(true);
+    expect(checkChannelPost({ text: "а".repeat(CHANNEL_TEXT_MAX + 1), photos: 0 })).toMatchObject({ error: "too_long", max: CHANNEL_TEXT_MAX });
   });
 
   it("разметка в длину не входит", () => {
-    expect(checkChannelPost({ text: `**${"а".repeat(CHANNEL_CAPTION_MAX)}**`, hasPhoto: true }).ok).toBe(true);
+    expect(checkChannelPost({ text: `**${"а".repeat(CHANNEL_CAPTION_MAX)}**`, photos: 1 }).ok).toBe(true);
   });
 
   it("кнопка: нужны и надпись, и ссылка https", () => {
-    const base = { text: "Пост", hasPhoto: false };
+    const base = { text: "Пост", photos: 0 };
     expect(checkChannelPost({ ...base, buttonText: CHANNEL_BUTTON_DEFAULT.text, buttonUrl: CHANNEL_BUTTON_DEFAULT.url })).toEqual({
       ok: true,
-      post: { text: "Пост", channel: CHANNEL_DEFAULT, button: { ...CHANNEL_BUTTON_DEFAULT } },
+      post: { text: "Пост", channel: CHANNEL_DEFAULT, button: { ...CHANNEL_BUTTON_DEFAULT }, layout: "text" },
     });
     expect(checkChannelPost({ ...base, buttonUrl: "https://milav.app" })).toMatchObject({ error: "button_text_missing" });
     expect(checkChannelPost({ ...base, buttonText: "Открыть" })).toMatchObject({ error: "button_url_missing" });
@@ -88,12 +91,30 @@ describe("проверка поста", () => {
     expect(checkChannelPost({ ...base, buttonText: "я".repeat(65), buttonUrl: "https://milav.app" })).toMatchObject({ error: "button_too_long" });
   });
 
+  it("вид поста по числу картинок и кнопке", () => {
+    expect(postLayout(0, true)).toBe("text");
+    expect(postLayout(1, true)).toBe("photo");
+    expect(postLayout(2, false)).toBe("album");
+    expect(postLayout(10, true)).toBe("album+text");
+    expect([postTextMax("text"), postTextMax("photo"), postTextMax("album"), postTextMax("album+text")]).toEqual([4096, 1024, 1024, 4096]);
+  });
+
+  it("альбом: до 10 картинок; без кнопки текст это подпись (1024), с кнопкой отдельное сообщение (4096) и текст обязателен", () => {
+    const button = { buttonText: "Открыть", buttonUrl: "https://milav.app" };
+    const long = "а".repeat(CHANNEL_CAPTION_MAX + 1);
+    expect(checkChannelPost({ text: "x", photos: CHANNEL_PHOTOS_MAX + 1 })).toEqual({ ok: false, error: "too_many_photos", max: 10 });
+    expect(checkChannelPost({ text: "", photos: 3 })).toMatchObject({ ok: true, post: { layout: "album" } });
+    expect(checkChannelPost({ text: long, photos: 3 })).toMatchObject({ error: "too_long", max: CHANNEL_CAPTION_MAX });
+    expect(checkChannelPost({ text: long, photos: 3, ...button })).toMatchObject({ ok: true, post: { layout: "album+text" } });
+    expect(checkChannelPost({ text: " ", photos: 3, ...button })).toEqual({ ok: false, error: "button_needs_text" });
+  });
+
   it("канал: @имя или числовой id", () => {
     expect(isChannelId("@milavnews")).toBe(true);
     expect(isChannelId("-1001234567890")).toBe(true);
     expect(isChannelId("milavnews")).toBe(false);
     expect(isChannelId("@ab")).toBe(false);
-    expect(checkChannelPost({ text: "x", channel: "t.me/milavnews", hasPhoto: false })).toMatchObject({ error: "bad_channel" });
+    expect(checkChannelPost({ text: "x", channel: "t.me/milavnews", photos: 0 })).toMatchObject({ error: "bad_channel" });
   });
 
   it("ссылки кнопки и поста", () => {

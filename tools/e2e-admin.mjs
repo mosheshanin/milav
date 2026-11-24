@@ -237,6 +237,21 @@ await page.waitForSelector('[data-testid="admin-menu"]');
   await page.setInputFiles('[data-testid="channel-photo-input"]', { name: "post.png", mimeType: "image/png", buffer: PNG_1PX });
   await page.waitForSelector('[data-testid="channel-preview"] img');
   check((await text(page, "channel-length")).includes("из 1024"), "с картинкой предел 1024 знака (подпись)");
+  // Альбом (до 10 картинок): с кнопкой текст и кнопка уходят отдельным сообщением после альбома.
+  await page.setInputFiles('[data-testid="channel-photo-input"]', [
+    { name: "two.png", mimeType: "image/png", buffer: PNG_1PX },
+    { name: "three.png", mimeType: "image/png", buffer: PNG_1PX },
+  ]);
+  await page.waitForFunction(() => document.querySelectorAll('[data-testid="channel-photo"]').length === 3);
+  check((await text(page, "channel-photo-count")).startsWith("3 из 10"), "добавлено ещё две картинки: 3 из 10");
+  check((await page.locator('[data-testid="channel-preview-album"] img').count()) === 3, "предпросмотр показывает альбом из трёх картинок");
+  check((await page.locator('[data-testid="channel-preview-followup"]').count()) === 1, "альбом с кнопкой: текст и кнопка отдельным сообщением в предпросмотре");
+  check((await text(page, "channel-length")).includes("из 4096"), "альбом с кнопкой: предел текста 4096");
+  await page.click('[data-testid="channel-button-on"]');
+  check((await text(page, "channel-length")).includes("из 1024"), "альбом без кнопки: текст это подпись, предел 1024");
+  await page.click('[data-testid="channel-button-on"]');
+  await page.locator('[data-testid="channel-photo-remove"]').first().click();
+  check((await text(page, "channel-photo-count")).startsWith("2 из 10"), "картинку можно убрать");
   await page.fill('[data-testid="channel-button-url"]', "milav.app");
   await page.click('[data-testid="channel-send-me"]');
   check((await text(page, "channel-status")).includes("https://"), "ссылка кнопки без https: ошибка до отправки");
@@ -247,7 +262,7 @@ await page.waitForSelector('[data-testid="admin-menu"]');
   await page.click('[data-testid="channel-publish"]');
   await page.waitForFunction(() => /токена бота/.test(document.querySelector('[data-testid="channel-status"]')?.textContent ?? ""));
   check(dialogs.some((d) => d.includes("Опубликовать пост в @milavnews")), "публикация спрашивает подтверждение");
-  check(true, "сервер принял форму с картинкой и ответил «нет токена бота» (локально бот не настроен)");
+  check(true, "сервер принял форму с альбомом и ответил «нет токена бота» (локально бот не настроен)");
   await page.click('header button[aria-label="Назад"]');
   await page.waitForSelector('[data-testid="admin-menu"]');
   await page.click('[data-testid="admin-open-channel"]');

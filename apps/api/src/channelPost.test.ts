@@ -13,43 +13,50 @@ interface Sent {
   method: string;
   fields: Record<string, unknown>;
   photo?: { type: string; size: number };
+  files?: Record<string, { type: string; size: number; name: string }>;
 }
 let outbox: Sent[] = [];
 let reply: { status: number; body: unknown } = { status: 200, body: { ok: true, result: { message_id: 42 } } };
+/** Ответ на sendMediaGroup: список сообщений альбома. */
+let albumReply: { status: number; body: unknown } = { status: 200, body: { ok: true, result: [{ message_id: 50 }, { message_id: 51 }] } };
 
 beforeEach(() => {
   resetHarness();
   outbox = [];
   reply = { status: 200, body: { ok: true, result: { message_id: 42 } } };
+  albumReply = { status: 200, body: { ok: true, result: [{ message_id: 50 }, { message_id: 51 }] } };
   setTelegramFetchForTests(async (url, init) => {
     const method = url.split("/").pop()!;
     if (init?.body instanceof FormData) {
       const fields: Record<string, unknown> = {};
-      let photo: Sent["photo"];
+      const files: NonNullable<Sent["files"]> = {};
       for (const [k, v] of init.body.entries()) {
         if (typeof v === "string") fields[k] = v;
-        else photo = { type: v.type, size: v.size };
+        else files[k] = { type: v.type, size: v.size, name: (v as File).name };
       }
-      outbox.push({ method, fields, photo });
+      const photo = files.photo ? { type: files.photo.type, size: files.photo.size } : undefined;
+      outbox.push({ method, fields, ...(photo ? { photo } : { files }) });
     } else {
       outbox.push({ method, fields: JSON.parse(String(init?.body)) });
     }
-    return new Response(JSON.stringify(reply.body), { status: reply.status });
+    const r = method === "sendMediaGroup" ? albumReply : reply;
+    return new Response(JSON.stringify(r.body), { status: r.status });
   });
 });
 afterEach(() => setTelegramFetchForTests(null));
 
 const env = (): Bindings => ({ ...ctx.env, ADMIN_IDS: `${OWNER}` });
 
-function form(fields: Record<string, string>, photo?: File): FormData {
+function form(fields: Record<string, string>, photos: File[] = []): FormData {
   const f = new FormData();
   for (const [k, v] of Object.entries(fields)) f.set(k, v);
-  if (photo) f.set("photo", photo);
+  for (const p of photos) f.append("photo", p);
   return f;
 }
-const postForm = (fields: Record<string, string>, as = OWNER, photo?: File) =>
-  api("/api/admin/channel/post", { method: "POST", as, body: form(fields, photo) }, env());
+const postForm = (fields: Record<string, string>, as = OWNER, photo?: File | File[]) =>
+  api("/api/admin/channel/post", { method: "POST", as, body: form(fields, photo === undefined ? [] : Array.isArray(photo) ? photo : [photo]) }, env());
 const png = (bytes = 100) => new File([new Uint8Array(bytes)], "shot.png", { type: "image/png" });
+const jpg = (bytes = 100) => new File([new Uint8Array(bytes)], "shot.jpg", { type: "image/jpeg" });
 const logRows = () => ctx.env.DB.prepare("SELECT action, target, new_value FROM admin_log ORDER BY id").all<{ action: string; target: string; new_value: string }>();
 
 describe("пост в канал", () => {
@@ -83,7 +90,7 @@ describe("пост в канал", () => {
     const { results } = await logRows();
     expect(results).toHaveLength(1);
     expect(results[0]).toMatchObject({ action: "channel.post", target: "@milavnews" });
-    expect(JSON.parse(results[0]!.new_value)).toMatchObject({ messageId: 42, photo: false, button: { text: "Открыть Milav" } });
+    expect(JSON.parse(results[0]!.new_value)).toMatchObject({ messageId: 42, photos: 0, button: { text: "Открыть Milav" } });
   });
 
   it("«прислать мне»: тот же пост в личный чат администратора, без записи в журнале", async () => {
@@ -112,6 +119,67 @@ describe("пост в канал", () => {
       },
       photo: { type: "image/png", size: 2048 },
     });
+  });
+
+  it("альбом без кнопки: sendMediaGroup, подпись у первой картинки, ссылка на первое сообщение", async () => {
+    const res = await postForm({ target: "channel", text: "**Скриншоты**", silent: "1" }, OWNER, [png(300), jpg(200), png(100)]);
+    expect(((await res.json()) as AdminChannelPostResponse)).toEqual({ ok: true, target: "channel", messageId: 50, link: "https://t.me/milavnews/50" });
+    expect(outbox).toHaveLength(1);
+    expect(outbox[0]!.method).toBe("sendMediaGroup");
+    expect(outbox[0]!.fields.chat_id).toBe("@milavnews");
+    expect(outbox[0]!.fields.disable_notification).toBe("true");
+    expect(JSON.parse(String(outbox[0]!.fields.media))).toEqual([
+      { type: "photo", media: "attach://p0", caption: "<b>Скриншоты</b>", parse_mode: "HTML" },
+      { type: "photo", media: "attach://p1" },
+      { type: "photo", media: "attach://p2" },
+    ]);
+    // Порядок картинок как в панели, имена файлов по порядку.
+    expect(outbox[0]!.files).toEqual({
+      p0: { type: "image/png", size: 300, name: "post-1.png" },
+      p1: { type: "image/jpeg", size: 200, name: "post-2.jpg" },
+      p2: { type: "image/png", size: 100, name: "post-3.png" },
+    });
+    const { results } = await logRows();
+    expect(JSON.parse(results[0]!.new_value)).toMatchObject({ photos: 3, messageId: 50 });
+  });
+
+  it("альбом с кнопкой: альбом без подписи, следом текст с кнопкой; текст может быть длиннее 1024", async () => {
+    const text = "а".repeat(2000);
+    const res = await postForm({ target: "channel", text, buttonText: "Открыть Milav", buttonUrl: "https://t.me/milavbotbot?startapp" }, OWNER, [png(), png()]);
+    expect(res.status).toBe(200);
+    expect(((await res.json()) as AdminChannelPostResponse).link).toBe("https://t.me/milavnews/50");
+    expect(outbox.map((m) => m.method)).toEqual(["sendMediaGroup", "sendMessage"]);
+    expect(JSON.parse(String(outbox[0]!.fields.media))).toEqual([
+      { type: "photo", media: "attach://p0" },
+      { type: "photo", media: "attach://p1" },
+    ]);
+    expect(outbox[1]!.fields).toMatchObject({
+      chat_id: "@milavnews",
+      text,
+      reply_markup: { inline_keyboard: [[{ text: "Открыть Milav", url: "https://t.me/milavbotbot?startapp" }]] },
+    });
+  });
+
+  it("альбом ушёл, а сообщение с кнопкой нет: пост не откатывается, панель узнаёт об этом", async () => {
+    reply = { status: 400, body: { ok: false, error_code: 400, description: "Bad Request: BUTTON_URL_INVALID" } };
+    const res = await postForm({ target: "channel", text: "x", buttonText: "Открыть", buttonUrl: "https://milav.app" }, OWNER, [png(), png()]);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toMatchObject({ ok: true, messageId: 50, followUpError: "bad_button_url" });
+  });
+
+  it("альбом с кнопкой без текста нельзя: кнопке не к чему прикрепиться", async () => {
+    const res = await postForm({ target: "channel", text: "", buttonText: "Открыть", buttonUrl: "https://milav.app" }, OWNER, [png(), png()]);
+    expect(await res.json()).toEqual({ error: "post_button_needs_text" });
+    expect(outbox).toHaveLength(0);
+  });
+
+  it("не больше 10 картинок и не больше 20 МБ вместе", async () => {
+    const many = Array.from({ length: 11 }, () => png());
+    expect(await (await postForm({ target: "channel", text: "x" }, OWNER, many)).json()).toEqual({ error: "post_too_many_photos", max: 10 });
+    const ten = Array.from({ length: 10 }, () => png());
+    expect((await postForm({ target: "channel", text: "x" }, OWNER, ten)).status).toBe(200);
+    const heavy = Array.from({ length: 5 }, () => png(4.5 * 1024 * 1024));
+    expect((await postForm({ target: "channel", text: "x" }, OWNER, heavy)).status).toBe(413);
   });
 
   it("картинка без текста можно, пустой пост нельзя", async () => {
@@ -146,7 +214,7 @@ describe("пост в канал", () => {
 
   it("без токена бота пост не отправляется", async () => {
     const post = { text: "x", channel: "@milavnews", button: null };
-    expect(await sendPost({ BOT_TOKEN: undefined }, "@milavnews", post, null, false, "channel")).toEqual({ ok: false, error: "no_token" });
+    expect(await sendPost({ BOT_TOKEN: undefined }, "@milavnews", { ...post, layout: "text" }, [], false, "channel")).toEqual({ ok: false, error: "no_token" });
     expect(outbox).toHaveLength(0);
   });
 });

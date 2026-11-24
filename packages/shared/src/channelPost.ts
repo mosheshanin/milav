@@ -18,6 +18,31 @@ export const CHANNEL_BUTTON_TEXT_MAX = 64;
 export const CHANNEL_PHOTO_MAX_BYTES = 5 * 1024 * 1024;
 export const CHANNEL_PHOTO_TYPES = ["image/jpeg", "image/png"] as const;
 
+/** До 10 картинок (альбом Telegram: 2–10 фото), все вместе до 20 МБ: Worker держит запрос в памяти (128 МБ). */
+export const CHANNEL_PHOTOS_MAX = 10;
+export const CHANNEL_PHOTOS_TOTAL_MAX_BYTES = 20 * 1024 * 1024;
+
+/**
+ * Как пост уходит в Telegram:
+ * - text: одно сообщение с текстом (до 4096) и кнопкой;
+ * - photo: одна картинка с подписью (до 1024) и кнопкой;
+ * - album: альбом из 2–10 картинок, текст подписью под альбомом (до 1024), без кнопки;
+ * - album+text: альбом без подписи, следом сообщение с текстом (до 4096) и кнопкой. К альбому Telegram кнопку
+ *   прикрепить не даёт (у sendMediaGroup нет reply_markup), поэтому кнопка уходит отдельным сообщением.
+ */
+export type PostLayout = "text" | "photo" | "album" | "album+text";
+
+export function postLayout(photos: number, hasButton: boolean): PostLayout {
+  if (photos === 0) return "text";
+  if (photos === 1) return "photo";
+  return hasButton ? "album+text" : "album";
+}
+
+/** Предел длины текста при таком виде поста. */
+export function postTextMax(layout: PostLayout): number {
+  return layout === "photo" || layout === "album" ? CHANNEL_CAPTION_MAX : CHANNEL_TEXT_MAX;
+}
+
 /** Кусок текста поста после разбора разметки. */
 export interface PostSegment {
   text: string;
@@ -69,6 +94,8 @@ export function postLength(text: string): number {
 export type ChannelPostError =
   | "empty"
   | "too_long"
+  | "too_many_photos"
+  | "button_needs_text"
   | "bad_channel"
   | "button_text_missing"
   | "button_url_missing"
@@ -80,13 +107,15 @@ export interface ChannelPostInput {
   channel?: unknown;
   buttonText?: unknown;
   buttonUrl?: unknown;
-  hasPhoto: boolean;
+  /** Сколько картинок (0–10). */
+  photos: number;
 }
 
 export interface ChannelPost {
   text: string;
   channel: string;
   button: { text: string; url: string } | null;
+  layout: PostLayout;
 }
 
 /** Канал: @имя (5–32 знака, как у Telegram) или числовой id вида -100… */
@@ -96,14 +125,16 @@ export function isChannelId(value: string): boolean {
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
-/** Проверяет поля поста. Без картинки нужен текст; с картинкой текст это подпись (до 1024 знаков). */
+/**
+ * Проверяет поля поста. Без картинок нужен текст. Предел длины зависит от вида поста (`postLayout`): подпись к картинке
+ * или альбому до 1024 знаков, отдельное сообщение до 4096. У альбома с кнопкой нужен текст: кнопка живёт под ним.
+ */
 export function checkChannelPost(input: ChannelPostInput): { ok: true; post: ChannelPost } | { ok: false; error: ChannelPostError; max?: number } {
   const text = str(input.text);
   const channel = str(input.channel) || CHANNEL_DEFAULT;
-  if (!text && !input.hasPhoto) return { ok: false, error: "empty" };
-  const max = input.hasPhoto ? CHANNEL_CAPTION_MAX : CHANNEL_TEXT_MAX;
-  if (postLength(text) > max) return { ok: false, error: "too_long", max };
-  if (!isChannelId(channel)) return { ok: false, error: "bad_channel" };
+  const photos = input.photos;
+  if (photos > CHANNEL_PHOTOS_MAX) return { ok: false, error: "too_many_photos", max: CHANNEL_PHOTOS_MAX };
+  if (!text && photos === 0) return { ok: false, error: "empty" };
   const buttonText = str(input.buttonText);
   const buttonUrl = str(input.buttonUrl);
   let button: ChannelPost["button"] = null;
@@ -114,7 +145,12 @@ export function checkChannelPost(input: ChannelPostInput): { ok: true; post: Cha
     if (!isButtonUrl(buttonUrl)) return { ok: false, error: "bad_button_url" };
     button = { text: buttonText, url: buttonUrl };
   }
-  return { ok: true, post: { text, channel, button } };
+  const layout = postLayout(photos, button !== null);
+  if (layout === "album+text" && !text) return { ok: false, error: "button_needs_text" };
+  const max = postTextMax(layout);
+  if (postLength(text) > max) return { ok: false, error: "too_long", max };
+  if (!isChannelId(channel)) return { ok: false, error: "bad_channel" };
+  return { ok: true, post: { text, channel, button, layout } };
 }
 
 /** Ссылка для кнопки: только https:// с адресом сайта (Telegram отклоняет кривые ссылки целиком). */
@@ -137,4 +173,6 @@ export interface AdminChannelPostResponse {
   messageId: number | null;
   /** Ссылка на пост в канале (у публичного канала). */
   link: string | null;
+  /** Альбом ушёл, а сообщение с текстом и кнопкой следом — нет (код ошибки Telegram). */
+  followUpError?: string;
 }

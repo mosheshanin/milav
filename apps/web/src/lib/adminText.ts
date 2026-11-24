@@ -56,8 +56,10 @@ export function logEntryText(entry: AdminLogEntry): string {
     case "student.leaderboard":
       return entry.newValue ? `Ученик id ${target} убран из таблицы лидеров` : `Ученик id ${target} возвращён в таблицу лидеров`;
     case "channel.post": {
-      const post = entry.newValue as { text?: string; photo?: boolean } | null;
-      return `Пост в канал ${target}${post?.photo ? " с картинкой" : ""}: «${short(post?.text)}»`;
+      const post = entry.newValue as { text?: string; photo?: boolean; photos?: number } | null;
+      const photos = post?.photos ?? (post?.photo ? 1 : 0);
+      const what = photos === 1 ? " с картинкой" : photos > 1 ? `, альбом из ${photos} картинок` : "";
+      return `Пост в канал ${target}${what}: «${short(post?.text)}»`;
     }
     case "bot.reset":
       return `Сообщение бота «${isBotTextKey(target) ? BOT_TEXTS[target].title : target}»: возвращён исходный текст`;
@@ -142,6 +144,8 @@ export function adminErrorText(error: unknown): string {
         return "Telegram не принял ссылку кнопки. Проверьте её: она должна начинаться с https://.";
       case "photo_bad":
         return "Telegram не смог обработать картинку. Попробуйте другой файл (JPEG или PNG).";
+      case "post_too_many_photos":
+        return channelPostErrorText("too_many_photos", 10);
       case "no_token":
         return "На сервере нет токена бота: отправить пост нельзя.";
     }
@@ -209,7 +213,13 @@ export function channelPostErrorText(error: string, max?: number): string {
     case "photo_type":
       return "Картинка должна быть JPEG или PNG.";
     case "photo_too_big":
-      return "Картинка больше 5 МБ. Уменьшите её или выберите другую.";
+      return "Картинка больше 5 МБ или все вместе больше 20 МБ. Уменьшите их или выберите другие.";
+    case "photos_total":
+      return "Картинки вместе больше 20 МБ. Уберите одну-две или выберите поменьше.";
+    case "too_many_photos":
+      return `В посте не больше ${max ?? 10} картинок: лишние не добавлены.`;
+    case "button_needs_text":
+      return "К альбому кнопка уходит отдельным сообщением с текстом: напишите текст или выключите кнопку.";
     default:
       return "Пост не прошёл проверку. Проверьте поля.";
   }
