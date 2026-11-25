@@ -218,13 +218,17 @@ check(true, "после перезагрузки остаёмся на экра�
 // ---------- Таблица лидеров ----------
 await page.click('[data-testid="open-leaderboard"]');
 await page.waitForSelector('[data-testid="leaderboard"]');
+// Участие включено по умолчанию (решение владельца 25.11.2026): кнопки «Участвовать» нет, есть «Выйти из таблицы».
+await page.waitForSelector('[data-testid="board-in"]');
+await shot(page, "06-board-in");
+check((await text(page, "board-in")).includes("Tester"), "новичок уже в таблице, и ему показано, какое имя видят другие");
+await page.click('[data-testid="board-leave-button"]');
 await page.waitForSelector('[data-testid="board-join"]');
-await shot(page, "06-board-join");
-check((await text(page, "board-join")).includes("Tester"), "перед вступлением показано, какое имя увидят другие");
+check((await text(page, "board-join")).includes("Tester"), "после выхода можно вернуться, и перед этим показано имя");
 await page.click('[data-testid="board-join-button"]');
 await page.waitForSelector('[data-testid="board-leave-button"]');
-check(true, "вступление в таблицу сработало");
-// Снимок собран до вступления: сбрасываем его, как это сделало бы время.
+check(true, "возвращение в таблицу сработало");
+// Снимок мог собраться, пока участник был вне таблицы: сбрасываем его, как это сделало бы время.
 sql("DELETE FROM board_snapshots;");
 await page.click('[data-testid="board-all"]');
 await page.click('[data-testid="board-week"]');
@@ -237,7 +241,7 @@ check((await text(page, "board-ends")).includes("субботу"), "подпис
 {
   const view = await apiGet(OTHER, "/api/leaderboard?board=week");
   check(view.status === 200, "таблица отвечает другому пользователю");
-  check(view.json.participating === false, "другой не участвует, но топ ему виден (решение владельца)");
+  check(view.json.participating === true, "другой тоже участвует по умолчанию и видит топ");
   check(view.json.top.some((r) => r.name === "Tester" && r.points === 1), "другой видит имя и очки участника");
   check(!view.body.includes("3101") && !/username|lastName|"id"/.test(view.body), "в ответе таблицы нет id, username и фамилий");
 }

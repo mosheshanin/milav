@@ -140,9 +140,15 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
                 </Button>
               </Card>
             ) : (
-              <Button variant="ghost" block disabled={busy} onClick={() => void setParticipation(false)} data-testid="board-leave-button">
-                Выйти из таблицы
-              </Button>
+              <Card className="flex flex-col gap-3" data-testid="board-in">
+                <p className="text-sm text-ink-soft">
+                  Вы в таблице: другие видят ваше имя из Telegram («{myName}», без фамилии и имени пользователя) и очки.
+                  Не хотите — выйдите, и вы сразу исчезнете из таблицы. Вернуться можно в любой момент.
+                </p>
+                <Button variant="ghost" block disabled={busy} onClick={() => void setParticipation(false)} data-testid="board-leave-button">
+                  Выйти из таблицы
+                </Button>
+              </Card>
             )}
             {message && <p className="text-danger">{message}</p>}
           </>

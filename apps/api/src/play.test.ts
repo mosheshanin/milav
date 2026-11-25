@@ -33,7 +33,7 @@ beforeEach(() => {
 afterEach(() => vi.useRealTimers());
 
 describe("новичок", () => {
-  it("блок «Мой путь» пустой, цель дня включена на 5, участие в таблице выключено", async () => {
+  it("блок «Мой путь» пустой, цель дня включена на 5, участие в таблице включено по умолчанию", async () => {
     const me = await meOf(1);
     expect(me.points).toBe(0);
     expect(me.play).toMatchObject({
@@ -42,7 +42,7 @@ describe("новичок", () => {
       activeDays: 0,
       recap: null,
       goal: { target: 5, done: 0, met: false },
-      settings: { dailyGoal: 5, leaderboard: false, cohortExcluded: false },
+      settings: { dailyGoal: 5, leaderboard: true, cohortExcluded: false },
       features: { leaderboard: false, repeat: true, numbersTrainer: false },
       week: { target: 3, wordsThisWeek: 0, rhythmWeeks: 0, rhythmLast8: 0, daysThisWeek: 0 },
       statusPath: { key: "pawn", from: 0, to: 6, passed: 0 },
@@ -361,7 +361,7 @@ describe("настройки", () => {
     const res = await put("/api/settings", 1, { dailyGoal: 10, cohortExcluded: true, tz: "Asia/Tokyo" });
     expect(res.status).toBe(200);
     const { play } = (await res.json()) as any;
-    expect(play.settings).toEqual({ dailyGoal: 10, leaderboard: false, cohortExcluded: true, gender: "m" });
+    expect(play.settings).toEqual({ dailyGoal: 10, leaderboard: true, cohortExcluded: true, gender: "m" });
     expect(play.tz).toBe("Asia/Tokyo");
     expect((await meOf(1)).play.settings.dailyGoal).toBe(10);
   });
@@ -492,7 +492,7 @@ describe("таблица лидеров", () => {
     expect((await api("/api/leaderboard", { as: 1 }, lb())).status).toBe(200);
   });
 
-  it("места по очкам, ничья делит место, скрытые, забаненные и не вступившие не видны, id и username наружу не уходят", async () => {
+  it("места по очкам, ничья делит место, вышедшие и забаненные не видны, id и username наружу не уходят", async () => {
     await name(11, "Анна");
     await name(12, "Борис https://evil.example");
     await name(13, "Вера");
@@ -501,7 +501,8 @@ describe("таблица лидеров", () => {
     for (const [uid, words] of [[11, 2], [12, 3], [13, 3], [14, 1], [15, 4]] as const) {
       for (let i = 0; i < words; i++) await finishWord(uid, i);
     }
-    for (const uid of [11, 12, 13, 15]) expect((await join(uid)).status).toBe(200);
+    // Участие включено по умолчанию (решение владельца 25.11.2026): Анна, Борис и Вера не нажимали «Участвовать».
+    expect((await join(14, false)).status).toBe(200);
     await ctx.env.DB.prepare("UPDATE user_stats SET lb_banned = 1 WHERE user_id = 15").run();
 
     const mine = await board(11);
@@ -517,7 +518,7 @@ describe("таблица лидеров", () => {
     const text = JSON.stringify(mine);
     expect(text).not.toMatch(/username|first_name|"id"|evil|spam|Хулиган|Гена/);
 
-    // Не участвующий видит таблицу, но не своё место.
+    // Вышедший видит таблицу, но не своё место.
     const outsider = await board(14);
     expect(outsider.participating).toBe(false);
     expect(outsider.me).toBeNull();
