@@ -242,7 +242,14 @@ check((await page.locator('[data-testid="board-row-me"]').textContent()).include
   const myRow = page.locator('[data-testid="board-row-me"]');
   check((await myRow.locator('[data-testid="board-status"]').textContent()) === "♟", "в строке значок статуса (Пешка)");
   check((await myRow.locator('[data-testid="board-status"]').getAttribute("title")) === "Пешка", "у значка подсказка с названием статуса");
-  check((await myRow.locator('[data-testid="board-points"]').textContent()).trim() === "1", "в строке очки со звездой");
+  check((await myRow.locator('[data-testid="board-points"]').textContent()).trim() === "+1", "на «Неделе» очки со звездой и плюсом (+1)");
+  check((await myRow.locator('[data-testid="board-lessons"]').textContent()).trim() === "0", "в строке число сданных уроков с книжкой (0)");
+  check((await text(page, "board-columns")).includes("за неделю"), "над списком подписи столбцов: уроки и очки за неделю");
+  await page.click('[data-testid="board-all"]');
+  await page.waitForFunction(() => document.querySelector('[data-testid="board-columns"]')?.textContent.includes("очки"));
+  check((await page.locator('[data-testid="board-row-me"] [data-testid="board-points"]').textContent()).trim() === "1", "на «Всё время» очки без плюса");
+  await page.click('[data-testid="board-week"]');
+  await page.waitForSelector('[data-testid="board-row-me"]');
   await page.setViewportSize({ width: 360, height: 640 });
   check(await page.evaluate(() => document.documentElement.scrollWidth <= 360), "таблица на 360 px без прокрутки вбок");
   await shot(page, "07b-board-360");

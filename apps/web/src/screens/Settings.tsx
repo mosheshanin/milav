@@ -131,7 +131,7 @@ export function Settings({
           {features.leaderboard && (
             <Toggle
               label="Показывать меня в таблице лидеров"
-              hint="Другие увидят ваше имя из Telegram (без фамилии и имени пользователя), статус и очки."
+              hint="Другие увидят ваше имя из Telegram (без фамилии и имени пользователя), статус, число сданных уроков и очки."
               checked={settings.leaderboard}
               disabled={busy}
               testId="toggle-leaderboard"

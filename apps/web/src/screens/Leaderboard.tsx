@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Star } from "lucide-react";
+import { BookOpen, Star } from "lucide-react";
 import { cleanDisplayName, type BoardRow, type LeaderboardResponse } from "@milav/shared";
 import { ApiError, api } from "../api";
 import { useApp } from "../AppContext";
@@ -100,11 +100,14 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
                 </p>
               </Card>
             ) : (
-              <ol className="flex flex-col gap-1" data-testid="board-top">
-                {data.top.map((row) => (
-                  <Row key={`${row.rank}-${row.name}-${row.points}`} row={row} />
-                ))}
-              </ol>
+              <>
+                <ColumnTitles week={data.board === "week"} />
+                <ol className="flex flex-col gap-1" data-testid="board-top">
+                  {data.top.map((row) => (
+                    <Row key={`${row.rank}-${row.name}-${row.points}`} row={row} week={data.board === "week"} />
+                  ))}
+                </ol>
+              </>
             )}
 
             {data.participating && data.me && !data.top.some((r) => r.me) && (
@@ -112,9 +115,9 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
                 <h2 className="mt-2 font-semibold text-ink-soft">Ваше место</h2>
                 <ol className="flex flex-col gap-1">
                   {data.me.around.length > 0 ? (
-                    data.me.around.map((row) => <Row key={`${row.rank}-${row.name}-${row.points}`} row={row} />)
+                    data.me.around.map((row) => <Row key={`${row.rank}-${row.name}-${row.points}`} row={row} week={data.board === "week"} />)
                   ) : (
-                    <Row row={{ rank: data.me.rank ?? 0, name: myName, points: data.me.points, status: me.status, me: true }} />
+                    <Row row={{ rank: data.me.rank ?? 0, name: myName, points: data.me.points, status: me.status, lessons: me.passedLessons, me: true }} week={data.board === "week"} />
                   )}
                 </ol>
               </section>
@@ -133,7 +136,7 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
               <Card className="flex flex-col gap-3" data-testid="board-join">
                 <h2 className="font-semibold">Хотите участвовать?</h2>
                 <p className="text-sm text-ink-soft">
-                  Другие участники увидят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), ваш статус и очки.
+                  Другие участники увидят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), ваш статус, число сданных уроков и очки.
                   Выйти можно в любой момент, и вы сразу исчезнете из таблицы.
                 </p>
                 <Button block disabled={busy} onClick={() => void setParticipation(true)} data-testid="board-join-button">
@@ -143,7 +146,7 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
             ) : (
               <Card className="flex flex-col gap-3" data-testid="board-in">
                 <p className="text-sm text-ink-soft">
-                  Вы в таблице: другие видят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), статус и очки.
+                  Вы в таблице: другие видят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), статус, число сданных уроков и очки.
                   Не хотите — выйдите, и вы сразу исчезнете из таблицы. Вернуться можно в любой момент.
                 </p>
                 <Button variant="ghost" block disabled={busy} onClick={() => void setParticipation(false)} data-testid="board-leave-button">
@@ -159,13 +162,34 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
   );
 }
 
-function Row({ row }: { row: BoardRow }) {
+/**
+ * Подписи столбцов над списком (25.11.2026, вариант 2 владельца): книжка — сданные уроки, звезда — очки
+ * (на «Неделе» очки с воскресенья, со знаком «+»).
+ */
+function ColumnTitles({ week }: { week: boolean }) {
+  return (
+    <div className="flex items-center gap-3 px-3 text-sm text-ink-soft" data-testid="board-columns" aria-hidden>
+      <span className="flex-1">Место и ученик</span>
+      <span className="flex items-center gap-1">
+        <BookOpen className="size-4" />
+        уроки
+      </span>
+      <span className="flex items-center gap-1">
+        <Star className="size-4 fill-brand-yellow text-brand-yellow" />
+        {week ? "за неделю" : "очки"}
+      </span>
+    </div>
+  );
+}
+
+function Row({ row, week }: { row: BoardRow; week: boolean }) {
+  const points = week ? `+${row.points}` : String(row.points);
   return (
     <li
       data-testid={row.me ? "board-row-me" : "board-row"}
-      className={`flex items-center gap-3 rounded-control px-3 py-2 ${row.me ? "bg-accent-soft font-semibold" : "bg-surface"}`}
+      className={`flex items-center gap-2 rounded-control px-3 py-2 ${row.me ? "bg-accent-soft font-semibold" : "bg-surface"}`}
     >
-      <span className="w-8 shrink-0 text-right text-ink-soft">{row.rank}</span>
+      <span className="w-6 shrink-0 text-right text-ink-soft">{row.rank}</span>
       <span
         title={row.status.name}
         aria-label={`Статус: ${row.status.name}`}
@@ -176,9 +200,22 @@ function Row({ row }: { row: BoardRow }) {
       </span>
       <span className="min-w-0 flex-1 truncate">{row.name}</span>
       {row.me && <Chip tone="accent">Вы</Chip>}
-      <span className="flex shrink-0 items-center gap-1 font-semibold" aria-label={`Очки: ${row.points}`} data-testid="board-points">
+      <span
+        className="flex w-11 shrink-0 items-center gap-1 font-normal text-ink-soft"
+        title="Сдано уроков"
+        aria-label={`Сдано уроков: ${row.lessons}`}
+        data-testid="board-lessons"
+      >
+        <BookOpen className="size-4" aria-hidden />
+        {row.lessons}
+      </span>
+      <span
+        className="flex w-14 shrink-0 items-center gap-1 font-semibold"
+        aria-label={week ? `Очки за неделю: ${row.points}` : `Очки: ${row.points}`}
+        data-testid="board-points"
+      >
         <Star className="size-4 fill-brand-yellow text-brand-yellow" aria-hidden />
-        {row.points}
+        {points}
       </span>
     </li>
   );

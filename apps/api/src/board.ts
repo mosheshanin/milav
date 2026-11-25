@@ -86,11 +86,12 @@ export async function ensureSnapshot(db: D1Database, board: Board, now: number):
 interface Participant {
   name: string;
   status: BoardRow["status"];
+  lessons: number;
 }
 
 /**
- * Имена и статусы тех, кто сейчас участвует (и не заблокирован). Остальные в таблице не показываются.
- * Статус считается по сданным урокам в момент чтения, а не берётся из снимка: он всегда свежий.
+ * Имена, статусы и число сданных уроков тех, кто сейчас участвует (и не заблокирован). Остальные в таблице не
+ * показываются. Статус и уроки читаются в момент запроса, а не берутся из снимка: они всегда свежие.
  */
 async function participants(db: D1Database, ids: number[]): Promise<Map<number, Participant>> {
   if (ids.length === 0) return new Map();
@@ -105,7 +106,7 @@ async function participants(db: D1Database, ids: number[]): Promise<Map<number, 
   return new Map(
     results.map((r) => {
       const { key, name, symbol } = statusForPassedLessons(r.passed);
-      return [r.id, { name: cleanDisplayName(r.name), status: { key, name, symbol } }];
+      return [r.id, { name: cleanDisplayName(r.name), status: { key, name, symbol }, lessons: r.passed }];
     }),
   );
 }
@@ -130,7 +131,7 @@ export async function buildLeaderboard(db: D1Database, board: Board, viewer: Sta
     const [id, points] = snap.entries[i]!;
     const person = people.get(id);
     if (person === undefined) return null;
-    return { rank: ranks[i]!, name: person.name, points, status: person.status, ...(id === viewer.userId ? { me: true as const } : {}) };
+    return { rank: ranks[i]!, name: person.name, points, status: person.status, lessons: person.lessons, ...(id === viewer.userId ? { me: true as const } : {}) };
   };
   const rows = (indexes: number[]) => indexes.map(rowAt).filter((r): r is BoardRow => r !== null);
 
