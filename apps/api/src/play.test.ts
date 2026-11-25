@@ -525,6 +525,27 @@ describe("таблица лидеров", () => {
     expect(outsider.top.length).toBe(3);
   });
 
+  it("у каждой строки шахматный статус по сданным урокам, и он свежий без нового снимка", async () => {
+    await name(11, "Анна");
+    await name(12, "Борис");
+    await finishWord(11, 0);
+    await finishWord(12, 0);
+    await finishWord(12, 1);
+
+    const before = await board(11, "all");
+    expect(before.top.map((r: any) => [r.name, r.status])).toEqual([
+      ["Борис", { key: "pawn", name: "Пешка", symbol: "♟" }],
+      ["Анна", { key: "pawn", name: "Пешка", symbol: "♟" }],
+    ]);
+
+    // Борис сдал 21 урок: Слон. Снимок тот же (очки не менялись), а статус уже новый.
+    await ctx.env.DB.prepare("UPDATE user_stats SET passed_lessons = 21 WHERE user_id = 12").run();
+    const after = await board(11, "all");
+    expect(after.asOf).toBe(before.asOf);
+    expect(after.top[0]).toMatchObject({ name: "Борис", points: 2, status: { key: "bishop", name: "Слон", symbol: "♝" } });
+    expect(JSON.stringify(after)).not.toMatch(/passed|"id"/);
+  });
+
   it("выход из таблицы действует сразу, не дожидаясь нового снимка", async () => {
     await name(11, "Анна");
     await name(12, "Борис");

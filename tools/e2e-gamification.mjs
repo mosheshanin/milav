@@ -238,6 +238,16 @@ await page.click('[data-testid="board-week"]');
 await page.waitForSelector('[data-testid="board-row-me"]');
 await shot(page, "07-board");
 check((await page.locator('[data-testid="board-row-me"]').textContent()).includes("Tester"), "в таблице есть своя строка с именем из Telegram");
+{
+  const myRow = page.locator('[data-testid="board-row-me"]');
+  check((await myRow.locator('[data-testid="board-status"]').textContent()) === "♟", "в строке значок статуса (Пешка)");
+  check((await myRow.locator('[data-testid="board-status"]').getAttribute("title")) === "Пешка", "у значка подсказка с названием статуса");
+  check((await myRow.locator('[data-testid="board-points"]').textContent()).trim() === "1", "в строке очки со звездой");
+  await page.setViewportSize({ width: 360, height: 640 });
+  check(await page.evaluate(() => document.documentElement.scrollWidth <= 360), "таблица на 360 px без прокрутки вбок");
+  await shot(page, "07b-board-360");
+  await page.setViewportSize({ width: 390, height: 844 });
+}
 check((await text(page, "board-ends")).includes("субботу"), "подпись про конец недели в субботу");
 
 // Приватность: что видит другой человек.

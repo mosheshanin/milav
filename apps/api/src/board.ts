@@ -14,6 +14,7 @@ import {
   localEpochDay,
   ranksOf,
   sortBoard,
+  statusForPassedLessons,
   weekIndex,
   weekStartDay,
   type BoardRow,
@@ -82,18 +83,31 @@ export async function ensureSnapshot(db: D1Database, board: Board, now: number):
   return { weekIdx: week, builtAt: now, entries };
 }
 
-/** Имена тех, кто сейчас согласен участвовать (и не заблокирован). Остальные в таблице не показываются. */
-async function participantNames(db: D1Database, ids: number[]): Promise<Map<number, string>> {
+interface Participant {
+  name: string;
+  status: BoardRow["status"];
+}
+
+/**
+ * Имена и статусы тех, кто сейчас участвует (и не заблокирован). Остальные в таблице не показываются.
+ * Статус считается по сданным урокам в момент чтения, а не берётся из снимка: он всегда свежий.
+ */
+async function participants(db: D1Database, ids: number[]): Promise<Map<number, Participant>> {
   if (ids.length === 0) return new Map();
   const marks = ids.map(() => "?").join(", ");
   const { results } = await db
     .prepare(
-      `SELECT u.id AS id, u.first_name AS name FROM users u JOIN user_stats s ON s.user_id = u.id
+      `SELECT u.id AS id, u.first_name AS name, s.passed_lessons AS passed FROM users u JOIN user_stats s ON s.user_id = u.id
        WHERE u.id IN (${marks}) AND s.lb_optin = 1 AND s.lb_banned = 0`,
     )
     .bind(...ids)
-    .all<{ id: number; name: string }>();
-  return new Map(results.map((r) => [r.id, cleanDisplayName(r.name)]));
+    .all<{ id: number; name: string; passed: number }>();
+  return new Map(
+    results.map((r) => {
+      const { key, name, symbol } = statusForPassedLessons(r.passed);
+      return [r.id, { name: cleanDisplayName(r.name), status: { key, name, symbol } }];
+    }),
+  );
 }
 
 export async function buildLeaderboard(db: D1Database, board: Board, viewer: Stats, now: number): Promise<LeaderboardResponse> {
@@ -111,12 +125,12 @@ export async function buildLeaderboard(db: D1Database, board: Board, viewer: Sta
     for (let i = from; i <= to; i++) aroundIdx.push(i);
   }
 
-  const names = await participantNames(db, [...new Set([...topIdx, ...aroundIdx].map((i) => snap.entries[i]![0]))]);
+  const people = await participants(db, [...new Set([...topIdx, ...aroundIdx].map((i) => snap.entries[i]![0]))]);
   const rowAt = (i: number): BoardRow | null => {
     const [id, points] = snap.entries[i]!;
-    const name = names.get(id);
-    if (name === undefined) return null;
-    return { rank: ranks[i]!, name, points, ...(id === viewer.userId ? { me: true as const } : {}) };
+    const person = people.get(id);
+    if (person === undefined) return null;
+    return { rank: ranks[i]!, name: person.name, points, status: person.status, ...(id === viewer.userId ? { me: true as const } : {}) };
   };
   const rows = (indexes: number[]) => indexes.map(rowAt).filter((r): r is BoardRow => r !== null);
 

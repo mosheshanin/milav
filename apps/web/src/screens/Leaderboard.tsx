@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { Star } from "lucide-react";
 import { cleanDisplayName, type BoardRow, type LeaderboardResponse } from "@milav/shared";
 import { ApiError, api } from "../api";
 import { useApp } from "../AppContext";
@@ -113,7 +114,7 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
                   {data.me.around.length > 0 ? (
                     data.me.around.map((row) => <Row key={`${row.rank}-${row.name}-${row.points}`} row={row} />)
                   ) : (
-                    <Row row={{ rank: data.me.rank ?? 0, name: myName, points: data.me.points, me: true }} />
+                    <Row row={{ rank: data.me.rank ?? 0, name: myName, points: data.me.points, status: me.status, me: true }} />
                   )}
                 </ol>
               </section>
@@ -132,7 +133,7 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
               <Card className="flex flex-col gap-3" data-testid="board-join">
                 <h2 className="font-semibold">Хотите участвовать?</h2>
                 <p className="text-sm text-ink-soft">
-                  Другие участники увидят ваше имя из Telegram («{myName}», без фамилии и имени пользователя) и ваши очки.
+                  Другие участники увидят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), ваш статус и очки.
                   Выйти можно в любой момент, и вы сразу исчезнете из таблицы.
                 </p>
                 <Button block disabled={busy} onClick={() => void setParticipation(true)} data-testid="board-join-button">
@@ -142,7 +143,7 @@ export function Leaderboard({ onBack }: { onBack: () => void }) {
             ) : (
               <Card className="flex flex-col gap-3" data-testid="board-in">
                 <p className="text-sm text-ink-soft">
-                  Вы в таблице: другие видят ваше имя из Telegram («{myName}», без фамилии и имени пользователя) и очки.
+                  Вы в таблице: другие видят ваше имя из Telegram («{myName}», без фамилии и имени пользователя), статус и очки.
                   Не хотите — выйдите, и вы сразу исчезнете из таблицы. Вернуться можно в любой момент.
                 </p>
                 <Button variant="ghost" block disabled={busy} onClick={() => void setParticipation(false)} data-testid="board-leave-button">
@@ -164,10 +165,21 @@ function Row({ row }: { row: BoardRow }) {
       data-testid={row.me ? "board-row-me" : "board-row"}
       className={`flex items-center gap-3 rounded-control px-3 py-2 ${row.me ? "bg-accent-soft font-semibold" : "bg-surface"}`}
     >
-      <span className="w-8 text-right text-ink-soft">{row.rank}</span>
+      <span className="w-8 shrink-0 text-right text-ink-soft">{row.rank}</span>
+      <span
+        title={row.status.name}
+        aria-label={`Статус: ${row.status.name}`}
+        data-testid="board-status"
+        className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xl leading-none"
+      >
+        {row.status.symbol}
+      </span>
       <span className="min-w-0 flex-1 truncate">{row.name}</span>
       {row.me && <Chip tone="accent">Вы</Chip>}
-      <span className="font-semibold">{row.points}</span>
+      <span className="flex shrink-0 items-center gap-1 font-semibold" aria-label={`Очки: ${row.points}`} data-testid="board-points">
+        <Star className="size-4 fill-brand-yellow text-brand-yellow" aria-hidden />
+        {row.points}
+      </span>
     </li>
   );
 }

@@ -1,5 +1,5 @@
 // Типы API геймификации (docs/GAMIFICATION.md, раздел 10).
-import type { Gender } from "../types";
+import type { Gender, StatusInfo } from "../types";
 import type { Metrics } from "./badges";
 
 /** Путь к следующему шахматному статусу. */
@@ -74,6 +74,8 @@ export interface BoardRow {
   rank: number;
   name: string;
   points: number;
+  /** Шахматный статус участника по сданным урокам на момент чтения (25.11.2026, просьба владельца). */
+  status: Pick<StatusInfo, "key" | "name" | "symbol">;
   me?: true;
 }
 
