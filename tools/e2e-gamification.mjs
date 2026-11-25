@@ -216,6 +216,9 @@ await page.waitForSelector('[data-testid="achievements"]');
 check(true, "после перезагрузки остаёмся на экране «Достижения»");
 
 // ---------- Таблица лидеров ----------
+// Участие по умолчанию: ученики других сценариев группы (тоже «Tester») уже в таблице. Выводим их, чтобы проверки
+// по имени касались только A.
+sql(`UPDATE user_stats SET lb_optin = 0 WHERE user_id NOT IN (${A}, ${OTHER});`);
 await page.click('[data-testid="open-leaderboard"]');
 await page.waitForSelector('[data-testid="leaderboard"]');
 // Участие включено по умолчанию (решение владельца 25.11.2026): кнопки «Участвовать» нет, есть «Выйти из таблицы».
