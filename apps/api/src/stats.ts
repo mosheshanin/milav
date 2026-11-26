@@ -30,6 +30,7 @@ import {
   type PlayState,
   type StatusInfo,
 } from "@milav/shared";
+import { noteStudiedStatement } from "./reminderSends";
 
 /** Сведения о контенте считаются один раз: контент не меняется, пока работает Worker. */
 export const INFO = contentInfo();
@@ -495,6 +496,9 @@ async function applyWordsToPlay(db: D1Database, initial: Stats, words: number, n
       current = (await loadStats(db, current.userId)) ?? current;
     }
   }
+  // Первое занятие за местный день: отмечаем в журнале рассылок, если напоминание было в последние сутки
+  // (учёт рассылок, reminderSends.ts). Одна запись на ученика в день; без напоминания запрос ничего не меняет.
+  if (applied && current.play.lastDay !== today) await noteStudiedStatement(db, current.userId, now).run();
   return { current, after: applied ? after : current.play, today, goalMet, applied };
 }
 

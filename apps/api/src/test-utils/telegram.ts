@@ -14,8 +14,10 @@ export function signInitData(
   botToken: string,
   user: TestUser,
   authDate: number = Math.floor(Date.now() / 1000),
+  extra: Record<string, string> = {},
 ): string {
   const params: Record<string, string> = {
+    ...extra,
     auth_date: String(authDate),
     query_id: "AAHdF6IQAAAAAN0XohDhrOrc",
     user: JSON.stringify(user),

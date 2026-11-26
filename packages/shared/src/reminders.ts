@@ -236,3 +236,99 @@ export interface AdminRemindersResponse {
   /** Сколько выключили сами или заблокировали бота. */
   blocked: number;
 }
+
+// ---- Учёт рассылок (26.11.2026, docs/REMINDERS.md, «Учёт рассылок») ----
+
+/**
+ * Группа напоминания в отчёте: шутка, прогресс ученика (его числа), повторение. «Контроль»: напоминание нарочно
+ * не отправлено, чтобы сравнить, сколько людей занимаются и без него.
+ */
+export type ReminderGroup = "joke" | "progress" | "repeat" | "control";
+export const REMINDER_GROUPS: readonly ReminderGroup[] = ["joke", "progress", "repeat", "control"];
+export const REMINDER_GROUP_TITLES: Record<ReminderGroup, string> = {
+  joke: "Шутки",
+  progress: "Прогресс ученика",
+  repeat: "Повторение",
+  control: "Контроль (не отправлено)",
+};
+
+const PROGRESS_PLACEHOLDERS: readonly string[] = ["осталось_слов", "дней_на_неделе", "слов_за_неделю", "статус", "до_статуса"];
+
+/** Группа текста по его подстановкам: {к_повторению} — повторение, числа ученика — прогресс, иначе шутка. */
+export function reminderTextGroup(text: string): Exclude<ReminderGroup, "control"> {
+  const names = placeholdersIn(text);
+  if (names.includes("к_повторению")) return "repeat";
+  if (names.some((name) => PROGRESS_PLACEHOLDERS.includes(name))) return "progress";
+  return "joke";
+}
+
+/** Окно учёта: нажал, открыл или занимался в течение суток после напоминания. */
+export const REMINDER_WINDOW_SECONDS = 86_400;
+
+/** Метка кнопки «Продолжить» под напоминанием: адрес приложения `?from=reminder`, приложение передаёт её в /api/me. */
+export const LAUNCH_FROM_REMINDER = "reminder";
+
+/**
+ * Попадает ли напоминание этого ученика в этот день в контрольную группу (не отправляется). Решение не случайное,
+ * а по номеру ученика и дню: так оно одно и то же при повторном запуске таймера, и один и тот же человек не сидит
+ * в контроле постоянно, а пропускает примерно одно напоминание из `100 / percent`.
+ */
+export function inReminderControl(userId: number, localDay: number, percent: number): boolean {
+  if (percent <= 0) return false;
+  let h = Math.imul((userId % 2_147_483_629) | 0, 0x9e3779b1) ^ Math.imul(localDay | 0, 0x85ebca6b);
+  h = Math.imul(h ^ (h >>> 16), 0x7feb352d);
+  h = Math.imul(h ^ (h >>> 15), 0x846ca68b);
+  h ^= h >>> 16;
+  return (h >>> 0) % 100 < percent;
+}
+
+/** Числа одной строки отчёта: сколько напоминаний и после скольких нажали, открыли, занимались (за сутки). */
+export interface ReminderReportRow {
+  sends: number;
+  clicked: number;
+  opened: number;
+  studied: number;
+}
+
+/** Меньше стольких строк в контроле: разницу с контролем не показываем (слишком мало данных). */
+export const REPORT_MIN_CONTROL = 30;
+
+export interface ReminderReport {
+  /** За сколько дней. */
+  days: number;
+  /** Напоминания последних суток: итог ещё неизвестен, в отчёт не входят. */
+  pending: number;
+  /** Все отправленные (без контроля). */
+  sent: ReminderReportRow;
+  /** Контроль: не отправлено нарочно. */
+  control: ReminderReportRow;
+  /**
+   * Сколько из 100 напоминаний привели к занятию сверх того, что было бы без них (доля «занимались» после напоминания
+   * минус доля в контроле, процентные пункты). null: в контроле меньше REPORT_MIN_CONTROL.
+   */
+  lift: number | null;
+  groups: (ReminderReportRow & { group: ReminderGroup })[];
+  texts: (ReminderReportRow & { textId: number })[];
+  /** Откуда пришли новые ученики за эти дни (метка ссылки запуска). */
+  sources: SourceRow[];
+}
+
+/** Новые ученики по метке ссылки запуска: сколько пришло, сколько выучили хоть одно слово, сколько вернулись в другой день. */
+export interface SourceRow {
+  /** Метка (`startapp=<метка>`); '' — без метки. */
+  source: string;
+  users: number;
+  learned: number;
+  returned: number;
+}
+
+/** Доля в процентах, целым числом; при нуле в знаменателе 0. */
+export function percentOf(part: number, whole: number): number {
+  return whole > 0 ? Math.round((part * 100) / whole) : 0;
+}
+
+/** Разница «занимались» после напоминания и в контроле, процентные пункты (см. ReminderReport.lift). */
+export function reminderLift(sent: ReminderReportRow, control: ReminderReportRow): number | null {
+  if (control.sends < REPORT_MIN_CONTROL || sent.sends === 0) return null;
+  return Math.round(((sent.studied / sent.sends) - (control.studied / control.sends)) * 100);
+}

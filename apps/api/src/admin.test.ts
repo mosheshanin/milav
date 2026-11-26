@@ -147,6 +147,7 @@ describe("настройки приложения", () => {
       { key: "repeatReminderMin", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
       { key: "offerTimes", value: 2, isDefault: true, updatedAt: null, updatedBy: null },
       { key: "offerAgainDays", value: 7, isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "reminderControl", value: 10, isDefault: true, updatedAt: null, updatedBy: null },
     ]);
     const on = env({ LEADERBOARD_ENABLED: "1" });
     expect((await getJson<AdminConfigResponse>("/api/admin/config", OWNER, on)).items[0]!.value).toBe("all");

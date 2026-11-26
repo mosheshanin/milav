@@ -45,6 +45,7 @@ import type {
 import { numberTargetQuery } from "@milav/shared";
 import { deviceTimeZone } from "./lib/timezone";
 import { authHeader } from "./telegram";
+import { launchFromOf } from "./lib/launch";
 
 export class ApiError extends Error {
   constructor(
@@ -104,11 +105,26 @@ export interface SpeechResponse {
 
 export type { HomeResponse, LessonProgressResponse };
 
+let launchFromTaken = false;
+
+/** Метка `?from=` адреса запуска (например, `reminder`), один раз за запуск: дальше undefined. */
+function takeLaunchFrom(): string | undefined {
+  if (launchFromTaken) return undefined;
+  launchFromTaken = true;
+  return launchFromOf(typeof location === "undefined" ? "" : location.search);
+}
+
 export const api = {
   /** Профиль; часовой пояс устройства нужен для границы дня (ритм, цель). */
   me: () => {
+    const headers: Record<string, string> = {};
     const tz = deviceTimeZone();
-    return request<MeResponse>("/api/me", tz ? { headers: { "X-Timezone": tz } } : {});
+    if (tz) headers["X-Timezone"] = tz;
+    // Учёт рассылок: приложение открыто кнопкой «Продолжить» под напоминанием (адрес ?from=reminder).
+    // Метка уходит один раз за запуск, с первым запросом профиля.
+    const from = takeLaunchFrom();
+    if (from) headers["X-Launch-From"] = from;
+    return request<MeResponse>("/api/me", { headers });
   },
   achievements: () => request<AchievementsResponse>("/api/achievements"),
   /** Человек увидел поздравление с этими бейджами. */

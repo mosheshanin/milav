@@ -64,8 +64,8 @@ describe("проверка и подстановки", () => {
 });
 
 describe("настройки сообщений бота", () => {
-  it("в группе «bot» пять настроек, значения по умолчанию допустимы", () => {
-    expect(BOT_CONFIG_KEYS).toEqual(["reminderMinute", "shabbatFrom", "repeatReminderMin", "offerTimes", "offerAgainDays"]);
+  it("в группе «bot» шесть настроек, значения по умолчанию допустимы", () => {
+    expect(BOT_CONFIG_KEYS).toEqual(["reminderMinute", "shabbatFrom", "repeatReminderMin", "offerTimes", "offerAgainDays", "reminderControl"]);
     expect(isValidConfigValue("reminderMinute", 1200)).toBe(true);
     expect(isValidConfigValue("shabbatFrom", 900)).toBe(true);
     expect(isValidConfigValue("shabbatFrom", SHABBAT_OFF)).toBe(true);

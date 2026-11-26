@@ -25,6 +25,8 @@ import {
   pickReminder,
   SHABBAT_OFF,
   wordsText,
+  inReminderControl,
+  reminderTextGroup,
   popcount,
   renderReminder,
   statusPath,
@@ -46,6 +48,7 @@ import { appOrigin } from "./appUrl";
 import type { AppEnv, Bindings } from "./env";
 import { statsFor } from "./play";
 import { countDueForReminders } from "./repeat";
+import { REPORT_DAYS, noteSendOpen, reminderReport, sendLogStatement, sendMarkStatement } from "./reminderSends";
 import { rateLimit } from "./rateLimit";
 import type { Stats } from "./stats";
 import { describeError, logError, logEvent, logWarn } from "./telemetry";
@@ -140,12 +143,16 @@ interface ReminderRow {
   blocked: number;
   asked_count: number;
   asked_at: number;
+  /** Учёт рассылок: время последней строки журнала и отмечено ли после неё открытие. */
+  send_at: number;
+  send_open: number;
 }
 
 export async function loadReminderRow(db: D1Database, userId: number): Promise<ReminderRow | null> {
   return db
     .prepare(
-      `SELECT user_id, enabled, minute, next_at, skip_day, last_sent_at, last_text_id, opened_counted, blocked, asked_count, asked_at
+      `SELECT user_id, enabled, minute, next_at, skip_day, last_sent_at, last_text_id, opened_counted, blocked, asked_count, asked_at,
+              send_at, send_open
        FROM reminders WHERE user_id = ?`,
     )
     .bind(userId)
@@ -176,10 +183,13 @@ export async function remindersOn(env: Bindings, userId: number): Promise<boolea
 }
 
 /**
- * Человек открыл приложение. Если это в течение суток после напоминания, засчитываем тексту «открыли» (один раз).
+ * Человек открыл приложение. Если это в течение суток после напоминания, засчитываем тексту «открыли» (один раз)
+ * и отмечаем открытие в журнале рассылок; `fromReminder`: открыл кнопкой «Продолжить» под напоминанием.
  * Вызывается из /api/me; строку уже прочитали.
  */
-export async function noteAppOpen(db: D1Database, row: ReminderRow | null, now: number): Promise<void> {
+export async function noteAppOpen(db: D1Database, row: ReminderRow | null, now: number, fromReminder = false): Promise<void> {
+  const logged = await noteSendOpen(db, row, now, fromReminder);
+  if (logged && fromReminder) logEvent("reminder_click", { uid: row!.user_id, after: now - row!.send_at });
   if (!row || row.opened_counted || !row.last_sent_at || now - row.last_sent_at > OPEN_WINDOW_SECONDS) return;
   const statements = [db.prepare("UPDATE reminders SET opened_counted = 1 WHERE user_id = ?").bind(row.user_id)];
   if (row.last_text_id !== null) statements.push(db.prepare("UPDATE reminder_texts SET opened = opened + 1 WHERE id = ?").bind(row.last_text_id));
@@ -342,6 +352,8 @@ export interface RunSummary {
   skipped: number;
   blocked: number;
   retry: number;
+  /** Контрольная группа: напоминание нарочно не отправлено (учёт рассылок). */
+  held: number;
 }
 
 /**
@@ -350,7 +362,7 @@ export interface RunSummary {
  */
 export async function runDueReminders(env: Bindings, nowMs: number, appUrl: string, random: () => number = Math.random): Promise<RunSummary> {
   const now = Math.floor(nowMs / 1000);
-  const summary: RunSummary = { due: 0, sent: 0, skipped: 0, blocked: 0, retry: 0 };
+  const summary: RunSummary = { due: 0, sent: 0, skipped: 0, blocked: 0, retry: 0, held: 0 };
   const { results: due } = await env.DB
     .prepare(
       `SELECT r.user_id, r.minute, r.next_at, r.skip_day, r.last_text_id, u.first_name,
@@ -416,10 +428,22 @@ export async function runDueReminders(env: Bindings, nowMs: number, appUrl: stri
       continue;
     }
 
+    // Контрольная группа (учёт рассылок): часть напоминаний нарочно не уходит, чтобы сравнить, занимаются ли люди
+    // и без них. Решение по ученику и дню, команды не касается. В журнал идёт строка «контроль».
+    if (inReminderControl(row.user_id, local.day, config.reminderControl) && !(await staffOf(env, row.user_id))) {
+      summary.held++;
+      reschedule();
+      updates.push(sendLogStatement(env.DB, row.user_id, null, "control", now), sendMarkStatement(env.DB, row.user_id, now));
+      logEvent("reminder_held", { uid: row.user_id });
+      continue;
+    }
+
     const result = await sendToUser(env, row.user_id, chosen.text, reminderKeyboard(bot, appUrl, true));
     if (result === "sent") {
       summary.sent++;
       updates.push(
+        sendLogStatement(env.DB, row.user_id, chosen.id, reminderTextGroup(chosen.text), now),
+        sendMarkStatement(env.DB, row.user_id, now),
         env.DB
           .prepare("UPDATE reminders SET next_at = ?, last_sent_at = ?, last_text_id = ?, opened_counted = 0 WHERE user_id = ?")
           .bind(next, now, chosen.id, row.user_id),
@@ -605,6 +629,13 @@ adminRoutes.get("/api/admin/reminders", async (c) => {
     blocked: Number(count.blocked ?? 0),
   };
   return c.json(body);
+});
+
+// Учёт рассылок: отчёт за 7, 30 или 90 дней (?days=), по умолчанию 30 (reminderSends.ts).
+adminRoutes.get("/api/admin/reminders/report", async (c) => {
+  const days = Number(c.req.query("days") ?? 30);
+  if (!(REPORT_DAYS as readonly number[]).includes(days)) return c.json({ error: "bad_days" }, 400);
+  return c.json(await reminderReport(c.env.DB, nowSeconds(), days));
 });
 
 // Новый текст: { kind, text }.

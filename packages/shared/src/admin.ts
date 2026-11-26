@@ -43,6 +43,7 @@ export const BOT_CONFIG_DEFAULTS = {
   repeatReminderMin: REPEAT_REMINDER_MIN,
   offerTimes: 2,
   offerAgainDays: 7,
+  reminderControl: 10,
 } as const;
 
 /**
@@ -116,6 +117,13 @@ export const APP_CONFIG = {
     hint: "Сколько дней ждать после «Не сейчас», прежде чем предложить ещё раз.",
     options: [1, 3, 7, 14, 30],
   },
+  reminderControl: {
+    kind: "choice",
+    group: "bot",
+    title: "Контрольная группа напоминаний",
+    hint: "Сколько ежедневных напоминаний из 100 нарочно не отправлять, чтобы сравнить: занимаются ли люди после напоминания чаще, чем без него (отчёт в «Напоминаниях»). Пропуск выпадает разным людям в разные дни, примерно одно напоминание из десяти при 10%. Администраторов и проверяющих не касается. «Выкл.»: напоминания уходят всем, но честной разницы в отчёте не будет.",
+    options: [0, 5, 10, 20],
+  },
 } as const satisfies Record<string, ConfigDef>;
 
 export type ConfigKey = keyof typeof APP_CONFIG;
@@ -133,6 +141,8 @@ export interface AppConfig {
   repeatReminderMin: number;
   offerTimes: number;
   offerAgainDays: number;
+  /** Сколько напоминаний из 100 не отправлять (контрольная группа, отчёт «Учёт рассылок»). */
+  reminderControl: number;
 }
 
 /** Ключи настроек сообщений бота (раздел «Сообщения бота»); остальные в «Настройках приложения». */
@@ -157,6 +167,7 @@ export function configValueTitle(key: ConfigKey, value: unknown): string {
   if (key === "repeatReminderMin") return value === 0 ? "Выкл." : `от ${value} сл.`;
   if (key === "offerTimes") return value === 0 ? "Не предлагать" : `${value} р.`;
   if (key === "offerAgainDays") return `${value} дн.`;
+  if (key === "reminderControl") return value === 0 ? "Выкл." : `${value}%`;
   return String(value);
 }
 

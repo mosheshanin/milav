@@ -24,6 +24,7 @@ import {
   type Stage,
   type TemplateSaveResponse,
   type TemplatesResponse,
+  LAUNCH_FROM_REMINDER,
 } from "@milav/shared";
 import { requireUser, userFromHeader } from "./auth";
 import { boardWeekNow } from "./board";
@@ -270,7 +271,9 @@ app.get("/api/me", requireUser, async (c) => {
   }
   // Напоминания: открыли приложение после напоминания (статистика текста) и данные для «Настроек».
   const reminderRow = await loadReminderRow(c.env.DB, user.id);
-  await noteAppOpen(c.env.DB, reminderRow, now);
+  // Учёт рассылок: приложение открыто кнопкой «Продолжить» под напоминанием (адрес ?from=reminder, приложение
+  // передаёт метку заголовком X-Launch-From при первом запросе профиля).
+  await noteAppOpen(c.env.DB, reminderRow, now, c.req.header("X-Launch-From") === LAUNCH_FROM_REMINDER);
   const staff = await staffOf(c.env, user.id);
   const body: MeResponse = {
     user: { id: user.id, firstName: user.firstName, username: user.username },

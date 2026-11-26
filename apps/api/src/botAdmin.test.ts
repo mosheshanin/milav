@@ -13,8 +13,13 @@ const APP = "https://app.example/";
 let outbox: { method: string; chat_id?: number; text?: string; reply_markup?: any; [k: string]: unknown }[] = [];
 let telegramOk = true;
 
-beforeEach(() => {
+/** Контрольная группа напоминаний выключена: прежние тесты проверяют отправку, а не учёт рассылок. */
+const controlOff = () =>
+  ctx.env.DB.prepare("INSERT INTO app_config (key, value, updated_by, updated_at) VALUES ('reminderControl', '0', 0, 0)").run();
+
+beforeEach(async () => {
   resetHarness();
+  await controlOff();
   outbox = [];
   telegramOk = true;
   setTelegramFetchForTests(async (url, init) => {

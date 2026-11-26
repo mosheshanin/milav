@@ -7,6 +7,13 @@ export interface AuthUser {
   lastName?: string;
   username?: string;
   languageCode?: string;
+  /** Метка ссылки запуска (`startapp=<метка>`), если приложение открыто такой ссылкой: откуда пришёл ученик. */
+  startParam?: string;
+}
+
+/** Метка запуска: как её допускает Telegram (латиница, цифры, _ и -, до 64 знаков); иначе не записываем. */
+export function cleanStartParam(value: string | null | undefined): string | undefined {
+  return value && /^[A-Za-z0-9_-]{1,64}$/.test(value) ? value : undefined;
 }
 
 const encoder = new TextEncoder();
@@ -84,6 +91,7 @@ export async function validateInitData(
       lastName: typeof u.last_name === "string" ? u.last_name : undefined,
       username: typeof u.username === "string" ? u.username : undefined,
       languageCode: typeof u.language_code === "string" ? u.language_code : undefined,
+      startParam: cleanStartParam(params.get("start_param")),
     };
   } catch {
     return null;

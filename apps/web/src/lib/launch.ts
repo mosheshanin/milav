@@ -28,3 +28,16 @@ export function launchTargetFrom(input: LaunchInput): LaunchTarget {
   if (input.allowDev && new URLSearchParams(input.search).has("record")) return "record";
   return null;
 }
+
+/**
+ * Метка `?from=` в адресе запуска. Кнопка «Продолжить» под напоминанием бота открывает приложение с `?from=reminder`
+ * (учёт рассылок, docs/REMINDERS.md); метка уходит на сервер заголовком X-Launch-From с первым запросом профиля.
+ */
+export function launchFromOf(search: string): string | undefined {
+  try {
+    const from = new URLSearchParams(search).get("from");
+    return from && /^[a-z_-]{1,32}$/.test(from) ? from : undefined;
+  } catch {
+    return undefined;
+  }
+}

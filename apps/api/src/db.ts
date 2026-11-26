@@ -31,20 +31,23 @@ function toProgress(wordId: string, row?: ProgressRow | null): WordProgress {
 /** Создаёт пользователя, если его ещё нет (нужно для внешних ключей). */
 export async function ensureUser(db: D1Database, user: AuthUser): Promise<void> {
   await db
-    .prepare("INSERT OR IGNORE INTO users (id, first_name, last_name, username, language_code) VALUES (?, ?, ?, ?, ?)")
-    .bind(user.id, user.firstName, user.lastName ?? null, user.username ?? null, user.languageCode ?? null)
+    .prepare("INSERT OR IGNORE INTO users (id, first_name, last_name, username, language_code, source) VALUES (?, ?, ?, ?, ?, ?)")
+    .bind(user.id, user.firstName, user.lastName ?? null, user.username ?? null, user.languageCode ?? null, user.startParam ?? "")
     .run();
 }
 
-/** Создаёт или обновляет профиль и время последнего входа. Вызывается при запуске приложения. */
+/**
+ * Создаёт или обновляет профиль и время последнего входа. Вызывается при запуске приложения.
+ * Метка ссылки запуска (source) пишется один раз, при первом входе: откуда пришёл ученик ('' — без метки).
+ */
 export async function touchUser(db: D1Database, user: AuthUser): Promise<void> {
   await db
     .prepare(
-      `INSERT INTO users (id, first_name, last_name, username, language_code) VALUES (?, ?, ?, ?, ?)
+      `INSERT INTO users (id, first_name, last_name, username, language_code, source) VALUES (?, ?, ?, ?, ?, ?)
        ON CONFLICT(id) DO UPDATE SET first_name = excluded.first_name, last_name = excluded.last_name,
          username = excluded.username, language_code = excluded.language_code, last_seen_at = datetime('now')`,
     )
-    .bind(user.id, user.firstName, user.lastName ?? null, user.username ?? null, user.languageCode ?? null)
+    .bind(user.id, user.firstName, user.lastName ?? null, user.username ?? null, user.languageCode ?? null, user.startParam ?? "")
     .run();
 }
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { launchTargetFrom } from "./launch";
+import { launchFromOf, launchTargetFrom } from "./launch";
 
 const base = { hash: "", search: "", allowDev: false };
 
@@ -24,5 +24,15 @@ describe("цель запуска", () => {
     expect(launchTargetFrom({ ...base, search: "?record=1", allowDev: true })).toBe("record");
     expect(launchTargetFrom({ ...base, search: "?dev=1001&record", allowDev: true })).toBe("record");
     expect(launchTargetFrom({ ...base, search: "?dev=1001", allowDev: true })).toBeNull();
+  });
+});
+
+describe("метка ?from= (учёт рассылок)", () => {
+  it("кнопка «Продолжить» под напоминанием даёт reminder; чужое и пустое не берём", () => {
+    expect(launchFromOf("?from=reminder")).toBe("reminder");
+    expect(launchFromOf("?x=1&from=reminder")).toBe("reminder");
+    expect(launchFromOf("")).toBeUndefined();
+    expect(launchFromOf("?from=")).toBeUndefined();
+    expect(launchFromOf("?from=<script>")).toBeUndefined();
   });
 });
