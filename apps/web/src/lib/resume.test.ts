@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { LETTER_STAGES, PAID_LESSONS_OPEN, STAGES, type LessonMeta, type WordProgress } from "@milav/shared";
-import { findResume, orderLessons, type LessonState } from "./resume";
+import { findResume, firstSteps, orderLessons, type LessonState } from "./resume";
 
 function lesson(id: string, over: Partial<LessonMeta> = {}): LessonMeta {
   return {
@@ -153,5 +153,28 @@ describe("алфавит", () => {
   it("сданный алфавит пропускается", () => {
     const progress = { "alphabet-1": letterState(5, {}, true), "animals-1": state(0) };
     expect(findResume(lessons, progress)).toMatchObject({ lessonId: "animals-1", started: false });
+  });
+});
+
+describe("новичок: «С чего начнём?» (вопрос 149)", () => {
+  const lessons = [
+    lesson("animals-1"),
+    lesson("pronouns-1", { section: "basics", topic: "Местоимения" }),
+    lesson("alphabet-2", { section: "alphabet", topic: "Алфавит", number: 2, stages: [...LETTER_STAGES] }),
+    lesson("alphabet-1", { section: "alphabet", topic: "Алфавит", number: 1, stages: [...LETTER_STAGES] }),
+  ];
+  const fresh = () => Object.fromEntries(lessons.map((l) => [l.id, state(0)]));
+
+  it("ничего не начато: первый урок алфавита и первый урок слов по порядку главной", () => {
+    expect(firstSteps(lessons, fresh())).toEqual({ alphabet: "alphabet-1", words: "pronouns-1" });
+  });
+
+  it("начат хоть один этап или сдана викторина: карточки нет", () => {
+    expect(firstSteps(lessons, { ...fresh(), "animals-1": state(0, { listen: true }) })).toBeNull();
+    expect(firstSteps(lessons, { ...fresh(), "alphabet-2": state(0, {}, true) })).toBeNull();
+  });
+
+  it("прогресс не загрузился: карточки нет", () => {
+    expect(firstSteps(lessons, {})).toBeNull();
   });
 });

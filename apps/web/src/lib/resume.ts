@@ -71,3 +71,23 @@ export function findResume(lessons: readonly ResumeLesson[], progress: Record<st
     started: isStarted(state),
   };
 }
+
+/** Куда ведут кнопки карточки «С чего начнём?»: первый урок алфавита и первый урок слов (порядок главной). */
+export interface FirstSteps {
+  alphabet: string;
+  words: string;
+}
+
+/**
+ * Новичок (вопрос 149, решение владельца 26.11.2026): прогресс загружен, и ни один урок не начат и не сдан.
+ * Тогда главная открывается карточкой «С чего начнём?» с двумя кнопками. Если прогресса нет (запрос не удался)
+ * или нужного урока нет, карточки нет: остаётся обычная «Начать».
+ */
+export function firstSteps(lessons: readonly ResumeLesson[], progress: Record<string, LessonState | undefined>): FirstSteps | null {
+  const states = Object.values(progress).filter((s): s is LessonState => !!s);
+  if (states.length === 0 || states.some((s) => s.quiz.passed || isStarted(s))) return null;
+  const open = orderLessons(lessons).filter((l) => lessonOpenWithoutPurchase(l, PAID_LESSONS_OPEN) && progress[l.id]);
+  const alphabet = open.find((l) => l.section === ALPHABET_SECTION);
+  const words = open.find((l) => l.section !== ALPHABET_SECTION);
+  return alphabet && words ? { alphabet: alphabet.id, words: words.id } : null;
+}

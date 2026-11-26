@@ -11,7 +11,8 @@ export const CLIENT_LOG_PATH = "/api/client-log";
  * - mic_problem: не удалось включить микрофон (detail: denied | unsupported) или он отдал мёртвую тишину и включён заново (dead, 22.11);
  * - app_crash: интерфейс упал и показан экран «Что-то пошло не так» (подробности приходят отдельным отчётом об ошибке).
  */
-export const CLIENT_EVENTS = ["mic_problem", "app_crash"] as const;
+/** first_steps: новичок выбрал на главной «Начать с алфавита» (alphabet) или «к словам» (words), вопрос 149. */
+export const CLIENT_EVENTS = ["mic_problem", "app_crash", "first_steps"] as const;
 export type ClientEventName = (typeof CLIENT_EVENTS)[number];
 
 /** Откуда пришла ошибка: window.onerror, необработанный промис или падение отрисовки React. */

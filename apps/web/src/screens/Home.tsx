@@ -26,7 +26,8 @@ import { alphabetAllLessonIds, alphabetMetas, lessonMetas, wordMetas } from "../
 import { dismissRecap, plural, recapDismissed } from "../lib/play";
 import { repeatCardText } from "../lib/repeat";
 import { fillLook, groupFill, lessonFill } from "../lib/progressFill";
-import { findResume } from "../lib/resume";
+import { findResume, firstSteps } from "../lib/resume";
+import { reportEvent } from "../lib/telemetry";
 
 const SECTIONS: Section[] = ["basics", "numbers", "nouns", "verbs", "adjectives"];
 
@@ -118,6 +119,8 @@ export function Home({
 
   // Кнопка «Продолжить» появляется, когда прогресс загружен: иначе она бы «прыгала».
   const resume = settled ? findResume(lessonMetas, progress) : null;
+  // Новичок (ничего не начато): вместо «Начать» внизу — карточка «С чего начнём?» первой на экране (вопрос 149).
+  const steps = settled ? firstSteps(lessonMetas, progress) : null;
   const resumeLesson = resume ? lessonMetas.find((l) => l.id === resume.lessonId) : undefined;
   const resumeLetters = resumeLesson?.section === "alphabet";
 
@@ -133,6 +136,32 @@ export function Home({
     <>
       <Header onStatus={onAchievements} onSettings={onSettings} />
       <main className="mx-auto flex max-w-md flex-col gap-section p-block pb-section">
+        {steps && (
+          <Card className="flex flex-col gap-3" data-testid="first-steps">
+            <div>
+              <h2 className="text-lg font-bold">👋 С чего начнём?</h2>
+              <p className="text-sm text-ink-soft">Если иврит совсем новый, начните с букв. Если буквы уже знаете, сразу к словам.</p>
+            </div>
+            {(["alphabet", "words"] as const).map((kind) => {
+              const meta = lessonMetas.find((l) => l.id === steps[kind]);
+              return (
+                <Button
+                  key={kind}
+                  block
+                  variant={kind === "alphabet" ? "primary" : "ghost"}
+                  data-testid={`first-steps-${kind}`}
+                  onClick={() => {
+                    reportEvent("first_steps", kind);
+                    if (meta) reveal(meta);
+                    onOpen(steps[kind]);
+                  }}
+                >
+                  {kind === "alphabet" ? "Начать с алфавита" : "Уже знаю буквы — к словам"}
+                </Button>
+              );
+            })}
+          </Card>
+        )}
         {me.play.recap && !recapHidden && !recapDismissed(me.play.recap.weekIdx) && (
           <Card className="flex items-start gap-3" data-testid="recap">
             <div className="flex-1">
@@ -188,7 +217,7 @@ export function Home({
           )}
         </Card>
         {me.play.features.repeat && repeat && repeat.total > 0 && <RepeatCard summary={repeat} onRepeat={onRepeat} onWords={onWords} />}
-        {resume && resumeLesson && (
+        {resume && resumeLesson && !steps && (
           <Card className="flex flex-col gap-3" >
             <div>
               <div className="text-sm text-ink-soft">
