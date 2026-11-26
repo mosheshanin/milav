@@ -109,7 +109,11 @@ export function progressVars(card: ProgressCardData): {
     путь: card.nx ? `${card.nx.s} ${card.nx.n}, через ${lessonsText(card.nx.left)}` : "у вас высшая фигура 👑",
     очков: String(card.p),
     цель: card.g === null ? "выключена" : card.g[0] >= card.g[1] ? `выполнена ✅ (${wordsText(card.g[0])})` : `${card.g[0]} из ${wordsText(card.g[1])}`,
-    неделя: `${card.wd} из ${daysText(card.wt)}${card.wd >= card.wt ? " ✅" : ""}`,
+    // Набрали норму ритма: «4 дня, неделя ритмичная ✅» (а не «4 из 3 дней»); иначе «2 из 3 дней».
+    неделя:
+      card.wd >= card.wt
+        ? `${card.wd} ${plural(card.wd, "день", "дня", "дней")}, неделя ритмичная ✅`
+        : `${card.wd} из ${daysText(card.wt)}`,
     повторить: card.r === null ? "выключено" : card.r === 0 ? "пока нечего" : wordsText(card.r),
   };
 }

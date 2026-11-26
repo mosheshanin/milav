@@ -49,7 +49,7 @@ if(!d){e.innerHTML='<p class="m">Загружаю прогресс…</p>';retur
 var g=d.g,x='<div class="h"><div class="fig">'+h(d.s)+'</div><div><div class="t">'+h(d.sn)+'</div><div class="m">Сдано '+L(d.l)+' · ⭐ '+d.p+' '+pl(d.p,'очко','очка','очков')+'</div></div></div>';
 x+='<div class="bar"><i style="width:'+Math.max(0,Math.min(100,d.f))+'%"></i></div><div class="m">'+(d.nx?'До фигуры '+h(d.nx.s)+' '+h(d.nx.n)+': ещё '+L(d.nx.left):'У вас высшая фигура 👑')+'</div>';
 x+='<div class="row"><div class="box"><div class="m">Цель дня</div><div class="t">'+(g?(g[0]>=g[1]?'✅ ':'')+g[0]+' из '+g[1]:'—')+'</div></div>';
-x+='<div class="box" style="flex:2"><div class="m">Неделя: '+d.wd+' из '+d.wt+' '+pl(d.wt,'дня','дней','дней')+(d.wd>=d.wt?' ✅':'')+'</div><div class="wk">';
+x+='<div class="box" style="flex:2"><div class="m">Неделя: '+(d.wd>=d.wt?d.wd+' '+pl(d.wd,'день','дня','дней')+' ✅':d.wd+' из '+d.wt+' '+pl(d.wt,'дня','дней','дней'))+'</div><div class="wk">';
 for(var i=0;i<7;i++)x+='<b class="'+(d.w.charAt(i)=='1'?'on':'')+(i==d.t?' td':'')+'">'+'ВсПнВтСрЧтПтСб'.substr(i*2,2)+'</b>';
 x+='</div></div></div>';
 if(d.r)x+='<p class="m" style="margin-top:10px">🔁 Пора повторить '+d.r+' '+pl(d.r,'слово','слова','слов')+'</p>';

@@ -19,7 +19,7 @@ const THEMES = {
 const progress = progressCard({
   passedLessons: 12,
   points: 340,
-  week: { days: [true, false, true, false, false, false, false], todayIndex: 3, daysThisWeek: 2, target: 3 },
+  week: { days: [true, true, true, true, false, false, false], todayIndex: 3, daysThisWeek: 4, target: 3 },
   goal: { target: 5, done: 3 },
   repeatDue: 7,
 });

@@ -55,7 +55,10 @@ describe("данные карточки прогресса", () => {
     const vars = progressVars(card);
     expect(vars.путь).toContain("высшая");
     expect(vars.цель).toBe("выполнена ✅ (8 слов)");
-    expect(vars.неделя).toBe("3 из 3 дней ✅");
+    expect(vars.неделя).toBe("3 дня, неделя ритмичная ✅");
+    // Больше нормы: не «4 из 3 дней» (скриншот владельца 26.11).
+    expect(progressVars({ ...card, wd: 4 }).неделя).toBe("4 дня, неделя ритмичная ✅");
+    expect(progressVars({ ...card, wd: 5 }).неделя).toBe("5 дней, неделя ритмичная ✅");
     expect(vars.повторить).toBe("выключено");
   });
 
