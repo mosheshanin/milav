@@ -22,11 +22,12 @@ describe("какую заставку показать", () => {
     expect(splashMode({ ...base, seen: true, forced: "что-то" })).toBe("short");
   });
 
-  it("полная заставка — 5 слайдов, около 21 секунды", () => {
+  it("полная заставка — 5 слайдов, около 15 секунд, каждый слайд не короче 2,6 с (анимации успевают)", () => {
     expect(FULL_DURATIONS).toHaveLength(5);
     const total = FULL_DURATIONS.reduce((a, b) => a + b, 0);
-    expect(total).toBeGreaterThan(18000);
-    expect(total).toBeLessThan(24000);
+    expect(total).toBeGreaterThan(13000);
+    expect(total).toBeLessThan(17000);
+    for (const ms of FULL_DURATIONS) expect(ms).toBeGreaterThanOrEqual(2600);
   });
 });
 

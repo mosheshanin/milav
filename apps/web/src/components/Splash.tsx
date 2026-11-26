@@ -234,7 +234,7 @@ function SplashScreen() {
       cur++;
       slides[cur]!.classList.add(`in-${out}`);
       show(cur);
-      timer = later(next, durations[cur] ?? 4400);
+      timer = later(next, durations[cur] ?? 3000);
     };
     const skip = (e: Event) => {
       e.stopPropagation();
