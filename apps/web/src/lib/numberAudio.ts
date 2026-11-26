@@ -4,6 +4,7 @@
 // Если Web Audio или файлы недоступны, число читает голос устройства по тексту с огласовками (как у остальных слов).
 import { numberPieceAudio, type SpokenNumber } from "@milav/shared";
 import { playWord, type PlayHooks } from "./audio";
+import { micOpen } from "./mic";
 
 /** Паузы между кусками, мс. «Медленно» разводит слова, а телефон делится на группы цифр по 3-3-4. */
 export const NUMBER_GAPS = {
@@ -47,15 +48,82 @@ let context: AudioContext | null | undefined;
 const clips = new Map<string, Promise<Clip>>();
 let playing: AudioBufferSourceNode[] = [];
 
-function audioContext(): AudioContext | null {
-  if (context !== undefined) return context;
+function audioContext(fresh = false): AudioContext | null {
+  if (context !== undefined && !fresh) return context;
   try {
     const Ctor = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    const old = context;
     context = Ctor ? new Ctor() : null;
+    if (old && old !== context) void old.close().catch(() => undefined);
   } catch {
     context = null;
   }
   return context;
+}
+
+/**
+ * Движок, готовый звучать по этому нажатию. Вызывать синхронно в обработчике нажатия.
+ * На iPhone движок бывает не только «приостановлен» (`suspended`), но и «прерван» (`interrupted`: свернули Telegram,
+ * позвонили, заиграл другой звук) или закрыт. Прерванный часто не оживает от `resume()`: тогда число «играло» в
+ * тишине (26.11.2026, вопрос 146). Такой движок заменяем новым прямо по нажатию; загруженные куски подходят и ему.
+ */
+export function contextForGesture(
+  current: { state: string } | null,
+): "keep" | "resume" | "replace" {
+  if (!current) return "replace";
+  if (current.state === "running") return "keep";
+  if (current.state === "suspended") return "resume";
+  return "replace";
+}
+
+type SessionType = "auto" | "playback" | "transient" | "transient-solo" | "ambient" | "play-and-record";
+type AudioSessionLike = { type: SessionType };
+
+/**
+ * iPhone: Web Audio по умолчанию звучит как «фоновый» звук и молчит, когда сбоку включён беззвучный режим, а файлы
+ * слов (элемент <audio>) при этом слышны. Поэтому числа «молчали» там, где слова звучат (26.11.2026, вопрос 146).
+ * Пока звучит число, просим у системы режим «проигрывание» (Audio Session API, iOS 16.4+), потом возвращаем «авто».
+ * Если микрофон открыт, режим не трогаем: там уже «запись и проигрывание», и переключение могло бы сломать запись.
+ * Возвращает функцию, которая возвращает режим обратно.
+ */
+export function claimPlayback(session: AudioSessionLike | undefined, micIsOpen: boolean): () => void {
+  if (!session || micIsOpen || session.type !== "auto") return () => undefined;
+  try {
+    session.type = "playback";
+  } catch {
+    return () => undefined;
+  }
+  return () => {
+    try {
+      if (session.type === "playback") session.type = "auto";
+    } catch {
+      // Не страшно: следующее нажатие «Записать» всё равно откроет микрофон.
+    }
+  };
+}
+
+/** Сколько ждать запуска движка после нажатия, мс. */
+export const RESUME_WAIT_MS = 1500;
+
+/** Ждёт обещание, но не дольше `ms`; ошибку и опоздание не бросает. */
+export function settleWithin(promise: Promise<unknown>, ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    const timer = setTimeout(resolve, ms);
+    promise.then(
+      () => {
+        clearTimeout(timer);
+        resolve();
+      },
+      () => {
+        clearTimeout(timer);
+        resolve();
+      },
+    );
+  });
+}
+
+function audioSession(): AudioSessionLike | undefined {
+  return (navigator as unknown as { audioSession?: AudioSessionLike }).audioSession;
 }
 
 function loadClip(ctx: AudioContext, id: string): Promise<Clip> {
@@ -99,12 +167,26 @@ export function stopNumberAudio(): void {
  * Вызывать из обработчика нажатия: контекст Web Audio «просыпается» только по жесту.
  */
 export async function playSpokenNumber(spoken: SpokenNumber, { slow = false }: { slow?: boolean } = {}, hooks: PlayHooks = {}): Promise<boolean> {
-  const ctx = audioContext();
+  // Всё до первого await идёт синхронно в обработчике нажатия: иначе iPhone не даст звуку зазвучать.
+  const restoreSession = claimPlayback(audioSession(), micOpen());
+  try {
+    return await playPieces(spoken, slow, hooks);
+  } finally {
+    restoreSession();
+  }
+}
+
+async function playPieces(spoken: SpokenNumber, slow: boolean, hooks: PlayHooks): Promise<boolean> {
+  const current = audioContext();
+  const ctx = current && contextForGesture(current) === "replace" ? audioContext(true) : current;
   if (ctx) {
     try {
-      const resumed = ctx.state === "suspended" ? ctx.resume() : Promise.resolve();
+      // `resume()` на части телефонов не отвечает вовсе: ждём не дольше RESUME_WAIT_MS и проверяем состояние ниже.
+      const resumed = ctx.state === "running" ? Promise.resolve() : settleWithin(ctx.resume(), RESUME_WAIT_MS);
       const plan = planPlayback(spoken, slow);
       const [loaded] = await Promise.all([Promise.all(plan.map((step) => loadClip(ctx, step.id))), resumed]);
+      // Движок так и не запустился: не делаем вид, что играем, а читаем число голосом устройства.
+      if (ctx.state !== "running") throw new Error(`audio context ${ctx.state}`);
       stopNumberAudio();
       let at = ctx.currentTime + 0.05;
       const sources: AudioBufferSourceNode[] = [];

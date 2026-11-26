@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { spellDigits, spellNumber, spellTime } from "@milav/shared";
-import { NUMBER_GAPS, planPlayback, speechRange } from "./numberAudio";
+import { NUMBER_GAPS, claimPlayback, contextForGesture, planPlayback, settleWithin, speechRange } from "./numberAudio";
 import { formatDigits } from "../components/DigitPad";
 
 describe("порядок и паузы проигрыша числа", () => {
@@ -53,5 +53,48 @@ describe("номер телефона на экране", () => {
     expect(formatDigits("0541")).toBe("054-1");
     expect(formatDigits("0541234")).toBe("054-123-4");
     expect(formatDigits("0541234567")).toBe("054-123-4567");
+  });
+});
+
+describe("звук на телефоне (вопрос 146)", () => {
+  it("прерванный или закрытый движок заменяется новым, приостановленный возобновляется", () => {
+    expect(contextForGesture({ state: "running" })).toBe("keep");
+    expect(contextForGesture({ state: "suspended" })).toBe("resume");
+    expect(contextForGesture({ state: "interrupted" })).toBe("replace");
+    expect(contextForGesture({ state: "closed" })).toBe("replace");
+    expect(contextForGesture(null)).toBe("replace");
+  });
+
+  it("беззвучный режим iPhone: на время числа режим «проигрывание», потом снова «авто»", () => {
+    const session = { type: "auto" as const } as { type: "auto" | "playback" | "play-and-record" };
+    const restore = claimPlayback(session as never, false);
+    expect(session.type).toBe("playback");
+    restore();
+    expect(session.type).toBe("auto");
+  });
+
+  it("при открытом микрофоне и чужом режиме ничего не трогаем, без Audio Session API тоже", () => {
+    const session = { type: "auto" } as { type: string };
+    claimPlayback(session as never, true)();
+    expect(session.type).toBe("auto");
+    const recording = { type: "play-and-record" } as { type: string };
+    claimPlayback(recording as never, false)();
+    expect(recording.type).toBe("play-and-record");
+    expect(() => claimPlayback(undefined, false)()).not.toThrow();
+  });
+
+  it("не ждём запуска движка дольше срока и не падаем на ошибке", async () => {
+    vi.useFakeTimers();
+    try {
+      let done = false;
+      void settleWithin(new Promise(() => undefined), 1500).then(() => (done = true));
+      await vi.advanceTimersByTimeAsync(1499);
+      expect(done).toBe(false);
+      await vi.advanceTimersByTimeAsync(1);
+      expect(done).toBe(true);
+    } finally {
+      vi.useRealTimers();
+    }
+    await expect(settleWithin(Promise.reject(new Error("x")), 10)).resolves.toBeUndefined();
   });
 });

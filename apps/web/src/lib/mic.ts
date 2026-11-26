@@ -61,6 +61,11 @@ export function usableStream(s: MediaStream | null): s is MediaStream {
   return tracks.length > 0 && tracks.every((t) => t.readyState === "live" && !t.muted);
 }
 
+/** Микрофон сейчас открыт (поток живой). Пока он открыт, iPhone держит звук в режиме «запись и проигрывание». */
+export function micOpen(): boolean {
+  return usableStream(stream);
+}
+
 export function micSupported(): boolean {
   return !!navigator.mediaDevices?.getUserMedia && typeof MediaRecorder !== "undefined";
 }
