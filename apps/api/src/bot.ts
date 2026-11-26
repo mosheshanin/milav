@@ -14,16 +14,17 @@
 
 import { BOT_MENU_COMMANDS, defaultBotTexts, type BotProfileSync, type BotTexts } from "@milav/shared";
 import { botText, cleanName, openKeyboard, type InlineKeyboard } from "./botTexts";
+import type { CallbackWithMessage, WidgetQueryUpdate } from "./botWidgets";
 import { logError, logEvent, logWarn } from "./telemetry";
 
 /** Путь вебхука (под /api/*, поэтому запрос доходит до Worker, а не до статики). */
 export const BOT_WEBHOOK_PATH = "/api/bot/webhook";
 
 /**
- * Какие обновления получает бот: сообщения и нажатия кнопок под напоминаниями (callback_query). Для платежей Stars
- * позже добавятся pre_checkout_query (и successful_payment в message). Самонастройка перерегистрирует вебхук сама.
+ * Какие обновления получает бот: сообщения, нажатия кнопок под сообщениями (callback_query) и запросы от карточек
+ * в чате (widget_query, docs/WIDGETS.md). При изменении списка самонастройка перерегистрирует вебхук сама.
  */
-export const BOT_ALLOWED_UPDATES = ["message", "callback_query"] as const;
+export const BOT_ALLOWED_UPDATES = ["message", "callback_query", "widget_query"] as const;
 
 /** Самое большое обновление, которое принимаем (обычное сообщение занимает 1–2 КБ). */
 export const BOT_MAX_UPDATE_BYTES = 64 * 1024;
@@ -80,8 +81,10 @@ export interface TelegramUpdate {
     chat?: { id?: number; type?: string };
     from?: { id?: number; is_bot?: boolean; first_name?: string };
   };
-  /** Нажатие кнопки под сообщением бота (напоминания: «Завтра не напоминать», «Отключить»). */
-  callback_query?: { id?: string; data?: string; from?: { id?: number; first_name?: string } };
+  /** Нажатие кнопки под сообщением бота (напоминания: «Завтра не напоминать», «Отключить»; «Обновить» прогресс). */
+  callback_query?: CallbackWithMessage;
+  /** Запрос от карточки в чате (виджет Telegram, botWidgets.ts). */
+  widget_query?: WidgetQueryUpdate;
 }
 
 /** Ответ в теле вебхука: Telegram выполнит этот метод сам. */

@@ -30,8 +30,8 @@ describe("каталог текстов бота", () => {
     }
   });
 
-  it("меню команд: все три команды, подписи из текстов", () => {
-    expect(BOT_MENU_COMMANDS.map((c) => c.command)).toEqual(["start", "help", "reminders"]);
+  it("меню команд: все четыре команды, подписи из текстов", () => {
+    expect(BOT_MENU_COMMANDS.map((c) => c.command)).toEqual(["start", "help", "reminders", "progress"]);
     for (const c of BOT_MENU_COMMANDS) expect(isBotTextKey(c.key)).toBe(true);
   });
 

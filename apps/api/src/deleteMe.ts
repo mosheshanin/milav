@@ -15,6 +15,7 @@ export const USER_TABLES = [
   "user_badges",
   "repeat_state",
   "reminders",
+  "bot_cards",
   "activity_days",
   "user_stats",
 ] as const;

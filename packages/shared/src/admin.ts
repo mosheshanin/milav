@@ -70,6 +70,11 @@ export const APP_CONFIG = {
     title: "Тренажёр «Числа на слух»",
     hint: "Строка «Числа на слух» в разделе «Числа и время» и проверка речи в тренажёре. «Команда»: только администраторам и проверяющим (для проверки на телефоне). Очки, цель дня и ритм тренажёр не меняет.",
   },
+  botWidgets: {
+    kind: "feature",
+    title: "Карточки в чате с ботом",
+    hint: "Команды /progress и /reminders отвечают интерактивной карточкой прямо в сообщении (виджеты Telegram). Выключено, или Telegram карточку не принял: бот отвечает обычным текстом с кнопками. «Команда»: карточки только администраторам и проверяющим.",
+  },
   defaultDailyGoal: {
     kind: "choice",
     title: "Цель дня для новых учеников",
@@ -121,6 +126,7 @@ export interface AppConfig {
   reminders: FeatureMode;
   repeat: FeatureMode;
   numbersTrainer: FeatureMode;
+  botWidgets: FeatureMode;
   defaultDailyGoal: number;
   reminderMinute: number;
   shabbatFrom: number;

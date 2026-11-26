@@ -136,6 +136,8 @@ export function configDefaults(env: Bindings): AppConfig {
     repeat: "all",
     // Тренажёр «Числа на слух» (27.10): сначала команда проверяет на своих телефонах, потом владелец включает «Все» в панели.
     numbersTrainer: "team",
+    // Карточки в чате с ботом (26.11.2026): сначала команда проверяет на своих телефонах, потом владелец включает «Все».
+    botWidgets: "team",
     defaultDailyGoal: DEFAULT_DAILY_GOAL,
     // Сообщения бота (раздел «Сообщения бота», 22.11.2026): как было до панели.
     ...BOT_CONFIG_DEFAULTS,

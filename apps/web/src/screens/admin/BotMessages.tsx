@@ -22,13 +22,14 @@ import { confirmAction } from "../../telegram";
 import { ConfigList } from "./AppSettings";
 import { LoadView, useLoad } from "./load";
 
-/** Настройки отправки в этом разделе: выключатель напоминаний и настройки группы «bot». */
-const SETTINGS_KEYS: readonly ConfigKey[] = ["reminders", ...BOT_CONFIG_KEYS];
+/** Настройки отправки в этом разделе: выключатели напоминаний и карточек в чате, настройки группы «bot». */
+const SETTINGS_KEYS: readonly ConfigKey[] = ["reminders", "botWidgets", ...BOT_CONFIG_KEYS];
 
 const KIND_LABELS: Record<BotTextDef["kind"], string> = {
   message: "Сообщение",
   button: "Кнопка",
   popup: "Подсказка",
+  caption: "Подпись",
   profile: "Профиль",
 };
 
@@ -228,7 +229,7 @@ function Editor({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const length = [...text.trim()].length;
-  const long = def.kind === "message" || itemKey === "profile.description";
+  const long = def.kind === "message" || def.kind === "caption" || itemKey === "profile.description";
 
   async function save() {
     const check = checkBotText(itemKey, text);

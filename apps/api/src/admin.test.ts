@@ -140,6 +140,7 @@ describe("настройки приложения", () => {
       { key: "reminders", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "repeat", value: "all", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "numbersTrainer", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
+      { key: "botWidgets", value: "team", isDefault: true, updatedAt: null, updatedBy: null },
       { key: "defaultDailyGoal", value: 5, isDefault: true, updatedAt: null, updatedBy: null },
       { key: "reminderMinute", value: 1200, isDefault: true, updatedAt: null, updatedBy: null },
       { key: "shabbatFrom", value: 900, isDefault: true, updatedAt: null, updatedBy: null },

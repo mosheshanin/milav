@@ -184,7 +184,7 @@ await page.waitForSelector('[data-testid="bot-settings"]');
 for (const group of ["replies", "remindersCommand", "reminderButtons", "popups", "confirm", "profile"]) {
   check((await page.locator(`[data-testid="bot-group-${group}"]`).count()) === 1, `группа текстов «${group}» на месте`);
 }
-check((await page.locator('[data-testid^="bot-text-"][data-testid$="-edit"]').count()) === 23, "все 23 текста бота можно изменить");
+check((await page.locator('[data-testid^="bot-text-"][data-testid$="-edit"]').count()) === 29, "все 29 текстов бота можно изменить");
 check((await page.locator('[data-testid="config-shabbatFrom-900"]').getAttribute("aria-checked")) === "true", "пауза на шаббат по умолчанию с 15:00");
 await page.click('[data-testid="config-reminderMinute-540"]');
 await page.waitForFunction(() => document.querySelector('[data-testid="config-reminderMinute-540"]')?.getAttribute("aria-checked") === "true");

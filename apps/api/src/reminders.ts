@@ -479,12 +479,28 @@ export async function handleReminderCallback(env: Bindings, query: CallbackQuery
     const settings = reminderSettings(await loadConfig(env));
     const minute = row?.minute ?? settings.defaultMinute;
     // Человек нажал кнопку в чате с ботом, значит бот ему писать может. Подтверждение не шлём: ответим подсказкой.
-    const nextAt = Math.floor(nextReminderAt(tz, minute, now * 1000, settings.shabbatFrom) / 1000);
-    await upsert(env.DB, userId, { enabled: 1, blocked: 0, minute, next_at: nextAt }, now).run();
-    logEvent("reminder_on", { uid: userId, minute, where: "chat" });
+    await enableFromChat(env.DB, userId, tz, minute, now, settings, "chat");
     return answer(botText(texts, "popup.on", { время: minuteText(minute) }));
   }
   return answer("");
+}
+
+/**
+ * Включает напоминания (или меняет время) по нажатию в чате с ботом: кнопка под /reminders или карточка «Напоминания».
+ * Подтверждение не шлём: человек пишет боту, значит бот ему писать может (blocked сбрасывается).
+ */
+export async function enableFromChat(
+  db: D1Database,
+  userId: number,
+  tz: string,
+  minute: number,
+  now: number,
+  settings: ReminderSettings,
+  where: string,
+): Promise<void> {
+  const nextAt = Math.floor(nextReminderAt(tz, minute, now * 1000, settings.shabbatFrom) / 1000);
+  await upsert(db, userId, { enabled: 1, blocked: 0, minute, next_at: nextAt }, now).run();
+  logEvent("reminder_on", { uid: userId, minute, where });
 }
 
 /** Команда /reminders: что сейчас включено и кнопка «включить» или «отключить». Тексты из «Сообщений бота». */

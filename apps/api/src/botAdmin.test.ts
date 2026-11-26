@@ -181,6 +181,7 @@ describe("профиль бота и меню команд уходят в Teleg
       { command: "start", description: BOT_TEXTS["command.start"].default },
       { command: "help", description: "Помощь" },
       { command: "reminders", description: BOT_TEXTS["command.reminders"].default },
+      { command: "progress", description: BOT_TEXTS["command.progress"].default },
     ]);
     body = (await (await send("/api/admin/bot/profile.description", OWNER, undefined, "DELETE")).json()) as AdminBotSaveResponse;
     expect(body.telegram).toBe("ok");

@@ -177,7 +177,7 @@ describe("самонастройка вебхука", () => {
     expect(set.body.url).toBe(await webhookUrl(ORIGIN, TOKEN));
     expect(set.body.url.startsWith(`${ORIGIN}${BOT_WEBHOOK_PATH}?v=`)).toBe(true);
     expect(set.body.secret_token).toBe(await webhookSecret(TOKEN));
-    expect(set.body.allowed_updates).toEqual(["message", "callback_query"]);
+    expect(set.body.allowed_updates).toEqual(["message", "callback_query", "widget_query"]);
     expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands).toEqual(botCommands(defaultBotTexts()));
     expect(tg.calls.find((c) => c.method === "setMyCommands")!.body.commands[2]).toEqual({ command: "reminders", description: "Напоминания: включить или отключить" });
     expect(tg.calls.find((c) => c.method === "setMyDescription")!.body.description).toBe(BOT_TEXTS["profile.description"].default);
@@ -192,7 +192,7 @@ describe("самонастройка вебхука", () => {
   });
 
   it("если вебхук уже наш, ничего не меняет (один запрос)", async () => {
-    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message"] });
+    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message", "widget_query"] });
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, tg.fetchFn)).toBe("ok");
     expect(tg.methods()).toEqual(["getWebhookInfo"]);
   });
@@ -202,11 +202,14 @@ describe("самонастройка вебхука", () => {
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, old.fetchFn)).toBe("set");
     const narrow = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query"] });
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, narrow.fetchFn)).toBe("set");
+    // До карточек в чате (26.11.2026) вебхук был без widget_query: после выкладки перерегистрируется сам.
+    const beforeCards = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message"] });
+    expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, ORIGIN, beforeCards.fetchFn)).toBe("set");
   });
 
   it("свой вебхук на запасном адресе (workers.dev) переносит на основной адрес", async () => {
     const domain = "https://milav.app";
-    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message"] });
+    const tg = fakeTelegram({ url: await webhookUrl(ORIGIN, TOKEN), allowed: ["callback_query", "message", "widget_query"] });
     expect(await ensureBotSetup({ BOT_TOKEN: TOKEN }, domain, tg.fetchFn)).toBe("set");
     expect(tg.calls.find((c) => c.method === "setWebhook")!.body.url).toBe(await webhookUrl(domain, TOKEN));
   });

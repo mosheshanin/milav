@@ -86,6 +86,7 @@ import {
   type TelegramUpdate,
 } from "./bot";
 import { appOrigin } from "./appUrl";
+import { handleWidgetQuery, progressCommand, refreshProgressText, remindersCardCommand } from "./botWidgets";
 import { deleteUserData } from "./deleteMe";
 import { PRIVACY_PAGE_CSP, privacyPageHtml } from "./privacyPage";
 
@@ -188,24 +189,39 @@ app.post(BOT_WEBHOOK_PATH, async (c) => {
   const raw = await readBodyLimited(c.req.raw, BOT_MAX_UPDATE_BYTES);
   const update = raw ? parseJson<TelegramUpdate>(raw) : null;
   if (!update || typeof update !== "object") return c.body(null, 200);
-  // Кнопки под напоминаниями: ответ всплывающей подсказкой (answerCallbackQuery).
+  const appUrl = `${appOrigin(c.env, c.req.url)}/`;
+  // Запрос от карточки в чате (виджет): свежие данные или изменение напоминаний (botWidgets.ts).
+  if (update.widget_query) {
+    await handleWidgetQuery(c.env, update.widget_query);
+    return c.body(null, 200);
+  }
+  // Кнопки под напоминаниями и под текстовым «Моим прогрессом»: ответ всплывающей подсказкой (answerCallbackQuery).
   if (update.callback_query) {
-    const answer = await handleReminderCallback(c.env, update.callback_query);
-    if (answer) logEvent("bot_callback", { uid: update.callback_query.from?.id, data: update.callback_query.data?.slice(0, 16) });
+    const query = update.callback_query;
+    const answer = query.data === "prog:upd" ? await refreshProgressText(c.env, query, appUrl) : await handleReminderCallback(c.env, query);
+    if (answer) logEvent("bot_callback", { uid: query.from?.id, data: query.data?.slice(0, 16) });
     return answer ? c.json(answer) : c.body(null, 200);
   }
   const message = update.message;
+  const command = commandOf(message?.text);
   if (
-    commandOf(message?.text) === "reminders" &&
+    (command === "reminders" || command === "progress") &&
     message?.chat?.type === "private" &&
     typeof message.chat.id === "number" &&
-    typeof message.from?.id === "number" &&
+    message.chat.id === message.from?.id &&
     !message.from.is_bot
   ) {
-    logEvent("bot_message", { uid: message.from.id, cmd: "reminders" });
+    logEvent("bot_message", { uid: message.from.id, cmd: command });
+    // /progress: карточка или текст, бот отправляет сам и закрепляет (ответ на вебхук пустой).
+    if (command === "progress") {
+      await progressCommand(c.env, message.chat.id, message.from.first_name, appUrl);
+      return c.body(null, 200);
+    }
+    // /reminders: карточка, а если карточки выключены или Telegram её не принял, прежний текст с кнопкой.
+    if (await remindersCardCommand(c.env, message.chat.id, message.from.first_name)) return c.body(null, 200);
     return c.json(await reminderCommandReply(c.env, message.chat.id, message.from.id, message.from.first_name));
   }
-  const reply = replyTo(update, `${appOrigin(c.env, c.req.url)}/`, await loadBotTexts(c.env.DB));
+  const reply = replyTo(update, appUrl, await loadBotTexts(c.env.DB));
   if (!reply) return c.body(null, 200);
   logEvent("bot_message", { uid: update.message?.from?.id, cmd: commandOf(update.message?.text) ?? "text" });
   return c.json(reply);

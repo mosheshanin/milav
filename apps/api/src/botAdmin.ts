@@ -2,6 +2,7 @@
 // и подтверждений (они в «Напоминаниях»). Изменить, вернуть исходный, «Прислать мне». Тексты профиля и меню команд
 // уходят в Telegram сразу. Настройки отправки этого раздела живут в app_config (`/api/admin/config`, группа «bot»).
 import {
+  progressVars,
   BOT_TEXTS,
   BOT_TEXT_KEYS,
   checkBotText,
@@ -19,6 +20,7 @@ import { appOrigin } from "./appUrl";
 import { parseJson, readBodyLimited } from "./body";
 import { nameVar, syncBotProfile, type BotProfilePart } from "./bot";
 import { botMessage, botTextRows, dropBotTextsCache, loadBotTexts, type BotTextRow } from "./botTexts";
+import { progressData } from "./botWidgets";
 import type { Bindings } from "./env";
 import { loadReminderRow, reminderSettings, sendToUser, telegramFetchFn } from "./reminders";
 import { logEvent } from "./telemetry";
@@ -129,7 +131,9 @@ adminRoutes.post("/api/admin/bot/:key/send", async (c) => {
   const user = c.get("user");
   const reminder = await loadReminderRow(c.env.DB, user.id);
   const minute = reminder?.minute ?? reminderSettings(await loadConfig(c.env)).defaultMinute;
-  const vars = { имя: nameVar(user.firstName), время: minuteText(minute) };
+  // «Мой прогресс» текстом: подстановки из прогресса самого администратора.
+  const progress = key === "progress.text" ? progressVars(await progressData(c.env, user.id, Math.floor(Date.now() / 1000))) : {};
+  const vars = { имя: nameVar(user.firstName), время: minuteText(minute), ...progress };
   const message = botMessage(await loadBotTexts(c.env.DB), key, vars, `${appOrigin(c.env, c.req.url)}/`);
   if (!message) return c.json({ error: "not_a_message" }, 400);
   const sent = await sendToUser(c.env, user.id, message.text, message.reply_markup);

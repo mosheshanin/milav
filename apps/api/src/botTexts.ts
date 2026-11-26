@@ -99,6 +99,15 @@ export function enableKeyboard(texts: BotTexts, vars: BotVars): InlineKeyboard {
   return { inline_keyboard: [[{ text: botText(texts, "button.enable", vars), callback_data: "rem:on" }]] };
 }
 
+/**
+ * Кнопки «Моего прогресса» (/progress): под текстовым вариантом «Обновить» и «Продолжить», под карточкой только
+ * «Продолжить» (карточка обновляется сама).
+ */
+export function progressKeyboard(texts: BotTexts, appUrl: string, withRefresh: boolean): InlineKeyboard {
+  const open: InlineButton = { text: botText(texts, "button.continue"), web_app: { url: appUrl } };
+  return { inline_keyboard: withRefresh ? [[{ text: botText(texts, "button.refresh"), callback_data: "prog:upd" }, open]] : [[open]] };
+}
+
 /** Сообщение бота целиком, как его видит ученик: текст и кнопки. Для «Прислать мне» в панели. */
 export function botMessage(texts: BotTexts, key: BotTextKey, vars: BotVars, appUrl: string): { text: string; reply_markup?: InlineKeyboard } | null {
   const text = botText(texts, key, vars);
@@ -115,6 +124,8 @@ export function botMessage(texts: BotTexts, key: BotTextKey, vars: BotVars, appU
       return { text };
     case "confirm.fallback":
       return { text, reply_markup: reminderKeyboard(texts, appUrl, false) };
+    case "progress.text":
+      return { text, reply_markup: progressKeyboard(texts, appUrl, true) };
     default:
       return null;
   }

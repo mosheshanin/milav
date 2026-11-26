@@ -9,6 +9,13 @@
 export const BOT_PLACEHOLDERS = {
   имя: "имя из Telegram",
   время: "время напоминаний ученика, например 20:00",
+  статус: "фигура статуса, например ♞ Конь",
+  уроков: "сколько уроков сдано, например 12 уроков",
+  путь: "следующая фигура и сколько до неё, например ♝ Слон, через 9 уроков",
+  очков: "очки, например 340",
+  цель: "цель дня, например 3 из 5 слов или выполнена ✅",
+  неделя: "дни занятий на этой неделе, например 2 из 3 дней",
+  повторить: "сколько слов пора повторить, например 7 слов",
 } as const;
 export type BotPlaceholder = keyof typeof BOT_PLACEHOLDERS;
 
@@ -20,10 +27,12 @@ export type BotTextKind =
   | "button"
   /** Всплывающая подсказка вверху чата после нажатия кнопки (answerCallbackQuery). */
   | "popup"
+  /** Подпись под карточкой в чате (виджет): до 1024 знаков. */
+  | "caption"
   /** Профиль бота и меню команд: сохраняется в Telegram сразу. */
   | "profile";
 
-export type BotTextGroup = "replies" | "remindersCommand" | "reminderButtons" | "popups" | "confirm" | "profile";
+export type BotTextGroup = "replies" | "remindersCommand" | "reminderButtons" | "popups" | "confirm" | "cards" | "profile";
 
 export const BOT_TEXT_GROUPS: readonly { id: BotTextGroup; title: string; hint: string }[] = [
   { id: "replies", title: "Ответы на сообщения", hint: "Что бот отвечает на /start, /help и на любое другое сообщение. Под каждым ответом кнопка, открывающая приложение." },
@@ -31,6 +40,7 @@ export const BOT_TEXT_GROUPS: readonly { id: BotTextGroup; title: string; hint: 
   { id: "reminderButtons", title: "Кнопки под напоминаниями", hint: "Под каждым ежедневным напоминанием. «Отключить» стоит и под ответом на /reminders." },
   { id: "popups", title: "Ответы на кнопки", hint: "Всплывающая подсказка вверху чата после нажатия кнопки под напоминанием или под /reminders. Не больше 200 знаков." },
   { id: "confirm", title: "Запасное подтверждение", hint: "Уходит, когда ученик включил напоминания, а все тексты вида «Напоминания включены» в разделе «Напоминания» выключены." },
+  { id: "cards", title: "Карточки в чате", hint: "Команда /progress и карточка /reminders. Подписи внутри карточек меняются только в коде; здесь подписи под карточками и запасной текст, который бот присылает, когда Telegram не принимает карточки (или они выключены в «Настройках приложения»)." },
   { id: "profile", title: "Профиль бота и меню команд", hint: "Сохраняется в Telegram сразу. У людей описание обновится, когда они снова откроют чат; меню команд иногда только после перезапуска Telegram." },
 ];
 
@@ -48,6 +58,7 @@ export interface BotTextDef {
 const MESSAGE_MAX = 2000;
 const BUTTON_MAX = 64;
 const POPUP_MAX = 200;
+const CAPTION_MAX = 1000;
 
 export const BOT_TEXTS = {
   start: {
@@ -232,6 +243,60 @@ export const BOT_TEXTS = {
     placeholders: ["имя", "время"],
     max: MESSAGE_MAX,
   },
+  "progress.text": {
+    group: "cards",
+    kind: "message",
+    title: "Мой прогресс (текстом)",
+    hint: "Ответ на /progress, когда карточка не отправилась или выключена. Под ним кнопки «Обновить» и «Продолжить»; бот закрепляет его в чате.",
+    default: [
+      "📊 Мой прогресс",
+      "",
+      "{статус}: сдано {уроков}",
+      "Следующая фигура: {путь}",
+      "⭐ Очки: {очков}",
+      "🎯 Цель дня: {цель}",
+      "📅 На этой неделе: {неделя}",
+      "🔁 Повторить: {повторить}",
+    ].join("\n"),
+    placeholders: ["имя", "статус", "уроков", "путь", "очков", "цель", "неделя", "повторить"],
+    max: MESSAGE_MAX,
+  },
+  "progress.caption": {
+    group: "cards",
+    kind: "caption",
+    title: "Подпись под карточкой «Мой прогресс»",
+    hint: "Видна под карточкой. В старых версиях Telegram, которые карточек не показывают, видна только она.",
+    default: "📊 Мой прогресс в Milav. Карточка обновляется сама, когда вы открываете чат.",
+    placeholders: ["имя"],
+    max: CAPTION_MAX,
+  },
+  "reminders.caption": {
+    group: "cards",
+    kind: "caption",
+    title: "Подпись под карточкой «Напоминания»",
+    hint: "Видна под карточкой /reminders. В старых версиях Telegram видна только она.",
+    default: "Напоминания заниматься: включить, выключить и время. Если карточки не видно, обновите Telegram или откройте «Настройки» в приложении.",
+    placeholders: ["имя"],
+    max: CAPTION_MAX,
+  },
+  "button.refresh": {
+    group: "cards",
+    kind: "button",
+    title: "Кнопка «Обновить»",
+    hint: "Под текстовым «Моим прогрессом».",
+    default: "↻ Обновить",
+    placeholders: [],
+    max: BUTTON_MAX,
+  },
+  "popup.refreshed": {
+    group: "cards",
+    kind: "popup",
+    title: "Нажали «Обновить»",
+    hint: "",
+    default: "Обновлено",
+    placeholders: [],
+    max: POPUP_MAX,
+  },
   "profile.description": {
     group: "profile",
     kind: "profile",
@@ -277,6 +342,15 @@ export const BOT_TEXTS = {
     placeholders: [],
     max: 256,
   },
+  "command.progress": {
+    group: "profile",
+    kind: "profile",
+    title: "Меню: /progress",
+    hint: "",
+    default: "Мой прогресс",
+    placeholders: [],
+    max: 256,
+  },
 } as const satisfies Record<string, BotTextDef>;
 
 export type BotTextKey = keyof typeof BOT_TEXTS;
@@ -299,6 +373,7 @@ export const BOT_MENU_COMMANDS = [
   { command: "start", key: "command.start" },
   { command: "help", key: "command.help" },
   { command: "reminders", key: "command.reminders" },
+  { command: "progress", key: "command.progress" },
 ] as const satisfies readonly { command: string; key: BotTextKey }[];
 
 const PLACEHOLDER_RE = /\{([^{}]*)\}/g;
@@ -312,7 +387,7 @@ export function checkBotText(key: BotTextKey, text: unknown): { ok: true; text: 
   const clean = text.replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, "").replace(/\r\n?/g, "\n").trim();
   if (!clean) return { ok: false, error: "empty" };
   // На кнопке, во всплывающей подсказке, в описании и в меню перенос строки не нужен (в меню и на кнопке его не видно).
-  if (def.kind !== "message" && def.kind !== "popup" && key !== "profile.description" && clean.includes("\n")) return { ok: false, error: "multiline" };
+  if (def.kind !== "message" && def.kind !== "popup" && def.kind !== "caption" && key !== "profile.description" && clean.includes("\n")) return { ok: false, error: "multiline" };
   if ([...clean].length > def.max) return { ok: false, error: "too_long" };
   const outside = clean.replace(PLACEHOLDER_RE, "");
   if (outside.includes("{") || outside.includes("}")) return { ok: false, error: "bad_braces" };
@@ -330,7 +405,17 @@ export function renderBotText(text: string, vars: BotVars): string {
 }
 
 /** Примеры для предпросмотра в панели. */
-export const BOT_SAMPLE_VARS: Required<BotVars> = { имя: "Анна", время: "20:00" };
+export const BOT_SAMPLE_VARS: Required<BotVars> = {
+  имя: "Анна",
+  время: "20:00",
+  статус: "♞ Конь",
+  уроков: "12 уроков",
+  путь: "♝ Слон, через 9 уроков",
+  очков: "340",
+  цель: "3 из 5 слов",
+  неделя: "2 из 3 дней",
+  повторить: "7 слов",
+};
 
 // ---- Ответы API панели ----
 
