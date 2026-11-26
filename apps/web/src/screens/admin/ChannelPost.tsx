@@ -23,6 +23,7 @@ import { Button, Card } from "../../components/ui";
 import { adminErrorText, channelPostErrorText } from "../../lib/adminText";
 import { shrinkPhoto } from "../../lib/shrinkPhoto";
 import { confirmAction, getTelegram } from "../../telegram";
+import { postLabel } from "../../lib/reminderReport";
 
 const DRAFT_KEY = "milav.admin.channelDraft";
 
@@ -76,7 +77,8 @@ export function ChannelPost() {
   const [preparing, setPreparing] = useState(false);
   const [withButton, setWithButton] = useState(true);
   const [buttonText, setButtonText] = useState<string>(CHANNEL_BUTTON_DEFAULT.text);
-  const [buttonUrl, setButtonUrl] = useState<string>(CHANNEL_BUTTON_DEFAULT.url);
+  // Метка поста в ссылке (учёт рассылок): по ней «Аналитика» → «Откуда пришли» видит, сколько людей привёл пост.
+  const [buttonUrl, setButtonUrl] = useState<string>(`${CHANNEL_BUTTON_DEFAULT.url}=${postLabel(new Date())}`);
   const [silent, setSilent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<{ tone: "ok" | "error"; text: string; link?: string } | null>(null);
@@ -313,7 +315,7 @@ export function ChannelPost() {
 
         <Toggle
           label="Кнопка под постом"
-          hint="Ссылка ?startapp сразу открывает приложение. Без неё откроется чат с ботом."
+          hint="Ссылка ?startapp сразу открывает приложение. Без неё откроется чат с ботом. Метка после «startapp=» (по умолчанию post-дата) видна в «Аналитике» → «Откуда пришли»: латиница, цифры, - и _."
           checked={withButton}
           testId="channel-button-on"
           onChange={setWithButton}

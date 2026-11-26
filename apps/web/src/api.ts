@@ -2,6 +2,7 @@ import type { AdminBotResponse, AdminBotSaveResponse, AdminChannelPostResponse, 
 import type {
   AdminConfigResponse,
   AdminRemindersResponse,
+  ReminderReport,
   ReminderInfo,
   ReminderKind,
   ReminderSettingsRequest,
@@ -198,6 +199,8 @@ export const api = {
     removeFromTeam: (userId: number) => request<{ ok: true }>(`/api/admin/team?userId=${userId}`, { method: "DELETE" }),
     log: (before?: number) => request<AdminLogResponse>(`/api/admin/log${before ? `?before=${before}` : ""}`),
     reminders: () => request<AdminRemindersResponse>("/api/admin/reminders"),
+    /** Учёт рассылок: отчёт за 7, 30 или 90 дней. */
+    remindersReport: (days: number) => request<ReminderReport>(`/api/admin/reminders/report?days=${days}`),
     addReminder: (kind: ReminderKind, text: string) => request<{ item: ReminderTextItem }>("/api/admin/reminders", json({ kind, text })),
     editReminder: (id: number, body: { text?: string; enabled?: boolean }) =>
       request<{ item: ReminderTextItem; changed: boolean }>(`/api/admin/reminders/${id}`, jsonPut(body)),

@@ -4,6 +4,7 @@ import type { AdminAnalyticsResponse, HardItem, LessonAnalytics, RetentionCohort
 import { api } from "../../api";
 import { Button, Card } from "../../components/ui";
 import { dayText } from "../../lib/adminText";
+import { percentText, sourceTitle } from "../../lib/reminderReport";
 import { LoadView, useLoad } from "./load";
 
 /** Доля в процентах без дробей: «42%»; null — «рано». */
@@ -21,6 +22,7 @@ function AnalyticsView({ data }: { data: AdminAnalyticsResponse }) {
     <>
       <Retention cohorts={data.retention} since={data.activeSince} />
       <Funnel data={data} />
+      <Sources />
       <Lessons lessons={data.lessons} />
       <Hard title="Трудные слова" hint={`Где чаще всего ошибаются в викторинах (слово спрошено этим типом вопроса не меньше ${data.hardMinAsked} раз). Заодно ловит плохую озвучку и неудачные варианты ответа.`} items={data.hardItems} testId="analytics-hard" />
       <section className="flex flex-col gap-2" data-testid="analytics-speech">
@@ -167,5 +169,50 @@ function HardList({ items }: { items: HardItem[] }) {
         </div>
       ))}
     </Card>
+  );
+}
+
+/** Откуда пришли новые ученики за 30 дней: метка ссылки запуска (startapp=<метка>), записывается с 26.11.2026. */
+function Sources() {
+  const [value, reload] = useLoad(() => api.admin.remindersReport(30));
+  return (
+    <section className="flex flex-col gap-2" data-testid="analytics-sources">
+      <h2 className="text-lg font-bold">Откуда пришли</h2>
+      <p className="text-sm text-ink-soft">
+        Новые ученики за 30 дней по метке ссылки, которой они впервые открыли приложение (…?startapp=метка). Ссылка поста
+        в канал получает метку сама (post-дата); «без метки»: кнопка бота, поиск, пересланная ссылка. «Учились»: выучили хоть
+        одну букву или слово, «Верн.»: заходили в другой день. Учёт с 26.11.2026; кто пришёл раньше, здесь не считается.
+      </p>
+      <LoadView value={value} reload={reload}>
+        {(report) =>
+          report.sources.length === 0 ? (
+            <Card><p className="text-ink-soft">Пока нет данных.</p></Card>
+          ) : (
+            <Card className="overflow-x-auto p-0">
+              <table className="w-full text-sm">
+                <thead className="text-ink-soft">
+                  <tr className="border-b border-line">
+                    <th className="px-3 py-2 text-left font-semibold">Метка</th>
+                    <th className="px-2 py-2 text-right font-semibold" title="Пришли">Шт.</th>
+                    <th className="px-2 py-2 text-right font-semibold" title="Выучили хоть одно слово или букву">Учились</th>
+                    <th className="px-3 py-2 text-right font-semibold" title="Заходили в другой день">Верн.</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {report.sources.map((s) => (
+                    <tr key={s.source} className="border-b border-line last:border-0">
+                      <td className="px-3 py-2 [overflow-wrap:anywhere]">{sourceTitle(s.source)}</td>
+                      <td className="px-2 py-2 text-right">{s.users}</td>
+                      <td className="px-2 py-2 text-right">{percentText(s.learned, s.users)}</td>
+                      <td className="px-3 py-2 text-right">{percentText(s.returned, s.users)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          )
+        }
+      </LoadView>
+    </section>
   );
 }

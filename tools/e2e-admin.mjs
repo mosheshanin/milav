@@ -227,7 +227,10 @@ await page.waitForSelector('[data-testid="admin-menu"]');
   await page.click('[data-testid="admin-open-channel"]');
   await page.waitForSelector('[data-testid="channel-text"]');
   check((await page.inputValue('[data-testid="channel-name"]')) === "@milavnews", "канал по умолчанию @milavnews");
-  check((await page.inputValue('[data-testid="channel-button-url"]')) === "https://t.me/milavbotbot?startapp", "кнопка по умолчанию открывает приложение");
+  check(
+    /^https:\/\/t\.me\/milavbotbot\?startapp=post-\d{8}$/.test(await page.inputValue('[data-testid="channel-button-url"]')),
+    "кнопка по умолчанию открывает приложение с меткой поста",
+  );
   await page.click('[data-testid="channel-send-me"]');
   check((await text(page, "channel-status")).includes("Напишите текст"), "пустой пост: понятная ошибка до отправки");
   await page.fill('[data-testid="channel-text"]', "**Иврит** в Telegram 👋\nПишите @y_o_g_g_y");

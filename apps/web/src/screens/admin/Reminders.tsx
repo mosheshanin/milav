@@ -1,5 +1,6 @@
 // «Напоминания»: тексты сообщений бота по видам. Изменить, добавить, выключить, удалить, «Прислать мне»,
-// статистика по каждому тексту (отправлено и сколько раз после него открыли приложение в течение суток).
+// статистика по каждому тексту (отправлено и сколько раз после него открыли приложение в течение суток)
+// и «Учёт рассылок» сверху (ReminderReport.tsx).
 import { useState } from "react";
 import {
   KIND_PLACEHOLDERS,
@@ -18,6 +19,7 @@ import { Button, Card, Chip } from "../../components/ui";
 import { adminErrorText, reminderTextErrorText } from "../../lib/adminText";
 import { confirmAction } from "../../telegram";
 import { LoadView, useLoad } from "./load";
+import { ReminderReportSection } from "./ReminderReport";
 
 export function Reminders() {
   const [value, reload] = useLoad(() => api.admin.reminders());
@@ -35,6 +37,7 @@ function RemindersView({ data }: { data: AdminRemindersResponse }) {
         Включили напоминания: <b>{data.subscribers}</b>. Отключили или заблокировали бота: <b>{data.blocked}</b>. Включить
         напоминания для всех: «Настройки приложения» → «Напоминания от бота».
       </p>
+      <ReminderReportSection texts={texts} />
       {REMINDER_KINDS.map((kind) => (
         <KindSection
           key={kind}
@@ -170,8 +173,8 @@ function TextCard({
       <div className="flex flex-wrap items-center gap-2 text-sm text-ink-soft">
         {!item.enabled && <Chip>Выключен</Chip>}
         <span>
-          Отправлено: {item.sent}
-          {rate !== null ? `, открыли в течение суток: ${item.opened} (${rate}%)` : ""}
+          Отправлено за всё время: {item.sent}
+          {rate !== null ? `, после него открыли приложение в течение суток: ${item.opened} (${rate}%)` : ""}
         </span>
       </div>
       <div className="flex flex-wrap gap-2">
