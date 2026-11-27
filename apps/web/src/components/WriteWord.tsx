@@ -82,7 +82,19 @@ export function WriteWord({
   // (потом «Дальше») были в видимой части. Если всё и так видно, страница не двигается («nearest»).
   // Отступ снизу (scroll-mb-inset) учитывает полоску «домой» и спрятанный низ окна Telegram (lib/viewport.ts).
   useEffect(() => {
-    area.current?.scrollIntoView?.({ block: "nearest" });
+    const el = area.current;
+    if (!el) return;
+    const reveal = () => el.scrollIntoView?.({ block: "nearest" });
+    reveal();
+    // Шрифты и картинки выше могут догрузиться позже и сдвинуть холст: первые 1,5 с поправляем при изменении экрана.
+    const screen = el.closest("main");
+    const observer = screen && typeof ResizeObserver === "function" ? new ResizeObserver(reveal) : null;
+    if (screen) observer?.observe(screen);
+    const stop = setTimeout(() => observer?.disconnect(), 1500);
+    return () => {
+      clearTimeout(stop);
+      observer?.disconnect();
+    };
   }, [index, message, templates]);
 
   const finished = index >= letters.length;
