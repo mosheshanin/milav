@@ -1,5 +1,6 @@
 // Минимальные типы Telegram WebApp SDK (скрипт подключён в index.html).
 import { launchTargetFrom, type LaunchTarget } from "./lib/launch";
+import { watchViewport } from "./lib/viewport";
 
 export interface TelegramUser {
   id: number;
@@ -29,6 +30,8 @@ export interface TelegramWebApp {
   initDataUnsafe?: { user?: TelegramUser; start_param?: string };
   ready: () => void;
   expand: () => void;
+  /** Высота видимой части приложения в последнем устойчивом положении (px). Окно может быть выше: низ за краем экрана. */
+  viewportStableHeight?: number;
   BackButton?: TelegramBackButton;
   /** Родной диалог подтверждения (с версии 6.2). */
   showConfirm?: (message: string, callback: (confirmed: boolean) => void) => void;
@@ -101,6 +104,8 @@ export function initTelegram(): void {
   if (!tg) return;
   tg.ready();
   tg.expand();
+  // Низ окна может быть за краем экрана (iPad): отступ под содержимым растёт на спрятанную высоту (lib/viewport.ts).
+  watchViewport(tg);
 }
 
 /**

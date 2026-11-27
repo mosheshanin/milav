@@ -134,6 +134,10 @@
   --safe-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-safe-area-inset-bottom, 0px));
   --safe-left: max(env(safe-area-inset-left, 0px), var(--tg-safe-area-inset-left, 0px));
   --safe-right: max(env(safe-area-inset-right, 0px), var(--tg-safe-area-inset-right, 0px));
+  /* Низ окна за краем экрана (iPad, 27.11): спрятанную высоту пишет lib/viewport.ts по данным Telegram. */
+  --hidden-bottom: var(--app-hidden-bottom, 0px);
+  /* Сколько снизу занято: полоска «домой» и спрятанная часть окна. Под содержимым оставляем столько места. */
+  --bottom-inset: calc(var(--safe-bottom) + var(--hidden-bottom));
 }
 
 /* Шапка экрана: под вырезом сверху (только в полноэкранном режиме Telegram). */
@@ -143,7 +147,7 @@
 
 /* Нижний лист: содержимое не уходит под полоску «домой». */
 @utility pb-sheet {
-  padding-bottom: calc(var(--spacing-section) + var(--safe-bottom));
+  padding-bottom: calc(var(--spacing-section) + var(--bottom-inset));
 }
 
 /* Плашка как полоса прогресса (урок или тема начаты, но не сданы): слева залито на долю --fill (lib/progressFill.ts),
@@ -156,9 +160,19 @@
   );
 }
 
-/* Всплывающее уведомление над нижним краем. */
+/* Прокрутка к элементу (scrollIntoView): снизу остаётся место над полоской «домой» и спрятанным низом окна. */
+@utility scroll-mb-inset {
+  scroll-margin-bottom: calc(var(--spacing-block) + var(--bottom-inset));
+}
+
+/* Прокрутка к элементу вверх: он не прячется под закреплённой шапкой экрана (Header). */
+@utility scroll-mt-header {
+  scroll-margin-top: calc(5rem + var(--safe-top));
+}
+
+/* Всплывающее уведомление над нижним краем видимой части. */
 @utility bottom-toast {
-  bottom: calc(var(--spacing-block) + var(--safe-bottom));
+  bottom: calc(var(--spacing-block) + var(--bottom-inset));
 }
 
 @layer base {
@@ -173,6 +187,14 @@
     padding-left: var(--safe-left);
     padding-right: var(--safe-right);
     padding-bottom: var(--safe-bottom);
+  }
+
+  /* Спрятанный низ окна (iPad, lib/viewport.ts): пустое место в конце страницы той же высоты, чтобы последние кнопки
+     докручивались в видимую часть. Отступом (padding) нельзя: у #root высота 100%, и длинная страница вылезает за неё. */
+  #root::after {
+    content: "";
+    display: block;
+    height: var(--hidden-bottom);
   }
 
   body {

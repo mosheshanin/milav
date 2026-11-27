@@ -76,6 +76,15 @@ export function WriteWord({
     loadTemplates().then(setTemplates, () => setLoadFailed(true));
   }, []);
 
+  /** Холст, кнопки под ним и ответ: на коротком экране (iPad, маленький телефон) они должны быть видны целиком. */
+  const area = useRef<HTMLDivElement>(null);
+  // Новая буква, ответ на проверку или конец слова: докручиваем, чтобы холст и кнопки «Стереть» и «Проверить»
+  // (потом «Дальше») были в видимой части. Если всё и так видно, страница не двигается («nearest»).
+  // Отступ снизу (scroll-mb-inset) учитывает полоску «домой» и спрятанный низ окна Telegram (lib/viewport.ts).
+  useEffect(() => {
+    area.current?.scrollIntoView?.({ block: "nearest" });
+  }, [index, message, templates]);
+
   const finished = index >= letters.length;
   const current = letters[index];
 
@@ -154,49 +163,51 @@ export function WriteWord({
         })}
       </div>
 
-      {finished ? (
-        <>
-          <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
-            {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : phrase ? "Фраза написана!" : "Слово написано!"}
-          </p>
-          <AutoNextButton
-            running={autoNext && failedLetters === 0}
-            onNext={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
-            testId="write-done"
-          >
-            {doneLabel}
-          </AutoNextButton>
-        </>
-      ) : (
-        <>
-          {letters.length > 1 && (
-            <p className="text-center text-ink-soft">
-              Буква {index + 1} из {letters.length}
+      <div ref={area} className="flex scroll-mt-header scroll-mb-inset flex-col gap-block" data-testid="write-area">
+        {finished ? (
+          <>
+            <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>
+              {failedLetters ? `Букв с ошибкой: ${failedLetters}` : letters.length === 1 ? "Буква написана!" : phrase ? "Фраза написана!" : "Слово написано!"}
             </p>
-          )}
-          <DrawCanvas
-            key={index}
-            ref={canvas}
-            ghost={mode === "study" ? current : undefined}
-            onInkChange={setHasInk}
-            disabled={!templates}
-          />
-          <div className="grid grid-cols-2 gap-2">
-            <Button variant="ghost" onClick={() => canvas.current?.clear()} disabled={!hasInk} data-testid="clear">
-              <Eraser className="size-icon" aria-hidden />
-              Стереть
-            </Button>
-            <Button onClick={check} disabled={!hasInk || !templates} data-testid="check">
-              Проверить
-            </Button>
-          </div>
-        </>
-      )}
-      {message && !finished && (
-        <p role="status" className={`text-center font-semibold ${message.tone === "ok" ? "text-success" : "text-danger"}`}>
-          {message.text}
-        </p>
-      )}
+            <AutoNextButton
+              running={autoNext && failedLetters === 0}
+              onNext={() => onDone({ failedLetters, letterStrokes: letters.map((_, i) => accepted.current[i] ?? []) })}
+              testId="write-done"
+            >
+              {doneLabel}
+            </AutoNextButton>
+          </>
+        ) : (
+          <>
+            {letters.length > 1 && (
+              <p className="text-center text-ink-soft">
+                Буква {index + 1} из {letters.length}
+              </p>
+            )}
+            <DrawCanvas
+              key={index}
+              ref={canvas}
+              ghost={mode === "study" ? current : undefined}
+              onInkChange={setHasInk}
+              disabled={!templates}
+            />
+            <div className="grid grid-cols-2 gap-2">
+              <Button variant="ghost" onClick={() => canvas.current?.clear()} disabled={!hasInk} data-testid="clear">
+                <Eraser className="size-icon" aria-hidden />
+                Стереть
+              </Button>
+              <Button onClick={check} disabled={!hasInk || !templates} data-testid="check">
+                Проверить
+              </Button>
+            </div>
+          </>
+        )}
+        {message && !finished && (
+          <p role="status" className={`text-center font-semibold ${message.tone === "ok" ? "text-success" : "text-danger"}`}>
+            {message.text}
+          </p>
+        )}
+      </div>
     </div>
   );
 }
