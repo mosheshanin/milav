@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { hiddenBottom, watchViewport } from "./viewport";
+import { hiddenBottom, revealDelta, watchViewport } from "./viewport";
 
 describe("спрятанная снизу часть окна", () => {
   it("окно выше видимой части: спрятана разница", () => {
@@ -52,5 +52,25 @@ describe("слежение за видимой частью", () => {
     tg.viewportStableHeight = 600;
     resize(820);
     expect(style.get("--app-hidden-bottom")).toBe("220px");
+  });
+});
+
+describe("докрутка блока в видимую часть", () => {
+  // Шапка до 80, видимая часть до 544: место 464 px.
+  it("блок виден целиком: страница не двигается", () => {
+    expect(revealDelta(100, 400, 80, 544)).toBe(0);
+  });
+
+  it("низ блока за краем: прокрутка вниз ровно настолько", () => {
+    expect(revealDelta(300, 690, 80, 544)).toBe(146);
+  });
+
+  it("верх блока под шапкой: прокрутка вверх", () => {
+    expect(revealDelta(63, 347, 80, 544)).toBe(-17);
+  });
+
+  it("блок выше видимой части: виден верх (холст), а не кнопки", () => {
+    expect(revealDelta(300, 900, 80, 544)).toBe(220);
+    expect(revealDelta(20, 620, 80, 544)).toBe(-60);
   });
 });

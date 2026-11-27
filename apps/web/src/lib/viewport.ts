@@ -47,3 +47,36 @@ export function watchViewport(tg: ViewportSource, win: Window = window): void {
   }
   win.addEventListener("resize", update);
 }
+
+/**
+ * На сколько пикселей прокрутить страницу, чтобы блок от `top` до `bottom` (координаты на экране) оказался между
+ * `viewTop` (низ шапки с отступом) и `viewBottom` (край видимой части с отступом). Блок уже виден — 0. Не влезает
+ * целиком — виден верх (холст важнее кнопок под ним: до них докрутят сами). Плюс — вниз, минус — вверх.
+ */
+export function revealDelta(top: number, bottom: number, viewTop: number, viewBottom: number): number {
+  if (bottom - top > viewBottom - viewTop) return top - viewTop;
+  if (top < viewTop) return top - viewTop;
+  if (bottom > viewBottom) return bottom - viewBottom;
+  return 0;
+}
+
+/** Зазор между шапкой экрана и элементом после докрутки (px, как --spacing-block). */
+const GAP_UNDER_HEADER = 16;
+
+/**
+ * Прокручивает страницу так, чтобы элемент был виден целиком: под закреплённой шапкой экрана (`header`) и над
+ * спрятанным низом окна. Отступ снизу берётся из `scroll-margin-bottom` элемента (index.css, `scroll-mb-inset`),
+ * шапка меряется по-настоящему, под ней 16 px. Своим расчётом, а не `scrollIntoView`: браузеры по-разному
+ * учитывают закреплённую шапку и отступы (в CI холст оказывался под шапкой, 27.11).
+ */
+export function revealElement(el: Element, win: Window = window): void {
+  const rect = el.getBoundingClientRect();
+  const style = win.getComputedStyle(el);
+  const marginBottom = parseFloat(style.scrollMarginBottom) || 0;
+  const header = win.document.querySelector("header");
+  const headerBottom = header ? Math.max(0, header.getBoundingClientRect().bottom) : 0;
+  const viewTop = headerBottom + GAP_UNDER_HEADER;
+  const viewBottom = win.innerHeight - marginBottom;
+  const delta = Math.round(revealDelta(rect.top, rect.bottom, viewTop, viewBottom));
+  if (delta !== 0) win.scrollBy({ top: delta });
+}

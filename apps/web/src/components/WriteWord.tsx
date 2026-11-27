@@ -13,6 +13,7 @@ import {
 } from "@milav/shared";
 import { DrawCanvas, type DrawHandle } from "./DrawCanvas";
 import { AutoNextButton } from "./AutoNextButton";
+import { revealElement } from "../lib/viewport";
 import { Button } from "./ui";
 
 export interface WriteResult {
@@ -79,12 +80,12 @@ export function WriteWord({
   /** Холст, кнопки под ним и ответ: на коротком экране (iPad, маленький телефон) они должны быть видны целиком. */
   const area = useRef<HTMLDivElement>(null);
   // Новая буква, ответ на проверку или конец слова: докручиваем, чтобы холст и кнопки «Стереть» и «Проверить»
-  // (потом «Дальше») были в видимой части. Если всё и так видно, страница не двигается («nearest»).
+  // (потом «Дальше») были в видимой части. Если всё и так видно, страница не двигается (lib/viewport.ts, revealElement).
   // Отступ снизу (scroll-mb-inset) учитывает полоску «домой» и спрятанный низ окна Telegram (lib/viewport.ts).
   useEffect(() => {
     const el = area.current;
     if (!el) return;
-    const reveal = () => el.scrollIntoView?.({ block: "nearest" });
+    const reveal = () => revealElement(el);
     reveal();
     // Шрифты и картинки выше могут догрузиться позже и сдвинуть холст: первые 1,5 с поправляем при изменении экрана.
     const screen = el.closest("main");
@@ -175,7 +176,7 @@ export function WriteWord({
         })}
       </div>
 
-      <div ref={area} className="flex scroll-mt-header scroll-mb-inset flex-col gap-block" data-testid="write-area">
+      <div ref={area} className="flex scroll-mb-inset flex-col gap-block" data-testid="write-area">
         {finished ? (
           <>
             <p className={`text-center font-semibold ${failedLetters ? "text-danger" : "text-success"}`}>

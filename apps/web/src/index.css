@@ -160,14 +160,9 @@
   );
 }
 
-/* Прокрутка к элементу (scrollIntoView): снизу остаётся место над полоской «домой» и спрятанным низом окна. */
+/* Докрутка к элементу (lib/viewport.ts, revealElement): снизу остаётся место над полоской «домой» и спрятанным низом окна. */
 @utility scroll-mb-inset {
   scroll-margin-bottom: calc(var(--spacing-block) + var(--bottom-inset));
-}
-
-/* Прокрутка к элементу вверх: он не прячется под закреплённой шапкой экрана (Header). */
-@utility scroll-mt-header {
-  scroll-margin-top: calc(5rem + var(--safe-top));
 }
 
 /* Всплывающее уведомление над нижним краем видимой части. */
