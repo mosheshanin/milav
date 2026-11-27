@@ -7,6 +7,7 @@ import {
   type Stroke,
 } from "@milav/shared";
 import { cssToken, onThemeChange } from "../lib/theme";
+import { lockVerticalSwipes } from "../telegram";
 
 // Геометрия холста (высота, направляющие) лежит в packages/shared: по ней же сервер проверяет штрихи.
 /** Высота «א» в шрифте относительно кегля (подобрано по глифам Gveret Levin). */
@@ -121,6 +122,27 @@ export function DrawCanvas({ ghost, onInkChange, disabled = false, ref }: Props)
     if (ghost) void document.fonts.load(`48px "Gveret Levin"`, ghost).then(paint);
     return () => observer.disconnect();
   }, [paint, ghost]);
+
+  // Палец на холсте рисует, а не прокручивает экран. `touch-action: none` в стиле не всегда хватает: на iPhone
+  // страница всё равно сдвигается, а свайп вниз Telegram тянет окно приложения. Поэтому касания холста гасим
+  // сами (слушатели не пассивные, иначе preventDefault не действует), а свайп Telegram выключаем, пока холст на экране.
+  // События pointer, которыми идёт рисование, от этого не пропадают.
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const stop = (e: TouchEvent) => {
+      if (e.cancelable) e.preventDefault();
+    };
+    const options = { passive: false } as const;
+    canvas.addEventListener("touchstart", stop, options);
+    canvas.addEventListener("touchmove", stop, options);
+    const unlock = lockVerticalSwipes();
+    return () => {
+      canvas.removeEventListener("touchstart", stop);
+      canvas.removeEventListener("touchmove", stop);
+      unlock();
+    };
+  }, []);
 
   // Тема сменилась: холст перерисовывается новыми цветами, нарисованное сохраняется.
   useEffect(

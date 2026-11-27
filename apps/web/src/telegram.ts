@@ -35,6 +35,9 @@ export interface TelegramWebApp {
   /** Спрашивать подтверждение, когда человек закрывает приложение (с версии 6.2). */
   enableClosingConfirmation?: () => void;
   disableClosingConfirmation?: () => void;
+  /** Свайп вниз сворачивает или закрывает приложение; эти методы его выключают и включают (с версии 7.7). */
+  disableVerticalSwipes?: () => void;
+  enableVerticalSwipes?: () => void;
   /** Отклик устройства (с версии 6.1). */
   HapticFeedback?: {
     notificationOccurred: (type: "error" | "success" | "warning") => void;
@@ -131,6 +134,36 @@ export function confirmAction(message: string): Promise<boolean> {
     });
   }
   return Promise.resolve(window.confirm(message));
+}
+
+/** Сколько экранов сейчас просят выключить свайп вниз (холст «пиши» может смениться новым до ухода старого). */
+let swipeLocks = 0;
+
+/**
+ * Выключает свайп вниз Telegram, пока на экране холст для рисования: иначе движение пальца вниз по холсту тянет
+ * и сворачивает окно приложения. Возвращает функцию, которая снимает запрет. Старые версии молча пропускаются.
+ */
+export function lockVerticalSwipes(): () => void {
+  swipeLocks += 1;
+  if (swipeLocks === 1) applyVerticalSwipes(false);
+  let released = false;
+  return () => {
+    if (released) return;
+    released = true;
+    swipeLocks -= 1;
+    if (swipeLocks === 0) applyVerticalSwipes(true);
+  };
+}
+
+function applyVerticalSwipes(enabled: boolean): void {
+  try {
+    const tg = getTelegram();
+    if (!tg?.isVersionAtLeast?.("7.7")) return;
+    if (enabled) tg.enableVerticalSwipes?.();
+    else tg.disableVerticalSwipes?.();
+  } catch {
+    // Метод не поддерживается этой версией Telegram.
+  }
 }
 
 /** Включает или выключает вопрос «закрыть приложение?» (например, пока идёт викторина). Старые версии молча пропускаются. */
